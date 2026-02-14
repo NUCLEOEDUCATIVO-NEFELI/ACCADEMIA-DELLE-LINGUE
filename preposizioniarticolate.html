@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preposizioni Articolate - Italiano A1 (50 Esercizi)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .prep-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .prep-table {
+            background: white;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .prep-title {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .contract-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contract-list li {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .contract-list li:hover {
+            background: var(--light);
+            padding-left: 1.5rem;
+        }
+
+        .contract-list li:last-child {
+            border-bottom: none;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .btn-check {
+            background: var(--b1-color);
+            color: #000;
+        }
+
+        .btn-check:hover {
+            background: #b8941f;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 180px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .prep-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Preposizioni Articolate</h1>
+            <p>Unione di preposizioni semplici e articoli determinativi - Livello A1 (50 Esercizi)</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A1</a>
+            <span>›</span>
+            <strong>Preposizioni Articolate</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 Preposizioni Articolate</h1>
+            <p class="page-subtitle">Fonetica e Morfologia: unione di preposizioni e articoli con 50 esercizi</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📖 Teoria</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header">Definizione e Formazione</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Definizione:</strong> Le preposizioni articolate nascono dall'unione di una preposizione semplice (di, a, da, in, su) con un articolo determinativo. Questa fusione è regolata da leggi fonetiche specifiche.
+                    </div>
+
+                    <div class="prep-grid">
+                        <div class="prep-table">
+                            <div class="prep-title">DI + Articolo</div>
+                            <ul class="contract-list">
+                                <li>di + il = <strong>del</strong> libro</li>
+                                <li>di + lo = <strong>dello</strong> studente</li>
+                                <li>di + la = <strong>della</strong> casa</li>
+                                <li>di + l' = <strong>dell'</strong>amico</li>
+                                <li>di + i = <strong>dei</strong> ragazzi</li>
+                                <li>di + gli = <strong>degli</strong> studenti</li>
+                                <li>di + le = <strong>delle</strong> case</li>
+                            </ul>
+                        </div>
+
+                        <div class="prep-table">
+                            <div class="prep-title">A + Articolo</div>
+                            <ul class="contract-list">
+                                <li>a + il = <strong>al</strong> cinema</li>
+                                <li>a + lo = <strong>allo</strong> stadio</li>
+                                <li>a + la = <strong>alla</strong> stazione</li>
+                                <li>a + l' = <strong>all'</strong>ospedale</li>
+                                <li>a + i = <strong>ai</strong> giovani</li>
+                                <li>a + gli = <strong>agli</strong> amici</li>
+                                <li>a + le = <strong>alle</strong> donne</li>
+                            </ul>
+                        </div>
+
+                        <div class="prep-table">
+                            <div class="prep-title">DA + Articolo</div>
+                            <ul class="contract-list">
+                                <li>da + il = <strong>dal</strong> medico</li>
+                                <li>da + lo = <strong>dallo</strong> psicologo</li>
+                                <li>da + la = <strong>dalla</strong> Francia</li>
+                                <li>da + l' = <strong>dall'</strong>Italia</li>
+                                <li>da + i = <strong>dai</strong> genitori</li>
+                                <li>da + gli = <strong>dagli</strong> zii</li>
+                                <li>da + le = <strong>dalle</strong> signore</li>
+                            </ul>
+                        </div>
+
+                        <div class="prep-table">
+                            <div class="prep-title">IN + Articolo</div>
+                            <ul class="contract-list">
+                                <li>in + il = <strong>nel</strong> parco</li>
+                                <li>in + lo = <strong>nello</strong> studio</li>
+                                <li>in + la = <strong>nella</strong> scatola</li>
+                                <li>in + l' = <strong>nell'</strong>armadio</li>
+                                <li>in + i = <strong>nei</strong> negozi</li>
+                                <li>in + gli = <strong>negli</strong> uffici</li>
+                                <li>in + le = <strong>nelle</strong> città</li>
+                            </ul>
+                        </div>
+
+                        <div class="prep-table">
+                            <div class="prep-title">SU + Articolo</div>
+                            <ul class="contract-list">
+                                <li>su + il = <strong>sul</strong> tavolo</li>
+                                <li>su + lo = <strong>sullo</strong> scaffale</li>
+                                <li>su + la = <strong>sulla</strong> sedia</li>
+                                <li>su + l' = <strong>sull'</strong>aereo</li>
+                                <li>su + i = <strong>sui</strong> libri</li>
+                                <li>su + gli = <strong>sugli</strong> alberi</li>
+                                <li>su + le = <strong>sulle</strong> montagne</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="note-box">
+                        <strong>Note fonetiche:</strong> La preposizione <em>in</em> subisce elisione della vocale iniziale davanti a tutti gli articoli, divenendo <strong>n-</strong> (nel, nello, nella, negli, nelle). Questo fenomeno è noto come "assimilazione parziale".
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A1 - Preposizioni Articolate (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Trasformazione base DI + articolo
+            {
+                id: 1,
+                type: 'choice',
+                question: 'di + il = ?',
+                options: ['del', 'al', 'nel', 'dal'],
+                correct: 'del',
+                explanation: '✅ Corretto! di + il = del',
+                errorExplanation: '❌ di + il = del (fusione delle due parole)'
+            },
+            {
+                id: 2,
+                type: 'choice',
+                question: 'di + lo = ?',
+                options: ['dello', 'del', 'allo', 'nello'],
+                correct: 'dello',
+                explanation: '✅ Corretto! di + lo = dello (si mantiene la vocale)',
+                errorExplanation: '❌ di + lo = dello (si mantiene la vocale o)'
+            },
+            {
+                id: 3,
+                type: 'fill',
+                question: 'di + la = ________',
+                correct: ['della'],
+                explanation: '✅ Corretto! di + la = della'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'di + l\' = ________',
+                correct: ['dell\''],
+                explanation: '✅ Corretto! di + l\' = dell\' (con apostrofo)'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'di + i = ?',
+                options: ['dei', 'del', 'ai', 'nei'],
+                correct: 'dei',
+                explanation: '✅ Corretto! di + i = dei',
+                errorExplanation: '❌ di + i = dei (plurale maschile)'
+            },
+            {
+                id: 6,
+                type: 'choice',
+                question: 'di + gli = ?',
+                options: ['degli', 'dei', 'agli', 'negli'],
+                correct: 'degli',
+                explanation: '✅ Corretto! di + gli = degli',
+                errorExplanation: '❌ di + gli = degli (plurale maschile con vocale iniziale)'
+            },
+            {
+                id: 7,
+                type: 'fill',
+                question: 'di + le = ________',
+                correct: ['delle'],
+                explanation: '✅ Corretto! di + le = delle (plurale femminile)'
+            },
+            {
+                id: 8,
+                type: 'choice',
+                question: 'Il libro è ________ professore. (di + il)',
+                options: ['del', 'dello', 'al', 'nel'],
+                correct: 'del',
+                explanation: '✅ Corretto! di + il = del',
+                errorExplanation: '❌ Il libro è del professore (possesso)'
+            },
+            {
+                id: 9,
+                type: 'fill',
+                question: 'La penna è ________ studente. (di + lo)',
+                correct: ['dello'],
+                explanation: '✅ Corretto! di + lo = dello (studiante inizia per s+consonante)'
+            },
+            {
+                id: 10,
+                type: 'choice',
+                question: 'Sono ________ amici. (di + gli)',
+                options: ['degli', 'dei', 'agli', 'sugli'],
+                correct: 'degli',
+                explanation: '✅ Corretto! di + gli = degli',
+                errorExplanation: '❌ Sono degli amici (appartenenza)'
+
+            },
+
+            // ESERCIZI 11-20: Trasformazione A + articolo
+            {
+                id: 11,
+                type: 'choice',
+                question: 'a + il = ?',
+                options: ['al', 'a', 'nel', 'dal'],
+                correct: 'al',
+                explanation: '✅ Corretto! a + il = al',
+                errorExplanation: '❌ a + il = al (fusione)'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'a + lo = ________',
+                correct: ['allo'],
+                explanation: '✅ Corretto! a + lo = allo'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'a + la = ?',
+                options: ['alla', 'al', 'nella', 'dalla'],
+                correct: 'alla',
+                explanation: '✅ Corretto! a + la = alla',
+                errorExplanation: '❌ a + la = alla'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'a + l\' = ________',
+                correct: ['all\''],
+                explanation: '✅ Corretto! a + l\' = all\' (con apostrofo)'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'a + i = ?',
+                options: ['ai', 'al', 'nei', 'dai'],
+                correct: 'ai',
+                explanation: '✅ Corretto! a + i = ai',
+                errorExplanation: '❌ a + i = ai (plurale maschile)'
+            },
+            {
+                id: 16,
+                type: 'choice',
+                question: 'a + gli = ?',
+                options: ['agli', 'ai', 'negli', 'dagli'],
+                correct: 'agli',
+                explanation: '✅ Corretto! a + gli = agli',
+                errorExplanation: '❌ a + gli = agli (plurale maschile con vocale)'
+            },
+            {
+                id: 17,
+                type: 'fill',
+                question: 'a + le = ________',
+                correct: ['alle'],
+                explanation: '✅ Corretto! a + le = alle'
+            },
+            {
+                id: 18,
+                type: 'choice',
+                question: 'Vado ________ cinema. (a + il)',
+                options: ['al', 'a', 'nel', 'dal'],
+                correct: 'al',
+                explanation: '✅ Corretto! Vado al cinema (movimento)',
+                errorExplanation: '❌ Vado al cinema (a + il = al)'
+            },
+            {
+                id: 19,
+                type: 'fill',
+                question: 'Vado ________ stadio. (a + lo)',
+                correct: ['allo'],
+                explanation: '✅ Corretto! Vado allo stadio (stadio inizia per s+consonante)'
+            },
+            {
+                id: 20,
+                type: 'choice',
+                question: 'Parlo ________ amici. (a + gli)',
+                options: ['agli', 'ai', 'degli', 'negli'],
+                correct: 'agli',
+                explanation: '✅ Corretto! Parlo agli amici (comunicazione)',
+                errorExplanation: '❌ Parlo agli amici (a + gli = agli)'
+
+            },
+
+            // ESERCIZI 21-30: Trasformazione DA + articolo
+            {
+                id: 21,
+                type: 'choice',
+                question: 'da + il = ?',
+                options: ['dal', 'da', 'nel', 'al'],
+                correct: 'dal',
+                explanation: '✅ Corretto! da + il = dal',
+                errorExplanation: '❌ da + il = dal'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'da + lo = ________',
+                correct: ['dallo'],
+                explanation: '✅ Corretto! da + lo = dallo'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'da + la = ?',
+                options: ['dalla', 'dal', 'nella', 'alla'],
+                correct: 'dalla',
+                explanation: '✅ Corretto! da + la = dalla',
+                errorExplanation: '❌ da + la = dalla'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'da + l\' = ________',
+                correct: ['dall\''],
+                explanation: '✅ Corretto! da + l\' = dall\' (con apostrofo)'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'da + i = ?',
+                options: ['dai', 'dal', 'nei', 'ai'],
+                correct: 'dai',
+                explanation: '✅ Corretto! da + i = dai',
+                errorExplanation: '❌ da + i = dai'
+            },
+            {
+                id: 26,
+                type: 'choice',
+                question: 'da + gli = ?',
+                options: ['dagli', 'dai', 'negli', 'agli'],
+                correct: 'dagli',
+                explanation: '✅ Corretto! da + gli = dagli',
+                errorExplanation: '❌ da + gli = dagli'
+            },
+            {
+                id: 27,
+                type: 'fill',
+                question: 'da + le = ________',
+                correct: ['dalle'],
+                explanation: '✅ Corretto! da + le = dalle'
+            },
+            {
+                id: 28,
+                type: 'choice',
+                question: 'Vengo ________ medico. (da + il)',
+                options: ['dal', 'da', 'nel', 'al'],
+                correct: 'dal',
+                explanation: '✅ Corretto! Vengo dal medico (provenienza)',
+                errorExplanation: '❌ Vengo dal medico (da + il = dal)'
+            },
+            {
+                id: 29,
+                type: 'fill',
+                question: 'Vengo ________ psicologo. (da + lo)',
+                correct: ['dallo'],
+                explanation: '✅ Corretto! Vengo dallo psicologo'
+            },
+            {
+                id: 30,
+                type: 'choice',
+                question: 'Esco ________ ufficio. (da + l\')',
+                options: ['dall\'', 'dal', 'nell\'', 'all\''],
+                correct: 'dall\'',
+                explanation: '✅ Corretto! Esco dall\'ufficio',
+                errorExplanation: '❌ Esco dall\'ufficio (da + l\' = dall\')'
+
+            },
+
+            // ESERCIZI 31-40: Trasformazione IN + articolo (con assimilazione)
+            {
+                id: 31,
+                type: 'choice',
+                question: 'in + il = ?',
+                options: ['nel', 'in', 'al', 'dal'],
+                correct: 'nel',
+                explanation: '✅ Corretto! in + il = nel (assimilazione: i diventa n)',
+                errorExplanation: '❌ in + il = nel (la i si trasforma in n)'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'in + lo = ________',
+                correct: ['nello'],
+                explanation: '✅ Corretto! in + lo = nello (assimilazione)'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'in + la = ?',
+                options: ['nella', 'nel', 'alla', 'dalla'],
+                correct: 'nella',
+                explanation: '✅ Corretto! in + la = nella',
+                errorExplanation: '❌ in + la = nella'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'in + l\' = ________',
+                correct: ['nell\''],
+                explanation: '✅ Corretto! in + l\' = nell\' (con apostrofo)'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'in + i = ?',
+                options: ['nei', 'nel', 'ai', 'dai'],
+                correct: 'nei',
+                explanation: '✅ Corretto! in + i = nei',
+                errorExplanation: '❌ in + i = nei'
+            },
+            {
+                id: 36,
+                type: 'choice',
+                question: 'in + gli = ?',
+                options: ['negli', 'nei', 'agli', 'dagli'],
+                correct: 'negli',
+                explanation: '✅ Corretto! in + gli = negli',
+                errorExplanation: '❌ in + gli = negli'
+            },
+            {
+                id: 37,
+                type: 'fill',
+                question: 'in + le = ________',
+                correct: ['nelle'],
+                explanation: '✅ Corretto! in + le = nelle'
+            },
+            {
+                id: 38,
+                type: 'choice',
+                question: 'Sono ________ parco. (in + il)',
+                options: ['nel', 'in', 'al', 'dal'],
+                correct: 'nel',
+                explanation: '✅ Corretto! Sono nel parco (stato in luogo)',
+                errorExplanation: '❌ Sono nel parco (in + il = nel)'
+            },
+            {
+                id: 39,
+                type: 'fill',
+                question: 'Sono ________ studio. (in + lo)',
+                correct: ['nello'],
+                explanation: '✅ Corretto! Sono nello studio'
+            },
+            {
+                id: 40,
+                type: 'choice',
+                question: 'Sono ________ albergo. (in + l\')',
+                options: ['nell\'', 'nel', 'all\'', 'dall\''],
+                correct: 'nell\'',
+                explanation: '✅ Corretto! Sono nell\'albergo',
+                errorExplanation: '❌ Sono nell\'albergo (in + l\' = nell\')'
+
+            },
+
+            // ESERCIZI 41-50: Trasformazione SU + articolo e mix
+            {
+                id: 41,
+                type: 'choice',
+                question: 'su + il = ?',
+                options: ['sul', 'su', 'al', 'nel'],
+                correct: 'sul',
+                explanation: '✅ Corretto! su + il = sul',
+                errorExplanation: '❌ su + il = sul'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'su + lo = ________',
+                correct: ['sullo'],
+                explanation: '✅ Corretto! su + lo = sullo'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'su + la = ?',
+                options: ['sulla', 'sul', 'alla', 'nella'],
+                correct: 'sulla',
+                explanation: '✅ Corretto! su + la = sulla',
+                errorExplanation: '❌ su + la = sulla'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'su + l\' = ________',
+                correct: ['sull\''],
+                explanation: '✅ Corretto! su + l\' = sull\' (con apostrofo)'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'su + i = ?',
+                options: ['sui', 'sul', 'ai', 'nei'],
+                correct: 'sui',
+                explanation: '✅ Corretto! su + i = sui',
+                errorExplanation: '❌ su + i = sui'
+            },
+            {
+                id: 46,
+                type: 'choice',
+                question: 'su + gli = ?',
+                options: ['sugli', 'sui', 'agli', 'negli'],
+                correct: 'sugli',
+                explanation: '✅ Corretto! su + gli = sugli',
+                errorExplanation: '❌ su + gli = sugli'
+            },
+            {
+                id: 47,
+                type: 'fill',
+                question: 'su + le = ________',
+                correct: ['sulle'],
+                explanation: '✅ Corretto! su + le = sulle'
+            },
+            {
+                id: 48,
+                type: 'choice',
+                question: 'Il libro è ________ tavolo. (su + il)',
+                options: ['sul', 'su', 'al', 'nel'],
+                correct: 'sul',
+                explanation: '✅ Corretto! Il libro è sul tavolo (posizione sopra)',
+                errorExplanation: '❌ Il libro è sul tavolo (su + il = sul)'
+            },
+            {
+                id: 49,
+                type: 'fill',
+                question: 'Il gatto è ________ scaffale. (su + lo)',
+                correct: ['sullo'],
+                explanation: '✅ Corretto! Il gatto è sullo scaffale'
+            },
+            {
+                id: 50,
+                type: 'choice',
+                question: 'Quale preposizione articolata deriva da "in + gli"?',
+                options: ['negli', 'nei', 'agli', 'dagli', 'sugli'],
+                correct: 'negli',
+                explanation: '✅ Corretto! in + gli = negli. Complimenti per aver completato tutti gli esercizi!',
+                errorExplanation: '❌ in + gli = negli (attenzione all\'assimilazione: in diventa n-)'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    // Gestione sicura dell'apostrofo nei data attribute
+                    const safeOpt = opt.replace(/'/g, "&#39;");
+                    html += `<button class="option-btn" onclick="checkChoice('${safeOpt}')" data-value="${safeOpt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la preposizione articolata..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            // Decodifica l'apostrofo per il confronto
+            const decodedSelected = selected.replace(/&#39;/g, "'");
+            
+            btns.forEach(btn => {
+                btn.disabled = true;
+                const btnValue = btn.dataset.value.replace(/&#39;/g, "'");
+                if (btnValue === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btnValue === decodedSelected && decodedSelected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (decodedSelected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente tutte le preposizioni articolate!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene le preposizioni articolate, fai attenzione all\'assimilazione di IN!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: DI→de-, A→a-, DA→da-, IN→n-, SU→su-';
+            } else {
+                message = '📚 Ripassa le tabelle! Ricorda che IN diventa N- (nel, nello, nella...)';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

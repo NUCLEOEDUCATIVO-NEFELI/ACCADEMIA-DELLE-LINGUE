@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B1 - Forma Passiva</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --agent: #7c3aed;
+            --action: #059669;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .subject { color: var(--agent); font-weight: bold; }
+        .verb-passive { color: var(--action); font-weight: bold; }
+        .agent { color: var(--accent); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--b1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--b1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--b1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .tempo-selector {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .tempo-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: white;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .tempo-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B1 - Forma Passiva</h1>
+            <p>Trasformare l'azione: quando il soggetto subisce invece di compiere</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B1</a>
+            <span>›</span>
+            <strong>Forma Passiva</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🔄 Forma Passiva</h1>
+            <p class="page-subtitle">Costruzione con ESSERE + Participio Passato, uso e tempi</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('presente', this)">Presente</button>
+            <button class="nav-tab" onclick="showSection('passato', this)">Passato</button>
+            <button class="nav-tab" onclick="showSection('futuro', this)">Futuro</button>
+            <button class="nav-tab" onclick="showSection('congiuntivo', this)">Congiuntivo</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍🏫</div>
+                    <div class="avatar-name">Prof. Marco</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B1! 🔄</h3>
+                    <p>Oggi studiamo la <strong>forma passiva</strong>, utile quando vogliamo enfatizzare l'azione piuttosto che chi la compie.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="subject">Il quadro</span> <span class="verb-passive">è stato dipinto</span> <span class="agent">da Leonardo</span>."</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è la Forma Passiva?</div>
+                <div class="card-body">
+                    <p>La forma passiva trasforma il <strong>soggetto</strong> da chi compie l'azione a chi la <strong>subisce</strong>.</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Struttura:</strong><br>
+                        <span class="subject">Soggetto (paziente)</span> + 
+                        <span class="verb-passive">ESSERE (ausiliare) + Participio Passato</span> + 
+                        <span class="agent">da + Agente (opzionale)</span>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Regole fondamentali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Il verbo ESSERE si coniuga nel tempo richiesto</li>
+                            <li>Il participio passato concorda in genere e numero con il soggetto</li>
+                            <li>L'agente (chi compie) è introdotto da "da" (o "da parte di")</li>
+                            <li>Si può usare solo con verbi transitivi (che hanno l'oggetto diretto)</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Esempio di trasformazione:</strong><br>
+                        <em>Attiva:</em> <span class="agent">Leonardo</span> <span class="verb-passive">dipinse</span> <span class="subject">la Gioconda</span>.<br>
+                        <span class="arrow">↓</span><br>
+                        <em>Passiva:</em> <span class="subject">La Gioconda</span> <span class="verb-passive">fu dipinta</span> <span class="agent">da Leonardo</span>.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PRESENTE -->
+        <section id="presente" class="section">
+            <div class="card">
+                <div class="card-header">Passiva al Presente</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Struttura:</strong> Presente di ESSERE + Participio Passato
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Soggetto</th><th>ESSERE</th><th>Esempio (scrivere)</th><th>Esempio (fare)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>il libro</td>
+                                <td class="verb-passive">è</td>
+                                <td class="subject">è scritto</td>
+                                <td class="subject">è fatto</td>
+                            </tr>
+                            <tr>
+                                <td>i libri</td>
+                                <td class="verb-passive">sono</td>
+                                <td class="subject">sono scritti</td>
+                                <td class="subject">sono fatti</td>
+                            </tr>
+                            <tr>
+                                <td>la lettera</td>
+                                <td class="verb-passive">è</td>
+                                <td class="subject">è scritta</td>
+                                <td class="subject">è fatta</td>
+                            </tr>
+                            <tr>
+                                <td>le lettere</td>
+                                <td class="verb-passive">sono</td>
+                                <td class="subject">sono scritte</td>
+                                <td class="subject">sono fatte</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Il participio concorda sempre con il soggetto!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PASSATO -->
+        <section id="passato" class="section">
+            <div class="card">
+                <div class="card-header">Passiva al Passato</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Passato Prossimo:</strong> Presente di ESSERE + stato/a/i/e + Participio Passato<br>
+                        <strong>Passato Remoto:</strong> Passato remoto di ESSERE + Participio Passato
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tempo</th><th>ESSERE</th><th>Esempio (costruire)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Passato Prossimo</td>
+                                <td class="verb-passive">è stato</td>
+                                <td class="subject">è stato costruito</td>
+                            </tr>
+                            <tr>
+                                <td>Trapassato Prossimo</td>
+                                <td class="verb-passive">era stato</td>
+                                <td class="subject">era stato costruito</td>
+                            </tr>
+                            <tr>
+                                <td>Passato Remoto</td>
+                                <td class="verb-passive">fu</td>
+                                <td class="subject">fu costruito</td>
+                            </tr>
+                            <tr>
+                                <td>Trapassato Remoto</td>
+                                <td class="verb-passive">fu stato</td>
+                                <td class="subject">fu stato costruito</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="rule-box">
+                        <strong>Nota:</strong> Al passato prossimo e trapassato, ESSERE si comporta come ausiliare (stato/a/i/e) e il participio del verbo principale concorda con il soggetto.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE FUTURO -->
+        <section id="futuro" class="section">
+            <div class="card">
+                <div class="card-header">Passiva al Futuro e Condizionale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Futuro Semplice:</strong> Futuro di ESSERE + Participio Passato<br>
+                        <strong>Futuro Anteriore:</strong> Futuro di ESSERE + stato/a/i/e + Participio Passato<br>
+                        <strong>Condizionale:</strong> Condizionale di ESSERE + Participio Passato
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tempo</th><th>ESSERE</th><th>Esempio (fare)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Futuro Semplice</td>
+                                <td class="verb-passive">sarà</td>
+                                <td class="subject">sarà fatto</td>
+                            </tr>
+                            <tr>
+                                <td>Futuro Anteriore</td>
+                                <td class="verb-passive">sarà stato</td>
+                                <td class="subject">sarà stato fatto</td>
+                            </tr>
+                            <tr>
+                                <td>Condizionale Presente</td>
+                                <td class="verb-passive">sarebbe</td>
+                                <td class="subject">sarebbe fatto</td>
+                            </tr>
+                            <tr>
+                                <td>Condizionale Passato</td>
+                                <td class="verb-passive">sarebbe stato</td>
+                                <td class="subject">sarebbe stato fatto</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CONGIUNTIVO -->
+        <section id="congiuntivo" class="section">
+            <div class="card">
+                <div class="card-header">Passiva al Congiuntivo</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Struttura:</strong> Congiuntivo di ESSERE + Participio Passato
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tempo</th><th>che io</th><th>che lui</th><th>che noi</th><th>che loro</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Congiuntivo Presente</td>
+                                <td class="verb-passive">sia</td>
+                                <td class="verb-passive">sia</td>
+                                <td class="verb-passive">siamo</td>
+                                <td class="verb-passive">siano</td>
+                            </tr>
+                            <tr>
+                                <td>Congiuntivo Passato</td>
+                                <td class="verb-passive">sia stato</td>
+                                <td class="verb-passive">sia stato</td>
+                                <td class="verb-passive">siamo stati</td>
+                                <td class="verb-passive">siano stati</td>
+                            </tr>
+                            <tr>
+                                <td>Congiuntivo Imperfetto</td>
+                                <td class="verb-passive">fossi</td>
+                                <td class="verb-passive">fosse</td>
+                                <td class="verb-passive">fossimo</td>
+                                <td class="verb-passive">fossero</td>
+                            </tr>
+                            <tr>
+                                <td>Congiuntivo Trapassato</td>
+                                <td class="verb-passive">fossi stato</td>
+                                <td class="verb-passive">fosse stato</td>
+                                <td class="verb-passive">fossimo stati</td>
+                                <td class="verb-passive">fossero stati</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="rule-box">
+                        <strong>Esempio:</strong> "Penso che <span class="subject">il problema</span> <span class="verb-passive">sia risolto</span> <span class="agent">dal tecnico</span>."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B1 - Forma Passiva (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Presente indicativo passivo
+            {
+                id: 1,
+                type: 'choice',
+                question: 'La pizza __________ (fare) dal pizzaiolo.',
+                options: ['è fatta', 'è fatto', 'è fatta', 'viene fatto'],
+                correct: 'è fatta',
+                explanation: '✅ Corretto! La pizza (femminile singolare) è fatta',
+                errorExplanation: '❌ La pizza è femminile singolare: è fatta (participio concorda)'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'I libri __________ (leggere) dagli studenti.',
+                correct: ['sono letti', 'vengono letti'],
+                explanation: '✅ Corretto! I libri (maschile plurale) sono letti'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'La casa __________ (costruire) dagli operai.',
+                options: ['è costruita', 'è costruito', 'è costruita', 'viene costruito'],
+                correct: 'è costruita',
+                explanation: '✅ Corretto! La casa (femminile singolare) è costruita',
+                errorExplanation: '❌ La casa è femminile singolare: participio in -a'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Le lettere __________ (scrivere) dalla segretaria.',
+                correct: ['sono scritte', 'vengono scritte'],
+                explanation: '✅ Corretto! Le lettere (femminile plurale) sono scritte'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Il problema __________ (risolvere) dal tecnico.',
+                options: ['è risolto', 'è risolto', 'è risolto', 'viene risolto'],
+                correct: 'è risolto',
+                explanation: '✅ Corretto! Il problema (maschile singolare) è risolto',
+                errorExplanation: '❌ Il problema è maschile singolare: participio in -o'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'I documenti __________ (firmare) dal direttore.',
+                correct: ['sono firmati', 'vengono firmati'],
+                explanation: '✅ Corretto! I documenti (maschile plurale) sono firmati'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'La finestra __________ (aprire) dal vento.',
+                options: ['è aperta', 'è aperto', 'è aperta', 'viene aperto'],
+                correct: 'è aperta',
+                explanation: '✅ Corretto! La finestra (femminile singolare) è aperta',
+                errorExplanation: '❌ La finestra è femminile: participio concorda (aperta)'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Le porte __________ (chiudere) dal custode.',
+                correct: ['sono chiuse', 'vengono chiuse'],
+                explanation: '✅ Corretto! Le porte (femminile plurale) sono chiuse'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Il quadro __________ (dipignere) dall\'artista.',
+                options: ['è dipinto', 'è dipinto', 'è dipinto', 'viene dipinto'],
+                correct: 'è dipinto',
+                explanation: '✅ Corretto! Il quadro (maschile singolare) è dipinto',
+                errorExplanation: '❌ Il quadro è maschile singolare: è dipinto'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Le macchine __________ (produrre) in Germania.',
+                correct: ['sono prodotte', 'vengono prodotte'],
+                explanation: '✅ Corretto! Le macchine (femminile plurale) sono prodotte'
+
+            },
+
+            // ESERCIZI 11-20: Passato prossimo e trapassato
+            {
+                id: 11,
+                type: 'choice',
+                question: 'La cattedrale __________ (costruire) nel XIV secolo.',
+                options: ['è stata costruita', 'è stato costruita', 'è stata costruita', 'fu costruita'],
+                correct: 'è stata costruita',
+                explanation: '✅ Corretto! Passato prossimo: è stata costruita (femminile)',
+                errorExplanation: '❌ Passato prossimo passivo: ESSERE + stato/a + participio. La cattedrale è femminile'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'I ladri __________ (arrestare) dalla polizia ieri.',
+                correct: ['sono stati arrestati', 'furono arrestati'],
+                explanation: '✅ Corretto! I ladri (maschile plurale) sono stati arrestati'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Il contratto __________ (firmare) prima della riunione.',
+                options: ['era stato firmato', 'era stata firmato', 'era stato firmato', 'fu firmato'],
+                correct: 'era stato firmato',
+                explanation: '✅ Corretto! Trapassato prossimo: era stato firmato (maschile)',
+                errorExplanation: '❌ Trapassato prossimo: ESSERE all\'imperfetto + stato + participio. Il contratto è maschile'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Le case __________ (distruggere) dall\'incendio.',
+                correct: ['sono state distrutte', 'furono distrutte'],
+                explanation: '✅ Corretto! Le case (femminile plurale) sono state distrutte'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'La lettera __________ (spedire) prima che arrivasse lui.',
+                options: ['era stata spedita', 'era stato spedita', 'era stata spedita', 'fu spedita'],
+                correct: 'era stata spedita',
+                explanation: '✅ Corretto! Trapassato prossimo: era stata spedita (femminile)',
+                errorExplanation: '❌ La lettera è femminile: era stata spedita'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Il progetto __________ (approvare) dalla commissione.',
+                correct: ['è stato approvato', 'fu approvato'],
+                explanation: '✅ Corretto! Il progetto (maschile singolare) è stato approvato'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'I documenti __________ (preparare) prima della scadenza.',
+                options: ['erano stati preparati', 'erano state preparati', 'erano stati preparati', 'furono preparati'],
+                correct: 'erano stati preparati',
+                explanation: '✅ Corretto! Trapassato prossimo plurale: erano stati preparati',
+                errorExplanation: '❌ I documenti è maschile plurale: erano stati preparati'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'La scoperta __________ (fare) da un giovane scienziato.',
+                correct: ['è stata fatta', 'fu fatta'],
+                explanation: '✅ Corretto! La scoperta (femminile singolare) è stata fatta'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Le strade __________ (allagare) dalle piogge.',
+                options: ['sono state allagate', 'sono stati allagate', 'sono state allagate', 'furono allagate'],
+                correct: 'sono state allagate',
+                explanation: '✅ Corretto! Le strade (femminile plurale) sono state allagate',
+                errorExplanation: '❌ Le strade è femminile plurale: sono state allagate'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Il paziente __________ (operare) con successo.',
+                correct: ['è stato operato', 'fu operato'],
+                explanation: '✅ Corretto! Il paziente (maschile singolare) è stato operato'
+
+            },
+
+            // ESERCIZI 21-30: Futuro e condizionale
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Il nuovo ponte __________ (costruire) entro il 2025.',
+                options: ['sarà costruito', 'sarà costruita', 'sarà costruito', 'verrà costruito'],
+                correct: 'sarà costruito',
+                explanation: '✅ Corretto! Futuro semplice passivo: sarà costruito (maschile)',
+                errorExplanation: '❌ Il ponte è maschile singolare: sarà costruito'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Le modifiche __________ (apportare) prima della scadenza.',
+                correct: ['saranno apportate', 'verranno apportate'],
+                explanation: '✅ Corretto! Futuro plurale: saranno apportate'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Il lavoro __________ (finire) per domani sera.',
+                options: ['sarà finito', 'sarà finita', 'sarà finito', 'verrà finito'],
+                correct: 'sarà finito',
+                explanation: '✅ Corretto! Il lavoro (maschile) sarà finito',
+                errorExplanation: '❌ Il lavoro è maschile singolare: sarà finito'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'La decisione __________ (prendere) dal consiglio.',
+                correct: ['sarebbe presa', 'verrebbe presa'],
+                explanation: '✅ Corretto! Condizionale presente: sarebbe presa (femminile)'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'I problemi __________ (risolvere) se avessimo più tempo.',
+                options: ['sarebbero risolti', 'sarebbero risolte', 'sarebbero risolti', 'verrebbero risolti'],
+                correct: 'sarebbero risolti',
+                explanation: '✅ Corretto! Condizionale plurale maschile: sarebbero risolti',
+                errorExplanation: '❌ I problemi è maschile plurale: sarebbero risolti'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Il contratto __________ (firmare) entro domani.',
+                correct: ['sarà firmato', 'verrà firmato'],
+                explanation: '✅ Corretto! Futuro semplice: sarà firmato'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Le case __________ (vendere) a prezzi più alti.',
+                options: ['sarebbero vendute', 'sarebbero venduti', 'sarebbero vendute', 'verrebbero vendute'],
+                correct: 'sarebbero vendute',
+                explanation: '✅ Corretto! Condizionale femminile plurale: sarebbero vendute',
+                errorExplanation: '❌ Le case è femminile plurale: sarebbero vendute'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Il progetto __________ (completare) entro la fine del mese.',
+                correct: ['sarà completato', 'verrà completato'],
+                explanation: '✅ Corretto! Futuro: sarà completato'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'La riunione __________ (spostare) a domani.',
+                options: ['sarebbe spostata', 'sarebbe spostato', 'sarebbe spostata', 'verrebbe spostata'],
+                correct: 'sarebbe spostata',
+                explanation: '✅ Corretto! Condizionale femminile: sarebbe spostata',
+                errorExplanation: '❌ La riunione è femminile: sarebbe spostata'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'I risultati __________ (pubblicare) la settimana prossima.',
+                correct: ['saranno pubblicati', 'verranno pubblicati'],
+                explanation: '✅ Corretto! Futuro plurale: saranno pubblicati'
+
+            },
+
+            // ESERCIZI 31-40: Congiuntivo passivo
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Penso che il problema __________ (risolvere) presto.',
+                options: ['sia risolto', 'sia risolto', 'sia risolto', 'venga risolto'],
+                correct: 'sia risolto',
+                explanation: '✅ Corretto! Congiuntivo presente passivo: sia risolto',
+                errorExplanation: '❌ Congiuntivo presente di ESSERE + participio: sia risolto'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'È necessario che le regole __________ (rispettare).',
+                correct: ['siano rispettate', 'vengano rispettate'],
+                explanation: '✅ Corretto! Congiuntivo plurale: siano rispettate'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Spero che la lettera __________ (spedire) oggi.',
+                options: ['sia spedita', 'sia spedito', 'sia spedita', 'venga spedito'],
+                correct: 'sia spedita',
+                explanation: '✅ Corretto! Congiuntivo femminile: sia spedita',
+                errorExplanation: '❌ La lettera è femminile: sia spedita'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Temo che i documenti non __________ (trovare).',
+                correct: ['siano trovati', 'vengano trovati'],
+                explanation: '✅ Corretto! Congiuntivo negativo: siano trovati'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'È importante che il lavoro __________ (fare) bene.',
+                options: ['sia fatto', 'sia fatto', 'sia fatto', 'venga fatto'],
+                correct: 'sia fatto',
+                explanation: '✅ Corretto! Congiuntivo: sia fatto (fare è irregolare)',
+                errorExplanation: '❌ Fare al participio è fatto: sia fatto'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Desidero che le modifiche __________ (apportare) subito.',
+                correct: ['siano apportate', 'vengano apportate'],
+                explanation: '✅ Corretto! Congiuntivo plurale: siano apportate'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Benché __________ (avvertire), non è venuto.',
+                options: ['sia stato avvertito', 'sia stata avvertito', 'sia stato avvertito', 'fosse stato avvertito'],
+                correct: 'sia stato avvertito',
+                explanation: '✅ Corretto! Congiuntivo passato: sia stato avvertito',
+                errorExplanation: '❌ Congiuntivo passato: ESSERE congiuntivo + stato + participio'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Sebbene le condizioni __________ (migliorare), restano problemi.',
+                correct: ['siano migliorate', 'fossero migliorate'],
+                explanation: '✅ Corretto! Congiuntivo presente: siano migliorate'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Affinché il progetto __________ (approvare), dobbiamo modificarlo.',
+                options: ['sia approvato', 'sia approvato', 'sia approvato', 'venga approvato'],
+                correct: 'sia approvato',
+                explanation: '✅ Corretto! Affinché richiede congiuntivo: sia approvato',
+                errorExplanation: '❌ Affinché richiede il congiuntivo: sia approvato'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Prima che la riunione __________ (iniziare), prepariamo i documenti.',
+                correct: ['sia iniziata', 'venga iniziata'],
+                explanation: '✅ Corretto! Prima che + congiuntivo: sia iniziata'
+
+            },
+
+            // ESERCIZI 41-50: Trasformazione e contesti complessi
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Trasforma: "Shakespeare scrisse Romeo e Giulietta"',
+                options: ['Romeo e Giulietta fu scritto da Shakespeare', 'Romeo e Giulietta fu scritta da Shakespeare', 'Romeo e Giulietta fu scritto da Shakespeare', 'Romeo e Giulietta venne scritto da Shakespeare'],
+                correct: 'Romeo e Giulietta fu scritto da Shakespeare',
+                explanation: '✅ Corretto! Opera teatrale è singolare maschile: fu scritto',
+                errorExplanation: '❌ Romeo e Giulietta è singolare (opera): fu scritto'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Trasforma al passivo: "Gli studenti leggono i libri"',
+                correct: ['i libri sono letti dagli studenti', 'i libri vengono letti dagli studenti'],
+                explanation: '✅ Corretto! I libri sono letti dagli studenti'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['La canzone è stata cantata da Maria', 'La canzone è stato cantata da Maria', 'La canzone è stata cantata da Maria', 'La canzone è stata cantato da Maria'],
+                correct: 'La canzone è stata cantata da Maria',
+                explanation: '✅ Corretto! La canzone (femminile): è stata cantata',
+                errorExplanation: '❌ La canzone è femminile: è stata cantata'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Completa: "Quando arrivai, la cena __________ (servire) già"',
+                correct: ['era stata servita', 'fu servita'],
+                explanation: '✅ Corretto! Trapassato prossimo: era stata servita'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Trasforma al futuro passivo: "Il meccanico riparerà la macchina"',
+                options: ['La macchina sarà riparata dal meccanico', 'La macchina sarà riparato dal meccanico', 'La macchina sarà riparata dal meccanico', 'La macchina verrà riparata dal meccanico'],
+                correct: 'La macchina sarà riparata dal meccanico',
+                explanation: '✅ Corretto! Futuro: sarà riparata (femminile)',
+                errorExplanation: '❌ La macchina è femminile: sarà riparata'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Trasforma: "Nessuno ha visto il ladro"',
+                correct: ['il ladro non è stato visto', 'il ladro non fu visto'],
+                explanation: '✅ Corretto! Il ladro non è stato visto (da nessuno)'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Quale forma è corretta per "dovrebbe essere fatto"?',
+                options: ['dovrebbe essere fatto', 'dovrebbe essere fatto', 'dovrebbe essere fatto', 'sarebbe fatto'],
+                correct: 'dovrebbe essere fatto',
+                explanation: '✅ Corretto! Dovere al condizionale + essere + participio',
+                errorExplanation: '❌ Si usa il verbo modale al condizionale + essere + participio'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Completa con la passiva corretta: "Queste regole devono __________ (seguire)"',
+                correct: ['essere seguite', 'venire seguite'],
+                explanation: '✅ Corretto! Dovere + essere + participio: devono essere seguite'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Trasforma: "Hanno rubato la mia bici"',
+                options: ['La mia bici è stata rubata', 'La mia bici è stato rubata', 'La mia bici è stata rubata', 'La mia bici venne rubata'],
+                correct: 'La mia bici è stata rubata',
+                explanation: '✅ Corretto! La bici (femminile): è stata rubata',
+                errorExplanation: '❌ La bici è femminile: è stata rubata'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Trasforma al congiuntivo passivo: "Penso che hanno costruito il ponte l\'anno scorso"',
+                correct: ['penso che il ponte sia stato costruito', 'penso che il ponte fosse stato costruito'],
+                explanation: '✅ Corretto! Penso che + congiuntivo passato: sia stato costruito. Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la forma passiva..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente la forma passiva in tutti i tempi!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene la passiva, ma fai attenzione alla concordanza!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: il participio deve sempre concordare con il soggetto!';
+            } else {
+                message = '📚 Ripassa le tabelle e ricorda: ESSERE si coniuga nel tempo richiesto, il participio concorda!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numeri e Età - 50 Esercizi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #155724;
+            --success-bg: #d4edda;
+            --error: #721c24;
+            --error-bg: #f8d7da;
+            --parchment: #faf8f3;
+            --b1-color: #c9a227;
+            --numbers: #2e7d32;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-header.numbers {
+            border-left-color: var(--numbers);
+            color: var(--numbers);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .number-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .number-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .number-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .number-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .number-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+            color: var(--numbers);
+        }
+
+        .number-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 0.5rem;
+            color: white;
+            font-weight: bold;
+            background: var(--numbers);
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .btn-check {
+            background: var(--b1-color);
+            color: #000;
+        }
+
+        .btn-check:hover {
+            background: #b8941f;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .number-card {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .number-card:hover {
+            border-color: var(--numbers);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .number-digit {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--numbers);
+        }
+
+        .number-text {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+            .number-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Numeri e Età - Modulo A1</h1>
+            <p>Numeri cardinali (0-100) e strutture per esprimere l'età - 50 Esercizi</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A1</a>
+            <span>›</span>
+            <strong>Numeri e Età (50 Esercizi)</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 Numeri Cardinali ed Espressioni dell'Età</h1>
+            <p class="page-subtitle">Da zero a cento, e come dire "Ho 25 anni" in italiano</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('numbers', this)">Numeri 0-20</button>
+            <button class="nav-tab" onclick="showSection('decine', this)">Decine</button>
+            <button class="nav-tab" onclick="showSection('eta', this)">Età</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header numbers">Il Sistema Numerico Italiano</div>
+                <div class="card-body">
+                    <p>I numeri cardinali in italiano sono relativamente semplici fino a 100. Ecco le regole principali:</p>
+                    
+                    <div class="instruction-box" style="border-left-color: var(--numbers);">
+                        <strong>Numeri 0-10:</strong> Forme irregolari da memorizzare
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>zero, uno, due, tre, quattro, cinque, sei, sette, otto, nove, dieci</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box" style="border-left-color: var(--numbers);">
+                        <strong>Numeri 11-16:</strong> Suffisso "-dici" con modifiche
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>undici, dodici, tredici, quattordici, quindici, sedici</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box" style="border-left-color: var(--numbers);">
+                        <strong>Numeri 17-19:</strong> Suffisso "-dici" preceduto dal numero
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>diciassette, diciotto, diciannove</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box" style="border-left-color: var(--numbers);">
+                        <strong>Decine:</strong> Sostantivi propri (terminano in -a o in -i)
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>venti, trenta, quaranta, cinquanta, sessanta, settanta, ottanta, novanta, cento</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> I numeri 21, 31, 41... perdono la vocale finale della decina: venti → ventuno, trenta → trentuno, quaranta → quarantuno.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Come Esprimere l'Età</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Regola fondamentale:</strong> In italiano si usa il verbo <strong>AVERE</strong>, non "essere"!
+                    </div>
+
+                    <div class="rule-box" style="background: #e8f5e9; border-color: var(--numbers);">
+                        <strong>Struttura:</strong> Soggetto + <span style="color: var(--numbers); font-weight: bold;">avere</span> + numero + anni<br><br>
+                        Esempi:<br>
+                        • Io <strong>ho</strong> 20 anni (non "Io sono 20")<br>
+                        • Tu <strong>hai</strong> 15 anni<br>
+                        • Lui/Lei <strong>ha</strong> 30 anni<br>
+                        • Noi <strong>abbiamo</strong> 25 anni<br>
+                        • Voi <strong>avete</strong> 40 anni<br>
+                        • Loro <strong>hanno</strong> 18 anni
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>💡 Nota culturale:</strong> A differenza dell'inglese ("I am 25"), in italiano si deve sempre specificare "anni" dopo il numero. Non si dice mai "Io sono 25" per indicare l'età!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE NUMERI 0-20 -->
+        <section id="numbers" class="section">
+            <div class="card">
+                <div class="card-header numbers">Numeri da 0 a 20</div>
+                <div class="card-body">
+                    <div class="number-grid" id="numbersGrid">
+                        <!-- Generato via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE DECINE -->
+        <section id="decine" class="section">
+            <div class="card">
+                <div class="card-header numbers">Le Decine (20-100)</div>
+                <div class="card-body">
+                    <table class="number-table">
+                        <tr>
+                            <th>Numero</th>
+                            <th>Scrittura</th>
+                            <th>Note</th>
+                        </tr>
+                        <tr>
+                            <td class="number-display">20</td>
+                            <td>venti</td>
+                            <td>Attenzione: ventuno, ventidue... (perde la i)</td>
+                        </tr>
+                        <tr>
+                            <td class="number-display">30</td>
+                            <td>trenta</td>
+                            <td>trentuno, trentadue...</td>
+                        </tr>
+                        <tr>
+                            <td class="number-display">40</td>
+                            <td>quaranta</td>
+                            <td>quarantuno, quarantadue...</td>
+                        </tr>
+                        <tr>
+                            <td class="number-display">50</td>
+                            <td>cinquanta</td>
+                            <td>cinquantuno, cinquantadue...</td>
+                        </tr>
+                        <tr>
+                            <td class="number-display">60</td>
+                            <td>sessanta</td>
+                            <td>sessantuno, sessantadue...</td>
+                        </tr>
+                        <tr>
+                            <td class="number-display">70</td>
+                            <td>settanta</td>
+                            <td>settantuno, settantadue...</td>
+                        </tr>
+                        <tr>
+                            <td class="number-display">80</td>
+                            <td>ottanta</td>
+                            <td>ottantuno, ottantadue...</td>
+                        </tr>
+                        <tr>
+                            <td class="number-display">90</td>
+                            <td>novanta</td>
+                            <td>novantuno, novantadue...</td>
+                        </tr>
+                        <tr>
+                            <td class="number-display">100</td>
+                            <td>cento</td>
+                            <td><span class="number-tag">CENTINAIO</span></td>
+                        </tr>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola del troncamento:</strong> Quando si aggiunge "uno" o "otto" a una decina, la decina perde la vocale finale:<br>
+                        venti + uno = <strong>ventuno</strong> (non "ventiuno")<br>
+                        trenta + otto = <strong>trentotto</strong> (non "trentaotto")
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ETÀ -->
+        <section id="eta" class="section">
+            <div class="card">
+                <div class="card-header numbers">Espressioni per l'Età</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: var(--numbers);">
+                        <strong>Domande:</strong>
+                    </div>
+                    
+                    <table class="number-table">
+                        <tr>
+                            <th>Forma</th>
+                            <th>Domanda</th>
+                            <th>Quando usarla</th>
+                        </tr>
+                        <tr>
+                            <td>Informale</td>
+                            <td class="number-display">Quanti anni hai?</td>
+                            <td>Con amici, familiari, persone conosciute</td>
+                        </tr>
+                        <tr>
+                            <td>Formale</td>
+                            <td class="number-display">Quanti anni ha (Lei)?</td>
+                            <td>Con sconosciuti, anziani, superiori</td>
+                        </tr>
+                    </table>
+
+                    <div class="instruction-box" style="border-left-color: var(--numbers); margin-top: 1.5rem;">
+                        <strong>Risposte:</strong>
+                    </div>
+                    
+                    <table class="number-table">
+                        <tr>
+                            <th>Soggetto</th>
+                            <th>Verbo</th>
+                            <th>Esempio</th>
+                        </tr>
+                        <tr>
+                            <td>Io</td>
+                            <td class="number-display">ho</td>
+                            <td>Ho venticinque anni</td>
+                        </tr>
+                        <tr>
+                            <td>Tu</td>
+                            <td class="number-display">hai</td>
+                            <td>Hai trenta anni?</td>
+                        </tr>
+                        <tr>
+                            <td>Lui/Lei</td>
+                            <td class="number-display">ha</td>
+                            <td>Ha diciotto anni</td>
+                        </tr>
+                        <tr>
+                            <td>Noi</td>
+                            <td class="number-display">abbiamo</td>
+                            <td>Abbiamo quaranta anni</td>
+                        </tr>
+                        <tr>
+                            <td>Voi</td>
+                            <td class="number-display">avete</td>
+                            <td>Avete venti anni?</td>
+                        </tr>
+                        <tr>
+                            <td>Loro</td>
+                            <td class="number-display">hanno</td>
+                            <td>Hanno quindici anni</td>
+                        </tr>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Errore comune:</strong> Non confondere "Ho 20 anni" (italiano) con "I am 20" (inglese)! In italiano si deve usare <strong>AVERE</strong> e specificare sempre <strong>anni</strong>.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A1 - Numeri e Età (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database dei numeri
+        const numbersData = {
+            0: 'zero', 1: 'uno', 2: 'due', 3: 'tre', 4: 'quattro', 5: 'cinque',
+            6: 'sei', 7: 'sette', 8: 'otto', 9: 'nove', 10: 'dieci',
+            11: 'undici', 12: 'dodici', 13: 'tredici', 14: 'quattordici',
+            15: 'quindici', 16: 'sedici', 17: 'diciassette', 18: 'diciotto',
+            19: 'diciannove', 20: 'venti', 30: 'trenta', 40: 'quaranta',
+            50: 'cinquanta', 60: 'sessanta', 70: 'settanta', 80: 'ottanta',
+            90: 'novanta', 100: 'cento'
+        };
+
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Numeri base 0-10
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Come si scrive il numero 0?',
+                options: ['zero', 'uno', 'dieci', 'cento'],
+                correct: 'zero',
+                explanation: '✅ Corretto! 0 = zero.',
+                errorExplanation: '❌ 0 si scrive ZERO'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Completa: Il numero 3 si scrive _____',
+                correct: ['tre'],
+                explanation: '✅ Corretto! 3 = tre.'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Come si scrive il numero 7?',
+                options: ['sei', 'sette', 'otto', 'nove'],
+                correct: 'sette',
+                explanation: '✅ Corretto! 7 = sette.',
+                errorExplanation: '❌ 7 si scrive SETTE'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Completa: 5 = _____',
+                correct: ['cinque'],
+                explanation: '✅ Corretto! 5 = cinque.'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Quale numero corrisponde a "otto"?',
+                options: ['6', '7', '8', '9'],
+                correct: '8',
+                explanation: '✅ Corretto! otto = 8.',
+                errorExplanation: '❌ "Otto" corrisponde a 8'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Completa: nove = _____ (in cifre)',
+                correct: ['9'],
+                explanation: '✅ Corretto! nove = 9.'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Come si scrive il numero 10?',
+                options: ['dieci', 'undici', 'dodici', 'venti'],
+                correct: 'dieci',
+                explanation: '✅ Corretto! 10 = dieci.',
+                errorExplanation: '❌ 10 si scrive DIECI'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Completa: 1 = _____',
+                correct: ['uno'],
+                explanation: '✅ Corretto! 1 = uno.'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Quale numero corrisponde a "quattro"?',
+                options: ['3', '4', '5', '6'],
+                correct: '4',
+                explanation: '✅ Corretto! quattro = 4.',
+                errorExplanation: '❌ "Quattro" corrisponde a 4'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Completa: sei = _____ (in cifre)',
+                correct: ['6'],
+                explanation: '✅ Corretto! sei = 6.'
+
+            },
+
+            // ESERCIZI 11-20: Numeri 11-20
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Come si scrive il numero 11?',
+                options: ['dieci', 'undici', 'dodici', 'tredici'],
+                correct: 'undici',
+                explanation: '✅ Corretto! 11 = undici.',
+                errorExplanation: '❌ 11 si scrive UNDICI'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Completa: 15 = _____',
+                correct: ['quindici'],
+                explanation: '✅ Corretto! 15 = quindici.'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Quale numero corrisponde a "diciotto"?',
+                options: ['16', '17', '18', '19'],
+                correct: '18',
+                explanation: '✅ Corretto! diciotto = 18.',
+                errorExplanation: '❌ "Diciotto" corrisponde a 18'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Completa: 12 si scrive _____',
+                correct: ['dodici'],
+                explanation: '✅ Corretto! 12 = dodici.'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Come si scrive il numero 14?',
+                options: ['tredici', 'quattordici', 'quindici', 'sedici'],
+                correct: 'quattordici',
+                explanation: '✅ Corretto! 14 = quattordici.',
+                errorExplanation: '❌ 14 si scrive QUATTORDICI'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Completa: 17 = _____',
+                correct: ['diciassette'],
+                explanation: '✅ Corretto! 17 = diciassette.'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Quale numero corrisponde a "diciannove"?',
+                options: ['17', '18', '19', '20'],
+                correct: '19',
+                explanation: '✅ Corretto! diciannove = 19.',
+                errorExplanation: '❌ "Diciannove" corrisponde a 19'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Completa: tredici = _____ (in cifre)',
+                correct: ['13'],
+                explanation: '✅ Corretto! tredici = 13.'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Come si scrive il numero 16?',
+                options: ['quindici', 'sedici', 'diciassette', 'diciotto'],
+                correct: 'sedici',
+                explanation: '✅ Corretto! 16 = sedici.',
+                errorExplanation: '❌ 16 si scrive SEDICI'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Completa: 20 = _____',
+                correct: ['venti'],
+                explanation: '✅ Corretto! 20 = venti.'
+
+            },
+
+            // ESERCIZI 21-30: Decine
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Come si scrive il numero 30?',
+                options: ['venti', 'trenta', 'quaranta', 'cinquanta'],
+                correct: 'trenta',
+                explanation: '✅ Corretto! 30 = trenta.',
+                errorExplanation: '❌ 30 si scrive TRENTA'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Completa: 50 = _____',
+                correct: ['cinquanta'],
+                explanation: '✅ Corretto! 50 = cinquanta.'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Quale numero corrisponde a "ottanta"?',
+                options: ['60', '70', '80', '90'],
+                correct: '80',
+                explanation: '✅ Corretto! ottanta = 80.',
+                errorExplanation: '❌ "Ottanta" corrisponde a 80'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Completa: 40 si scrive _____',
+                correct: ['quaranta'],
+                explanation: '✅ Corretto! 40 = quaranta.'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Come si scrive il numero 100?',
+                options: ['novanta', 'cento', 'centouno', 'mille'],
+                correct: 'cento',
+                explanation: '✅ Corretto! 100 = cento.',
+                errorExplanation: '❌ 100 si scrive CENTO'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Completa: 70 = _____',
+                correct: ['settanta'],
+                explanation: '✅ Corretto! 70 = settanta.'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Quale numero corrisponde a "sessanta"?',
+                options: ['50', '60', '70', '80'],
+                correct: '60',
+                explanation: '✅ Corretto! sessanta = 60.',
+                errorExplanation: '❌ "Sessanta" corrisponde a 60'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Completa: 90 = _____',
+                correct: ['novanta'],
+                explanation: '✅ Corretto! 90 = novanta.'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Come si scrive 21? (attenzione alla regola del troncamento)',
+                options: ['ventiuno', 'ventuno', 'venti', 'ventidue'],
+                correct: 'ventuno',
+                explanation: '✅ Corretto! 21 = ventuno (la i di venti cade prima di uno).',
+                errorExplanation: '❌ 21 = ventuno (senza la i di venti)'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Completa: 28 = _____ (attenzione al troncamento)',
+                correct: ['ventotto'],
+                explanation: '✅ Corretto! 28 = ventotto (la i di venti cade prima di otto).'
+
+            },
+
+            // ESERCIZI 31-40: Numeri composti
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Come si scrive il numero 35?',
+                options: ['trentacinque', 'trenta cinque', 'trentuno', 'quarantacinque'],
+                correct: 'trentacinque',
+                explanation: '✅ Corretto! 35 = trentacinque (tutto attaccato).',
+                errorExplanation: '❌ 35 = trentacinque (tutto attaccato, senza spazi)'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Completa: 42 = _____',
+                correct: ['quarantadue'],
+                explanation: '✅ Corretto! 42 = quarantadue.'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Quale numero corrisponde a "cinquantatré"?',
+                options: ['52', '53', '54', '63'],
+                correct: '53',
+                explanation: '✅ Corretto! cinquantatré = 53.',
+                errorExplanation: '❌ "Cinquantatré" corrisponde a 53'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Completa: 67 = _____',
+                correct: ['sessantasette'],
+                explanation: '✅ Corretto! 67 = sessantasette.'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Come si scrive il numero 99?',
+                options: ['novantanove', 'novanta nove', 'centonove', 'ottantanove'],
+                correct: 'novantanove',
+                explanation: '✅ Corretto! 99 = novantanove.',
+                errorExplanation: '❌ 99 = novantanove (tutto attaccato)'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Completa: 31 = _____ (attenzione al troncamento)',
+                correct: ['trentuno'],
+                explanation: '✅ Corretto! 31 = trentuno (senza la a di trenta).'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Quale numero corrisponde a "settantotto"?',
+                options: ['68', '70', '78', '88'],
+                correct: '78',
+                explanation: '✅ Corretto! settantotto = 78 (settanta senza a + otto).',
+                errorExplanation: '❌ "Settantotto" = 78 (settanta perde la a prima di otto)'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Completa: 46 = _____',
+                correct: ['quarantasei'],
+                explanation: '✅ Corretto! 46 = quarantasei.'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Come si scrive il numero 88?',
+                options: ['ottantotto', 'ottantaotto', 'ottantotto', 'novantotto'],
+                correct: 'ottantotto',
+                explanation: '✅ Corretto! 88 = ottantotto (ottanta senza a + otto).',
+                errorExplanation: '❌ 88 = ottantotto (senza la a di ottanta)'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Completa: 74 = _____',
+                correct: ['settantaquattro'],
+                explanation: '✅ Corretto! 74 = settantaquattro.'
+
+            },
+
+            // ESERCIZI 41-50: Età con il verbo AVERE
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Completa: Io _____ 20 anni. (esprimere età)',
+                options: ['sono', 'ho', 'ha', 'abbiamo'],
+                correct: 'ho',
+                explanation: '✅ Corretto! In italiano si "hanno" gli anni: io HO 20 anni.',
+                errorExplanation: '❌ ERRORE CLASSICO: In italiano si usa AVERE per l\'età, non ESSERE!'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Completa: Tu _____ 15 anni?',
+                correct: ['hai'],
+                explanation: '✅ Corretto! "Tu hai 15 anni?" (avere per l\'età).'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Completa: Lei _____ 30 anni. (formale)',
+                options: ['sono', 'ho', 'hai', 'ha'],
+                correct: 'ha',
+                explanation: '✅ Corretto! "Lei ha 30 anni" (avere alla terza persona).',
+                errorExplanation: '❌ Per lei si usa HA (avere)'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Completa: Noi _____ 25 anni.',
+                correct: ['abbiamo'],
+                explanation: '✅ Corretto! "Noi abbiamo 25 anni".'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Completa: Voi _____ 40 anni?',
+                options: ['siete', 'avete', 'hanno', 'abbiamo'],
+                correct: 'avete',
+                explanation: '✅ Corretto! "Voi avete 40 anni?" (avere).',
+                errorExplanation: '❌ Per voi si usa AVETE (avere)'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Completa: Loro _____ 18 anni.',
+                correct: ['hanno'],
+                explanation: '✅ Corretto! "Loro hanno 18 anni".'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Come si chiede l\'età in modo informale?',
+                options: ['Quanti anni sei?', 'Quanti anni hai?', 'Quanti anni ha?', 'Quanti anni abbiamo?'],
+                correct: 'Quanti anni hai?',
+                explanation: '✅ Corretto! "Quanti anni hai?" (informale, tu).',
+                errorExplanation: '❌ La forma informale è "Quanti anni HAI?" (tu)'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Come si chiede l\'età in modo formale? (Lei)',
+                correct: ['Quanti anni ha?', 'Quanti anni ha lei?'],
+                explanation: '✅ Corretto! "Quanti anni ha (Lei)?" (formale).'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Traduci: "I am 22 years old" (italiano corretto)',
+                options: ['Io sono 22', 'Io ho 22 anni', 'Io sono 22 anni', 'Io ho 22'],
+                correct: 'Io ho 22 anni',
+                explanation: '✅ Corretto! "Io ho 22 anni" (avere + anni).',
+                errorExplanation: '❌ In italiano si dice "ho 22 anni", non "sono 22" e non si omette "anni"'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Completa la frase: Marco ha 35 anni. La sua sorella _____ 32 anni e i suoi genitori _____ 60 anni.',
+                correct: ['ha... hanno', 'ha hanno'],
+                explanation: '✅ Corretto! "Sua sorella HA 32 anni" (lei) e "i genitori HANNO 60 anni" (loro). Complimenti!',
+                errorExplanation: '❌ Attenzione: lei HA, loro HANNO (avere)'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        // Popola la griglia dei numeri 0-20
+        function populateNumbersGrid() {
+            const grid = document.getElementById('numbersGrid');
+            let html = '';
+            for (let i = 0; i <= 20; i++) {
+                html += `
+                    <div class="number-card" onclick="speak('${numbersData[i]}')">
+                        <div class="number-digit">${i}</div>
+                        <div class="number-text">${numbersData[i]}</div>
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+        }
+
+        function speak(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'it-IT';
+            u.rate = 0.8;
+            window.speechSynthesis.speak(u);
+        }
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+            if(id === 'numbers') {
+                populateNumbersGrid();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header numbers">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = ex.errorExplanation;
+                
+                // Messaggi specifici per errori comuni
+                if (ex.question.includes('età') && selected === 'sono') {
+                    errorMsg += '<br><strong>⚠️ ERRORE CLASSICO: In italiano si "hanno" gli anni, non si "sono"!</strong>';
+                }
+                if (ex.question.includes('troncamento') && selected.includes('auno') || selected.includes('iuno')) {
+                    errorMsg += '<br><strong>💡 Ricorda: la vocale finale della decina cade prima di uno e otto!</strong>';
+                }
+                
+                feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                
+                // Messaggi specifici per errori comuni
+                if (ex.question.includes('età') && value === 'sono') {
+                    errorMsg += '<br><strong>⚠️ ERRORE CLASSICO: In italiano si "hanno" gli anni, non si "sono"!</strong>';
+                }
+                if (ex.question.includes('troncamento')) {
+                    errorMsg += '<br><strong>💡 Ricorda la regola del troncamento: venti + uno = ventuno (senza i)!</strong>';
+                }
+                
+                feedback.innerHTML = errorMsg;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente i numeri e le espressioni dell\'età!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene i numeri da 0 a 100 e le strutture per l\'età!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: i numeri si scrivono attaccati, e per l\'età si usa AVERE (ho 20 anni)!';
+            } else {
+                message = '📚 Ripassa le regole! Ricorda: ventuno (non ventiuno), e "ho 20 anni" (non "sono 20")!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

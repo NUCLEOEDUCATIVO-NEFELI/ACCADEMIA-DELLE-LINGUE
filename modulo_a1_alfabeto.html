@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alfabeto Italiano - 50 Esercizi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #155724;
+            --success-bg: #d4edda;
+            --error: #721c24;
+            --error-bg: #f8d7da;
+            --parchment: #faf8f3;
+            --b1-color: #c9a227;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .alphabet-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .alphabet-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .alphabet-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .alphabet-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .letter-big {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .btn-check {
+            background: var(--b1-color);
+            color: #000;
+        }
+
+        .btn-check:hover {
+            background: #b8941f;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .letter-display {
+            font-size: 4rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .phonetic-display {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Alfabeto Italiano - Modulo A1</h1>
+            <p>Impara le lettere e i suoni dell'italiano con 50 esercizi interattivi</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A1</a>
+            <span>›</span>
+            <strong>Alfabeto (50 Esercizi)</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🔤 L'Alfabeto Italiano</h1>
+            <p class="page-subtitle">21 lettere, 5 vocali, 16 consonanti italiane e 5 consonanti straniere</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('alphabet', this)">Alfabeto</button>
+            <button class="nav-tab" onclick="showSection('pronunciation', this)">Pronuncia</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header">Che cos'è l'Alfabeto Italiano?</div>
+                <div class="card-body">
+                    <p>L'alfabeto italiano è il sistema di scrittura utilizzato per la lingua italiana. È una variante dell'alfabeto latino.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Caratteristiche principali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>21 lettere</strong> nell'alfabeto tradizionale italiano</li>
+                            <li><strong>5 vocali:</strong> A, E, I, O, U</li>
+                            <li><strong>16 consonanti italiane:</strong> B, C, D, F, G, H, L, M, N, P, Q, R, S, T, V, Z</li>
+                            <li><strong>5 consonanti straniere:</strong> J, K, W, X, Y (usate solo in parole straniere)</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Nota importante:</strong> Le lettere J, K, W, X, Y sono considerate "consonanti straniere" e si trovano solo in parole di origine straniera come jeans, kayak, wifi, xilofono, yogurt.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Le Vocali</div>
+                <div class="card-body">
+                    <p>Le vocali italiane sono 5 e possono essere pronunciate aperte o chiuse:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li><strong>A</strong> - si pronuncia sempre [a] (aperta) - es. <em>casa, albero</em></li>
+                        <li><strong>E</strong> - può essere [e] aperta o [ɛ] chiusa - es. <em>elefante, e</em></li>
+                        <li><strong>I</strong> - si pronuncia sempre [i] - es. <em>isola, i</em></li>
+                        <li><strong>O</strong> - può essere [o] aperta o [ɔ] chiusa - es. <em>orso, o</em></li>
+                        <li><strong>U</strong> - si pronuncia sempre [u] - es. <em>uva, u</em></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ALFABETO -->
+        <section id="alphabet" class="section">
+            <div class="card">
+                <div class="card-header">Le 21 Lettere dell'Alfabeto Italiano</div>
+                <div class="card-body">
+                    <table class="alphabet-table">
+                        <thead>
+                            <tr>
+                                <th>Lettera</th>
+                                <th>Nome</th>
+                                <th>Fonema</th>
+                                <th>Parola Esempio</th>
+                                <th>Traduzione</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="letter-big">A a</td><td>a</td><td>[a]</td><td>albero</td><td>tree</td></tr>
+                            <tr><td class="letter-big">B b</td><td>bi</td><td>[bi]</td><td>banana</td><td>banana</td></tr>
+                            <tr><td class="letter-big">C c</td><td>ci</td><td>[tʃi] o [ki]</td><td>casa / ciao</td><td>house / hello</td></tr>
+                            <tr><td class="letter-big">D d</td><td>di</td><td>[di]</td><td>dente</td><td>tooth</td></tr>
+                            <tr><td class="letter-big">E e</td><td>e</td><td>[e] o [ɛ]</td><td>elefante</td><td>elephant</td></tr>
+                            <tr><td class="letter-big">F f</td><td>effe</td><td>[ˈɛffe]</td><td>fiore</td><td>flower</td></tr>
+                            <tr><td class="letter-big">G g</td><td>gi</td><td>[dʒi] o [gi]</td><td>gatto / gelato</td><td>cat / ice cream</td></tr>
+                            <tr><td class="letter-big">H h</td><td>acca</td><td>[ˈakka]</td><td>hotel</td><td>hotel</td></tr>
+                            <tr><td class="letter-big">I i</td><td>i</td><td>[i]</td><td>isola</td><td>island</td></tr>
+                            <tr><td class="letter-big">L l</td><td>elle</td><td>[ˈɛlle]</td><td>luna</td><td>moon</td></tr>
+                            <tr><td class="letter-big">M m</td><td>emme</td><td>[ˈɛmme]</td><td>maiale</td><td>pig</td></tr>
+                            <tr><td class="letter-big">N n</td><td>enne</td><td>[ˈɛnne]</td><td>notte</td><td>night</td></tr>
+                            <tr><td class="letter-big">O o</td><td>o</td><td>[o] o [ɔ]</td><td>orso</td><td>bear</td></tr>
+                            <tr><td class="letter-big">P p</td><td>pi</td><td>[pi]</td><td>pizza</td><td>pizza</td></tr>
+                            <tr><td class="letter-big">Q q</td><td>qu</td><td>[ku]</td><td>quadro</td><td>painting</td></tr>
+                            <tr><td class="letter-big">R r</td><td>erre</td><td>[ˈɛrre]</td><td>rosa</td><td>rose</td></tr>
+                            <tr><td class="letter-big">S s</td><td>esse</td><td>[ˈɛsse]</td><td>sole</td><td>sun</td></tr>
+                            <tr><td class="letter-big">T t</td><td>ti</td><td>[ti]</td><td>tigre</td><td>tiger</td></tr>
+                            <tr><td class="letter-big">U u</td><td>u</td><td>[u]</td><td>uva</td><td>grapes</td></tr>
+                            <tr><td class="letter-big">V v</td><td>vi / vu</td><td>[vi]</td><td>volpe</td><td>fox</td></tr>
+                            <tr><td class="letter-big">Z z</td><td>zeta</td><td>[ˈdzɛta] o [ˈtsɛta]</td><td>zebra</td><td>zebra</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PRONUNCIA -->
+        <section id="pronunciation" class="section">
+            <div class="card">
+                <div class="card-header">Regole di Pronuncia Importanti</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>C e G - Due suoni per lettera</strong>
+                    </div>
+                    <p>Le lettere <strong>C</strong> e <strong>G</strong> hanno due pronunce diverse a seconda della vocale che segue:</p>
+                    
+                    <table class="alphabet-table" style="margin-top: 1rem;">
+                        <thead>
+                            <tr>
+                                <th>Lettera</th>
+                                <th>Davanti a A, O, U</th>
+                                <th>Davanti a E, I</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="letter-big">C</td>
+                                <td>[k] suono duro - <em>casa, cosa, cura</em></td>
+                                <td>[tʃ] suono dolce - <em>ciao, cena, cibo</em></td>
+                            </tr>
+                            <tr>
+                                <td class="letter-big">G</td>
+                                <td>[g] suono duro - <em>gatto, gola, gusto</em></td>
+                                <td>[dʒ] suono dolce - <em>gelato, gente, giro</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box" style="margin-top: 1.5rem;">
+                        <strong>Eccezione con H:</strong> Per mantenere il suono duro davanti a E o I, si aggiunge la H.<br>
+                        <em>che</em> (ke), <em>chi</em> (ki), <em>ghe</em> (ge), <em>ghi</em> (gi)
+                    </div>
+
+                    <div class="instruction-box" style="margin-top: 1.5rem;">
+                        <strong>La lettera H</strong>
+                    </div>
+                    <p>In italiano la <strong>H</strong> è sempre muta (non si pronuncia). Serve solo per modificare il suono di C e G.</p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li><em>hotel</em> - si pronuncia /oˈtɛl/</li>
+                        <li><em>hanno</em> - si pronuncia /ˈanno/</li>
+                    </ul>
+
+                    <div class="instruction-box" style="margin-top: 1.5rem;">
+                        <strong>Le consonanti straniere</strong>
+                    </div>
+                    <table class="alphabet-table">
+                        <thead>
+                            <tr>
+                                <th>Lettera</th>
+                                <th>Nome</th>
+                                <th>Esempi di uso</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="letter-big">J j</td><td>i lunga</td><td>jeans, jogging, juventus</td></tr>
+                            <tr><td class="letter-big">K k</td><td>kappa</td><td>kayak, ketchup, kilo</td></tr>
+                            <tr><td class="letter-big">W w</td><td>vu doppia</td><td>web, wifi, whisky</td></tr>
+                            <tr><td class="letter-big">X x</td><td>ics</td><td>xilofono, taxi, extra</td></tr>
+                            <tr><td class="letter-big">Y y</td><td>ipsilon / i greca</td><td>yogurt, yoga, yacht</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A1 - Alfabeto (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Riconoscimento lettere base
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Qual è la prima lettera dell\'alfabeto italiano?',
+                options: ['A', 'B', 'C', 'D'],
+                correct: 'A',
+                explanation: '✅ Corretto! A è la prima lettera dell\'alfabeto italiano.',
+                errorExplanation: '❌ La prima lettera è A (come in "albero")'
+            },
+            {
+                id: 2,
+                type: 'choice',
+                question: 'Come si chiama la lettera "B"?',
+                options: ['bi', 'be', 'ba', 'bì'],
+                correct: 'bi',
+                explanation: '✅ Corretto! La B si chiama "bi" (come in "banana").',
+                errorExplanation: '❌ La B si pronuncia "bi"'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Quante sono le vocali nell\'alfabeto italiano?',
+                options: ['5', '6', '4', '7'],
+                correct: '5',
+                explanation: '✅ Corretto! Le vocali sono 5: A, E, I, O, U.',
+                errorExplanation: '❌ Le vocali italiane sono 5: A, E, I, O, U'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'La lettera "C" si pronuncia ______ (come in "casa").',
+                correct: ['ci', 'cì'],
+                explanation: '✅ Corretto! La C si chiama "ci".'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Qual è l\'ultima lettera dell\'alfabeto italiano tradizionale?',
+                options: ['Z', 'Y', 'X', 'V'],
+                correct: 'Z',
+                explanation: '✅ Corretto! Z (zeta) è l\'ultima delle 21 lettere italiane.',
+                errorExplanation: '❌ L\'ultima lettera tradizionale è Z (zeta)'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'La lettera "D" si chiama ______ (come in "dente").',
+                correct: ['di', 'dì'],
+                explanation: '✅ Corretto! La D si pronuncia "di".'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Come si pronuncia la lettera "F"?',
+                options: ['effe', 'fi', 'fa', 'ef'],
+                correct: 'effe',
+                explanation: '✅ Corretto! La F si chiama "effe" (doppia effe).',
+                errorExplanation: '❌ La F si pronuncia "effe"'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'La lettera "G" si pronuncia ______ (come in "gatto").',
+                correct: ['gi', 'gì'],
+                explanation: '✅ Corretto! La G si chiama "gi".'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Qual è il nome della lettera "H"?',
+                options: ['acca', 'ha', 'hi', 'he'],
+                correct: 'acca',
+                explanation: '✅ Corretto! La H si chiama "acca".',
+                errorExplanation: '❌ La H si pronuncia "acca" (è muta nelle parole)'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'La lettera "I" è una ______.',
+                correct: ['vocale', 'Vocale'],
+                explanation: '✅ Corretto! I è una vocale.'
+
+            },
+
+            // ESERCIZI 11-20: Consonanti doppie e nomi
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Come si chiama la lettera "L"?',
+                options: ['elle', 'el', 'li', 'la'],
+                correct: 'elle',
+                explanation: '✅ Corretto! La L si chiama "elle" (doppia elle).',
+                errorExplanation: '❌ La L si pronuncia "elle"'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'La lettera "M" si chiama ______ (doppia emme).',
+                correct: ['emme', 'Emme'],
+                explanation: '✅ Corretto! La M si pronuncia "emme".'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Come si pronuncia la lettera "N"?',
+                options: ['enne', 'en', 'ni', 'na'],
+                correct: 'enne',
+                explanation: '✅ Corretto! La N si chiama "enne" (doppia enne).',
+                errorExplanation: '❌ La N si pronuncia "enne"'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'La lettera "P" si chiama ______ (come in "pizza").',
+                correct: ['pi', 'pì'],
+                explanation: '✅ Corretto! La P si pronuncia "pi".'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Qual è il nome della lettera "Q"?',
+                options: ['qu', 'cu', 'que', 'qui'],
+                correct: 'qu',
+                explanation: '✅ Corretto! La Q si chiama "qu".',
+                errorExplanation: '❌ La Q si pronuncia "qu" (come "ku")'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'La lettera "R" si chiama ______ (doppia erre).',
+                correct: ['erre', 'Erre'],
+                explanation: '✅ Corretto! La R si pronuncia "erre".'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Come si chiama la lettera "S"?',
+                options: ['esse', 'es', 'si', 'sa'],
+                correct: 'esse',
+                explanation: '✅ Corretto! La S si chiama "esse" (doppia esse).',
+                errorExplanation: '❌ La S si pronuncia "esse"'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'La lettera "T" si chiama ______ (come in "tigre").',
+                correct: ['ti', 'tì'],
+                explanation: '✅ Corretto! La T si pronuncia "ti".'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Qual è il nome della lettera "V"?',
+                options: ['vi', 'vu', 'va', 've'],
+                correct: 'vi',
+                explanation: '✅ Corretto! La V si chiama "vi" (o anche "vu" in alcune regioni).',
+                errorExplanation: '❌ La V si pronuncia "vi" (o "vu")'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'La lettera "Z" si chiama ______ (come in "zebra").',
+                correct: ['zeta', 'Zeta'],
+                explanation: '✅ Corretto! La Z si pronuncia "zeta".'
+
+            },
+
+            // ESERCIZI 21-30: Vocali e suoni speciali
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Quante consonanti ci sono nell\'alfabeto italiano tradizionale?',
+                options: ['16', '21', '5', '26'],
+                correct: '16',
+                explanation: '✅ Corretto! Ci sono 16 consonanti italiane (B, C, D, F, G, H, L, M, N, P, Q, R, S, T, V, Z).',
+                errorExplanation: '❌ Le consonanti italiane tradizionali sono 16'
+            },
+            {
+                id: 22,
+                type: 'choice',
+                question: 'Quante sono le lettere totali nell\'alfabeto italiano tradizionale?',
+                options: ['21', '26', '22', '20'],
+                correct: '21',
+                explanation: '✅ Corretto! L\'alfabeto italiano tradizionale ha 21 lettere (5 vocali + 16 consonanti).',
+                errorExplanation: '❌ L\'alfabeto italiano tradizionale ha 21 lettere'
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: 'Le lettere A, E, I, O, U sono tutte ______.',
+                correct: ['vocali', 'Vocali'],
+                explanation: '✅ Corretto! A, E, I, O, U sono le 5 vocali.'
+            },
+            {
+                id: 24,
+                type: 'choice',
+                question: 'La lettera "E" è una:',
+                options: ['vocale', 'consonante', 'consonante straniera', 'semivocale'],
+                correct: 'vocale',
+                explanation: '✅ Corretto! E è una vocale.',
+                errorExplanation: '❌ La E è una vocale'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Quali di queste è una consonante?',
+                options: ['B', 'A', 'E', 'I'],
+                correct: 'B',
+                explanation: '✅ Corretto! B è una consonante. A, E, I sono vocali.',
+                errorExplanation: '❌ La B è una consonante, le altre sono vocali'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'La lettera "O" è una ______.',
+                correct: ['vocale', 'Vocale'],
+                explanation: '✅ Corretto! O è una vocale.'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Quante consonanti straniere ci sono in italiano?',
+                options: ['5', '4', '6', '3'],
+                correct: '5',
+                explanation: '✅ Corretto! Le consonanti straniere sono 5: J, K, W, X, Y.',
+                errorExplanation: '❌ Le consonanti straniere sono 5: J, K, W, X, Y'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Le consonanti straniere sono J, K, W, X e ______.',
+                correct: ['Y', 'y'],
+                explanation: '✅ Corretto! La quinta consonante straniera è Y (ipsilon).'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Qual è il nome della consonante straniera "J"?',
+                options: ['i lunga', 'je', 'ji', 'jay'],
+                correct: 'i lunga',
+                explanation: '✅ Corretto! La J si chiama "i lunga".',
+                errorExplanation: '❌ La J si pronuncia "i lunga"'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'La lettera "K" si chiama ______ (come in "kayak").',
+                correct: ['kappa', 'Kappa'],
+                explanation: '✅ Corretto! La K si pronuncia "kappa".'
+
+            },
+
+            // ESERCIZI 31-40: Regole di pronuncia C e G
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Come si pronuncia la C davanti a A, O, U?',
+                options: ['[k] suono duro', '[tʃ] suono dolce', '[s]', '[z]'],
+                correct: '[k] suono duro',
+                explanation: '✅ Corretto! Davanti a A, O, U la C si pronuncia [k] (suono duro come in "casa").',
+                errorExplanation: '❌ Davanti a A, O, U la C ha suono duro [k]'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Davanti a E e I, la C si pronuncia [______] (suono dolce come in "ciao").',
+                correct: ['tʃ', 'ci'],
+                explanation: '✅ Corretto! Davanti a E, I la C si pronuncia [tʃ] (dolce).'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Come si pronuncia la G davanti a A, O, U?',
+                options: ['[g] suono duro', '[dʒ] suono dolce', '[j]', '[ʒ]'],
+                correct: '[g] suono duro',
+                explanation: '✅ Corretto! Davanti a A, O, U la G si pronuncia [g] (suono duro come in "gatto").',
+                errorExplanation: '❌ Davanti a A, O, U la G ha suono duro [g]'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Davanti a E e I, la G si pronuncia [______] (suono dolce come in "gelato").',
+                correct: ['dʒ', 'gi', 'gì'],
+                explanation: '✅ Corretto! Davanti a E, I la G si pronuncia [dʒ] (dolce).'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Nella parola "ciao", come si pronuncia la C?',
+                options: ['[tʃ] dolce', '[k] duro', '[s]', '[z]'],
+                correct: '[tʃ] dolce',
+                explanation: '✅ Corretto! In "ciao" la C è seguita da I, quindi si pronuncia [tʃ] (dolce).',
+                errorExplanation: '❌ Davanti a I la C è dolce: [tʃ]'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Nella parola "gatto", la G si pronuncia [______] (duro) perché è seguita da A.',
+                correct: ['g', 'k', 'duro', 'g duro'],
+                explanation: '✅ Corretto! In "gatto" la G è dura [g] perché seguita da A.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Nella parola "gelato", come si pronuncia la G?',
+                options: ['[dʒ] dolce', '[g] duro', '[j]', '[ʒ]'],
+                correct: '[dʒ] dolce',
+                explanation: '✅ Corretto! In "gelato" la G è seguita da E, quindi si pronuncia [dʒ] (dolce).',
+                errorExplanation: '❌ Davanti a E la G è dolce: [dʒ]'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Per mantenere il suono duro di C davanti a E o I, si aggiunge la lettera ______.',
+                correct: ['h', 'H', 'acca'],
+                explanation: '✅ Corretto! La H rende dura la C: che, chi (ke, ki).'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Come si pronuncia "chi" (come in "chiesa")?',
+                options: ['[ki]', '[tʃi]', '[si]', '[zi]'],
+                correct: '[ki]',
+                explanation: '✅ Corretto! "Chi" si pronuncia [ki] con suono duro grazie alla H.',
+                errorExplanation: '❌ CH si pronuncia [ki] (duro)'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'La parola "ghetto" ha la G ______ (duro/dolce) perché c\'è la H.',
+                correct: ['duro', 'dura', 'duro', 'g duro'],
+                explanation: '✅ Corretto! GH mantiene il suono duro [g] davanti a E.'
+
+            },
+
+            // ESERCIZI 41-50: Consonanti straniere e completamento
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Qual è il nome della lettera straniera "W"?',
+                options: ['vu doppia', 'doppia vu', 'we', 'wa'],
+                correct: 'vu doppia',
+                explanation: '✅ Corretto! La W si chiama "vu doppia" o "doppia vu".',
+                errorExplanation: '❌ La W si pronuncia "vu doppia"'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'La lettera "X" si chiama ______ (come in "xilofono").',
+                correct: ['ics', 'Ics'],
+                explanation: '✅ Corretto! La X si pronuncia "ics".'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Come si chiama la lettera "Y"?',
+                options: ['ipsilon', 'i greca', 'Entrambe le precedenti', 'ya'],
+                correct: 'Entrambe le precedenti',
+                explanation: '✅ Corretto! La Y si chiama "ipsilon" o "i greca".',
+                errorExplanation: '❌ La Y si pronuncia "ipsilon" o "i greca"'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'La parola "yogurt" inizia con la lettera ______ (consonante straniera).',
+                correct: ['y', 'Y', 'ipsilon', 'i greca'],
+                explanation: '✅ Corretto! "Yogurt" inizia con Y (ipsilon/i greca).'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Quale di queste parole usa una consonante straniera?',
+                options: ['jeans', 'casa', 'gatto', 'albero'],
+                correct: 'jeans',
+                explanation: '✅ Corretto! "Jeans" usa la J, che è una consonante straniera.',
+                errorExplanation: '❌ "Jeans" contiene la J, consonante straniera'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'La parola "taxi" contiene la lettera ______ (consonante straniera).',
+                correct: ['x', 'X', 'ics'],
+                explanation: '✅ Corretto! "Taxi" contiene la X (ics).'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Quale lettera manca nella sequenza: A, B, C, D, E, F, G, H, I, ___?',
+                options: ['L', 'M', 'N', 'O'],
+                correct: 'L',
+                explanation: '✅ Corretto! Dopo la I viene la L (la J e K sono straniere e saltate).',
+                errorExplanation: '❌ Dopo I viene L (J e K sono straniere)'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Nell\'alfabeto italiano, tra la I e la L mancano le lettere straniere J e ______.',
+                correct: ['k', 'K', 'kappa'],
+                explanation: '✅ Corretto! Tra I e L mancano J (i lunga) e K (kappa).'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Qual è l\'ordine corretto delle ultime 5 lettere dell\'alfabeto italiano?',
+                options: ['Q, R, S, T, U, V, Z', 'P, Q, R, S, T', 'R, S, T, U, V', 'S, T, U, V, Z'],
+                correct: 'Q, R, S, T, U, V, Z',
+                explanation: '✅ Corretto! L\'ordine è Q, R, S, T, U, V, Z (con la Z finale).',
+                errorExplanation: '❌ L\'ordine corretto è Q, R, S, T, U, V, Z'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Completa: A, B, C, D, E, F, G, H, I, L, M, N, O, P, Q, R, S, T, U, V, ______.',
+                correct: ['Z', 'z', 'zeta', 'Zeta'],
+                explanation: '✅ Corretto! L\'ultima lettera è Z (zeta). Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Conosci perfettamente l\'alfabeto italiano!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene l\'alfabeto, ma rivedi le consonanti straniere!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Continua a esercitarti con le lettere e la pronuncia!';
+            } else {
+                message = '📚 Ripassa l\'alfabeto! Ricorda: 21 lettere totali, 5 vocali, 16 consonanti italiane!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

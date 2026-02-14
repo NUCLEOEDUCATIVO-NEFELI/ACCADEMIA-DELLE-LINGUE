@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prova di Ascolto - Italiano A1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #155724;
+            --success-bg: #d4edda;
+            --error: #721c24;
+            --error-bg: #f8d7da;
+            --parchment: #faf8f3;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .listen-area {
+            background: #e8f5e9;
+            border: 2px solid var(--success);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .listen-area:hover {
+            background: #d4edda;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            text-align: left;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: var(--light);
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show { display: block; }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .text-center { text-align: center; }
+
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.show { display: flex; }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Prova di Ascolto</h1>
+            <p>Comprensione orale - Livello A1</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A1</a>
+            <span>›</span>
+            <strong>Prova di Ascolto</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Comprensione Orale</h1>
+        </div>
+
+        <div class="score-panel">
+            <span>Domanda: <strong id="qNum">1</strong>/10</span>
+            <span>Punteggio: <strong id="score">0</strong></span>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <div class="card" id="startScreen">
+            <div class="card-header">Istruzioni</div>
+            <div class="card-body">
+                <div class="instruction-box">
+                    Ascolta attentamente l'audio e rispondi alla domanda scegliendo l'opzione corretta.
+                </div>
+                <div class="text-center">
+                    <button class="btn-primary" onclick="startTest()">Inizia il Test</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" id="testScreen" style="display: none;">
+            <div class="card-header">Ascolto</div>
+            <div class="card-body">
+                <div class="listen-area" onclick="playAudio()">
+                    <div style="font-size: 2rem;">🔊</div>
+                    <div>Clicca per ascoltare</div>
+                </div>
+
+                <div id="questionText" style="margin-bottom: 1rem; font-weight: bold;"></div>
+
+                <div class="options-grid" id="options"></div>
+
+                <div class="feedback" id="feedback"></div>
+
+                <div class="text-center">
+                    <button class="btn-primary" onclick="nextQuestion()">Successivo →</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal" id="resultModal">
+        <div class="modal-content">
+            <h2 style="color: var(--primary); margin-bottom: 1rem;">Test Completato!</h2>
+            <p>Punteggio finale: <strong id="finalScore">0</strong>/100</p>
+            <button class="btn-primary" onclick="restart()" style="margin-top: 1rem;">Ricomincia</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { text: "Ciao, mi chiamo Marco e vengo da Roma.", question: "Come si chiama il ragazzo?", options: ["Mario", "Marco", "Luca"], correct: 1 },
+            { text: "Ho ventitré anni e lavoro in un ufficio.", question: "Quanti anni ha?", options: ["23", "32", "13"], correct: 0 },
+            { text: "Sono italiana, ma abito a Parigi.", question: "Dove abita la ragazza?", options: ["A Roma", "A Parigi", "A Londra"], correct: 1 },
+            { text: "Ho due fratelli e una sorella.", question: "Quanti fratelli ha?", options: ["Uno", "Due", "Tre"], correct: 1 },
+            { text: "Sono insegnante di italiano.", question: "Che lavoro fa?", options: ["Studente", "Insegnante", "Medico"], correct: 1 }
+        ];
+
+        let current = 0;
+        let score = 0;
+
+        function speak(text) {
+            if(!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'it-IT';
+            u.rate = 0.8;
+            window.speechSynthesis.speak(u);
+        }
+
+        function startTest() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('testScreen').style.display = 'block';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = questions[current];
+            document.getElementById('questionText').textContent = q.question;
+            document.getElementById('qNum').textContent = current + 1;
+            
+            const opts = document.getElementById('options');
+            opts.innerHTML = '';
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = opt;
+                btn.onclick = () => check(i);
+                opts.appendChild(btn);
+            });
+            
+            document.getElementById('feedback').className = 'feedback';
+            setTimeout(() => playAudio(), 500);
+        }
+
+        function playAudio() {
+            speak(questions[current].text);
+        }
+
+        function check(answer) {
+            const q = questions[current];
+            const btns = document.querySelectorAll('.option-btn');
+            btns.forEach(b => b.disabled = true);
+            
+            const fb = document.getElementById('feedback');
+            fb.classList.add('show');
+            
+            if(answer === q.correct) {
+                fb.className = 'feedback show correct';
+                fb.textContent = '✓ Corretto!';
+                score += 20;
+            } else {
+                fb.className = 'feedback show wrong';
+                fb.textContent = '✗ Sbagliato. Era: ' + q.options[q.correct];
+            }
+            
+            document.getElementById('score').textContent = score;
+            document.getElementById('progress').style.width = ((current + 1) * 10) + '%';
+        }
+
+        function nextQuestion() {
+            current++;
+            if(current >= questions.length) {
+                document.getElementById('resultModal').classList.add('show');
+                document.getElementById('finalScore').textContent = score;
+            } else {
+                loadQuestion();
+            }
+        }
+
+        function restart() {
+            current = 0;
+            score = 0;
+            document.getElementById('resultModal').classList.remove('show');
+            document.getElementById('testScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'block';
+            document.getElementById('score').textContent = '0';
+            document.getElementById('progress').style.width = '0%';
+        }
+    </script>
+</body>
+</html>

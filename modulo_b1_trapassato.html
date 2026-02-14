@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B1 - Trapassato Prossimo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .ausiliare { color: var(--success); font-weight: bold; }
+        .participio { color: var(--primary); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.5rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 250px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--b1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--b1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B1 - Trapassato Prossimo</h1>
+            <p>Il tempo dell'anteriorità: azioni completate prima di un'altra azione passata</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B1</a>
+            <span>›</span>
+            <strong>Trapassato Prossimo</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">⏮️ Trapassato Prossimo</h1>
+            <p class="page-subtitle">Il "passato del passato" - Azioni anteriori a un'altra azione passata</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('avere', this)">AUSILIARE AVERE</button>
+            <button class="nav-tab" onclick="showSection('essere', this)">AUSILIARE ESSERE</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍🏫</div>
+                    <div class="avatar-name">Prof. Marco</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B1! 🎯</h3>
+                    <p>Oggi impariamo il <strong>Trapassato Prossimo</strong>, un tempo fondamentale per raccontare eventi del passato.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "Quando sono arrivato, <span class="highlight">avevano già mangiato</span>."</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è il Trapassato Prossimo?</div>
+                <div class="card-body">
+                    <p>Indica un'azione che si è <strong>completata prima di un'altra azione passata</strong>. È il "passato del passato".</p>
+                    <div class="instruction-box">
+                        <strong>Struttura:</strong> <span class="ausiliare">AUSILIARE</span> (imperfetto) + <span class="participio">PARTICIPIO PASSATO</span><br>
+                        Esempio: avevo mangiato, ero andato/a
+                    </div>
+                    <div class="rule-box">
+                        <strong>Quando usarlo:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Azione precedente a un'altra azione passata</li>
+                            <li>Con <em>quando, dopo che, appena, non appena</em></li>
+                            <li>Per esprimere anteriorità nel passato</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE AVERE -->
+        <section id="avere" class="section">
+            <div class="card">
+                <div class="card-header">Coniugazione con AVERE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Struttura:</strong> Imperfetto di AVERE + Participio Passato (invariato)
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Soggetto</th><th>Imperfetto AVERE</th><th>Esempio (parlare)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>io</td><td class="ausiliare">avevo</td><td class="participio">avevo parlato</td></tr>
+                            <tr><td>tu</td><td class="ausiliare">avevi</td><td class="participio">avevi parlato</td></tr>
+                            <tr><td>lui/lei</td><td class="ausiliare">aveva</td><td class="participio">aveva parlato</td></tr>
+                            <tr><td>noi</td><td class="ausiliare">avevamo</td><td class="participio">avevamo parlato</td></tr>
+                            <tr><td>voi</td><td class="ausiliare">avevate</td><td class="participio">avevate parlato</td></tr>
+                            <tr><td>loro</td><td class="ausiliare">avevano</td><td class="participio">avevano parlato</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="rule-box">
+                        <strong>Verbi che usano AVERE:</strong> verbi transitivi (con oggetto diretto) come mangiare, leggere, scrivere, vedere, fare, dire, prendere, mettere...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESSERE -->
+        <section id="essere" class="section">
+            <div class="card">
+                <div class="card-header">Coniugazione con ESSERE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Struttura:</strong> Imperfetto di ESSERE + Participio Passato (concorda con il soggetto)
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Soggetto</th><th>Imperfetto ESSERE</th><th>Maschile</th><th>Femminile</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>io</td><td class="ausiliare">ero</td><td class="participio">ero andato</td><td class="participio">ero andata</td></tr>
+                            <tr><td>tu</td><td class="ausiliare">eri</td><td class="participio">eri andato</td><td class="participio">eri andata</td></tr>
+                            <tr><td>lui/lei</td><td class="ausiliare">era</td><td class="participio">era andato</td><td class="participio">era andata</td></tr>
+                            <tr><td>noi</td><td class="ausiliare">eravamo</td><td class="participio">eravamo andati</td><td class="participio">eravamo andate</td></tr>
+                            <tr><td>voi</td><td class="ausiliare">eravate</td><td class="participio">eravate andati</td><td class="participio">eravate andate</td></tr>
+                            <tr><td>loro</td><td class="ausiliare">erano</td><td class="participio">erano andati</td><td class="participio">erano andate</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Con ESSERE il participio concorda in genere e numero con il soggetto!<br>
+                        <strong>Verbi che usano ESSERE:</strong> verbi di movimento (andare, venire, partire, arrivare), stato (essere, stare), cambiamento (diventare, morire, nascere) e riflessivi (alzarsi, vestirsi).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B1 - Trapassato Prossimo (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Scelta ausiliare base (AVERE vs ESSERE)
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Quando sono arrivato alla stazione, il treno __________ già partito.',
+                options: ['era', 'aveva', 'è', 'aveva'],
+                correct: 'era',
+                explanation: '✅ Corretto! "Era partito" con ESSERE (verbo di movimento)',
+                errorExplanation: '❌ Sbagliato. Con i verbi di movimento (partire) si usa ESSERE'
+            },
+            {
+                id: 2,
+                type: 'choice',
+                question: 'Maria __________ mai vista Venezia prima del 2020.',
+                options: ['era', 'aveva', 'ha', 'è'],
+                correct: 'aveva',
+                explanation: '✅ Corretto! "Aveva vista" con AVERE (verbo transitivo vedere)',
+                errorExplanation: '❌ Vedere è transitivo, usa AVERE'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Dopo che __________ fatto colazione, sono uscito.',
+                options: ['avevo', 'ero', 'ho', 'facevo'],
+                correct: 'avevo',
+                explanation: '✅ Corretto! "Avevo fatto" con AVERE',
+                errorExplanation: '❌ Fare usa l\'ausiliare AVERE'
+            },
+            {
+                id: 4,
+                type: 'choice',
+                question: 'Appena __________ arrivati, hanno mangiato.',
+                options: ['erano', 'avevano', 'sono', 'furono'],
+                correct: 'erano',
+                explanation: '✅ Corretto! Arrivare usa ESSERE',
+                errorExplanation: '❌ Arrivare è un verbo di movimento, usa ESSERE'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Dopo che ti __________ alzato, hai fatto colazione.',
+                options: ['eri', 'avevi', 'sei', 'fosti'],
+                correct: 'eri',
+                explanation: '✅ Corretto! Alzarsi è riflessivo e usa ESSERE',
+                errorExplanation: '❌ I verbi riflessivi (alzarsi) usano ESSERE'
+            },
+            {
+                id: 6,
+                type: 'choice',
+                question: 'Non __________ mai stato a Roma prima di ieri.',
+                options: ['ero', 'avevo', 'sono', 'fui'],
+                correct: 'ero',
+                explanation: '✅ Corretto! Essere usa se stesso come ausiliare',
+                errorExplanation: '❌ Il verbo essere usa ESSERE come ausiliare'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Quando ho telefonato, loro __________ già usciti.',
+                options: ['erano', 'avevano', 'sono', 'furono'],
+                correct: 'erano',
+                explanation: '✅ Corretto! Uscire usa ESSERE, participio concorda (usciti)',
+                errorExplanation: '❌ Uscire è un verbo di movimento, usa ESSERE'
+            },
+            {
+                id: 8,
+                type: 'choice',
+                question: 'Appena __________ nato, piangeva forte.',
+                options: ['era', 'aveva', 'è', 'fu'],
+                correct: 'era',
+                explanation: '✅ Corretto! Nascere usa ESSERE',
+                errorExplanation: '❌ Nascere è un verbo di stato/cambiamento, usa ESSERE'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Quando sono tornato a casa, mia madre __________ già cucinato.',
+                options: ['aveva', 'era', 'ha', 'fu'],
+                correct: 'aveva',
+                explanation: '✅ Corretto! Cucinare usa AVERE',
+                errorExplanation: '❌ Cucinare è transitivo, usa AVERE'
+            },
+            {
+                id: 10,
+                type: 'choice',
+                question: 'Dopo che __________ piovuto, è uscito il sole.',
+                options: ['era', 'aveva', 'pioveva', 'fu'],
+                correct: 'era',
+                explanation: '✅ Corretto! Piove (impersonale) usa ESSERE',
+                errorExplanation: '❌ I verbi impersonali meteorologici usano ESSERE'
+            },
+
+            // ESERCIZI 11-25: Completamento frasi (fill-in)
+            {
+                id: 11,
+                type: 'fill',
+                question: 'Quando ho chiamato Luca, lui __________ (mangiare).',
+                correct: ['aveva già mangiato', 'aveva mangiato'],
+                explanation: '✅ Corretto! Mangiare usa AVERE'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Sono andato al cinema dopo che __________ (finire) i compiti.',
+                correct: ['avevo finito', 'avevo terminato'],
+                explanation: '✅ Corretto! Finire usa AVERE (transitivo)'
+            },
+            {
+                id: 13,
+                type: 'fill',
+                question: 'Le ragazze __________ (partire) quando sono arrivato.',
+                correct: ['erano già partite', 'erano partite'],
+                explanation: '✅ Corretto! Partire usa ESSERE, participio concorda (partite femminile plurale)'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Non __________ (vedere) un film così prima.',
+                correct: ['avevo mai visto', 'avevo visto'],
+                explanation: '✅ Corretto! Vedere usa AVERE'
+            },
+            {
+                id: 15,
+                type: 'fill',
+                question: 'Quando sono entrato, loro __________ (mangiare).',
+                correct: ['avevano già mangiato', 'avevano mangiato'],
+                explanation: '✅ Corretto! Mangiare usa AVERE'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Dopo che __________ (leggere) il libro, l\'ho restituito.',
+                correct: ['avevo letto', 'avevo già letto'],
+                explanation: '✅ Corretto! Leggere usa AVERE'
+            },
+            {
+                id: 17,
+                type: 'fill',
+                question: 'Mi ha detto che __________ (prendere) il treno delle 8.',
+                correct: ['aveva preso', 'aveva preso'],
+                explanation: '✅ Corretto! Prendere usa AVERE'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Dopo che __________ (scrivere) la lettera, l\'ha spedita.',
+                correct: ['avevo scritto', 'aveva scritto'],
+                explanation: '✅ Corretto! Scrivere usa AVERE'
+            },
+            {
+                id: 19,
+                type: 'fill',
+                question: 'Le bambine __________ (addormentarsi) prima delle 9.',
+                correct: ['si erano addormentate', 'erano addormentate'],
+                explanation: '✅ Corretto! Addormentarsi è riflessivo e usa ESSERE, participio concorda'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Quando ho visto il film, io __________ (già vederlo).',
+                correct: ['l\'avevo già visto', 'avevo già visto', 'l\'avevo visto'],
+                explanation: '✅ Corretto! Vedere usa AVERE'
+            },
+            {
+                id: 21,
+                type: 'fill',
+                question: 'Dopo che __________ (fare) la doccia, mi sono vestito.',
+                correct: ['avevo fatto', 'mi ero fatto'],
+                explanation: '✅ Corretto! Fare usa AVERE (o ESSERE se riflessivo)'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Quando siamo arrivati, loro __________ (andare via).',
+                correct: ['erano già andati', 'erano andati'],
+                explanation: '✅ Corretto! Andare usa ESSERE'
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: 'Non __________ (capire) la lezione, ho chiesto aiuto.',
+                correct: ['avevo capito', 'avevo capita'],
+                explanation: '✅ Corretto! Capire usa AVERE'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Dopo che __________ (venire) a casa mia, siamo usciti.',
+                correct: ['era venuto', 'eri venuto', 'era venuta'],
+                explanation: '✅ Corretto! Venire usa ESSERE'
+            },
+            {
+                id: 25,
+                type: 'fill',
+                question: 'Quando ho aperto la porta, il cane __________ (uscire).',
+                correct: ['era già uscito', 'era uscito'],
+                explanation: '✅ Corretto! Uscire usa ESSERE'
+            },
+
+            // ESERCIZI 26-35: Concordanza participio con ESSERE
+            {
+                id: 26,
+                type: 'choice',
+                question: 'Maria __________ andata a Milano prima di ieri.',
+                options: ['era', 'aveva', 'è', 'fu'],
+                correct: 'era',
+                explanation: '✅ Corretto! Andare usa ESSERE, participio concorda (andata femminile)',
+                errorExplanation: '❌ Andare usa ESSERE, e il participio deve concordare con Maria (andata)'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Le mie amiche __________ arrivate in ritardo.',
+                options: ['erano', 'avevano', 'sono', 'furono'],
+                correct: 'erano',
+                explanation: '✅ Corretto! Arrivare usa ESSERE, participio concorda (arrivate femminile plurale)',
+                errorExplanation: '❌ Arrivare usa ESSERE, participio concorda con soggetto femminile plurale'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Quando l\'ho vista, lei __________ (cambiare) molto.',
+                correct: ['era cambiata', 'era molto cambiata'],
+                explanation: '✅ Corretto! Cambiare (intransitivo) usa ESSERE, concorda con lei (cambiata)'
+            },
+            {
+                id: 29,
+                type: 'fill',
+                question: 'I bambini __________ (stancarsi) dopo la gita.',
+                correct: ['si erano stancati', 'erano stancati'],
+                explanation: '✅ Corretto! Stancarsi è riflessivo, usa ESSERE, concorda (stancati maschile plurale)'
+            },
+            {
+                id: 30,
+                type: 'choice',
+                question: 'Tu __________ rimasto a casa tutto il giorno.',
+                options: ['eri', 'avevi', 'sei', 'fosti'],
+                correct: 'eri',
+                explanation: '✅ Corretto! Rimanere usa ESSERE, participio concorda (rimasto maschile)',
+                errorExplanation: '❌ Rimanere usa ESSERE come ausiliare'
+            },
+            {
+                id: 31,
+                type: 'fill',
+                question: 'Quando l\'ho incontrata, lei __________ (diventare) famosa.',
+                correct: ['era diventata', 'era già diventata'],
+                explanation: '✅ Corretto! Diventare usa ESSERE, concorda con lei (diventata)'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Noi __________ (alzarsi) presto quel giorno.',
+                correct: ['ci eravamo alzati', 'eravamo alzati', 'ci eravamo alzate'],
+                explanation: '✅ Corretto! Alzarsi usa ESSERE, concorda con noi (alzati/alzate)'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Voi __________ tornati tardi ieri sera.',
+                options: ['eravate', 'avevate', 'siete', 'foste'],
+                correct: 'eravate',
+                explanation: '✅ Corretto! Tornare usa ESSERE, participio concorda (tornati maschile plurale)',
+                errorExplanation: '❌ Tornare è un verbo di movimento, usa ESSERE'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Le turiste __________ (perdersi) nel centro storico.',
+                correct: ['si erano perse', 'erano perse'],
+                explanation: '✅ Corretto! Perdersi usa ESSERE, concorda con turiste (perse femminile plurale)'
+            },
+            {
+                id: 35,
+                type: 'fill',
+                question: 'Quando ho visto Paolo, lui __________ (ingrassare).',
+                correct: ['era ingrassato', 'era molto ingrassato'],
+                explanation: '✅ Corretto! Ingrassare (intransitivo) usa ESSERE, concorda (ingrassato)'
+            },
+
+            // ESERCIZI 36-42: Verbi speciali e casi particolari
+            {
+                id: 36,
+                type: 'choice',
+                question: 'Dopo che __________ cominciato a piovere, siamo entrati.',
+                options: ['era', 'aveva', 'cominciava', 'fu'],
+                correct: 'era',
+                explanation: '✅ Corretto! Cominciare (impersonale) usa ESSERE',
+                errorExplanation: '❌ Quando è usato impersonalmente, usa ESSERE'
+            },
+            {
+                id: 37,
+                type: 'fill',
+                question: 'Quando sono arrivato, il film __________ (cominciare).',
+                correct: ['era già cominciato', 'era cominciato'],
+                explanation: '✅ Corretto! Cominciare (intransitivo) usa ESSERE'
+            },
+            {
+                id: 38,
+                type: 'choice',
+                question: 'Loro __________ vissuto a Parigi per dieci anni.',
+                options: ['avevano', 'erano', 'hanno', 'furono'],
+                correct: 'avevano',
+                explanation: '✅ Corretto! Vivere (transitivo con avverbio di tempo) usa AVERE',
+                errorExplanation: '❌ Vivere usa AVERE quando ha un complemento di tempo'
+            },
+            {
+                id: 39,
+                type: 'fill',
+                question: 'Dopo che __________ (correre) per un\'ora, si è fermato.',
+                correct: ['aveva corso', 'aveva corso'],
+                explanation: '✅ Corretto! Correre usa AVERE quando ha un oggetto diretto o complemento di tempo'
+            },
+            {
+                id: 40,
+                type: 'choice',
+                question: 'Quando l\'ho vista, __________ pallida.',
+                options: ['era', 'aveva', 'diventava', 'fu'],
+                correct: 'era',
+                explanation: '✅ Corretto! Essere + aggettivo (stato)',
+                errorExplanation: '❌ Qui si usa l\'imperfetto di ESSERE per descrivere uno stato'
+            },
+            {
+                id: 41,
+                type: 'fill',
+                question: 'Mi ha detto che __________ (morire) il suo cane.',
+                correct: ['era morto', 'era morto'],
+                explanation: '✅ Corretto! Morire usa ESSERE'
+            },
+            {
+                id: 42,
+                type: 'choice',
+                question: 'Dopo che si __________ lavati, hanno cenato.',
+                options: ['erano', 'avevano', 'sono', 'furono'],
+                correct: 'erano',
+                explanation: '✅ Corretto! Lavarsi è riflessivo e usa ESSERE, concorda (lavati maschile plurale)',
+                errorExplanation: '❌ I verbi riflessivi usano ESSERE'
+            },
+
+            // ESERCIZI 43-50: Mix completo e frasi complesse
+            {
+                id: 43,
+                type: 'fill',
+                question: 'Quando finalmente __________ (arrivare) io, tutti __________ (partire).',
+                correct: ['ero arrivato erano partiti', 'ero arrivato, erano partiti'],
+                explanation: '✅ Corretto! Entrambi i verbi usano ESSERE'
+            },
+            {
+                id: 44,
+                type: 'choice',
+                question: 'Appena __________ finito di mangiare, ho pagato.',
+                options: ['avevo', 'ero', 'ho', 'ebbi'],
+                correct: 'avevo',
+                explanation: '✅ Corretto! Finire (transitivo) usa AVERE',
+                errorExplanation: '❌ Finire con oggetto diretto usa AVERE'
+            },
+            {
+                id: 45,
+                type: 'fill',
+                question: 'Dopo che __________ (sedersi), ha aperto il libro.',
+                correct: ['si era seduto', 'era seduto', 'si era seduta'],
+                explanation: '✅ Corretto! Sedersi è riflessivo e usa ESSERE'
+            },
+            {
+                id: 46,
+                type: 'choice',
+                question: 'Non __________ mai sentito questa canzone prima.',
+                options: ['avevo', 'ero', 'ho', 'ebbi'],
+                correct: 'avevo',
+                explanation: '✅ Corretto! Sentire (transitivo) usa AVERE',
+                errorExplanation: '❌ Sentire è transitivo, usa AVERE'
+            },
+            {
+                id: 47,
+                type: 'fill',
+                question: 'Quando ho chiamato, loro __________ (uscire) da poco.',
+                correct: ['erano usciti', 'erano appena usciti', 'erano uscite'],
+                explanation: '✅ Corretto! Uscire usa ESSERE, concorda con il soggetto'
+            },
+            {
+                id: 48,
+                type: 'choice',
+                question: 'Dopo che __________ piovuto tutto il giorno, il cielo si è schiarito.',
+                options: ['era', 'aveva', 'pioveva', 'ebbi'],
+                correct: 'era',
+                explanation: '✅ Corretto! Piove (impersonale) usa ESSERE',
+                errorExplanation: '❌ I verbi impersonali usano ESSERE'
+            },
+            {
+                id: 49,
+                type: 'fill',
+                question: 'Mi ha raccontato che __________ (incontrare) un attore famoso.',
+                correct: ['aveva incontrato', 'aveva incontrato'],
+                explanation: '✅ Corretto! Incontrare (transitivo) usa AVERE'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Quando siamo arrivati al ristorante, i nostri amici __________ (mangiare) già.',
+                correct: ['avevano già mangiato', 'avevano mangiato'],
+                explanation: '✅ Corretto! Mangiare usa AVERE. Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                // Mescola le opzioni
+                const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta completa..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            // Focus sull'input se è un fill
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2; // 2 punti per esercizio (50 esercizi = 100 punti)
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente il Trapassato Prossimo! Sei pronto per il livello B2!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci molto bene questo tempo verbale!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Hai una buona base, ma ripassa ancora qualche regola.';
+            } else {
+                message = '📚 Studia ancora la teoria e riprova! Il Trapassato Prossimo richiede pratica.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            // Mescola gli esercizi per una nuova sessione
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        // Inizializza
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mescola gli esercizi all'inizio
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

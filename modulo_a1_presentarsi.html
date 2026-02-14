@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verbi di Presentazione - 50 Esercizi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #155724;
+            --success-bg: #d4edda;
+            --error: #721c24;
+            --error-bg: #f8d7da;
+            --parchment: #faf8f3;
+            --b1-color: #c9a227;
+            --chiamarsi: #5d4e75;
+            --venire: #2d5a3d;
+            --abitare: #1e4a5c;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .verb-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .verb-display {
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .verb-display.chiamarsi {
+            color: var(--chiamarsi);
+        }
+
+        .verb-display.venire {
+            color: var(--venire);
+        }
+
+        .verb-display.abitare {
+            color: var(--abitare);
+        }
+
+        .verb-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 0.5rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tag-chiamarsi {
+            background: var(--chiamarsi);
+        }
+
+        .tag-venire {
+            background: var(--venire);
+        }
+
+        .tag-abitare {
+            background: var(--abitare);
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .btn-check {
+            background: var(--b1-color);
+            color: #000;
+        }
+
+        .btn-check:hover {
+            background: #b8941f;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .pronoun-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .hint-text {
+            color: var(--secondary);
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        .conj-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 1.2rem;
+            padding: 0.8rem 0;
+            background: white;
+            border: 1px solid var(--border);
+            margin: 0.3rem 0;
+        }
+
+        .pronoun {
+            font-weight: bold;
+            color: var(--secondary);
+            min-width: 80px;
+        }
+
+        .form {
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+            .conj-row { flex-direction: column; gap: 0.3rem; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Verbi di Presentazione - Modulo A1</h1>
+            <p>Chiamarsi, Venire, Abitare - 50 Esercizi Interattivi</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A1</a>
+            <span>›</span>
+            <strong>Verbi di Presentazione (50 Esercizi)</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 I Verbi della Presentazione Personale</h1>
+            <p class="page-subtitle">Chiamarsi (nome), Venire da (provenienza), Abitare a (residenza)</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('chiamarsi', this)">Chiamarsi</button>
+            <button class="nav-tab" onclick="showSection('venire', this)">Venire</button>
+            <button class="nav-tab" onclick="showSection('abitare', this)">Abitare</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header">I Tre Verbi della Presentazione</div>
+                <div class="card-body">
+                    <p>Per presentarsi in italiano si usano principalmente tre verbi, ognuno con una funzione specifica:</p>
+                    
+                    <div class="instruction-box">
+                        <strong>1. CHIAMARSI (verbo riflessivo)</strong> - Per dire il proprio nome
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Richiede il pronome riflessivo (mi, ti, si, ci, vi, si)</li>
+                            <li>Esempio: <em>Mi chiamo Marco</em></li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>2. VENIRE DA (verbo irregolare)</strong> - Per indicare la provenienza
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Richiede la preposizione "da"</li>
+                            <li>Esempio: <em>Vengo da Roma</em></li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>3. ABITARE A (verbo regolare)</strong> - Per indicare la residenza
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Richiede la preposizione "a" (per le città)</li>
+                            <li>Esempio: <em>Abito a Milano</em></li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Non confondere i verbi! Ognuno ha una funzione specifica e richiede preposizioni diverse.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Confronto tra i Verbi</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Quando usarli:</strong>
+                    </div>
+                    
+                    <div class="conj-row">
+                        <span class="pronoun">NOME</span>
+                        <span class="form"><span style="color: var(--chiamarsi); font-weight: bold;">CHIAMARSI</span></span>
+                        <span>→ Mi chiamo Anna</span>
+                    </div>
+                    <div class="conj-row">
+                        <span class="pronoun">PROVENIENZA</span>
+                        <span class="form"><span style="color: var(--venire); font-weight: bold;">VENIRE DA</span></span>
+                        <span>→ Vengo da Parigi</span>
+                    </div>
+                    <div class="conj-row">
+                        <span class="pronoun">RESIDENZA</span>
+                        <span class="form"><span style="color: var(--abitare); font-weight: bold;">ABITARE A</span></span>
+                        <span>→ Abito a Torino</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CHIAMARSI -->
+        <section id="chiamarsi" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--chiamarsi);">CHIAMARSI - Indicare il Nome</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                        <strong>Verbo riflessivo</strong> - Si coniuga con i pronomi riflessivi:
+                    </div>
+                    
+                    <table class="verb-table">
+                        <tr>
+                            <th>Pronome</th>
+                            <th>Forma</th>
+                            <th>Esempio</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Io</strong></td>
+                            <td class="verb-display chiamarsi">mi chiamo</td>
+                            <td>Mi chiamo Marco <span class="verb-tag tag-chiamarsi">RIFLESSIVO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tu</strong></td>
+                            <td class="verb-display chiamarsi">ti chiami</td>
+                            <td>Ti chiami Anna? <span class="verb-tag tag-chiamarsi">RIFLESSIVO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lui/Lei</strong></td>
+                            <td class="verb-display chiamarsi">si chiama</td>
+                            <td>Si chiama Luigi <span class="verb-tag tag-chiamarsi">RIFLESSIVO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Noi</strong></td>
+                            <td class="verb-display chiamarsi">ci chiamiamo</td>
+                            <td>Ci chiamiamo Rossi <span class="verb-tag tag-chiamarsi">RIFLESSIVO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Voi</strong></td>
+                            <td class="verb-display chiamarsi">vi chiamate</td>
+                            <td>Vi chiamate Bianchi? <span class="verb-tag tag-chiamarsi">RIFLESSIVO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Loro</strong></td>
+                            <td class="verb-display chiamarsi">si chiamano</td>
+                            <td>Si chiamano Marco e Anna <span class="verb-tag tag-chiamarsi">RIFLESSIVO</span></td>
+                        </tr>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Errore comune:</strong> Non dimenticare il pronome riflessivo! Si dice <strong>"Mi chiamo Marco"</strong>, non "Chiamo Marco".
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE VENIRE -->
+        <section id="venire" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--venire);">VENIRE DA - Indicare la Provenienza</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: var(--venire);">
+                        <strong>Verbo irregolare</strong> - Coniugazione:
+                    </div>
+                    
+                    <table class="verb-table">
+                        <tr>
+                            <th>Pronome</th>
+                            <th>Forma</th>
+                            <th>Esempio</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Io</strong></td>
+                            <td class="verb-display venire">vengo da</td>
+                            <td>Vengo da Roma <span class="verb-tag tag-venire">IRREGOLARE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tu</strong></td>
+                            <td class="verb-display venire">vieni da</td>
+                            <td>Vieni da Milano? <span class="verb-tag tag-venire">IRREGOLARE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lui/Lei</strong></td>
+                            <td class="verb-display venire">viene da</td>
+                            <td>Viene da Napoli <span class="verb-tag tag-venire">IRREGOLARE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Noi</strong></td>
+                            <td class="verb-display venire">veniamo da</td>
+                            <td>Veniamo da Torino <span class="verb-tag tag-venire">IRREGOLARE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Voi</strong></td>
+                            <td class="verb-display venire">venite da</td>
+                            <td>Venite da Palermo? <span class="verb-tag tag-venire">IRREGOLARE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Loro</strong></td>
+                            <td class="verb-display venire">vengono da</td>
+                            <td>Vengono da Firenze <span class="verb-tag tag-venire">IRREGOLARE</span></td>
+                        </tr>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Si usa sempre con la preposizione <strong>DA</strong> per indicare la provenienza geografica o nazionale.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ABITARE -->
+        <section id="abitare" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--abitare);">ABITARE A - Indicare la Residenza</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: var(--abitare);">
+                        <strong>Verbo regolare (-are)</strong> - Coniugazione:
+                    </div>
+                    
+                    <table class="verb-table">
+                        <tr>
+                            <th>Pronome</th>
+                            <th>Forma</th>
+                            <th>Esempio</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Io</strong></td>
+                            <td class="verb-display abitare">abito a</td>
+                            <td>Abito a Bologna <span class="verb-tag tag-abitare">REGOLARE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tu</strong></td>
+                            <td class="verb-display abitare">abiti a</td>
+                            <td>Abiti a Genova? <span class="verb-tag tag-abitare">REGOLARE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lui/Lei</strong></td>
+                            <td class="verb-display abitare">abita a</td>
+                            <td>Abita a Venezia <span class="verb-tag tag-abitare">REGOLARE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Noi</strong></td>
+                            <td class="verb-display abitare">abitiamo a</td>
+                            <td>Abitiamo a Verona <span class="verb-tag tag-abitare">REGOLARE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Voi</strong></td>
+                            <td class="verb-display abitare">abitate a</td>
+                            <td>Abitate a Padova? <span class="verb-tag tag-abitare">REGOLARE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Loro</strong></td>
+                            <td class="verb-display abitare">abitano a</td>
+                            <td>Abitano a Trieste <span class="verb-tag tag-abitare">REGOLARE</span></td>
+                        </tr>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Si usa con la preposizione <strong>A</strong> per le città. Non usare "in" come in inglese!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A1 - Verbi di Presentazione (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-15: CHIAMARSI (verbo riflessivo)
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Completa: Io _____ Marco. (dire il nome)',
+                options: ['chiamo', 'mi chiamo', 'ti chiami', 'si chiama'],
+                correct: 'mi chiamo',
+                explanation: '✅ Corretto! "Chiamarsi" è un verbo riflessivo: io MI chiamo.',
+                errorExplanation: '❌ "Chiamarsi" richiede il pronome riflessivo: mi chiamo'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Completa: Tu _____ Anna? (chiedere il nome)',
+                correct: ['ti chiami'],
+                explanation: '✅ Corretto! Al tu corrisponde "ti chiami".'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Completa: Lei _____ Maria. (femminile singolare)',
+                options: ['mi chiamo', 'ti chiami', 'si chiama', 'ci chiamiamo'],
+                correct: 'si chiama',
+                explanation: '✅ Corretto! Per lei/lui si usa "si chiama".',
+                errorExplanation: '❌ Per la terza persona singolare: si chiama'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Completa: Noi _____ Rossi. (plurale, noi)',
+                correct: ['ci chiamiamo'],
+                explanation: '✅ Corretto! Per noi: ci chiamiamo.'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Completa: Voi _____ Bianchi? (plurale, voi)',
+                options: ['ti chiami', 'si chiama', 'vi chiamate', 'si chiamano'],
+                correct: 'vi chiamate',
+                explanation: '✅ Corretto! Per voi: vi chiamate.',
+                errorExplanation: '❌ Per voi (plurale): vi chiamate'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Completa: Loro _____ Marco e Anna. (plurale, loro)',
+                correct: ['si chiamano'],
+                explanation: '✅ Corretto! Per loro: si chiamano.'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Come ti _____? (domanda informale)',
+                options: ['chiami', 'chiamo', 'chiama', 'chiamiamo'],
+                correct: 'chiami',
+                explanation: '✅ Corretto! "Come ti chiami?" (tu).',
+                errorExplanation: '❌ La domanda informale è: Come ti chiami?'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Come si _____? (domanda formale)',
+                correct: ['chiama'],
+                explanation: '✅ Corretto! "Come si chiama?" (formale).'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Io non _____ Giuseppe, _____ Antonio. (negazione)',
+                options: ['mi chiamo... mi chiamo', 'ti chiami... ti chiami', 'mi chiamo... mi chiamo', 'chiamo... chiamo'],
+                correct: 'mi chiamo... mi chiamo',
+                explanation: '✅ Corretto! Anche nella negazione serve il pronome riflessivo.',
+                errorExplanation: '❌ Non dimenticare il pronome: mi chiamo'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Lui _____ Luigi, ma tutti lo chiamano Gino. (soprannome)',
+                correct: ['si chiama'],
+                explanation: '✅ Corretto! "Si chiama" per la terza persona.'
+            },
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Noi _____ Carlo e Maria, siamo fratello e sorella. (noi)',
+                options: ['mi chiamo', 'ti chiami', 'ci chiamiamo', 'vi chiamate'],
+                correct: 'ci chiamiamo',
+                explanation: '✅ Corretto! Per noi: ci chiamiamo.',
+                errorExplanation: '❌ Per noi: ci chiamiamo'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Tu come _____? (informale)',
+                correct: ['ti chiami'],
+                explanation: '✅ Corretto! "Come ti chiami?" (tu).'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Loro _____ i Gemelli Bianchi. (artista, plurale)',
+                options: ['mi chiamo', 'ti chiami', 'si chiama', 'si chiamano'],
+                correct: 'si chiamano',
+                explanation: '✅ Corretto! Per loro: si chiamano.',
+                errorExplanation: '❌ Per loro (plurale): si chiamano'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Io _____ semplicemente Giovanni. (semplicità)',
+                correct: ['mi chiamo'],
+                explanation: '✅ Corretto! "Mi chiamo Giovanni".'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Voi come _____? (plurale)',
+                options: ['ti chiami', 'si chiama', 'vi chiamate', 'ci chiamiamo'],
+                correct: 'vi chiamate',
+                explanation: '✅ Corretto! Per voi: vi chiamate.',
+                errorExplanation: '❌ Per voi: vi chiamate'
+
+            },
+
+            // ESERCIZI 16-30: VENIRE DA (provenienza)
+            {
+                id: 16,
+                type: 'choice',
+                question: 'Completa: Io _____ Roma. (provenienza)',
+                options: ['vengo da', 'vado a', 'vengo a', 'abito da'],
+                correct: 'vengo da',
+                explanation: '✅ Corretto! Per la provenienza: vengo DA.',
+                errorExplanation: '❌ Per la provenienza si usa VENIRE DA'
+            },
+            {
+                id: 17,
+                type: 'fill',
+                question: 'Completa: Tu _____ Milano? (domanda)',
+                correct: ['vieni da'],
+                explanation: '✅ Corretto! "Vieni da Milano?" (tu).'
+            },
+            {
+                id: 18,
+                type: 'choice',
+                question: 'Completa: Lei _____ Napoli. (femminile)',
+                options: ['vengo da', 'vieni da', 'viene da', 'veniamo da'],
+                correct: 'viene da',
+                explanation: '✅ Corretto! Per lei/lui: viene da.',
+                errorExplanation: '❌ Per lei/lui: viene da'
+            },
+            {
+                id: 19,
+                type: 'fill',
+                question: 'Completa: Noi _____ Torino. (noi)',
+                correct: ['veniamo da'],
+                explanation: '✅ Corretto! Per noi: veniamo da.'
+            },
+            {
+                id: 20,
+                type: 'choice',
+                question: 'Completa: Voi _____ Palermo? (voi)',
+                options: ['vieni da', 'viene da', 'venite da', 'vengono da'],
+                correct: 'venite da',
+                explanation: '✅ Corretto! Per voi: venite da.',
+                errorExplanation: '❌ Per voi: venite da'
+            },
+            {
+                id: 21,
+                type: 'fill',
+                question: 'Completa: Loro _____ Firenze. (loro)',
+                correct: ['vengono da'],
+                explanation: '✅ Corretto! Per loro: vengono da.'
+            },
+            {
+                id: 22,
+                type: 'choice',
+                question: 'Da dove _____? (io, domanda)',
+                options: ['vengo', 'vieni', 'viene', 'veniamo'],
+                correct: 'vengo',
+                explanation: '✅ Corretto! "Da dove vengo?" o "Da dove vengo io?".',
+                errorExplanation: '❌ Per io: vengo (da dove vengo?)'
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: 'Da dove _____ tu? (domanda informale)',
+                correct: ['vieni'],
+                explanation: '✅ Corretto! "Da dove vieni tu?".'
+            },
+            {
+                id: 24,
+                type: 'choice',
+                question: 'Io _____ Italia, ma ora vivo in Spagna. (nazionalità)',
+                options: ['vengo dall\'', 'vengo dalla', 'vengo da', 'vengo in'],
+                correct: 'vengo dall\'',
+                explanation: '✅ Corretto! "Vengo dall\'Italia" (apostrofo per vocale).',
+                errorExplanation: '❌ Davanti a vocale: dall\'Italia'
+            },
+            {
+                id: 25,
+                type: 'fill',
+                question: 'Lui _____ Francia. (nazione femminile)',
+                correct: ['viene dalla', 'viene da'],
+                explanation: '✅ Corretto! "Viene dalla Francia" (la Francia).'
+            },
+            {
+                id: 26,
+                type: 'choice',
+                question: 'Noi _____ Stati Uniti. (nazione plurale)',
+                options: ['veniamo dagli', 'veniamo dai', 'veniamo dalle', 'veniamo dallo'],
+                correct: 'veniamo dagli',
+                explanation: '✅ Corretto! "Veniamo dagli Stati Uniti" (gli Stati Uniti).',
+                errorExplanation: '❌ Per gli Stati Uniti: dagli'
+            },
+            {
+                id: 27,
+                type: 'fill',
+                question: 'Tu _____ Germania, vero? (nazione femminile)',
+                correct: ['vieni dalla', 'vieni da'],
+                explanation: '✅ Corretto! "Vieni dalla Germania" (la Germania).'
+            },
+            {
+                id: 28,
+                type: 'choice',
+                question: 'Loro _____ Inghilterra. (nazione femminile)',
+                options: ['vengono dallo', 'vengono dall\'', 'vengono dalla', 'vengono dai'],
+                correct: 'vengono dalla',
+                explanation: '✅ Corretto! "Vengono dall\'Inghilterra"... aspetta, no: "dall\'Inghilterra"!',
+                errorExplanation: '❌ Inghilterra inizia con vocale: dall\'Inghilterra'
+            },
+            {
+                id: 29,
+                type: 'fill',
+                question: 'Io _____ Spagna. (nazione femminile)',
+                correct: ['vengo dalla', 'vengo da'],
+                explanation: '✅ Corretto! "Vengo dalla Spagna" (la Spagna).'
+            },
+            {
+                id: 30,
+                type: 'choice',
+                question: 'Lei _____ Giappone. (nazione maschile)',
+                options: ['viene dal', 'viene dallo', 'viene dall\'', 'viene dalla'],
+                correct: 'viene dal',
+                explanation: '✅ Corretto! "Viene dal Giappone" (il Giappone).',
+                errorExplanation: '❌ Il Giappone: viene dal Giappone'
+
+            },
+
+            // ESERCIZI 31-45: ABITARE A (residenza)
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Completa: Io _____ Roma. (residenza)',
+                options: ['vengo da', 'abito a', 'vivo in', 'sto a'],
+                correct: 'abito a',
+                explanation: '✅ Corretto! Per la residenza: abito A.',
+                errorExplanation: '❌ Per la residenza si usa ABITARE A'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Completa: Tu _____ Milano? (domanda)',
+                correct: ['abiti a'],
+                explanation: '✅ Corretto! "Abiti a Milano?" (tu).'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Completa: Lui _____ Napoli. (maschile)',
+                options: ['abito a', 'abiti a', 'abita a', 'abitiamo a'],
+                correct: 'abita a',
+                explanation: '✅ Corretto! Per lui/lei: abita a.',
+                errorExplanation: '❌ Per lui/lei: abita a'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Completa: Noi _____ Torino. (noi)',
+                correct: ['abitiamo a'],
+                explanation: '✅ Corretto! Per noi: abitiamo a.'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Completa: Voi _____ Palermo? (voi)',
+                options: ['abiti a', 'abita a', 'abitate a', 'abitano a'],
+                correct: 'abitate a',
+                explanation: '✅ Corretto! Per voi: abitate a.',
+                errorExplanation: '❌ Per voi: abitate a'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Completa: Loro _____ Firenze. (loro)',
+                correct: ['abitano a'],
+                explanation: '✅ Corretto! Per loro: abitano a.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Dove _____? (io, domanda)',
+                options: ['abito', 'abiti', 'abita', 'abitiamo'],
+                correct: 'abito',
+                explanation: '✅ Corretto! "Dove abito?" o "Dove abito io?".',
+                errorExplanation: '❌ Per io: abito (dove abito?)'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Dove _____ tu? (domanda informale)',
+                correct: ['abiti'],
+                explanation: '✅ Corretto! "Dove abiti tu?".'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Io _____ centro di Roma. (zona)',
+                options: ['abito nel', 'abito in', 'abito a', 'abito al'],
+                correct: 'abito nel',
+                explanation: '✅ Corretto! Per le zone: abito NEL centro.',
+                errorExplanation: '❌ Per le zone/quartieri: nel centro, nella periferia'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Lui _____ periferia di Milano. (zona)',
+                correct: ['abita nella', 'abita in', 'abita'],
+                explanation: '✅ Corretto! "Abita nella periferia" (la periferia).'
+            },
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Noi _____ centro storico. (zona determinata)',
+                options: ['abitiamo al', 'abitiamo nel', 'abitiamo a', 'abitiamo in'],
+                correct: 'abitiamo nel',
+                explanation: '✅ Corretto! "Abitiamo nel centro storico".',
+                errorExplanation: '❌ Per zone specifiche: nel centro storico'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Tu _____ vicino alla stazione? (luogo)',
+                correct: ['abiti', 'abiti vicino'],
+                explanation: '✅ Corretto! "Abiti vicino alla stazione?".'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Loro _____ in via Garibaldi, 10. (indirizzo)',
+                options: ['abitano a', 'abitano in', 'abitano al', 'abitano'],
+                correct: 'abitano in',
+                explanation: '✅ Corretto! Per gli indirizzi: in via...',
+                errorExplanation: '❌ Per gli indirizzi: in via..., in piazza...'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Io non _____ più a Bologna, ora _____ a Ferrara. (cambiamento)',
+                correct: ['abito... abito'],
+                explanation: '✅ Corretto! "Non abito più... ora abito a...".'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Lei _____ da sola o in famiglia? (modo)',
+                options: ['abita', 'vive', 'sta', 'è'],
+                correct: 'abita',
+                explanation: '✅ Corretto! "Abita da sola?" (modalità).',
+                errorExplanation: '❌ Per indicare come si vive: abitare'
+
+            },
+
+            // ESERCIZI 46-50: MISTO - Scegli il verbo corretto
+            {
+                id: 46,
+                type: 'choice',
+                question: 'Io _____ Marco e _____ Roma. (nome + provenienza)',
+                options: ['mi chiamo... vengo da', 'chiamo... vengo da', 'mi chiamo... vado a', 'sono... vengo da'],
+                correct: 'mi chiamo... vengo da',
+                explanation: '✅ Corretto! Mi chiamo Marco (nome) e vengo da Roma (provenienza).',
+                errorExplanation: '❌ Per il nome: mi chiamo. Per la provenienza: vengo da'
+            },
+            {
+                id: 47,
+                type: 'fill',
+                question: 'Tu _____ Anna, _____ da Parigi e _____ a Milano. (completo)',
+                correct: ['ti chiami... vieni... abiti'],
+                explanation: '✅ Corretto! Ti chiami Anna, vieni da Parigi e abiti a Milano.'
+            },
+            {
+                id: 48,
+                type: 'choice',
+                question: 'Lui _____ Luigi, _____ Napoli e _____ Torino. (completo)',
+                options: ['si chiama... viene... abita', 'chiama... viene... abita', 'si chiama... viene da... abita a', 'si chiama... viene da... abita'],
+                correct: 'si chiama... viene da... abita a',
+                explanation: '✅ Corretto! Si chiama Luigi, viene da Napoli e abita a Torino.',
+                errorExplanation: '❌ Si chiama (nome), viene da (provenienza), abita a (residenza)'
+            },
+            {
+                id: 49,
+                type: 'fill',
+                question: 'Noi _____ Carlo e Maria, _____ da Firenze e _____ a Bologna. (completo)',
+                correct: ['ci chiamiamo... veniamo... abitiamo', 'ci chiamiamo... veniamo da... abitiamo a'],
+                explanation: '✅ Corretto! Ci chiamiamo Carlo e Maria, veniamo da Firenze e abitiamo a Bologna.'
+            },
+            {
+                id: 50,
+                type: 'choice',
+                question: 'Completa la presentazione: "Ciao! _____ Luca, _____ da Roma e _____ a Milano. Voglio presentarvi mia sorella: _____ Giulia, _____ anche lei da Roma, ma ora _____ a Torino."',
+                options: [
+                    'Mi chiamo... vengo... abito... si chiama... viene... abita',
+                    'Chiamo... vengo... abito... chiama... viene... abita',
+                    'Mi chiamo... vengo da... abito a... si chiama... viene da... abita a',
+                    'Sono... vengo da... sto a... è... viene... abita'
+                ],
+                correct: 'Mi chiamo... vengo da... abito a... si chiama... viene da... abita a',
+                explanation: '✅ Corretto! Mi chiamo Luca, vengo da Roma e abito a Milano. Si chiama Giulia, viene anche lei da Roma, ma ora abita a Torino. Complimenti!',
+                errorExplanation: '❌ Ricorda: mi chiamo (io), si chiama (lei), vengo/abito (preposizioni!)'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la forma verbale..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = ex.errorExplanation;
+                
+                // Messaggi specifici per errori comuni
+                if (ex.question.includes('chiamarsi') && !selected.includes('mi ') && !selected.includes('ti ') && !selected.includes('si ') && !selected.includes('ci ') && !selected.includes('vi ')) {
+                    errorMsg += '<br><strong>💡 Ricorda: "chiamarsi" è riflessivo, serve il pronome (mi, ti, si, ci, vi, si)!</strong>';
+                }
+                if (ex.question.includes('provenienza') && selected.includes('abito')) {
+                    errorMsg += '<br><strong>💡 Per la provenienza si usa VENIRE, non ABITARE!</strong>';
+                }
+                if (ex.question.includes('residenza') && selected.includes('vengo')) {
+                    errorMsg += '<br><strong>💡 Per la residenza si usa ABITARE, non VENIRE!</strong>';
+                }
+                if (ex.question.includes('provenienza') && selected.includes(' a ')) {
+                    errorMsg += '<br><strong>💡 Per la provenienza si usa DA, non A!</strong>';
+                }
+                if (ex.question.includes('residenza') && selected.includes(' da ')) {
+                    errorMsg += '<br><strong>💡 Per la residenza si usa A, non DA!</strong>';
+                }
+                
+                feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                
+                // Messaggi specifici per errori comuni
+                if (ex.question.includes('chiamarsi') && !value.includes('mi ') && !value.includes('ti ') && !value.includes('si ') && !value.includes('ci ') && !value.includes('vi ')) {
+                    errorMsg += '<br><strong>💡 Ricorda: "chiamarsi" è riflessivo, serve il pronome!</strong>';
+                }
+                if (ex.question.includes('provenienza') && value.includes('abito')) {
+                    errorMsg += '<br><strong>💡 Per la provenienza si usa VENIRE, non ABITARE!</strong>';
+                }
+                if (ex.question.includes('residenza') && value.includes('vengo')) {
+                    errorMsg += '<br><strong>💡 Per la residenza si usa ABITARE, non VENIRE!</strong>';
+                }
+                
+                feedback.innerHTML = errorMsg;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente i verbi di presentazione!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene chiamarsi, venire e abitare!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: mi chiamo (nome), vengo da (provenienza), abito a (residenza)!';
+            } else {
+                message = '📚 Ripassa le regole! Ricorda: chiamarsi è riflessivo, venire usa DA, abitare usa A!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

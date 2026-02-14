@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articoli Determinativi - 50 Esercizi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #155724;
+            --success-bg: #d4edda;
+            --error: #721c24;
+            --error-bg: #f8d7da;
+            --parchment: #faf8f3;
+            --b1-color: #c9a227;
+            --maschile: #2c5282;
+            --femminile: #702459;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .article-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .article-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .article-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .article-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .article-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .article-display.maschile {
+            color: var(--maschile);
+        }
+
+        .article-display.femminile {
+            color: var(--femminile);
+        }
+
+        .gender-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 0.5rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tag-m {
+            background: var(--maschile);
+        }
+
+        .tag-f {
+            background: var(--femminile);
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .btn-check {
+            background: var(--b1-color);
+            color: #000;
+        }
+
+        .btn-check:hover {
+            background: #b8941f;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .word-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .hint-text {
+            color: var(--secondary);
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Articoli Determinativi - Modulo A1</h1>
+            <p>Il sistema morfosintattico dell'articolo in italiano</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A1</a>
+            <span>›</span>
+            <strong>Articoli Determinativi (50 Esercizi)</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 Gli Articoli Determinativi Italiani</h1>
+            <p class="page-subtitle">Il, lo, la, l', i, gli, le - Sistema completo con 50 esercizi interattivi</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('maschile', this)">Maschile</button>
+            <button class="nav-tab" onclick="showSection('femminile', this)">Femminile</button>
+            <button class="nav-tab" onclick="showSection('plurale', this)">Plurale</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header">Che cosa sono gli Articoli Determinativi?</div>
+                <div class="card-body">
+                    <p>Gli articoli determinativi sono parole che accompagnano i nomi (sostantivi) per indicare persone, animali o cose specifiche e determinate.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>In italiano ci sono 7 forme:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Singolare maschile:</strong> il, lo, l'</li>
+                            <li><strong>Singolare femminile:</strong> la, l'</li>
+                            <li><strong>Plurale maschile:</strong> i, gli</li>
+                            <li><strong>Plurale femminile:</strong> le</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola importante:</strong> La scelta dell'articolo dipende dal genere del nome (maschile o femminile), dal numero (singolare o plurale) e dalla lettera iniziale del nome.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Schema Riassuntivo</div>
+                <div class="card-body">
+                    <table class="article-table">
+                        <thead>
+                            <tr>
+                                <th>Genere</th>
+                                <th>Numero</th>
+                                <th>Articolo</th>
+                                <th>Quando si usa</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3">Maschile</td>
+                                <td rowspan="3">Singolare</td>
+                                <td class="article-display maschile">IL</td>
+                                <td>Consonante semplice</td>
+                                <td>il libro, il cane</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display maschile">LO</td>
+                                <td>s+consonante, z, ps, gn, x, y, i semiconsonantica</td>
+                                <td>lo studente, lo zaino</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display maschile">L'</td>
+                                <td>Vocale</td>
+                                <td>l'amico, l'orologio</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Femminile</td>
+                                <td rowspan="2">Singolare</td>
+                                <td class="article-display femminile">LA</td>
+                                <td>Consonante</td>
+                                <td>la casa, la penna</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display femminile">L'</td>
+                                <td>Vocale</td>
+                                <td>l'amica, l'isola</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE MASCHILE -->
+        <section id="maschile" class="section">
+            <div class="card">
+                <div class="card-header">Articoli Maschili Singolari</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>IL</strong> - Si usa con i nomi maschili che iniziano con consonante semplice (non s+consonante)
+                    </div>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>il libro <span class="gender-tag tag-m">MASCHILE</span></li>
+                        <li>il tavolo <span class="gender-tag tag-m">MASCHILE</span></li>
+                        <li>il cane <span class="gender-tag tag-m">MASCHILE</span></li>
+                        <li>il computer <span class="gender-tag tag-m">MASCHILE</span></li>
+                    </ul>
+
+                    <div class="instruction-box">
+                        <strong>LO</strong> - Si usa con i nomi maschili che iniziano con:
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>s + consonante</strong> (st, sp, sc, sn, sm, sb, sd, sf, sg)</li>
+                            <li><strong>z</strong> (sia sonora che sorda)</li>
+                            <li><strong>ps</strong> (psicologo)</li>
+                            <li><strong>gn</strong> (gnocco)</li>
+                            <li><strong>x</strong> (xilofono)</li>
+                            <li><strong>y</strong> (yogurt)</li>
+                            <li><strong>i semiconsonantica</strong> (j)</li>
+                        </ul>
+                    </div>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>lo studente <span class="gender-tag tag-m">MASCHILE</span> (st-)</li>
+                        <li>lo zaino <span class="gender-tag tag-m">MASCHILE</span> (z-)</li>
+                        <li>lo psicologo <span class="gender-tag tag-m">MASCHILE</span> (ps-)</li>
+                        <li>lo gnocco <span class="gender-tag tag-m">MASCHILE</span> (gn-)</li>
+                        <li>lo yogurt <span class="gender-tag tag-m">MASCHILE</span> (y-)</li>
+                    </ul>
+
+                    <div class="instruction-box">
+                        <strong>L'</strong> - Si usa con i nomi maschili che iniziano con vocale (a, e, i, o, u)
+                    </div>
+                    <ul style="margin-left: 2rem;">
+                        <li>l'amico <span class="gender-tag tag-m">MASCHILE</span> (a-)</li>
+                        <li>l'orologio <span class="gender-tag tag-m">MASCHILE</span> (o-)</li>
+                        <li>l'ufficio <span class="gender-tag tag-m">MASCHILE</span> (u-)</li>
+                        <li>l'elefante <span class="gender-tag tag-m">MASCHILE</span> (e-)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE FEMMINILE -->
+        <section id="femminile" class="section">
+            <div class="card">
+                <div class="card-header">Articoli Femminili Singolari</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>LA</strong> - Si usa con i nomi femminili che iniziano con consonante
+                    </div>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>la casa <span class="gender-tag tag-f">FEMMINILE</span></li>
+                        <li>la macchina <span class="gender-tag tag-f">FEMMINILE</span></li>
+                        <li>la scuola <span class="gender-tag tag-f">FEMMINILE</span></li>
+                        <li>la penna <span class="gender-tag tag-f">FEMMINILE</span></li>
+                        <li>la studentessa <span class="gender-tag tag-f">FEMMINILE</span></li>
+                    </ul>
+
+                    <div class="instruction-box">
+                        <strong>L'</strong> - Si usa con i nomi femminili che iniziano con vocale (a, e, i, o, u)
+                    </div>
+                    <ul style="margin-left: 2rem;">
+                        <li>l'amica <span class="gender-tag tag-f">FEMMINILE</span> (a-)</li>
+                        <li>l'ora <span class="gender-tag tag-f">FEMMINILE</span> (o-)</li>
+                        <li>l'isola <span class="gender-tag tag-f">FEMMINILE</span> (i-)</li>
+                        <li>l'acqua <span class="gender-tag tag-f">FEMMINILE</span> (a-)</li>
+                        <li>l'edicola <span class="gender-tag tag-f">FEMMINILE</span> (e-)</li>
+                    </ul>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Nota:</strong> Al femminile non c'è distinzione tra consonante semplice e s+consonante. Si usa sempre LA (tranne che per le vocali).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PLURALE -->
+        <section id="plurale" class="section">
+            <div class="card">
+                <div class="card-header">Articoli Plurali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Maschile plurale:</strong>
+                    </div>
+                    <table class="article-table">
+                        <thead>
+                            <tr>
+                                <th>Singolare</th>
+                                <th>Plurale</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="article-display maschile">IL</td>
+                                <td class="article-display maschile">I</td>
+                                <td>il libro → i libri</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display maschile">LO</td>
+                                <td class="article-display maschile">GLI</td>
+                                <td>lo zaino → gli zaini</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display maschile">L'</td>
+                                <td class="article-display maschile">GLI</td>
+                                <td>l'amico → gli amici</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="instruction-box" style="margin-top: 1.5rem;">
+                        <strong>Femminile plurale:</strong>
+                    </div>
+                    <table class="article-table">
+                        <thead>
+                            <tr>
+                                <th>Singolare</th>
+                                <th>Plurale</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="article-display femminile">LA</td>
+                                <td class="article-display femminile">LE</td>
+                                <td>la casa → le case</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display femminile">L'</td>
+                                <td class="article-display femminile">LE</td>
+                                <td>l'amica → le amiche</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola mnemonica:</strong><br>
+                        <strong>I</strong> → plurale di <strong>IL</strong> (entrambi iniziano per I)<br>
+                        <strong>GLI</strong> → plurale di <strong>LO</strong> e <strong>L'</strong><br>
+                        <strong>LE</strong> → unico plurale femminile
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A1 - Articoli Determinativi (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Articolo maschile singolare - IL
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Completa: _____ libro (inizia con consonante semplice)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'il',
+                correctDisplay: 'il',
+                explanation: '✅ Corretto! Si usa IL con i nomi maschili che iniziano con consonante semplice (non s+consonante).',
+                errorExplanation: '❌ Con i nomi maschili che iniziano con consonante semplice si usa IL'
+            },
+            {
+                id: 2,
+                type: 'choice',
+                question: 'Completa: _____ tavolo (maschile, consonante semplice)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'il',
+                correctDisplay: 'il',
+                explanation: '✅ Corretto! "Tavolo" è maschile e inizia con t- (consonante semplice) → IL.',
+                errorExplanation: '❌ "Tavolo" è maschile, consonante semplice → IL'
+            },
+            {
+                id: 3,
+                type: 'fill',
+                question: 'Completa: _____ cane (maschile, inizia con c-)',
+                correct: ['il'],
+                explanation: '✅ Corretto! "Cane" è maschile, inizia con consonante semplice → IL.'
+            },
+            {
+                id: 4,
+                type: 'choice',
+                question: 'Completa: _____ computer (maschile, inizia con c-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'il',
+                correctDisplay: 'il',
+                explanation: '✅ Corretto! "Computer" è maschile, inizia con consonante semplice → IL.',
+                errorExplanation: '❌ "Computer" è maschile, consonante semplice → IL'
+            },
+            {
+                id: 5,
+                type: 'fill',
+                question: 'Completa: _____ professore (maschile, inizia con p-)',
+                correct: ['il'],
+                explanation: '✅ Corretto! "Professore" è maschile, consonante semplice → IL.'
+            },
+            {
+                id: 6,
+                type: 'choice',
+                question: 'Completa: _____ treno (maschile, inizia con t-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'il',
+                correctDisplay: 'il',
+                explanation: '✅ Corretto! "Treno" è maschile, consonante semplice → IL.',
+                errorExplanation: '❌ "Treno" è maschile, consonante semplice → IL'
+            },
+            {
+                id: 7,
+                type: 'fill',
+                question: 'Completa: _____ medico (maschile, inizia con m-)',
+                correct: ['il'],
+                explanation: '✅ Corretto! "Medico" è maschile, consonante semplice → IL.'
+            },
+            {
+                id: 8,
+                type: 'choice',
+                question: 'Completa: _____ bambino (maschile, inizia con b-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'il',
+                correctDisplay: 'il',
+                explanation: '✅ Corretto! "Bambino" è maschile, consonante semplice → IL.',
+                errorExplanation: '❌ "Bambino" è maschile, consonante semplice → IL'
+            },
+            {
+                id: 9,
+                type: 'fill',
+                question: 'Completa: _____ gatto (maschile, inizia con g-)',
+                correct: ['il'],
+                explanation: '✅ Corretto! "Gatto" è maschile, consonante semplice → IL.'
+            },
+            {
+                id: 10,
+                type: 'choice',
+                question: 'Completa: _____ telefono (maschile, inizia con t-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'il',
+                correctDisplay: 'il',
+                explanation: '✅ Corretto! "Telefono" è maschile, consonante semplice → IL.',
+                errorExplanation: '❌ "Telefono" è maschile, consonante semplice → IL'
+
+            },
+
+            // ESERCIZI 11-20: Articolo maschile singolare - LO
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Completa: _____ studente (inizia con st-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'lo',
+                correctDisplay: 'lo',
+                explanation: '✅ Corretto! Si usa LO con s+consonante (st-, sp-, sc-, ecc.).',
+                errorExplanation: '❌ Con s+consonante si usa LO'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Completa: _____ zaino (inizia con z-)',
+                correct: ['lo'],
+                explanation: '✅ Corretto! Con z- si usa LO.'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Completa: _____ psicologo (inizia con ps-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'lo',
+                correctDisplay: 'lo',
+                explanation: '✅ Corretto! Con ps- si usa LO.',
+                errorExplanation: '❌ Con ps- si usa LO'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Completa: _____ gnocco (inizia con gn-)',
+                correct: ['lo'],
+                explanation: '✅ Corretto! Con gn- si usa LO.'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Completa: _____ specchio (inizia con sp-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'lo',
+                correctDisplay: 'lo',
+                explanation: '✅ Corretto! Con sp- (s+consonante) si usa LO.',
+                errorExplanation: '❌ Con sp- si usa LO'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Completa: _____ yogurt (inizia con y-)',
+                correct: ['lo'],
+                explanation: '✅ Corretto! Con y- (consonante straniera) si usa LO.'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Completa: _____ xilofono (inizia con x-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'lo',
+                correctDisplay: 'lo',
+                explanation: '✅ Corretto! Con x- si usa LO.',
+                errorExplanation: '❌ Con x- si usa LO'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Completa: _____ sceriffo (inizia con sc-)',
+                correct: ['lo'],
+                explanation: '✅ Corretto! Con sc- (s+consonante) si usa LO.'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Completa: _____ smalto (inizia con sm-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'lo',
+                correctDisplay: 'lo',
+                explanation: '✅ Corretto! Con sm- (s+consonante) si usa LO.',
+                errorExplanation: '❌ Con sm- si usa LO'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Completa: _____ sbaglio (inizia con sb-)',
+                correct: ['lo'],
+                explanation: '✅ Corretto! Con sb- (s+consonante) si usa LO.'
+
+            },
+
+            // ESERCIZI 21-30: Articolo maschile/femminile singolare - L'
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Completa: _____ amico (inizia con a-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'l-apostrofo',
+                correctDisplay: "l'",
+                explanation: '✅ Corretto! Con le vocali (maschile o femminile) si usa L\'.',
+                errorExplanation: '❌ Con le vocali si usa L\' (apostrofo)'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Completa: _____ orologio (inizia con o-)',
+                correct: ["l'"],
+                explanation: '✅ Corretto! "Orologio" inizia con vocale → L\'.'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Completa: _____ ufficio (inizia con u-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'l-apostrofo',
+                correctDisplay: "l'",
+                explanation: '✅ Corretto! Con u- (vocale) si usa L\'.',
+                errorExplanation: '❌ Con u- si usa L\''
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Completa: _____ elefante (inizia con e-)',
+                correct: ["l'"],
+                explanation: '✅ Corretto! Con e- (vocale) si usa L\'.'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Completa: _____ amica (femminile, inizia con a-)',
+                options: ['la', 'l-apostrofo', 'lo', 'il'],
+                correct: 'l-apostrofo',
+                correctDisplay: "l'",
+                explanation: '✅ Corretto! "Amica" è femminile ma inizia con vocale → L\'.',
+                errorExplanation: '❌ Anche al femminile, con le vocali si usa L\''
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Completa: _____ isola (femminile, inizia con i-)',
+                correct: ["l'"],
+                explanation: '✅ Corretto! "Isola" è femminile, inizia con i- → L\'.'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Completa: _____ edicola (femminile, inizia con e-)',
+                options: ['la', 'l-apostrofo', 'lo', 'le'],
+                correct: 'l-apostrofo',
+                correctDisplay: "l'",
+                explanation: '✅ Corretto! "Edicola" è femminile, inizia con e- → L\'.',
+                errorExplanation: '❌ Con e- si usa L\' (anche al femminile)'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Completa: _____ acqua (femminile, inizia con a-)',
+                correct: ["l'"],
+                explanation: '✅ Corretto! "Acqua" è femminile, inizia con a- → L\'.'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Completa: _____ ombrello (maschile, inizia con o-)',
+                options: ['il', 'lo', 'la', 'l-apostrofo'],
+                correct: 'l-apostrofo',
+                correctDisplay: "l'",
+                explanation: '✅ Corretto! Con o- (vocale) si usa L\'.',
+                errorExplanation: '❌ Con o- si usa L\''
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Completa: _____ erba (femminile, inizia con e-)',
+                correct: ["l'"],
+                explanation: '✅ Corretto! "Erba" è femminile, inizia con e- → L\'.'
+
+            },
+
+            // ESERCIZI 31-40: Articolo femminile singolare - LA
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Completa: _____ casa (femminile, consonante)',
+                options: ['la', 'l-apostrofo', 'lo', 'il'],
+                correct: 'la',
+                correctDisplay: 'la',
+                explanation: '✅ Corretto! Al femminile con consonante si usa LA.',
+                errorExplanation: '❌ Al femminile con consonante si usa LA'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Completa: _____ penna (femminile, inizia con p-)',
+                correct: ['la'],
+                explanation: '✅ Corretto! "Penna" è femminile, consonante → LA.'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Completa: _____ scuola (femminile, inizia con sc-)',
+                options: ['la', 'l-apostrofo', 'lo', 'le'],
+                correct: 'la',
+                correctDisplay: 'la',
+                explanation: '✅ Corretto! Al femminile non c\'è distinzione tra consonante semplice e s+consonante → sempre LA.',
+                errorExplanation: '❌ Al femminile si usa LA anche con s+consonante'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Completa: _____ macchina (femminile, inizia con m-)',
+                correct: ['la'],
+                explanation: '✅ Corretto! "Macchina" è femminile, consonante → LA.'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Completa: _____ studentessa (femminile, inizia con st-)',
+                options: ['la', 'l-apostrofo', 'lo', 'le'],
+                correct: 'la',
+                correctDisplay: 'la',
+                explanation: '✅ Corretto! Al femminile anche con st- si usa LA.',
+                errorExplanation: '❌ Al femminile si usa LA anche con s+consonante'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Completa: _____ zia (femminile, inizia con z-)',
+                correct: ['la'],
+                explanation: '✅ Corretto! "Zia" è femminile, anche con z- si usa LA.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Completa: _____ sposa (femminile, inizia con sp-)',
+                options: ['la', 'l-apostrofo', 'lo', 'le'],
+                correct: 'la',
+                correctDisplay: 'la',
+                explanation: '✅ Corretto! Al femminile anche con sp- si usa LA.',
+                errorExplanation: '❌ Al femminile si usa LA anche con s+consonante'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Completa: _____ gatta (femminile, inizia con g-)',
+                correct: ['la'],
+                explanation: '✅ Corretto! "Gatta" è femminile, consonante → LA.'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Completa: _____ psicologa (femminile, inizia con ps-)',
+                options: ['la', 'l-apostrofo', 'lo', 'le'],
+                correct: 'la',
+                correctDisplay: 'la',
+                explanation: '✅ Corretto! Al femminile anche con ps- si usa LA.',
+                errorExplanation: '❌ Al femminile si usa LA anche con ps-'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Completa: _____ donna (femminile, inizia con d-)',
+                correct: ['la'],
+                explanation: '✅ Corretto! "Donna" è femminile, consonante → LA.'
+
+            },
+
+            // ESERCIZI 41-50: Plurale
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Il plurale di "il libro" è:',
+                options: ['i libri', 'gli libri', 'le libri', 'lo libri'],
+                correct: 'i libri',
+                correctDisplay: 'i libri',
+                explanation: '✅ Corretto! IL → I (entrambi iniziano per I).',
+                errorExplanation: '❌ IL diventa I al plurale'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Il plurale di "lo zaino" è: _____ zaini',
+                correct: ['gli'],
+                explanation: '✅ Corretto! LO → GLI al plurale.'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Il plurale di "l\'amico" è:',
+                options: ['gli amici', 'i amici', 'le amici', 'lo amici'],
+                correct: 'gli amici',
+                correctDisplay: 'gli amici',
+                explanation: '✅ Corretto! L\' (maschile) → GLI al plurale.',
+                errorExplanation: '❌ L\' (maschile) diventa GLI al plurale'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Il plurale di "la casa" è: _____ case',
+                correct: ['le'],
+                explanation: '✅ Corretto! LA → LE al plurale.'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Il plurale di "l\'amica" è:',
+                options: ['le amiche', 'gli amiche', 'i amiche', 'la amiche'],
+                correct: 'le amiche',
+                correctDisplay: 'le amiche',
+                explanation: '✅ Corretto! L\' (femminile) → LE al plurale.',
+                errorExplanation: '❌ Al femminile L\' diventa LE al plurale'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Il plurale di "il cane" è: _____ cani',
+                correct: ['i'],
+                explanation: '✅ Corretto! IL → I al plurale.'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Il plurale di "lo studente" è:',
+                options: ['gli studenti', 'i studenti', 'le studenti', 'lo studenti'],
+                correct: 'gli studenti',
+                correctDisplay: 'gli studenti',
+                explanation: '✅ Corretto! LO → GLI al plurale.',
+                errorExplanation: '❌ LO diventa GLI al plurale'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Il plurale di "la penna" è: _____ penne',
+                correct: ['le'],
+                explanation: '✅ Corretto! LA → LE al plurale.'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Il plurale di "l\'orologio" è:',
+                options: ['gli orologi', 'i orologi', 'le orologi', 'lo orologi'],
+                correct: 'gli orologi',
+                correctDisplay: 'gli orologi',
+                explanation: '✅ Corretto! L\' (maschile) → GLI al plurale.',
+                errorExplanation: '❌ L\' (maschile) diventa GLI al plurale'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Il plurale di "la scuola" è: _____ scuole',
+                correct: ['le'],
+                explanation: '✅ Corretto! LA → LE al plurale. Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                // Mescola le opzioni
+                const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    // Usa un attributo data sicuro senza apostrofi problematici
+                    const displayValue = opt === 'l-apostrofo' ? "l'" : opt;
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${displayValue}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi l'articolo..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            // Trova il pulsante corretto usando l'attributo data-value
+            let correctBtn = null;
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                    correctBtn = btn;
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correctDisplay || ex.correct.replace('l-apostrofo', "l'")}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            // Normalizza l'input per confronto (accetta sia l' che l)
+            const normalizedValue = value === 'l' ? "l'" : value;
+            const isCorrect = ex.correct.some(ans => {
+                const normalizedAns = ans === 'l' ? "l'" : ans.toLowerCase();
+                return normalizedValue === normalizedAns;
+            });
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente gli articoli determinativi!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene gli articoli, ma fai attenzione ai casi speciali!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: IL/LO/L\' al maschile singolare, LA/L\' al femminile singolare!';
+            } else {
+                message = '📚 Ripassa le regole! Ricorda: IL con consonante semplice, LO con s+consonante/z/ps/gn, L\' con vocali!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

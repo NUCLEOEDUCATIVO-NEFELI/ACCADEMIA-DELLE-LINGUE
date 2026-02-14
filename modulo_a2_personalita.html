@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Personalità - 50 Esercizi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #003366; --secondary: #6c757d; --accent: #8b0000;
+            --light: #f8f9fa; --dark: #212529; --border: #dee2e6;
+            --success: #155724; --success-bg: #d4edda;
+            --error: #721c24; --error-bg: #f8d7da;
+            --parchment: #faf8f3; --b1-color: #c9a227; --personality: #6a1b9a;
+        }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+        .card-header.personality {
+            border-left-color: var(--personality);
+            color: var(--personality);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .trait-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .trait-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .trait-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .trait-table tr:hover {
+            background: #f8f9fa;
+        }
+        .trait-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+            color: var(--personality);
+        }
+        .opposites-table {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            margin: 1rem 0;
+        }
+        .opposite-word {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        .opposite-word.positive {
+            color: var(--success);
+            background: #f0fff4;
+        }
+        .opposite-word.negative {
+            color: var(--error);
+            background: #fff5f5;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check {
+            background: var(--b1-color);
+            color: #000;
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .valence-positive { color: var(--success); font-weight: bold; }
+        .valence-negative { color: var(--error); font-weight: bold; }
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+            .opposites-table { grid-template-columns: 1fr; gap: 0.5rem; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>La Personalità - Modulo A2</h1>
+            <p>Aggettivi per descrivere il carattere e il comportamento - 50 Esercizi</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A2</a>
+            <span>›</span>
+            <strong>La Personalità (50 Esercizi)</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 Aggettivi di Personalità</h1>
+            <p class="page-subtitle">Vocabolario per descrivere carattere, comportamento e tratti distintivi</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('positivi', this)">👍 Positivi</button>
+            <button class="nav-tab" onclick="showSection('negativi', this)">👎 Negativi</button>
+            <button class="nav-tab" onclick="showSection('contrari', this)">⚖️ Contrari</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header personality">Il Campo Semantico della Personalità</div>
+                <div class="card-body">
+                    <p>Gli <strong>aggettivi di personalità</strong> descrivono tratti caratteriali stabili nel tempo. In italiano si dividono in <span class="valence-positive">virtù (positivi)</span> e <span class="valence-negative">difetti (negativi)</span>, con numerose coppie antonimiche.</p>
+
+                    <div class="instruction-box" style="border-left-color: var(--personality);">
+                        <strong>Struttura descrittiva:</strong> Soggetto + essere + aggettivo di personalità
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>"Mario è <strong>generoso</strong>" (descrizione positiva)</li>
+                            <li>"Anna è <strong>egoista</strong>" (descrizione negativa)</li>
+                            <li>"Loro sono <strong>estroversi</strong>" (plurale)</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Gli aggettivi di personalità concordano in genere e numero con il soggetto!<br>
+                        <em>Marco è <strong>allegro</strong> (m.sg) → Maria è <strong>allegra</strong> (f.sg) → Loro sono <strong>allegri</strong> (pl)</em>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Classificazione Semantica</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: var(--success);">
+                        <strong class="valence-positive">Tratti Positivi (Virtù):</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>onesto, generoso, gentile, paziente, coraggioso, ottimista</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box" style="border-left-color: var(--error);">
+                        <strong class="valence-negative">Tratti Negativi (Difetti):</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>disonesto, egoista, sgarbato, impaziente, codardo, pessimista</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box" style="background: #e8f5e9; border-color: #4caf50;">
+                        <strong>💡 Consiglio:</strong> Per descrivere qualcuno in modo equilibrato, usa sia tratti positivi che negativi. Nessuno è perfetto!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TRATTI POSITIVI -->
+        <section id="positivi" class="section">
+            <div class="card">
+                <div class="card-header personality">Tratti di Personalità Positivi</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: var(--success);">
+                        <strong class="valence-positive">Aggettivi positivi più comuni:</strong>
+                    </div>
+
+                    <table class="trait-table">
+                        <tr>
+                            <th>Maschile</th>
+                            <th>Femminile</th>
+                            <th>Significato</th>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Allegro</td>
+                            <td>Allegra</td>
+                            <td>Sempre sorridente, positivo, gioioso</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Gentile</td>
+                            <td>Gentile</td>
+                            <td>Educato, premuroso, cortese</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Generoso</td>
+                            <td>Generosa</td>
+                            <td>Dà agli altri, altruista, solidale</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Onesto</td>
+                            <td>Onesta</td>
+                            <td>Non ruba, dice la verità, corretto</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Paziente</td>
+                            <td>Paziente</td>
+                            <td>Sa aspettare senza annoiarsi, tollerante</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Coraggioso</td>
+                            <td>Coraggiosa</td>
+                            <td>Non ha paura, affronta i pericoli</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Ottimista</td>
+                            <td>Ottimista</td>
+                            <td>Vede il lato positivo, speranzoso</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Estroverso</td>
+                            <td>Estroversa</td>
+                            <td>Ama stare con gli altri, socievole</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Calmo</td>
+                            <td>Calma</td>
+                            <td>Non si arrabbia, tranquillo, sereno</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Serio</td>
+                            <td>Seria</td>
+                            <td>Responsabile, affidabile, poco scherzoso</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TRATTI NEGATIVI -->
+        <section id="negativi" class="section">
+            <div class="card">
+                <div class="card-header personality">Tratti di Personalità Negativi</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: var(--error);">
+                        <strong class="valence-negative">Aggettivi negativi più comuni:</strong>
+                    </div>
+
+                    <table class="trait-table">
+                        <tr>
+                            <th>Maschile</th>
+                            <th>Femminile</th>
+                            <th>Significato</th>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Egoista</td>
+                            <td>Egoista</td>
+                            <td>Pensa solo a sé stesso, individualista</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Disonesto</td>
+                            <td>Disonesta</td>
+                            <td>Ruba, mente, non corretto</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Sgarbato</td>
+                            <td>Sgarbata</td>
+                            <td>Maleducato, scortese, rude</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Nervoso</td>
+                            <td>Nervosa</td>
+                            <td>Si arrabbia facilmente, agitato</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Impetuoso</td>
+                            <td>Impetuosa</td>
+                            <td>Agisce senza pensare, impulsivo</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Codardo</td>
+                            <td>Codarda</td>
+                            <td>Ha paura, non affronta i pericoli</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Pessimista</td>
+                            <td>Pessimista</td>
+                            <td>Vede il lato negativo, senza speranza</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Introverso</td>
+                            <td>Introversa</td>
+                            <td>Riservato, ama la solitudine</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Pigro</td>
+                            <td>Pigra</td>
+                            <td>Non lavora, non fa nulla, ozioso</td>
+                        </tr>
+                        <tr>
+                            <td class="trait-display">Superbo</td>
+                            <td>Superba</td>
+                            <td>Presuntuoso, si crede superiore</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CONTRARI -->
+        <section id="contrari" class="section">
+            <div class="card">
+                <div class="card-header personality">Coppie di Contrari (Antonimi)</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: var(--personality);">
+                        <strong>Aggettivi opposti:</strong> Molti tratti caratteriali formano coppie antonimiche.
+                    </div>
+
+                    <div class="opposites-table">
+                        <div class="opposite-word positive">Generoso</div>
+                        <div style="text-align: center; color: var(--secondary);">↔</div>
+                        <div class="opposite-word negative">Egoista</div>
+                    </div>
+                    <div class="opposites-table">
+                        <div class="opposite-word positive">Onesto</div>
+                        <div style="text-align: center; color: var(--secondary);">↔</div>
+                        <div class="opposite-word negative">Disonesto</div>
+                    </div>
+                    <div class="opposites-table">
+                        <div class="opposite-word positive">Calmo</div>
+                        <div style="text-align: center; color: var(--secondary);">↔</div>
+                        <div class="opposite-word negative">Nervoso</div>
+                    </div>
+                    <div class="opposites-table">
+                        <div class="opposite-word positive">Estroverso</div>
+                        <div style="text-align: center; color: var(--secondary);">↔</div>
+                        <div class="opposite-word negative">Introverso</div>
+                    </div>
+                    <div class="opposites-table">
+                        <div class="opposite-word positive">Ottimista</div>
+                        <div style="text-align: center; color: var(--secondary);">↔</div>
+                        <div class="opposite-word negative">Pessimista</div>
+                    </div>
+                    <div class="opposites-table">
+                        <div class="opposite-word positive">Coraggioso</div>
+                        <div style="text-align: center; color: var(--secondary);">↔</div>
+                        <div class="opposite-word negative">Codardo</div>
+                    </div>
+                    <div class="opposites-table">
+                        <div class="opposite-word positive">Gentile</div>
+                        <div style="text-align: center; color: var(--secondary);">↔</div>
+                        <div class="opposite-word negative">Sgarbato</div>
+                    </div>
+                    <div class="opposites-table">
+                        <div class="opposite-word positive">Paziente</div>
+                        <div style="text-align: center; color: var(--secondary);">↔</div>
+                        <div class="opposite-word negative">Impetuoso</div>
+                    </div>
+                    <div class="opposites-table">
+                        <div class="opposite-word positive">Allegro</div>
+                        <div style="text-align: center; color: var(--secondary);">↔</div>
+                        <div class="opposite-word negative">Triste</div>
+                    </div>
+                    <div class="opposites-table">
+                        <div class="opposite-word positive">Laborioso</div>
+                        <div style="text-align: center; color: var(--secondary);">↔</div>
+                        <div class="opposite-word negative">Pigro</div>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>💡 Nota:</strong> Alcuni aggettivi hanno più di un contrario a seconda del significato specifico (es. "serio" può essere opposto a "allegro" o a "frivolo").
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A2 - La Personalità (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Significati di base - Tratti positivi
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Cosa significa "generoso"?',
+                options: ['Pensa solo a sé stesso', 'Dà agli altri, altruista', 'Non lavora mai', 'Si arrabbia facilmente'],
+                correct: 'Dà agli altri, altruista',
+                explanation: '✅ Corretto! GENEROSO = dà agli altri, altruista, solidale.',
+                errorExplanation: '❌ Generoso significa dare agli altri, essere altruisti'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Completa: Una persona _____ dice sempre la verità e non ruba.',
+                correct: ['onesta'],
+                explanation: '✅ Corretto! ONESTO = dice la verità, non ruba, corretto.'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Quale aggettivo descrive una persona che sa aspettare senza arrabbiarsi?',
+                options: ['Nervoso', 'Impetuoso', 'Paziente', 'Egoista'],
+                correct: 'Paziente',
+                explanation: '✅ Corretto! PAZIENTE = sa aspettare, tollerante.',
+                errorExplanation: '❌ La persona che sa aspettare è PAZIENTE'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Completa: Marco è molto _____, sorride sempre ed è positivo.',
+                correct: ['allegro', 'allegra'],
+                explanation: '✅ Corretto! ALLEGRO = sempre sorridente, positivo, gioioso.'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Cosa significa "gentile"?',
+                options: ['Maleducato e scortese', 'Educato, premuroso, cortese', 'Pigro e ozioso', 'Timido e riservato'],
+                correct: 'Educato, premuroso, cortese',
+                explanation: '✅ Corretto! GENTILE = educato, premuroso, cortese.',
+                errorExplanation: '❌ Gentile significa educato e cortese'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Completa: Un soldato _____ non ha paura del pericolo.',
+                correct: ['coraggioso'],
+                explanation: '✅ Corretto! CORAGGIOSO = non ha paura, affronta i pericoli.'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Quale aggettivo descrive una persona che vede sempre il lato positivo?',
+                options: ['Pessimista', 'Ottimista', 'Realista', 'Sognatore'],
+                correct: 'Ottimista',
+                explanation: '✅ Corretto! OTTIMISTA = vede il lato positivo, speranzoso.',
+                errorExplanation: '❌ Chi vede il lato positivo è OTTIMISTA'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Completa: Maria è _____, ama stare con gli altri e parlare.',
+                correct: ['estroversa'],
+                explanation: '✅ Corretto! ESTROVERSA = ama stare con gli altri, socievole.'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Cosa significa "calmo"?',
+                options: ['Si arrabbia facilmente', 'Non si arrabbia, è tranquillo', 'È molto allegro', 'È molto serio'],
+                correct: 'Non si arrabbia, è tranquillo',
+                explanation: '✅ Corretto! CALMO = non si arrabbia, tranquillo, sereno.',
+                errorExplanation: '❌ Calmo significa tranquillo, non si arrabbia'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Completa: Il capo è molto _____, responsabile e affidabile.',
+                correct: ['serio'],
+                explanation: '✅ Corretto! SERIO = responsabile, affidabile, poco scherzoso.'
+            },
+
+            // ESERCIZI 11-20: Significati di base - Tratti negativi
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Cosa significa "egoista"?',
+                options: ['Ama gli altri', 'Pensa solo a sé stesso', 'Dà molto agli altri', 'È molto socievole'],
+                correct: 'Pensa solo a sé stesso',
+                explanation: '✅ Corretto! EGOISTA = pensa solo a sé stesso, individualista.',
+                errorExplanation: '❌ Egoista significa pensare solo a sé stesso'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Completa: Il ladro è una persona _____.',
+                correct: ['disonesta'],
+                explanation: '✅ Corretto! DISONESTO = ruba, mente, non corretto.'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Quale aggettivo descrive una persona maleducata e scortese?',
+                options: ['Gentile', 'Educato', 'Sgarbato', 'Cortese'],
+                correct: 'Sgarbato',
+                explanation: '✅ Corretto! SGARBATO = maleducato, scortese, rude.',
+                errorExplanation: '❌ La persona maleducata è SGARBATA'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Completa: Mio fratello è _____, si arrabbia per ogni piccola cosa.',
+                correct: ['nervoso'],
+                explanation: '✅ Corretto! NERVOSO = si arrabbia facilmente, agitato.'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Cosa significa "impetuoso"?',
+                options: ['Agisce senza pensare, impulsivo', 'È molto calmo', 'È molto paziente', 'Pensa prima di agire'],
+                correct: 'Agisce senza pensare, impulsivo',
+                explanation: '✅ Corretto! IMPETUOSO = agisce senza pensare, impulsivo, irruente.',
+                errorExplanation: '❌ Impetuoso significa agire senza pensare'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Completa: Non sono _____, ho paura dei ragni e dei topi!',
+                correct: ['coraggioso', 'coraggiosa'],
+                explanation: '✅ Corretto! CODARDO = ha paura, non affronta i pericoli (contrario di coraggioso).'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Quale aggettivo descrive una persona che vede sempre il lato negativo?',
+                options: ['Ottimista', 'Realista', 'Pessimista', 'Sognatore'],
+                correct: 'Pessimista',
+                explanation: '✅ Corretto! PESSIMISTA = vede il lato negativo, senza speranza.',
+                errorExplanation: '❌ Chi vede il lato negativo è PESSIMISTA'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Completa: Luca è _____, sta sempre da solo e non parla molto.',
+                correct: ['introverso'],
+                explanation: '✅ Corretto! INTROVERSO = riservato, ama la solitudine, riflessivo.'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Cosa significa "pigro"?',
+                options: ['Lavora molto', 'Non lavora, non fa nulla', 'È molto veloce', 'È molto intelligente'],
+                correct: 'Non lavora, non fa nulla',
+                explanation: '✅ Corretto! PIGRO = non lavora, non fa nulla, ozioso.',
+                errorExplanation: '❌ Pigro significa non voler lavorare'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Completa: Il campione è _____, crede di essere il migliore di tutti.',
+                correct: ['superbo'],
+                explanation: '✅ Corretto! SUPERBO = presuntuoso, si crede superiore.'
+            },
+
+            // ESERCIZI 21-30: Contrari (Antonimi)
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Qual è il contrario di GENEROSO?',
+                options: ['Gentile', 'Egoista', 'Allegro', 'Onesto'],
+                correct: 'Egoista',
+                explanation: '✅ Corretto! GENEROSO ↔ EGOISTA (opposti).',
+                errorExplanation: '❌ Il contrario di generoso è EGOISTA'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Completa: ONESTO è il contrario di _____.',
+                correct: ['disonesto'],
+                explanation: '✅ Corretto! ONESTO ↔ DISONESTO (opposti).'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Qual è il contrario di CALMO?',
+                options: ['Tranquillo', 'Sereno', 'Nervoso', 'Paziente'],
+                correct: 'Nervoso',
+                explanation: '✅ Corretto! CALMO ↔ NERVOSO (opposti).',
+                errorExplanation: '❌ Il contrario di calmo è NERVOSO'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Completa: ESTROVERSO è il contrario di _____.',
+                correct: ['introverso'],
+                explanation: '✅ Corretto! ESTROVERSO ↔ INTROVERSO (opposti).'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Qual è il contrario di OTTIMISTA?',
+                options: ['Realista', 'Pessimista', 'Sognatore', 'Idealista'],
+                correct: 'Pessimista',
+                explanation: '✅ Corretto! OTTIMISTA ↔ PESSIMISTA (opposti).',
+                errorExplanation: '❌ Il contrario di ottimista è PESSIMISTA'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Completa: CORAGGIOSO è il contrario di _____.',
+                correct: ['codardo'],
+                explanation: '✅ Corretto! CORAGGIOSO ↔ CODARDO (opposti).'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Qual è il contrario di GENTILE?',
+                options: ['Educato', 'Cortese', 'Sgarbato', 'Premuroso'],
+                correct: 'Sgarbato',
+                explanation: '✅ Corretto! GENTILE ↔ SGARBATO (opposti).',
+                errorExplanation: '❌ Il contrario di gentile è SGARBATO'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Completa: PAZIENTE è il contrario di _____.',
+                correct: ['impetuoso', 'impaziente'],
+                explanation: '✅ Corretto! PAZIENTE ↔ IMPETUOSO/IMPAZIENTE (opposti).'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Qual è il contrario di ALLEGRO?',
+                options: ['Serio', 'Triste', 'Calmo', 'Nervoso'],
+                correct: 'Triste',
+                explanation: '✅ Corretto! ALLEGRO ↔ TRISTE (opposti).',
+                errorExplanation: '❌ Il contrario di allegro è TRISTE'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Completa: LABORIOSO (che lavora molto) è il contrario di _____.',
+                correct: ['pigro'],
+                explanation: '✅ Corretto! LABORIOSO ↔ PIGRO (opposti).'
+            },
+
+            // ESERCIZI 31-40: Contesti e descrizioni
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Come si descrive una persona che aiuta sempre gli altri e condivide?',
+                options: ['Egoista', 'Generosa', 'Sgarbata', 'Pigra'],
+                correct: 'Generosa',
+                explanation: '✅ Corretto! Chi aiuta e condivide è GENEROSA.',
+                errorExplanation: '❌ Chi aiuta gli altri è GENEROSA'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Completa: "Non mi piace quel ragazzo, è molto _____, non saluta mai."',
+                correct: ['sgarbato'],
+                explanation: '✅ Corretto! SGARBATO = maleducato, non saluta, scortese.'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Quale aggettivo usa per un amico che ascolta per ore senza lamentarsi?',
+                options: ['Nervoso', 'Impetuoso', 'Paziente', 'Egoista'],
+                correct: 'Paziente',
+                explanation: '✅ Corretto! Chi ascolta a lungo è PAZIENTE.',
+                errorExplanation: '❌ Chi sa ascoltare è PAZIENTE'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Completa: "Mio padre è _____, non si arrabbia mai anche quando sono in ritardo."',
+                correct: ['calmo'],
+                explanation: '✅ Corretto! CALMO = non si arrabbia, tranquillo.'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Come si descrive una persona che ha rubato e mentito?',
+                options: ['Onesta', 'Gentile', 'Disonesta', 'Generosa'],
+                correct: 'Disonesta',
+                explanation: '✅ Corretto! Chi ruba e mente è DISONESTA.',
+                errorExplanation: '❌ Chi ruba e mente è DISONESTA'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Completa: "La mia amica è _____, crede sempre che tutto andrà bene."',
+                correct: ['ottimista'],
+                explanation: '✅ Corretto! OTTIMISTA = crede che tutto andrà bene.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Quale aggettivo descrive una persona che agisce senza pensare prima?',
+                options: ['Paziente', 'Calma', 'Impetuosa', 'Riflessiva'],
+                correct: 'Impetuosa',
+                explanation: '✅ Corretto! Chi agisce senza pensare è IMPETUOSA.',
+                errorExplanation: '❌ Chi agisce senza pensare è IMPETUOSA'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Completa: "Non sono _____, non posso guardare i film horror!"',
+                correct: ['coraggioso', 'coraggiosa'],
+                explanation: '✅ Corretto! Non essere coraggioso = avere paura (essere codardo).'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Come si descrive una persona che sta sempre da sola e non parla molto?',
+                options: ['Estroversa', 'Introversa', 'Allegro', 'Socievole'],
+                correct: 'Introversa',
+                explanation: '✅ Corretto! Chi sta da solo e non parla è INTROVERSA.',
+                errorExplanation: '❌ Chi sta da solo è INTROVERSA'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Completa: "Il mio collega è _____, non fa mai nulla in ufficio."',
+                correct: ['pigro'],
+                explanation: '✅ Corretto! PIGRO = non lavora, non fa nulla.'
+            },
+
+            // ESERCIZI 41-50: Situazioni comunicative e concordanza
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Come si concorda "generoso" al femminile singolare?',
+                options: ['Generoso', 'Generosa', 'Generosi', 'Generose'],
+                correct: 'Generosa',
+                explanation: '✅ Corretto! GENEROSA (femminile singolare: -a).',
+                errorExplanation: '❌ Al femminile singolare è GENEROSA'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Completa: "Marco e Luigi sono molto _____." (gentile, plurale maschile)',
+                correct: ['gentili'],
+                explanation: '✅ Corretto! GENTILI (plurale maschile: cambia in -i).'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Come si concorda "onesto" al femminile plurale?',
+                options: ['Onesti', 'Oneste', 'Onesto', 'Onesta'],
+                correct: 'Oneste',
+                explanation: '✅ Corretto! ONESTE (femminile plurale: -e).',
+                errorExplanation: '❌ Al femminile plurale è ONESTE'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Completa: "Le mie amiche sono tutte molto _____." (allegro, plurale femminile)',
+                correct: ['allegre'],
+                explanation: '✅ Corretto! ALLEGRE (plurale femminile: -e, allegro → allegri → allegre).'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['Maria è allegro', 'Maria è allegra', 'Maria è allegri', 'Maria è allegre'],
+                correct: 'Maria è allegra',
+                explanation: '✅ Corretto! Maria (f) + allegra (f.sg).',
+                errorExplanation: '❌ Maria è femminile, quindi si usa ALLEGRA'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Completa: "Giovanni e Marco sono _____, pensano solo a sé stessi."',
+                correct: ['egoisti'],
+                explanation: '✅ Corretto! EGOISTI (plurale maschile: -i, invariabile in genere ma cambia al plurale).'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Quale frase descrive meglio una persona equilibrata?',
+                options: ['È sempre nervosa e impetuosa', 'È calma e paziente', 'È egoista e sgarbata', 'È pigra e disonesta'],
+                correct: 'È calma e paziente',
+                explanation: '✅ Corretto! CALMA e PAZIENTE sono tratti positivi di una persona equilibrata.',
+                errorExplanation: '❌ Una persona equilibrata è calma e paziente'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Completa: "Mia nonna è _____, ha superato molte difficoltà nella vita."',
+                correct: ['coraggiosa', 'forte', 'paziente'],
+                explanation: '✅ Corretto! Chi supera difficoltà è CORAGGIOSA/FORTE/PAZIENTE.'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Quale aggettivo NON è appropriato per descrivere un buon amico?',
+                options: ['Leale', 'Affidabile', 'Egoista', 'Sincero'],
+                correct: 'Egoista',
+                explanation: '✅ Corretto! EGOISTA è negativo, non descrive un buon amico.',
+                errorExplanation: '❌ Egoista è un tratto negativo, non da un buon amico'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Completa: "Per essere un buon leader devi essere _____, _____ e _____." (scegli 3 aggettivi positivi)',
+                correct: ['onesto, coraggioso, paziente', 'onesto coraggioso paziente', 'generoso, leale, serio', 'generoso leale serio'],
+                explanation: '✅ Corretto! Un buon leader ha tratti positivi come onestà, coraggio e pazienza. Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header personality">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = ex.errorExplanation;
+
+                // Messaggi specifici per errori comuni
+                if (ex.question.includes('concorda') && ex.question.includes('femminile')) {
+                    errorMsg += '<br><strong>💡 Ricorda: il femminile singolare termina in -A!</strong>';
+                }
+                if (ex.question.includes('concorda') && ex.question.includes('plurale')) {
+                    errorMsg += '<br><strong>💡 Ricorda: il plurale maschile termina in -I, il femminile in -E!</strong>';
+                }
+
+                feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+
+                // Messaggi specifici per errori comuni
+                if (ex.question.includes('contrario') && value.includes(ex.correct[0])) {
+                    errorMsg += '<br><strong>⚠️ ATTENZIONE: Hai scritto lo stesso aggettivo, non il contrario!</strong>';
+                }
+                if (ex.question.includes('femminile') && value.endsWith('o')) {
+                    errorMsg += '<br><strong>💡 Ricorda: il femminile singolare termina in -A, non in -O!</strong>';
+                }
+
+                feedback.innerHTML = errorMsg;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente il vocabolario della personalità!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene gli aggettivi di personalità e i loro contrari!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda i contrari e fai attenzione alla concordanza (m/f, sing/plur)!';
+            } else {
+                message = '📚 Ripassa il vocabolario! Ricorda: generoso/egoista, calmo/nervoso, onesto/disonesto!';
+            }
+
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+
+            exercises.sort(() => Math.random() - 0.5);
+
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

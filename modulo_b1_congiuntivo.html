@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B1 - Congiuntivo Presente</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --are: #1e40af;
+            --ere: #7c3aed;
+            --ire: #059669;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .nav-tab.are:hover, .nav-tab.are.active { color: var(--are); border-bottom-color: var(--are); }
+        .nav-tab.ere:hover, .nav-tab.ere.active { color: var(--ere); border-bottom-color: var(--ere); }
+        .nav-tab.ire:hover, .nav-tab.ire.active { color: var(--ire); border-bottom-color: var(--ire); }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-header.are { border-left-color: var(--are); color: var(--are); }
+        .card-header.ere { border-left-color: var(--ere); color: var(--ere); }
+        .card-header.ire { border-left-color: var(--ire); color: var(--ire); }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .rule-box.are { background: #dbeafe; border-color: var(--are); }
+        .rule-box.ere { background: #ede9fe; border-color: var(--ere); }
+        .rule-box.ire { background: #d1fae5; border-color: var(--ire); }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .congiuntivo { color: var(--accent); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .ending {
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        .verb-form.are { color: var(--are); font-weight: bold; }
+        .verb-form.ere { color: var(--ere); font-weight: bold; }
+        .verb-form.ire { color: var(--ire); font-weight: bold; }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 120px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 200px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--b1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--b1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .trigger-list {
+            background: #f0f7ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+        }
+        .trigger-list ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .trigger-list li {
+            margin: 0.3rem 0;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B1 - Congiuntivo Presente</h1>
+            <p>Il modo del dubbio, della possibilità e dell'irrealtà</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B1</a>
+            <span>›</span>
+            <strong>Congiuntivo Presente</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🎯 Congiuntivo Presente</h1>
+            <p class="page-subtitle">Esprimere dubbi, opinioni, emozioni e ipotesi nel presente</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab are" onclick="showSection('are', this)">-ARE</button>
+            <button class="nav-tab ere" onclick="showSection('ere', this)">-ERE</button>
+            <button class="nav-tab ire" onclick="showSection('ire', this)">-IRE</button>
+            <button class="nav-tab" onclick="showSection('irregular', this)">⚠️ Irregolari</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍🏫</div>
+                    <div class="avatar-name">Prof. Marco</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B1! 🎓</h3>
+                    <p>Oggi affrontiamo il <strong>Congiuntivo Presente</strong>, il modo che esprime soggettività, dubbio e possibilità.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "Penso che <span class="highlight">lui sia</span> stanco" (non "è").</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è il Congiuntivo?</div>
+                <div class="card-body">
+                    <p>Il congiuntivo è un <strong>modo verbale</strong> che esprime:</p>
+                    <div class="instruction-box">
+                        <strong>Funzioni principali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Dubbio, incertezza, possibilità</li>
+                            <li>Opinioni, giudizi, emozioni</li>
+                            <li>Desideri, speranze, timori</li>
+                            <li>Ipotesi, condizioni irreali</li>
+                            <li>Scopi, finalità</li>
+                        </ul>
+                    </div>
+                    <div class="trigger-list">
+                        <strong>⚡ Trigger (parole che richiedono il congiuntivo):</strong>
+                        <ul>
+                            <li><em>Verbi di opinione:</em> pensare, credere, ritenere, supporre</li>
+                            <li><em>Verbi di emozione:</em> temere, sperare, desiderare, volere</li>
+                            <li><em>Verbi di dubbio:</em> dubitare, non essere sicuro, non sapere</li>
+                            <li><em>Congiunzioni:</em> che, perché, affinché, benché, sebbene, malgrado</li>
+                            <li><em>Avverbi/Aggettivi:</em> è possibile che, è necessario che, è bello che</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE -ARE -->
+        <section id="are" class="section">
+            <div class="card">
+                <div class="card-header are">Congiuntivo Presente: Verbi in -ARE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Esempio modello:</strong> PARLARE<br>
+                        Radice: <strong>parl-</strong> + Desinenze congiuntivo
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Persona</th><th>Desinenza</th><th>Forma</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>che io</td><td class="ending">-i</td><td class="verb-form are">parli</td></tr>
+                            <tr><td>che tu</td><td class="ending">-i</td><td class="verb-form are">parli</td></tr>
+                            <tr><td>che lui/lei</td><td class="ending">-i</td><td class="verb-form are">parli</td></tr>
+                            <tr><td>che noi</td><td class="ending">-iamo</td><td class="verb-form are">parliamo</td></tr>
+                            <tr><td>che voi</td><td class="ending">-iate</td><td class="verb-form are">parliate</td></tr>
+                            <tr><td>che loro</td><td class="ending">-ino</td><td class="verb-form are">parlino</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="rule-box are">
+                        <strong>⚠️ Attenzione:</strong> La 1ª persona singolare, 2ª e 3ª sono uguali (parli)!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE -ERE -->
+        <section id="ere" class="section">
+            <div class="card">
+                <div class="card-header ere">Congiuntivo Presente: Verbi in -ERE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Esempio modello:</strong> CREDERE<br>
+                        Radice: <strong>cred-</strong> + Desinenze congiuntivo
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Persona</th><th>Desinenza</th><th>Forma</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>che io</td><td class="ending">-a</td><td class="verb-form ere">creda</td></tr>
+                            <tr><td>che tu</td><td class="ending">-a</td><td class="verb-form ere">creda</td></tr>
+                            <tr><td>che lui/lei</td><td class="ending">-a</td><td class="verb-form ere">creda</td></tr>
+                            <tr><td>che noi</td><td class="ending">-iamo</td><td class="verb-form ere">crediamo</td></tr>
+                            <tr><td>che voi</td><td class="ending">-iate</td><td class="verb-form ere">crediate</td></tr>
+                            <tr><td>che loro</td><td class="ending">-ano</td><td class="verb-form ere">credano</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="rule-box ere">
+                        <strong>Osservazione:</strong> Le desinenze in -ERE usano la vocale <strong>A</strong> (tranne noi e voi).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE -IRE -->
+        <section id="ire" class="section">
+            <div class="card">
+                <div class="card-header ire">Congiuntivo Presente: Verbi in -IRE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Esempio modello:</strong> DORMIRE (regolare)<br>
+                        Radice: <strong>dorm-</strong> + Desinenze congiuntivo
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Persona</th><th>Desinenza</th><th>Forma</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>che io</td><td class="ending">-a</td><td class="verb-form ire">dorma</td></tr>
+                            <tr><td>che tu</td><td class="ending">-a</td><td class="verb-form ire">dorma</td></tr>
+                            <tr><td>che lui/lei</td><td class="ending">-a</td><td class="verb-form ire">dorma</td></tr>
+                            <tr><td>che noi</td><td class="ending">-iamo</td><td class="verb-form ire">dormiamo</td></tr>
+                            <tr><td>che voi</td><td class="ending">-iate</td><td class="verb-form ire">dormiate</td></tr>
+                            <tr><td>che loro</td><td class="ending">-ano</td><td class="verb-form ire">dormano</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="rule-box ire">
+                        <strong>Verbi in -IRE con -isc-:</strong> Capire, finire, preferire, pulire<br>
+                        che io <strong>capisca</strong>, che tu <strong>capisca</strong>, che lui <strong>capisca</strong>...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE IRREGOLARI -->
+        <section id="irregular" class="section">
+            <div class="card">
+                <div class="card-header">Verbi Irregolari Importanti</div>
+                <div class="card-body">
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Infinito</th><th>che io</th><th>che tu</th><th>che lui</th><th>che noi</th><th>che voi</th><th>che loro</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>essere</strong></td>
+                                <td class="congiuntivo">sia</td>
+                                <td class="congiuntivo">sia</td>
+                                <td class="congiuntivo">sia</td>
+                                <td class="congiuntivo">siamo</td>
+                                <td class="congiuntivo">siate</td>
+                                <td class="congiuntivo">siano</td>
+                            </tr>
+                            <tr>
+                                <td><strong>avere</strong></td>
+                                <td class="congiuntivo">abbia</td>
+                                <td class="congiuntivo">abbia</td>
+                                <td class="congiuntivo">abbia</td>
+                                <td class="congiuntivo">abbiamo</td>
+                                <td class="congiuntivo">abbiate</td>
+                                <td class="congiuntivo">abbiano</td>
+                            </tr>
+                            <tr>
+                                <td><strong>andare</strong></td>
+                                <td class="congiuntivo">vada</td>
+                                <td class="congiuntivo">vada</td>
+                                <td class="congiuntivo">vada</td>
+                                <td class="congiuntivo">andiamo</td>
+                                <td class="congiuntivo">andiate</td>
+                                <td class="congiuntivo">vadano</td>
+                            </tr>
+                            <tr>
+                                <td><strong>fare</strong></td>
+                                <td class="congiuntivo">faccia</td>
+                                <td class="congiuntivo">faccia</td>
+                                <td class="congiuntivo">faccia</td>
+                                <td class="congiuntivo">facciamo</td>
+                                <td class="congiuntivo">facciate</td>
+                                <td class="congiuntivo">facciano</td>
+                            </tr>
+                            <tr>
+                                <td><strong>stare</strong></td>
+                                <td class="congiuntivo">stia</td>
+                                <td class="congiuntivo">stia</td>
+                                <td class="congiuntivo">stia</td>
+                                <td class="congiuntivo">stiamo</td>
+                                <td class="congiuntivo">stiate</td>
+                                <td class="congiuntivo">stiano</td>
+                            </tr>
+                            <tr>
+                                <td><strong>dare</strong></td>
+                                <td class="congiuntivo">dia</td>
+                                <td class="congiuntivo">dia</td>
+                                <td class="congiuntivo">dia</td>
+                                <td class="congiuntivo">diamo</td>
+                                <td class="congiuntivo">diate</td>
+                                <td class="congiuntivo">diano</td>
+                            </tr>
+                            <tr>
+                                <td><strong>sapere</strong></td>
+                                <td class="congiuntivo">sappia</td>
+                                <td class="congiuntivo">sappia</td>
+                                <td class="congiuntivo">sappia</td>
+                                <td class="congiuntivo">sappiamo</td>
+                                <td class="congiuntivo">sappiate</td>
+                                <td class="congiuntivo">sappiano</td>
+                            </tr>
+                            <tr>
+                                <td><strong>volere</strong></td>
+                                <td class="congiuntivo">voglia</td>
+                                <td class="congiuntivo">voglia</td>
+                                <td class="congiuntivo">voglia</td>
+                                <td class="congiuntivo">vogliamo</td>
+                                <td class="congiuntivo">vogliate</td>
+                                <td class="congiuntivo">vogliano</td>
+                            </tr>
+                            <tr>
+                                <td><strong>potere</strong></td>
+                                <td class="congiuntivo">possa</td>
+                                <td class="congiuntivo">possa</td>
+                                <td class="congiuntivo">possa</td>
+                                <td class="congiuntivo">possiamo</td>
+                                <td class="congiuntivo">possiate</td>
+                                <td class="congiuntivo">possano</td>
+                            </tr>
+                            <tr>
+                                <td><strong>dovere</strong></td>
+                                <td class="congiuntivo">debba</td>
+                                <td class="congiuntivo">debba</td>
+                                <td class="congiuntivo">debba</td>
+                                <td class="congiuntivo>dobbiamo</td>
+                                <td class="congiuntivo">dobbiate</td>
+                                <td class="congiuntivo">debbano</td>
+                            </tr>
+                            <tr>
+                                <td><strong>uscire</strong></td>
+                                <td class="congiuntivo">esca</td>
+                                <td class="congiuntivo">esca</td>
+                                <td class="congiuntivo">esca</td>
+                                <td class="congiuntivo">usciamo</td>
+                                <td class="congiuntivo">usciate</td>
+                                <td class="congiuntivo">escano</td>
+                            </tr>
+                            <tr>
+                                <td><strong>venire</strong></td>
+                                <td class="congiuntivo">venga</td>
+                                <td class="congiuntivo">venga</td>
+                                <td class="congiuntivo">venga</td>
+                                <td class="congiuntivo">veniamo</td>
+                                <td class="congiuntivo">veniate</td>
+                                <td class="congiuntivo">vengano</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B1 - Congiuntivo Presente (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Verbi in -ARE regolari
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Penso che lui __________ ragione.',
+                options: ['abbia', 'ha', 'abbia', 'avrebbe'],
+                correct: 'abbia',
+                explanation: '✅ Corretto! "Avere ragione" al congiuntivo è "abbia" (verbo irregolare avere)',
+                errorExplanation: '❌ Dopo "penso che" serve il congiuntivo. Avere → abbia'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Spero che tu __________ (parlare) con lui.',
+                correct: ['parli'],
+                explanation: '✅ Corretto! Parlare (-ARE) → che tu parli'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'È necessario che noi __________ presto.',
+                options: ['partiamo', 'partiamo', 'partiamo', 'partiremo'],
+                correct: 'partiamo',
+                explanation: '✅ Corretto! Partire al congiuntivo: che noi partiamo',
+                errorExplanation: '❌ Dopo "è necessario che" serve il congiuntivo presente'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Credo che lei __________ (abitare) a Roma.',
+                correct: ['abiti'],
+                explanation: '✅ Corretto! Abitare (-ARE) → che lei abiti'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Desidero che voi __________ la verità.',
+                options: ['diciate', 'dite', 'diciate', 'direte'],
+                correct: 'diciate',
+                explanation: '✅ Corretto! Dire è irregolare: che voi diciate',
+                errorExplanation: '❌ Dire è irregolare al congiuntivo: diciate (non dite)'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Temo che loro non __________ (capire) la situazione.',
+                correct: ['capiscano', 'capiano'],
+                explanation: '✅ Corretto! Capire (-isc-) → che loro capiscano'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'È bello che tu __________ qui con noi.',
+                options: ['stia', 'sei', 'stia', 'staresti'],
+                correct: 'stia',
+                explanation: '✅ Corretto! Stare è irregolare: che tu stia',
+                errorExplanation: '❌ Stare al congiuntivo è irregolare: stia'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Penso che lui __________ (lavorare) troppo.',
+                correct: ['lavori'],
+                explanation: '✅ Corretto! Lavorare (-ARE) → che lui lavori'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Speriamo che il tempo __________ migliore domani.',
+                options: ['sia', 'è', 'sia', 'sarà'],
+                correct: 'sia',
+                explanation: '✅ Corretto! Essere al congiuntivo: che il tempo sia',
+                errorExplanation: '❌ Essere è irregolare al congiuntivo: sia'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'È importante che noi __________ (ascoltare) attentamente.',
+                correct: ['ascoltiamo'],
+                explanation: '✅ Corretto! Ascoltare (-ARE) → che noi ascoltiamo'
+
+            },
+
+            // ESERCIZI 11-20: Verbi in -ERE regolari e irregolari
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Non credo che lui __________ la verità.',
+                options: ['sappia', 'sa', 'sappia', 'saprebbe'],
+                correct: 'sappia',
+                explanation: '✅ Corretto! Sapere è irregolare: che lui sappia',
+                errorExplanation: '❌ Sapere al congiuntivo è irregolare: sappia'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Temo che voi non __________ (credere) alle mie parole.',
+                correct: ['crediate'],
+                explanation: '✅ Corretto! Credere (-ERE) → che voi crediate'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'È possibile che loro __________ in ritardo.',
+                options: ['arrivino', 'arrivano', 'arrivino', 'arriveranno'],
+                correct: 'arrivino',
+                explanation: '✅ Corretto! Arrivare (-ARE) → che loro arrivino',
+                errorExplanation: '❌ Arrivare in -ARE → desinenza -ino al congiuntivo'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Desidero che tu __________ (vedere) questo film.',
+                correct: ['veda'],
+                explanation: '✅ Corretto! Vedere (-ERE) → che tu veda'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Non penso che lui __________ fare questo lavoro.',
+                options: ['possa', 'può', 'possa', 'potrebbe'],
+                correct: 'possa',
+                explanation: '✅ Corretto! Potere è irregolare: che lui possa',
+                errorExplanation: '❌ Potere al congiuntivo è irregolare: possa'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'È necessario che lei __________ (scrivere) una mail.',
+                correct: ['scriva'],
+                explanation: '✅ Corretto! Scrivere (-ERE) → che lei scriva'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Spero che noi __________ tempo sufficiente.',
+                options: ['abbiamo', 'abbiamo', 'abbiamo', 'avremo'],
+                correct: 'abbiamo',
+                explanation: '✅ Corretto! Avere al congiuntivo: che noi abbiamo',
+                errorExplanation: '❌ Avere è irregolare al congiuntivo: abbiamo'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Credo che loro __________ (prendere) il treno delle 8.',
+                correct: ['prendano'],
+                explanation: '✅ Corretto! Prendere (-ERE) → che loro prendano'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'È strano che tu non __________ niente.',
+                options: ['dica', 'dici', 'dica', 'dirai'],
+                correct: 'dica',
+                explanation: '✅ Corretto! Dire è irregolare: che tu dica',
+                errorExplanation: '❌ Dire al congiuntivo è irregolare: dica'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Temo che il bambino __________ (avere) paura.',
+                correct: ['abbia'],
+                explanation: '✅ Corretto! Avere (irregolare) → che lui abbia'
+
+            },
+
+            // ESERCIZI 21-30: Verbi in -IRE regolari e in -isc-
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Penso che lui __________ a casa stasera.',
+                options: ['dorma', 'dorma', 'dorma', 'dormirà'],
+                correct: 'dorma',
+                explanation: '✅ Corretto! Dormire (-IRE) → che lui dorma',
+                errorExplanation: '❌ Dormire in -IRE regolare → desinenza -a'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'È importante che voi __________ (finire) il lavoro.',
+                correct: ['finisciate', 'finiate'],
+                explanation: '✅ Corretto! Finire (-isc-) → che voi finisciate'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Spero che lei __________ la mia proposta.',
+                options: ['accetti', 'accetta', 'accetti', 'accetterà'],
+                correct: 'accetti',
+                explanation: '✅ Corretto! Accettare (-ARE) → che lei accetti',
+                errorExplanation: '❌ Accettare in -ARE → desinenza -i'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Non credo che loro __________ (pulire) la casa.',
+                correct: ['puliscano'],
+                explanation: '✅ Corretto! Pulire (-isc-) → che loro puliscano'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'È meglio che tu __________ subito.',
+                options: ['parta', 'parti', 'parta', 'partirai'],
+                correct: 'parta',
+                explanation: '✅ Corretto! Partire (-IRE) → che tu parta',
+                errorExplanation: '❌ Partire in -IRE → desinenza -a'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Desidero che noi __________ (seguire) questo corso.',
+                correct: ['seguiamo'],
+                explanation: '✅ Corretto! Seguire (-IRE) → che noi seguiamo'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Temo che lui non __________ la lezione.',
+                options: ['capisca', 'capisce', 'capisca', 'capirà'],
+                correct: 'capisca',
+                explanation: '✅ Corretto! Capire (-isc-) → che lui capisca',
+                errorExplanation: '❌ Capire ha l\'inserimento di -isc- al congiuntivo'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'È necessario che io __________ (sentire) la tua opinione.',
+                correct: ['senta'],
+                explanation: '✅ Corretto! Sentire (-IRE) → che io senta'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Spero che voi __________ presto.',
+                options: ['guarisciate', 'guarite', 'guariate', 'guarirete'],
+                correct: 'guarisciate',
+                explanation: '✅ Corretto! Guarire (-isc-) → che voi guarisciate',
+                errorExplanation: '❌ Guarire ha l\'inserimento di -isc- al congiuntivo'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Penso che lei __________ (aprire) il negozio domani.',
+                correct: ['apra'],
+                explanation: '✅ Corretto! Aprire (-IRE) → che lei apra'
+
+            },
+
+            // ESERCIZI 31-40: Verbi irregolari fondamentali
+            {
+                id: 31,
+                type: 'choice',
+                question: 'È importante che tu __________ a lezione.',
+                options: ['venga', 'vieni', 'venga', 'verrai'],
+                correct: 'venga',
+                explanation: '✅ Corretto! Venire è irregolare: che tu venga',
+                errorExplanation: '❌ Venire al congiuntivo è irregolare: venga'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Desidero che lui __________ (fare) attenzione.',
+                correct: ['faccia'],
+                explanation: '✅ Corretto! Fare è irregolare: che lui faccia'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Non credo che loro __________ uscire stasera.',
+                options: ['possano', 'possono', 'possano', 'potranno'],
+                correct: 'possano',
+                explanation: '✅ Corretto! Potere è irregolare: che loro possano',
+                errorExplanation: '❌ Potere al congiuntivo è irregolare: possano'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'È necessario che io __________ (andare) dal dottore.',
+                correct: ['vada'],
+                explanation: '✅ Corretto! Andare è irregolare: che io vada'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Spero che tu __________ bene.',
+                options: ['stia', 'stai', 'stia', 'starai'],
+                correct: 'stia',
+                explanation: '✅ Corretto! Stare è irregolare: che tu stia',
+                errorExplanation: '❌ Stare al congiuntivo è irregolare: stia'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Temo che noi non __________ (dovere) farlo.',
+                correct: ['dobbiamo'],
+                explanation: '✅ Corretto! Dovere è irregolare: che noi dobbiamo'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'È strano che lui non __________ niente.',
+                options: ['sappia', 'sa', 'sappia', 'saprà'],
+                correct: 'sappia',
+                explanation: '✅ Corretto! Sapere è irregolare: che lui sappia',
+                errorExplanation: '❌ Sapere al congiuntivo è irregolare: sappia'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Desidero che voi __________ (volere) provare.',
+                correct: ['vogliate'],
+                explanation: '✅ Corretto! Volere è irregolare: che voi vogliate'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Penso che lei __________ contenta.',
+                options: ['sia', 'è', 'sia', 'sarà'],
+                correct: 'sia',
+                explanation: '✅ Corretto! Essere è irregolare: che lei sia',
+                errorExplanation: '❌ Essere al congiuntivo è irregolare: sia'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Spero che loro __________ (uscire) con noi.',
+                correct: ['escano'],
+                explanation: '✅ Corretto! Uscire è irregolare: che loro escano'
+
+            },
+
+            // ESERCIZI 41-50: Contesti complessi e frasi articolate
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Benché __________ stanco, continuo a lavorare.',
+                options: ['sia', 'sia', 'sia', 'sia'],
+                correct: 'sia',
+                explanation: '✅ Corretto! "Benché" (sebbene) richiede il congiuntivo: sia',
+                errorExplanation: '❌ Benché/sebbene richiedono sempre il congiuntivo'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Affinché tutto __________ (andare) bene, dobbiamo prepararci.',
+                correct: ['vada'],
+                explanation: '✅ Corretto! "Affinché" richiede il congiuntivo. Andare → vada'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Non c\'è nessuno che __________ questa lingua.',
+                options: ['sappia', 'sa', 'sappia', 'sapeva'],
+                correct: 'sappia',
+                explanation: '✅ Corretto! Dopo "nessuno che" serve il congiuntivo: sappia',
+                errorExplanation: '❌ I pronomi indefiniti con "che" richiedono il congiuntivo'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Malgrado __________ (piovere), siamo usciti.',
+                correct: ['piova'],
+                explanation: '✅ Corretto! "Malgrado" richiede il congiuntivo'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Cerco un libro che __________ interessante.',
+                options: ['sia', 'è', 'sia', 'sarebbe'],
+                correct: 'sia',
+                explanation: '✅ Corretto! Dopo "che" relativo con valore dubitativo: sia',
+                errorExplanation: '❌ Quando il relativo esprime un desiderio/dubbio, usa il congiuntivo'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Prima che lui __________ (arrivare), dobbiamo finire.',
+                correct: ['arrivi'],
+                explanation: '✅ Corretto! "Prima che" richiede il congiuntivo'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'È il miglior film che io __________ visto.',
+                options: ['abbia', 'abbia', 'abbia', 'ho'],
+                correct: 'abbia',
+                explanation: '✅ Corretto! Dopo superlativo + "che": abbia (congiuntivo passato)',
+                errorExplanation: '❌ Dopo i superlativi con "che" si usa il congiuntivo'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'A meno che non __________ (venire) lui, non iniziamo.',
+                correct: ['venga'],
+                explanation: '✅ Corretto! "A meno che" richiede il congiuntivo'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Dubito che loro __________ in tempo.',
+                options: ['arrivino', 'arrivano', 'arrivino', 'arriveranno'],
+                correct: 'arrivino',
+                explanation: '✅ Corretto! "Dubito che" richiede il congiuntivo: arrivino',
+                errorExplanation: '❌ Dubitare richiede il congiuntivo nella subordinata'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Qualunque cosa __________ (succedere), resterò qui.',
+                correct: ['succeda'],
+                explanation: '✅ Corretto! "Qualunque cosa" richiede il congiuntivo. Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la forma congiuntiva..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente il Congiuntivo Presente! Sei pronto per il Congiuntivo Passato!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci molto bene questo modo verbale!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Hai una buona base, ma ripassa ancora le forme irregolari.';
+            } else {
+                message = '📚 Studia ancora le tabelle e riprova! Il congiuntivo richiede molta pratica.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

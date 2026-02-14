@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Tre Coniugazioni - Italiano A1 (50 Esercizi)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --are: #1e40af;
+            --ere: #7c3aed;
+            --ire: #059669;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+
+        .nav-tab.are:hover, .nav-tab.are.active { border-bottom-color: var(--are); color: var(--are); }
+        .nav-tab.ere:hover, .nav-tab.ere.active { border-bottom-color: var(--ere); color: var(--ere); }
+        .nav-tab.ire:hover, .nav-tab.ire.active { border-bottom-color: var(--ire); color: var(--ire); }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+
+        .card-header.are { border-left-color: var(--are); color: var(--are); }
+        .card-header.ere { border-left-color: var(--ere); color: var(--ere); }
+        .card-header.ire { border-left-color: var(--ire); color: var(--ire); }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .conjugation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        .conjugation-table th {
+            background: var(--light);
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 2px solid var(--border);
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .conjugation-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .conjugation-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .person {
+            font-weight: bold;
+            color: var(--secondary);
+            width: 20%;
+        }
+
+        .ending {
+            font-family: 'Courier New', monospace;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .verb-form {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .verb-form.are { color: var(--are); }
+        .verb-form.ere { color: var(--ere); }
+        .verb-form.ire { color: var(--ire); }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .rule-box.are { background: #dbeafe; border-color: var(--are); }
+        .rule-box.ere { background: #ede9fe; border-color: var(--ere); }
+        .rule-box.ire { background: #d1fae5; border-color: var(--ire); }
+
+        .verb-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .verb-item {
+            padding: 0.5rem;
+            background: var(--light);
+            border-left: 3px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .verb-item:hover {
+            background: white;
+            border-left-color: var(--primary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .verb-item.are:hover { border-left-color: var(--are); }
+        .verb-item.ere:hover { border-left-color: var(--ere); }
+        .verb-item.ire:hover { border-left-color: var(--ire); }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .btn-check {
+            background: var(--b1-color);
+            color: #000;
+        }
+
+        .btn-check:hover {
+            background: #b8941f;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 180px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 150px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Le Tre Coniugazioni Italiane</h1>
+            <p>Studio dei verbi regolari in -ARE, -ERE, -IRE - Livello A1 (50 Esercizi)</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A1</a>
+            <span>›</span>
+            <strong>Verbi Regolari: ARE, ERE, IRE</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 Il Sistema Coniugazionale Italiano</h1>
+            <p class="page-subtitle">Analisi delle tre coniugazioni regolari con 50 esercizi interattivi</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('learn', this)">📖 Teoria</button>
+            <button class="nav-tab are" onclick="showSection('are', this)">-ARE (1ª)</button>
+            <button class="nav-tab ere" onclick="showSection('ere', this)">-ERE (2ª)</button>
+            <button class="nav-tab ire" onclick="showSection('ire', this)">-IRE (3ª)</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE STUDIO GENERALE -->
+        <section id="learn" class="section active">
+            <div class="card">
+                <div class="card-header">Cenni Teorici sul Sistema Verbale</div>
+                <div class="card-body">
+                    <p style="margin-bottom: 1rem;">L'italiano distingue tre coniugazioni verbali, identificate dalla desinenza dell'infinito presente:</p>
+                    
+                    <div class="rule-box are">
+                        <strong>Prima Coniugazione (-ARE):</strong> La più numerosa e produttiva. Comprende verbi come <em>parlare, mangiare, lavorare</em>.
+                        <br>Vocale tematica: <strong>A</strong>
+                    </div>
+                    
+                    <div class="rule-box ere">
+                        <strong>Seconda Coniugazione (-ERE):</strong> Meno numerosa ma con alta frequenza d'uso. Comprende verbi come <em>vedere, prendere, scrivere</em>.
+                        <br>Vocale tematica: <strong>E</strong>
+                    </div>
+                    
+                    <div class="rule-box ire">
+                        <strong>Terza Coniugazione (-IRE):</strong> Suddivisa in due sottogruppi: regolari (dormire) e inchoativi (-isc-: capire, finire).
+                        <br>Vocale tematica: <strong>I</strong>
+                    </div>
+
+                    <p style="margin-top: 1.5rem;"><strong>Metodo di coniugazione:</strong></p>
+                    <ol style="margin-left: 2rem; line-height: 2;">
+                        <li>Identificare la coniugazione dall'infinito</li>
+                        <li>Rimuovere la desinenza (-are, -ere, -ire) per ottenere la radice</li>
+                        <li>Aggiungere le desinenze flesse specifiche della persona e del numero</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Schema Riassuntivo delle Desinenze</div>
+                <div class="card-body">
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Persona</th>
+                                <th class="are">-ARE (parlare)</th>
+                                <th class="ere">-ERE (credere)</th>
+                                <th class="ire">-IRE (dormire)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="person">io</td>
+                                <td class="verb-form are">parl<span class="ending">-o</span></td>
+                                <td class="verb-form ere">cred<span class="ending">-o</span></td>
+                                <td class="verb-form ire">dorm<span class="ending">-o</span></td>
+                            </tr>
+                            <tr>
+                                <td class="person">tu</td>
+                                <td class="verb-form are">parl<span class="ending">-i</span></td>
+                                <td class="verb-form ere">cred<span class="ending">-i</span></td>
+                                <td class="verb-form ire">dorm<span class="ending">-i</span></td>
+                            </tr>
+                            <tr>
+                                <td class="person">lui/lei</td>
+                                <td class="verb-form are">parl<span class="ending">-a</span></td>
+                                <td class="verb-form ere">cred<span class="ending">-e</span></td>
+                                <td class="verb-form ire">dorm<span class="ending">-e</span></td>
+                            </tr>
+                            <tr>
+                                <td class="person">noi</td>
+                                <td class="verb-form are">parl<span class="ending">-iamo</span></td>
+                                <td class="verb-form ere">cred<span class="ending">-iamo</span></td>
+                                <td class="verb-form ire">dorm<span class="ending">-iamo</span></td>
+                            </tr>
+                            <tr>
+                                <td class="person">voi</td>
+                                <td class="verb-form are">parl<span class="ending">-ate</span></td>
+                                <td class="verb-form ere">cred<span class="ending">-ete</span></td>
+                                <td class="verb-form ire">dorm<span class="ending">-ite</span></td>
+                            </tr>
+                            <tr>
+                                <td class="person">loro</td>
+                                <td class="verb-form are">parl<span class="ending">-ano</span></td>
+                                <td class="verb-form ere">cred<span class="ending">-ono</span></td>
+                                <td class="verb-form ire">dorm<span class="ending">-ono</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE -ARE -->
+        <section id="are" class="section">
+            <div class="card">
+                <div class="card-header are">Prima Coniugazione: Verbi in -ARE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Esempio modello:</strong> PARLARE (to speak)
+                        <br>Radice: <strong>parl-</strong> | Vocale tematica: <strong>a</strong>
+                    </div>
+
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Persona</th>
+                                <th>Forma</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="person">io</td>
+                                <td class="ending">-o</td>
+                                <td class="verb-form are">parlo</td>
+                            </tr>
+                            <tr>
+                                <td class="person">tu</td>
+                                <td class="ending">-i</td>
+                                <td class="verb-form are">parli</td>
+                            </tr>
+                            <tr>
+                                <td class="person">lui/lei</td>
+                                <td class="ending">-a</td>
+                                <td class="verb-form are">parla</td>
+                            </tr>
+                            <tr>
+                                <td class="person">noi</td>
+                                <td class="ending">-iamo</td>
+                                <td class="verb-form are">parliamo</td>
+                            </tr>
+                            <tr>
+                                <td class="person">voi</td>
+                                <td class="ending">-ate</td>
+                                <td class="verb-form are">parlate</td>
+                            </tr>
+                            <tr>
+                                <td class="person">loro</td>
+                                <td class="ending">-ano</td>
+                                <td class="verb-form are">parlano</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box are">
+                        <strong>Nota:</strong> La 1ª persona plurale (noi) termina sempre in <strong>-iamo</strong> in tutte le coniugazioni.
+                    </div>
+
+                    <h3 style="margin-top: 1.5rem; color: var(--are);">Verbi regolari comuni in -ARE:</h3>
+                    <div class="verb-list">
+                        <div class="verb-item are">abitare (to live)</div>
+                        <div class="verb-item are">amare (to love)</div>
+                        <div class="verb-item are">ascoltare (to listen)</div>
+                        <div class="verb-item are">cercare (to look for)</div>
+                        <div class="verb-item are">comprare (to buy)</div>
+                        <div class="verb-item are">cucinare (to cook)</div>
+                        <div class="verb-item are">giocare (to play)</div>
+                        <div class="verb-item are">guardare (to watch)</div>
+                        <div class="verb-item are">imparare (to learn)</div>
+                        <div class="verb-item are">lavorare (to work)</div>
+                        <div class="verb-item are">mangiare (to eat)</div>
+                        <div class="verb-item are">pagare (to pay)</div>
+                        <div class="verb-item are">pensare (to think)</div>
+                        <div class="verb-item are">studiare (to study)</div>
+                        <div class="verb-item are">telefonare (to call)</div>
+                        <div class="verb-item are">trovare (to find)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE -ERE -->
+        <section id="ere" class="section">
+            <div class="card">
+                <div class="card-header ere">Seconda Coniugazione: Verbi in -ERE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Esempio modello:</strong> CREDERE (to believe)
+                        <br>Radice: <strong>cred-</strong> | Vocale tematica: <strong>e</strong>
+                    </div>
+
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Persona</th>
+                                <th>Forma</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="person">io</td>
+                                <td class="ending">-o</td>
+                                <td class="verb-form ere">credo</td>
+                            </tr>
+                            <tr>
+                                <td class="person">tu</td>
+                                <td class="ending">-i</td>
+                                <td class="verb-form ere">credi</td>
+                            </tr>
+                            <tr>
+                                <td class="person">lui/lei</td>
+                                <td class="ending">-e</td>
+                                <td class="verb-form ere">crede</td>
+                            </tr>
+                            <tr>
+                                <td class="person">noi</td>
+                                <td class="ending">-iamo</td>
+                                <td class="verb-form ere">crediamo</td>
+                            </tr>
+                            <tr>
+                                <td class="person">voi</td>
+                                <td class="ending">-ete</td>
+                                <td class="verb-form ere">credete</td>
+                            </tr>
+                            <tr>
+                                <td class="person">loro</td>
+                                <td class="ending">-ono</td>
+                                <td class="verb-form ere">credono</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box ere">
+                        <strong>Osservazione:</strong> Attenzione alla 2ª persona plurale: <strong>-ete</strong> (non -ate come in -ARE).
+                    </div>
+
+                    <h3 style="margin-top: 1.5rem; color: var(--ere);">Verbi regolari comuni in -ERE:</h3>
+                    <div class="verb-list">
+                        <div class="verb-item ere">chiedere (to ask)</div>
+                        <div class="verb-item ere">chiudere (to close)</div>
+                        <div class="verb-item ere">conoscere (to know)</div>
+                        <div class="verb-item ere">correre (to run)</div>
+                        <div class="verb-item ere">credere (to believe)</div>
+                        <div class="verb-item ere">leggere (to read)</div>
+                        <div class="verb-item ere">mettere (to put)</div>
+                        <div class="verb-item ere">prendere (to take)</div>
+                        <div class="verb-item ere">ricevere (to receive)</div>
+                        <div class="verb-item ere">ridere (to laugh)</div>
+                        <div class="verb-item ere">rispondere (to answer)</div>
+                        <div class="verb-item ere">scrivere (to write)</div>
+                        <div class="verb-item ere">vedere (to see)</div>
+                        <div class="verb-item ere">vendere (to sell)</div>
+                        <div class="verb-item ere">vivere (to live)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE -IRE -->
+        <section id="ire" class="section">
+            <div class="card">
+                <div class="card-header ire">Terza Coniugazione: Verbi in -IRE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Esempio modello:</strong> DORMIRE (to sleep)
+                        <br>Radice: <strong>dorm-</strong> | Vocale tematica: <strong>i</strong>
+                    </div>
+
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Persona</th>
+                                <th>Forma</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="person">io</td>
+                                <td class="ending">-o</td>
+                                <td class="verb-form ire">dormo</td>
+                            </tr>
+                            <tr>
+                                <td class="person">tu</td>
+                                <td class="ending">-i</td>
+                                <td class="verb-form ire">dormi</td>
+                            </tr>
+                            <tr>
+                                <td class="person">lui/lei</td>
+                                <td class="ending">-e</td>
+                                <td class="verb-form ire">dorme</td>
+                            </tr>
+                            <tr>
+                                <td class="person">noi</td>
+                                <td class="ending">-iamo</td>
+                                <td class="verb-form ire">dormiamo</td>
+                            </tr>
+                            <tr>
+                                <td class="person">voi</td>
+                                <td class="ending">-ite</td>
+                                <td class="verb-form ire">dormite</td>
+                            </tr>
+                            <tr>
+                                <td class="person">loro</td>
+                                <td class="ending">-ono</td>
+                                <td class="verb-form ire">dormono</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box ire">
+                        <strong>Attenzione:</strong> Esiste un sottogruppo di verbi in -IRE che inserisce <strong>-isc-</strong> nelle persone io, tu, lui/lei, loro (capire → capisco, capisci, capisce, capiscono).
+                    </div>
+
+                    <h3 style="margin-top: 1.5rem; color: var(--ire);">Verbi regolari comuni in -IRE:</h3>
+                    <div class="verb-list">
+                        <div class="verb-item ire">aprire (to open)</div>
+                        <div class="verb-item ire">dormire (to sleep)</div>
+                        <div class="verb-item ire">fuggire (to escape)</div>
+                        <div class="verb-item ire">offrire (to offer)</div>
+                        <div class="verb-item ire">partire (to leave)</div>
+                        <div class="verb-item ire">seguire (to follow)</div>
+                        <div class="verb-item ire">sentire (to hear/feel)</div>
+                        <div class="verb-item ire">servire (to serve)</div>
+                    </div>
+
+                    <h3 style="margin-top: 1.5rem; color: var(--accent);">Verbi in -IRE con -isc-:</h3>
+                    <div class="verb-list">
+                        <div class="verb-item ire">capire (to understand)</div>
+                        <div class="verb-item ire">finire (to finish)</div>
+                        <div class="verb-item ire">preferire (to prefer)</div>
+                        <div class="verb-item ire">pulire (to clean)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A1 - Le Tre Coniugazioni (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-15: Riconoscimento della coniugazione
+            {
+                id: 1,
+                type: 'choice',
+                question: 'A quale coniugazione appartiene il verbo "parlare"?',
+                options: ['Prima coniugazione (-ARE)', 'Seconda coniugazione (-ERE)', 'Terza coniugazione (-IRE)'],
+                correct: 'Prima coniugazione (-ARE)',
+                explanation: '✅ Corretto! Parlare termina in -ARE, quindi è della prima coniugazione.',
+                errorExplanation: '❌ Parlare termina in -ARE, quindi è della prima coniugazione.'
+            },
+            {
+                id: 2,
+                type: 'choice',
+                question: 'A quale coniugazione appartiene il verbo "vedere"?',
+                options: ['Prima coniugazione (-ARE)', 'Seconda coniugazione (-ERE)', 'Terza coniugazione (-IRE)'],
+                correct: 'Seconda coniugazione (-ERE)',
+                explanation: '✅ Corretto! Vedere termina in -ERE, quindi è della seconda coniugazione.',
+                errorExplanation: '❌ Vedere termina in -ERE, quindi è della seconda coniugazione.'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'A quale coniugazione appartiene il verbo "dormire"?',
+                options: ['Prima coniugazione (-ARE)', 'Seconda coniugazione (-ERE)', 'Terza coniugazione (-IRE)'],
+                correct: 'Terza coniugazione (-IRE)',
+                explanation: '✅ Corretto! Dormire termina in -IRE, quindi è della terza coniugazione.',
+                errorExplanation: '❌ Dormire termina in -IRE, quindi è della terza coniugazione.'
+            },
+            {
+                id: 4,
+                type: 'choice',
+                question: '"Mangiare" è un verbo della:',
+                options: ['Prima coniugazione', 'Seconda coniugazione', 'Terza coniugazione'],
+                correct: 'Prima coniugazione',
+                explanation: '✅ Corretto! Mangiare è un verbo in -ARE.',
+                errorExplanation: '❌ Mangiare termina in -ARE, quindi è prima coniugazione.'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: '"Scrivere" è un verbo della:',
+                options: ['Prima coniugazione', 'Seconda coniugazione', 'Terza coniugazione'],
+                correct: 'Seconda coniugazione',
+                explanation: '✅ Corretto! Scrivere è un verbo in -ERE.',
+                errorExplanation: '❌ Scrivere termina in -ERE, quindi è seconda coniugazione.'
+            },
+            {
+                id: 6,
+                type: 'choice',
+                question: '"Partire" è un verbo della:',
+                options: ['Prima coniugazione', 'Seconda coniugazione', 'Terza coniugazione'],
+                correct: 'Terza coniugazione',
+                explanation: '✅ Corretto! Partire è un verbo in -IRE.',
+                errorExplanation: '❌ Partire termina in -IRE, quindi è terza coniugazione.'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Quale di questi verbi è della prima coniugazione?',
+                options: ['Leggere', 'Lavorare', 'Dormire'],
+                correct: 'Lavorare',
+                explanation: '✅ Corretto! Lavorare termina in -ARE.',
+                errorExplanation: '❌ Lavorare è il solo verbo in -ARE tra le opzioni.'
+            },
+            {
+                id: 8,
+                type: 'choice',
+                question: 'Quale di questi verbi è della seconda coniugazione?',
+                options: ['Parlare', 'Prendere', 'Aprire'],
+                correct: 'Prendere',
+                explanation: '✅ Corretto! Prendere termina in -ERE.',
+                errorExplanation: '❌ Prendere è il solo verbo in -ERE tra le opzioni.'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Quale di questi verbi è della terza coniugazione?',
+                options: ['Studiare', 'Mettere', 'Sentire'],
+                correct: 'Sentire',
+                explanation: '✅ Corretto! Sentire termina in -IRE.',
+                errorExplanation: '❌ Sentire è il solo verbo in -IRE tra le opzioni.'
+            },
+            {
+                id: 10,
+                type: 'choice',
+                question: '"Capire" è un verbo:',
+                options: ['Regolare in -ARE', 'Regolare in -ERE', 'In -IRE con -isc-'],
+                correct: 'In -IRE con -isc-',
+                explanation: '✅ Corretto! Capire è un verbo in -IRE che aggiunge -isc- (capisco, capisci...).',
+                errorExplanation: '❌ Capire è un verbo in -IRE con l\'inserzione di -isc-.'
+            },
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Tutti questi verbi sono della stessa coniugazione, tranne uno. Quale?',
+                options: ['Comprare', 'Cercare', 'Chiudere', 'Guardare'],
+                correct: 'Chiudere',
+                explanation: '✅ Corretto! Chiudere è in -ERE, gli altri sono in -ARE.',
+                errorExplanation: '❌ Chiudere è il solo verbo in -ERE, gli altri sono in -ARE.'
+            },
+            {
+                id: 12,
+                type: 'choice',
+                question: 'Tutti questi verbi sono della stessa coniugazione, tranne uno. Quale?',
+                options: ['Vedere', 'Credere', 'Vivere', 'Abilitare'],
+                correct: 'Abilitare',
+                explanation: '✅ Corretto! Abilitare (abilitare) è in -ARE, gli altri sono in -ERE.',
+                errorExplanation: '❌ Abilitare è in -ARE, gli altri sono in -ERE.'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'La vocale tematica della prima coniugazione è:',
+                options: ['A', 'E', 'I'],
+                correct: 'A',
+                explanation: '✅ Corretto! La prima coniugazione ha vocale tematica A.',
+                errorExplanation: '❌ La prima coniugazione (-ARE) ha vocale tematica A.'
+            },
+            {
+                id: 14,
+                type: 'choice',
+                question: 'La vocale tematica della seconda coniugazione è:',
+                options: ['A', 'E', 'I'],
+                correct: 'E',
+                explanation: '✅ Corretto! La seconda coniugazione ha vocale tematica E.',
+                errorExplanation: '❌ La seconda coniugazione (-ERE) ha vocale tematica E.'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'La vocale tematica della terza coniugazione è:',
+                options: ['A', 'E', 'I'],
+                correct: 'I',
+                explanation: '✅ Corretto! La terza coniugazione ha vocale tematica I.',
+                errorExplanation: '❌ La terza coniugazione (-IRE) ha vocale tematica I.'
+
+            },
+
+            // ESERCIZI 16-30: Coniugazione al presente (-ARE)
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Io (parlare) ________ italiano.',
+                correct: ['parlo'],
+                explanation: '✅ Corretto! Io parl-o (prima coniugazione, desinenza -o).'
+            },
+            {
+                id: 17,
+                type: 'fill',
+                question: 'Tu (mangiare) ________ la pizza.',
+                correct: ['mangi'],
+                explanation: '✅ Corretto! Tu mangi (radice mangi- + desinenza -i).'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Lui (lavorare) ________ in ufficio.',
+                correct: ['lavora'],
+                explanation: '✅ Corretto! Lui lavor-a (desinenza -a per lui/lei in -ARE).'
+            },
+            {
+                id: 19,
+                type: 'fill',
+                question: 'Noi (studiare) ________ italiano.',
+                correct: ['studiamo'],
+                explanation: '✅ Corretto! Noi studiamo (desinenza -iamo per tutte le coniugazioni).'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Voi (comprare) ________ il pane.',
+                correct: ['comprate'],
+                explanation: '✅ Corretto! Voi compr-ate (desinenza -ate in -ARE).'
+            },
+            {
+                id: 21,
+                type: 'fill',
+                question: 'Loro (abitare) ________ a Roma.',
+                correct: ['abitano'],
+                explanation: '✅ Corretto! Loro abit-ano (desinenza -ano in -ARE).'
+            },
+            {
+                id: 22,
+                type: 'choice',
+                question: 'Quale forma è corretta? "Io (cucinare)"',
+                options: ['cucino', 'cucine', 'cucina'],
+                correct: 'cucino',
+                explanation: '✅ Corretto! Io cucin-o (desinenza -o).',
+                errorExplanation: '❌ Con "io" la desinenza è -o: cucino.'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Quale forma è corretta? "Tu (pensare)"',
+                options: ['penso', 'pensi', 'pensa'],
+                correct: 'pensi',
+                explanation: '✅ Corretto! Tu pens-i (desinenza -i).',
+                errorExplanation: '❌ Con "tu" la desinenza è -i: pensi.'
+            },
+            {
+                id: 24,
+                type: 'choice',
+                question: 'Quale forma è corretta? "Lei (telefonare)"',
+                options: ['telefono', 'telefoni', 'telefona'],
+                correct: 'telefona',
+                explanation: '✅ Corretto! Lei telefon-a (desinenza -a).',
+                errorExplanation: '❌ Con "lei/lui" la desinenza è -a: telefona.'
+            },
+            {
+                id: 25,
+                type: 'fill',
+                question: 'Noi (ascoltare) ________ la musica.',
+                correct: ['ascoltiamo'],
+                explanation: '✅ Corretto! Noi ascoltiamo (desinenza -iamo).'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Voi (trovare) ________ una soluzione.',
+                correct: ['trovate'],
+                explanation: '✅ Corretto! Voi trov-ate (desinenza -ate).'
+            },
+            {
+                id: 27,
+                type: 'fill',
+                question: 'Loro (giocare) ________ a calcio.',
+                correct: ['giocano'],
+                explanation: '✅ Corretto! Loro gioc-ano (desinenza -ano).'
+            },
+            {
+                id: 28,
+                type: 'choice',
+                question: 'Completa: "Io (amare) ________ il gelato."',
+                options: ['amo', 'ami', 'ama'],
+                correct: 'amo',
+                explanation: '✅ Corretto! Io am-o.',
+                errorExplanation: '❌ Io + verbo in -ARE = amo.'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Completa: "Tu (cercare) ________ il libro."',
+                options: ['cerco', 'cerchi', 'cerca'],
+                correct: 'cerchi',
+                explanation: '✅ Corretto! Tu cerchi (cerc- + -hi per mantenere il suono [k]).',
+                errorExplanation: '❌ Cercare mantiene la C dura: cerchi.'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Lui (pagare) ________ il conto.',
+                correct: ['paga'],
+                explanation: '✅ Corretto! Lui pag-a (attenzione: non "paga" con la h, è già corretto così).'
+
+            },
+
+            // ESERCIZI 31-40: Coniugazione -ERE e -IRE
+            {
+                id: 31,
+                type: 'fill',
+                question: 'Io (credere) ________ a te.',
+                correct: ['credo'],
+                explanation: '✅ Corretto! Io cred-o (seconda coniugazione, desinenza -o).'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Tu (leggere) ________ un libro.',
+                correct: ['leggi'],
+                explanation: '✅ Corretto! Tu legg-i (desinenza -i in -ERE).'
+            },
+            {
+                id: 33,
+                type: 'fill',
+                question: 'Lui (scrivere) ________ una lettera.',
+                correct: ['scrive'],
+                explanation: '✅ Corretto! Lui scriv-e (desinenza -e in -ERE).'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Noi (vedere) ________ il film.',
+                correct: ['vediamo'],
+                explanation: '✅ Corretto! Noi ved-iamo (desinenza -iamo).'
+            },
+            {
+                id: 35,
+                type: 'fill',
+                question: 'Voi (rispondere) ________ alla domanda.',
+                correct: ['rispondete'],
+                explanation: '✅ Corretto! Voi rispond-ete (desinenza -ete in -ERE).'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Loro (vivere) ________ felici.',
+                correct: ['vivono'],
+                explanation: '✅ Corretto! Loro viv-ono (desinenza -ono in -ERE).'
+            },
+            {
+                id: 37,
+                type: 'fill',
+                question: 'Io (dormire) ________ otto ore.',
+                correct: ['dormo'],
+                explanation: '✅ Corretto! Io dorm-o (terza coniugazione, desinenza -o).'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Tu (aprire) ________ la porta.',
+                correct: ['apri'],
+                explanation: '✅ Corretto! Tu apr-i (desinenza -i in -IRE).'
+            },
+            {
+                id: 39,
+                type: 'fill',
+                question: 'Lui (partire) ________ domani.',
+                correct: ['parte'],
+                explanation: '✅ Corretto! Lui part-e (desinenza -e in -IRE).'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Noi (sentire) ________ un rumore.',
+                correct: ['sentiamo'],
+                explanation: '✅ Corretto! Noi sent-iamo (desinenza -iamo).'
+
+            },
+
+            // ESERCIZI 41-50: Verbi in -IRE con -isc- e mix
+            {
+                id: 41,
+                type: 'fill',
+                question: 'Io (capire) ________ la lezione.',
+                correct: ['capisco'],
+                explanation: '✅ Corretto! Io cap-isco (verbo in -IRE con inserzione di -isc-).'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Tu (finire) ________ il lavoro.',
+                correct: ['finisci'],
+                explanation: '✅ Corretto! Tu fin-isci (inserzione di -isc-).'
+            },
+            {
+                id: 43,
+                type: 'fill',
+                question: 'Lui (preferire) ________ il tè.',
+                correct: ['preferisce'],
+                explanation: '✅ Corretto! Lui prefer-isce (inserzione di -isc-).'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Loro (pulire) ________ la casa.',
+                correct: ['puliscono'],
+                explanation: '✅ Corretto! Loro pul-iscono (inserzione di -isc-).'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Quale forma è corretta? "Io (dormire)"',
+                options: ['dormo', 'dormisco', 'dormio'],
+                correct: 'dormo',
+                explanation: '✅ Corretto! Dormire è regolare: io dormo (senza -isc-).',
+                errorExplanation: '❌ Dormire non aggiunge -isc-, è regolare: dormo.'
+            },
+            {
+                id: 46,
+                type: 'choice',
+                question: 'Quale forma è corretta? "Noi (finire)"',
+                options: ['finisco', 'finiamo', 'finisciamo'],
+                correct: 'finiamo',
+                explanation: '✅ Corretto! Con "noi" non c\'è -isc-: finiamo (come tutti i verbi in -iamo).',
+                errorExplanation: '❌ Con "noi" la desinenza è sempre -iamo, senza -isc-.'
+            },
+            {
+                id: 47,
+                type: 'fill',
+                question: 'Voi (capire) ________ l\'italiano?',
+                correct: ['capite'],
+                explanation: '✅ Corretto! Voi cap-ite (senza -isc-).'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Io (seguire) ________ il corso.',
+                correct: ['seguo'],
+                explanation: '✅ Corretto! Io seguo (verbo regolare in -IRE, non ha -isc-).'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Completa: "Loro (preferire) ________ restare a casa."',
+                options: ['prefero', 'preferiscono', 'preferono'],
+                correct: 'preferiscono',
+                explanation: '✅ Corretto! Preferire ha -isc-: preferiscono.',
+                errorExplanation: '❌ Preferire aggiunge -isc-: preferiscono.'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Tu (spedire) ________ il pacco. (verbo in -IRE con -isc-)',
+                correct: ['spedisci'],
+                explanation: '✅ Corretto! Tu sped-isci. Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la forma verbale..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente le tre coniugazioni!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene le coniugazioni, ma fai attenzione ai verbi in -isc-!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: -ARE (a), -ERE (e), -IRE (i) e le desinenze!';
+            } else {
+                message = '📚 Ripassa le tabelle! Ricorda le desinenze: io -o, tu -i, lui -a/-e/-e!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

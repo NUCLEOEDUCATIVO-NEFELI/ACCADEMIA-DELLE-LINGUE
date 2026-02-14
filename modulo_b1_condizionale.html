@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B1 - Condizionale</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --conditional: #0891b2;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .conditional { color: var(--conditional); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--b1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--b1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--b1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B1 - Condizionale</h1>
+            <p>Esprimere ipotesi, cortesia e possibilità nel presente e nel passato</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B1</a>
+            <span>›</span>
+            <strong>Condizionale</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🤔 Condizionale Presente e Passato</h1>
+            <p class="page-subtitle">Modo verbale per esprimere desideri, ipotesi, consigli e cortesia</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('presente', this)">Presente</button>
+            <button class="nav-tab" onclick="showSection('passato', this)">Passato</button>
+            <button class="nav-tab" onclick="showSection('usi', this)">Usi Speciali</button>
+            <button class="nav-tab" onclick="showSection('irregulari', this)">Verbi Irregolari</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍🏫</div>
+                    <div class="avatar-name">Prof. Marco</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B1! 🤔</h3>
+                    <p>Oggi studiamo il <strong>condizionale</strong>, un modo verbale fondamentale per esprimere ipotesi, desideri e cortesia.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="conditional">Vorrei</span> un caffè, per favore" (cortesia) o "<span class="conditional">Andrei</span> volentieri al cinema" (desiderio).</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è il Condizionale?</div>
+                <div class="card-body">
+                    <p>Il condizionale è un <strong>modo verbale</strong> che esprime:</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Funzioni principali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Desiderio:</strong> "Vorrei andare in vacanza"</li>
+                            <li><strong>Ipotesi:</strong> "Comprerei quella macchina se avessi i soldi"</li>
+                            <li><strong>Cortesia:</strong> "Potrebbe ripetere, per favore?"</li>
+                            <li><strong>Consiglio:</strong> "Dovresti studiare di più"</li>
+                            <li><strong>Possibilità:</strong> "Forse verrebbe anche lui"</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Struttura:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Condizionale Presente:</strong> Infinito + desinenze (-rei, -resti, -rebbe, -remmo, -reste, -rebbero)</li>
+                            <li><strong>Condizionale Passato:</strong> Condizionale di AVERE/ESSERE + Participio Passato</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Esempio con PARLARE:</strong><br>
+                        <em>Presente:</em> io parl<span class="conditional">erei</span>, tu parl<span class="conditional">eresti</span>, lui parl<span class="conditional">erebbe</span><br>
+                        <em>Passato:</em> io <span class="conditional">avrei parlato</span>, tu <span class="conditional">avresti parlato</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PRESENTE -->
+        <section id="presente" class="section">
+            <div class="card">
+                <div class="card-header">Condizionale Presente - Coniugazione</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Desinenze:</strong> -rei, -resti, -rebbe, -remmo, -reste, -rebbero<br>
+                        Si aggiungono alla radice del futuro (infinito senza -e finale)
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Soggetto</th><th>PARLARE</th><th>VEDERE</th><th>PARTIRE</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>io</td>
+                                <td class="conditional">parlerei</td>
+                                <td class="conditional">vedrei</td>
+                                <td class="conditional">partirei</td>
+                            </tr>
+                            <tr>
+                                <td>tu</td>
+                                <td class="conditional">parleresti</td>
+                                <td class="conditional">vedresti</td>
+                                <td class="conditional">partiresti</td>
+                            </tr>
+                            <tr>
+                                <td>lui/lei</td>
+                                <td class="conditional">parlerebbe</td>
+                                <td class="conditional">vedrebbe</td>
+                                <td class="conditional">partirebbe</td>
+                            </tr>
+                            <tr>
+                                <td>noi</td>
+                                <td class="conditional">parleremmo</td>
+                                <td class="conditional">vedremmo</td>
+                                <td class="conditional">partiremmo</td>
+                            </tr>
+                            <tr>
+                                <td>voi</td>
+                                <td class="conditional">parlereste</td>
+                                <td class="conditional">vedreste</td>
+                                <td class="conditional">partireste</td>
+                            </tr>
+                            <tr>
+                                <td>loro</td>
+                                <td class="conditional">parlerebbero</td>
+                                <td class="conditional">vedrebbero</td>
+                                <td class="conditional">partirebbero</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> I verbi in -ARE perdono la 'a' (parlare → parlerei, non parlarei)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PASSATO -->
+        <section id="passato" class="section">
+            <div class="card">
+                <div class="card-header">Condizionale Passato</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Struttura:</strong> Condizionale presente di AVERE o ESSERE + Participio Passato<br>
+                        <strong>Concordanza:</strong> Con ESSERE il participio concorda con il soggetto
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Soggetto</th><th>AVERE</th><th>ESSERE</th><th>Esempio (andare)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>io</td>
+                                <td class="conditional">avrei</td>
+                                <td class="conditional">sarei</td>
+                                <td class="conditional">sarei andato/a</td>
+                            </tr>
+                            <tr>
+                                <td>tu</td>
+                                <td class="conditional">avresti</td>
+                                <td class="conditional">saresti</td>
+                                <td class="conditional">saresti andato/a</td>
+                            </tr>
+                            <tr>
+                                <td>lui</td>
+                                <td class="conditional">avrebbe</td>
+                                <td class="conditional">sarebbe</td>
+                                <td class="conditional">sarebbe andato</td>
+                            </tr>
+                            <tr>
+                                <td>lei</td>
+                                <td class="conditional">avrebbe</td>
+                                <td class="conditional">sarebbe</td>
+                                <td class="conditional">sarebbe andata</td>
+                            </tr>
+                            <tr>
+                                <td>noi</td>
+                                <td class="conditional">avremmo</td>
+                                <td class="conditional">saremmo</td>
+                                <td class="conditional">saremmo andati/e</td>
+                            </tr>
+                            <tr>
+                                <td>loro</td>
+                                <td class="conditional">avrebbero</td>
+                                <td class="conditional">sarebbero</td>
+                                <td class="conditional">sarebbero andati/e</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="rule-box">
+                        <strong>Esempio:</strong> "Se avessi saputo, <span class="conditional">sarei venuto</span>" (ipotesi nel passato)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE USI SPECIALI -->
+        <section id="usi" class="section">
+            <div class="card">
+                <div class="card-header">Usi Speciali del Condizionale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>1. Condizionale di Cortesia</strong><br>
+                        Per attenuare richieste o esprimere educazione
+                    </div>
+                    <div class="rule-box">
+                        "Vorrei" (voglio in modo gentile) vs "Voglio" (diretto)<br>
+                        "Potrebbe" (può in modo gentile) vs "Può"
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>2. Condizionale nel Periodo Ipotetico</strong><br>
+                        Tipo 2: ipotesi improbabile nel presente
+                    </div>
+                    <div class="rule-box">
+                        Se + congiuntivo imperfetto, condizionale presente<br>
+                        "Se <strong>avessi</strong> tempo, <strong>viaggerei</strong> di più"
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>3. Condizionale Passato nel Periodo Ipotetico</strong><br>
+                        Tipo 3: ipotesi irrealizzata nel passato
+                    </div>
+                    <div class="rule-box">
+                        Se + congiuntivo trapassato, condizionale passato<br>
+                        "Se <strong>avesse studiato</strong>, <strong>avrebbe passato</strong> l'esame"
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>4. Condizionale di Future in the Past</strong><br>
+                        Per esprimere un futuro dal punto di vista del passato
+                    </div>
+                    <div class="rule-box">
+                        "Mi disse che <strong>sarebbe venuto</strong>" (lui disse nel passato che sarebbe venuto nel suo futuro)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE IRREGOLARI -->
+        <section id="irregulari" class="section">
+            <div class="card">
+                <div class="card-header">Verbi Irregolari al Condizionale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Verbi con radice irregolare al futuro (e quindi al condizionale):</strong>
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Infinito</th><th>Radice Futuro</th><th>Condizionale (io)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>essere</td><td>sar-</td><td class="conditional">sarei</td></tr>
+                            <tr><td>avere</td><td>avr-</td><td class="conditional">avrei</td></tr>
+                            <tr><td>andare</td><td>andr-</td><td class="conditional">andrei</td></tr>
+                            <tr><td>venire</td><td>verr-</td><td class="conditional">verrei</td></tr>
+                            <tr><td>fare</td><td>far-</td><td class="conditional">farei</td></tr>
+                            <tr><td>dare</td><td>dar-</td><td class="conditional">darei</td></tr>
+                            <tr><td>stare</td><td>star-</td><td class="conditional">starei</td></tr>
+                            <tr><td>potere</td><td>potr-</td><td class="conditional">potrei</td></tr>
+                            <tr><td>volere</td><td>vorr-</td><td class="conditional">vorrei</td></tr>
+                            <tr><td>dovere</td><td>dovr-</td><td class="conditional">dovrei</td></tr>
+                            <tr><td>sapere</td><td>sapr-</td><td class="conditional">saprei</td></tr>
+                            <tr><td>vedere</td><td>vedr-</td><td class="conditional">vedrei</td></tr>
+                            <tr><td>rimanere</td><td>rimarr-</td><td class="conditional">rimarrei</td></tr>
+                            <tr><td>tenere</td><td>terr-</td><td class="conditional">terrei</td></tr>
+                            <tr><td>morire</td><td>morir-</td><td class="conditional">morirei</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="rule-box">
+                        <strong>⚠️ Nota:</strong> I verbi modali (dovere, potere, volere) seguono lo stesso schema irregolare
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B1 - Condizionale (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Condizionale Presente - coniugazione base
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Io (andare) __________ volentieri al cinema stasera.',
+                options: ['andrei', 'andresti', 'andrebbe', 'andremmo'],
+                correct: 'andrei',
+                explanation: '✅ Corretto! Io andrei (condizionale presente di andare)',
+                errorExplanation: '❌ Con il soggetto "io" si usa la desinenza -rei: andrei'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Tu (potere) __________ chiudere la finestra, per favore?',
+                correct: ['potresti'],
+                explanation: '✅ Corretto! Tu potresti (cortesia)'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Lui (volere) __________ un caffè.',
+                options: ['vorrebbe', 'vorresti', 'vorrei', 'vorrà'],
+                correct: 'vorrebbe',
+                explanation: '✅ Corretto! Lui vorrebbe (desiderio)',
+                errorExplanation: '❌ Con "lui" si usa -rebbe: vorrebbe (irregolare come volere)'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Noi (mangiare) __________ volentieri una pizza.',
+                correct: ['mangeremmo', 'mangeremmo'],
+                explanation: '✅ Corretto! Noi mangeremmo (attenzione alla desinenza -remmo)'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Voi (dovere) __________ studiare di più.',
+                options: ['dovreste', 'dovrebbe', 'dovremmo', 'dovresti'],
+                correct: 'dovreste',
+                explanation: '✅ Corretto! Voi dovreste (consiglio)',
+                errorExplanation: '❌ Con "voi" si usa -reste: dovreste'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Loro (venire) __________ volentieri alla festa.',
+                correct: ['verrebbero'],
+                explanation: '✅ Corretto! Loro verrebbero (irregolare: venire → verr-)'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Io (fare) __________ una passeggata se non piovesse.',
+                options: ['farei', 'faresti', 'farebbe', 'faremmo'],
+                correct: 'farei',
+                explanation: '✅ Corretto! Io farei (condizionale presente)',
+                errorExplanation: '❌ Fare al condizionale: farei (radice far- + -ei)'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Tu (sapere) __________ dirmi l\'ora?',
+                correct: ['sapresti'],
+                explanation: '✅ Corretto! Tu sapresti (cortesia)'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Lei (dire) __________ la verità se potesse.',
+                options: ['direbbe', 'diresti', 'direi', 'diremmo'],
+                correct: 'direbbe',
+                explanation: '✅ Corretto! Lei direbbe (irregolare: dire → dir-)',
+                errorExplanation: '❌ Dire al condizionale: direbbe (radice dir- + -ebbe)'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Noi (rimanere) __________ a casa se nevica.',
+                correct: ['rimarremmo'],
+                explanation: '✅ Corretto! Noi rimarremmo (irregolare: rimanere → rimarr-)'
+
+            },
+
+            // ESERCIZI 11-20: Condizionale Passato
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Se avessi avuto tempo, io (andare) __________ al mare.',
+                options: ['sarei andato', 'avrei andato', 'sarei andata', 'avrei andata'],
+                correct: 'sarei andato',
+                explanation: '✅ Corretto! Condizionale passato con ESSERE: sarei andato',
+                errorExplanation: '❌ Andare richiede ESSERE come ausiliare: sarei andato'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Tu (dovere) __________ avvisarmi prima!',
+                correct: ['avresti dovuto'],
+                explanation: '✅ Corretto! Avresti dovuto (condizionale passato di dovere)'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Lui (mangiare) __________ volentieri, ma non aveva fame.',
+                options: ['avrebbe mangiato', 'sarebbe mangiato', 'avrebbe mangiata', 'sarebbe mangiata'],
+                correct: 'avrebbe mangiato',
+                explanation: '✅ Corretto! Mangiare usa AVERE: avrebbe mangiato',
+                errorExplanation: '❌ Mangiare è transitivo, usa AVERE: avrebbe mangiato'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Noi (vedere) __________ quel film se avessimo avuto i biglietti.',
+                correct: ['avremmo visto'],
+                explanation: '✅ Corretto! Avremmo visto (vedere usa AVERE)'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Voi (partire) __________ ieri, ma il volo è stato cancellato.',
+                options: ['sareste partiti', 'avreste partiti', 'sareste partite', 'avreste partite'],
+                correct: 'sareste partiti',
+                explanation: '✅ Corretto! Partire usa ESSERE: sareste partiti/e',
+                errorExplanation: '❌ Partire richiede ESSERE e il participio concorda: sareste partiti'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Loro (arrivare) __________ in orario se non ci fosse stato il traffico.',
+                correct: ['sarebbero arrivati', 'sarebbero arrivate'],
+                explanation: '✅ Corretto! Sarebbero arrivati (ESSERE + participio concordato)'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Io (fare) __________ la stessa cosa al tuo posto.',
+                options: ['avrei fatto', 'sarei fatto', 'avrei fatta', 'sarei fatta'],
+                correct: 'avrei fatto',
+                explanation: '✅ Corretto! Avrei fatto (fare usa AVERE, participio invariato)',
+                errorExplanation: '❌ Fare usa AVERE: avrei fatto (participio non cambia con AVERE)'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Tu (potere) __________ almeno chiamarmi!',
+                correct: ['avresti potuto'],
+                explanation: '✅ Corretto! Avresti potuto (i verbi modali usano AVERE)'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Lei (rimanere) __________ a casa se avesse saputo della neve.',
+                options: ['sarebbe rimasta', 'avrebbe rimasta', 'sarebbe rimasto', 'avrebbe rimasto'],
+                correct: 'sarebbe rimasta',
+                explanation: '✅ Corretto! Sarebbe rimasta (ESSERE + concordanza femminile)',
+                errorExplanation: '❌ Rimanere usa ESSERE e il participio concorda con lei: rimasta'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Noi (scrivere) __________ prima, ma non abbiamo avuto tempo.',
+                correct: ['avremmo scritto'],
+                explanation: '✅ Corretto! Avremmo scritto (scrivere usa AVERE)'
+
+            },
+
+            // ESERCIZI 21-30: Periodo ipotetico - Tipo 2
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Se avessi più soldi, (comprare) __________ una macchina nuova.',
+                options: ['comprerei', 'compreresti', 'comprerebbe', 'compreremmo'],
+                correct: 'comprerei',
+                explanation: '✅ Corretto! Se + congiuntivo imperfetto, condizionale presente',
+                errorExplanation: '❌ Nel periodo ipotetico tipo 2: Se avessi... comprerei'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Se tu studiassi di più, (passare) __________ l\'esame.',
+                correct: ['passeresti'],
+                explanation: '✅ Corretto! Passeresti (ipotesi improbabile presente)'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Se piovesse, loro (restare) __________ a casa.',
+                options: ['resterebbero', 'resteresti', 'resterei', 'resteremmo'],
+                correct: 'resterebbero',
+                explanation: '✅ Corretto! Loro resterebbero',
+                errorExplanation: '❌ Con "loro" si usa -rebbero: resterebbero'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Se potessi, (venire) __________ volentieri alla tua festa.',
+                correct: ['verrei'],
+                explanation: '✅ Corretto! Verrei (irregolare: venire → verr-)'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Se lei mi chiedesse aiuto, io (aiutare) __________.',
+                options: ['aiuterei', 'aiuteresti', 'aiuterebbe', 'aiuteremmo'],
+                correct: 'aiuterei',
+                explanation: '✅ Corretto! Io aiuterei (attenzione: aiutare perde la -a)',
+                errorExplanation: '❌ Aiutare → aiut- + erei = aiuterei'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Se voi aveste fame, (mangiare) __________ qualcosa.',
+                correct: ['mangereste'],
+                explanation: '✅ Corretto! Mangereste (voi + condizionale)'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Se fossi in te, non (fare) __________ quello.',
+                options: ['farei', 'faresti', 'farebbe', 'faremmo'],
+                correct: 'farei',
+                explanation: '✅ Corretto! Se fossi in te... io farei (espressione fissa)',
+                errorExplanation: '❌ "Se fossi in te" richiede la prima persona: farei'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Se lui avesse tempo, (leggere) __________ quel libro.',
+                correct: ['leggerebbe'],
+                explanation: '✅ Corretto! Leggerebbe (lui + condizionale)'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Se noi vincessimo alla lotteria, (viaggiare) __________ per il mondo.',
+                options: ['viaggeremmo', 'viaggereste', 'viaggerebbero', 'viaggerei'],
+                correct: 'viaggeremmo',
+                explanation: '✅ Corretto! Noi viaggeremmo (attenzione alla radice)',
+                errorExplanation: '❌ Viaggiare → viagg- + eremmo = viaggeremmo'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Se tu fossi più gentile, gli (piacere) __________ di più.',
+                correct: ['piacerebbe'],
+                explanation: '✅ Corretto! Piacerebbe (verbo piacere impersonale)'
+
+            },
+
+            // ESERCIZI 31-40: Periodo ipotetico - Tipo 3
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Se avessi studiato, (passare) __________ l\'esame.',
+                options: ['avrei passato', 'sarei passato', 'avresti passato', 'saresti passato'],
+                correct: 'avrei passato',
+                explanation: '✅ Corretto! Periodo ipotetico tipo 3: condizionale passato',
+                errorExplanation: '❌ Se + trapassato, condizionale passato: avrei passato'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Se tu mi avessi ascoltato, non (fare) __________ quel errore.',
+                correct: ['avresti fatto'],
+                explanation: '✅ Corretto! Avresti fatto (ipotesi irrealizzata passato)'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Se non avesse piovuto, noi (uscire) __________.',
+                options: ['saremmo usciti', 'avremmo usciti', 'sareste usciti', 'avreste usciti'],
+                correct: 'saremmo usciti',
+                explanation: '✅ Corretto! Uscire usa ESSERE: saremmo usciti',
+                errorExplanation: '❌ Uscire richiede ESSERE: saremmo usciti'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Se lei ci avesse avvertiti, (essere) __________ più cauti.',
+                correct: ['saremmo stati', 'sarei stato', 'saresti stato'],
+                explanation: '✅ Corretto! Saremmo stati (ESSERE al condizionale passato)'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Se avessero comprato i biglietti, (vedere) __________ il concerto.',
+                options: ['avrebbero visto', 'sarebbero visti', 'avrebbero veduto', 'sarebbero veduti'],
+                correct: 'avrebbero visto',
+                explanation: '✅ Corretto! Vedere usa AVERE: avrebbero visto',
+                errorExplanation: '❌ Vedere usa AVERE e il participio è visto: avrebbero visto'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Se io avessi saputo la verità, (dirlo) __________ subito.',
+                correct: ['l\'avrei detto', 'avrei detto', 'lo avrei detto'],
+                explanation: '✅ Corretto! L\'avrei detto (pronomi con condizionale passato)'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Se tu non fossi arrivato in ritardo, (prendere) __________ il treno.',
+                options: ['avresti preso', 'saresti preso', 'avresti presa', 'saresti presa'],
+                correct: 'avresti preso',
+                explanation: '✅ Corretto! Prendere usa AVERE: avresti preso',
+                errorExplanation: '❌ Prendere usa AVERE: avresti preso (participio invariato)'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Se il tempo fosse stato bello, (andare) __________ al mare.',
+                correct: ['saremmo andati', 'sarei andato', 'saresti andato'],
+                explanation: '✅ Corretto! Saremmo andati (ESSERE + concordanza plurale)'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Se lei avesse accettato, (sposare) __________ Marco.',
+                options: ['si sarebbe sposata', 'avrebbe sposata', 'sarebbe sposata', 'avrebbe sposato'],
+                correct: 'si sarebbe sposata',
+                explanation: '✅ Corretto! Si sarebbe sposata (passivo riflessivo con ESSERE)',
+                errorExplanation: '❌ Sposarsi è riflessivo e usa ESSERE: si sarebbe sposata'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Se noi avessimo avuto i soldi, (comprare) __________ quella casa.',
+                correct: ['l\'avremmo comprata', 'avremmo comprata', 'la avremmo comprata'],
+                explanation: '✅ Corretto! L\'avremmo comprata (accordo del participio con oggetto precedente)'
+
+            },
+
+            // ESERCIZI 41-50: Condizionale di cortesia e contesti complessi
+            {
+                id: 41,
+                type: 'choice',
+                question: '(Potere) __________ dirmi dove si trova la stazione?',
+                options: ['Potrebbe', 'Potresti', 'Potrei', 'Potremmo'],
+                correct: 'Potrebbe',
+                explanation: '✅ Corretto! Potrebbe (cortesia con lei)',
+                errorExplanation: '❌ Per cortesia con "lei" si usa la terza persona: potrebbe'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: '(Volere) __________ un caffè, per favore? (cortesia con tu)',
+                correct: ['Vorresti'],
+                explanation: '✅ Corretto! Vorresti (cortesia con tu)'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Mi disse che (venire) __________ il giorno dopo.',
+                options: ['sarebbe venuto', 'verrebbe', 'sarebbe venuta', 'venirebbe'],
+                correct: 'sarebbe venuto',
+                explanation: '✅ Corretto! Future in the past: sarebbe venuto',
+                errorExplanation: '❌ Dal passato si guarda al futuro: condizionale passato'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: '(Dovere) __________ proprio fare così? (cortesia)',
+                correct: ['Dovresti', 'Dovrebbe'],
+                explanation: '✅ Corretto! Dovresti/Dovrebbe (esprimere disapprovazione educata)'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Secondo me, tu (dovere) __________ parlarle.',
+                options: ['dovresti', 'dovrebbe', 'dovremmo', 'dovreste'],
+                correct: 'dovresti',
+                explanation: '✅ Corretto! Dovresti (consiglio)',
+                errorExplanation: '❌ Con "tu" si usa -resti: dovresti'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Non (sapere) __________ dirti la verità.',
+                correct: ['saprei'],
+                explanation: '✅ Corretto! Saprei (prima persona singolare)'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'A me (piacere) __________ molto visitare Parigi.',
+                options: ['piacerebbe', 'piaceresti', 'piacerei', 'piaceremmo'],
+                correct: 'piacerebbe',
+                explanation: '✅ Corretto! Piacerebbe (verbo impersonale, terza persona)',
+                errorExplanation: '❌ Piacere si usa sempre alla terza persona: piacerebbe'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: '(Volere) __________ gentilmente passarmi il sale?',
+                correct: ['Vorrebbe', 'Vorresti'],
+                explanation: '✅ Corretto! Vorrebbe/Vorresti (cortesia nella richiesta)'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Se fossi ricco, non (dovere) __________ più lavorare.',
+                options: ['dovrei', 'dovresti', 'dovrebbe', 'dovremmo'],
+                correct: 'dovrei',
+                explanation: '✅ Corretto! Se fossi ricco... io non dovrei (prima persona)',
+                errorExplanation: '❌ Con "io" si usa -rei: dovrei'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Mi ha promesso che (finire) __________ il lavoro entro sera.',
+                correct: ['avrebbe finito', 'sarebbe finito'],
+                explanation: '✅ Corretto! Avrebbe finito (future in the past). Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la forma condizionale..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente il condizionale in tutti i suoi usi!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene il condizionale, ma fai attenzione ai verbi irregolari!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: il condizionale passato usa AVERE o ESSERE + participio!';
+            } else {
+                message = '📚 Ripassa le tabelle! Ricorda le desinenze (-rei, -resti, -rebbe...) e i verbi irregolari!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

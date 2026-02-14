@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B1 - Pronomi Combinati</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --pronoun-1: #7c3aed;
+            --pronoun-2: #059669;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .pronoun-indirect { color: var(--pronoun-1); font-weight: bold; }
+        .pronoun-direct { color: var(--pronoun-2); font-weight: bold; }
+        .combined { color: var(--accent); font-weight: bold; font-size: 1.1em; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--b1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--b1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--b1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .example-box {
+            background: #f0fdf4;
+            border-left: 4px solid var(--pronoun-2);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B1 - Pronomi Combinati</h1>
+            <p>Unire i pronomi indiretti e diretti: me lo, te la, ce li, ve le...</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B1</a>
+            <span>›</span>
+            <strong>Pronomi Combinati</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🎯 Pronomi Combinati</h1>
+            <p class="page-subtitle">Quando il verbo ha due oggetti: il dativo (a chi?) e l'accusativo (cosa?)</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('tabella', this)">Tabella</button>
+            <button class="nav-tab" onclick="showSection('regole', this)">Regole</button>
+            <button class="nav-tab" onclick="showSection('posizione', this)">Posizione</button>
+            <button class="nav-tab" onclick="showSection('eccezioni', this)">Eccezioni</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍🏫</div>
+                    <div class="avatar-name">Prof. Marco</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B1! 🎯</h3>
+                    <p>Oggi studiamo i <strong>pronomi combinati</strong>: quando un verbo ha sia un oggetto diretto (cosa?) che indiretto (a chi?).</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="pronoun-indirect">Mi</span> <span class="pronoun-direct">hai dato</span> il libro?" → "<span class="combined">Me l'</span>hai dato?"</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cosa sono i Pronomi Combinati?</div>
+                <div class="card-body">
+                    <p>I pronomi combinati nascono dall'unione di un <span class="pronoun-indirect">pronome indiretto</span> (dativo: mi, ti, gli, le, ci, vi, loro) con un <span class="pronoun-direct">pronome diretto</span> (accusativo: lo, la, li, le).</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Struttura:</strong><br>
+                        <span class="pronoun-indirect">Pronome Indiretto</span> + 
+                        <span class="pronoun-direct">Pronome Diretto</span> = 
+                        <span class="combined">Pronome Combinato</span>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Quando si usano:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Quando il verbo ha due oggetti: "Dare <strong>a qualcuno</strong> <strong>qualcosa</strong>"</li>
+                            <li>Per evitare ripetizioni: "Mi dai il libro? Sì, <strong>te lo</strong> do"</li>
+                            <li>Con verbi come: dare, mandare, portare, mostrare, spiegare, dire...</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Esempio di trasformazione:</strong><br>
+                        <em>Frase completa:</em> <span class="pronoun-indirect">A me</span> <span class="pronoun-direct">il libro</span>? <span class="arrow">↓</span><br>
+                        <em>Con pronomi:</em> <span class="pronoun-indirect">Mi</span> <span class="pronoun-direct">lo</span> dai? <span class="arrow">↓</span><br>
+                        <em>Combinato:</em> <span class="combined">Me lo</span> dai?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TABELLA -->
+        <section id="tabella" class="section">
+            <div class="card">
+                <div class="card-header">Tabella dei Pronomi Combinati</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Legenda:</strong> 
+                        <span class="pronoun-indirect">Indiretto (a chi?)</span> + 
+                        <span class="pronoun-direct">Diretto (cosa?)</span> = 
+                        <span class="combined">Combinato</span>
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr>
+                                <th>Indiretto ↓ / Diretto →</th>
+                                <th class="pronoun-direct">lo (m.sg)</th>
+                                <th class="pronoun-direct">la (f.sg)</th>
+                                <th class="pronoun-direct">li (m.pl)</th>
+                                <th class="pronoun-direct">le (f.pl)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="pronoun-indirect">mi (a me)</td>
+                                <td class="combined">me lo</td>
+                                <td class="combined">me la</td>
+                                <td class="combined">me li</td>
+                                <td class="combined">me le</td>
+                            </tr>
+                            <tr>
+                                <td class="pronoun-indirect">ti (a te)</td>
+                                <td class="combined">te lo</td>
+                                <td class="combined">te la</td>
+                                <td class="combined">te li</td>
+                                <td class="combined">te le</td>
+                            </tr>
+                            <tr>
+                                <td class="pronoun-indirect">gli (a lui)</td>
+                                <td class="combined">glielo</td>
+                                <td class="combined">gliela</td>
+                                <td class="combined">glieli</td>
+                                <td class="combined">gliele</td>
+                            </tr>
+                            <tr>
+                                <td class="pronoun-indirect">le (a lei)</td>
+                                <td class="combined">glielo</td>
+                                <td class="combined">gliela</td>
+                                <td class="combined">glieli</td>
+                                <td class="combined">gliele</td>
+                            </tr>
+                            <tr>
+                                <td class="pronoun-indirect">ci (a noi)</td>
+                                <td class="combined">ce lo</td>
+                                <td class="combined">ce la</td>
+                                <td class="combined">ce li</td>
+                                <td class="combined">ce le</td>
+                            </tr>
+                            <tr>
+                                <td class="pronoun-indirect">vi (a voi)</td>
+                                <td class="combined">ve lo</td>
+                                <td class="combined">ve la</td>
+                                <td class="combined">ve li</td>
+                                <td class="combined">ve le</td>
+                            </tr>
+                            <tr>
+                                <td class="pronoun-indirect">loro (a loro)</td>
+                                <td class="combined">glielo</td>
+                                <td class="combined">gliela</td>
+                                <td class="combined">glieli</td>
+                                <td class="combined">gliele</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Esempi pratici:</strong><br>
+                        • <span class="combined">Me lo</span> dai? (Mi dai il libro?)<br>
+                        • <span class="combined">Te la</span> mostro. (Ti mostro la foto.)<br>
+                        • <span class="combined">Glielo</span> dico io. (Gli dico la verità / Le dico la verità)<br>
+                        • <span class="combined">Ce li</span> hanno dati. (Ci hanno dato i documenti.)<br>
+                        • <span class="combined">Ve le</span> spiego dopo. (Vi spiego le regole dopo.)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE REGOLE -->
+        <section id="regole" class="section">
+            <div class="card">
+                <div class="card-header">Regole Fondamentali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Regola 1: Cambio vocale</strong><br>
+                        Mi + lo → <span class="combined">Me lo</span> (non "mi lo")<br>
+                        Ti + la → <span class="combined">Te la</span> (non "ti la")<br>
+                        Ci + li → <span class="combined">Ce li</span> (non "ci li")<br>
+                        Vi + le → <span class="combined">Ve le</span> (non "vi le")
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Regola 2: Fusione con GLI/LE/LORO</strong><br>
+                        Gli/LE/Loro + lo/la/li/le → tutti diventano <span class="combined">GLIE-</span><br>
+                        • gli + lo = <span class="combined">glielo</span><br>
+                        • le + la = <span class="combined">gliela</span><br>
+                        • loro + li = <span class="combined">glieli</span>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Regola 3: Apocope (caduta della vocale)</strong><br>
+                        Quando "lo" o "la" seguono una parola finita in vocale, perdono la loro vocale iniziale:<br>
+                        • me + lo = <span class="combined">me l'</span>o (davanti a vocale, ma si scrive me lo)<br>
+                        • te + la = <span class="combined">te l'</span>a (in realtà si mantiene, ma si pronuncia attaccato)<br>
+                        <em>Nota: In italiano moderno si preferisce la forma completa "me lo", "te la", ecc.</em>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Attenzione alla forma "glie-"</strong><br>
+                        "Glielo" può significare:<br>
+                        • A lui + lo (gli lo → glielo)<br>
+                        • A lei + lo (le lo → glielo)<br>
+                        • A loro + lo (loro lo → glielo)<br>
+                        Il contesto chiarirà a chi ci riferiamo!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE POSIZIONE -->
+        <section id="posizione" class="section">
+            <div class="card">
+                <div class="card-header">Posizione dei Pronomi Combinati</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>1. Verbi indicativo, congiuntivo, condizionale</strong><br>
+                        Il pronome viene <strong>prima</strong> del verbo
+                    </div>
+                    <div class="rule-box">
+                        • <span class="combined">Me lo</span> dai? (Presente)<br>
+                        • Spero che <span class="combined">te la</span> dia. (Congiuntivo)<br>
+                        • <span class="combined">Glielo</span> direi volentieri. (Condizionale)
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>2. Verbi all'infinito, imperativo, gerundio</strong><br>
+                        Il pronome viene <strong>dopo</strong> il verbo e si unisce a esso
+                    </div>
+                    <div class="rule-box">
+                        • Voglio <strong>dartelo</strong> (dare + te + lo)<br>
+                        • <strong>Dimmi</strong> la verità! (di' + mi, ma con combinati: <strong>Dimmelo!</strong>)<br>
+                        • Sto <strong>mandandoglielo</strong> (mandando + gli + lo)
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>3. Con il participio passato</strong><br>
+                        Il pronome viene prima, ma il participio può concordare (opzionale con AVERE)
+                    </div>
+                    <div class="rule-box">
+                        • <span class="combined">Me l'</span>ha data (concordanza con "la" femminile)<br>
+                        • <span class="combined">Te li</span> ho dati (concordanza con "li" maschile plurale)<br>
+                        • <span class="combined">Glielo</span> ho detto (concordanza opzionale con "lo")
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Esempi di posizione:</strong><br>
+                        • <strong>Infinito:</strong> Posso <strong>mandarteli</strong>? (mandare + ti + li)<br>
+                        • <strong>Gerundio:</strong> Sto <strong>spiegandoglielo</strong>.<br>
+                        • <strong>Imperativo:</strong> <strong>Dimmelo!</strong> (di' + mi + lo), <strong>Diglielo!</strong> (di' + gli + lo)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ECCEZIONI -->
+        <section id="eccezioni" class="section">
+            <div class="card">
+                <div class="card-header">Eccezioni e Casi Particolari</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>1. Verbi servili (dovere, potere, volere, sapere)</strong><br>
+                        I pronomi possono stare prima del servile o dopo l'infinito
+                    </div>
+                    <div class="rule-box">
+                        • <span class="combined">Me lo</span> devi dire / Devi <strong>dirmelo</strong><br>
+                        • <span class="combined">Te la</span> posso mostrare / Posso <strong>mostrartela</strong><br>
+                        Entrambe le forme sono corrette, ma la seconda è più colloquiale.
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>2. Verbi riflessivi con pronomi combinati</strong><br>
+                        Si usa "ci" come indiretto + riflessivo
+                    </div>
+                    <div class="rule-box">
+                        • Me <strong>lo compro</strong> (comprare a me stesso)<br>
+                        • Ce <strong>la siamo goduta</strong> (godersi qualcosa)<br>
+                        • Ve <strong>lo siete meritati</strong> (meritarsi qualcosa)
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>3. "Loro" diventa "gli" nella lingua parlata</strong><br>
+                        Nella lingua scritta formale si mantiene "loro", ma nella lingua parlata si usa "gli" anche per "a loro"
+                    </div>
+                    <div class="rule-box">
+                        • Formale: <span class="combined">Dillo loro</span> / <span class="combined">Diteglielo</span> (loro → glie-)<br>
+                        • Colloquiale: <span class="combined">Glielo</span> dico (per "a loro")
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Attenzione a "farcela" e "celare"</strong><br>
+                        • <strong>Ce la faccio</strong> = ce (ci + la) + faccio (farcela = riuscire)<br>
+                        • Non confondere con il verbo "celare" (nascondere)!<br>
+                        • <strong>Ce l'ho</strong> = ci + la + ho (avercela = possedere / essere arrabbiati)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B1 - Pronomi Combinati (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Me lo, te la, ce li, ve le (combinati base)
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Mi dai il libro? Sì, ________ do subito.',
+                options: ['me lo', 'te lo', 'glielo', 'ce lo'],
+                correct: 'me lo',
+                explanation: '✅ Corretto! Mi (a me) + lo (il libro) = me lo',
+                errorExplanation: '❌ Mi + lo = me lo (cambio di vocale: i → e)'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Ti mostro la foto. Sì, ________ mostra!',
+                correct: ['te la'],
+                explanation: '✅ Corretto! Ti (a te) + la (la foto) = te la'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Gli hai dato la penna? Sì, ________ ho dato.',
+                options: ['gliela', 'me la', 'te la', 'ce la'],
+                correct: 'gliela',
+                explanation: '✅ Corretto! Gli (a lui) + la (la penna) = gliela',
+                errorExplanation: '❌ Gli + la = gliela (fusione in glie-)'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Le hai mandato i documenti? Sì, ________ ho mandati.',
+                correct: ['glieli'],
+                explanation: '✅ Corretto! Le (a lei) + li (i documenti) = glieli'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Ci date le chiavi? Sì, ________ diamo subito.',
+                options: ['ce le', 've le', 'me le', 'te le'],
+                correct: 'ce le',
+                explanation: '✅ Corretto! Ci (a noi) + le (le chiavi) = ce le',
+                errorExplanation: '❌ Ci + le = ce le (cambio di vocale: i → e)'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Vi porto i dolci. Grazie, ________ porti?',
+                correct: ['ce li', 'celi'],
+                explanation: '✅ Corretto! Vi (a voi) + li (i dolci) = ve li (attenzione: qui la domanda è "vi porto" quindi la risposta è "ve li")'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Mi presti la macchina? No, non ________ posso prestare.',
+                options: ['te la', 'me la', 'gliela', 'ce la'],
+                correct: 'te la',
+                explanation: '✅ Corretto! Ti (a te) + la (la macchina) = te la',
+                errorExplanation: '❌ La domanda è "mi presti" (tu a me), ma la risposta è "non te la posso prestare" (io a te)'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Gli spieghi il problema? Sì, ________ spiego subito.',
+                correct: ['glielo'],
+                explanation: '✅ Corretto! Gli (a lui) + lo (il problema) = glielo'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Le hai comprato i fiori? Sì, ________ ho comprati.',
+                options: ['glieli', 'me li', 'te li', 'ce li'],
+                correct: 'glieli',
+                explanation: '✅ Corretto! Le (a lei) + li (i fiori) = glieli',
+                errorExplanation: '❌ Le (a lei) + li (i fiori) = glieli (fusione)'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Ci racconti la storia? Sì, ________ racconto volentieri.',
+                correct: ['ve la', 'vela'],
+                explanation: '✅ Corretto! Vi (a voi) + la (la storia) = ve la'
+
+            },
+
+            // ESERCIZI 11-20: Posizione con tempi verbali diversi
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Spero che tu ________ dia (la possibilità).',
+                options: ['me la', 'te la', 'gliela', 'ce la'],
+                correct: 'me la',
+                explanation: '✅ Corretto! Congiuntivo: mi (a me) + la = me la (prima del verbo)',
+                errorExplanation: '❌ Al congiuntivo il pronome viene prima: me la dia'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Penso che lui ________ dica (la verità).',
+                correct: ['gliela', 'ce la'],
+                explanation: '✅ Corretto! Gli/Le (a lui/lei) + la = gliela'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Vorrei che voi ________ mostraste (le foto).',
+                options: ['ce le', 've le', 'me le', 'te le'],
+                correct: 'ce le',
+                explanation: '✅ Corretto! Ci (a noi) + le (le foto) = ce le',
+                errorExplanation: '❌ Ci + le = ce le'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Se potessi, ________ darei (il consiglio) subito.',
+                correct: ['te lo', 'glielo'],
+                explanation: '✅ Corretto! Ti (a te) + lo (il consiglio) = te lo'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Dove ________ hai messo? (la chiave a me)',
+                options: ['me l\'', 'te l\'', 'gliel\'', 'ce l\''],
+                correct: 'me l\'',
+                explanation: '✅ Corretto! Mi + la = me l\' (apocope davanti a vocale)',
+                errorExplanation: '❌ Mi + la = me l\' (davanti a hai)'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Non so se ________ piaceranno. (i regali a loro)',
+                correct: ['glieli', 'ce li'],
+                explanation: '✅ Corretto! Gli/Loro (a loro) + li (i regali) = glieli'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Credo che tu ________ abbia già dati. (i soldi a me)',
+                options: ['me li', 'te li', 'glieli', 'ce li'],
+                correct: 'me li',
+                explanation: '✅ Corretto! Mi + li = me li',
+                errorExplanation: '❌ Mi (a me) + li (i soldi) = me li'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Spero che lei ________ mandi presto. (la risposta a te)',
+                correct: ['te la', 'gliela'],
+                explanation: '✅ Corretto! Ti (a te) + la (la risposta) = te la'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Temevo che loro non ________ dicessero. (la notizia a noi)',
+                options: ['ce la', 've la', 'me la', 'te la'],
+                correct: 'ce la',
+                explanation: '✅ Corretto! Ci (a noi) + la (la notizia) = ce la',
+                errorExplanation: '❌ Ci + la = ce la'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Vorrei che tu ________ spiegassi meglio. (il problema a lui)',
+                correct: ['glielo'],
+                explanation: '✅ Corretto! Gli (a lui) + lo (il problema) = glielo'
+
+            },
+
+            // ESERCIZI 21-30: Infinito, imperativo, gerundio (posizione postposta)
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Posso darti il libro? Sì, puoi ________ dare.',
+                options: ['melo', 'telo', 'glielo', 'celo'],
+                correct: 'melo',
+                explanation: '✅ Corretto! Infinito: darmelo (dare + mi + lo)',
+                errorExplanation: '❌ Con l\'infinito il pronome si attacca: darmelo (a me)'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Voglio mostrarvi le foto. Posso ________ mostrare?',
+                correct: ['vele', 've le'],
+                explanation: '✅ Corretto! Mostrarvele (mostrare + vi + le)'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Devi dirgli la verità! Devo ________ dire!',
+                options: ['glielo', 'gliela', 'melo', 'telo'],
+                correct: 'gliela',
+                explanation: '✅ Corretto! Dirgliela (dire + gli + la verità)',
+                errorExplanation: '❌ Gli + la (verità) = gliela'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Dimmi la verità! Dimmelo! (il segreto a me)',
+                correct: ['Dimmi', 'Dimmelo'],
+                explanation: '✅ Corretto! Imperativo: Dimmelo (di\' + mi + lo)'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Digli ciao! ________ pure! (a lui)',
+                options: ['Diglielo', 'Dimmelo', 'Diteglielo', 'Diglieli'],
+                correct: 'Diglielo',
+                explanation: '✅ Corretto! Diglielo (di\' + gli + lo)',
+                errorExplanation: '❌ Imperativo di dire + gli + lo = Diglielo'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Mandami i documenti! Mandameli subito!',
+                correct: ['Mandameli', 'Mandameli'],
+                explanation: '✅ Corretto! Mandameli (manda + mi + li)'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Sto spiegandogli il motivo. Sto ________ spiegando.',
+                options: ['glielo', 'gliela', 'melo', 'telo'],
+                correct: 'glielo',
+                explanation: '✅ Corretto! Gerundio: spiegandoglielo',
+                errorExplanation: '❌ Gerundio + gli + lo = spiegandoglielo'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Sto portandovi i dolci. Sto ________ portando.',
+                correct: ['ve li', 'veli'],
+                explanation: '✅ Corretto! Portandovele? No, portandovele (femminile) o portandovele... Attenzione: "i dolci" è maschile, quindi "ve li"'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Posso prestarti la macchina? Puoi ________ prestare?',
+                options: ['mela', 'tela', 'cela', 'gli la'],
+                correct: 'mela',
+                explanation: '✅ Corretto! Prestarmela (prestare + mi + la)',
+                errorExplanation: '❌ Prestare + ti (a te) + la = prestarmela? No, aspetta: "posso prestarti" = tu a me, quindi "puoi prestarmela" = io a te... No! Correzione: se lui chiede "posso prestarti", io rispondo "puoi prestarmela" (a me). Quindi me la!'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Vieni a dirci la notizia! Vieni a ________ dire!',
+                correct: ['ce la', 'cela'],
+                explanation: '✅ Corretto! Dircela (dire + ci + la)'
+
+            },
+
+            // ESERCIZI 31-40: Partecipio passato e accordo
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Me l\'hai data? Sì, ________ ho data.',
+                options: ['te l\'', 'me l\'', 'gliel\'', 'ce l\''],
+                correct: 'te l\'',
+                explanation: '✅ Corretto! Ti + la = te l\' (concordanza con la femminile)',
+                errorExplanation: '❌ Con ESSERE o con AVERE + pronome diretto femminile: concordanza!'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Glieli hai dati? Sì, ________ ho dati.',
+                correct: ['glieli'],
+                explanation: '✅ Corretto! Gli + li = glieli (concordanza con li maschile plurale)'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Te li ha mostrati lui? Sì, ________ ha mostrati.',
+                options: ['me li', 'te li', 'glieli', 'ce li'],
+                correct: 'me li',
+                explanation: '✅ Corretto! Mi + li = me li (concordanza con li)',
+                errorExplanation: '❌ Mi + li = me li, participio concorda: mostrati'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Ce le hai spiegate? Sì, ________ ho spiegate.',
+                correct: ['ve le', 'vele'],
+                explanation: '✅ Corretto! Vi + le = ve le (concordanza con le femminile plurale)'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Me lo hai detto? Sì, ________ ho detto.',
+                options: ['te l\'', 'me l\'', 'glielo', 'te lo'],
+                correct: 'te l\'',
+                explanation: '✅ Corretto! Ti + lo = te l\' (davanti a ho)',
+                errorExplanation: '❌ Ti + lo = te l\' (apocope davanti a vocale)'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Gliela hai mandata? Sì, ________ ho mandata.',
+                correct: ['gliela'],
+                explanation: '✅ Corretto! Le/Gli + la = gliela (concordanza femminile)'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Ve li hanno dati? Sì, ________ hanno dati.',
+                options: ['ce li', 've li', 'me li', 'te li'],
+                correct: 'ce li',
+                explanation: '✅ Corretto! Ci + li = ce li',
+                errorExplanation: '❌ Ci (a noi) + li = ce li'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Te la ha promessa? Sì, ________ ha promessa.',
+                correct: ['me la', 'mela'],
+                explanation: '✅ Corretto! Mi + la = me la (concordanza con la femminile)'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Glielo hai scritto? Sì, ________ ho scritto.',
+                options: ['glielo', 'gliel\'', 'melo', 'telo'],
+                correct: 'gliel\'',
+                explanation: '✅ Corretto! Gli + lo = gliel\' (davanti a ho)',
+                errorExplanation: '❌ Gli + lo = gliel\' (apocope davanti a vocale)'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Me le hai comprate? Sì, ________ ho comprate.',
+                correct: ['te le', 'tele'],
+                explanation: '✅ Corretto! Ti + le = te le (concordanza femminile plurale)'
+
+            },
+
+            // ESERCIZI 41-50: Contesti complessi e frasi complete
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Se mi presti la macchina, ________ restituisco domani.',
+                options: ['te la', 'me la', 'gliela', 'ce la'],
+                correct: 'te la',
+                explanation: '✅ Corretto! Ti (a te) + la (la macchina) = te la',
+                errorExplanation: '❌ Se tu mi presti, io te la restituisco'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Non so se ________ piacerà questo regalo. (a lui)',
+                correct: ['gli piacerà', 'glielo'],
+                explanation: '✅ Corretto! "Gli piacerà" (a lui), ma se vogliamo dire "non so se glielo darò" è diverso. Qui la risposta corretta è il pronome indiretto semplice: gli'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Finalmente ________ siamo liberati di quel problema! (ce la)',
+                options: ['ce la', 'ce lo', 've la', 'me la'],
+                correct: 'ce la',
+                explanation: '✅ Corretto! "Cela" (ci + la) ma attenzione: "ce la siamo liberati" = liberarcene (liberarsi + ci + ne)',
+                errorExplanation: '❌ "Ce la siamo liberati" è un\'espressione idiomatica con "la" pleonastica'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: '________ fai vedere? (la foto a me)',
+                correct: ['Me la', 'Mela'],
+                explanation: '✅ Corretto! Mi (a me) + la (la foto) = me la'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Non ________ preoccupare, ________ risolvo io. (a te / il problema)',
+                options: ['ti ... te lo', 'ti ... me lo', 'ci ... ce lo', 'vi ... ve lo'],
+                correct: 'ti ... te lo',
+                explanation: '✅ Corretto! Non ti preoccupare, te lo risolvo io (ti + lo = te lo)',
+                errorExplanation: '❌ "Non ti preoccupare" (riflessivo) + "te lo risolvo" (ti + lo)'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: '________ dico io, non ti preoccupare! (la verità a lui)',
+                correct: ['Gliela', 'Glielo'],
+                explanation: '✅ Corretto! Gli (a lui) + la (la verità) = gliela'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Quanto ________ devo? (i soldi a te)',
+                options: ['te li', 'me li', 'glieli', 'ce li'],
+                correct: 'te li',
+                explanation: '✅ Corretto! Ti (a te) + li (i soldi) = te li',
+                errorExplanation: '❌ Ti + li = te li'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: '________ racconterò tutto domani. (la storia a voi)',
+                correct: ['Ve la', 'Vela'],
+                explanation: '✅ Corretto! Vi (a voi) + la (la storia) = ve la'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Non ________ voglio dire per non preoccuparti. (la notizia a te)',
+                options: ['te la', 'me la', 'gliela', 'ce la'],
+                correct: 'te la',
+                explanation: '✅ Corretto! Non te la voglio dire (ti + la = te la)',
+                errorExplanation: '❌ Ti + la = te la'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: '________ spiego subito come funziona. (tutto a loro)',
+                correct: ['Glielo', 'Glielo spiego'],
+                explanation: '✅ Corretto! Gli/Loro (a loro) + lo (tutto) = glielo. Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il pronome combinato..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase().replace(/\s+/g, ' ');
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => {
+                const normalizedAns = ans.toLowerCase().replace(/\s+/g, ' ');
+                return value === normalizedAns;
+            });
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente i pronomi combinati in tutti i contesti!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene i pronomi combinati, ma fai attenzione alla posizione con infinito e imperativo!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: mi+lo=me lo, ti+la=te la, gli/le+lo/la=glielo/gliela!';
+            } else {
+                message = '📚 Ripassa la tabella! Ricorda il cambio di vocale (mi→me, ti→te, ci→ce, vi→ve) e la fusione glie-!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

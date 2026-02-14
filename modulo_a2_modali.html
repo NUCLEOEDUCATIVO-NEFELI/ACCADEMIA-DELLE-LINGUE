@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verbi Modali - 50 Esercizi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #003366; --secondary: #6c757d; --accent: #8b0000;
+            --light: #f8f9fa; --dark: #212529; --border: #dee2e6;
+            --success: #155724; --success-bg: #d4edda;
+            --error: #721c24; --error-bg: #f8d7da;
+            --parchment: #faf8f3; --b1-color: #c9a227; --modals: #c62828;
+        }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+        .card-header.modals {
+            border-left-color: var(--modals);
+            color: var(--modals);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .verb-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+            color: var(--modals);
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check {
+            background: var(--b1-color);
+            color: #000;
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .usage-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+        }
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Verbi Modali - Modulo A2</h1>
+            <p>Potere, Dovere, Volere - Coniugazione, uso e significato - 50 Esercizi</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A2</a>
+            <span>›</span>
+            <strong>Verbi Modali (50 Esercizi)</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 I Verbi Modali: Potere, Dovere, Volere</h1>
+            <p class="page-subtitle">Coniugazione, valori semantici e uso corretto nel contesto comunicativo</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('potere', this)">POTERE</button>
+            <button class="nav-tab" onclick="showSection('dovere', this)">DOVERE</button>
+            <button class="nav-tab" onclick="showSection('volere', this)">VOLERE</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header modals">Che cosa sono i Verbi Modali?</div>
+                <div class="card-body">
+                    <p>I <strong>verbi modali</strong> (o verbi servili) esprimono il <em>modo</em> in cui si realizza un'azione: possibilità, necessità, volizione. Sintatticamente, reggono sempre un infinito senza preposizione.</p>
+
+                    <div class="instruction-box" style="border-left-color: var(--modals);">
+                        <strong>Struttura base:</strong> Soggetto + Verbo modale coniugato + Infinito
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>"Io <strong>posso</strong> cantare" (abilità/permesso)</li>
+                            <li>"Tu <strong>devi</strong> studiare" (obbligo)</li>
+                            <li>"Loro <strong>vogliono</strong> mangiare" (desiderio)</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> I verbi modali sono <strong>irregolari</strong> e presentano cambiamenti nella radice durante la coniugazione!
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Caratteristiche Morfologiche</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: #c62828;">
+                        <strong style="color: #c62828;">POTERE:</strong> Alternanza vocalica /o/ → /u/
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>posso, <strong>puoi</strong>, <strong>può</strong>, possiamo, potete, possono</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box" style="border-left-color: #ef6c00;">
+                        <strong style="color: #ef6c00;">DOVERE:</strong> Variazione della radice in /dev-/
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>devo</strong>, <strong>devi</strong>, <strong>deve</strong>, dobbiamo, dovete, devono</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box" style="border-left-color: #6a1b9a;">
+                        <strong style="color: #6a1b9a;">VOLERE:</strong> Inserzione della consonante /g/
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>voglio</strong>, vuoi, vuole, vogliamo, volete, <strong>vogliono</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box" style="background: #e8f5e9; border-color: #4caf50;">
+                        <strong>💡 Forma condizionale (cortesia):</strong><br>
+                        <strong>vorrei</strong> (vorrei un caffè), <strong>potrei</strong> (potrei entrare?), <strong>dovrei</strong> (dovrei studiare)<br>
+                        <em>Serve per attenuare la richiesta e mostrare maggiore educazione.</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE POTERE -->
+        <section id="potere" class="section">
+            <div class="card">
+                <div class="card-header modals">POTERE - Significati e Uso</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: #c62828;">
+                        <strong>Significato base:</strong> "essere in grado di", "avere il permesso di", "essere possibile"
+                    </div>
+
+                    <table class="verb-table">
+                        <tr>
+                            <th>Soggetto</th>
+                            <th>Forma</th>
+                            <th>Esempio</th>
+                        </tr>
+                        <tr>
+                            <td>io</td>
+                            <td class="verb-display">posso</td>
+                            <td>Io posso nuotare (so nuotare)</td>
+                        </tr>
+                        <tr>
+                            <td>tu</td>
+                            <td class="verb-display">puoi</td>
+                            <td>Puoi aiutarmi? (permesso/capacità)</td>
+                        </tr>
+                        <tr>
+                            <td>lui/lei</td>
+                            <td class="verb-display">può</td>
+                            <td>Lei può entrare (permesso formale)</td>
+                        </tr>
+                        <tr>
+                            <td>noi</td>
+                            <td class="verb-display">possiamo</td>
+                            <td>Possiamo partire? (possibilità)</td>
+                        </tr>
+                        <tr>
+                            <td>voi</td>
+                            <td class="verb-display">potete</td>
+                            <td>Potete ripetere? (abilità)</td>
+                        </tr>
+                        <tr>
+                            <td>loro</td>
+                            <td class="verb-display">possono</td>
+                            <td>Possono arrivare tardi (possibilità)</td>
+                        </tr>
+                    </table>
+
+                    <div class="usage-box" style="border-left-color: #c62828;">
+                        <strong>Valori semantici di POTERE:</strong><br><br>
+                        1. <strong>Abilità/capacità:</strong> "Marco può nuotare 100 metri" (sa nuotare)<br>
+                        2. <strong>Permesso:</strong> "Posso entrare?" (mi è consentito?)<br>
+                        3. <strong>Possibilità oggettiva:</strong> "Può piovere domani" (è possibile)<br>
+                        4. <strong>Richiesta educata:</strong> "Potrei avere un caffè?" (condizionale)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE DOVERE -->
+        <section id="dovere" class="section">
+            <div class="card">
+                <div class="card-header modals">DOVERE - Significati e Uso</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: #ef6c00;">
+                        <strong>Significato base:</strong> "essere obbligati a", "essere necessario", "dovere fare qualcosa"
+                    </div>
+
+                    <table class="verb-table">
+                        <tr>
+                            <th>Soggetto</th>
+                            <th>Forma</th>
+                            <th>Esempio</th>
+                        </tr>
+                        <tr>
+                            <td>io</td>
+                            <td class="verb-display">devo</td>
+                            <td>Devo studiare (obbligo personale)</td>
+                        </tr>
+                        <tr>
+                            <td>tu</td>
+                            <td class="verb-display">devi</td>
+                            <td>Devi fare attenzione! (consiglio forte)</td>
+                        </tr>
+                        <tr>
+                            <td>lui/lei</td>
+                            <td class="verb-display">deve</td>
+                            <td>Deve essere tardi (probabilità)</td>
+                        </tr>
+                        <tr>
+                            <td>noi</td>
+                            <td class="verb-display">dobbiamo</td>
+                            <td>Dobbiamo partire (necessità)</td>
+                        </tr>
+                        <tr>
+                            <td>voi</td>
+                            <td class="verb-display">dovete</td>
+                            <td>Dovete finire il lavoro (obbligo)</td>
+                        </tr>
+                        <tr>
+                            <td>loro</td>
+                            <td class="verb-display">devono</td>
+                            <td>Devono rispettare le regole (legge)</td>
+                        </tr>
+                    </table>
+
+                    <div class="usage-box" style="border-left-color: #ef6c00;">
+                        <strong>Valori semantici di DOVERE:</strong><br><br>
+                        1. <strong>Obbligo morale/legale:</strong> "I bambini devono andare a scuola"<br>
+                        2. <strong>Necessità:</strong> "Dobbiamo comprare il pane" (serve farlo)<br>
+                        3. <strong>Consiglio forte:</strong> "Devi vedere questo film!" (ti consiglio vivamente)<br>
+                        4. <strong>Probabilità:</strong> "Deve essere tardi" (suppongo, deduco)<br>
+                        5. <strong>Dovere morale:</strong> "Dovremmo aiutare gli altri"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE VOLERE -->
+        <section id="volere" class="section">
+            <div class="card">
+                <div class="card-header modals">VOLERE - Significati e Uso</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: #6a1b9a;">
+                        <strong>Significato base:</strong> "desiderare", "avere voglia di", "volere qualcosa"
+                    </div>
+
+                    <table class="verb-table">
+                        <tr>
+                            <th>Soggetto</th>
+                            <th>Forma</th>
+                            <th>Esempio</th>
+                        </tr>
+                        <tr>
+                            <td>io</td>
+                            <td class="verb-display">voglio</td>
+                            <td>Voglio andare in Italia (desiderio)</td>
+                        </tr>
+                        <tr>
+                            <td>tu</td>
+                            <td class="verb-display">vuoi</td>
+                            <td>Vuoi un caffè? (offerta)</td>
+                        </tr>
+                        <tr>
+                            <td>lui/lei</td>
+                            <td class="verb-display">vuole</td>
+                            <td>Vuole imparare l'italiano (intenzione)</td>
+                        </tr>
+                        <tr>
+                            <td>noi</td>
+                            <td class="verb-display">vogliamo</td>
+                            <td>Vogliamo mangiare fuori (proposta)</td>
+                        </tr>
+                        <tr>
+                            <td>voi</td>
+                            <td class="verb-display">volete</td>
+                            <td>Volete ballare? (invito)</td>
+                        </tr>
+                        <tr>
+                            <td>loro</td>
+                            <td class="verb-display">vogliono</td>
+                            <td>Vogliono partire domani (decisione)</td>
+                        </tr>
+                    </table>
+
+                    <div class="usage-box" style="border-left-color: #6a1b9a;">
+                        <strong>Valori semantici di VOLERE:</strong><br><br>
+                        1. <strong>Desiderio:</strong> "Voglio un caffè" (ho voglia di...)<br>
+                        2. <strong>Richiesta educata:</strong> "Vorrei un tavolo per due" (condizionale)<br>
+                        3. <strong>Rifiuto:</strong> "Non voglio uscire" (rifiuto fare qualcosa)<br>
+                        4. <strong>Intenzione:</strong> "Voglio imparare il tedesco" (ho l'intenzione di...)<br>
+                        5. <strong>Offerta/Invito:</strong> "Vuoi mangiare qualcosa?"
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> "Voglio" è diretto e può sembrare scortese in alcuni contesti. Usa il condizionale "<strong>vorrei</strong>" per essere più educato!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A2 - Verbi Modali (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Coniugazione POTERE
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Come si coniuga POTERE alla prima persona singolare (io)?',
+                options: ['posso', 'puoi', 'può', 'potere'],
+                correct: 'posso',
+                explanation: '✅ Corretto! Io POSSO (radice poss- + o).',
+                errorExplanation: '❌ La forma corretta è POSSO'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Completa: Tu _____ aiutarmi? (potere)',
+                correct: ['puoi'],
+                explanation: '✅ Corretto! Tu PUOI (cambio di vocale: o → uoi).'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Quale forma è corretta per "lui" con il verbo POTERE?',
+                options: ['puoi', 'può', 'possono', 'potete'],
+                correct: 'può',
+                explanation: '✅ Corretto! Lui/lei PUÒ (con l\'accento sulla o).',
+                errorExplanation: '❌ Per lui/lei si usa PUÒ (con accento)'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Completa: Noi _____ partire domani. (potere)',
+                correct: ['possiamo'],
+                explanation: '✅ Corretto! Noi POSSIAMO (torniamo alla radice poss-).'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Come si coniuga POTERE alla seconda persona plurale (voi)?',
+                options: ['potete', 'possiamo', 'possono', 'puoi'],
+                correct: 'potete',
+                explanation: '✅ Corretto! Voi POTETE (radice pot- + ete).',
+                errorExplanation: '❌ Per voi si usa POTETE'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Completa: Loro _____ venire stasera. (potere)',
+                correct: ['possono'],
+                explanation: '✅ Corretto! Loro POSSONO (radice poss- + ono).'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Quale frase usa correttamente POTERE per chiedere permesso?',
+                options: ['Posso entrare?', 'Devo entrare?', 'Voglio entrare?', 'Entro?'],
+                correct: 'Posso entrare?',
+                explanation: '✅ Corretto! POSSO indica permesso o possibilità.',
+                errorExplanation: '❌ Per chiedere permesso si usa POTERE (posso)'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Completa: Marco nuota molto bene. Lui _____ nuotare 100 metri. (potere)',
+                correct: ['può'],
+                explanation: '✅ Corretto! Lui PUÒ (abilità/capacità).'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Quale forma condizionale di POTERE esprime maggiore cortesia?',
+                options: ['posso', 'puoi', 'potrei', 'potessi'],
+                correct: 'potrei',
+                explanation: '✅ Corretto! POTREI è il condizionale (potrei avere un caffè?).',
+                errorExplanation: '❌ Il condizionale di cortesia è POTREI'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Completa: _____ piovere domani, porta l\'ombrello! (potere, 3a persona)',
+                correct: ['può'],
+                explanation: '✅ Corretto! Può piovere = possibilità oggettiva.'
+            },
+
+            // ESERCIZI 11-20: Coniugazione DOVERE
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Come si coniuga DOVERE alla prima persona singolare (io)?',
+                options: ['devo', 'devi', 'deve', 'dovere'],
+                correct: 'devo',
+                explanation: '✅ Corretto! Io DEVO (radice dev- + o).',
+                errorExplanation: '❌ La forma corretta è DEVO'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Completa: Tu _____ studiare di più per l\'esame. (dovere)',
+                correct: ['devi'],
+                explanation: '✅ Corretto! Tu DEVI (obbligo/consiglio forte).'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Quale forma è corretta per "lei" con il verbo DOVERE?',
+                options: ['devo', 'devi', 'deve', 'devono'],
+                correct: 'deve',
+                explanation: '✅ Corretto! Lei DEVE (radice dev- + e).',
+                errorExplanation: '❌ Per lei si usa DEVE'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Completa: Noi _____ rispettare le regole. (dovere)',
+                correct: ['dobbiamo'],
+                explanation: '✅ Corretto! Noi DOBBIAMO (radice dobb- + iamo).'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Come si coniuga DOVERE alla seconda persona plurale (voi)?',
+                options: ['dovete', 'dobbiamo', 'devono', 'devi'],
+                correct: 'dovete',
+                explanation: '✅ Corretto! Voi DOVETE (radice dov- + ete).',
+                errorExplanation: '❌ Per voi si usa DOVETE'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Completa: I bambini _____ andare a scuola per legge. (dovere)',
+                correct: ['devono'],
+                explanation: '✅ Corretto! Loro DEVONO (obbligo legale).'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Quale frase usa DOVERE per esprimere probabilità?',
+                options: ['Devo andare', 'Deve essere tardi', 'Devi studiare', 'Dobbiamo mangiare'],
+                correct: 'Deve essere tardi',
+                explanation: '✅ Corretto! DEVE + essere = probabilità/supposizione.',
+                errorExplanation: '❌ Per la probabilità si usa "deve essere"'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Completa: _____ fare attenzione quando attraversi la strada! (dovere, tu)',
+                correct: ['devi'],
+                explanation: '✅ Corretto! Devi = consiglio forte/avvertimento.'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Quale forma condizionale di DOVERE esprime un consiglio attenuato?',
+                options: ['devo', 'devi', 'dovrei', 'dovessi'],
+                correct: 'dovrei',
+                explanation: '✅ Corretto! DOVREI = consiglio più delicato (dovrei studiare).',
+                errorExplanation: '❌ Il condizionale per consiglio è DOVREI'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Completa: Non _____ fumare in questo locale. (dovere, si impersonale)',
+                correct: ['si deve', 'devono'],
+                explanation: '✅ Corretto! Si deve = obbligo generale/divieto.'
+            },
+
+            // ESERCIZI 21-30: Coniugazione VOLERE
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Come si coniuga VOLERE alla prima persona singolare (io)?',
+                options: ['voglio', 'vuoi', 'vuole', 'volere'],
+                correct: 'voglio',
+                explanation: '✅ Corretto! Io VOGLIO (inserimento della g: vol- → vog-).',
+                errorExplanation: '❌ La forma corretta è VOGLIO (con la g)'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Completa: Tu _____ un caffè? (volere)',
+                correct: ['vuoi'],
+                explanation: '✅ Corretto! Tu VUOI (offerta).'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Quale forma è corretta per "lei" con il verbo VOLERE?',
+                options: ['vuoi', 'vuole', 'vogliono', 'volete'],
+                correct: 'vuole',
+                explanation: '✅ Corretto! Lei VUOLE (senza la g).',
+                errorExplanation: '❌ Per lei si usa VUOLE (senza g)'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Completa: Noi _____ mangiare fuori stasera. (volere)',
+                correct: ['vogliamo'],
+                explanation: '✅ Corretto! Noi VOGLIAMO (con la g).'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Come si coniuga VOLERE alla seconda persona plurale (voi)?',
+                options: ['volete', 'vogliamo', 'vogliono', 'vuoi'],
+                correct: 'volete',
+                explanation: '✅ Corretto! Voi VOLETE (radice vol- + ete).',
+                errorExplanation: '❌ Per voi si usa VOLETE'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Completa: Loro _____ imparare l\'italiano. (volere)',
+                correct: ['vogliono'],
+                explanation: '✅ Corretto! Loro VOGLIONO (con la g: vol- → vogl-).'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Quale forma è più educata per ordinare al bar?',
+                options: ['Voglio un caffè', 'Vorrei un caffè', 'Vuoi un caffè', 'Vogliamo un caffè'],
+                correct: 'Vorrei un caffè',
+                explanation: '✅ Corretto! VORREI (condizionale) è più cortese di VOGLIO.',
+                errorExplanation: '❌ Al bar si usa VORREI (condizionale di cortesia)'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Completa: Non _____ uscire perché sono stanco. (volere, io)',
+                correct: ['voglio'],
+                explanation: '✅ Corretto! Non voglio = rifiuto.'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Quale frase usa correttamente VOLERE per un invito?',
+                options: ['Voglio ballare', 'Vuoi ballare?', 'Devi ballare', 'Puoi ballare'],
+                correct: 'Vuoi ballare?',
+                explanation: '✅ Corretto! VUOI + infinito = invito/offerta.',
+                errorExplanation: '❌ Per invitare si usa "Vuoi...?"'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Completa: _____ un tavolo per due persone, per favore. (volere, condizionale)',
+                correct: ['vorrei'],
+                explanation: '✅ Corretto! VORREI = richiesta educata.'
+            },
+
+            // ESERCIZI 31-40: Differenziazione semantica
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Scegli il verbo corretto: "_____ nuotare perché ho preso lezioni" (capacità)',
+                options: ['Posso', 'Devo', 'Voglio', 'So'],
+                correct: 'Posso',
+                explanation: '✅ Corretto! POSSO = abilità/capacità (so nuotare).',
+                errorExplanation: '❌ Per l\'abilità si usa POTERE (posso)'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Completa: "_____ andare al bagno?" (chiedere permesso)',
+                correct: ['posso', 'Posso'],
+                explanation: '✅ Corretto! POSSO = permesso.'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Scegli il verbo corretto: "I cittadini _____ pagare le tasse" (obbligo legale)',
+                options: ['possono', 'devono', 'vogliono', 'sanno'],
+                correct: 'devono',
+                explanation: '✅ Corretto! DEVONO = obbligo di legge.',
+                errorExplanation: '❌ Per l\'obbligo legale si usa DOVERE (devono)'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Completa: "_____ essere malato, non è venuto a lavoro" (probabilità)',
+                correct: ['deve', 'Deve'],
+                explanation: '✅ Corretto! DEVE = probabilità/supposizione.'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Scegli il verbo corretto: "_____ un bicchiere d\'acqua" (desiderio)',
+                options: ['Posso', 'Devo', 'Voglio', 'So'],
+                correct: 'Voglio',
+                explanation: '✅ Corretto! VOGLIO = desiderio.',
+                errorExplanation: '❌ Per il desiderio si usa VOLERE (voglio)'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Completa: "_____ vedere quel film, è bellissimo!" (consiglio forte)',
+                correct: ['devi', 'Devi'],
+                explanation: '✅ Corretto! DEVI = consiglio forte.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Quale frase esprime necessità oggettiva?',
+                options: ['Posso uscire', 'Devo uscire', 'Voglio uscire', 'Esco'],
+                correct: 'Devo uscire',
+                explanation: '✅ Corretto! DEVO = necessità/obbligo.',
+                errorExplanation: '❌ Per la necessità si usa DOVERE (devo)'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Completa: "Non _____ fumare qui" (divieto/impossibilità)',
+                correct: ['si può', 'possiamo', 'puoi'],
+                explanation: '✅ Corretto! Non si può = divieto/impossibilità.'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Scegli il verbo corretto: "_____ andare in vacanza in Italia" (intenzione)',
+                options: ['Posso', 'Devo', 'Voglio', 'So'],
+                correct: 'Voglio',
+                explanation: '✅ Corretto! VOGLIO = intenzione/progetto futuro.',
+                errorExplanation: '❌ Per l\'intenzione si usa VOLERE (voglio)'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Completa: "_____ finire questo lavoro entro domani" (necessità/obbligo)',
+                correct: ['devo', 'Devo'],
+                explanation: '✅ Corretto! DEVO = necessità/obbligo personale.'
+            },
+
+            // ESERCIZI 41-50: Contesti comunicativi misti
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Al ristorante, come chiedi educatamente il conto?',
+                options: ['Voglio il conto', 'Posso avere il conto?', 'Vorrei il conto', 'Devo il conto'],
+                correct: 'Vorrei il conto',
+                explanation: '✅ Corretto! VORREI è la forma più educata al ristorante.',
+                errorExplanation: '❌ Al ristorante si usa VORREI (condizionale)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Completa: "Mi scusi, _____ sapere che ore sono?" (chiedere gentilmente)',
+                correct: ['potrei', 'Posso', 'vorrei'],
+                explanation: '✅ Corretto! POTREI/VORREI sapere = cortesia.'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Quale risposta è corretta a "Puoi aiutarmi?" se non hai tempo?',
+                options: ['Non posso', 'Non devo', 'Non voglio', 'Non so'],
+                correct: 'Non posso',
+                explanation: '✅ Corretto! NON POSSO = impossibilità oggettiva (non ho tempo).',
+                errorExplanation: '❌ Per rifiutare educatamente si usa "non posso"'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Completa: "_____ proprio andare ora, altrimenti perdo il treno" (necessità urgente)',
+                correct: ['devo', 'Devo'],
+                explanation: '✅ Corretto! DEVO = necessità/obbligo urgente.'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Cosa dici a un amico che deve smettere di fumare per salute?',
+                options: ['Puoi smettere', 'Devi smettere', 'Vuoi smettere', 'Smetti'],
+                correct: 'Devi smettere',
+                explanation: '✅ Corretto! DEVI = consiglio forte per salute.',
+                errorExplanation: '❌ Per un consiglio importante si usa DOVERE (devi)'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Completa: "_____ telefonarti più tardi?" (chiedere permesso educatamente)',
+                correct: ['posso', 'Posso', 'potrei', 'Potrei'],
+                explanation: '✅ Corretto! POSSO/POTREI = permesso.'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Quale frase esprime un progetto futuro?',
+                options: ['Posso andare in Francia', 'Devo andare in Francia', 'Voglio andare in Francia', 'So andare in Francia'],
+                correct: 'Voglio andare in Francia',
+                explanation: '✅ Corretto! VOGLIO = intenzione/progetto futuro.',
+                errorExplanation: '❌ Per i progetti futuri si usa VOLERE (voglio)'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Completa: "Non _____ ancora guidare, non ho la patente" (impossibilità legale)',
+                correct: ['posso', 'Posso'],
+                explanation: '✅ Corretto! NON POSSO = impossibilità (manca la patente).'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Come rispondi a "Perché non sei venuto alla festa?" se eri malato?',
+                options: ['Non potevo', 'Non dovevo', 'Non volevo', 'Non sapevo'],
+                correct: 'Non potevo',
+                explanation: '✅ Corretto! NON POTEVO = impossibilità passata (ero malato).',
+                errorExplanation: '❌ Per l\'impossibilità si usa POTERE (non potevo)'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Completa: "_____ proprio dire che questo è il miglior ristorante della città!" (consiglio forte)',
+                correct: ['devo', 'Devo', 'dovrei', 'Dovrei'],
+                explanation: '✅ Corretto! DEVO/DOVREI dire = consiglio forte. Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header modals">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = ex.errorExplanation;
+
+                if (ex.question.includes('condizionale') && !selected.includes('rei')) {
+                    errorMsg += '<br><strong>💡 Ricorda: il condizionale termina in -REI (vorrei, potrei, dovrei)!</strong>';
+                }
+                if (ex.question.includes('cortesia') && selected === 'Voglio') {
+                    errorMsg += '<br><strong>⚠️ ATTENZIONE: "Voglio" è troppo diretto! Usa "VORREI" per essere educato!</strong>';
+                }
+
+                feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+
+                if (ex.question.includes('potere') && value.includes('voglio')) {
+                    errorMsg += '<br><strong>⚠️ ATTENZIONE: Non confondere POTERE con VOLERE!</strong>';
+                }
+                if (ex.question.includes('volere') && value.includes('posso')) {
+                    errorMsg += '<br><strong>⚠️ ATTENZIONE: Non confondere VOLERE con POTERE!</strong>';
+                }
+                if (ex.question.includes('dovere') && value.includes('devo') && ex.correct[0] === 'devi') {
+                    errorMsg += '<br><strong>💡 Ricorda: IO devo, TU devi!</strong>';
+                }
+
+                feedback.innerHTML = errorMsg;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente i verbi modali e le loro sfumature!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene potere, dovere e volere!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: posso = permesso/capacità, devo = obbligo, voglio = desiderio!';
+            } else {
+                message = '📚 Ripassa le regole! Ricorda le coniugazioni irregolari e i valori semantici dei verbi modali!';
+            }
+
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+
+            exercises.sort(() => Math.random() - 0.5);
+
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

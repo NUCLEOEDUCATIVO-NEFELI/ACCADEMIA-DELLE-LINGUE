@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Accademia delle Lingue</title>
+    <link rel="stylesheet" href="../css/academic.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>🏛️ Accademia delle Lingue</h1>
+                <p>Sezione Italiano</p>
+                <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">Nucleo educativo per la formazione europea al lavoro internazionale</p>
+            </div>
+
+            <div class="login-body">
+                <div id="alertBox" class="alert alert-error" style="display: none;"></div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">Email istituzionale</label>
+                        <input type="email" id="email" class="form-input" placeholder="nome@accademia.it" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        🔐 Accedi alla piattaforma
+                    </button>
+                </form>
+
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <p style="color: #64748b; font-size: 0.9rem;">
+                        Non hai ancora un account?<br>
+                        <a href="richiesta-accesso.html" style="color: #3b82f6; text-decoration: none; font-weight: 600;">
+                            Richiedi l'accesso →
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="login-footer">
+                <p style="font-size: 0.85rem; color: #64748b;">
+                    © 2024 Accademia delle Lingue<br>
+                    <small>Tutti i diritti riservati</small>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/academic.js"></script>
+</body>
+</html>

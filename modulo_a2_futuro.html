@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Futuro - 50 Esercizi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #155724;
+            --success-bg: #d4edda;
+            --error: #721c24;
+            --error-bg: #f8d7da;
+            --parchment: #faf8f3;
+            --b1-color: #c9a227;
+            --are: #2c5282;
+            --ere: #702459;
+            --ire: #276749;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .verb-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .ending {
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .conjugation-are { color: var(--are); font-weight: bold; }
+        .conjugation-ere { color: var(--ere); font-weight: bold; }
+        .conjugation-ire { color: var(--ire); font-weight: bold; }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .btn-check {
+            background: var(--b1-color);
+            color: #000;
+        }
+
+        .btn-check:hover {
+            background: #b8941f;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .verb-display {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .hint-text {
+            color: var(--secondary);
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        .irregular-box {
+            background: white;
+            border: 1px solid var(--border);
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .irregular-verb {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1rem;
+            font-weight: bold;
+            min-width: 120px;
+        }
+
+        .irregular-form {
+            padding: 0.75rem 1rem;
+            flex: 1;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Il Futuro - Modulo A2</h1>
+            <p>Futuro semplice e prossimo: forme regolari e irregolari</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A2</a>
+            <span>›</span>
+            <strong>Il Futuro (50 Esercizi)</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 Il Futuro in Italiano</h1>
+            <p class="page-subtitle">Futuro semplice e prossimo - 50 esercizi interattivi</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('regolari', this)">Regolari</button>
+            <button class="nav-tab" onclick="showSection('irregolari', this)">Irregolari</button>
+            <button class="nav-tab" onclick="showSection('prossimo', this)">Prossimo</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header">Che cos'è il Futuro?</div>
+                <div class="card-body">
+                    <p>In italiano ci sono due tempi futuri: il <strong>futuro semplice</strong> per azioni lontane nel tempo e il <strong>futuro prossimo</strong> per azioni imminenti.</p>
+
+                    <div class="instruction-box">
+                        <strong>Futuro Semplice:</strong> Si forma eliminando l'infinito (-are, -ere, -ire) e aggiungendo le desinenze: <span class="ending">-ò, -ai, -à, -emo, -ete, -anno</span>.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola importante:</strong> Molti verbi comuni sono <strong>irregolari</strong> e cambiano la radice (es. andare → andr-, venire → verr-).
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Schema di Coniugazione</div>
+                <div class="card-body">
+                    <table class="verb-table">
+                        <thead>
+                            <tr>
+                                <th>Persona</th>
+                                <th>-ARE (parlare)</th>
+                                <th>-ERE (vedere)</th>
+                                <th>-IRE (partire)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Io</strong></td>
+                                <td class="conjugation-are">parlerò</td>
+                                <td class="conjugation-ere">vedrò</td>
+                                <td class="conjugation-ire">partirò</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tu</strong></td>
+                                <td class="conjugation-are">parlerai</td>
+                                <td class="conjugation-ere">vedrai</td>
+                                <td class="conjugation-ire">partirai</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lui/Lei</strong></td>
+                                <td class="conjugation-are">parlerà</td>
+                                <td class="conjugation-ere">vedrà</td>
+                                <td class="conjugation-ire">partirà</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Noi</strong></td>
+                                <td class="conjugation-are">parleremo</td>
+                                <td class="conjugation-ere">vedremo</td>
+                                <td class="conjugation-ire">partiremo</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Voi</strong></td>
+                                <td class="conjugation-are">parlerete</td>
+                                <td class="conjugation-ere">vedrete</td>
+                                <td class="conjugation-ire">partirete</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Loro</strong></td>
+                                <td class="conjugation-are">parleranno</td>
+                                <td class="conjugation-ere">vedranno</td>
+                                <td class="conjugation-ire">partiranno</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE REGOLARI -->
+        <section id="regolari" class="section">
+            <div class="card">
+                <div class="card-header">Verbi Regolari in -ARE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Regola:</strong> Eliminare -are e aggiungere le desinenze del futuro. Attenzione: la <strong>a</strong> diventa <strong>e</strong> (parlare → parler-).
+                    </div>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Io <strong>mangerò</strong> una pizza <span style="color: var(--are);">(mangiare)</span></li>
+                        <li>Tu <strong>studierai</strong> molto <span style="color: var(--are);">(studiare)</span></li>
+                        <li>Lui <strong>lavorerà</strong> domani <span style="color: var(--are);">(lavorare)</span></li>
+                        <li>Noi <strong>parleremo</strong> italiano <span style="color: var(--are);">(parlare)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Verbi Regolari in -ERE e -IRE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Regola:</strong> Eliminare -ere o -ire e aggiungere le desinenze. La radice rimane invariata.
+                    </div>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Io <strong>vedrò</strong> un film <span style="color: var(--ere);">(vedere)</span></li>
+                        <li>Tu <strong>venderai</strong> la macchina <span style="color: var(--ere);">(vendere)</span></li>
+                        <li>Lei <strong>dormirà</strong> presto <span style="color: var(--ire);">(dormire)</span></li>
+                        <li>Noi <strong>partiremo</strong> domani <span style="color: var(--ire);">(partire)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE IRREGOLARI -->
+        <section id="irregolari" class="section">
+            <div class="card">
+                <div class="card-header">Verbi Irregolari Principali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Attenzione:</strong> Questi verbi cambiano la radice. La desinenza rimane regolare (-ò, -ai, -à, -emo, -ete, -anno).
+                    </div>
+
+                    <div class="irregular-box">
+                        <div class="irregular-verb">ANDARE</div>
+                        <div class="irregular-form">andrò, andrai, andrà, andremo, andrete, andranno</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">ESSERE</div>
+                        <div class="irregular-form">sarò, sarai, sarà, saremo, sarete, saranno</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">AVERE</div>
+                        <div class="irregular-form">avrò, avrai, avrà, avremo, avrete, avranno</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">FARE</div>
+                        <div class="irregular-form">farò, farai, farà, faremo, farete, faranno</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">VENIRE</div>
+                        <div class="irregular-form">verrò, verrai, verrà, verremo, verrete, verranno</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">DOVERE</div>
+                        <div class="irregular-form">dovrò, dovrai, dovrà, dovremo, dovrete, dovranno</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">POTERE</div>
+                        <div class="irregular-form">potrò, potrai, potrà, potremo, potrete, potranno</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">VOLERE</div>
+                        <div class="irregular-form">vorrò, vorrai, vorrà, vorremo, vorrete, vorranno</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PROSSIMO -->
+        <section id="prossimo" class="section">
+            <div class="card">
+                <div class="card-header">Futuro Prossimo</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Formazione:</strong> Verbo <strong>andare</strong> al presente + infinito del verbo principale.
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr>
+                                <th>Persona</th>
+                                <th>Forma</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Io</strong></td>
+                                <td>vado a + infinito</td>
+                                <td>Vado a mangiare.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tu</strong></td>
+                                <td>vai a + infinito</td>
+                                <td>Vai a dormire?</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lui/Lei</strong></td>
+                                <td>va a + infinito</td>
+                                <td>Va a lavorare.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Noi</strong></td>
+                                <td>andiamo a + infinito</td>
+                                <td>Andiamo a ballare.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Voi</strong></td>
+                                <td>andate a + infinito</td>
+                                <td>Andate a studiare!</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Loro</strong></td>
+                                <td>vanno a + infinito</td>
+                                <td>Vanno a comprare il pane.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Nota:</strong> Si usa per azioni <strong>imminenti</strong> o già programmate. Es: "Sto per uscire" (molto imminente) o "Vado a mangiare" (prossimo).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A2 - Il Futuro (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>

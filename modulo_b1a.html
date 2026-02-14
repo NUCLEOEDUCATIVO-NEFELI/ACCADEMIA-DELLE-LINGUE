@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronomi Relativi - Livello B1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c5282;
+            --secondary: #4a5568;
+            --accent: #744210;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --border: #e2e8f0;
+            --success: #22543d;
+            --success-bg: #c6f6d5;
+            --error: #742a2a;
+            --error-bg: #fed7d7;
+            --parchment: #fdfbf7;
+            --relativo: #553c9a;
+            --cui: #2f855a;
+            --quale: #c05621;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            font-family: 'Times New Roman', serif;
+        }
+
+        .hearts {
+            font-size: 1.5rem;
+            letter-spacing: 0.25rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .theory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .rule-card {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .rule-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .rule-card.che { border-left: 4px solid var(--relativo); }
+        .rule-card.cui { border-left: 4px solid var(--cui); }
+        .rule-card.quale { border-left: 4px solid var(--quale); }
+
+        .pronoun-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .pronoun-display.che { color: var(--relativo); }
+        .pronoun-display.cui { color: var(--cui); }
+        .pronoun-display.quale { color: var(--quale); }
+
+        .rule-title {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .example-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .example-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .example-list li:hover {
+            color: var(--primary);
+            padding-left: 0.5rem;
+            background: var(--light);
+        }
+
+        .example-list li:last-child {
+            border-bottom: none;
+        }
+
+        .analysis {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-style: italic;
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        .instruction-box {
+            background: #ebf8ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .instruction-box strong {
+            color: var(--primary);
+        }
+
+        .warning-box {
+            background: #fffaf0;
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .warning-box strong {
+            color: var(--accent);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background: var(--light);
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .comparison-table tr:hover {
+            background: var(--light);
+        }
+
+        .game-panel {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .progress-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--border);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: normal;
+        }
+
+        .game-instruction {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .question-area {
+            background: var(--light);
+            border: 2px solid var(--border);
+            padding: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .sentence-display {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+            font-weight: bold;
+            margin: 0 0.25rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1.25rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: none;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            background: #1a365d;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--light);
+        }
+
+        .next-btn {
+            display: none;
+            width: 100%;
+        }
+
+        .next-btn.show {
+            display: block;
+        }
+
+        .transform-box {
+            background: white;
+            border: 2px dashed var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .transform-line {
+            font-size: 1.4rem;
+            margin: 0.5rem 0;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .trophy {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: normal;
+        }
+
+        .footer {
+            background: var(--light);
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 {
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+
+            .nav-tab {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .theory-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sentence-display {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Pronomi Relativi</h1>
+            <p>La subordinazione relativa in italiano - Livello B1 (QCER)</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B1</a>
+            <span>›</span>
+            <strong>Sintassi della Subordinazione</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">I Pronomi Relativi Italiani</h1>
+            <p class="page-subtitle">Analisi morfosintattica di CHE, CUI e il quale/la quale/i quali/le quali nella proposizione relativa</p>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-body">
+                <div class="stats-bar">
+                    <div class="stat-box">
+                        <div class="stat-label">Punteggio</div>
+                        <div class="stat-value" id="scoreDisplay">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Vite</div>
+                        <div class="hearts" id="heartsDisplay">❤️❤️❤️</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Livello</div>
+                        <div class="stat-value" id="levelDisplay">1</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('learn')">
+                📚 Teoria
+            </button>
+            <button class="nav-tab" onclick="showSection('game1')">
+                Esercitazione 1: Selezione
+            </button>
+            <button class="nav-tab" onclick="showSection('game2')">
+                Esercitazione 2: Analisi
+            </button>
+            <button class="nav-tab" onclick="showSection('game3')">
+                Esercitazione 3: Completamento
+            </button>
+        </nav>
+
+        <section id="learn" class="section active">
+            <div class="card">
+                <div class="card-header">
+                    Cenni Teorici
+                </div>
+                <div class="card-body">
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        I <strong>pronomi relativi</strong> (o congiuntivi) sono elementi che collegano due proposizioni, svolgendo contemporaneamente la funzione di congiunzione e di pronome. Introducono la <strong>proposizione relativa</strong> (o proposizione subordinata aggettivale), che svolge la funzione di complemento specificativo rispetto all'antecedente nella reggente.
+                    </p>
+                    <p style="margin-top: 1rem; font-style: italic; color: var(--secondary);">
+                        <strong>Esempio:</strong> "Il libro <strong>che</strong> ho letto è interessante" (la proposizione "che ho letto" specifica quale libro).
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Il Pronome CHE
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Osservazione:</strong> CHE è il pronome relativo più frequente in italiano. È <strong>invariabile</strong> (non cambia per genere e numero) e si usa solo come <strong>soggetto</strong> o <strong>complemento oggetto</strong>.
+                    </div>
+
+                    <div class="theory-grid">
+                        <div class="rule-card che" onclick="speak('Il ragazzo che studia')">
+                            <div class="pronoun-display che">CHE</div>
+                            <div class="rule-title">Funzione di <strong>soggetto</strong></div>
+                            <ul class="example-list">
+                                <li>
+                                    Il ragazzo <strong>che</strong> studia passerà l'esame.
+                                    <span class="analysis">"che" = soggetto di "studia"</span>
+                                </li>
+                                <li>
+                                    La casa <strong>che</strong> affaccia sul mare è cara.
+                                    <span class="analysis">"che" = soggetto di "affaccia"</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-card che" onclick="speak('Il libro che ho comprato')">
+                            <div class="pronoun-display che">CHE</div>
+                            <div class="rule-title">Funzione di <strong>complemento oggetto</strong></div>
+                            <ul class="example-list">
+                                <li>
+                                    Il libro <strong>che</strong> ho comprato è interessante.
+                                    <span class="analysis">"che" = oggetto di "ho comprato"</span>
+                                </li>
+                                <li>
+                                    La persona <strong>che</strong> ho incontrato è gentile.
+                                    <span class="analysis">"che" = oggetto di "ho incontrato"</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="warning-box" style="margin-top: 1.5rem;">
+                        <strong>Attenzione:</strong> Non si può usare CHE con preposizione! 
+                        <br>✗ Il ragazzo <strong>a che</strong> ho parlato...
+                        <br>✓ Il ragazzo <strong>a cui</strong> ho parlato...
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Il Pronome CUI
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Osservazione:</strong> CUI è <strong>invariabile</strong> e si usa esclusivamente con <strong>preposizione</strong> (a cui, di cui, con cui, per cui, da cui, in cui, su cui). Svolge funzioni di complemento indiretto.
+                    </div>
+
+                    <div class="theory-grid">
+                        <div class="rule-card cui" onclick="speak('L\'uomo a cui ho parlato')">
+                            <div class="pronoun-display cui">CUI</div>
+                            <div class="rule-title">Complemento di <strong>termine</strong> (a cui)</div>
+                            <ul class="example-list">
+                                <li>
+                                    L'uomo <strong>a cui</strong> ho parlato è il direttore.
+                                    <span class="analysis">"a cui" = complemento di termine (a chi?)</span>
+                                </li>
+                                <li>
+                                    La persona <strong>a cui</strong> ho scritto non risponde.
+                                    <span class="analysis">"a cui" = complemento di termine</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-card cui" onclick="speak('Il libro di cui ti ho parlato')">
+                            <div class="pronoun-display cui">CUI</div>
+                            <div class="rule-title">Complemento di <strong>specificazione</strong> (di cui)</div>
+                            <ul class="example-list">
+                                <li>
+                                    Il libro <strong>di cui</strong> ti ho parlato è uscito.
+                                    <span class="analysis">"di cui" = complemento di specificazione (di che cosa?)</span>
+                                </li>
+                                <li>
+                                    L'argomento <strong>di cui</strong> discutiamo è complesso.
+                                    <span class="analysis">"di cui" = complemento di specificazione</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-card cui" onclick="speak('La città in cui vivo')">
+                            <div class="pronoun-display cui">CUI</div>
+                            <div class="rule-title">Altri complementi (con, per, da, in, su)</div>
+                            <ul class="example-list">
+                                <li>
+                                    La città <strong>in cui</strong> vivo è bella.
+                                    <span class="analysis">"in cui" = complemento di stato in luogo</span>
+                                </li>
+                                <li>
+                                    Lo strumento <strong>con cui</strong> lavoro è nuovo.
+                                    <span class="analysis">"con cui" = complemento di mezzo</span>
+                                </li>
+                                <li>
+                                    Il motivo <strong>per cui</strong> sono partito è serio.
+                                    <span class="analysis">"per cui" = complemento di causa</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Il Pronome IL QUALE / LA QUALE / I QUALI / LE QUALI
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Osservazione:</strong> Questa forma è <strong>variabile</strong> (si accorda in genere e numero con l'antecedente) e si usa per <strong>chiarezza stilistica</strong>, specialmente quando l'antecedente è lontano o quando si rischia l'ambiguità con CHE.
+                    </div>
+
+                    <div class="theory-grid">
+                        <div class="rule-card quale" onclick="speak('Il quale, la quale')">
+                            <div class="pronoun-display quale">il/la quale</div>
+                            <div class="rule-title">Forme <strong>singolari</strong></div>
+                            <ul class="example-list">
+                                <li>
+                                    Il ragazzo, <strong>il quale</strong> studia molto, passerà.
+                                    <span class="analysis">maschile singolare</span>
+                                </li>
+                                <li>
+                                    La casa, <strong>la quale</strong> affaccia sul mare, è cara.
+                                    <span class="analysis">femminile singolare</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-card quale" onclick="speak('I quali, le quali')">
+                            <div class="pronoun-display quale">i/le quali</div>
+                            <div class="rule-title">Forme <strong>plurali</strong></div>
+                            <ul class="example-list">
+                                <li>
+                                    I ragazzi, <strong>i quali</strong> studiano molto, passeranno.
+                                    <span class="analysis">maschile plurale</span>
+                                </li>
+                                <li>
+                                    Le case, <strong>le quali</strong> affacciano sul mare, sono care.
+                                    <span class="analysis">femminile plurale</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-card quale" onclick="speak('Al quale, della quale')">
+                            <div class="pronoun-display quale">al/della quale</div>
+                            <div class="rule-title">Con <strong>preposizioni articolate</strong></div>
+                            <ul class="example-list">
+                                <li>
+                                    Il collega <strong>al quale</strong> ho telefonato è assente.
+                                    <span class="analysis">"a" + "il quale" = al quale</span>
+                                </li>
+                                <li>
+                                    La studentessa <strong>della quale</strong> ti ho parlato...
+                                    <span class="analysis">"di" + "la quale" = della quale</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="warning-box" style="margin-top: 1.5rem;">
+                        <strong>Quando usare IL QUALE al posto di CHE/CUI:</strong>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>Per evitare ambiguità: "Ho incontrato il fratello di Marco, <strong>il quale</strong> mi ha salutato" (chi ha salutato? Marco o il fratello?)</li>
+                            <li>Con antecedente lontano nella frase</li>
+                            <li>Nel registro formale/scritto</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Tabella Comparativa
+                </div>
+                <div class="card-body">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Pronome</th>
+                                <th>Variabilità</th>
+                                <th>Funzione</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="color: var(--relativo); font-weight: bold;">CHE</td>
+                                <td>Invariabile</td>
+                                <td>Soggetto / Oggetto</td>
+                                <td>Il libro <strong>che</strong> leggo è bello</td>
+                            </tr>
+                            <tr>
+                                <td style="color: var(--cui); font-weight: bold;">CUI</td>
+                                <td>Invariabile</td>
+                                <td>Complementi indiretti (con prep.)</td>
+                                <td>L'uomo <strong>a cui</strong> parlo è gentile</td>
+                            </tr>
+                            <tr>
+                                <td style="color: var(--quale); font-weight: bold;">IL QUALE</td>
+                                <td>Variabile (m/f, s/p)</td>
+                                <td>Tutte (con preposizioni articolate)</td>
+                                <td>Il collega <strong>al quale</strong> scrivo...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Note Metalinguistiche
+                </div>
+                <div class="card-body">
+                    <p><strong>1. Concordanza:</strong> Il verbo della proposizione relativa si accorda con il pronome relativo quando questo funge da soggetto. Esempio: "I ragazzi che <strong>studiano</strong>" (plurale perché "che" = "i ragazzi").</p>
+                    
+                    <p style="margin-top: 1rem;"><strong>2. Preposizioni:</strong> CUI regge sempre una preposizione; IL QUALE può reggerla direttamente o attraverso la forma articolata (al quale, del quale).</p>
+                    
+                    <p style="margin-top: 1rem;"><strong>3. Registro:</strong> CHE e CUI sono neutre e adatte a ogni contesto; IL QUALE è più formale e letterario.</p>
+                    
+                    <p style="margin-top: 1rem;"><strong>4. Ellissi:</strong> In italiano non è possibile omettere il pronome relativo come in inglese (✗ "The book I read" → ✓ "Il libro che leggo").</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="game1" class="section">
+            <div class="game-panel">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress1"></div>
+                    </div>
+                </div>
+                
+                <h2 class="game-title">Esercitazione 1: Selezione del Pronome Relativo</h2>
+                <div class="game-instruction">
+                    Selezionare il pronome relativo corretto per completare la frase. Analizza la funzione sintattica del pronome nella subordinata.
+                </div>
+                
+                <div class="question-area">
+                    <div class="sentence-display" id="sentence1">
+                        Il ragazzo _____ ho incontrato è mio cugino.
+                    </div>
+                </div>
+
+                <div class="options-grid" id="options1">
+                    <button class="option-btn" onclick="checkAnswer(1, 'che', this)">che</button>
+                    <button class="option-btn" onclick="checkAnswer(1, 'cui', this)">cui</button>
+                    <button class="option-btn" onclick="checkAnswer(1, 'il quale', this)">il quale</button>
+                    <button class="option-btn" onclick="checkAnswer(1, 'al quale', this)">al quale</button>
+                </div>
+
+                <div class="feedback" id="feedback1"></div>
+                <button class="btn-primary next-btn" id="next1" onclick="nextQuestion(1)">Successivo →</button>
+            </div>
+        </section>
+
+        <section id="game2" class="section">
+            <div class="game-panel">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress2"></div>
+                    </div>
+                </div>
+                
+                <h2 class="game-title">Esercitazione 2: Analisi Sintattica</h2>
+                <div class="game-instruction">
+                    Individuare la funzione del pronome relativo evidenziato nella proposizione subordinata.
+                </div>
+                
+                <div class="question-area">
+                    <div class="sentence-display" id="sentence2">
+                        La persona <strong>a cui</strong> ho telefonato non c'era.
+                        <br><br>
+                        <span style="color: var(--secondary); font-size: 1rem;">Funzione: complemento di _______</span>
+                    </div>
+                </div>
+
+                <div class="options-grid" id="options2">
+                    <button class="option-btn" onclick="checkAnswer(2, 'termine', this)">termine</button>
+                    <button class="option-btn" onclick="checkAnswer(2, 'specificazione', this)">specificazione</button>
+                    <button class="option-btn" onclick="checkAnswer(2, 'oggetto', this)">oggetto</button>
+                    <button class="option-btn" onclick="checkAnswer(2, 'soggetto', this)">soggetto</button>
+                </div>
+
+                <div class="feedback" id="feedback2"></div>
+                <button class="btn-primary next-btn" id="next2" onclick="nextQuestion(2)">Successivo →</button>
+            </div>
+        </section>
+
+        <section id="game3" class="section">
+            <div class="game-panel">
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress3"></div>
+                    </div>
+                </div>
+                
+                <h2 class="game-title">Esercitazione 3: Completamento Frasale</h2>
+                <div class="game-instruction">
+                    Inserire il pronome relativo corretto con eventuale preposizione nel contesto sintattico proposto.
+                </div>
+                
+                <div class="question-area">
+                    <div class="sentence-display" id="sentence3">
+                        Il problema _____ stiamo discutendo è complesso.
+                    </div>
+                </div>
+
+                <div class="options-grid" id="options3">
+                    <!-- Generato via JS -->
+                </div>
+
+                <div class="feedback" id="feedback3"></div>
+                <button class="btn-primary next-btn" id="next3" onclick="nextQuestion(3)">Successivo →</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div>
+            <p>© 2024 Corso di Italiano B1 - Tutti i diritti riservati</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+                Piattaforma didattica per l'apprendimento della lingua italiana
+            </p>
+        </div>
+    </footer>
+
+    <div class="modal" id="winModal">
+        <div class="modal-content">
+            <div class="trophy">🏆</div>
+            <h2 class="modal-title">Esercitazione Completata</h2>
+            <p style="margin-bottom: 1rem;">Punteggio finale: <strong id="finalScore">0</strong></p>
+            <div style="font-size: 2rem; margin-bottom: 1rem;" id="starsDisplay">⭐⭐⭐</div>
+            <button class="btn-primary" onclick="closeModal()" style="width: 100%;">Continua</button>
+        </div>
+    </div>
+
+    <script>
+        const pronounsDB = {
+            game1: [
+                { 
+                    sentence: "Il ragazzo _____ ho incontrato è mio cugino.", 
+                    answer: "che", 
+                    explanation: "'che' funge da complemento oggetto di 'ho incontrato'",
+                    hint: "funzione: oggetto (senza preposizione)"
+                },
+                { 
+                    sentence: "La persona _____ ho scritto non risponde.", 
+                    answer: "a cui", 
+                    explanation: "'a cui' = complemento di termine (a chi?)",
+                    hint: "serve la preposizione 'a'"
+                },
+                { 
+                    sentence: "Il libro _____ ti ho parlato è uscito.", 
+                    answer: "di cui", 
+                    explanation: "'di cui' = complemento di specificazione (di che cosa?)",
+                    hint: "serve la preposizione 'di'"
+                },
+                { 
+                    sentence: "Lo studente, _____ studia molto, passerà.", 
+                    answer: "il quale", 
+                    explanation: "'il quale' = soggetto di 'studia' (uso formale)",
+                    hint: "soggetto, registro formale"
+                },
+                { 
+                    sentence: "La città _____ vivo è molto bella.", 
+                    answer: "in cui", 
+                    explanation: "'in cui' = complemento di stato in luogo",
+                    hint: "serve la preposizione 'in'"
+                },
+                { 
+                    sentence: "I colleghi, _____ ho telefonato, sono assenti.", 
+                    answer: "ai quali", 
+                    explanation: "'ai quali' = a + i quali (complemento di termine, maschile plurale)",
+                    hint: "preposizione 'a' + forma plurale maschile"
+                },
+                { 
+                    sentence: "Il film _____ abbiamo visto era noioso.", 
+                    answer: "che", 
+                    explanation: "'che' = complemento oggetto di 'abbiamo visto'",
+                    hint: "oggetto, senza preposizione"
+                },
+                { 
+                    sentence: "Il motivo _____ sono partito è serio.", 
+                    answer: "per cui", 
+                    explanation: "'per cui' = complemento di causa (per quale motivo?)",
+                    hint: "serve la preposizione 'per'"
+                },
+                { 
+                    sentence: "La ragazza, _____ conosco il fratello, è simpatica.", 
+                    answer: "della quale", 
+                    explanation: "'della quale' = di + la quale (complemento di specificazione)",
+                    hint: "preposizione 'di' + femminile singolare"
+                },
+                { 
+                    sentence: "L'uomo _____ mi ha aiutato è gentile.", 
+                    answer: "che", 
+                    explanation: "'che' = soggetto di 'mi ha aiutato'",
+                    hint: "soggetto della subordinata"
+                }
+            ],
+            game2: [
+                { 
+                    sentence: "La persona <strong>a cui</strong> ho telefonato non c'era.", 
+                    function: "termine", 
+                    explanation: "'a cui' = complemento di termine (a chi? a quale persona?)",
+                    prep: "a"
+                },
+                { 
+                    sentence: "Il libro <strong>che</strong> leggo è interessante.", 
+                    function: "oggetto", 
+                    explanation: "'che' = complemento oggetto (che cosa leggo? il libro)",
+                    prep: "-"
+                },
+                { 
+                    sentence: "Il ragazzo <strong>che</strong> studia passerà.", 
+                    function: "soggetto", 
+                    explanation: "'che' = soggetto (chi studia? il ragazzo)",
+                    prep: "-"
+                },
+                { 
+                    sentence: "L'argomento <strong>di cui</strong> discutiamo è complesso.", 
+                    function: "specificazione", 
+                    explanation: "'di cui' = complemento di specificazione (di che cosa?)",
+                    prep: "di"
+                },
+                { 
+                    sentence: "La città <strong>in cui</strong> vivo è bella.", 
+                    function: "stato in luogo", 
+                    explanation: "'in cui' = complemento di stato in luogo (in quale città?)",
+                    prep: "in"
+                },
+                { 
+                    sentence: "Lo strumento <strong>con cui</strong> lavoro è nuovo.", 
+                    function: "mezzo", 
+                    explanation: "'con cui' = complemento di mezzo (con che cosa?)",
+                    prep: "con"
+                },
+                { 
+                    sentence: "Il collega <strong>al quale</strong> ho scritto è in ferie.", 
+                    function: "termine", 
+                    explanation: "'al quale' = complemento di termine (a chi? a quale collega?)",
+                    prep: "a"
+                },
+                { 
+                    sentence: "Il motivo <strong>per cui</strong> sono partito è serio.", 
+                    function: "causa", 
+                    explanation: "'per cui' = complemento di causa (per quale motivo?)",
+                    prep: "per"
+                }
+            ],
+            game3: [
+                { 
+                    sentence: "Il problema _____ stiamo discutendo è complesso.", 
+                    answer: "di cui", 
+                    full: "Il problema di cui stiamo discutendo è complesso.",
+                    hint: "complemento di specificazione (di che cosa?)"
+                },
+                { 
+                    sentence: "La studentessa, _____ conosco il fratello, è brava.", 
+                    answer: "della quale", 
+                    full: "La studentessa, della quale conosco il fratello, è brava.",
+                    hint: "di + la quale (femminile singolare)"
+                },
+                { 
+                    sentence: "Gli amici _____ ho invitato verranno alla festa.", 
+                    answer: "che", 
+                    full: "Gli amici che ho invitato verranno alla festa.",
+                    hint: "complemento oggetto (senza preposizione)"
+                },
+                { 
+                    sentence: "Il museo, _____ entriamo ora, è molto famoso.", 
+                    answer: "nel quale", 
+                    full: "Il museo, nel quale entriamo ora, è molto famoso.",
+                    hint: "in + il quale (maschile singolare)"
+                },
+                { 
+                    sentence: "Le persone _____ lavoro sono molto competenti.", 
+                    answer: "con cui", 
+                    full: "Le persone con cui lavoro sono molto competenti.",
+                    hint: "complemento di mezzo (con chi?)"
+                },
+                { 
+                    sentence: "Il professore, _____ spiego il problema, è paziente.", 
+                    answer: "al quale", 
+                    full: "Il professore, al quale spiego il problema, è paziente.",
+                    hint: "a + il quale (maschile singolale)"
+                },
+                { 
+                    sentence: "I libri _____ ti ho parlato sono in biblioteca.", 
+                    answer: "dei quali", 
+                    full: "I libri dei quali ti ho parlato sono in biblioteca.",
+                    hint: "di + i quali (maschile plurale)"
+                },
+                { 
+                    sentence: "La ragazza _____ vive in centro è mia amica.", 
+                    answer: "che", 
+                    full: "La ragazza che vive in centro è mia amica.",
+                    hint: "soggetto della subordinata (chi vive?)"
+                },
+                { 
+                    sentence: "L'azienda, _____ ho mandato il CV, non risponde.", 
+                    answer: "alla quale", 
+                    full: "L'azienda, alla quale ho mandato il CV, non risponde.",
+                    hint: "a + la quale (femminile singolare, con apostrofo)"
+                },
+                { 
+                    sentence: "Il paese _____ sono nato è piccolo.", 
+                    answer: "in cui", 
+                    full: "Il paese in cui sono nato è piccolo.",
+                    hint: "complemento di stato in luogo (in quale paese?)"
+                }
+            ]
+        };
+
+        let score = 0;
+        let level = 1;
+        let lives = 3;
+        let currentGame = 1;
+        let currentQIndex = 0;
+
+        window.onload = function() {
+            updateDisplay();
+            loadQuestion(1);
+            loadQuestion(2);
+            loadQuestion(3);
+        };
+
+        function updateDisplay() {
+            document.getElementById('scoreDisplay').textContent = score;
+            document.getElementById('levelDisplay').textContent = level;
+            updateHearts();
+        }
+
+        function updateHearts() {
+            let h = '';
+            for(let i=0; i<3; i++) h += i < lives ? '❤' : '🖤';
+            document.getElementById('heartsDisplay').textContent = h;
+        }
+
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if(id.startsWith('game')) {
+                currentGame = parseInt(id.replace('game',''));
+                currentQIndex = 0;
+                loadQuestion(currentGame);
+            }
+        }
+
+        function speak(text) {
+            if(!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'it-IT';
+            u.rate = 0.8;
+            window.speechSynthesis.speak(u);
+        }
+
+        function loadQuestion(game) {
+            if(game === 1) {
+                const q = pronounsDB.game1[currentQIndex % pronounsDB.game1.length];
+                document.getElementById('sentence1').innerHTML = q.sentence.replace('_____', '<span class="blank">?</span>');
+                document.getElementById('feedback1').className = 'feedback';
+                document.getElementById('next1').classList.remove('show');
+                
+                document.querySelectorAll('#options1 .option-btn').forEach(btn => {
+                    btn.className = 'option-btn';
+                    btn.disabled = false;
+                });
+                
+            } else if(game === 2) {
+                const q = pronounsDB.game2[currentQIndex % pronounsDB.game2.length];
+                document.getElementById('sentence2').innerHTML = q.sentence + 
+                    '<br><br><span style="color: var(--secondary); font-size: 1rem;">Funzione: complemento di _______</span>';
+                document.getElementById('feedback2').className = 'feedback';
+                document.getElementById('next2').classList.remove('show');
+                
+                document.querySelectorAll('#options2 .option-btn').forEach(btn => {
+                    btn.className = 'option-btn';
+                    btn.disabled = false;
+                });
+                
+            } else if(game === 3) {
+                const q = pronounsDB.game3[currentQIndex % pronounsDB.game3.length];
+                document.getElementById('sentence3').innerHTML = q.sentence.replace('_____', '<span class="blank">?</span>');
+                document.getElementById('feedback3').className = 'feedback';
+                document.getElementById('next3').classList.remove('show');
+                
+                const options = ['che', 'cui', 'il quale', 'al quale', 'di cui', 'a cui', 'in cui', 'con cui', 'per cui', 'del quale', 'della quale', 'ai quali', 'dei quali'];
+                const shuffled = options.sort(() => Math.random() - 0.5).slice(0, 6);
+                if(!shuffled.includes(q.answer)) {
+                    shuffled[0] = q.answer;
+                }
+                
+                const container = document.getElementById('options3');
+                container.innerHTML = '';
+                shuffled.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.textContent = opt;
+                    btn.onclick = function() { checkAnswer3(opt, this); };
+                    container.appendChild(btn);
+                });
+            }
+            
+            const prog = ((currentQIndex % 10) / 10) * 100;
+            document.getElementById(`progress${game}`).style.width = prog + '%';
+        }
+
+        function checkAnswer(game, answer, btn) {
+            let q, correct, feedback, nextBtn;
+            
+            if(game === 1) {
+                q = pronounsDB.game1[currentQIndex % pronounsDB.game1.length];
+                correct = q.answer;
+                feedback = document.getElementById('feedback1');
+                nextBtn = document.getElementById('next1');
+            } else if(game === 2) {
+                q = pronounsDB.game2[currentQIndex % pronounsDB.game2.length];
+                correct = q.function;
+                feedback = document.getElementById('feedback2');
+                nextBtn = document.getElementById('next2');
+            }
+            
+            document.querySelectorAll(`#options${game} .option-btn`).forEach(b => b.disabled = true);
+            
+            if(answer === correct) {
+                btn.classList.add('correct');
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = `✓ Corretto! ${q.explanation}`;
+                score += (10 * level);
+                speak(q.sentence.replace(/<[^>]*>/g, '').replace('_____', q.answer || q.function));
+                nextBtn.classList.add('show');
+                if(currentQIndex % 10 === 9) setTimeout(showModal, 1500);
+            } else {
+                btn.classList.add('wrong');
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `✗ Errato. ${q.explanation}`;
+                lives--;
+                updateHearts();
+                speak('Riprova');
+                nextBtn.classList.add('show');
+            }
+            updateDisplay();
+        }
+
+        function checkAnswer3(answer, btn) {
+            const q = pronounsDB.game3[currentQIndex % pronounsDB.game3.length];
+            const correct = q.answer;
+            
+            document.querySelectorAll('#options3 .option-btn').forEach(b => b.disabled = true);
+            const fb = document.getElementById('feedback3');
+            
+            if(answer === correct) {
+                btn.classList.add('correct');
+                fb.className = 'feedback show correct';
+                fb.innerHTML = `✓ Corretto: <strong>${q.full}</strong><br><small>${q.hint}</small>`;
+                score += (15 * level);
+                speak(q.full);
+                document.getElementById('next3').classList.add('show');
+                if(currentQIndex % 10 === 9) setTimeout(showModal, 1500);
+            } else {
+                btn.classList.add('wrong');
+                fb.className = 'feedback show wrong';
+                fb.innerHTML = `✗ Errato. La forma corretta è: <strong>${q.answer}</strong><br><small>${q.hint}</small>`;
+                lives--;
+                updateHearts();
+                speak('Riprova');
+                document.getElementById('next3').classList.add('show');
+            }
+            updateDisplay();
+        }
+
+        function nextQuestion(game) {
+            currentQIndex++;
+            loadQuestion(game);
+        }
+
+        function showModal() {
+            document.getElementById('finalScore').textContent = score;
+            const stars = lives === 3 ? '⭐⭐⭐' : lives === 2 ? '⭐⭐' : '⭐';
+            document.getElementById('starsDisplay').textContent = stars;
+            document.getElementById('winModal').classList.add('show');
+            speak('Complimenti');
+            
+            if(score >= level * 100) {
+                level++;
+                document.getElementById('levelDisplay').textContent = level;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('winModal').classList.remove('show');
+            lives = 3;
+            updateHearts();
+            currentQIndex = 0;
+            loadQuestion(currentGame);
+        }
+    </script>
+</body>
+</html>

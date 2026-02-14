@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verbi Riflessivi - 50 Esercizi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #155724;
+            --success-bg: #d4edda;
+            --error: #721c24;
+            --error-bg: #f8d7da;
+            --parchment: #faf8f3;
+            --b1-color: #c9a227;
+            --reflexive: #9b59b6;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-header.reflexive {
+            border-left-color: var(--reflexive);
+            color: var(--reflexive);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--reflexive);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .verb-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .verb-display {
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .verb-display.reflexive {
+            color: var(--reflexive);
+        }
+
+        .pronoun-highlight {
+            color: var(--reflexive);
+            font-weight: bold;
+        }
+
+        .verb-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 0.5rem;
+            color: white;
+            font-weight: bold;
+            background: var(--reflexive);
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .btn-check {
+            background: var(--b1-color);
+            color: #000;
+        }
+
+        .btn-check:hover {
+            background: #b8941f;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .pronoun-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .hint-text {
+            color: var(--secondary);
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        .structure-formula {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Verbi Riflessivi - Modulo A1</h1>
+            <p>Azioni che si compiono su sé stessi - 50 Esercizi Interattivi</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A1</a>
+            <span>›</span>
+            <strong>Verbi Riflessivi (50 Esercizi)</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 I Verbi Riflessivi</h1>
+            <p class="page-subtitle">Mi alzo, ti lavi, si veste... Azioni riflessive con pronomi mi, ti, si, ci, vi, si</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('pronomi', this)">Pronomi</button>
+            <button class="nav-tab" onclick="showSection('verbi', this)">Verbi Comuni</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header reflexive">Che cosa sono i Verbi Riflessivi?</div>
+                <div class="card-body">
+                    <p>I verbi riflessivi indicano un'azione che il soggetto compie <strong>su se stesso</strong>. Si riconoscono dalla desinenza <strong>-SI</strong> all'infinito.</p>
+
+                    <div class="structure-formula">
+                        <span class="pronoun-highlight">PRONOME RIFLESSIVO</span> + VERBO CONIUGATO
+                    </div>
+
+                    <div class="rule-box">
+                        <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Pronomi Riflessivi</h3>
+                        <p style="font-size: 1.1rem;"><strong>mi</strong> (io) - <strong>ti</strong> (tu) - <strong>si</strong> (lui/lei) - <strong>ci</strong> (noi) - <strong>vi</strong> (voi) - <strong>si</strong> (loro)</p>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Regola fondamentale:</strong> Il pronome si posiziona sempre <strong>prima</strong> del verbo coniugato.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Errore comune:</strong> Non dimenticare il pronome riflessivo! Si dice <strong>"Mi alzo"</strong>, non "Alzo"!
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Confronto: Verbi Non Riflessivi vs Riflessivi</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Differenza chiave:</strong>
+                    </div>
+                    
+                    <table class="verb-table">
+                        <tr>
+                            <th>NON Riflessivo</th>
+                            <th>Riflessivo</th>
+                            <th>Significato</th>
+                        </tr>
+                        <tr>
+                            <td>Io lavo la macchina</td>
+                            <td class="verb-display reflexive">Io mi lavo</td>
+                            <td>Mi lavo (me stesso)</td>
+                        </tr>
+                        <tr>
+                            <td>Tu chiami Maria</td>
+                            <td class="verb-display reflexive">Tu ti chiami</td>
+                            <td>Il tuo nome è...</td>
+                        </tr>
+                        <tr>
+                            <td>Lei veste il bambino</td>
+                            <td class="verb-display reflexive">Lei si veste</td>
+                            <td>Indossa i propri vestiti</td>
+                        </tr>
+                        <tr>
+                            <td>Noi svegliamo i bambini</td>
+                            <td class="verb-display reflexive">Noi ci svegliamo</td>
+                            <td>Noi ci svegliamo (da soli)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PRONOMI -->
+        <section id="pronomi" class="section">
+            <div class="card">
+                <div class="card-header reflexive">I Pronomi Riflessivi</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: var(--reflexive);">
+                        <strong>Tabella completa dei pronomi riflessivi:</strong>
+                    </div>
+                    
+                    <table class="verb-table">
+                        <tr>
+                            <th>Soggetto</th>
+                            <th>Pronome</th>
+                            <th>Esempio con "alzarsi"</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Io</strong></td>
+                            <td class="pronoun-highlight">mi</td>
+                            <td class="verb-display reflexive">mi alzo <span class="verb-tag">RIFLESSIVO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tu</strong></td>
+                            <td class="pronoun-highlight">ti</td>
+                            <td class="verb-display reflexive">ti alzi <span class="verb-tag">RIFLESSIVO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lui/Lei</strong></td>
+                            <td class="pronoun-highlight">si</td>
+                            <td class="verb-display reflexive">si alza <span class="verb-tag">RIFLESSIVO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Noi</strong></td>
+                            <td class="pronoun-highlight">ci</td>
+                            <td class="verb-display reflexive">ci alziamo <span class="verb-tag">RIFLESSIVO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Voi</strong></td>
+                            <td class="pronoun-highlight">vi</td>
+                            <td class="verb-display reflexive">vi alzate <span class="verb-tag">RIFLESSIVO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Loro</strong></td>
+                            <td class="pronoun-highlight">si</td>
+                            <td class="verb-display reflexive">si alzano <span class="verb-tag">RIFLESSIVO</span></td>
+                        </tr>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> I pronomi <strong>si</strong> (lui/lei) e <strong>si</strong> (loro) sono uguali nella forma, ma si distinguono dal verbo coniugato!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE VERBI COMUNI -->
+        <section id="verbi" class="section">
+            <div class="card">
+                <div class="card-header reflexive">Verbi Riflessivi Comuni</div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: var(--reflexive);">
+                        <strong>Verbi della routine quotidiana:</strong>
+                    </div>
+                    
+                    <table class="verb-table">
+                        <tr>
+                            <th>Infinito</th>
+                            <th>Significato</th>
+                            <th>Esempio</th>
+                        </tr>
+                        <tr>
+                            <td class="verb-display reflexive">alzarsi</td>
+                            <td>svegliarsi e mettersi in piedi</td>
+                            <td>Mi alzo alle 7:00</td>
+                        </tr>
+                        <tr>
+                            <td class="verb-display reflexive">svegliarsi</td>
+                            <td>aprire gli occhi dal sonno</td>
+                            <td>Mi sveglio presto</td>
+                        </tr>
+                        <tr>
+                            <td class="verb-display reflexive">lavarsi</td>
+                            <td>pulire sé stessi</td>
+                            <td>Mi lavo le mani</td>
+                        </tr>
+                        <tr>
+                            <td class="verb-display reflexive">vestirsi</td>
+                            <td>mettere i vestiti addosso</td>
+                            <td>Mi vesto elegantemente</td>
+                        </tr>
+                        <tr>
+                            <td class="verb-display reflexive">pettinarsi</td>
+                            <td>sistemarsi i capelli</td>
+                            <td>Mi pettino ogni mattina</td>
+                        </tr>
+                        <tr>
+                            <td class="verb-display reflexive">addormentarsi</td>
+                            <td>prendere sonno</td>
+                            <td>Mi addormento tardi</td>
+                        </tr>
+                        <tr>
+                            <td class="verb-display reflexive">chiamarsi</td>
+                            <td>avere un nome</td>
+                            <td>Mi chiamo Marco</td>
+                        </tr>
+                        <tr>
+                            <td class="verb-display reflexive">sentirsi</td>
+                            <td>provare una sensazione fisica</td>
+                            <td>Mi sento bene/male</td>
+                        </tr>
+                        <tr>
+                            <td class="verb-display reflexive">divertirsi</td>
+                            <td>passare il tempo piacevolmente</td>
+                            <td>Mi diverto con gli amici</td>
+                        </tr>
+                        <tr>
+                            <td class="verb-display reflexive">arrabbiarsi</td>
+                            <td>diventare adirato</td>
+                            <td>Mi arrabbio facilmente</td>
+                        </tr>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>💡 Suggerimento:</strong> Molti verbi riflessivi descrivono azioni della <strong>cura personale</strong> (lavarsi, vestirsi, pettinarsi) o <strong>stato d'animo</strong> (sentirsi, divertirsi, arrabbiarsi).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A1 - Verbi Riflessivi (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-8: Pronome MI (io)
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Completa: Io _____ presto la mattina. (alzarsi)',
+                options: ['alzo', 'mi alzo', 'ti alzi', 'si alza'],
+                correct: 'mi alzo',
+                explanation: '✅ Corretto! "Alzarsi" è riflessivo: io MI alzo.',
+                errorExplanation: '❌ Manca il pronome riflessivo! È "mi alzo", non solo "alzo"'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Completa: Io _____ i denti dopo mangiato. (lavarsi)',
+                correct: ['mi lavo'],
+                explanation: '✅ Corretto! "Mi lavo" (io + mi).'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Completa: Io _____ Marco. (chiamarsi)',
+                options: ['chiamo', 'mi chiamo', 'ti chiami', 'chiama'],
+                correct: 'mi chiamo',
+                explanation: '✅ Corretto! "Mi chiamo Marco" (dire il proprio nome).',
+                errorExplanation: '❌ Per dire il nome serve il riflessivo: mi chiamo'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Completa: Io _____ sempre alle 8:00. (svegliarsi)',
+                correct: ['mi sveglio'],
+                explanation: '✅ Corretto! "Mi sveglio" (io + mi).'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Completa: Io _____ bene oggi, grazie. (sentirsi)',
+                options: ['sento', 'mi sento', 'ti senti', 'si sente'],
+                correct: 'mi sento',
+                explanation: '✅ Corretto! "Mi sento bene" (stato fisico).',
+                errorExplanation: '❌ "Sentirsi" è riflessivo: mi sento bene/male'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Completa: Io _____ lentamente perché sono stanco. (addormentarsi)',
+                correct: ['mi addormento'],
+                explanation: '✅ Corretto! "Mi addormento" (io + mi).'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Completa: Io _____ in fretta per andare a lavoro. (vestirsi)',
+                options: ['vesto', 'mi vesto', 'ti vesti', 'si veste'],
+                correct: 'mi vesto',
+                explanation: '✅ Corretto! "Mi vesto" (io + mi).',
+                errorExplanation: '❌ "Vestirsi" è riflessivo: mi vesto'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Completa: Io _____ prima di uscire. (pettinarsi)',
+                correct: ['mi pettino'],
+                explanation: '✅ Corretto! "Mi pettino" (io + mi).'
+
+            },
+
+            // ESERCIZI 9-16: Pronome TI (tu)
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Completa: Tu _____ presto o tardi? (alzarsi)',
+                options: ['mi alzo', 'ti alzi', 'si alza', 'ci alziamo'],
+                correct: 'ti alzi',
+                explanation: '✅ Corretto! Per tu: TI alzi.',
+                errorExplanation: '❌ Per tu si usa TI: ti alzi'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Completa: Tu come _____? (chiamarsi)',
+                correct: ['ti chiami'],
+                explanation: '✅ Corretto! "Come ti chiami?" (tu + ti).'
+            },
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Completa: Tu _____ spesso le mani? (lavarsi)',
+                options: ['mi lavo', 'ti lavi', 'si lava', 'vi lavate'],
+                correct: 'ti lavi',
+                explanation: '✅ Corretto! Per tu: TI lavi.',
+                errorExplanation: '❌ Per tu: ti lavi'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Completa: Tu _____ bene con i tuoi amici? (divertirsi)',
+                correct: ['ti diverti'],
+                explanation: '✅ Corretto! "Ti diverti" (tu + ti).'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Completa: Tu _____ facilmente quando qualcosa non va? (arrabbiarsi)',
+                options: ['mi arrabbio', 'ti arrabbi', 'si arrabbia', 'ci arrabbiamo'],
+                correct: 'ti arrabbi',
+                explanation: '✅ Corretto! Per tu: TI arrabbi.',
+                errorExplanation: '❌ Per tu: ti arrabbi'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Completa: Tu dove _____? (sentirsi bene/male)',
+                correct: ['ti senti'],
+                explanation: '✅ Corretto! "Ti senti" (tu + ti).'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Completa: Tu _____ subito dopo cena? (addormentarsi)',
+                options: ['mi addormento', 'ti addormenti', 'si addormenta', 'vi addormentate'],
+                correct: 'ti addormenti',
+                explanation: '✅ Corretto! Per tu: TI addormenti.',
+                errorExplanation: '❌ Per tu: ti addormenti'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Completa: Tu bene oggi? (sentirsi)',
+                correct: ['ti senti'],
+                explanation: '✅ Corretto! "Ti senti bene?" (tu + ti).'
+
+            },
+
+            // ESERCIZI 17-24: Pronome SI (lui/lei)
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Completa: Lei _____ molto presto. (svegliarsi)',
+                options: ['mi sveglio', 'ti svegli', 'si sveglia', 'ci svegliamo'],
+                correct: 'si sveglia',
+                explanation: '✅ Corretto! Per lei/lui: SI sveglia.',
+                errorExplanation: '❌ Per lui/lei: si sveglia'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Completa: Lui _____ sempre in ritardo. (alzarsi)',
+                correct: ['si alza'],
+                explanation: '✅ Corretto! "Si alza" (lui + si).'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Completa: Maria _____ Anna. (chiamarsi)',
+                options: ['mi chiamo', 'ti chiami', 'si chiama', 'ci chiamiamo'],
+                correct: 'si chiama',
+                explanation: '✅ Corretto! Per lei: SI chiama.',
+                errorExplanation: '❌ Per lei (Maria): si chiama'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Completa: Luigi _____ molto elegantemente. (vestirsi)',
+                correct: ['si veste'],
+                explanation: '✅ Corretto! "Si veste" (lui + si).'
+            },
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Completa: La bambina _____ da sola. (lavarsi)',
+                options: ['mi lavo', 'ti lavi', 'si lava', 'vi lavate'],
+                correct: 'si lava',
+                explanation: '✅ Corretto! Per lei: SI lava.',
+                errorExplanation: '❌ Per lei (la bambina): si lava'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Completa: Il gatto _____ sempre sul divano. (addormentarsi)',
+                correct: ['si addormenta'],
+                explanation: '✅ Corretto! "Si addormenta" (lui + si).'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Completa: Lei non _____ bene ultimamente. (sentirsi)',
+                options: ['mi sento', 'ti senti', 'si sente', 'ci sentiamo'],
+                correct: 'si sente',
+                explanation: '✅ Corretto! Per lei: SI sente.',
+                errorExplanation: '❌ Per lei: si sente'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Completa: Lui si _____ sempre prima di uscire. (pettinarsi)',
+                correct: ['si pettina'],
+                explanation: '✅ Corretto! "Si pettina" (lui + si).'
+
+            },
+
+            // ESERCIZI 25-32: Pronome CI (noi)
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Completa: Noi _____ alle 7:00 tutti i giorni. (alzarsi)',
+                options: ['mi alzo', 'ti alzi', 'si alza', 'ci alziamo'],
+                correct: 'ci alziamo',
+                explanation: '✅ Corretto! Per noi: CI alziamo.',
+                errorExplanation: '❌ Per noi: ci alziamo'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Completa: Noi _____ insieme la domenica. (divertirsi)',
+                correct: ['ci divertiamo'],
+                explanation: '✅ Corretto! "Ci divertiamo" (noi + ci).'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Completa: Noi _____ Rossi. (chiamarsi)',
+                options: ['mi chiamo', 'ti chiami', 'si chiama', 'ci chiamiamo'],
+                correct: 'ci chiamiamo',
+                explanation: '✅ Corretto! Per noi: CI chiamiamo.',
+                errorExplanation: '❌ Per noi: ci chiamiamo'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Completa: Noi _____ sempre in piscina. (lavarsi)',
+                correct: ['ci laviamo'],
+                explanation: '✅ Corretto! "Ci laviamo" (noi + ci).'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Completa: Noi _____ presto perché dobbiamo lavorare. (svegliarsi)',
+                options: ['mi sveglio', 'ti svegli', 'si sveglia', 'ci svegliamo'],
+                correct: 'ci svegliamo',
+                explanation: '✅ Corretto! Per noi: CI svegliamo.',
+                errorExplanation: '❌ Per noi: ci svegliamo'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Completa: Noi _____ in modo casual. (vestirsi)',
+                correct: ['ci vestiamo'],
+                explanation: '✅ Corretto! "Ci vestiamo" (noi + ci).'
+            },
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Completa: Noi non _____ mai tardi. (addormentarsi)',
+                options: ['mi addormento', 'ti addormenti', 'si addormenta', 'ci addormentiamo'],
+                correct: 'ci addormentiamo',
+                explanation: '✅ Corretto! Per noi: CI addormentiamo.',
+                errorExplanation: '❌ Per noi: ci addormentiamo'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Completa: Noi _____ molto bene, grazie. (sentirsi)',
+                correct: ['ci sentiamo'],
+                explanation: '✅ Corretto! "Ci sentiamo bene" (noi + ci).'
+
+            },
+
+            // ESERCIZI 33-40: Pronome VI (voi)
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Completa: Voi _____ presto o tardi? (alzarsi)',
+                options: ['ti alzi', 'si alza', 'ci alziamo', 'vi alzate'],
+                correct: 'vi alzate',
+                explanation: '✅ Corretto! Per voi: VI alzate.',
+                errorExplanation: '❌ Per voi: vi alzate'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Completa: Voi come _____? (chiamarsi)',
+                correct: ['vi chiamate'],
+                explanation: '✅ Corretto! "Come vi chiamate?" (voi + vi).'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Completa: Voi _____ spesso insieme? (divertirsi)',
+                options: ['ti diverti', 'si diverte', 'ci divertiamo', 'vi divertite'],
+                correct: 'vi divertite',
+                explanation: '✅ Corretto! Per voi: VI divertite.',
+                errorExplanation: '❌ Per voi: vi divertite'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Completa: Voi _____ prima di colazione? (lavarsi)',
+                correct: ['vi lavate'],
+                explanation: '✅ Corretto! "Vi lavate" (voi + vi).'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Completa: Voi _____ bene questa mattina? (sentirsi)',
+                options: ['ti senti', 'si sente', 'ci sentiamo', 'vi sentite'],
+                correct: 'vi sentite',
+                explanation: '✅ Corretto! Per voi: VI sentite.',
+                errorExplanation: '❌ Per voi: vi sentite'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Completa: Voi _____ in modo elegante per la festa. (vestirsi)',
+                correct: ['vi vestite'],
+                explanation: '✅ Corretto! "Vi vestite" (voi + vi).'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Completa: Voi _____ subito dopo pranzo? (addormentarsi)',
+                options: ['ti addormenti', 'si addormenta', 'ci addormentiamo', 'vi addormentate'],
+                correct: 'vi addormentate',
+                explanation: '✅ Corretto! Per voi: VI addormentate.',
+                errorExplanation: '❌ Per voi: vi addormentate'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Completa: Voi vi _____ insieme prima di uscire? (pettinarsi)',
+                correct: ['vi pettinate'],
+                explanation: '✅ Corretto! "Vi pettinate" (voi + vi).'
+
+            },
+
+            // ESERCIZI 41-47: Pronome SI (loro)
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Completa: Loro _____ sempre tardi. (alzarsi)',
+                options: ['si alza', 'ci alziamo', 'vi alzate', 'si alzano'],
+                correct: 'si alzano',
+                explanation: '✅ Corretto! Per loro: SI alzano.',
+                errorExplanation: '❌ Per loro: si alzano (attenzione: si alza = lui/lei, si alzano = loro)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Completa: Loro _____ Marco e Anna. (chiamarsi)',
+                correct: ['si chiamano'],
+                explanation: '✅ Corretto! "Si chiamano" (loro + si).'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Completa: I bambini _____ molto al parco. (divertirsi)',
+                options: ['si diverte', 'ci divertiamo', 'vi divertite', 'si divertono'],
+                correct: 'si divertono',
+                explanation: '✅ Corretto! Per loro: SI divertono.',
+                errorExplanation: '❌ Per loro: si divertono'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Completa: Loro _____ sempre le mani prima di mangiare. (lavarsi)',
+                correct: ['si lavano'],
+                explanation: '✅ Corretto! "Si lavano" (loro + si).'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Completa: Le ragazze _____ insieme nello stesso bagno. (pettinarsi)',
+                options: ['si pettina', 'ci pettiniamo', 'vi pettinate', 'si pettinano'],
+                correct: 'si pettinano',
+                explanation: '✅ Corretto! Per loro: SI pettinano.',
+                errorExplanation: '❌ Per loro: si pettinano'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Completa: Loro non _____ bene ultimamente. (sentirsi)',
+                correct: ['si sentono'],
+                explanation: '✅ Corretto! "Si sentono" (loro + si).'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Completa: Gli studenti _____ in modo informale a scuola. (vestirsi)',
+                options: ['si veste', 'ci vestiamo', 'vi vestite', 'si vestono'],
+                correct: 'si vestono',
+                explanation: '✅ Corretto! Per loro: SI vestono.',
+                errorExplanation: '❌ Per loro: si vestono'
+
+            },
+
+            // ESERCIZI 48-50: MISTO - Frasi complete
+            {
+                id: 48,
+                type: 'choice',
+                question: 'Completa: Io _____ alle 7, _____ i denti e poi _____ per andare a lavoro. (alzarsi, lavarsi, vestirsi)',
+                options: [
+                    'mi alzo... mi lavo... mi vesto',
+                    'alzo... lavo... vesto',
+                    'ti alzi... ti lavi... ti vesti',
+                    'si alza... si lava... si veste'
+                ],
+                correct: 'mi alzo... mi lavo... mi vesto',
+                explanation: '✅ Corretto! Mi alzo, mi lavo, mi vesto (tutti con MI per io).',
+                errorExplanation: '❌ Tutti i verbi sono riflessivi e richiedono il pronome MI per io'
+            },
+            {
+                id: 49,
+                type: 'fill',
+                question: 'Completa: Tu _____ presto, _____ bene e poi _____ con gli amici? (svegliarsi, sentirsi, divertirsi)',
+                correct: ['ti svegli... ti senti... ti diverti', 'ti svegli... ti senti... ti diverti?'],
+                explanation: '✅ Corretto! Ti svegli, ti senti, ti diverti (tutti con TI per tu).'
+            },
+            {
+                id: 50,
+                type: 'choice',
+                question: 'Completa la frase: "Noi _____ la mattina, _____ bene durante il giorno e _____ la sera stanchi." (alzarsi, sentirsi, addormentarsi)',
+                options: [
+                    'ci alziamo... ci sentiamo... ci addormentiamo',
+                    'ci alziamo... sentiamo... addormentiamo',
+                    'alziamo... sentiamo... addormentiamo',
+                    'si alzano... si sentono... si addormentano'
+                ],
+                correct: 'ci alziamo... ci sentiamo... ci addormentiamo',
+                explanation: '✅ Corretto! Ci alziamo, ci sentiamo, ci addormentiamo (tutti riflessivi con CI per noi). Complimenti!',
+                errorExplanation: '❌ Tutti i verbi sono riflessivi e richiedono CI per noi'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header reflexive">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la forma verbale..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = ex.errorExplanation;
+                
+                // Messaggi specifici per errori comuni
+                if (!selected.includes('mi ') && !selected.includes('ti ') && !selected.includes('si ') && !selected.includes('ci ') && !selected.includes('vi ') && !selected.includes('si ')) {
+                    errorMsg += '<br><strong>💡 Ricorda: i verbi riflessivi richiedono sempre il pronome (mi, ti, si, ci, vi, si)!</strong>';
+                }
+                
+                // Controllo specifico per confusione tra si (lui/lei) e si (loro)
+                if (ex.question.includes('loro') && selected.includes('si ') && !selected.includes('si ') + selected.split(' ').length > 2) {
+                    // Già gestito dalla risposta corretta
+                }
+                
+                feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                
+                // Messaggi specifici per errori comuni
+                if (!value.includes('mi ') && !value.includes('ti ') && !value.includes('si ') && !value.includes('ci ') && !value.includes('vi ')) {
+                    errorMsg += '<br><strong>💡 Manca il pronome riflessivo! Ricorda: mi, ti, si, ci, vi, si</strong>';
+                }
+                
+                feedback.innerHTML = errorMsg;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente i verbi riflessivi!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene i pronomi riflessivi mi, ti, si, ci, vi, si!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: mi (io), ti (tu), si (lui/lei), ci (noi), vi (voi), si (loro)!';
+            } else {
+                message = '📚 Ripassa le regole! Ricorda: i verbi riflessivi richiedono sempre il pronome prima del verbo!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

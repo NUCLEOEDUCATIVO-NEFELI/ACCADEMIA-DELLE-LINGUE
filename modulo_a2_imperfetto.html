@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Imperfetto - 50 Esercizi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #155724;
+            --success-bg: #d4edda;
+            --error: #721c24;
+            --error-bg: #f8d7da;
+            --parchment: #faf8f3;
+            --b1-color: #c9a227;
+            --imperfetto: #2563eb;
+            --are: #2c5282;
+            --ere: #702459;
+            --ire: #276749;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-header.imperfetto {
+            border-left-color: var(--imperfetto);
+            color: var(--imperfetto);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--imperfetto);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .conjugation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .conjugation-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .conjugation-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .conjugation-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .person {
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .verb-form {
+            font-weight: bold;
+            color: var(--imperfetto);
+            font-size: 1.2rem;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .btn-check {
+            background: var(--b1-color);
+            color: #000;
+        }
+
+        .btn-check:hover {
+            background: #b8941f;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .example-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .error-box {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .irregular-box {
+            background: white;
+            border: 1px solid var(--border);
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .irregular-verb {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1rem;
+            font-weight: bold;
+            min-width: 120px;
+        }
+
+        .irregular-form {
+            padding: 0.75rem 1rem;
+            flex: 1;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>L'Imperfetto - Modulo A2</h1>
+            <p>Il tempo del passato per descrizioni, abitudini e azioni in corso</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano A2</a>
+            <span>›</span>
+            <strong>L'Imperfetto (50 Esercizi)</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">⏳ L'Imperfetto Indicativo</h1>
+            <p class="page-subtitle">Come descrivere il passato: abitudini, stati d'animo e azioni in corso - 50 Esercizi</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('regolari', this)">Regolari</button>
+            <button class="nav-tab" onclick="showSection('irregolari', this)">Irregolari</button>
+            <button class="nav-tab" onclick="showSection('uso', this)">Quando usarlo</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header imperfetto">Che cos'è l'Imperfetto?</div>
+                <div class="card-body">
+                    <p>L'<strong>imperfetto indicativo</strong> è un tempo del passato che serve a descrivere:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem;">
+                        <li><strong>Abitudini</strong> nel passato ("Da bambino mangiavo sempre il gelato")</li>
+                        <li><strong>Descrizioni</strong> di luoghi, persone, situazioni ("Il cielo era azzurro")</li>
+                        <li><strong>Azioni in corso</strong> interrotte da altre ("Mentre leggevo, ha suonato il telefono")</li>
+                        <li><strong>Stati d'animo</strong> o condizioni fisiche ("Ero stanco", "Mi sentivo felice")</li>
+                    </ul>
+
+                    <div class="instruction-box">
+                        <strong>Formazione:</strong> Si ottiene eliminando l'infinito (-are, -ere, -ire) e aggiungendo le desinenze: <span class="verb-form">-vo, -vi, -va, -vamo, -vate, -vano</span>.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola importante:</strong> Le desinenze sono <strong>identiche</strong> per tutte e tre le coniugazioni (-are, -ere, -ire), ma i verbi in <strong>-ire</strong> con doppia consonante (-isco) mantengono la doppia consonante.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header imperfetto">Schema di Coniugazione</div>
+                <div class="card-body">
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Persona</th>
+                                <th>-ARE (parlare)</th>
+                                <th>-ERE (vedere)</th>
+                                <th>-IRE (dormire)</th>
+                                <th>-IRE in -isco (finire)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr onclick="speak('Io parlavo, vedevo, dormivo, finivo')">
+                                <td class="person">Io</td>
+                                <td class="verb-form">parlavo</td>
+                                <td class="verb-form">vedevo</td>
+                                <td class="verb-form">dormivo</td>
+                                <td class="verb-form">finivo</td>
+                            </tr>
+                            <tr onclick="speak('Tu parlavi, vedevi, dormivi, finivi')">
+                                <td class="person">Tu</td>
+                                <td class="verb-form">parlavi</td>
+                                <td class="verb-form">vedevi</td>
+                                <td class="verb-form">dormivi</td>
+                                <td class="verb-form">finivi</td>
+                            </tr>
+                            <tr onclick="speak('Lui parlava, vedeva, dormiva, finiva')">
+                                <td class="person">Lui/Lei</td>
+                                <td class="verb-form">parlava</td>
+                                <td class="verb-form">vedeva</td>
+                                <td class="verb-form">dormiva</td>
+                                <td class="verb-form">finiva</td>
+                            </tr>
+                            <tr onclick="speak('Noi parlavamo, vedevamo, dormivamo, finivamo')">
+                                <td class="person">Noi</td>
+                                <td class="verb-form">parlavamo</td>
+                                <td class="verb-form">vedevamo</td>
+                                <td class="verb-form">dormivamo</td>
+                                <td class="verb-form">finivamo</td>
+                            </tr>
+                            <tr onclick="speak('Voi parlavate, vedevate, dormivate, finivate')">
+                                <td class="person">Voi</td>
+                                <td class="verb-form">parlavate</td>
+                                <td class="verb-form">vedevate</td>
+                                <td class="verb-form">dormivate</td>
+                                <td class="verb-form">finivate</td>
+                            </tr>
+                            <tr onclick="speak('Loro parlavano, vedevano, dormivano, finivano')">
+                                <td class="person">Loro</td>
+                                <td class="verb-form">parlavano</td>
+                                <td class="verb-form">vedevano</td>
+                                <td class="verb-form">dormivano</td>
+                                <td class="verb-form">finivano</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE REGOLARI -->
+        <section id="regolari" class="section">
+            <div class="card">
+                <div class="card-header imperfetto">Verbi Regolari</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Regola generale:</strong> Togli l'infinito e aggiungi le desinenze in -v- (tranne che per i verbi in -ire in -isco).
+                    </div>
+
+                    <h3 style="color: var(--are); margin-top: 1.5rem;">Verbi in -ARE</h3>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Io <strong>mangiavo</strong> sempre la pizza il sabato</li>
+                        <li>Tu <strong>giocavi</strong> a calcio da bambino</li>
+                        <li>Lui <strong>lavorava</strong> in quell'ufficio</li>
+                        <li>Noi <strong>parlavamo</strong> italiano a casa</li>
+                    </ul>
+
+                    <h3 style="color: var(--ere); margin-top: 1.5rem;">Verbi in -ERE</h3>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Io <strong>vedevo</strong> spesso mia nonna</li>
+                        <li>Tu <strong>vendevi</strong> frutta al mercato</li>
+                        <li>Lei <strong>leggeva</strong> molti libri</li>
+                        <li>Noi <strong>scrivevamo</strong> lettere ogni settimana</li>
+                    </ul>
+
+                    <h3 style="color: var(--ire); margin-top: 1.5rem;">Verbi in -IRE</h3>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Io <strong>dormivo</strong> fino a tardi</li>
+                        <li>Tu <strong>sentivi</strong> sempre quella canzone</li>
+                        <li>Lui <strong>partiva</strong> presto al mattino</li>
+                        <li>Noi <strong>seguivamo</strong> le lezioni online</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE IRREGOLARI -->
+        <section id="irregolari" class="section">
+            <div class="card">
+                <div class="card-header imperfetto">Verbi Irregolari Principali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Attenzione:</strong> Questi verbi sono irregolari ma molto frequenti. Da memorizzare!
+                    </div>
+
+                    <div class="irregular-box">
+                        <div class="irregular-verb">ESSERE</div>
+                        <div class="irregular-form">ero, eri, era, eravamo, eravate, erano</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">AVERE</div>
+                        <div class="irregular-form">avevo, avevi, aveva, avevamo, avevate, avevano</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">FARE</div>
+                        <div class="irregular-form">facevo, facevi, faceva, facevamo, facevate, facevano</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">DIRE</div>
+                        <div class="irregular-form">dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">BERE</div>
+                        <div class="irregular-form">bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">ANDARE</div>
+                        <div class="irregular-form">andavo, andavi, andava, andavamo, andavate, andavano</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">VENIRE</div>
+                        <div class="irregular-form">venivo, venivi, veniva, venivamo, venivate, venivano</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">VOLERE</div>
+                        <div class="irregular-form">volevo, volevi, voleva, volevamo, volevate, volevano</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">POTERE</div>
+                        <div class="irregular-form">potevo, potevi, poteva, potevamo, potevate, potevano</div>
+                    </div>
+                    <div class="irregular-box">
+                        <div class="irregular-verb">DOVERE</div>
+                        <div class="irregular-form">dovevo, dovevi, doveva, dovevamo, dovevate, dovevano</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE USO -->
+        <section id="uso" class="section">
+            <div class="card">
+                <div class="card-header imperfetto">Quando usare l'Imperfetto vs Passato Prossimo</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Regola d'oro:</strong> L'imperfetto descrive il <strong>background</strong>, il passato prossimo racconta l'<strong>azione</strong>.
+                    </div>
+
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Si usa l'IMPERFETTO per:</th>
+                                <th>Si usa il PASSATO PROSSIMO per:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>📅 <strong>Abitudini</strong><br>"Andavo in palestra ogni giorno"</td>
+                                <td>⚡ <strong>Azioni singole</strong><br>"Sono andato in palestra ieri"</td>
+                            </tr>
+                            <tr>
+                                <td>🎨 <strong>Descrizioni</strong><br>"Il mare era calmo"</td>
+                                <td>🎯 <strong>Eventi completati</strong><br>"Ho nuotato per due ore"</td>
+                            </tr>
+                            <tr>
+                                <td>💭 <strong>Stati d'animo</strong><br>"Ero felice"</td>
+                                <td>⏰ <strong>Cambiamenti di stato</strong><br>"Sono diventato felice"</td>
+                            </tr>
+                            <tr>
+                                <td>⏳ <strong>Azioni in corso</strong><br>"Mangiavo quando..."</td>
+                                <td>🔔 <strong>Azioni che interrompono</strong><br>"...ha suonato il telefono"</td>
+                            </tr>
+                            <tr>
+                                <td>🕐 <strong>Ora nel passato</strong><br>"Erano le 8 di sera"</td>
+                                <td>📅 <strong>Date specifiche</strong><br>"Il 15 maggio 2020..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Esempio di narrazione:</strong><br>
+                        "Era una giornata <strong>serena</strong> (descrizione = imperfetto). Il sole <strong>brillava</strong> (descrizione = imperfetto) e gli uccelli <strong>canticchiavano</strong> (descrizione = imperfetto). Improvvisamente <strong>è arrivata</strong> (azione singola = passato prossimo) una tempesta."
+                    </div>
+
+                    <div class="error-box">
+                        <strong>❌ Errore comune:</strong><br>
+                        Non usare l'imperfetto per azioni singole completate nel passato!<br>
+                        Sbagliato: "Ieri andavo al cinema" (se è un'azione singola)<br>
+                        Corretto: "Ieri sono andato al cinema"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A2 - L'Imperfetto (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Coniugazione base -ARE
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Completa: Da bambino io _____ (giocare) sempre nel parco.',
+                options: ['giocavo', 'giocai', 'giocare', 'giocato'],
+                correct: 'giocavo',
+                explanation: '✅ Corretto! "Giocavo" è la prima persona singolare dell\'imperfetto di giocare.',
+                errorExplanation: '❌ L\'imperfetto di "giocare" alla prima persona è "giocavo"'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Completa: Tu _____ (mangiare) la pizza ogni venerdì.',
+                correct: ['mangiavi'],
+                explanation: '✅ Corretto! "Mangiavi" è la seconda persona singolare.'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Completa: Lui _____ (lavorare) in quell\'ufficio.',
+                options: ['lavorava', 'lavoravo', 'lavoravi', 'lavoravamo'],
+                correct: 'lavorava',
+                explanation: '✅ Corretto! Per "lui" si usa la terza persona singolare: lavorava.',
+                errorExplanation: '❌ Per "lui" (terza persona singolare) si usa -AVA'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Completa: Noi _____ (parlare) italiano a casa.',
+                correct: ['parlavamo'],
+                explanation: '✅ Corretto! "Parlavamo" è la prima persona plurale.'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Completa: Voi _____ (studiare) molto all\'università.',
+                options: ['studiavate', 'studiavamo', 'studiavano', 'studiava'],
+                correct: 'studiavate',
+                explanation: '✅ Corretto! Per "voi" si usa la seconda persona plurale: studiavate.',
+                errorExplanation: '❌ Per "voi" (seconda persona plurale) si usa -AVATE'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Completa: Loro _____ (abitare) in centro.',
+                correct: ['abitavano'],
+                explanation: '✅ Corretto! "Abitavano" è la terza persona plurale.'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['Io cantava bene', 'Io cantavo bene', 'Io cantavi bene', 'Io cantavamo bene'],
+                correct: 'Io cantavo bene',
+                explanation: '✅ Corretto! "Cantavo" è la prima persona singolare.',
+                errorExplanation: '❌ Per "io" si usa la desinenza -AVO'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Completa: Da piccola lei _____ (amare) i gatti.',
+                correct: ['amava'],
+                explanation: '✅ Corretto! "Amava" è la terza persona singolare femminile.'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Completa: _____ (noi, viaggiare) spesso in estate.',
+                options: ['Viaggiavamo', 'Viaggiavate', 'Viaggiavano', 'Viaggiava'],
+                correct: 'Viaggiavamo',
+                explanation: '✅ Corretto! Per "noi" si usa -avamo.',
+                errorExplanation: '❌ Per "noi" si usa la desinenza -AVAMO'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Completa: I miei genitori _____ (ascoltare) la radio ogni mattina.',
+                correct: ['ascoltavano'],
+                explanation: '✅ Corretto! "Ascoltavano" è la terza persona plurale.'
+            },
+
+            // ESERCIZI 11-20: Coniugazione -ERE
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Completa: Io _____ (vedere) spesso mia nonna.',
+                options: ['vedevo', 'vedeva', 'vedevi', 'vedevamo'],
+                correct: 'vedevo',
+                explanation: '✅ Corretto! "Vedevo" è la prima persona singolare di vedere.',
+                errorExplanation: '❌ Per "io" e verbi in -ERE si usa -EVO'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Completa: Tu _____ (scrivere) lettere ai tuoi amici.',
+                correct: ['scrivevi'],
+                explanation: '✅ Corretto! "Scrivevi" è la seconda persona singolare.'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Completa: Lei _____ (leggere) molti libri.',
+                options: ['leggeva', 'leggevo', 'leggevi', 'leggevamo'],
+                correct: 'leggeva',
+                explanation: '✅ Corretto! "Leggeva" è la terza persona singolare.',
+                errorExplanation: '❌ Per "lei" (terza persona) si usa -EVA'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Completa: Noi _____ (vendere) frutta al mercato.',
+                correct: ['vendevamo'],
+                explanation: '✅ Corretto! "Vendevamo" è la prima persona plurale.'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Completa: Voi _____ (mettere) sempre il cappello.',
+                options: ['mettevate', 'mettevamo', 'mettevano', 'metteva'],
+                correct: 'mettevate',
+                explanation: '✅ Corretto! Per "voi" si usa -evate.',
+                errorExplanation: '❌ Per "voi" si usa la desinenza -EVATE'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Completa: Loro _____ (credere) a tutto.',
+                correct: ['credevano'],
+                explanation: '✅ Corretto! "Credevano" è la terza persona plurale.'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['Io riceveva tanti regali', 'Io ricevevo tanti regali', 'Io ricevevi tanti regali', 'Io ricevevamo tanti regali'],
+                correct: 'Io ricevevo tanti regali',
+                explanation: '✅ Corretto! "Ricevevo" è la prima persona singolare.',
+                errorExplanation: '❌ Per "io" si usa la desinenza -EVO'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Completa: Da bambino tu _____ (correre) molto veloce.',
+                correct: ['correvi'],
+                explanation: '✅ Corretto! "Correvi" è la seconda persona singolare.'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Completa: Il professore _____ (spiegare) bene la lezione.',
+                options: ['spiegava', 'spiegavo', 'spiegavi', 'spiegavamo'],
+                correct: 'spiegava',
+                explanation: '✅ Corretto! "Spiegava" è la terza persona singolare (attenzione: spiegare è in -ARE!).',
+                errorExplanation: '❌ "Spiegare" è in -ARE, quindi per "lui" si usa -AVA'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Completa: Noi _____ (prendere) il treno ogni giorno.',
+                correct: ['prendevamo'],
+                explanation: '✅ Corretto! "Prendevamo" è la prima persona plurale.'
+            },
+
+            // ESERCIZI 21-30: Coniugazione -IRE
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Completa: Io _____ (dormire) fino a tardi la domenica.',
+                options: ['dormivo', 'dormiva', 'dormivi', 'dormivamo'],
+                correct: 'dormivo',
+                explanation: '✅ Corretto! "Dormivo" è la prima persona singolare.',
+                errorExplanation: '❌ Per "io" e verbi in -IRE si usa -IVO'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Completa: Tu _____ (sentire) sempre quella canzone.',
+                correct: ['sentivi'],
+                explanation: '✅ Corretto! "Sentivi" è la seconda persona singolare.'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Completa: Lui _____ (partire) presto al mattino.',
+                options: ['partiva', 'partivo', 'partivi', 'partivamo'],
+                correct: 'partiva',
+                explanation: '✅ Corretto! "Partiva" è la terza persona singolare.',
+                errorExplanation: '❌ Per "lui" (terza persona) si usa -IVA'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Completa: Noi _____ (seguire) le lezioni online.',
+                correct: ['seguivamo'],
+                explanation: '✅ Corretto! "Seguivamo" è la prima persona plurale.'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Completa: Voi _____ (capire) subito tutto.',
+                options: ['capivate', 'capivamo', 'capivano', 'capiva'],
+                correct: 'capivate',
+                explanation: '✅ Corretto! Per "voi" si usa -ivate.',
+                errorExplanation: '❌ Per "voi" si usa la desinenza -IVATE'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Completa: Loro _____ (aprire) il negozio alle 9.',
+                correct: ['aprivano'],
+                explanation: '✅ Corretto! "Aprivano" è la terza persona plurale.'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Quale frase è corretta? (finire, io)',
+                options: ['Io finiva sempre presto', 'Io finivo sempre presto', 'Io finivi sempre presto', 'Io finivamo sempre presto'],
+                correct: 'Io finivo sempre presto',
+                explanation: '✅ Corretto! "Finivo" è la prima persona singolare (verbo in -isco).',
+                errorExplanation: '❌ "Finire" è in -IRE con -isco, ma all\'imperfetto diventa FINIVO'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Completa: Tu _____ (preferire) il tè al caffè.',
+                correct: ['preferivi'],
+                explanation: '✅ Corretto! "Preferivi" è la seconda persona singolare.'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Completa: La bambina _____ (pulire) la sua camera.',
+                options: ['puliva', 'pulivo', 'pulivi', 'pulivamo'],
+                correct: 'puliva',
+                explanation: '✅ Corretto! "Puliva" è la terza persona singolare.',
+                errorExplanation: '❌ Per "lei" (terza persona) si usa -IVA'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Completa: Noi _____ (costruire) case in campagna.',
+                correct: ['costruivamo'],
+                explanation: '✅ Corretto! "Costruivamo" è la prima persona plurale.'
+            },
+
+            // ESERCIZI 31-40: Verbi irregolari (essere, avere, fare, dire)
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Completa: Io _____ (essere) molto felice da bambino.',
+                options: ['ero', 'ero', 'ero', 'ero'],
+                correct: 'ero',
+                explanation: '✅ Corretto! "Ero" è la prima persona singolare di essere.',
+                errorExplanation: '❌ L\'imperfetto di ESSERE è irregolare: ERO'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Completa: Tu _____ (avere) molti amici.',
+                correct: ['avevi'],
+                explanation: '✅ Corretto! "Avevi" è la seconda persona singolare di avere.'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Completa: Lui _____ (fare) il medico.',
+                options: ['faceva', 'facevo', 'facevi', 'facevamo'],
+                correct: 'faceva',
+                explanation: '✅ Corretto! "Faceva" è la terza persona singolare di fare.',
+                errorExplanation: '❌ L\'imperfetto di FARE è irregolare: FACEVA'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Completa: Noi _____ (dire) sempre la verità.',
+                correct: ['dicevamo'],
+                explanation: '✅ Corretto! "Dicevamo" è la prima persona plurale di dire.'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Completa: Voi _____ (bere) molta acqua.',
+                options: ['bevevate', 'bevevamo', 'bevevano', 'beveva'],
+                correct: 'bevevate',
+                explanation: '✅ Corretto! "Bevevate" è la seconda persona plurale di bere.',
+                errorExplanation: '❌ L\'imperfetto di BERE è BEVEVATE'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Completa: Loro _____ (volere) andare al cinema.',
+                correct: ['volevano'],
+                explanation: '✅ Corretto! "Volevano" è la terza persona plurale di volere.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['Io poteva venire', 'Io potevo venire', 'Io potevi venire', 'Io potevamo venire'],
+                correct: 'Io potevo venire',
+                explanation: '✅ Corretto! "Potevo" è la prima persona singolare di potere.',
+                errorExplanation: '❌ L\'imperfetto di POTERE è POTEVO'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Completa: Tu _____ (dovere) studiare molto.',
+                correct: ['dovevi'],
+                explanation: '✅ Corretto! "Dovevi" è la seconda persona singolare di dovere.'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Completa: Lei _____ (andare) spesso in vacanza.',
+                options: ['andava', 'andavo', 'andavi', 'andavamo'],
+                correct: 'andava',
+                explanation: '✅ Corretto! "Andava" è la terza persona singolare di andare.',
+                errorExplanation: '❌ Per "lei" e "andare" si usa ANDAVA'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Completa: Noi _____ (venire) sempre in ritardo.',
+                correct: ['venivamo'],
+                explanation: '✅ Corretto! "Venivamo" è la prima persona plurale di venire.'
+            },
+
+            // ESERCIZI 41-50: Contesti e differenza con passato prossimo
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Quale tempo usi per un\'abitudine nel passato? "Da bambino _____ (mangiare) la pasta tutti i giorni."',
+                options: ['mangiavo', 'ho mangiato', 'mangerò', 'mangi'],
+                correct: 'mangiavo',
+                explanation: '✅ Corretto! Le abitudini nel passato richiedono l\'imperfetto.',
+                errorExplanation: '❌ Le abitudini nel passato si esprimono con l\'IMPERFETTO'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Completa con l\'imperfetto (descrizione): Il cielo _____ (essere) azzurro e il sole _____ (brillare).',
+                correct: ['era', 'brillava'],
+                explanation: '✅ Corretto! Le descrizioni si fanno all\'imperfetto.'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Quale frase usa correttamente l\'imperfetto per un\'azione in corso?',
+                options: ['Mentre mangiavo, ha suonato il telefono', 'Mentre ho mangiato, suonava il telefono', 'Mentre mangio, suona il telefono', 'Mangio e il telefono suona'],
+                correct: 'Mentre mangiavo, ha suonato il telefono',
+                explanation: '✅ Corretto! L\'azione in corso (mangiavo) è all\'imperfetto, quella che interrompe (ha suonato) al passato prossimo.',
+                errorExplanation: '❌ L\'azione in corso si esprime con l\'IMPERFETTO, quella che interrompe con il PASSATO PROSSIMO'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Completa con l\'imperfetto (stato d\'animo): Ieri _____ (essere) molto stanco.',
+                correct: ['ero'],
+                explanation: '✅ Corretto! Gli stati d\'animo si esprimono con l\'imperfetto.'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Quale frase è corretta? (descrizione fisica nel passato)',
+                options: ['Mia nonna era alta e aveva i capelli bianchi', 'Mia nonna è stata alta e ha avuto i capelli bianchi', 'Mia nonna fu alta e ebbe i capelli bianchi', 'Mia nonna sarà alta e avrà i capelli bianchi'],
+                correct: 'Mia nonna era alta e aveva i capelli bianchi',
+                explanation: '✅ Corretto! Le descrizioni fisiche nel passato usano l\'imperfetto.',
+                errorExplanation: '❌ Le descrizioni fisiche nel passato richiedono l\'IMPERFETTO'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Completa: _____ (essere) le 8 di sera quando _____ (arrivare) Marco. (prima azione = imperfetto, seconda = passato prossimo)',
+                correct: ['erano', 'è arrivato'],
+                explanation: '✅ Corretto! L\'ora si esprime con l\'imperfetto, l\'arrivo (azione) al passato prossimo.'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Quale tempo usi per: "Ieri _____ (andare) al cinema"? (azione singola completata)',
+                options: ['andavo', 'sono andato', 'andai', 'andrò'],
+                correct: 'sono andato',
+                explanation: '✅ Corretto! Un\'azione singola completata richiede il passato prossimo, non l\'imperfetto.',
+                errorExplanation: '❌ Per un\'azione singola completata nel passato si usa il PASSATO PROSSIMO'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Completa con l\'imperfetto (background narrativo): Faceva freddo e _____ (nevicare).',
+                correct: ['nevicava'],
+                explanation: '✅ Corretto! Il background narrativo si descrive all\'imperfetto.'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['Quando ero giovane, ho viaggiato molto', 'Quando sono stato giovane, viaggiavo molto', 'Quando ero giovane, viaggiavo molto', 'Quando fui giovane, ho viaggiato molto'],
+                correct: 'Quando ero giovane, viaggiavo molto',
+                explanation: '✅ Corretto! "Essere giovani" è uno stato (imperfetto) e "viaggiare molto" è un\'abitudine (imperfetto).',
+                errorExplanation: '❌ Entrambe le azioni richiedono l\'IMPERFETTO: stato + abitudine'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Completa: Mentre _____ (leggere) il giornale, _____ (sentire) un rumore. (prima azione = imperfetto, seconda = passato prossimo)',
+                correct: ['leggevo', 'ho sentito'],
+                explanation: '✅ Corretto! "Leggere" è l\'azione in corso (imperfetto), "sentire" è l\'interruzione (passato prossimo). Complimenti!',
+                errorExplanation: '❌ Azione in corso = IMPERFETTO, interruzione = PASSATO PROSSIMO'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function speak(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text);
+            u.lang = 'it-IT';
+            u.rate = 0.8;
+            window.speechSynthesis.speak(u);
+        }
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header imperfetto">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = ex.errorExplanation;
+                
+                if (ex.question.includes('imperfetto') && ex.question.includes('passato prossimo')) {
+                    errorMsg += '<br><strong>💡 Ricorda: imperfetto per descrizioni/abitudini, passato prossimo per azioni singole!</strong>';
+                }
+                if (ex.question.includes('essere') || ex.question.includes('avere') || ex.question.includes('fare') || ex.question.includes('dire')) {
+                    errorMsg += '<br><strong>💡 Questo è un verbo irregolare, memorizza le forme!</strong>';
+                }
+                
+                feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                
+                if (ex.question.includes('imperfetto') && ex.question.includes('passato prossimo')) {
+                    errorMsg += '<br><strong>💡 Ricorda: imperfetto per il background, passato prossimo per l\'azione!</strong>';
+                }
+                if (ex.question.includes('essere') || ex.question.includes('avere') || ex.question.includes('fare') || ex.question.includes('dire')) {
+                    errorMsg += '<br><strong>💡 Verbi irregolari: essere (ero), avere (avevo), fare (facevo), dire (dicevo)!</strong>';
+                }
+                
+                feedback.innerHTML = errorMsg;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente l\'imperfetto!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene le regole dell\'imperfetto!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda le desinenze: -avo, -evo, -ivo e i verbi irregolari!';
+            } else {
+                message = '📚 Ripassa le regole! Ricorda: -ARE → -avo, -ERE → -evo, -IRE → -ivo!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>
