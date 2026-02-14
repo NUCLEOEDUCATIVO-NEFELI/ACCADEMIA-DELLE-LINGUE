@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B2 - Varietà Regionali dell'Italiano</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --regional: #8b4513;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .regional { color: var(--regional); font-weight: bold; }
+        .dialect-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .dialect-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .dialect-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .dialect-table tr:hover {
+            background: #f8f9fa;
+        }
+        .region-box {
+            background: #f9f9f9;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 5px solid var(--regional);
+        }
+        .region-title {
+            color: var(--regional);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--regional);
+            padding-bottom: 0.5rem;
+        }
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .intro-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            border-left: 5px solid var(--b1-color);
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .phonetic {
+            font-style: italic;
+            color: var(--secondary);
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B2 - Varietà Regionali dell'Italiano</h1>
+            <p>Le differenze linguistiche tra le regioni italiane</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#" onclick="return false;">Home</a>
+            <span>›</span>
+            <a href="#" onclick="return false;">Italiano B2</a>
+            <span>›</span>
+            <strong>Varietà Regionali</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🗺️ Varietà Regionali dell'Italiano</h1>
+            <p class="page-subtitle">Lessico, fonetica e grammatica regionale: dal dialetto all'italiano standard</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('north', this)">Nord Italia</button>
+            <button class="nav-tab" onclick="showSection('center', this)">Centro Italia</button>
+            <button class="nav-tab" onclick="showSection('south', this)">Sud Italia</button>
+            <button class="nav-tab" onclick="showSection('islands', this)">Isole</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="intro-box">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B2! 🗺️</h3>
+                <p>Oggi studiamo le <strong>varietà regionali dell'italiano</strong>, ovvero come la lingua italiana cambia in base alle diverse regioni geografiche, influenzata dai dialetti locali.</p>
+                <p style="margin-top: 10px;"><strong>Esempio:</strong> Invece dello standard <span class="regional">"bambino"</span>, in Toscana si dice <span class="regional">"bimbo"</span>, in Lombardia <span class="regional">"bagaj"</span> (dal dialetto), in Sicilia <span class="regional">"picciriddu"</span> (influenza dialettale sull'italiano regionale).</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cosa sono le Varietà Regionali?</div>
+                <div class="card-body">
+                    <p>Le <strong>varietà regionali</strong> (o italiani regionali) sono forme di italiano parlate nelle diverse aree geografiche d'Italia, caratterizzate da interferenze con i dialetti locali. Ogni regione ha il proprio "colore" linguistico.</p>
+                    
+                    <div class="example-box">
+                        <strong>Caratteristiche delle varietà regionali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Fonetica:</strong> Differenze di pronuncia (es. "s" sonora/z in Toscana)</li>
+                            <li><strong>Lessico:</strong> Parole specifiche di una regione (es. "scioccare" al Nord per "spaventare")</li>
+                            <li><strong>Morfosintassi:</strong> Strutture grammaticali influenzate dal dialetto</li>
+                            <li><strong>Interferenze:</strong> Prestiti diretti dal dialetto all'italiano</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Tipologie di fenomeni regionali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Regionalismi lessicali:</strong> Parole usate solo in certe zone (es. "cacio" al Centro-Sud per "formaggio")</li>
+                            <li><strong>Fonetismi:</strong> Pronunce caratteristiche (es. "ascensore" con "sh" al Nord)</li>
+                            <li><strong>Morfosintassi regionale:</strong> Costruzioni grammaticali locali (es. "mi viene fatto" al Sud)</li>
+                            <li><strong>Italiano popolare:</strong> Uso non standard dell'italiano, spesso con interferenze dialettali</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Importante:</strong> Le varietà regionali sono accettate nella comunicazione informale, ma in contesti formali (lavoro, scuola, media nazionali) è preferibile usare l'italiano standard. Conoscere le differenze regionali però è fondamentale per comprendere tutti i parlanti nativi!
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">La Questione della Lingua in Italia</div>
+                <div class="card-body">
+                    <p>L'Italia ha una storia linguistica complessa: per secoli il <strong>dialetto</strong> è stata la lingua quotidiana, mentre l'<strong>italiano</strong> era la lingua della cultura e dell'amministrazione. Oggi esiste un continuum tra dialetto, italiano regionale e italiano standard.</p>
+                    
+                    <table class="dialect-table">
+                        <thead>
+                            <tr>
+                                <th>Livello</th>
+                                <th>Caratteristiche</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Dialetto</strong></td>
+                                <td>Lingua locale, spesso non mutuamente intelligibile</td>
+                                <td>"El me parla" (veneto)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Italiano regionale</strong></td>
+                                <td>Italiano con interferenze dialettali</td>
+                                <td>"Lui parla" con accento veneto</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Italiano standard</strong></td>
+                                <td>Lingua nazionale, basata sul toscano letterario</td>
+                                <td>"Lui parla" (pronuncia neutra)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE NORD ITALIA -->
+        <section id="north" class="section">
+            <div class="card">
+                <div class="card-header">Nord Italia: Caratteristiche Linguistiche</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il Nord Italia include: Valle d'Aosta, Piemonte, Liguria, Lombardia, Veneto, Trentino-Alto Adige, Friuli-Venezia Giulia, Emilia-Romagna.</strong>
+                    </div>
+
+                    <div class="region-box">
+                        <div class="region-title">🎭 Lombardia e Nord-Ovest</div>
+                        <p><strong>Fonetica:</strong> La "s" tra vocali diventa "z" (casa → "caza"), uso frequente della "u" breve.</p>
+                        <p><strong>Lessico:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><span class="regional">Sciò</span> = "Senti/Look" (interiezione)</li>
+                            <li><span class="regional">Baule</span> = "Portabagagli" (bagagliaio)</li>
+                            <li><span class="regional">Piedino</span> = "Fermaporta"</li>
+                            <li><span class="regional">Anguria</span> = "Cocomero" (standard)</li>
+                        </ul>
+                        <p><strong>Morfosintassi:</strong> "Mi viene fatto" → influenza del lombardo "me vegn fà".</p>
+                    </div>
+
+                    <div class="region-box">
+                        <div class="region-title">🦁 Veneto</div>
+                        <p><strong>Fonetica:</strong> Caduta delle vocali finali atone, "x" per "s" (six → "sissi").</p>
+                        <p><strong>Lessico:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><span class="regional">Cioàro</span> = "Ragazzo"</li>
+                            <li><span class="regional">Bacaro</span> = "Osteria"</li>
+                            <li><span class="regional">Cicchetto</span> = "Ombra" (bicchiere di vino)</li>
+                            <li><span class="regional">Mula</span> = "Capa tosta"</li>
+                        </ul>
+                        <p><strong>Espressioni:</strong> "Essere in tórcio" = essere nei guai.</p>
+                    </div>
+
+                    <div class="region-box">
+                        <div class="region-title">🍁 Emilia-Romagna</div>
+                        <p><strong>Fonetica:</strong> Nasalizzazione delle vocali, "z" per "s" (casa → "caza").</p>
+                        <p><strong>Lessico:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><span class="regional">Bettola</span> = "Osteria" (anche usato dispregiativamente)</li>
+                            <li><span class="regional">Birra</span> = "Birra artigianale" (cultura birraria forte)</li>
+                            <li><span class="regional">Piada</span> = "Tipo di pane piatto"</li>
+                            <li><span class="regional">Sgonfio</span> = "Stanco, senza energia"</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Caratteristica comune del Nord:</strong> Uso diffuso del <strong>lei</strong> anche in contesti informali (influenza del "voi" di cortesia storico), mentre nel resto d'Italia prevale il "tu".
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CENTRO ITALIA -->
+        <section id="center" class="section">
+            <div class="card">
+                <div class="card-header">Centro Italia: Toscana e dintorni</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il Centro Italia include: Toscana, Umbria, Marche, Lazio. La Toscana è considerata il "cuore" della lingua italiana standard.</strong>
+                    </div>
+
+                    <div class="region-box">
+                        <div class="region-title">🌟 Toscana (La culla dell'italiano)</div>
+                        <p><strong>Fonetica:</strong> Gorgia toscana (le "c", "t", "p" diventano fricative: <span class="phonetic">[h], [θ], [ɸ]</span>), "s" sempre sonora tra vocali (casa → "caza").</p>
+                        
+                        <p><strong>Lessico toscano che è diventato standard:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><span class="regional">Bimbo</span> = "Bambino"</li>
+                            <li><span class="regional">Babbo</span> = "Papà"</li>
+                            <li><span class="regional">Bisnonno</span> = "Trisavolo"</li>
+                            <li><span class="regional">Accomodarsi</span> = "Sedersi/Entrare"</li>
+                        </ul>
+
+                        <p><strong>Lessico specifico:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><span class="regional">Grullo</span> = "Stupido"</li>
+                            <li><span class="regional">Bischero</span> = "Scemo"</li>
+                            <li><span class="regional">Ganzo</span> = "Fico/Bravo"</li>
+                            <li><span class="regional">Sbrindellato</span> = "Strappato, logoro"</li>
+                        </ul>
+
+                        <p><strong>Morfosintassi:</strong> Uso del <strong>noi</strong> al posto del <strong>io</strong> (maestà plurale): "Noi siamo d'accordo" (io sono d'accordo).</p>
+                    </div>
+
+                    <div class="region-box">
+                        <div class="region-title">🏛️ Lazio (Roma)</div>
+                        <p><strong>Fonetica:</strong> Monottongazione (piede → "péde"), caduta delle consonanti finali, "r" moscia.</p>
+                        <p><strong>Lessico:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><span class="regional">Er citofono</span> = "Il citofono" (articolo "er")</li>
+                            <li><span class="regional">Pantofolaio</span> = "Persona pigra"</li>
+                            <li><span class="regional">Sorcio</span> = "Topo"</li>
+                            <li><span class="regional">Piazzale</span> = "Piazza" (uso specifico)</li>
+                            <li><span class="regional">Daje!</span> = "Dai!/Forza!"</li>
+                        </ul>
+                        <p><strong>Espressioni tipiche:</strong> "Che barba!" (che noia), "Che palle!" (fastidio), "Li mortacci tua!" (insulto colorito).</p>
+                    </div>
+
+                    <div class="region-box">
+                        <div class="region-title">🌿 Umbria e Marche</div>
+                        <p>Variabili intermedie tra Toscana e Sud. In Umbria: "io c'ho" (influenza del "jo ò" dialettale).</p>
+                        <p><strong>Lessico umbro:</strong> <span class="regional">Cresciuto</span> = "Allevato" (carne), <span class="regional">Pasciuto</span> = "Nutrito".</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Nota storica:</strong> L'italiano standard si basa sul <strong>fiorentino</strong> del XIV secolo (Dante, Petrarca, Boccaccio), ma la Toscana moderna ha sviluppato caratteristiche proprie (gorgia) che non fanno parte dello standard!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE SUD ITALIA -->
+        <section id="south" class="section">
+            <div class="card">
+                <div class="card-header">Sud Italia: Abruzzo, Molise, Campania, Puglia, Basilicata, Calabria</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il Sud Italia mantiene forte il legame con i dialetti, con l'italiano regionale fortemente influenzato da strutture sintattiche meridionali.</strong>
+                    </div>
+
+                    <div class="region-box">
+                        <div class="region-title">🌋 Campania (Napoli)</div>
+                        <p><strong>Fonetica:</strong> "R" molto vibrante, vocali chiuse, accento musicale.</p>
+                        <p><strong>Lessico:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><span class="regional">Guaglione</span> = "Ragazzo"</li>
+                            <li><span class="regional">Cumpà</span> = "Compare/Amico"</li>
+                            <li><span class="regional">Sciò</span> = "Guarda/Senti"</li>
+                            <li><span class="regional">Fattura</span> = "Malocchio"</li>
+                            <li><span class="regional">Piazzetta</span> = "Strada"</li>
+                        </ul>
+                        <p><strong>Morfosintassi:</strong> "Ce vò" = "Ci vuole", "Mo" = "Ora/Adesso", "Nun" = "Non".</p>
+                    </div>
+
+                    <div class="region-box">
+                        <div class="region-title">🌶️ Calabria</div>
+                        <p><strong>Fonetica:</strong> Metafonesi (influenza della vocale finale sulla precedente), "u" per "o".</p>
+                        <p><strong>Lessico:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><span class="regional">Chjachjero</span> = "Chiacchierare"</li>
+                            <li><span class="regional">Rugnu</span> = "Ringhio"</li>
+                            <li><span class="regional">Caddhu</span> = "Caduto"</li>
+                        </ul>
+                    </div>
+
+                    <div class="region-box">
+                        <div class="region-title">🫒 Puglia</div>
+                        <p><strong>Lessico:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><span class="regional">Uè</span> = "Ehi/Oi"</li>
+                            <li><span class="regional">Masciddaru</span> = "Sfortunato"</li>
+                            <li><span class="regional">Tajà</span> = "Tagliare"</li>
+                            <li><span class="regional">Spassarsela</span> = "Divertirsi" (usato anche nel resto d'Italia, ma nato qui)</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Caratteristiche morfosintattiche del Sud:</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li>Uso di <strong>"mi viene fatto"</strong> invece di "devo fare"</li>
+                            <li>Concordanza del participio con l'oggetto: "Ho mangiata la pasta"</li>
+                            <li>Uso pleonastico dei pronomi: "A me mi piace"</li>
+                            <li>Doppio negativo: "Non ho visto nessuno" (standard, ma usato anche col singolo "non")</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ISOLE -->
+        <section id="islands" class="section">
+            <div class="card">
+                <div class="card-header">Isole: Sicilia e Sardegna</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Sicilia e Sardegna hanno storie linguistiche autonome, con dialetti considerati "lingue" a sé stanti per la grande differenza rispetto all'italiano.</strong>
+                    </div>
+
+                    <div class="region-box">
+                        <div class="region-title">🏝️ Sicilia</div>
+                        <p><strong>Fonetica:</strong> "i" per "e" (bedda → "bella"), "u" per "o", caduta delle consonanti finali.</p>
+                        <p><strong>Lessico siciliano nell'italiano regionale:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><span class="regional">Picciriddu</span> = "Bambino"</li>
+                            <li><span class="regional">Bedda</span> = "Bella"</li>
+                            <li><span class="regional">Minchia!</span> = "Interiezione" (sorpresa/forte)</li>
+                            <li><span class="regional">Troncare</span> = "Tagliare/Interrompere"</li>
+                            <li><span class="regional">Abbannare</span> = "Abbandonare"</li>
+                            <li><span class="regional">Accattare</span> = "Comprare"</li>
+                        </ul>
+                        <p><strong>Espressioni:</strong> "Ma chi ciàmu!" (ma chi me l'ha fatto fare!), "Acqua in bocca!" (segreto!).</p>
+                    </div>
+
+                    <div class="region-box">
+                        <div class="region-title">🏖️ Sardegna</div>
+                        <p><strong>Caratteristica unica:</strong> Il sardo è considerata una lingua distinta (ISO 639-1: "sc").</p>
+                        <p><strong>Fonetica:</strong> Suoni gutturali, articolo determinativo <strong>"su/sa"</strong> (dal latino "ipse").</p>
+                        <p><strong>Lessico sardo nell'italiano regionale:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><span class="regional">Babbu</span> = "Padre"</li>
+                            <li><span class="regional">Mamma</span> = "Madre" (anche "mamma" standard, ma qui specifico)</li>
+                            <li><span class="regional">Abboiare</span> = "Gridare" (non solo il cane!)</li>
+                            <li><span class="regional">Campidanese/Logudorese</span> = Varietà dialettali</li>
+                        </ul>
+                        <p><strong>Prestiti lessicali:</strong> "Culurgiones", "Porceddu", "Seada" (cibi tipici entrati nell'italiano).</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> In Sardegna l'italiano regionale è molto diverso dallo standard a causa dell'substrato sardo. Frasi come "Andare a prendere il pane" possono diventare "Andare a pigliare su pane" (influenza del "pigliare" sardo e dell'articolo "su").
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B2 - Varietà Regionali dell'Italiano (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Concetti generali
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Cosa sono le varietà regionali dell italiano?',
+                options: ['Forme di italiano con influenze dialettali locali', 'Dialetti puri', 'Errori di grammatica', 'Lingue straniere parlate in Italia'],
+                correct: 'Forme di italiano con influenze dialettali locali',
+                explanation: '✅ Corretto! Sono forme di italiano standard influenzate dai dialetti locali',
+                errorExplanation: '❌ Le varietà regionali sono forme di italiano con interferenze dialettali, non dialetti puri'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'In Toscana, bambino diventa _________.',
+                correct: ['bimbo'],
+                explanation: '✅ Corretto! Bimbo è tipico toscano ed è entrato nello standard italiano'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Quale regione è considerata la culla della lingua italiana?',
+                options: ['Toscana', 'Lombardia', 'Lazio', 'Sicilia'],
+                correct: 'Toscana',
+                explanation: '✅ Corretto! L italiano standard si basa sul fiorentino del XIV secolo',
+                errorExplanation: '❌ La Toscana (in particolare Firenze) è la culla della lingua italiana per via di Dante, Petrarca e Boccaccio'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'A Napoli, ragazzo si dice _________.',
+                correct: ['guaglione', 'guagliò'],
+                explanation: '✅ Corretto! Guaglione è tipico napoletano'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Cosa caratterizza la gorgia toscana?',
+                options: ['Le consonanti occlusive diventano fricative', 'Le vocali si allungano', 'Le consonanti si raddoppiano', 'Le vocali cadono'],
+                correct: 'Le consonanti occlusive diventano fricative',
+                explanation: '✅ Corretto! In Toscana casa può suonare come hasa con la gorgia',
+                errorExplanation: '❌ La gorgia toscana trasforma c, t, p in suoni fricativi'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'In Veneto, ragazzo si dice _________.',
+                correct: ['cioàro', 'ciaro'],
+                explanation: '✅ Corretto! Cioàro è tipico veneto'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Quale parola indica papà in Toscana?',
+                options: ['Babbo', 'Tatà', 'Papà', 'Babbu'],
+                correct: 'Babbo',
+                explanation: '✅ Corretto! Babbo è tipico toscano (es. Babbo Natale)',
+                errorExplanation: '❌ Babbo è la forma toscana, poi entrata nello standard con Babbo Natale'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'A Roma, il citofono diventa er citofono con articolo _________.',
+                correct: ['er'],
+                explanation: '✅ Corretto! L articolo er è tipico del romanesco'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Cosa significa sciò nel Nord Italia?',
+                options: ['Senti/Look', 'No', 'Andiamo', 'Grazie'],
+                correct: 'Senti/Look',
+                explanation: '✅ Corretto! Sciò è un interiezione usata in Lombardia e Veneto',
+                errorExplanation: '❌ Sciò (da senti) è un interiezione per attirare l attenzione'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'In Sicilia, bella si dice _________.',
+                correct: ['bedda'],
+                explanation: '✅ Corretto! Bedda è la forma siciliana di bella'
+            },
+            // ESERCIZI 11-20: Fonetica regionale
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Come si pronuncia casa in Toscana?',
+                options: ['Casa con s sonora', 'Hasa', 'Cassa', 'Caza'],
+                correct: 'Casa con s sonora',
+                explanation: '✅ Corretto! In Toscana la s tra vocali è sempre sonora',
+                errorExplanation: '❌ In Toscana la s intervocalica è sonora, ma la gorgia interessa c, t, p'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Nel Nord Italia, casa tra vocali può diventare _________.',
+                correct: ['caza'],
+                explanation: '✅ Corretto! La sorda diventa sonora (s → z) nel Nord'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Cosa succede alla r finale in alcune aree del Centro-Sud?',
+                options: ['Viene vocalizzata o persa', 'Si raddoppia', 'Diventa s', 'Si trasforma in l'],
+                correct: 'Viene vocalizzata o persa',
+                explanation: '✅ Corretto! Spesso cade o diventa una vocale',
+                errorExplanation: '❌ Nel Centro-Sud la r finale spesso cade o si vocalizza'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'In Sardegna, l articolo il diventa _________.',
+                correct: ['su', 'sa'],
+                explanation: '✅ Corretto! Su/sa deriva dal latino ipse ed è tipico sardo'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Come si chiama il fenomeno per cui la vocale finale influenza la precedente?',
+                options: ['Metafonesi', 'Dittongo', 'Sinalefe', 'Elisione'],
+                correct: 'Metafonesi',
+                explanation: '✅ Corretto! Comune in Calabria e altre aree meridionali',
+                errorExplanation: '❌ La metafonesi è l armonia vocalica tipica del Sud'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'A Roma, piede si pronuncia con monottongazione del dittongo _________.',
+                correct: ['ie'],
+                explanation: '✅ Corretto! Péde con monottongazione del dittongo ie'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Cosa caratterizza la pronuncia lombarda?',
+                options: ['Vocali chiuse e s sonora', 'Gorgia', 'Vocali aperte', 'Caduta delle finali'],
+                correct: 'Vocali chiuse e s sonora',
+                explanation: '✅ Corretto! Il lombardo ha vocali chiuse e tendenza alla sonorizzazione',
+                errorExplanation: '❌ Il lombardo si caratterizza per vocali chiuse e s sonora tra vocali'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'In Toscana, la casa si pronuncia con la _________.',
+                correct: ['gorgia'],
+                explanation: '✅ Corretto! Gorgia toscana e s sonora sono i tratti distintivi'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Come si pronuncia ascensore nel Nord Italia?',
+                options: ['Ascensore con sh', 'Ascensore standard', 'Ascensore con sc', 'Ascensore con s'],
+                correct: 'Ascensore con sh',
+                explanation: '✅ Corretto! Spesso si sente ash-ensore nel Nord',
+                errorExplanation: '❌ Nel Nord sc davanti a e/i diventa sh (fricativa)'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'In Calabria, caduto può diventare caddhu per _________.',
+                correct: ['metafonesi'],
+                explanation: '✅ Corretto! Influenza della metafonesi e del suono u'
+            },
+            // ESERCIZI 21-30: Lessico regionale
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Cosa significa babbo in Toscana?',
+                options: ['Padre/Papà', 'Nonno', 'Zio', 'Fratello'],
+                correct: 'Padre/Papà',
+                explanation: '✅ Corretto! Babbo è il papà in Toscana (da qui Babbo Natale)',
+                errorExplanation: '❌ Babbo significa papà in toscano'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'In Lombardia, anguria si chiama _________.',
+                correct: ['cocomero'],
+                explanation: '✅ Corretto! Cocomero è lombardo, anguria è toscano/standard alternativo'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Cosa è un bacaro a Venezia?',
+                options: ['Una osteria', 'Un pittore', 'Un barbiere', 'Un gondoliere'],
+                correct: 'Una osteria',
+                explanation: '✅ Corretto! Bacaro è l osteria tipica veneziana',
+                errorExplanation: '❌ Bacaro è l osteria veneziana dove si beve ombra e si mangiano cicchetti'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'A Napoli, compare si dice _________.',
+                correct: ['cumpà', 'cumpari'],
+                explanation: '✅ Corretto! Cumpà è tipico napoletano'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Quale parola toscana significa stupido?',
+                options: ['Grullo', 'Babbo', 'Ganzo', 'Bischero'],
+                correct: 'Grullo',
+                explanation: '✅ Corretto! Grullo = stupido, bischero = altro sinonimo toscano',
+                errorExplanation: '❌ Grullo in Toscana significa stupido/scemo'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'In Sicilia, bambino si dice _________.',
+                correct: ['picciriddu', 'picciriddo'],
+                explanation: '✅ Corretto! Picciriddu è tipico siciliano'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Cosa significa daje a Roma?',
+                options: ['Forza/Dai', 'Grazie', 'Ciao', 'Scusa'],
+                correct: 'Forza/Dai',
+                explanation: '✅ Corretto! Daje è l incitamento tipico romano',
+                errorExplanation: '❌ Daje (dai + ce) significa forza/dai nel romanesco'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'In Sardegna, padre si dice _________.',
+                correct: ['babbu', 'babbo'],
+                explanation: '✅ Corretto! Babbu è sardo, diverso dal toscano babbo'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Cosa è una piada in Romagna?',
+                options: ['Un pane piatto', 'Un dolce', 'Una torta', 'Un tipo di pasta'],
+                correct: 'Un pane piatto',
+                explanation: '✅ Corretto! La piadina (piada) è tipica dell Emilia-Romagna',
+                errorExplanation: '❌ La piada o piadina è il pane piatto romagnolo'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'In Puglia, ehi si dice _________.',
+                correct: ['uè'],
+                explanation: '✅ Corretto! Uè è l interiezione pugliese'
+            },
+            // ESERCIZI 31-40: Morfosintassi regionale
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Cosa caratterizza la maestà plurale toscana?',
+                options: ['Uso del noi al posto del io', 'Uso del voi per tutti', 'Uso del tu per anziani', 'Uso del lei per animali'],
+                correct: 'Uso del noi al posto del io',
+                explanation: '✅ Corretto! Noi siamo d accordo invece di Io sono d accordo',
+                errorExplanation: '❌ La maestà plurale toscana usa noi per io (es. Noi siamo d accordo)'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Nel Sud, devo fare può diventare mi _________ fatto.',
+                correct: ['viene'],
+                explanation: '✅ Corretto! Mi viene fatto è tipico del Sud'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Come si concorda il participio passato nel Sud?',
+                options: ['Con l oggetto: Ho mangiata la pasta', 'Con il soggetto', 'Non si concorda', 'Si usa l infinito'],
+                correct: 'Con l oggetto: Ho mangiata la pasta',
+                explanation: '✅ Corretto! Concordanza con l oggetto femminile',
+                errorExplanation: '❌ Nel Sud si dice Ho mangiata la pasta (concordanza con l oggetto)'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Nel Nord, il lei si usa anche in contesti _________.',
+                correct: ['informali', 'familiari'],
+                explanation: '✅ Corretto! Influenza del voi storico di cortesia'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Cosa significa a me mi piace dal punto di vista grammaticale?',
+                options: ['Pleonasmo del pronome', 'Errore grave', 'Forma corretta', 'Solo dialetto'],
+                correct: 'Pleonasmo del pronome',
+                explanation: '✅ Corretto! Doppio pronome pleonastico tipico del Centro-Sud',
+                errorExplanation: '❌ A me mi piace è un pleonasmo (doppio pronome) tipico del Sud'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'In Toscana, faccio si può dire facendo _________.',
+                correct: ['gorgia'],
+                explanation: '✅ Corretto! Haccio con la gorgia toscana'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Cosa caratterizza l italiano popolare meridionale?',
+                options: ['Uso di che polivalente', 'Uso corretto dei tempi', 'Assenza di dialetto', 'Pronuncia perfetta'],
+                correct: 'Uso di che polivalente',
+                explanation: '✅ Corretto! Che usato in molte funzioni (congiunzione, pronome, etc.)',
+                errorExplanation: '❌ L italiano popolare usa che in modo polivalente (es. Il libro che l ho letto)'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'A Napoli, ora si dice _________.',
+                correct: ['mo'],
+                explanation: '✅ Corretto! Mo è tipico napoletano'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Come si forma il plurale dei nomi in -o in Toscana?',
+                options: ['-i standard', '-a (archaico)', '-e', '-u'],
+                correct: '-i standard',
+                explanation: '✅ Corretto! La Toscana usa il plurale standard in -i',
+                errorExplanation: '❌ La Toscana usa il plurale standard, ma alcune parlate rurali mantengono tratti antichi'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'In Sardegna, andare a prendere diventa andare a _________.',
+                correct: ['pigliare'],
+                explanation: '✅ Corretto! Pigliare invece di prendere per influenza sarda'
+            },
+            // ESERCIZI 41-50: Contesti e comprensione
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Quale regionalismo indica formaggio al Centro-Sud?',
+                options: ['Cacio', 'Formaggio', 'Casu', 'Furmai'],
+                correct: 'Cacio',
+                explanation: '✅ Corretto! Cacio è usato al Centro-Sud (es. Cacio e pepe)',
+                errorExplanation: '❌ Cacio è il termine centro-meridionale per formaggio'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'In Veneto, bicchiere di vino si dice _________.',
+                correct: ['ombra', 'cicchetto'],
+                explanation: '✅ Corretto! Ombra è il tipico bicchiere di vino veneziano'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Cosa significa minchia in Sicilia?',
+                options: ['Interiezione di sorpresa', 'Cibo', 'Persona', 'Luogo'],
+                correct: 'Interiezione di sorpresa',
+                explanation: '✅ Corretto! Interiezione molto forte e colorita',
+                errorExplanation: '❌ Minchia è un interiezione siciliana (anche se volgare) di sorpresa/forte'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'A Roma, essere nei guai si dice essere in _________.',
+                correct: ['tórcio', 'torcio'],
+                explanation: '✅ Corretto! Essere in tórcio è tipico romano'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Quale parola indica testa in molti dialetti meridionali?',
+                options: ['Capa', 'Testa', 'Cefa', 'Coppa'],
+                correct: 'Capa',
+                explanation: '✅ Corretto! Capa è il termine dialettale diffuso al Sud',
+                errorExplanation: '❌ Capa è la forma meridionale per testa (da capo)'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'In Toscana, scemo si dice _________.',
+                correct: ['bischero', 'grullo'],
+                explanation: '✅ Corretto! Entrambi sono sinonimi toscani per scemo'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Cosa è il porceddu in Sardegna?',
+                options: ['Maialetto arrosto', 'Formaggio', 'Pane', 'Vino'],
+                correct: 'Maialetto arrosto',
+                explanation: '✅ Corretto! Piatto tipico sardo (maialino da latte)',
+                errorExplanation: '❌ Il porceddu è il maialino arrosto tipico della Sardegna'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'In Calabria, parlare si dice _________.',
+                correct: ['chiacchierare', 'chjachjero'],
+                explanation: '✅ Corretto! Chjachjero è la forma calabrese'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Quale espressione romana significa che noia?',
+                options: ['Che barba!', 'Che pizza!', 'Che fatica!', 'Che sonno!'],
+                correct: 'Che barba!',
+                explanation: '✅ Corretto! Che barba! = che noia, nel romanesco',
+                errorExplanation: '❌ Che barba! è l espressione romana per che noia'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'In tutta Italia, acqua in bocca! significa _________.',
+                correct: ['segreto', 'tieni il segreto', 'non dire niente'],
+                explanation: '✅ Corretto! Significa tieni il segreto, espressione diffusa ma tipica del Sud. Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(function(b) { b.classList.remove('active'); });
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            var ex = exercises[currentExercise];
+            var container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = (currentExercise + 1) + ' / ' + exercises.length;
+            document.getElementById('currentScore').textContent = totalScore + ' / 100';
+            document.getElementById('progressBar').style.width = ((currentExercise / exercises.length) * 100) + '%';
+            
+            answered = false;
+
+            var html = '<div class="card" style="animation: fadeIn 0.4s ease;">' +
+                '<div class="card-header">Esercizio ' + ex.id + '</div>' +
+                '<div class="card-body">' +
+                '<div class="exercise-counter">Esercizio ' + (currentExercise + 1) + ' di ' + exercises.length + '</div>' +
+                '<div class="question-box">' +
+                '<div class="question-text">' + ex.question + '</div>' +
+                '</div>';
+
+            if (ex.type === 'choice') {
+                html += '<div class="options-grid" id="optionsGrid">';
+                var shuffledOptions = ex.options.slice().sort(function() { return Math.random() - 0.5; });
+                shuffledOptions.forEach(function(opt) {
+                    html += '<button class="option-btn" onclick="checkChoice(\'' + opt.replace(/'/g, "\\'") + '\')" data-value="' + opt.replace(/"/g, '&quot;') + '">' + opt + '</button>';
+                });
+                html += '</div>';
+            } else if (ex.type === 'fill') {
+                html += '<div style="text-align: center; margin-bottom: 1.5rem;">' +
+                    '<input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key===\'Enter\') checkFill()">' +
+                    '</div>' +
+                    '<div class="text-center">' +
+                    '<button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>' +
+                    '</div>';
+            }
+
+            html += '<div class="feedback" id="feedback"></div>' +
+                '<div class="text-center" id="nextBtnContainer" style="display: none;">' +
+                '<button class="btn-primary" onclick="nextExercise()">Successivo →</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(function() { document.getElementById('fillInput').focus(); }, 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            var ex = exercises[currentExercise];
+            var btns = document.querySelectorAll('#optionsGrid .option-btn');
+            var feedback = document.getElementById('feedback');
+            var nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(function(btn) {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = ex.errorExplanation + '<br><strong>Risposta corretta:</strong> ' + ex.correct;
+            }
+
+            document.getElementById('currentScore').textContent = totalScore + ' / 100';
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            var input = document.getElementById('fillInput');
+            var value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            var ex = exercises[currentExercise];
+            var feedback = document.getElementById('feedback');
+            var nextContainer = document.getElementById('nextBtnContainer');
+
+            var isCorrect = ex.correct.some(function(ans) { return value === ans.toLowerCase(); });
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = '❌ Sbagliato.<br><strong>Risposta corretta:</strong> ' + ex.correct[0];
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = totalScore + ' / 100';
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = totalScore + '/100';
+            
+            var message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Conosci perfettamente le varietà regionali italiane!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene le differenze regionali, ma alcuni dettagli sfuggono!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: Toscana (gorgia, bimbo), Nord (sciò, anguria/cocomero), Sud (guaglione, mi viene fatto)!';
+            } else {
+                message = '📚 Ripassa le tabelle! Ricorda: gorgia toscana, "lei" nel Nord, "guaglione" a Napoli, "bedda" in Sicilia!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(function() { return Math.random() - 0.5; });
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(function() { return Math.random() - 0.5; });
+        });
+    </script>
+</body>
+</html>

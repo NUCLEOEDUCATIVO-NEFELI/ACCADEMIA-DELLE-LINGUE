@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B2 - Connettivi Avanzati</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --connector: #0891b2;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .connector { color: var(--connector); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--b1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--b1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--b1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B2 - Connettivi Avanzati</h1>
+            <p>Collegare le idee con precisione: connettivi logici, temporali, causali e testuali</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B2</a>
+            <span>›</span>
+            <strong>Connettivi Avanzati</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🔗 Connettivi Avanzati</h1>
+            <p class="page-subtitle">Strumenti essenziali per la coesione testuale e la chiarezza espositiva</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('causal', this)">Causali</button>
+            <button class="nav-tab" onclick="showSection('temporal', this)">Temporali</button>
+            <button class="nav-tab" onclick="showSection('concessive', this)">Concessivi</button>
+            <button class="nav-tab" onclick="showSection('conditional', this)">Condizionali</button>
+            <button class="nav-tab" onclick="showSection('textual', this)">Testuali</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍🏫</div>
+                    <div class="avatar-name">Prof. Marco</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B2! 🔗</h3>
+                    <p>Oggi studiamo i <strong>connettivi avanzati</strong>, strumenti fondamentali per collegare le frasi e le idee in modo logico e coerente.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="connector">Poiché</span> pioveva, rimanemmo a casa" (causa) o "<span class="connector">Nonostante</span> fosse tardi, uscimmo" (concessione).</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cosa sono i Connettivi?</div>
+                <div class="card-body">
+                    <p>I <strong>connettivi</strong> (o connettori) sono parole o espressioni che stabiliscono legami logici tra concetti, eventi o parti di un testo. [^53^]</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Funzioni principali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Coesione:</strong> Unire le frasi in modo logico</li>
+                            <li><strong>Chiarezza:</strong> Rendere espliciti i rapporti tra le idee</li>
+                            <li><strong>Fluidità:</strong> Creare un discorso lineare e naturale</li>
+                            <li><strong>Precisazione:</strong> Specificare il tipo di relazione (causa, tempo, contrasto...)</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Classificazione per significato:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Causali:</strong> poiché, dato che, siccome, visto che</li>
+                            <li><strong>Temporali:</strong> nel momento in cui, non appena, finché</li>
+                            <li><strong>Concessivi:</strong> benché, sebbene, nonostante, malgrado</li>
+                            <li><strong>Condizionali:</strong> a patto che, a condizione che, purché</li>
+                            <li><strong>Consecutivi:</strong> al punto che, tanto che, così...che</li>
+                            <li><strong>Finali:</strong> affinché, allo scopo di, al fine di</li>
+                            <li><strong>Testuali:</strong> inoltre, tuttavia, d'altra parte</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Molti connettivi avanzati richiedono il <strong>congiuntivo</strong>! Ricorda: benché/sebbene/nonostante + congiuntivo; a patto che/a condizione che/purché + congiuntivo. [^59^]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CAUSALI -->
+        <section id="causal" class="section">
+            <div class="card">
+                <div class="card-header">Connettivi Causali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Esprimono la causa, il motivo o la ragione di un'azione.</strong> [^60^]
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Connettivo</th><th>Uso</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="connector">Poiché</td>
+                                <td>Formale, iniziale o media</td>
+                                <td>Poiché era malato, non è venuto</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Siccome</td>
+                                <td>Colloquiale, spesso iniziale</td>
+                                <td>Siccome piove, restiamo a casa</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Dato che / Visto che</td>
+                                <td>Colloquiale, causa nota</td>
+                                <td>Visto che sei qui, aiutami</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Dal momento che</td>
+                                <td>Formale, causa evidente</td>
+                                <td>Dal momento che insisti, ti do ragione</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Giacché</td>
+                                <td>Letterario/formale</td>
+                                <td>Giacché lo chiedi, te lo dirò</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Per il fatto che</td>
+                                <td>Enfatico, causa ovvia</td>
+                                <td>Non viene per il fatto che è stanco</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Differenza strutturale:</strong><br>
+                        <em>Perché</em> = effetto + causa (Non viene <strong>perché</strong> è stanco)<br>
+                        <em>Poiché/Siccome</em> = causa + effetto (<strong>Poiché</strong> è stanco, non viene) [^63^]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TEMPORALI -->
+        <section id="temporal" class="section">
+            <div class="card">
+                <div class="card-header">Connettivi Temporali Avanzati</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Indicano relazioni temporali tra azioni: anteriorità, contemporaneità, posteriorità.</strong> [^55^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Connettivo</th><th>Significato</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="connector">Non appena / Appena</td>
+                                <td>Immediatamente dopo</td>
+                                <td>Non appena arrivo, ti chiamo</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Nel momento in cui</td>
+                                <td>Esatta contemporaneità</td>
+                                <td>Nel momento in cui parlò, tutti tacquero</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Finché</td>
+                                <td>Fino a quando (durata)</td>
+                                <td>Rimasi finché non se ne andò</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Fino a quando</td>
+                                <td>Sinonimo di finché</td>
+                                <td>Aspetta fino a quando torno</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Prima che</td>
+                                <td>Anteriorità (+ congiuntivo)</td>
+                                <td>Parti prima che piova</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Dopo che</td>
+                                <td>Posteriorità</td>
+                                <td>Dopo che mangiamo, usciamo</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Intanto che / Mentre</td>
+                                <td>Contemporaneità</td>
+                                <td>Intanto che cucini, io apparecchio</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> "Prima che" richiede sempre il <strong>congiuntivo</strong>! "Dopo che" usa l'indicativo.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CONCESSIVI -->
+        <section id="concessive" class="section">
+            <div class="card">
+                <div class="card-header">Connettivi Concessivi</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Esprimono un'opposizione o un contrasto: qualcosa accade nonostante un ostacolo.</strong> [^59^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Connettivo</th><th>Modo verbale</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="connector">Benché</td>
+                                <td>Congiuntivo</td>
+                                <td>Benché fosse stanco, lavorò</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Sebbene</td>
+                                <td>Congiuntivo</td>
+                                <td>Sebbene piova, usciamo</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Nonostante (che)</td>
+                                <td>Congiuntivo</td>
+                                <td>Nonostante sia tardi, restiamo</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Malgrado (che)</td>
+                                <td>Congiuntivo</td>
+                                <td>Malgrado avesse paura, parlò</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Anche se</td>
+                                <td>Indicativo</td>
+                                <td>Anche se piove, usciamo</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Per quanto</td>
+                                <td>Congiuntivo</td>
+                                <td>Per quanto mi sforzi, non ci riesco</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Struttura alternativa:</strong> <em>Pur + gerundio</em> = Pur essendo stanco, lavorò. [^59^]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CONDIZIONALI -->
+        <section id="conditional" class="section">
+            <div class="card">
+                <div class="card-header">Connettivi Condizionali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Esprimono una condizione necessaria perché si realizzi l'azione principale.</strong> [^72^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Connettivo</th><th>Significato</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="connector">A patto che</td>
+                                <td>A condizione che</td>
+                                <td>Vengo a patto che tu venga anche tu</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">A condizione che</td>
+                                <td>Sotto questa condizione</td>
+                                <td>Lo faccio a condizione che mi aiuti</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Purché</td>
+                                <td>Purché (formale)</td>
+                                <td>Purché tu sia puntuale, va bene</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Qualora</td>
+                                <td>Nel caso che</td>
+                                <td>Qualora servisse, chiamami</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Nel caso che</td>
+                                <td>Eventualità</td>
+                                <td>Nel caso che nevichi, porto le catene</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">A meno che (non)</td>
+                                <td>Tranne se, esclusione</td>
+                                <td>Vengo a meno che non piova</td>
+                            </tr>
+                            <tr>
+                                <td class="connector">Se</td>
+                                <td>Condizione generica</td>
+                                <td>Se piove, resto a casa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Tutti richiedono il CONGIUNTIVO tranne "se" che può usare anche l'indicativo!</strong> [^72^]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TESTUALI -->
+        <section id="textual" class="section">
+            <div class="card">
+                <div class="card-header">Connettivi Testuali (Organizzativi)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Servono per organizzare il discorso, aggiungere informazioni, contrastare idee, concludere.</strong> [^57^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Funzione</th><th>Connettivi</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Aggiunta</td>
+                                <td class="connector">Inoltre, oltre a ciò, per giunta</td>
+                                <td>È intelligente; inoltre, è gentile</td>
+                            </tr>
+                            <tr>
+                                <td>Opposizione</td>
+                                <td class="connector">Tuttavia, ciononostante, nondimeno</td>
+                                <td>È povero; tuttavia, è felice</td>
+                            </tr>
+                            <tr>
+                                <td>Alternativa</td>
+                                <td class="connector">D'altra parte, d'altro canto</td>
+                                <td>Da una parte... d'altra parte</td>
+                            </tr>
+                            <tr>
+                                <td>Conclusione</td>
+                                <td class="connector">In conclusione, insomma, per cui</td>
+                                <td>Insomma, non è possibile</td>
+                            </tr>
+                            <tr>
+                                <td>Esemplificazione</td>
+                                <td class="connector">Ad esempio, per esempio, vale a dire</td>
+                                <td>Studia lingue, ad esempio spagnolo</td>
+                            </tr>
+                            <tr>
+                                <td>Riformulazione</td>
+                                <td class="connector">In altre parole, cioè, ossia</td>
+                                <td>È pigro, in altre parole non lavora</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Connettivi gerarchici:</strong> In primo luogo, in secondo luogo, infine... per strutturare un testo argomentativo. [^34^]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B2 - Connettivi Avanzati (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Connettivi Causali
+            {
+                id: 1,
+                type: 'choice',
+                question: '__________ era malato, non è venuto alla riunione.',
+                options: ['Poiché', 'Benché', 'Affinché', 'A meno che'],
+                correct: 'Poiché',
+                explanation: '✅ Corretto! Poiché esprime la causa (formale)',
+                errorExplanation: '❌ "Poiché" introduce la causa, mentre "benché" esprime concessione'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: '__________ piove molto, restiamo a casa oggi.',
+                correct: ['Siccome', 'Poiché', 'Dato che', 'Visto che'],
+                explanation: '✅ Corretto! Siccome/Poiché/Dato che/Visto che esprimono la causa'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: '__________ insisti tanto, ti darò ragione.',
+                options: ['Dal momento che', 'Nonostante', 'Purché', 'Prima che'],
+                correct: 'Dal momento che',
+                explanation: '✅ Corretto! "Dal momento che" = dato che (causa evidente)',
+                errorExplanation: '❌ "Dal momento che" esprime una causa evidente/ovvia'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Non viene alla festa __________ è stanco.',
+                correct: ['perché'],
+                explanation: '✅ Corretto! Perché (effetto + causa)'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: '__________ lo chiedi, te lo dirò sinceramente.',
+                options: ['Giacché', 'Sebbene', 'Affinché', 'A patto che'],
+                correct: 'Giacché',
+                explanation: '✅ Corretto! Giacché = poiché (forma più formale/letteraria)',
+                errorExplanation: '❌ "Giacché" è un connettivo causale formale, simile a "poiché"'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: '__________ sei qui, puoi aiutarmi con questi bagagli?',
+                correct: ['Visto che', 'Dato che'],
+                explanation: '✅ Corretto! Visto che/Dato che (causa nota, colloquiale)'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Non ha passato l\'esame __________ non aveva studiato.',
+                options: ['per il semplice fatto che', 'nonostante', 'benché', 'affinché'],
+                correct: 'per il semplice fatto che',
+                explanation: '✅ Corretto! "Per il fatto che" enfatizza la causa ovvia',
+                errorExplanation: '❌ "Per il (semplice) fatto che" indica una causa ovvia e scontata'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: '__________ piove, non possiamo fare la gita.',
+                correct: ['Siccome', 'Poiché', 'Dato che', 'Visto che'],
+                explanation: '✅ Corretto! Connettivo causale appropriato'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: '__________ il traffico era intenso, siamo arrivati tardi.',
+                options: ['Poiché', 'Sebbene', 'Purché', 'Prima che'],
+                correct: 'Poiché',
+                explanation: '✅ Corretto! Poiché introduce la causa iniziale',
+                errorExplanation: '❌ "Poiché" si usa per la causa, spesso a inizio frase'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Sono rimasto a casa __________ ero malato.',
+                correct: ['poiché', 'siccome', 'perché', 'dato che', 'visto che'],
+                explanation: '✅ Corretto! Qualsiasi connettivo causale va bene qui'
+
+            },
+
+            // ESERCIZI 11-20: Connettivi Temporali
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Ti chiamo __________ arrivo a casa.',
+                options: ['non appena', 'benché', 'affinché', 'poiché'],
+                correct: 'non appena',
+                explanation: '✅ Corretto! "Non appena" = immediatamente dopo (temporale)',
+                errorExplanation: '❌ "Non appena" indica immediata successione temporale'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: '__________ parlò, tutti tacquero.',
+                correct: ['Nel momento in cui'],
+                explanation: '✅ Corretto! "Nel momento in cui" = esatta contemporaneità'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Rimasi a guardare __________ non se ne andò.',
+                options: ['finché', 'benché', 'affinché', 'perché'],
+                correct: 'finché',
+                explanation: '✅ Corretto! "Finché" = fino a quando (durata)',
+                errorExplanation: '❌ "Finché" indica la durata di un\'azione nel tempo'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Aspetta __________ torno, non andare via!',
+                correct: ['fino a quando', 'finché'],
+                explanation: '✅ Corretto! "Fino a quando" o "finché" = attesa fino a un momento'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Partiamo subito __________ inizi a piovere.',
+                options: ['prima che', 'dopo che', 'mentre', 'quando'],
+                correct: 'prima che',
+                explanation: '✅ Corretto! "Prima che" + congiuntivo (anteriorità)',
+                errorExplanation: '❌ "Prima che" richiede il congiuntivo ed esprime anteriorità'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: '__________ mangiato, usciamo a fare una passeggiata.',
+                correct: ['Dopo che'],
+                explanation: '✅ Corretto! "Dopo che" + indicativo (posteriorità)'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: '__________ cucini tu, io apparecchio la tavola.',
+                options: ['Intanto che', 'Benché', 'Affinché', 'Poiché'],
+                correct: 'Intanto che',
+                explanation: '✅ Corretto! "Intanto che" = contemporaneità',
+                errorExplanation: '❌ "Intanto che" (o "mentre") indica azioni contemporanee'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: '__________ arrivò la polizia, i ladri erano già fuggiti.',
+                correct: ['Nel momento in cui', 'Quando'],
+                explanation: '✅ Corretto! Connettivo temporale di contemporaneità'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Fammi sapere __________ hai novità.',
+                options: ['non appena', 'sebbene', 'affinché', 'malgrado'],
+                correct: 'non appena',
+                explanation: '✅ Corretto! "Non appena" = appena, immediatamente dopo',
+                errorExplanation: '❌ "Non appena" indica successione immediata nel tempo'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Restiamo al chiuso __________ passa il temporale.',
+                correct: ['finché', 'fino a quando'],
+                explanation: '✅ Corretto! Durata dell\'azione fino a un certo momento'
+
+            },
+
+            // ESERCIZI 21-30: Connettivi Concessivi
+            {
+                id: 21,
+                type: 'choice',
+                question: '__________ fosse stanco, continuò a lavorare.',
+                options: ['Benché', 'Poiché', 'Affinché', 'Non appena'],
+                correct: 'Benché',
+                explanation: '✅ Corretto! "Benché" + congiuntivo (concessivo)',
+                errorExplanation: '❌ "Benché" è concessivo e richiede il congiuntivo'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: '__________ piova, usciamo comunque.',
+                correct: ['Sebbene', 'Benché', 'Nonostante'],
+                explanation: '✅ Corretto! Connettivo concessivo + congiuntivo'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: '__________ sia tardi, voglio finire questo lavoro.',
+                options: ['Nonostante', 'Poiché', 'Affinché', 'Prima che'],
+                correct: 'Nonostante',
+                explanation: '✅ Corretto! "Nonostante" + congiuntivo (concessivo)',
+                errorExplanation: '❌ "Nonostante" introduce una concessione e vuole il congiuntivo'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: '__________ avesse paura, parlò davanti a tutti.',
+                correct: ['Malgrado', 'Sebbene', 'Benché', 'Nonostante'],
+                explanation: '✅ Corretto! "Malgrado" = nonostante (concessivo)'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: '__________ piove, usciamo lo stesso.',
+                options: ['Anche se', 'Benché', 'Sebbene', 'Nonostante'],
+                correct: 'Anche se',
+                explanation: '✅ Corretto! "Anche se" + indicativo (concessivo)',
+                errorExplanation: '❌ "Anche se" è l\'unico concessivo che regge l\'indicativo!'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: '__________ mi sforzi, non riesco a capire questa lezione.',
+                correct: ['Per quanto'],
+                explanation: '✅ Corretto! "Per quanto" + congiuntivo (concessivo)'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: '__________ non avessimo studiato, abbiamo passato l\'esame.',
+                options: ['Sebbene', 'Poiché', 'Affinché', 'Non appena'],
+                correct: 'Sebbene',
+                explanation: '✅ Corretto! "Sebbene" + congiuntivo (concessivo)',
+                errorExplanation: '❌ "Sebbene" introduce una concessione e richiede il congiuntivo'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: '__________ la pioggia, siamo usciti a fare una passeggiata.',
+                correct: ['Nonostante', 'Malgrado'],
+                explanation: '✅ Corretto! Connettivo concessivo + nome'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: '__________ avendo poco tempo, ha fatto un ottimo lavoro.',
+                options: ['Pur', 'Per', 'Senza', 'Prima di'],
+                correct: 'Pur',
+                explanation: '✅ Corretto! "Pur + gerundio" = forma concessiva',
+                errorExplanation: '❌ "Pur + gerundio" è una forma concessiva alternativa'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: '__________ tutte le difficoltà, ce l\'abbiamo fatta.',
+                correct: ['Nonostante', 'Malgrado'],
+                explanation: '✅ Corretto! Connettivo concessivo'
+
+            },
+
+            // ESERCIZI 31-40: Connettivi Condizionali
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Vengo con te __________ tu mi aiuti con i compiti.',
+                options: ['a patto che', 'benché', 'poiché', 'mentre'],
+                correct: 'a patto che',
+                explanation: '✅ Corretto! "A patto che" + congiuntivo (condizionale)',
+                errorExplanation: '❌ "A patto che" esprime una condizione e richiede il congiuntivo'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Ti presto la macchina __________ tu sia prudente.',
+                correct: ['a condizione che', 'purché', 'a patto che'],
+                explanation: '✅ Corretto! Connettivo condizionale + congiuntivo'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Potete uscire __________ non torniate troppo tardi.',
+                options: ['purché', 'sebbene', 'affinché', 'poiché'],
+                correct: 'purché',
+                explanation: '✅ Corretto! "Purché" + congiuntivo (condizionale)',
+                errorExplanation: '❌ "Purché" (= a patto che) richiede il congiuntivo'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: '__________ avessi bisogno di aiuto, chiamami subito.',
+                correct: ['Qualora', 'Nel caso che'],
+                explanation: '✅ Corretto! "Qualora" = nel caso che (condizionale)'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: '__________ nevichi, è meglio portare le catene.',
+                options: ['Nel caso che', 'Benché', 'Poiché', 'Sebbene'],
+                correct: 'Nel caso che',
+                explanation: '✅ Corretto! "Nel caso che" + congiuntivo (eventualità)',
+                errorExplanation: '❌ "Nel caso che" introduce un\'ipotesi/eventualità'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Vengo alla festa __________ non ci sia Luca.',
+                correct: ['a meno che', 'tranne che'],
+                explanation: '✅ Corretto! "A meno che" = tranne se (esclusione)'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: '__________ tu finisca i compiti, puoi uscire.',
+                options: ['A condizione che', 'Benché', 'Nonostante', 'Mentre'],
+                correct: 'A condizione che',
+                explanation: '✅ Corretto! "A condizione che" + congiuntivo',
+                errorExplanation: '❌ "A condizione che" richiede il congiuntivo'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: '__________ tu sia d\'accordo, possiamo partire domani.',
+                correct: ['Qualora', 'Se', 'Nel caso che'],
+                explanation: '✅ Corretto! Connettivo condizionale appropriato'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Ti aiuto __________ tu me lo chieda gentilmente.',
+                options: ['purché', 'sebbene', 'poiché', 'mentre'],
+                correct: 'purché',
+                explanation: '✅ Corretto! "Purché" = a patto che (condizione)',
+                errorExplanation: '❌ "Purché" introduce una condizione necessaria'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: '__________ ci sia il sole, andiamo al mare.',
+                correct: ['Se'],
+                explanation: '✅ Corretto! "Se" può usare indicativo o congiuntivo'
+
+            },
+
+            // ESERCIZI 41-50: Connettivi Testuali e Finali
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Studia molto; __________, è molto intelligente.',
+                options: ['inoltre', 'tuttavia', 'benché', 'poiché'],
+                correct: 'inoltre',
+                explanation: '✅ Corretto! "Inoltre" = aggiunta/informazione supplementare',
+                errorExplanation: '❌ "Inoltre" aggiunge un\'informazione (connettivo additivo)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'È povero; __________, sembra molto felice.',
+                correct: ['tuttavia', 'ciononostante', 'nondimeno'],
+                explanation: '✅ Corretto! Connettivo avversativo (contrasto)'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Da una parte capisco il tuo punto di vista; __________, non sono d\'accordo.',
+                options: ['d\'altra parte', 'inoltre', 'poiché', 'affinché'],
+                correct: 'd\'altra parte',
+                explanation: '✅ Corretto! "D\'altra parte" = opposizione/alternativa',
+                errorExplanation: '❌ "D\'altra parte" introduce un\'opposizione o un\'altra prospettiva'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: '__________ possa capire meglio, mi spieghi tutto dall\'inizio?',
+                correct: ['Affinché', 'Perché'],
+                explanation: '✅ Corretto! "Affinché" + congiuntivo (scopo/fine)'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Ha studiato tutto il giorno __________ passare l\'esame.',
+                options: ['allo scopo di', 'benché', 'sebbene', 'mentre'],
+                correct: 'allo scopo di',
+                explanation: '✅ Corretto! "Allo scopo di" + infinito (fine/scopo)',
+                errorExplanation: '❌ "Allo scopo di" indica il fine/scopo dell\'azione'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: '__________ riassumere, la situazione è molto complicata.',
+                correct: ['Per', 'Al fine di'],
+                explanation: '✅ Corretto! "Per" o "Al fine di" introducono uno scopo'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Non ha molti soldi; __________, vive in una casa bellissima.',
+                options: ['tuttavia', 'inoltre', 'poiché', 'affinché'],
+                correct: 'tuttavia',
+                explanation: '✅ Corretto! "Tuttavia" = contrasto/avversativo',
+                errorExplanation: '❌ "Tuttavia" introduce un\'opposizione al concetto precedente'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: '__________ ciò, non posso accettare la tua proposta.',
+                correct: ['Nonostante', 'Malgrado'],
+                explanation: '✅ Corretto! "Nonostante/Malgrado ciò" = nonostante tutto'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: '__________ le difficoltà, ha raggiunto il suo obiettivo.',
+                options: ['Nonostante', 'Poiché', 'Affinché', 'Mentre'],
+                correct: 'Nonostante',
+                explanation: '✅ Corretto! "Nonostante" + nome (concessivo)',
+                errorExplanation: '❌ "Nonostante" può essere seguito da un nome o che + congiuntivo'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: '__________ tu possa capire, ti faccio un esempio pratico.',
+                correct: ['Affinché', 'Perché'],
+                explanation: '✅ Corretto! "Affinché" + congiuntivo (scopo/fine). Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il connettivo..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente i connettivi avanzati in tutte le loro funzioni!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene i connettivi, ma fai attenzione a quelli che richiedono il congiuntivo!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: causali (poiché), concessivi (benché + congiuntivo), condizionali (a patto che)!';
+            } else {
+                message = '📚 Ripassa le tabelle! Ricorda: benché/sebbene/nonostante + congiuntivo; a patto che/a condizione che + congiuntivo!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

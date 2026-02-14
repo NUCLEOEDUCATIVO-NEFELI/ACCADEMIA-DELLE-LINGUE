@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B1 - Congiuntivo Passato (Trapassato)</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --subjunctive: #7c3aed;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .subjunctive { color: var(--subjunctive); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--b1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--b1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--b1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B2 - Congiuntivo Passato</h1>
+            <p>Esprimere anteriorità e ipotesi irrealizzate nel passato</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B1</a>
+            <span>›</span>
+            <strong>Congiuntivo Passato </strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 Congiuntivo Passato </h1>
+            <p class="page-subtitle">Tempo composto per esprimere azioni precedenti nel passato e ipotesi irrealizzate</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('formation', this)">Formazione</button>
+            <button class="nav-tab" onclick="showSection('avere', this)">Con AVERE</button>
+            <button class="nav-tab" onclick="showSection('essere', this)">Con ESSERE</button>
+            <button class="nav-tab" onclick="showSection('uses', this)">Usi Speciali</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍🏫</div>
+                    <div class="avatar-name">Prof. Marco</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B1! 📚</h3>
+                    <p>Oggi studiamo il <strong>congiuntivo passato</strong> (o trapassato), un tempo composto fondamentale per parlare di azioni precedenti nel passato.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "Pensavo che lui <span class="subjunctive">fosse arrivato</span>" o "Se <span class="subjunctive">avessi studiato</span>, avrei passato l'esame".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è il Congiuntivo Passato?</div>
+                <div class="card-body">
+                    <p>Il <strong>congiuntivo passato</strong> (o trapassato congiuntivo) è un tempo composto che si forma con:</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Struttura:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Congiuntivo imperfetto</strong> di AVERE o ESSERE + Participio passato del verbo principale</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Quando si usa:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Anteriorità nel passato:</strong> "Credevo che tu avessi finito" (prima di credere, avevi finito)</li>
+                            <li><strong>Periodo ipotetico tipo 3:</strong> "Se avessi avuto tempo, sarei venuto" (ipotesi irrealizzata nel passato)</li>
+                            <li><strong>Dopo congiunzioni temporali:</strong> "Prima che fossi arrivato, era già partito"</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Con il verbo ausiliare ESSERE, il participio passato concorda in genere e numero con il soggetto!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE FORMAZIONE -->
+        <section id="formation" class="section">
+            <div class="card">
+                <div class="card-header">Formazione del Congiuntivo Passato</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Ausiliari al Congiuntivo Imperfetto:</strong>
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Soggetto</th><th>ESSERE</th><th>AVERE</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>che io</td>
+                                <td class="subjunctive">fossi</td>
+                                <td class="subjunctive">avessi</td>
+                            </tr>
+                            <tr>
+                                <td>che tu</td>
+                                <td class="subjunctive">fossi</td>
+                                <td class="subjunctive">avessi</td>
+                            </tr>
+                            <tr>
+                                <td>che lui/lei</td>
+                                <td class="subjunctive">fosse</td>
+                                <td class="subjunctive">avesse</td>
+                            </tr>
+                            <tr>
+                                <td>che noi</td>
+                                <td class="subjunctive">fossimo</td>
+                                <td class="subjunctive">avessimo</td>
+                            </tr>
+                            <tr>
+                                <td>che voi</td>
+                                <td class="subjunctive">foste</td>
+                                <td class="subjunctive">aveste</td>
+                            </tr>
+                            <tr>
+                                <td>che loro</td>
+                                <td class="subjunctive">fossero</td>
+                                <td class="subjunctive">avessero</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="instruction-box">
+                        <strong>Struttura completa:</strong><br>
+                        <em>Con AVERE:</em> che io avessi parlato, che tu avessi mangiato...<br>
+                        <em>Con ESSERE:</em> che io fossi andato/a, che tu fossi partito/a...
+                    </div>
+                    
+                    <div class="rule-box">
+                        <strong>Partecipi passati irregolari comuni:</strong><br>
+                        fare → fatto | dire → detto | scrivere → scritto | leggere → letto<br>
+                        vedere → visto/veduto | aprire → aperto | chiudere → chiuso<br>
+                        prendere → preso | mettere → messo | rispondere → risposto
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE AVERE -->
+        <section id="avere" class="section">
+            <div class="card">
+                <div class="card-header">Verbi con AVERE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        Si usano con AVERE i verbi transitivi (che reggono l'oggetto diretto). Il participio passato è invariabile.
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Soggetto</th><th>PARLARE</th><th>MANGIARE</th><th>SCRIVERE</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>che io</td>
+                                <td class="subjunctive">avessi parlato</td>
+                                <td class="subjunctive">avessi mangiato</td>
+                                <td class="subjunctive">avessi scritto</td>
+                            </tr>
+                            <tr>
+                                <td>che tu</td>
+                                <td class="subjunctive">avessi parlato</td>
+                                <td class="subjunctive">avessi mangiato</td>
+                                <td class="subjunctive">avessi scritto</td>
+                            </tr>
+                            <tr>
+                                <td>che lui/lei</td>
+                                <td class="subjunctive">avesse parlato</td>
+                                <td class="subjunctive">avesse mangiato</td>
+                                <td class="subjunctive">avesse scritto</td>
+                            </tr>
+                            <tr>
+                                <td>che noi</td>
+                                <td class="subjunctive">avessimo parlato</td>
+                                <td class="subjunctive">avessimo mangiato</td>
+                                <td class="subjunctive">avessimo scritto</td>
+                            </tr>
+                            <tr>
+                                <td>che voi</td>
+                                <td class="subjunctive">aveste parlato</td>
+                                <td class="subjunctive">aveste mangiato</td>
+                                <td class="subjunctive">aveste scritto</td>
+                            </tr>
+                            <tr>
+                                <td>che loro</td>
+                                <td class="subjunctive">avessero parlato</td>
+                                <td class="subjunctive">avessero mangiato</td>
+                                <td class="subjunctive">avessero scritto</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="rule-box">
+                        <strong>Verbi modali al congiuntivo passato (con AVERE):</strong><br>
+                        dovere: avessi dovuto | potere: avessi potuto | volere: avessi voluto | sapere: avessi saputo
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESSERE -->
+        <section id="essere" class="section">
+            <div class="card">
+                <div class="card-header">Verbi con ESSERE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        Si usano con ESSERE i verbi intransitivi di movimento, stato, cambiamento, e i riflessivi. Il participio concorda con il soggetto!
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Soggetto</th><th>ANDARE (m)</th><th>ANDARE (f)</th><th>PARTIRE (pl)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>che io</td>
+                                <td class="subjunctive">fossi andato</td>
+                                <td class="subjunctive">fossi andata</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>che tu</td>
+                                <td class="subjunctive">fossi andato</td>
+                                <td class="subjunctive">fossi andata</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>che lui</td>
+                                <td class="subjunctive">fosse andato</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>che lei</td>
+                                <td>-</td>
+                                <td class="subjunctive">fosse andata</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>che noi</td>
+                                <td class="subjunctive">fossimo andati</td>
+                                <td class="subjunctive">fossimo andate</td>
+                                <td class="subjunctive">fossimo partiti/e</td>
+                            </tr>
+                            <tr>
+                                <td>che loro</td>
+                                <td class="subjunctive">fossero andati</td>
+                                <td class="subjunctive">fossero andate</td>
+                                <td class="subjunctive">fossero partiti/e</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="rule-box">
+                        <strong>Verbi che richiedono ESSERE:</strong><br>
+                        andare, venire, arrivare, partire, entrare, uscire, tornare, rimanere, stare, essere, diventare, nascere, morire, crescere
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE USI -->
+        <section id="uses" class="section">
+            <div class="card">
+                <div class="card-header">Usi Speciali del Congiuntivo Passato</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>1. Anteriorità rispetto a un passato</strong><br>
+                        Quando nella principale c'è un verbo al passato, il congiuntivo passato esprime un'azione precedente.
+                    </div>
+                    <div class="rule-box">
+                        "Pensavo che lui <span class="subjunctive">fosse già arrivato</span>"<br>
+                        (Prima del mio pensare, lui era già arrivato)
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>2. Periodo ipotetico di tipo 3 (irreale)</strong><br>
+                        Per esprimere ipotesi irrealizzate nel passato.
+                    </div>
+                    <div class="rule-box">
+                        Se + congiuntivo trapassato, condizionale passato<br>
+                        "Se <span class="subjunctive">avessi studiato</span> di più, <span class="subjunctive">avrei passato</span> l'esame"<br>
+                        (Ma non ho studiato e non ho passato l'esame)
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>3. Dopo "prima che"</strong><br>
+                        Per indicare un'azione che deve essere completata prima di un'altra nel passato.
+                    </div>
+                    <div class="rule-box">
+                        "Siamo partiti prima che <span class="subjunctive">fosse arrivato</span>"
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>4. Con congiunzioni concessive</strong><br>
+                        benché, sebbene, nonostante, malgrado
+                    </div>
+                    <div class="rule-box">
+                        "Nonostante <span class="subjunctive">avesse studiato</span> molto, non ha superato l'esame"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B1 - Congiuntivo Passato/Trapassato (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Congiuntivo passato con AVERE - base
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Pensavo che tu (finire) __________ i compiti ieri.',
+                options: ['avessi finito', 'avesse finito', 'avessimo finito', 'aveste finito'],
+                correct: 'avessi finito',
+                explanation: '✅ Corretto! "Che tu" richiede avessi + participio (concordanza con ausiliare avere: invariabile)',
+                errorExplanation: '❌ Con "che tu" e ausiliare avere: avessi finito'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Credevo che lui (mangiare) __________ prima di uscire.',
+                correct: ['avesse mangiato'],
+                explanation: '✅ Corretto! Che lui avesse mangiato (avere al congiuntivo imperfetto + participio)'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Speravo che noi (ricevere) __________ buone notizie.',
+                options: ['avessimo ricevuto', 'avessero ricevuto', 'aveste ricevuto', 'avesse ricevuto'],
+                correct: 'avessimo ricevuto',
+                explanation: '✅ Corretto! "Che noi" richiede avessimo',
+                errorExplanation: '❌ Con "che noi" si usa avessimo: avessimo ricevuto'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Temevo che voi (capire) __________ il problema.',
+                correct: ['aveste capito'],
+                explanation: '✅ Corretto! Che voi aveste capito'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Immaginavo che loro (scrivere) __________ la lettera.',
+                options: ['avessero scritto', 'avessimo scritto', 'avesse scritto', 'avessi scritto'],
+                correct: 'avessero scritto',
+                explanation: '✅ Corretto! "Che loro" richiede avessero',
+                errorExplanation: '❌ Con "che loro" si usa avessero: avessero scritto'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Pensavo che io (fare) __________ un errore.',
+                correct: ['avessi fatto'],
+                explanation: '✅ Corretto! Avessi fatto (participio irregolare di fare: fatto)'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Credevo che tu (dire) __________ la verità.',
+                options: ['avessi detto', 'avesse detto', 'avessero detto', 'avessimo detto'],
+                correct: 'avessi detto',
+                explanation: '✅ Corretto! Avessi detto (participio irregolare di dire: detto)',
+                errorExplanation: '❌ Participio di dire è detto: avessi detto'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Speravo che lei (vedere) __________ il messaggio.',
+                correct: ['avesse visto', 'avesse veduto'],
+                explanation: '✅ Corretto! Avesse visto/veduto (doppio participio di vedere)'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Non pensavo che noi (potere) __________ vincere.',
+                options: ['avessimo potuto', 'aveste potuto', 'avessero potuto', 'avesse potuto'],
+                correct: 'avessimo potuto',
+                explanation: '✅ Corretto! I verbi modali usano avere: avessimo potuto',
+                errorExplanation: '❌ Potere al congiuntivo passato: avessimo potuto'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Temevo che voi (dovere) __________ partire subito.',
+                correct: ['aveste dovuto'],
+                explanation: '✅ Corretto! Aveste dovuto (verbi modali con avere)'
+
+            },
+
+            // ESERCIZI 11-20: Congiuntivo passato con ESSERE
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Pensavo che tu (arrivare) __________ in ritardo.',
+                options: ['fossi arrivato', 'fossi arrivata', 'fosse arrivato', 'fossimo arrivati'],
+                correct: 'fossi arrivato',
+                explanation: '✅ Corretto! Con essere il participio concorda: tu (m) → fossi arrivato',
+                errorExplanation: '❌ Con essere: che tu fossi arrivato/a (concordanza con il soggetto)'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Credevo che lui (partire) __________ ieri mattina.',
+                correct: ['fosse partito'],
+                explanation: '✅ Corretto! Fosse partito (partire usa essere, participio maschile)'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Speravo che lei (tornare) __________ presto.',
+                options: ['fosse tornata', 'fossi tornata', 'fosse tornato', 'fossero tornate'],
+                correct: 'fosse tornata',
+                explanation: '✅ Corretto! Lei (femminile) → fosse tornata',
+                errorExplanation: '❌ Lei richiede concordanza femminile: fosse tornata'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Pensavamo che voi (andare) __________ a Roma.',
+                correct: ['foste andati', 'foste andate'],
+                explanation: '✅ Corretto! Foste andati/e (concordanza con voi: maschile o femminile)'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Temevo che loro (rimanere) __________ a casa.',
+                options: ['fossero rimasti', 'fossero rimaste', 'fossi rimasto', 'fosse rimasta'],
+                correct: 'fossero rimasti',
+                explanation: '✅ Corretto! Loro (maschile plurale) → fossero rimasti',
+                errorExplanation: '❌ Loro richiede la terza persona plurale: fossero rimasti/e'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Credevo che io (venire) __________ per errore.',
+                correct: ['fossi venuto', 'fossi venuta'],
+                explanation: '✅ Corretto! Fossi venuto/a (prima persona singolare con essere)'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Immaginavo che noi (uscire) __________ insieme.',
+                options: ['fossimo usciti', 'fossimo uscite', 'foste usciti', 'fossero usciti'],
+                correct: 'fossimo usciti',
+                explanation: '✅ Corretto! Noi → fossimo usciti/e',
+                errorExplanation: '❌ Noi richiede fossimo: fossimo usciti'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Speravo che tu (stare) __________ bene.',
+                correct: ['fossi stato', 'fossi stata'],
+                explanation: '✅ Corretto! Fossi stato/a (stare usa essere)'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Non pensavo che lei (nascere) __________ in Italia.',
+                options: ['fosse nata', 'fossi nata', 'fosse nato', 'fossero nate'],
+                correct: 'fosse nata',
+                explanation: '✅ Corretto! Nascere usa essere, lei → fosse nata',
+                errorExplanation: '❌ Nascere usa essere e concorda: fosse nata'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Temevo che loro (diventare) __________ matti.',
+                correct: ['fossero diventati', 'fossero diventate'],
+                explanation: '✅ Corretto! Fossero diventati/e (diventare usa essere)'
+
+            },
+
+            // ESERCIZI 21-30: Periodo ipotetico tipo 3
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Se io (avere) __________ più tempo, sarei venuto alla festa.',
+                options: ['avessi avuto', 'avesse avuto', 'avessimo avuto', 'avessero avuto'],
+                correct: 'avessi avuto',
+                explanation: '✅ Corretto! Periodo ipotetico tipo 3: se + trapassato congiuntivo',
+                errorExplanation: '❌ Nel periodo ipotetico irreale: Se avessi avuto...'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Se tu (studiare) __________ di più, avresti passato l\'esame.',
+                correct: ['avessi studiato'],
+                explanation: '✅ Corretto! Se avessi studiato (ipotesi irrealizzata nel passato)'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Se lui (essere) __________ più prudente, non si sarebbe fatto male.',
+                options: ['fosse stato', 'fossi stato', 'fosse stata', 'fossero stato'],
+                correct: 'fosse stato',
+                explanation: '✅ Corretto! Essere al congiuntivo trapassato: fosse stato',
+                errorExplanation: '❌ Con essere: fosse stato (lui, maschile)'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Se noi (arrivare) __________ prima, avremmo trovato posto.',
+                correct: ['fossimo arrivati', 'fossimo arrivate'],
+                explanation: '✅ Corretto! Fossimo arrivati/e (essere + concordanza)'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Se voi (ascoltare) __________ il mio consiglio, non avreste sbagliato.',
+                options: ['aveste ascoltato', 'avessi ascoltato', 'avessimo ascoltato', 'avessero ascoltato'],
+                correct: 'aveste ascoltato',
+                explanation: '✅ Corretto! Voi → aveste ascoltato',
+                errorExplanation: '❌ Con voi: aveste ascoltato'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Se loro (sapere) __________ la verità, sarebbero rimasti.',
+                correct: ['avessero saputo'],
+                explanation: '✅ Corretto! Avessero saputo (sapere usa avere)'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Se io (andare) __________ al mare, mi sarei divertito di più.',
+                options: ['fossi andato', 'avessi andato', 'fosse andato', 'fossimo andati'],
+                correct: 'fossi andato',
+                explanation: '✅ Corretto! Andare usa essere: fossi andato',
+                errorExplanation: '❌ Andare richiede essere: fossi andato/a'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Se lei (leggere) __________ il libro, avrebbe capito il finale.',
+                correct: ['avesse letto'],
+                explanation: '✅ Corretto! Avesse letto (participio irregolare di leggere: letto)'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Se tu non (partire) __________ così presto, ci avresti visto.',
+                options: ['fossi partito', 'fosse partito', 'avessi partito', 'fossimo partiti'],
+                correct: 'fossi partito',
+                explanation: '✅ Corretto! Partire usa essere: fossi partito/a',
+                errorExplanation: '❌ Partire usa essere: fossi partito'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Se noi (prendere) __________ l\'ombrello, non ci saremmo bagnati.',
+                correct: ['avessimo preso'],
+                explanation: '✅ Corretto! Avessimo preso (participio irregolare di prendere: preso)'
+
+            },
+
+            // ESERCIZI 31-40: Congiunzioni e altri usi
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Prima che tu (arrivare) __________, io ero già uscito.',
+                options: ['fossi arrivato', 'fosse arrivato', 'avessi arrivato', 'arrivassi'],
+                correct: 'fossi arrivato',
+                explanation: '✅ Corretto! Prima che richiede il congiuntivo passato per anteriorità',
+                errorExplanation: '❌ Prima che + congiuntivo passato (anteriorità): fossi arrivato'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Nonostante (avere) __________ fame, non ha mangiato nulla.',
+                correct: ['avesse avuto', 'avessi avuto'],
+                explanation: '✅ Corretto! Nonostante + congiuntivo: avesse avuto (soggetto implicito "lui/lei")'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Benché (essere) __________ stanco, ha continuato a lavorare.',
+                options: ['fosse stato', 'fossi stato', 'fosse stata', 'essendo stato'],
+                correct: 'fosse stato',
+                explanation: '✅ Corretto! Benché + congiuntivo passato',
+                errorExplanation: '❌ Benché richiede il congiuntivo: fosse stato'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'A meno che tu non (finire) __________ i compiti, non puoi uscire.',
+                correct: ['avessi finito'],
+                explanation: '✅ Corretto! A meno che + congiuntivo: avessi finito'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Nel caso in cui loro (chiamare) __________, rispondi tu.',
+                options: ['avessero chiamato', 'avessimo chiamato', 'chiamassero', 'avessi chiamato'],
+                correct: 'avessero chiamato',
+                explanation: '✅ Corretto! Nel caso in cui + congiuntivo passato per ipotesi passata',
+                errorExplanation: '❌ Nel caso in cui + congiuntivo: avessero chiamato'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Sembrava che lui (dormire) __________ tutto il giorno.',
+                correct: ['avesse dormito'],
+                explanation: '✅ Corretto! Sembrava che + congiuntivo passato (anteriorità)'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Era possibile che noi (perdere) __________ il treno.',
+                options: ['avessimo perso', 'avessero perso', 'perdessimo', 'avessi perso'],
+                correct: 'avessimo perso',
+                explanation: '✅ Corretto! Era possibile che + congiuntivo passato',
+                errorExplanation: '❌ Era possibile che richiede il congiuntivo: avessimo perso'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Mi dispiaceva che tu (partire) __________ così presto.',
+                correct: ['fossi partito', 'fossi partita'],
+                explanation: '✅ Corretto! Mi dispiaceva che + congiuntivo passato: fossi partito/a'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Dubitavo che loro (capire) __________ la lezione.',
+                options: ['avessero capito', 'avessimo capito', 'capissero', 'avessi capito'],
+                correct: 'avessero capito',
+                explanation: '✅ Corretto! Dubitavo che + congiuntivo passato',
+                errorExplanation: '❌ Dubitavo che richiede il congiuntivo: avessero capito'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Era meglio che voi (rimanere) __________ a casa.',
+                correct: ['foste rimasti', 'foste rimaste'],
+                explanation: '✅ Corretto! Era meglio che + congiuntivo: foste rimati/e'
+
+            },
+
+            // ESERCIZI 41-50: Verbi irregolari e contesti complessi
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Pensavo che tu (aprire) __________ la porta.',
+                options: ['avessi aperto', 'avessi aperto', 'avesse aperto', 'apristi'],
+                correct: 'avessi aperto',
+                explanation: '✅ Corretto! Participio irregolare di aprire: aperto',
+                errorExplanation: '❌ Aprire ha participio irregolare: aperto → avessi aperto'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Credevo che lui (chiudere) __________ la finestra.',
+                correct: ['avesse chiuso'],
+                explanation: '✅ Corretto! Avesse chiuso (participio irregolare di chiudere: chiuso)'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Speravo che noi (mettere) __________ tutto in ordine.',
+                options: ['avessimo messo', 'avessimo mettuto', 'mettessimo', 'avessero messo'],
+                correct: 'avessimo messo',
+                explanation: '✅ Corretto! Mettere → messo (participio irregolare)',
+                errorExplanation: '❌ Participio di mettere è messo: avessimo messo'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Temevo che voi (rispondere) __________ male.',
+                correct: ['aveste risposto'],
+                explanation: '✅ Corretto! Aveste risposto (participio irregolare di rispondere: risposto)'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Immaginavo che loro (scegliere) __________ l\'opzione giusta.',
+                options: ['avessero scelto', 'avessero sceglito', 'scegliessero', 'avessi scelto'],
+                correct: 'avessero scelto',
+                explanation: '✅ Corretto! Scegliere → scelto',
+                errorExplanation: '❌ Participio di scegliere è scelto: avessero scelto'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Non pensavo che io (vincere) __________ la gara.',
+                correct: ['avessi vinto'],
+                explanation: '✅ Corretto! Avessi vinto (participio irregolare di vincere: vinto)'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Dubitavo che tu (bere) __________ tutto il vino.',
+                options: ['avessi bevuto', 'avessi bevuto', 'avessi bevuto', 'bevessi'],
+                correct: 'avessi bevuto',
+                explanation: '✅ Corretto! Bere → bevuto',
+                errorExplanation: '❌ Participio di bere è bevuto: avessi bevuto'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Speravo che lei (rimanere) __________ fino alla fine.',
+                correct: ['fosse rimasta'],
+                explanation: '✅ Corretto! Fosse rimasta (rimanere usa essere, concordanza femminile)'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Se io (sapere) __________ la verità, non sarei venuto.',
+                options: ['avessi saputo', 'avessi saputo', 'sapessi', 'avessimo saputo'],
+                correct: 'avessi saputo',
+                explanation: '✅ Corretto! Periodo ipotetico tipo 3: avessi saputo',
+                errorExplanation: '❌ Se + trapassato congiuntivo: avessi saputo'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Mi ha detto che (volere) __________ chiamarmi prima.',
+                correct: ['avrebbe voluto', 'avesse voluto'],
+                explanation: '✅ Corretto! Avrebbe voluto (condizionale passato) o avesse voluto (congiuntivo passato). Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la forma congiuntiva..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente il congiuntivo passato in tutti i suoi usi!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene il congiuntivo passato, ma fai attenzione ai verbi con ESSERE e alla concordanza!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: con ESSERE il participio concorda, con AVERE è invariabile!';
+            } else {
+                message = '📚 Ripassa le tabelle! Ricorda la differenza tra AVERE e ESSERE come ausiliari!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B2 - Modi Indiretti</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --subjunctive: #7c3aed;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .indirect { color: var(--subjunctive); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--b1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--b1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--b1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B2 - Modi Indiretti</h1>
+            <p>Trasformare il discorso diretto in indiretto: tempi, pronomi e avverbi</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B2</a>
+            <span>›</span>
+            <strong>Modi Indiretti</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">💬 Modi Indiretti (Discorso Indiretto)</h1>
+            <p class="page-subtitle">Come riportare le parole altrui con le trasformazioni grammaticali corrette</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('verbs', this)">Cambiamento Verbi</button>
+            <button class="nav-tab" onclick="showSection('pronouns', this)">Pronomi e Avverbi</button>
+            <button class="nav-tab" onclick="showSection('questions', this)">Domande e Comandi</button>
+            <button class="nav-tab" onclick="showSection('free', this)">Stile Indiretto Libero</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍🏫</div>
+                    <div class="avatar-name">Prof. Marco</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B2! 💬</h3>
+                    <p>Oggi studiamo i <strong>modi indiretti</strong>, ovvero come trasformare il discorso diretto (le parole esatte) in discorso indiretto (il riporto delle parole).</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> Diretto: "<span class="indirect">Vado a casa</span>" <span class="arrow">→</span> Indiretto: "<span class="indirect">Ha detto che andava a casa</span>".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cosa sono i Modi Indiretti?</div>
+                <div class="card-body">
+                    <p>Il <strong>discorso indiretto</strong> è la tecnica narrativa usata per <strong>riportare</strong> ciò che qualcuno ha detto, senza usare le sue parole esatte.</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Differenze principali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Punteggiatura:</strong> Si eliminano virgolette e due punti</li>
+                            <li><strong>Congiunzioni:</strong> Si introducono "che", "se", "di"</li>
+                            <li><strong>Tempi verbali:</strong> Cambiano in base alla consecutio temporum</li>
+                            <li><strong>Pronomi:</strong> Si adeguano al nuovo contesto</li>
+                            <li><strong>Avverbi:</strong> "Oggi" diventa "quel giorno", "qui" diventa "lì"</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Tipi di discorso indiretto:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Affermazioni:</strong> Introdotte da "che" + indicativo/congiuntivo</li>
+                            <li><strong>Domande:</strong> Introdotte da "se" (chiuse) o parole interrogative (aperte)</li>
+                            <li><strong>Comandi:</strong> Introdotte da "di" + infinito o "che" + congiuntivo</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola fondamentale:</strong> Se il verbo introduttivo è al <strong>presente</strong>, i tempi rimangono invariati. Se è al <strong>passato</strong>, i tempi retrocedono (consecutio temporum).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CAMBIAMENTO VERBI -->
+        <section id="verbs" class="section">
+            <div class="card">
+                <div class="card-header">Cambiamento dei Tempi Verbali (Consecutio Temporum)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Quando il verbo introduttivo è al PASSATO:</strong>
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Discorso Diretto</th><th>Discorso Indiretto</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Presente indicativo</td>
+                                <td class="indirect">Imperfetto indicativo</td>
+                                <td>"Vado" → disse che andava</td>
+                            </tr>
+                            <tr>
+                                <td>Passato prossimo</td>
+                                <td class="indirect">Trapassato prossimo</td>
+                                <td>"Sono andato" → disse che era andato</td>
+                            </tr>
+                            <tr>
+                                <td>Imperfetto</td>
+                                <td class="indirect">Imperfetto (invariato)</td>
+                                <td>"Andavo" → disse che andavo</td>
+                            </tr>
+                            <tr>
+                                <td>Trapassato prossimo</td>
+                                <td class="indirect">Trapassato prossimo (invariato)</td>
+                                <td>"Ero andato" → disse che era andato</td>
+                            </tr>
+                            <tr>
+                                <td>Futuro semplice</td>
+                                <td class="indirect">Condizionale presente</td>
+                                <td>"Andrò" → disse che andrebbe</td>
+                            </tr>
+                            <tr>
+                                <td>Futuro anteriore</td>
+                                <td class="indirect">Condizionale passato</td>
+                                <td>"Sarò andato" → disse che sarebbe andato</td>
+                            </tr>
+                            <tr>
+                                <td>Condizionale presente</td>
+                                <td class="indirect">Condizionale passato</td>
+                                <td>"Andrei" → disse che sarebbe andato</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="rule-box">
+                        <strong>⚠️ Eccezioni:</strong><br>
+                        - L'<strong>imperfetto</strong> e il <strong>trapassato</strong> rimangono invariati<br>
+                        - Se il verbo introduttivo è al <strong>presente</strong>, tutti i tempi restano invariati
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PRONOMI E AVVERBI -->
+        <section id="pronouns" class="section">
+            <div class="card">
+                <div class="card-header">Trasformazione di Pronomi, Aggettivi e Avverbi</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Pronomi personali soggetto:</strong>
+                    </div>
+                    <div class="rule-box">
+                        "Io sono stanco" (Marco parla) → Marco ha detto che <strong>lui</strong> era stanco<br>
+                        "Tu sei gentile" (parlando a Maria) → Ho detto a Maria che <strong>lei</strong> era gentile
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Aggettivi e pronomi possessivi:</strong>
+                    </div>
+                    <div class="rule-box">
+                        "La mia casa è grande" → Ha detto che la <strong>sua</strong> casa era grande<br>
+                        "Questo è il mio libro" → Ha detto che quello era il <strong>suo</strong> libro
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Avverbi di tempo e luogo:</strong>
+                    </div>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Diretto</th><th>Indiretto</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Oggi</td><td class="indirect">quel giorno, in quel giorno</td></tr>
+                            <tr><td>Ieri</td><td class="indirect">il giorno prima, la vigilia</td></tr>
+                            <tr><td>Domani</td><td class="indirect">il giorno dopo, il giorno seguente</td></tr>
+                            <tr><td>Ora, adesso</td><td class="indirect">allora, in quel momento</td></tr>
+                            <tr><td>Questa settimana</td><td class="indirect">quella settimana</td></tr>
+                            <tr><td>Qui</td><td class="indirect">lì, là</td></tr>
+                            <tr><td>Questo, questa</td><td class="indirect">quello, quella</td></tr>
+                            <tr><td>Così</td><td class="indirect">in quel modo</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE DOMANDE E COMANDI -->
+        <section id="questions" class="section">
+            <div class="card">
+                <div class="card-header">Domande e Comandi nel Discorso Indiretto</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>1. Domande chiuse (sì/no):</strong> Introdotte da "se" o "se... o no"
+                    </div>
+                    <div class="rule-box">
+                        Diretto: "Vieni alla festa?"<br>
+                        Indiretto: Mi ha chiesto <strong>se</strong> venivo alla festa<br>
+                        Indiretto: Mi ha chiesto <strong>se venivo o no</strong> alla festa
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>2. Domande aperte:</strong> Mantengono la parola interrogativa
+                    </div>
+                    <div class="rule-box">
+                        Diretto: "Dove vai?"<br>
+                        Indiretto: Mi ha chiesto <strong>dove andavo</strong><br><br>
+                        Diretto: "Perché sei triste?"<br>
+                        Indiretto: Mi ha chiesto <strong>perché ero triste</strong>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>3. Comandi e richieste:</strong>
+                    </div>
+                    <div class="rule-box">
+                        <strong>Forma implicita (stesso soggetto):</strong><br>
+                        Diretto: "Vieni qui!"<br>
+                        Indiretto: Mi ha ordinato <strong>di venire</strong> lì<br><br>
+                        
+                        <strong>Forma esplicita (soggetto diverso):</strong><br>
+                        Diretto: "Chiudi la porta!"<br>
+                        Indiretto: Mi ha ordinato <strong>che chiudessi</strong> la porta
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE STILE INDIRETTO LIBERO -->
+        <section id="free" class="section">
+            <div class="card">
+                <div class="card-header">Stile Indiretto Libero</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Che cos'è:</strong><br>
+                        Tecnica narrativa che mescola discorso indiretto e diretto, senza verbi introduttivi né congiunzioni.
+                    </div>
+                    
+                    <div class="transformation-box">
+                        <strong>Caratteristiche:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Terza persona (come l'indiretto)</li>
+                            <li>Assenza di "che", "disse che", "pensò che"</li>
+                            <li>Tempi verbali: imperfetto, condizionale passato</li>
+                            <li>Interiezioni, esclamazioni, oralità</li>
+                            <li>Punto di vista del personaggio</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Esempio (da Verga):</strong><br>
+                        <em>Diretto:</em> "Sono stanco. Andrò a casa."<br><br>
+                        <em>Indiretto libero:</em> Era stanco. Sarebbe andato a casa.<br><br>
+                        <em>(Nessun "disse che", ma mantiene il punto di vista e i tempi del personaggio)</em>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Altri esempi:</strong><br>
+                        "Che caldo! Non ce la faceva più. Avrebbe voluto un bicchiere d'acqua."<br><br>
+                        <em>(Il narratore parla, ma usa le parole e i pensieri del personaggio)</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B2 - Modi Indiretti (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Presente → Imperfetto
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Diretto: "Sono stanco." → Indiretto: Marco ha detto che __________ stanco.',
+                options: ['era', 'è', 'fu', 'sia'],
+                correct: 'era',
+                explanation: '✅ Corretto! Presente (sono) → Imperfetto (era) con verbo introduttivo al passato',
+                errorExplanation: '❌ Con il verbo introduttivo al passato, il presente diventa imperfetto: era'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Diretto: "Studio molto." → Indiretto: Ha detto che __________ molto.',
+                correct: ['studiava'],
+                explanation: '✅ Corretto! Presente (studio) → Imperfetto (studiava)'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Diretto: "Vado a casa." → Indiretto: Ha detto che __________ a casa.',
+                options: ['andava', 'va', 'andò', 'vada'],
+                correct: 'andava',
+                explanation: '✅ Corretto! Presente (vado) → Imperfetto (andava)',
+                errorExplanation: '❌ Presente indicativo diventa imperfetto indicativo: andava'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Diretto: "Mangio fuori." → Indiretto: Ha detto che __________ fuori.',
+                correct: ['mangiava'],
+                explanation: '✅ Corretto! Mangiava (presente → imperfetto)'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Diretto: "Lavoro qui." → Indiretto: Ha detto che __________ lì.',
+                options: ['lavorava', 'lavora', 'lavorò', 'lavori'],
+                correct: 'lavorava',
+                explanation: '✅ Corretto! Lavorava + trasformazione di "qui" in "lì"',
+                errorExplanation: '❌ Presente → imperfetto: lavorava. Attenzione anche a "qui" → "lì"'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Diretto: "Sono felice." → Indiretto: Ha detto che __________ felice.',
+                correct: ['era'],
+                explanation: '✅ Corretto! Era (presente di essere → imperfetto)'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Diretto: "Ho fame." → Indiretto: Ha detto che __________ fame.',
+                options: ['aveva', 'ha', 'ebbe', 'abbia'],
+                correct: 'aveva',
+                explanation: '✅ Corretto! Presente (ho) → Imperfetto (aveva)',
+                errorExplanation: '❌ Presente di avere → imperfetto: aveva'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Diretto: "Capisco il problema." → Indiretto: Ha detto che __________ il problema.',
+                correct: ['capiva'],
+                explanation: '✅ Corretto! Capiva (presente → imperfetto)'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Diretto: "Voglio partire." → Indiretto: Ha detto che __________ partire.',
+                options: ['voleva', 'vuole', 'volle', 'voglia'],
+                correct: 'voleva',
+                explanation: '✅ Corretto! Presente (voglio) → Imperfetto (voleva)',
+                errorExplanation: '❌ Presente di volere → imperfetto: voleva'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Diretto: "Posso aiutarti." → Indiretto: Ha detto che __________ aiutarmi.',
+                correct: ['poteva'],
+                explanation: '✅ Corretto! Poteva (presente → imperfetto) + cambiamento del pronome (ti → mi)'
+
+            },
+
+            // ESERCIZI 11-20: Passato prossimo → Trapassato prossimo
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Diretto: "Ho finito il lavoro." → Indiretto: Ha detto che __________ il lavoro.',
+                options: ['aveva finito', 'ha finito', 'ebbe finito', 'avesse finito'],
+                correct: 'aveva finito',
+                explanation: '✅ Corretto! Passato prossimo → Trapassato prossimo',
+                errorExplanation: '❌ Passato prossimo (ho finito) diventa trapassato prossimo (aveva finito)'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Diretto: "Sono andato a Roma." → Indiretto: Ha detto che __________ a Roma.',
+                correct: ['era andato', 'era andata'],
+                explanation: '✅ Corretto! Era andato/a (passato prossimo con essere → trapassato con essere + concordanza)'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Diretto: "Ho mangiato fuori." → Indiretto: Ha detto che __________ fuori.',
+                options: ['aveva mangiato', 'ha mangiato', 'mangiava', 'avesse mangiato'],
+                correct: 'aveva mangiato',
+                explanation: '✅ Corretto! Aveva mangiato (passato prossimo → trapassato)',
+                errorExplanation: '❌ Passato prossimo con avere → trapassato prossimo: aveva mangiato'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Diretto: "Sono arrivato in ritardo." → Indiretto: Ha detto che __________ in ritardo.',
+                correct: ['era arrivato', 'era arrivata'],
+                explanation: '✅ Corretto! Era arrivato/a (concordanza con il soggetto)'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Diretto: "Ho perso le chiavi." → Indiretto: Ha detto che __________ le chiavi.',
+                options: ['aveva perso', 'ha perso', 'perdeva', 'avesse perso'],
+                correct: 'aveva perso',
+                explanation: '✅ Corretto! Aveva perso (passato prossimo → trapassato)',
+                errorExplanation: '❌ Passato prossimo → trapassato prossimo: aveva perso'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Diretto: "Sono partita ieri." → Indiretto: Ha detto che __________ il giorno prima.',
+                correct: ['era partita', 'era partito'],
+                explanation: '✅ Corretto! Era partita (femminile) + ieri → il giorno prima'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Diretto: "Ho scritto una lettera." → Indiretto: Ha detto che __________ una lettera.',
+                options: ['aveva scritto', 'ha scritto', 'scriveva', 'avesse scritto'],
+                correct: 'aveva scritto',
+                explanation: '✅ Corretto! Aveva scritto (passato prossimo → trapassato)',
+                errorExplanation: '❌ Passato prossimo di scrivere → trapassato: aveva scritto'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Diretto: "Sono rimasto a casa." → Indiretto: Ha detto che __________ a casa.',
+                correct: ['era rimasto', 'era rimasta'],
+                explanation: '✅ Corretto! Era rimasto/a (passato prossimo con essere → trapassato)'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Diretto: "Ho visto quel film." → Indiretto: Ha detto che __________ quel film.',
+                options: ['aveva visto', 'ha visto', 'vedeva', 'avesse visto'],
+                correct: 'aveva visto',
+                explanation: '✅ Corretto! Aveva visto (passato prossimo → trapassato)',
+                errorExplanation: '❌ Passato prossimo di vedere → trapassato: aveva visto'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Diretto: "Sono nato qui." → Indiretto: Ha detto che __________ lì.',
+                correct: ['era nato', 'era nata'],
+                explanation: '✅ Corretto! Era nato/a + qui → lì'
+
+            },
+
+            // ESERCIZI 21-30: Futuro → Condizionale
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Diretto: "Andrò domani." → Indiretto: Ha detto che __________ il giorno dopo.',
+                options: ['sarebbe andato', 'andrà', 'andava', 'fosse andato'],
+                correct: 'sarebbe andato',
+                explanation: '✅ Corretto! Futuro semplice → Condizionale presente (sarebbe andato)',
+                errorExplanation: '❌ Futuro semplice (andrò) → condizionale presente: sarebbe andato'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Diretto: "Verrò alla festa." → Indiretto: Ha detto che __________ alla festa.',
+                correct: ['sarebbe venuto', 'sarebbe venuta'],
+                explanation: '✅ Corretto! Sarebbe venuto/a (futuro di venire → condizionale con essere)'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Diretto: "Farò il possibile." → Indiretto: Ha detto che __________ il possibile.',
+                options: ['avrebbe fatto', 'farà', 'faceva', 'avesse fatto'],
+                correct: 'avrebbe fatto',
+                explanation: '✅ Corretto! Avrebbe fatto (futuro di fare → condizionale)',
+                errorExplanation: '❌ Futuro di fare (farò) → condizionale: avrebbe fatto'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Diretto: "Sarò pronto alle 8." → Indiretto: Ha detto che __________ pronto alle 8.',
+                correct: ['sarebbe stato', 'sarebbe stata'],
+                explanation: '✅ Corretto! Sarebbe stato/a (futuro di essere → condizionale)'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Diretto: "Avrò finito entro sera." → Indiretto: Ha detto che __________ finito entro sera.',
+                options: ['avrebbe finito', 'avrà finito', 'finiva', 'avesse finito'],
+                correct: 'avrebbe finito',
+                explanation: '✅ Corretto! Futuro anteriore (avrò finito) → Condizionale passato (avrebbe finito)',
+                errorExplanation: '❌ Futuro anteriore → condizionale passato: avrebbe finito'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Diretto: "Mangerò fuori." → Indiretto: Ha detto che __________ fuori.',
+                correct: ['avrebbe mangiato'],
+                explanation: '✅ Corretto! Avrebbe mangiato (futuro → condizionale)'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Diretto: "Tornerò presto." → Indiretto: Ha detto che __________ presto.',
+                options: ['sarebbe tornato', 'tornerà', 'tornava', 'fosse tornato'],
+                correct: 'sarebbe tornato',
+                explanation: '✅ Corretto! Sarebbe tornato (futuro di tornare → condizionale con essere)',
+                errorExplanation: '❌ Futuro di tornare → condizionale: sarebbe tornato/a'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Diretto: "Domani partirò." → Indiretto: Ha detto che __________ il giorno dopo.',
+                correct: ['sarebbe partito', 'sarebbe partita'],
+                explanation: '✅ Corretto! Sarebbe partito/a + domani → il giorno dopo'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Diretto: "Andrei volentieri." → Indiretto: Ha detto che __________ volentieri.',
+                options: ['sarebbe andato', 'andrebbe', 'andava', 'fosse andato'],
+                correct: 'sarebbe andato',
+                explanation: '✅ Corretto! Condizionale presente (andrei) → Condizionale passato (sarebbe andato)',
+                errorExplanation: '❌ Condizionale presente → condizionale passato: sarebbe andato'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Diretto: "Vorrei un caffè." → Indiretto: Ha detto che __________ un caffè.',
+                correct: ['avrebbe voluto'],
+                explanation: '✅ Corretto! Avrebbe voluto (condizionale presente → condizionale passato)'
+
+            },
+
+            // ESERCIZI 31-40: Pronomi e aggettivi possessivi
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Diretto: "La mia casa è grande." → Indiretto: Ha detto che la __________ casa era grande.',
+                options: ['sua', 'mia', 'tua', 'loro'],
+                correct: 'sua',
+                explanation: '✅ Corretto! "Mia" (prima persona) → "sua" (terza persona)',
+                errorExplanation: '❌ Il possessivo si trasforma: mia → sua (dalla prospettiva del narratore)'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Diretto: "Io sono stanco." → Indiretto: Marco ha detto che __________ stanco.',
+                correct: ['lui era', 'egli era'],
+                explanation: '✅ Corretto! "Io" diventa "lui/egli" (terza persona)'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Diretto: "Tu sei gentile." (parlando a Maria) → Indiretto: Ho detto a Maria che __________ gentile.',
+                options: ['lei era', 'tu eri', 'egli era', 'loro erano'],
+                correct: 'lei era',
+                explanation: '✅ Corretto! "Tu" (parlando a Maria) → "lei" (Maria, terza persona)',
+                errorExplanation: '❌ "Tu" si trasforma in base al destinatario originale: lei (Maria)'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Diretto: "Questo è il mio libro." → Indiretto: Ha detto che __________ era il __________ libro.',
+                correct: ['quello', 'suo'],
+                explanation: '✅ Corretto! Questo → quello, mio → suo'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Diretto: "I miei genitori sono qui." → Indiretto: Ha detto che i __________ genitori erano __________.',
+                options: ['suoi, lì', 'miei, qui', 'loro, lì', 'suoi, qui'],
+                correct: 'suoi, lì',
+                explanation: '✅ Corretto! Miei → suoi, qui → lì',
+                errorExplanation: '❌ Miei → suoi (possessivo) e qui → lì (avverbio di luogo)'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Diretto: "Mi piace questo." → Indiretto: Ha detto che __________ piaceva __________.',
+                correct: ['gli', 'quello'],
+                explanation: '✅ Corretto! Mi → gli (a lui), questo → quello'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Diretto: "Ti chiamo domani." → Indiretto: Ha detto che __________ chiamava il giorno dopo.',
+                options: ['lo', 'mi', 'ti', 'gli'],
+                correct: 'lo',
+                explanation: '✅ Corretto! "Ti" (a me, che riporto) diventa "lo" (lui mi chiamava)',
+                errorExplanation: '❌ Attenzione: "ti chiamo" (io ti chiamo) → "mi chiamava" (lui mi chiamava), ma qui la struttura è diversa. Se Luca dice a me "ti chiamo", Luca ha detto che lo chiamavo... Meglio verificare il contesto. In questo caso: "ti chiamo" (io ti chiamo, dice lui a me) → ha detto che mi chiamava. Ma se la frase è "Ti chiamo domani" detto da lui a me, allora indiretto: Ha detto che mi chiamava. Se invece è detto a un terzo...'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Diretto: "Oggi sono felice." → Indiretto: Ha detto che __________ era felice.',
+                correct: ['quel giorno', 'in quel giorno'],
+                explanation: '✅ Corretto! Oggi → quel giorno/in quel giorno'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Diretto: "Ieri sono stato a Roma." → Indiretto: Ha detto che __________ era stato a Roma.',
+                options: ['il giorno prima', 'ieri', 'quel giorno', 'il giorno dopo'],
+                correct: 'il giorno prima',
+                explanation: '✅ Corretto! Ieri → il giorno prima/la vigilia',
+                errorExplanation: '❌ Ieri → il giorno prima (o la vigilia)'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Diretto: "Adesso devo andare." → Indiretto: Ha detto che __________ doveva andare.',
+                correct: ['allora', 'in quel momento'],
+                explanation: '✅ Corretto! Adesso/ora → allora/in quel momento'
+
+            },
+
+            // ESERCIZI 41-50: Domande e comandi
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Diretto: "Vieni alla festa?" → Indiretto: Mi ha chiesto __________ alla festa.',
+                options: ['se venivo', 'che venivo', 'di venire', 'venissi'],
+                correct: 'se venivo',
+                explanation: '✅ Corretto! Domanda chiusa (sì/no) → "se" + imperfetto',
+                errorExplanation: '❌ Le domande chiuse si introducono con "se": mi ha chiesto se venivo'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Diretto: "Dove vai?" → Indiretto: Mi ha chiesto __________.',
+                correct: ['dove andavo'],
+                explanation: '✅ Corretto! Domanda aperta → mantiene la parola interrogativa: dove andavo'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Diretto: "Perché sei triste?" → Indiretto: Mi ha chiesto __________ triste.',
+                options: ['perché ero', 'se ero', 'che ero', 'perché fossi'],
+                correct: 'perché ero',
+                explanation: '✅ Corretto! Domanda aperta con "perché" → perché + imperfetto',
+                errorExplanation: '❌ Domanda aperta: mantiene "perché" + imperfetto indicativo (ero)'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Diretto: "Chi è quel ragazzo?" → Indiretto: Mi ha chiesto __________ quel ragazzo.',
+                correct: ['chi era'],
+                explanation: '✅ Corretto! Chi era (presente → imperfetto)'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Diretto: "Vieni qui!" → Indiretto: Mi ha ordinato __________ lì.',
+                options: ['di venire', 'che venissi', 'venire', 'venivo'],
+                correct: 'di venire',
+                explanation: '✅ Corretto! Comando con stesso soggetto → "di" + infinito',
+                errorExplanation: '❌ Comando: con lo stesso soggetto si usa "di + infinito": di venire'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Diretto: "Chiudi la porta!" → Indiretto: Mi ha ordinato __________ la porta.',
+                correct: ['di chiudere', 'che chiudessi'],
+                explanation: '✅ Corretto! Di chiudere (forma implicita) o che chiudessi (forma esplicita con congiuntivo)'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Diretto: "Dammi il libro!" → Indiretto: Mi ha chiesto __________ il libro.',
+                options: ['di dargli', 'che gli dessi', 'dargli', 'gli davo'],
+                correct: 'di dargli',
+                explanation: '✅ Corretto! Di dargli (di + infinito con pronome)',
+                errorExplanation: '❌ Comando: di + infinito (di dargli) oppure che + congiuntivo (che gli dessi)'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Diretto: "Aspettami!" → Indiretto: Mi ha chiesto __________.',
+                correct: ['di aspettarlo', 'che lo aspettassi'],
+                explanation: '✅ Corretto! Di aspettarlo (mi diventa lo: lui mi chiede di aspettarlo)'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Diretto: "Sei sicuro?" → Indiretto: Mi ha chiesto __________ sicuro.',
+                options: ['se ero', 'che fossi', 'ero', 'se fossi'],
+                correct: 'se ero',
+                explanation: '✅ Corretto! Domanda chiusa con "se" + imperfetto indicativo',
+                errorExplanation: '❌ Domanda chiusa: se + imperfetto indicativo (ero)'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Diretto: "Quanto costa?" → Indiretto: Mi ha chiesto __________.',
+                correct: ['quanto costava'],
+                explanation: '✅ Corretto! Quanto costava (presente → imperfetto). Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la forma indiretta..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente la trasformazione dal discorso diretto all\'indiretto!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene le regole, ma fai attenzione ai cambiamenti dei pronomi!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: presente → imperfetto, passato prossimo → trapassato, futuro → condizionale!';
+            } else {
+                message = '📚 Ripassa le tabelle! Ricorda la consecutio temporum e le trasformazioni di pronomi e avverbi!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

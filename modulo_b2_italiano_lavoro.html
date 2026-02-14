@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B2 - Italiano del Lavoro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --work: #0891b2;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .work { color: var(--work); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--b1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .intro-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            border-left: 5px solid var(--b1-color);
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B2 - Italiano del Lavoro</h1>
+            <p>Comunicare efficacemente in contesti professionali</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B2</a>
+            <span>›</span>
+            <strong>Italiano del Lavoro</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">💼 Italiano del Lavoro</h1>
+            <p class="page-subtitle">Comunicazione professionale: colloqui, email, meeting e negoziazione</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('interview', this)">Colloqui</button>
+            <button class="nav-tab" onclick="showSection('email', this)">Email</button>
+            <button class="nav-tab" onclick="showSection('meeting', this)">Meeting</button>
+            <button class="nav-tab" onclick="showSection('negotiation', this)">Negoziazione</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="intro-box">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B2! 💼</h3>
+                <p>Oggi studiamo l'<strong>italiano del lavoro</strong>, ovvero come comunicare in modo efficace e professionale in contesti aziendali.</p>
+                <p style="margin-top: 10px;"><strong>Esempio:</strong> Invece di "<span class="work">Ciao, mi dai un lavoro?</span>" (informale), usiamo "<span class="work">Gentile Signor Rossi, La contatto in merito alla posizione di...</span>" (formale).</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è l'Italiano del Lavoro?</div>
+                <div class="card-body">
+                    <p>L'<strong>italiano del lavoro</strong> (o italiano professionale) è il registro linguistico utilizzato in contesti aziendali, commerciali e istituzionali. Richiede competenze specifiche in diverse situazioni comunicative.</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Competenze comunicative professionali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Colloquio di lavoro:</strong> Presentarsi, descrivere esperienze, rispondere a domande</li>
+                            <li><strong>Email professionali:</strong> Scrivere richieste, conferme, reclami, proposte</li>
+                            <li><strong>Meeting e riunioni:</strong> Partecipare, intervenire, prendere decisioni</li>
+                            <li><strong>Telefonate:</strong> Gestire chiamate in entrata e in uscita</li>
+                            <li><strong>Negoziazione:</strong> Discutere condizioni, fare proposte, trovare accordi</li>
+                            <li><strong>Presentazioni:</strong> Esporre progetti, risultati, strategie</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Caratteristiche del linguaggio professionale:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Forma di cortesia:</strong> Uso di "Lei" con maiuscola</li>
+                            <li><strong>Lessico specifico:</strong> Termini tecnici del settore</li>
+                            <li><strong>Chiarezza:</strong> Messaggi diretti e comprensibili</li>
+                            <li><strong>Brevità:</strong> Rispetto del tempo dell'interlocutore</li>
+                            <li><strong>Correttezza:</strong> Grammatica e ortografia impeccabili</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola fondamentale:</strong> In ambito lavorativo italiano, la forma di cortesia "Lei" è obbligatoria con sconosciuti, superiori e clienti. Il "tu" si usa solo dopo esplicita richiesta o in contesti informali consolidati.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE COLLOQUI -->
+        <section id="interview" class="section">
+            <div class="card">
+                <div class="card-header">Il Colloquio di Lavoro</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il colloquio di lavoro è il primo contatto con un potenziale datore di lavoro. La preparazione è fondamentale.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Fase</th><th>Obiettivo</th><th>Espressioni utili</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Presentazione</strong></td>
+                                <td>Presentarsi in modo professionale</td>
+                                <td>"Mi chiamo..., ho studiato..., ho lavorato..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Esperienze</strong></td>
+                                <td>Descrivere il percorso formativo e lavorativo</td>
+                                <td>"Ho conseguito..., mi sono occupato di..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Competenze</strong></td>
+                                <td>Evidenziare capacità specifiche</td>
+                                <td>"Ho competenze in..., sono abile nel..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Motivazione</strong></td>
+                                <td>Spiegare perché si vuole quel lavoro</td>
+                                <td>"Sono interessato a..., mi attrai..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Domande</strong></td>
+                                <td>Mostrare interesse per l'azienda</td>
+                                <td>"Vorrei sapere se..., potrebbe dirmi..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Domande frequenti e risposte:</strong><br>
+                        <em>"Parli di lei"</em> → Sintetizzare formazione, esperienza e obiettivi in 1-2 minuti<br>
+                        <em>"Quali sono i suoi punti di forza?"</em> → Citare 2-3 competenze con esempi concreti<br>
+                        <em>"Perché vuole lavorare con noi?"</em> → Mostrare conoscenza dell'azienda e allineamento valori
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Errori da evitare:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Arrivare impreparati sull'azienda</li>
+                            <li>Parlare troppo o troppo poco</li>
+                            <li>Criticare ex datori di lavoro</li>
+                            <li>Mostrare scarsa motivazione</li>
+                            <li>Non fare domande a propria volta</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE EMAIL -->
+        <section id="email" class="section">
+            <div class="card">
+                <div class="card-header">Email Professionali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>L'email è lo strumento di comunicazione aziendale più usato. La struttura deve essere chiara e professionale.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Elemento</th><th>Funzione</th><th>Esempi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Oggetto</strong></td>
+                                <td>Sintetizzare il contenuto</td>
+                                <td>"Richiesta informazioni", "Conferma appuntamento"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Saluto</strong></td>
+                                <td>Aprire in modo formale</td>
+                                <td>"Gentile Dott. Rossi," "Egregio Signor Bianchi,"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Introduzione</strong></td>
+                                <td>Contestualizzare il messaggio</td>
+                                <td>"Le scrivo in merito a...", "In riferimento a..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Corpo</strong></td>
+                                <td>Esplicitare la richiesta/informazione</td>
+                                <td>"Vorrei sapere se...", "La informo che..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Chiusura</strong></td>
+                                <td>Concludere e invitare azione</td>
+                                <td>"In attesa di un Suo riscontro..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Firma</strong></td>
+                                <td>Identificare il mittente</td>
+                                <td>"Cordiali saluti, [Nome Cognome]"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Tipologie di email lavorative:</strong><br>
+                        <em>Richiesta informazioni:</em> Gentile..., La contatto per avere informazioni su...<br>
+                        <em>Conferma:</em> Confermo l'appuntamento del...<br>
+                        <em>Reclamo:</em> Devo segnalare un problema riguardante...<br>
+                        <em>Proposta:</em> Vorrei proporre la mia candidatura per...<br>
+                        <em>Ringraziamento:</em> La ringrazio per la disponibilità dimostrata
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Formule di cortesia nelle email:</strong><br>
+                        <em>Richiesta:</em> "Vorrei cortesemente...", "Sarei grato se potesse..."<br>
+                        <em>Urgenza:</em> "Le sarei grato di ricevere risposta entro..."<br>
+                        <em>Allegati:</em> "Allego alla presente...", "In allegato trova..."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE MEETING -->
+        <section id="meeting" class="section">
+            <div class="card">
+                <div class="card-header">Meeting e Riunioni</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Partecipare efficacemente a meeting richiede competenze linguistiche e comportamentali specifiche.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Situazione</th><th>Espressione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Aprire</strong></td>
+                                <td>Dare inizio alla riunione</td>
+                                <td>"Ringrazio tutti per la presenza. Iniziamo."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Presentare</strong></td>
+                                <td>Esponi argomenti</td>
+                                <td>"Vorrei illustrare il progetto..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Intervenire</strong></td>
+                                <td>Prendere la parola</td>
+                                <td>"Se mi permette, vorrei aggiungere..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Chiedere chiarimenti</strong></td>
+                                <td>Richiedere spiegazioni</td>
+                                <td>"Potrebbe spiegare meglio..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Esprimere accordo</strong></td>
+                                <td>Condividere opinioni</td>
+                                <td>"Sono d'accordo con quanto detto da..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Esprimere disaccordo</strong></td>
+                                <td>Contrastare educatamente</td>
+                                <td>"Con tutto il rispetto, credo che..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Chiudere</strong></td>
+                                <td>Concludere la riunione</td>
+                                <td>"Riassumendo, abbiamo deciso che..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Verbale di riunione:</strong> Documento che riassume:<br>
+                        • Data, ora, luogo, partecipanti<br>
+                        • Argomenti trattati<br>
+                        • Decisioni prese<br>
+                        • Azioni da intraprendere e responsabili<br>
+                        • Prossimo appuntamento
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Frasi per gestire il tempo:</strong><br>
+                        "Per questioni di tempo, suggerirei di..."<br>
+                        "Siamo un po' in ritardo, quindi..."<br>
+                        "Per non dilungarci troppo, direi che..."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE NEGOZIAZIONE -->
+        <section id="negotiation" class="section">
+            <div class="card">
+                <div class="card-header">Negoziazione e Trattative</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La negoziazione richiede equilibrio tra fermezza e flessibilità, usando un linguaggio strategico.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Fase</th><th>Strategia</th><th>Espressioni</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Apertura</strong></td>
+                                <td>Stabilire rapporto e obiettivi</td>
+                                <td>"Siamo qui per trovare una soluzione vantaggiosa per entrambi"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Esplorazione</strong></td>
+                                <td>Capire esigenze dell'altro</td>
+                                <td>"Quali sono le Sue priorità?"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Proposta</strong></td>
+                                <td>Avanzare offerte concrete</td>
+                                <td>"Potremmo proporre...", "Saremmo disposti a..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Controproposta</strong></td>
+                                <td>Rispondere alle offerte</td>
+                                <td>"Apprezziamo la proposta, tuttavia..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Chiusura</strong></td>
+                                <td>Riassumere e formalizzare</td>
+                                <td>"Quindi, riassumendo, siamo d'accordo su..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Tecniche di negoziazione:</strong><br>
+                        <em>Condizionale di cortesia:</em> "Potremmo considerare..."<br>
+                        <em>Focus su interessi:</em> "Cosa è importante per Lei?"<br>
+                        <em>Opzioni multiple:</em> "Potremmo valutare diverse alternative..."<br>
+                        <em>Obiettivo criteriato:</em> "Basiamoci su criteri oggettivi"
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Formule per gestire conflitti:</strong><br>
+                        "Capisco il Suo punto di vista, tuttavia..."<br>
+                        "Cerco di vedere la questione dalla Sua prospettiva..."<br>
+                        "Non sono sicuro di aver capito bene. Potrebbe spiegare...?"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B2 - Italiano del Lavoro (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Forma di cortesia e presentazioni
+            {
+                id: 1,
+                type: 'choice',
+                question: 'In un colloquio di lavoro formale, come ci si presenta?',
+                options: ['Mi chiamo Marco Rossi', 'Sono Marco', 'Ciao, sono Marco', 'Marco sono'],
+                correct: 'Mi chiamo Marco Rossi',
+                explanation: '✅ Corretto! In contesti formali si usa nome e cognome completo',
+                errorExplanation: '❌ In contesti professionali si presenta con nome e cognome: "Mi chiamo Marco Rossi"'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Formale: "__________ conseguito una laurea in Economia."',
+                correct: ['Ho'],
+                explanation: '✅ Corretto! "Ho conseguito" è la forma corretta per parlare di titoli di studio'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Quale forma è appropriata per descrivere esperienze lavorative passate?',
+                options: ['Mi sono occupato di', 'Facevo', 'Lavoravo su', 'Stavo facendo'],
+                correct: 'Mi sono occupato di',
+                explanation: '✅ Corretto! "Mi sono occupato di" è formale e precisa',
+                errorExplanation: '❌ "Mi sono occupato di" è la formula professionale per descrivere mansioni'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Formale: "Ho __________ nel settore marketing per tre anni."',
+                correct: ['lavorato', 'operato'],
+                explanation: '✅ Corretto! "Ho lavorato/operato" sono forme professionali'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Come si esprime una competenza in modo professionale?',
+                options: ['Ho competenze in gestione progetti', 'So fare progetti', 'Manco i progetti', 'Faccio progetti bene'],
+                correct: 'Ho competenze in gestione progetti',
+                explanation: '✅ Corretto! "Ho competenze in..." è la formula professionale',
+                errorExplanation: '❌ "Ho competenze in..." è la struttura formale per indicare capacità'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Formale: "Sono __________ nel settore delle vendite."',
+                correct: ['specializzato', 'esperto', 'competente'],
+                explanation: '✅ Corretto! "Specializzato/esperto/competente" sono aggettivi professionali'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Quale espressione mostra motivazione professionale?',
+                options: ['Sono interessato a questa posizione', 'Mi piace questo lavoro', 'Voglio questo lavoro', 'Questo lavoro è bello'],
+                correct: 'Sono interessato a questa posizione',
+                explanation: '✅ Corretto! "Sono interessato a..." è formale e appropriata',
+                errorExplanation: '❌ "Sono interessato a..." è la formula professionale per esprimere motivazione'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Formale: "La mia esperienza mi ha permesso di __________ competenze tecniche."',
+                correct: ['sviluppare', 'acquisire', 'consolidare'],
+                explanation: '✅ Corretto! Verbi professionali per descrivere crescita competenze'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Come si chiede informazioni sull\'azienda in modo professionale?',
+                options: ['Vorrei sapere di più sulla vostra azienda', 'Dimmi dell\'azienda', 'Cosa fate?', 'Parlami di voi'],
+                correct: 'Vorrei sapere di più sulla vostra azienda',
+                explanation: '✅ Corretto! Condizionale di cortesia per richieste formali',
+                errorExplanation: '❌ "Vorrei sapere..." usa il condizionale di cortesia appropriato in contesti professionali'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Formale: "__________ la mia candidatura per il ruolo di..."',
+                correct: ['Vorrei proporre', 'Desidero presentare'],
+                explanation: '✅ Corretto! Formule formali per presentare candidature'
+
+            },
+
+            // ESERCIZI 11-20: Email professionali
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Quale saluto è appropriato per un\'email a un direttore commerciale?',
+                options: ['Gentile Dott. Rossi,', 'Ciao Rossi,', 'Ehi Dottore,', 'Salve a tutti,'],
+                correct: 'Gentile Dott. Rossi,',
+                explanation: '✅ Corretto! "Gentile + titolo + cognome" è lo standard professionale',
+                errorExplanation: '❌ "Gentile Dott. Rossi," è il saluto formale corretto per email professionali'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Oggetto email: "__________ informazioni sui vostri servizi"',
+                correct: ['Richiesta di', 'Richiesta'],
+                explanation: '✅ Corretto! L\'oggetto deve essere chiaro e sintetico'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Quale formula apre correttamente un\'email formale?',
+                options: ['Le scrivo in merito a', 'Ti scrivo perché', 'Ciao, ti dico che', 'Ehi, volevo dirti'],
+                correct: 'Le scrivo in merito a',
+                explanation: '✅ Corretto! "Le scrivo in merito a" è la formula formale standard',
+                errorExplanation: '❌ "Le scrivo in merito a..." è l\'apertura professionale con forma di cortesia'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Formale: "__________ alla presente il mio curriculum vitae."',
+                correct: ['Allego'],
+                explanation: '✅ Corretto! "Allego" è il verbo standard per indicare allegati'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Quale formula è appropriata per chiedere una risposta?',
+                options: ['In attesa di un Suo gentile riscontro', 'Rispondimi presto', 'Fammi sapere', 'Aspetto tue notizie'],
+                correct: 'In attesa di un Suo gentile riscontro',
+                explanation: '✅ Corretto! Formula professionale di chiusura con richiesta',
+                errorExplanation: '❌ "In attesa di un Suo gentile riscontro" è la formula formale standard'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Chiusura formale: "__________ saluti, Mario Bianchi"',
+                correct: ['Cordiali', 'Distinti'],
+                explanation: '✅ Corretto! "Cordiali/Distinti saluti" sono le chiusure professionali standard'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Come si scrive una richiesta di conferma appuntamento?',
+                options: ['Confermo l\'appuntamento del 15 maggio', 'Ci vediamo il 15', 'Ricordati del 15', 'Il 15 ci sei?'],
+                correct: 'Confermo l\'appuntamento del 15 maggio',
+                explanation: '✅ Corretto! Chiarezza e completezza nelle conferme professionali',
+                errorExplanation: '❌ Le conferme professionali devono essere chiare e complete'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Formale: "__________ cortesemente se fosse possibile anticipare l\'incontro."',
+                correct: ['Vorrei sapere', 'Sarei grato di sapere'],
+                explanation: '✅ Corretto! Condizionale di cortesia per richieste formali'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Quale formula è appropriata per un reclamo professionale?',
+                options: ['Devo segnalare un problema riguardante', 'C\'è un problema', 'Non va bene', 'Sono arrabbiato per'],
+                correct: 'Devo segnalare un problema riguardante',
+                explanation: '✅ Corretto! Forma professionale e oggettiva per reclami',
+                errorExplanation: '❌ "Devo segnalare un problema riguardante..." è la formula professionale per reclami'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Formale: "La __________ per la Sua disponibilità."',
+                correct: ['ringrazio'],
+                explanation: '✅ Corretto! "La ringrazio" è la formula di ringraziamento formale'
+
+            },
+
+            // ESERCIZI 21-30: Meeting e riunioni
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Come si interviene educatamente in una riunione?',
+                options: ['Se mi permette, vorrei aggiungere', 'Io dico che', 'Ascoltami', 'Devo parlare'],
+                correct: 'Se mi permette, vorrei aggiungere',
+                explanation: '✅ Corretto! Formula cortese per prendere la parola',
+                errorExplanation: '❌ "Se mi permette, vorrei aggiungere..." è la formula educata per intervenire'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Formale: "__________ tutti per la presenza. Possiamo iniziare."',
+                correct: ['Ringrazio'],
+                explanation: '✅ Corretto! "Ringrazio tutti per la presenza" apre professionalmente una riunione'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Come si chiede un chiarimento in modo professionale?',
+                options: ['Potrebbe spiegare meglio', 'Non ho capito', 'Cosa vuoi dire?', 'Spiegati'],
+                correct: 'Potrebbe spiegare meglio',
+                explanation: '✅ Corretto! Condizionale di cortesia per richieste di chiarimento',
+                errorExplanation: '❌ "Potrebbe spiegare meglio..." usa il condizionale di cortesia'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Formale: "Sono __________ con quanto detto dal collega."',
+                correct: ['d\'accordo'],
+                explanation: '✅ Corretto! "Sono d\'accordo con..." esprime consenso professionale'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Come si esprime disaccordo in modo educato?',
+                options: ['Con tutto il rispetto, credo che', 'Non sono d\'accordo', 'Hai torto', 'Non è vero'],
+                correct: 'Con tutto il rispetto, credo che',
+                explanation: '✅ Corretto! Formula per disaccordo rispettoso',
+                errorExplanation: '❌ "Con tutto il rispetto, credo che..." attenua il disaccordo in modo professionale'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Formale: "__________ il progetto che vorrei illustrarvi."',
+                correct: ['Ecco'],
+                explanation: '✅ Corretto! "Ecco" è la formula presentativa professionale'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Quale espressione conclude professionalmente una riunione?',
+                options: ['Riassumendo, abbiamo deciso che', 'Basta così', 'Finisco qui', 'Stop'],
+                correct: 'Riassumendo, abbiamo deciso che',
+                explanation: '✅ Corretto! Riassunto delle decisioni per chiusura professionale',
+                errorExplanation: '❌ "Riassumendo, abbiamo deciso che..." è la chiusura professionale di una riunione'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Formale: "Per questioni di __________, suggerirei di passare al punto successivo."',
+                correct: ['tempo'],
+                explanation: '✅ Corretto! Riferimento al tempo per gestire l\'agenda'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Come si rimanda un argomento in modo professionale?',
+                options: ['Torniamo su questo punto più tardi', 'Non ne parliamo ora', 'Lasciamo stare', 'Dopo'],
+                correct: 'Torniamo su questo punto più tardi',
+                explanation: '✅ Corretto! Formula educata per rimandare discussioni',
+                errorExplanation: '❌ "Torniamo su questo punto più tardi" è la formula professionale per rimandare'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Formale: "__________ il parere dei presenti su questa proposta."',
+                correct: ['Vorrei conoscere', 'Mi piacerebbe sapere'],
+                explanation: '✅ Corretto! Formula per sollecitare pareri in riunione'
+
+            },
+
+            // ESERCIZI 31-40: Negoziazione
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Quale espressione apre una negoziazione in modo collaborativo?',
+                options: ['Siamo qui per trovare una soluzione vantaggiosa per entrambi', 'Io voglio questo', 'Tu devi accettare', 'Prendere o lasciare'],
+                correct: 'Siamo qui per trovare una soluzione vantaggiosa per entrambi',
+                explanation: '✅ Corretto! Approccio win-win per negoziazione efficace',
+                errorExplanation: '❌ "Soluzione vantaggiosa per entrambi" è l\'approccio collaborativo professionale'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Formale: "__________ disposti a valutare diverse opzioni."',
+                correct: ['Saremmo'],
+                explanation: '✅ Corretto! Condizionale per flessibilità negoziale'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Come si avanza una proposta in modo flessibile?',
+                options: ['Potremmo proporre', 'Propongo', 'Devi accettare', 'Ecco la mia offerta'],
+                correct: 'Potremmo proporre',
+                explanation: '✅ Corretto! Condizionale per proposte negoziabili',
+                errorExplanation: '❌ "Potremmo proporre" usa il condizionale per mantenere flessibilità'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Formale: "Apprezziamo la proposta, __________ vorremmo discutere alcuni termini."',
+                correct: ['tuttavia'],
+                explanation: '✅ Corretto! "Tuttavia" introduce controproposta in modo educato'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Quale formula gestisce obiezioni in modo professionale?',
+                options: ['Capisco il Suo punto di vista, tuttavia', 'Non sono d\'accordo', 'Ha torto', 'Non funziona'],
+                correct: 'Capisco il Suo punto di vista, tuttavia',
+                explanation: '✅ Corretto! Riconoscimento + disaccordo attenuato',
+                errorExplanation: '❌ "Capisco il Suo punto di vista, tuttavia..." è la formula per gestire obiezioni'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Formale: "Quali sono le Sue __________ in questa trattativa?"',
+                correct: ['priorità', 'esigenze'],
+                explanation: '✅ Corretto! Focus sulle esigenze dell\'interlocutore'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Come si chiede chiarezza senza essere aggressivi?',
+                options: ['Non sono sicuro di aver capito bene. Potrebbe spiegare?', 'Non capisco', 'Cosa vuoi dire?', 'Non seguo'],
+                correct: 'Non sono sicuro di aver capito bene. Potrebbe spiegare?',
+                explanation: '✅ Corretto! Formula per chiedere chiarimenti educatamente',
+                errorExplanation: '❌ "Non sono sicuro di aver capito..." è la formula professionale per chiedere chiarimenti'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Formale: "Quindi, __________, siamo d\'accordo sui seguenti punti..."',
+                correct: ['riassumendo'],
+                explanation: '✅ Corretto! "Riassumendo" introduce la fase di chiusura negoziale'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Quale espressione formalizza un accordo?',
+                options: ['Perfetto, formalizziamo quanto concordato', 'OK, va bene', 'Fatto', 'Ci siamo'],
+                correct: 'Perfetto, formalizziamo quanto concordato',
+                explanation: '✅ Corretto! Linguaggio professionale per formalizzare accordi',
+                errorExplanation: '❌ "Formalizziamo quanto concordato" è la formula professionale per chiudere negoziati'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Formale: "__________ di trovare un compromesso accettabile per entrambe le parti."',
+                correct: ['Siamo interessati', 'Desideriamo'],
+                explanation: '✅ Corretto! Formule per esprimere volontà negoziale'
+
+            },
+
+            // ESERCIZI 41-50: Contesti professionali avanzati
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Quale titolo si usa per un avvocato?',
+                options: ['Avv.', 'Avvocato', 'Lawyer', 'Legale'],
+                correct: 'Avv.',
+                explanation: '✅ Corretto! "Avv." è l\'abbreviazione standard per avvocato',
+                errorExplanation: '❌ L\'abbreviazione professionale per avvocato è "Avv."'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Formale: "__________ alla cortese attenzione del Responsabile Risorse Umane."',
+                correct: ['Alla'],
+                explanation: '✅ Corretto! "Alla cortese attenzione" è la formula per indirizzare a un ufficio'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Come si risponde a una richiesta che non si può soddisfare?',
+                options: ['Purtroppo non è possibile, tuttavia potremmo', 'No, non si può', 'Impossibile', 'Non posso'],
+                correct: 'Purtroppo non è possibile, tuttavia potremmo',
+                explanation: '✅ Corretto! Rifiuto attenuato + alternativa propositiva',
+                errorExplanation: '❌ "Purtroppo non è possibile, tuttavia..." è la formula per rifiuti professionali'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Formale: "La __________ di un incontro per discutere la proposta."',
+                correct: ['contatto per fissare', 'chiamo per concordare'],
+                explanation: '✅ Corretto! Formula per richiesta di appuntamento'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Quale espressione è appropriata per telefonate professionali?',
+                options: ['Buongiorno, sono Mario Rossi della società X', 'Pronto, sono Mario', 'Ciao, sono Mario', 'Sono Mario'],
+                correct: 'Buongiorno, sono Mario Rossi della società X',
+                explanation: '✅ Corretto! Presentazione completa in telefonate professionali',
+                errorExplanation: '❌ In telefonate professionali: saluto + nome completo + azienda'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Formale: "__________ gentilmente di inviarmi ulteriori dettagli."',
+                correct: ['La prego'],
+                explanation: '✅ Corretto! "La prego" è la formula di richiesta cortese formale'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Come si conferma la ricezione di un documento?',
+                options: ['Confermo la ricezione del documento', 'Ho ricevuto', 'Arrivato', 'OK ricevuto'],
+                correct: 'Confermo la ricezione del documento',
+                explanation: '✅ Corretto! Formula standard per conferme di ricezione',
+                errorExplanation: '❌ "Confermo la ricezione..." è la formula professionale per conferme'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Formale: "Resto in __________ di un Suo riscontro."',
+                correct: ['attesa'],
+                explanation: '✅ Corretto! "Resto in attesa" è la formula standard di chiusura'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Quale formula è appropriata per scusarsi di un ritardo?',
+                options: ['Mi scuso per il ritardo dovuto a', 'Scusa il ritardo', 'Sono in ritardo', 'Tardi'],
+                correct: 'Mi scuso per il ritardo dovuto a',
+                explanation: '✅ Corretto! Scusa formale con spiegazione professionale',
+                errorExplanation: '❌ "Mi scuso per il ritardo dovuto a..." è la formula professionale per scuse'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Formale: "__________ per la collaborazione e la professionalità dimostrata."',
+                correct: ['La ringrazio'],
+                explanation: '✅ Corretto! "La ringrazio" è la formula di ringraziamento professionale. Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente l\'italiano del lavoro in tutti i contesti professionali!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene il linguaggio professionale, ma fai attenzione alle formule di cortesia!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: forma di cortesia (Lei), condizionale per richieste, chiusure professionali (Cordiali saluti)!';
+            } else {
+                message = '📚 Ripassa le tabelle! Ricorda: colloqui (Mi chiamo..., Ho competenze in...), email (Gentile..., In attesa di...), meeting (Se mi permette...), negoziazione (Potremmo proporre...)!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>
