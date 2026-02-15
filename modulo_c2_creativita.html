@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C2 - Creatività Linguistica</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2c1810;
+            --secondary: #6c757d;
+            --accent: #8b4513;
+            --c2-color: #9c27b0;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --creative: #ff6b35;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--creative);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--creative);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--creative);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--creative);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(156, 39, 176, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .creative-term { color: var(--creative); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f3e5f5;
+            border: 2px solid var(--creative);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--creative);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--creative);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--creative);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #1a0f0a;
+        }
+        .btn-check { 
+            background: var(--creative); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #e64a19;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--creative);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--creative);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--creative);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--creative);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .creative-context {
+            background: #fce4ec;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--creative);
+            font-style: italic;
+        }
+        .wordplay-box {
+            background: #f3e5f5;
+            border: 1px solid #ce93d8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .neologism-card {
+            background: linear-gradient(135deg, #e1bee7 0%, #f3e5f5 100%);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #9c27b0;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C2 - Creatività Linguistica</h1>
+            <p>Neologismi, figure retoriche avanzate, giochi di parole e innovazione espressiva</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C2</a>
+            <span>›</span>
+            <strong>Creatività Linguistica</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🎨 Creatività Linguistica</h1>
+            <p class="page-subtitle">Innovazione lessicale, manipolazione sintattica e creazione di nuove forme espressive</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📖 Teoria</button>
+            <button class="nav-tab" onclick="showSection('neologisms', this)">Neologismi</button>
+            <button class="nav-tab" onclick="showSection('wordplay', this)">Giochi di Parole</button>
+            <button class="nav-tab" onclick="showSection('stylistics', this)">Stilistica</button>
+            <button class="nav-tab" onclick="showSection('syntax', this)">Sintassi Creativa</button>
+            <button class="nav-tab" onclick="showSection('rhetoric', this)">Retorica Avanzata</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">🎭</div>
+                    <div class="avatar-name">Prof. Creativi</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto nel mondo della creatività linguistica! 🎨</h3>
+                    <p>Oggi esploriamo come l'italiano C2 permette di <strong>innovare</strong>, <strong>manipolare</strong> e <strong>creare</strong> nuove forme espressive attraverso neologismi, figure retoriche complesse e giochi di parole sofisticati.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="creative-term">L'infosfera</span> ci <span class="creative-term">infossifica</span> in un <span class="creative-term">scrollare</span> compulsivo, rendendoci <span class="creative-term">dittendenti</span> del <span class="creative-term">like</span>".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Caratteristiche della Creatività Linguistica C2</div>
+                <div class="card-body">
+                    <p>La <strong>creatività linguistica</strong> a livello C2 implica la capacità di produrre testi originali, innovare lessicalmente, manipolare le strutture sintattiche e creare effetti retorici complessi. [^1^]</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Dimensioni della creatività linguistica:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Neologia:</strong> Creazione di nuovi lemmi (derivazione, composizione, ibridazione)</li>
+                            <li><strong>Polisemia creativa:</strong> Attivazione di sensi nascosti, metafore concettuali</li>
+                            <li><strong>Manipolazione sintattica:</strong> Dislocazioni, inversioni, frammentazione</li>
+                            <li><strong>Intertestualità creativa:</strong> Riscrittura, parodia, pastiche</li>
+                            <li><strong>Multimedialità:</strong> Integrazione di codici visivi, sonori, verbali</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Figure retoriche creative:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Paronomasia:</strong> Gioco fonetico tra parole simili (vate/fate)</li>
+                            <li><strong>Antanaclasi:</strong> Ripetizione di una parola con significato diverso</li>
+                            <li><strong>Syllepsi:</strong> Accordo con il senso, non con la grammatica</li>
+                            <li><strong>Zeugma:</strong> Un verbo regge oggetti eterogenei</li>
+                            <li><strong>Spoonerismo:</strong> Scambio di fonemi iniziali (caldo petto → petto caldo)</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> La creatività non è arbitrarietà: ogni innovazione deve essere <em>motivata</em> (etimologicamente, semanticamente o contestualmente) e <em>comprensibile</em> nel contesto comunicativo.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE NEOLOGISMI -->
+        <section id="neologisms" class="section">
+            <div class="card">
+                <div class="card-header">Neologismi e Innovazione Lessicale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>I neologismi si formano attraverso processi morfologici regolari: derivazione, composizione, ibridazione, prestito, conversione.</strong> [^2^]
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Processo</th><th>Meccanismo</th><th>Esempi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="creative-term">Derivazione</td>
+                                <td>Aggiunta di prefissi/suffissi</td>
+                                <td>Infossare, scrollare, dittendente</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Composizione</td>
+                                <td>Unione di due basi</td>
+                                <td>Infosfera, webfare, foodtuber</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Ibridazione</td>
+                                <td>Misto di lingue (italiano/inglese)</td>
+                                <td>Spoilerare, chattare, asciugamano smart</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Prestito</td>
+                                <td>Adattamento di forestierismi</td>
+                                <td>Ghostare, binge-watching, fake news</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Conversione</td>
+                                <td>Cambio di categoria grammaticale</td>
+                                <td>Il perché, il come, google (verbo)</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Troncamento</td>
+                                <td>Riduzione di parole lunghe</td>
+                                <td>Tuto (tutorial), prof (professionista)</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Acronimia</td>
+                                <td>Iniziali di sintagmi</td>
+                                <td>FOMO, LOL, ASAP, smart working</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Metafora lessicale</td>
+                                <td>Estensione metaforica</td>
+                                <td>Nuvola (digitale), virus (informatico)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="wordplay-box">
+                        <strong>Neologismi recenti (2020-2024):</strong><br>
+                        <em>Doomscrolling</em> = scrollare notizie negative<br>
+                        <em>Quiet quitting</em> = fare il minimo indispensabile<br>
+                        <em>Brain rot</em> = appiattimento cognitivo da social<br>
+                        <em>Core</em> (aesthetic) = stile estetico specifico<br>
+                        <em>Rizz</em> = capacità di seduzione (dal dialetto)
+                    </div>
+
+                    <div class="neologism-card">
+                        <strong>Neologismo creativo:</strong> <em>"Dittendente"</em><br>
+                        Derivato da: dipendente + dittatura<br>
+                        Significato: Lavoratore schiavo della produttività, privo di autonomia<br>
+                        Contesto: "I dittendenti del terzo millennio non hanno orari, hanno notifiche."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE GIOCHI DI PAROLE -->
+        <section id="wordplay" class="section">
+            <div class="card">
+                <div class="card-header">Giochi di Parole e Figure Etimologiche</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>I giochi di parole (paronomasie) sfruttano somiglianze fonetiche, etimologiche o grafiche per creare effetti umoristici, ironici o poetici.</strong> [^3^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Tipologie di giochi di parole</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Figura</th><th>Meccanismo</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="creative-term">Paronomasia</td>
+                                <td>Assonanza/consonanza tra parole</td>
+                                <td>"Amore che nasce dal cuore"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Antanaclasi</td>
+                                <td>Stessa parola, significati diversi</td>
+                                <td>"Chi vive sperando, muore cantando"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Paronimia</td>
+                                <td>Parole simili ma diverse</td>
+                                <td>Effetto/affetto, pregiudizio/pregiudizio</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Spoonerismo</td>
+                                <td>Scambio iniziali (errori involontari)</td>
+                                <td>"Caldo petto" → "Petto caldo"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Anagramma</td>
+                                <td>Riordino lettere</td>
+                                <td>Amore → Roma, arte → rete</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Palindromo</td>
+                                <td>Leggibile inversamente</td>
+                                <td>"Ai lati d'Italia", "ossesso"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Pun</td>
+                                <td>Doppio senso fonetico</td>
+                                <td>"Time flies like an arrow; fruit flies like a banana"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="transformation-box">
+                        <strong>Giochi di parole letterari:</strong><br><br>
+                        <em>Dante (Inf. XIX, 21):</em> "La mia dotta scrittura" (dotta/dottrina)<br>
+                        <em>Shakespeare:</em> "No grave upon the earth shall clip my grave" (tomba/abbracciare)<br>
+                        <em>Calvino:</em> "Il visconte dimezzato" (divisione fisica/identitaria)<br>
+                        <em>Fortini:</em> "Vergogna di vincere" (vittoria morale/sconfitta etica)
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Tip:</strong> I giochi di parole C2 devono essere <em>sottili</em>, non forzati. Preferire l'evocazione all'ostentazione, l'intelligenza alla buffoneria.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE STILISTICA -->
+        <section id="stylistics" class="section">
+            <div class="card">
+                <div class="card-header">Stilistica e Variazione Diatopica/Diastratica</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La creatività stilistica implica la capacità di alternare registri, mescolare codes, creare effetti di straniamento.</strong> [^4^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tecnica</th><th>Descrizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="creative-term">Code-switching</td>
+                                <td>Alternanza tra lingue/dialetti</td>
+                                <td>"Fare il big manager è very stressante"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Mescolanza di registri</td>
+                                <td>Alto/basso, tecnico/volgare</td>
+                                <td>"L'ontologia del like"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Archaismi creativi</td>
+                                <td>Riattualizzazione di arcaismi</td>
+                                <td>"Perkè" (perché in stile sms arcaico)</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Tecnicismi ironici</td>
+                                <td>Lessico specialistico fuori contesto</td>
+                                <td>"Ho un buffer di stanchezza"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Onomatopee sintattiche</td>
+                                <td>Riproduzione del rumore nella sintassi</td>
+                                <td>"Boom. Fine. Tutto esplose."</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Ellissi drammatiche</td>
+                                <td>Omissione per effetto</td>
+                                <td>"Pioggia. Notte. Lui."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="creative-context">
+                        <strong>Esempio di mescolanza registri (Eco):</strong><br>
+                        "La mia opera è un'enciclopedia malata, un ipertesto manoscritto, un web senza Netscape, un'infosfera analogica."
+                    </div>
+
+                    <div class="wordplay-box">
+                        <strong>Variazione diastratica (livelli sociali):</strong><br>
+                        <em>Allo:</em> "Mi accingo a procedere verso la meta"<br>
+                        <em>Medio:</em> "Vado verso casa"<br>
+                        <em>Basso/Gergale:</em> "Me ne vinco a casa" / "Bounceo da casa mia"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE SINTASSI CREATIVA -->
+        <section id="syntax" class="section">
+            <div class="card">
+                <div class="card-header">Sintassi Creativa e Frammentazione</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La sintassi creativa C2 sperimenta l'ordine delle parole, la punteggiatura espressiva, la frammentazione nominale.</strong> [^5^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Tecniche sintattiche avanzate</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tecnica</th><th>Effetto</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="creative-term">Iperbato estremo</td>
+                                <td>Separazione massima tra nome e aggettivo</td>
+                                <td>"Alta, inenarrabile, la notte scese"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Anastrofe iterata</td>
+                                <td>Inversione ripetuta</td>
+                                <td>"Felice era, contento sembrava, allegro si mostrava"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Asindeto emotivo</td>
+                                <td>Omissione di congiunzioni per accumulo</td>
+                                <td>"Venne, vide, vinse. Punto."</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Polisindeto ritmico</td>
+                                <td>Ripetizione di congiunzioni</td>
+                                <td>"E pioveva e tuonava e lampeggiava"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Frammentazione nominale</td>
+                                <td>Sostantivi senza verbo</td>
+                                <td>"Silenzio. Polvere. Abbandono."</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Periodo brevissimo</td>
+                                <td>Monoverbo/monosillabo</td>
+                                <td>"Fu. Fine. Tutto."</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Dislocazione contrastiva</td>
+                                <td>Spostamento per enfasi</td>
+                                <td>"Mangiare, quello non fa mai"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="transformation-box">
+                        <strong>Trasformazione creativa:</strong><br><br>
+                        <em>Standard:</em> "La notte scese alta e inenarrabile"<br>
+                        <span class="arrow">↓</span><br>
+                        <em>Creativo:</em> "Alta, inenarrabile, la notte. Scese."<br>
+                        <span class="arrow">↓</span><br>
+                        <em>Avanguardia:</em> "Notte. Altezza. Inenarrabilità. Caduta."
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> La frammentazione sintattica deve essere <em>funzionale</em>: serve a creare suspense, ritmo, enfasi. Evitare l'arbitrarietà.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE RETORICA AVANZATA -->
+        <section id="rhetoric" class="section">
+            <div class="card">
+                <div class="card-header">Retorica Avanzata e Figure Complesse</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Le figure retoriche C2 combinano più meccanismi, creano effetti di secondo livello, manipolano le aspettative del lettore.</strong> [^6^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Figura</th><th>Definizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="creative-term">Sineddoche logica</td>
+                                <td>Parte per il tutto (astratto)</td>
+                                <td>"Ho molto cervello in quella classe" (intelligenze)</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Metonimia multipla</td>
+                                <td>Catena di sostituzioni</td>
+                                <td>"La corona → il re → il potere → l'oppressione"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Metafora assoluta</td>
+                                <td>Senza termine di paragone</td>
+                                <td>"Il tempo è un ladro" (non "come")</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Catachresi creativa</td>
+                                <td>Metafora forzata/assente</td>
+                                <td>"Le gambe del tavolo" → "Le ali del hangar"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Ossimoro concettuale</td>
+                                <td>Contraddizione logica</td>
+                                <td>"Silenzio assordante, presente assente"</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Paradosso sintetico</td>
+                                <td>Verità apparentemente contraddittoria</td>
+                                <td>"So di non sapere" (Socrate)</td>
+                            </tr>
+                            <tr>
+                                <td class="creative-term">Ironia drammatica</td>
+                                <td>Il lettore sa ciò che il personaggio ignora</td>
+                                <td>Oedipus Rex (non sa di essere il colpevole)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="creative-context">
+                        <strong>Esempio di metafora concettuale (Lakoff & Johnson):</strong><br>
+                        "L'amore è un viaggio" → "Siamo arrivati a un bivio", "La strada è in salita", "Abbiamo preso direzioni diverse"<br><br>
+                        Questo schema mentale genera innumerevoli espressioni creative.
+                    </div>
+
+                    <div class="wordplay-box">
+                        <strong>Figure complesse:</strong><br>
+                        <em>Chiasmo incrociato:</em> "Amare è soffrire, soffrire è amare"<br>
+                        <em>Antimetabole:</em> "Chi non lavora non mangia, chi non mangia non lavora"<br>
+                        <em>Gradatio:</em> "Vinco, ergo vivo; vivo, ergo spero; spero, ergo vinco"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C2 - Creatività Linguistica (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Neologismi e formazione delle parole
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Il neologismo "infossare" è formato per __________ da "fossa" + prefisso "in-".',
+                options: ['derivazione', 'composizione', 'ibridazione', 'conversione'],
+                correct: 'derivazione',
+                explanation: '✅ Corretto! Derivazione = aggiunta di affissi a una base esistente (fossa → infossare)',
+                errorExplanation: '❌ Derivazione = aggiunta di prefissi/suffissi; Composizione = unione di due basi'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'La __________ unisce elementi di lingue diverse (es. "chattare" da inglese "chat" + suffisso italiano).',
+                correct: ['ibridazione', 'ibrido'],
+                explanation: '✅ Corretto! Ibridazione = misto di elementi linguistici diversi (anglicismo + morfologia italiana)'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: '"Webfare" è un neologismo formato per __________.',
+                options: ['composizione', 'derivazione', 'prestito', 'conversione'],
+                correct: 'composizione',
+                explanation: '✅ Corretto! Composizione = unione di due basi autonome (web + fare)',
+                errorExplanation: '❌ Composizione = unione di due lessemi (web + fare); Derivazione = aggiunta di affissi'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Il __________ trasforma una parola da una categoria grammaticale a un\'altra (es. "google" da nome a verbo).',
+                correct: ['prestito', 'conversione', 'cambiamento di categoria'],
+                explanation: '✅ Corretto! Conversione (o mutazione di categoria) = cambio di parte del discorso'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: '"Dittendente" unisce "dipendente" e "dittatura" per formare un __________.',
+                options: ['parasintetico', 'ibrido', 'composto', 'derivato'],
+                correct: 'parasintetico',
+                explanation: '✅ Corretto! Parasintesi = fusione di parti di due parole (dipendente + dittatura)',
+                errorExplanation: '❌ Parasintesi = accostamento di frammenti di parole diverse (brunch = breakfast + lunch)'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Gli acronimi come FOMO, LOL, ASAP sono esempi di __________ lessicale.',
+                correct: ['siglazione', 'acronimia', 'abbreviazione'],
+                explanation: '✅ Corretto! Acronimia = formazione di parole dalle iniziali (Fear Of Missing Out, Laugh Out Loud, As Soon As Possible)'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: '"Spoilerare" è un prestito __________ dall\'inglese.',
+                options: ['adattato', 'crudo', 'ibrido', 'composto'],
+                correct: 'adattato',
+                explanation: '✅ Corretto! Prestito adattato = integrato nella morfologia italiana (aggiunta di -are)',
+                errorExplanation: '❌ Prestito adattato = italianizzato morfologicamente; Crudo = mantenuto originale'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'La __________ metaforica estende il significato per analogia (es. "nuvola" dal meteorologico al digitale).',
+                correct: ['estensione', 'metafora', 'semantica'],
+                explanation: '✅ Corretto! Estensione metaforica = ampliamento del significato per somiglianza (nuvola come spazio virtuale)'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: '"Tuto" (da tutorial) è un esempio di __________.',
+                options: ['troncamento', 'acronimo', 'composto', 'ibrido'],
+                correct: 'troncamento',
+                explanation: '✅ Corretto! Troncamento = riduzione di parola lunga (professionista → prof, situazione → sitch)',
+                errorExplanation: '❌ Troncamento = abbreviazione per taglio finale; Apocope = taglio iniziale'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'I neologismi "smart working" e "deep learning" sono __________ tecnologici recenti.',
+                correct: ['anglicismi', 'prestiti', 'forestierismi'],
+                explanation: '✅ Corretto! Anglicismi = prestiti dall\'inglese, molto frequenti nel linguaggio tecnologico'
+
+            },
+
+            // ESERCIZI 11-20: Giochi di parole
+            {
+                id: 11,
+                type: 'choice',
+                question: 'La paronomasia sfrutta la somiglianza __________ tra parole.',
+                options: ['fonetica', 'semantica', 'grafica', 'etimologica'],
+                correct: 'fonetica',
+                explanation: '✅ Corretto! Paronomasia = somiglianza fonica (suono simile, significato diverso)',
+                errorExplanation: '❌ Paronomasia = somiglianza di suono; Paronimia = parole simili ma con significato diverso'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'L\'__________ ripete la stessa parola con significati diversi (es. "vivere" = abitare / essere vivo).',
+                correct: ['antanaclasi'],
+                explanation: '✅ Corretto! Antanaclasi = ripetizione polisemica di una stessa parola in contesti diversi'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: '"Caldo petto" scambiato in "petto caldo" è uno __________.',
+                options: ['spoonerismo', 'anagramma', 'palindromo', 'paronomasia'],
+                correct: 'spoonerismo',
+                explanation: '✅ Corretto! Spoonerismo = scambio involontario di fonemi iniziali (da William Spooner)',
+                errorExplanation: '❌ Spoonerismo = metatesi iniziale; Anagramma = riordino di tutte le lettere'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'L\'anagramma riordina le __________ di una parola per formarne un\'altra.',
+                correct: ['lettere', 'grafemi'],
+                explanation: '✅ Corretto! Anagramma = permutazione di lettere (es. amore → Roma, arte → rete)'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: '"Ai lati d\'Italia" è un __________ perché si legge uguale al contrario.',
+                options: ['palindromo', 'anagramma', 'spoonerismo', 'paronomasia'],
+                correct: 'palindromo',
+                explanation: '✅ Corretto! Palindromo = sequenza simmetrica (anche frasi: "A mano a mano", "Osso")',
+                errorExplanation: '❌ Palindromo = leggibile inversamente; Anagramma = stesse lettere, ordine diverso'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'La paronimia riguarda parole __________ per forma ma diverse per significato.',
+                correct: ['simili', 'assonanti', 'omofone'],
+                explanation: '✅ Corretto! Paronimi = parole simili (effetto/affetto, pregiudizio/pregiudizio)'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Il "pun" anglosassone corrisponde alla __________ italiana.',
+                options: ['paronomasia', 'antanaclasi', 'paronimia', 'spoonerismo'],
+                correct: 'paronomasia',
+                explanation: '✅ Corretto! Pun = gioco di parole fonico (time flies = tempo vola / mosche della frutta)',
+                errorExplanation: '❌ Pun = paronomasia/gioco fonetico; è la figura retorica più simile'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: '"Amore che nasce dal cuore" è una paronomasia tra __________ e cuore.',
+                correct: ['amore'],
+                explanation: '✅ Corretto! Assonanza amore/cuore (a-o-e / c-u-o-r-e) = gioco fonico tipico della poesia'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'La figura etimologica ripete parole dalla stessa __________.',
+                options: ['radice', 'famiglia', 'classe', 'categoria'],
+                correct: 'radice',
+                explanation: '✅ Corretto! Figura etimologica = stessa radice, categorie diverse (vivere la vita, amare l\'amore)',
+                errorExplanation: '❌ Figura etmologica = stessa etimologia, parti del discorso diverse (sostantivo + verbo)'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: '"Chi vive sperando, muore __________" usa l\'antanaclasi su "morire" (morire fisico / svenire).',
+                correct: ['cantando', 'sperando'],
+                explanation: '✅ Corretto! Antanaclasi: "morire" = decesso / "morire dal ridere" = eccesso di riso'
+
+            },
+
+            // ESERCIZI 21-30: Stilistica e registri
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Il __________ è l\'alternanza tra lingue o varietà linguistiche nello stesso testo.',
+                options: ['code-switching', 'mescolanza', 'ibridazione', 'conversione'],
+                correct: 'code-switching',
+                explanation: '✅ Corretto! Code-switching = passaggio da una lingua all\'altra (bilinguismo situazionale)',
+                errorExplanation: '❌ Code-switching = alternanza tra codici; Mescolanza = fusione più stabile'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'La mescolanza di registri __________ unisce lessico aulico e tecnico-giovanile.',
+                correct: ['stilistica', 'di registri'],
+                explanation: '✅ Corretto! Mescolanza di registri = alternanza tra alto, medio, basso per effetti ironici'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: '"L\'ontologia del like" mescola registro __________ e gergale.',
+                options: ['filosofico', 'poetico', 'giuridico', 'medico'],
+                correct: 'filosofico',
+                explanation: '✅ Corretto! Mescolanza filosofico/gergale: "ontologia" (alto) + "like" (basso/tecnologico)',
+                errorExplanation: '❌ Ontologia = termine filosofico (studio dell\'essere); Like = termine social media'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Gli __________ creativi riattualizzano forme arcaiche per effetti stilistici.',
+                correct: ['archaismi', 'arcaismi'],
+                explanation: '✅ Corretto! Arcaismi creativi = uso ironico o poetico di forme obsolete (perkè, mo\')'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: '"Ho un buffer di stanchezza" usa un __________ informatico fuori contesto.',
+                options: ['tecnicismo', 'gergale', 'dialettale', 'arcaico'],
+                correct: 'tecnicismo',
+                explanation: '✅ Corretto! Tecnicismo ironico = lessico specialistico (informatica) applicato all\'esperienza quotidiana',
+                errorExplanation: '❌ Buffer = termine informatico (zona di memoria) usato metaforicamente'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Le __________ sintattiche riproducono rumori attraverso la struttura della frase.',
+                correct: ['onomatopee'],
+                explanation: '✅ Corretto! Onomatopea sintattica = struttura frasale che imita il ritmo (Boom. Fine.)'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: '"Pioggia. Notte. Lui." è un esempio di __________ drammatica.',
+                options: ['ellissi', 'asindeto', 'polisindeto', 'anastrofe'],
+                correct: 'ellissi',
+                explanation: '✅ Corretto! Ellissi = omissione del verbo (e di altri elementi) per effetto drammatico',
+                errorExplanation: '❌ Ellissi = omissione; Asindeto = omissione delle congiunzioni (ma qui manca il verbo)'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'La variazione __________ distingue livelli sociali del linguaggio (alto, medio, basso).',
+                correct: ['diastratica', 'sociale'],
+                explanation: '✅ Corretto! Variazione diastratica = livelli sociali (culto, comune, popolare/gergale)'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: '"Me ne vinco a casa" è una forma __________ (gergale/giovanile).',
+                options: ['bassa', 'alta', 'media', 'tecnica'],
+                correct: 'bassa',
+                explanation: '✅ Corretto! Registro basso/gergale: "vincere" = andare (dal romanesco "vincere" = muoversi)',
+                errorExplanation: '❌ "Vincere" nel gergo giovanile/romanesco significa "andare", "muoversi"'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Il __________ è il passaggio da un dialetto all\'italiano standard all\'interno dello stesso discorso.',
+                correct: ['code-switching', 'alternanza'],
+                explanation: '✅ Corretto! Code-switching dialettale = alternanza italiano/dialetto (es. "Vado a piglià il bus")'
+
+            },
+
+            // ESERCIZI 31-40: Sintassi creativa
+            {
+                id: 31,
+                type: 'choice',
+                question: 'L\'iperbato estremo separa massimamente __________ e nome.',
+                options: ['aggettivo', 'verbo', 'avverbio', 'complemento'],
+                correct: 'aggettivo',
+                explanation: '✅ Corretto! Iperbato = disposizione non lineare, spesso aggettivo lontano dal nome',
+                errorExplanation: '❌ Iperbato = separazione di elementi normalmente contigui (aggettivo + nome)'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'L\'__________ iterata ripete l\'inversione per effetto ritmico.',
+                correct: ['anastrofe'],
+                explanation: '✅ Corretto! Anastrofe = inversione dell\'ordine sintattico normale (complemento prima del verbo)'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'L\'asindeto emotivo __________ le congiunzioni per accumulo.',
+                options: ['omette', 'ripete', 'inverte', 'sostituisce'],
+                correct: 'omette',
+                explanation: '✅ Corretto! Asindeto = omissione di congiunzioni tra elementi della stessa serie',
+                errorExplanation: '❌ Asindeto = senza congiunzioni (a-syndeton); Polisindeto = con molte congiunzioni'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Il __________ ripete le congiunzioni per rallentare il ritmo.',
+                correct: ['polisindeto'],
+                explanation: '✅ Corretto! Polisindeto = ripetizione di congiunzioni (e... e... e...) per effetto cumulativo'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: '"Silenzio. Polvere. Abbandono." è una __________ nominale.',
+                options: ['frammentazione', 'accumulazione', 'enumerazione', 'dislocazione'],
+                correct: 'frammentazione',
+                explanation: '✅ Corretto! Frammentazione nominale = sequenza di sostantivi senza verbo (stile telegrafico)',
+                errorExplanation: '❌ Frammentazione = nomi isolati; Enumerazione = lista più estesa e ordinata'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Il periodo brevissimo usa __________ o monosillabi per effetto di sospensione.',
+                correct: ['monoverbi', 'verbi soli'],
+                explanation: '✅ Corretto! Monoverbo = frase ridotta a un solo verbo ("Fu. Fine.")'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: '"Mangiare, quello non fa mai" è una __________ contrastiva.',
+                options: ['dislocazione', 'inversione', 'frammentazione', 'disgiunzione'],
+                correct: 'dislocazione',
+                explanation: '✅ Corretto! Dislocazione = spostamento di un elemento in posizione non canonica per enfasi',
+                errorExplanation: '❌ Dislocazione = spostamento a sinistra o destra per focalizzare (clefting implicito)'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'L\'iperbato crea __________ ritmica e sospensione del senso.',
+                correct: ['tensione', 'sospensione'],
+                explanation: '✅ Corretto! Iperbato = distanza tra modificatore e modificato = attesa interpretativa'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: '"Alta, inenarrabile, la notte" è un esempio di __________.',
+                options: ['iperbato', 'anastrofe', 'dislocazione', 'frammentazione'],
+                correct: 'iperbato',
+                explanation: '✅ Corretto! Iperbato = aggettivi staccati dal nome, posti prima (o dopo) con enfasi',
+                errorExplanation: '❌ Iperbato = separazione aggettivo-nome; Anastrofe = inversione generica'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'La frammentazione sintattica deve essere sempre __________ al contesto.',
+                correct: ['funzionale', 'coerente', 'motivata'],
+                explanation: '✅ Corretto! La frammentazione non è arbitraria: serve a creare suspense, enfasi, ritmo'
+
+            },
+
+            // ESERCIZI 41-50: Retorica avanzata
+            {
+                id: 41,
+                type: 'choice',
+                question: 'La sineddoche logica usa la parte per indicare il tutto in senso __________.',
+                options: ['astratto', 'concreto', 'metaforico', 'ironico'],
+                correct: 'astratto',
+                explanation: '✅ Corretto! Sineddoche logica = parte per tutto astratto (cervello = intelligenza)',
+                errorExplanation: '❌ Sineddoche logica: "molto cervello" = molte persone intelligenti (astratto)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'La metonimia __________ crea catene di sostituzioni (corona → re → potere).',
+                correct: ['multipla', 'concatenata'],
+                explanation: '✅ Corretto! Metonimia multipla = successione di sostituzioni contigue per associazione'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Nella metafora __________ manca il termine di paragone ("il tempo è un ladro").',
+                options: ['assoluta', 'implicita', 'esplicita', 'composta'],
+                correct: 'assoluta',
+                explanation: '✅ Corretto! Metafora assoluta = senza "come" (tempo è ladro), non comparazione',
+                errorExplanation: '❌ Metafora assoluta = identificazione diretta; Comparazione = con "come/quantum"'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'La __________ è una metafora forzata o assente (es. "le ali del hangar").',
+                correct: ['catachresi'],
+                explanation: '✅ Corretto! Catachresi = uso metaforico per compensare lacuna lessicale (gambe del tavolo)'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'L\'ossimoro concettuale unisce termini __________.',
+                options: ['contraddittori', 'simili', 'sinonimi', 'tecnici'],
+                correct: 'contraddittori',
+                explanation: '✅ Corretto! Ossimoro = unione di contraddittori (silenzio assordante, presente assente)',
+                errorExplanation: '❌ Ossimoro = apparente contraddizione logica che esprime verità complessa'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Il paradosso __________ esprime verità apparentemente contraddittorie ("so di non sapere").',
+                correct: ['sintetico', 'logico'],
+                explanation: '✅ Corretto! Paradosso sintetico = contraddizione apparente che rivela verità più profonda'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'L\'ironia __________ si realizza quando il lettore sa ciò che il personaggio ignora.',
+                options: ['drammatica', 'socratica', 'verbale', 'situazionale'],
+                correct: 'drammatica',
+                explanation: '✅ Corretto! Ironia drammatica = contrasto tra sapere del pubblico e ignoranza del personaggio',
+                errorExplanation: '❌ Ironia drammatica (o tragica) = Edipo non sa di essere il colpevole, il pubblico sì'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Il __________ incrociato crea specchi sintattici (A:B = B:A).',
+                correct: ['chiasmo'],
+                explanation: '✅ Corretto! Chiasmo = incrocio simmetrico (amare è soffrire, soffrire è amare)'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'La metafora concettuale (Lakoff) struttura il pensiero attraverso __________.',
+                options: ['schemi mentali', 'regole grammaticali', 'figure retoriche', 'etimologie'],
+                correct: 'schemi mentali',
+                explanation: '✅ Corretto! Metafora concettuale = mappatura concettuale (amore = viaggio, tempo = denaro)',
+                errorExplanation: '❌ Lakoff & Johnson: la metafora non è solo linguistica ma struttura il pensiero'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'La gradatio crea una catena logica per __________ (vinco → vivo → spero).',
+                correct: ['accumulazione', 'progressione'],
+                explanation: '✅ Corretto! Gradatio = climax concatenato (A implica B, B implica C, C implica A). Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il termine creativo..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Maestro della creatività! Innovi la lingua come un vero artista della parola!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Sai giocare con le parole, ma esplora ancora neologismi e figure complesse!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon inizio! Ripassa code-switching, iperbato e metafore concettuali per brillare!';
+            } else {
+                message = '📚 Torna alle tabelle! Concentrati su neologismi, giochi di parole e sintassi creativa!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

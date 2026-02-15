@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C1 - Linguaggio Medico-Scientifico</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --c1-color: #2a9d8f;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --medical: #264653;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--c1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e9f5f3;
+            border-left: 4px solid var(--medical);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(42, 157, 143, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .medical-term { color: var(--medical); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--c1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--c1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--c1-color); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #21867a;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--c1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--c1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--c1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--c1-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .medical-context {
+            background: #e9ecef;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--medical);
+            font-style: italic;
+        }
+        .anatomy-box {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C1 - Linguaggio Medico-Scientifico</h1>
+            <p>Precisione terminologica, impersonalità e strutture sintattiche della comunicazione sanitaria</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C1</a>
+            <span>›</span>
+            <strong>Linguaggio Medico-Scientifico</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🩺 Linguaggio Medico-Scientifico</h1>
+            <p class="page-subtitle">Terminologia anatomica, formulazioni diagnostiche e stile della ricerca biomedica</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('terminology', this)">Terminologia</button>
+            <button class="nav-tab" onclick="showSection('syntax', this)">Sintassi</button>
+            <button class="nav-tab" onclick="showSection('genres', this)">Generi</button>
+            <button class="nav-tab" onclick="showSection('diagnosis', this)">Diagnosi</button>
+            <button class="nav-tab" onclick="showSection('research', this)">Ricerca</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍⚕️</div>
+                    <div class="avatar-name">Dr. Verdi</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo C1! 🩺</h3>
+                    <p>Oggi studiamo il <strong>linguaggio medico-scientifico</strong>, caratterizzato da precisione assoluta, terminologia greco-latina e impersonalità.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="medical-term">Si riscontra</span> una lesione <span class="medical-term">ipodensa</span> di <span class="medical-term">cm 2.5 x 1.8</span> a livello del <span class="medical-term">lobo temporale</span>".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Caratteristiche del Linguaggio Medico-Scientifico</div>
+                <div class="card-body">
+                    <p>Il <strong>linguaggio medico-scientifico</strong> è un registro specialistico finalizzato alla precisione diagnostica, alla documentazione clinica e alla comunicazione tra professionisti sanitari. [^1^]</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Caratteristiche distintive:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Terminologia greco-latina:</strong> Etimologia classica (es. cardiopatia, gastrite)</li>
+                            <li><strong>Impersonalità:</strong> Uso di si passivante, terza persona, soggetti inanimati</li>
+                            <li><strong>Precisione quantitativa:</strong> Misure esatte, percentuali, range numerici</li>
+                            <li><strong>Objectivity:</strong> Eliminazione di giudizi di valore ed emozioni</li>
+                            <li><strong>Specializzazione:</strong> Significati tecnici diversi dal linguaggio comune</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Strutture morfologiche tipiche:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Prefissi:</strong> iper-, ipo-, dis-, a-, an- (iperteso, ipoglicemia)</li>
+                            <li><strong>Suffissi:</strong> -ite, -osi, -emia, -patia, -algia (gastrite, fibrosi)</li>
+                            <li><strong>Composizione:</strong> Cardio-patia, neuro-chirurgia, elettro-cardio-gramma</li>
+                            <li><strong>Acronimi:</strong> TC, RMN, ECG, DNA, RNA, HIV</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Molti termini hanno significato diverso in medicina e nel linguaggio comune: "patologia" (malattia vs studio delle malattie), "sintomo" (segno vs disagio), "crisi" (accesso acuto vs emergenza).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TERMINOLOGIA -->
+        <section id="terminology" class="section">
+            <div class="card">
+                <div class="card-header">Terminologia Anatomica e Fisiologica</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La Terminologia Anatomica Internazionale (FCAT) standardizza i nomi in latino.</strong> [^2^]
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Prefisso/Radice</th><th>Significato</th><th>Esempi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="medical-term">Cardio-</td>
+                                <td>Cuore</td>
+                                <td>Cardiologia, cardiopatia, tachicardia</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Neuro-</td>
+                                <td>Nervo, sistema nervoso</td>
+                                <td>Neurologia, neuropatia, neurochirurgia</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Osteo-</td>
+                                <td>Osso</td>
+                                <td>Osteoporosi, osteoartrite, osteotomia</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Derma-</td>
+                                <td>Pelle</td>
+                                <td>Dermatite, dermatologia, ipodermica</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Hepat-</td>
+                                <td>Fegato</td>
+                                <td>Epatite, epatomegalia, epatocellular</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Nefr-</td>
+                                <td>Rene</td>
+                                <td>Nefrite, nefrologia, nefrotossico</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Pneum-</td>
+                                <td>Polmone, aria</td>
+                                <td>Pneumonia, pneumotorace, pneumatico</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Hem-</td>
+                                <td>Sangue</td>
+                                <td>Emoglobina, emorragia, ematoma</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="anatomy-box">
+                        <strong>Termini di posizione (anatomia):</strong><br>
+                        <em>Anteriore (ventrale)</em> = davanti | <em>Posteriore (dorsale)</em> = dietro<br>
+                        <em>Superiore (craniale)</em> = verso la testa | <em>Inferiore (caudale)</em> = verso i piedi<br>
+                        <em>Mediale</em> = verso la linea mediana | <em>Laterale</em> = lontano dalla linea mediana<br>
+                        <em>Profondo</em> = interno | <em>Superficiale</em> = esterno
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE SINTASSI -->
+        <section id="syntax" class="section">
+            <div class="card">
+                <div class="card-header">Strutture Sintattiche</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La sintassi medico-scientifica privilegia l'oggettività e la precisione.</strong> [^3^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Impersonalità e passivazione</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Struttura</th><th>Esempio</th><th>Funzione</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="medical-term">Si + verbo</td>
+                                <td>Si riscontra, si evidenzia, si osserva</td>
+                                <td>Impersonalità del riscontro</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Essi/esse + passivo</td>
+                                <td>Vengono eseguiti, sono stati rilevati</td>
+                                <td>Soggetto inanimato/agente non specificato</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Participio passato</td>
+                                <td>Rilevata, osservata, documentata</td>
+                                <td>Concisione descrittiva</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Nome + aggettivo</td>
+                                <td>Paziente di anni 45, esame positivo</td>
+                                <td>Informazione sintetica</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Verbi di riscontro</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Verbo</th><th>Uso</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="medical-term">Riscontrare</td>
+                                <td>Trovare oggettivamente</td>
+                                <td>Si riscontra aumento di volume</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Evidenziazione</td>
+                                <td>Rendere visibile/ evidente</td>
+                                <td>La TC evidenzia lesione occupativa</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Documentare</td>
+                                <td>Registrare su supporto</td>
+                                <td>ECG documenta fibrillazione</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Rilevare</td>
+                                <td>Accertare, constatare</td>
+                                <td>Si rilevano alterazioni metaboliche</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Presentare</td>
+                                <td>Mostrare (sintomi, segni)</td>
+                                <td>Il paziente presenta febbre</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Evitare:</strong> "Il paziente <em>sent</em> dolore" → "Il paziente <em>riferisce</em> dolore" o "Si <em>rileva</em> dolore".<br>
+                        Evitare: "Ho visto" → "Si <em>osserva</em>", "È stato <em>documentato</em>".
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE GENERI -->
+        <section id="genres" class="section">
+            <div class="card">
+                <div class="card-header">Generi della Comunicazione Medica</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Diversi tipi di testi medici richiedono registri diversi.</strong> [^4^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Genere</th><th>Destinatario</th><th>Caratteristiche</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="medical-term">Cartella clinica</td>
+                                <td>Equipe medica</td>
+                                <td>Impersionale, telegrafica, codificata</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Referto</td>
+                                <td>Colleghi/medici</td>
+                                <td>Tecnica, descrittiva, conclusiva</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Lettera di dimissione</td>
+                                <td>Medico curante</td>
+                                <td>Sintetica, informativa, terapeutica</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Consenso informato</td>
+                                <td>Paziente</td>
+                                <td>Chiara, completa, ma tecnicamente accurata</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Articolo scientifico</td>
+                                <td>Comunità scientifica</td>
+                                <td>IMRaD, impersonalità, evidenza</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Divulgazione</td>
+                                <td>Pubblico generale</td>
+                                <td>Semplificata, metafore controllate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="medical-context">
+                        <strong>Esempio di referto radiologico:</strong><br>
+                        "Esame TC eseguito con mdc ev. Si evidenzia formazione espansiva intra-assiale di cm 3.2 x 2.8 a carico della regione frontale sinistra, con caratteristiche di iperdensità in fase arteriosa e wash-out in fase venosa. Effetto massa su corno anteriore ventricolo laterale omolaterale."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE DIAGNOSI -->
+        <section id="diagnosis" class="section">
+            <div class="card">
+                <div class="card-header">Formulazioni Diagnostiche</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La diagnosi richiede precisione nosografica e formulazione standardizzata.</strong> [^5^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Struttura della diagnosi</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Elemento</th><th>Descrizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="medical-term">Sede</td>
+                                <td>Localizzazione anatomica</td>
+                                <td>Polmone superiore sinistro, lobo temporale</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Natura</td>
+                                <td>Tipologia patologica</td>
+                                <td>Neoplasia, infiammazione, degenerazione</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Eziologia</td>
+                                <td>Causa (se nota)</td>
+                                <td>Post-traumatica, autoimmune, infettiva</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Estensione</td>
+                                <td>Gravità/diffusione</td>
+                                <td>Localizzata, metastatica, diffusa</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Tempo</td>
+                                <td>Decorso</td>
+                                <td>Acuta, subacuta, cronica, recidivante</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="transformation-box">
+                        <strong>Formule diagnostiche:</strong><br><br>
+                        <em>Diagnosi positiva:</em> "Si conferma diagnosi di..."<br>
+                        <em>Diagnosi differenziale:</em> "Da escludere...", "Da differenziare da..."<br>
+                        <em>Diagnosi per esclusione:</em> "Diagnosi di esclusione di..."<br>
+                        <em>Sospetto diagnostico:</em> "Sospetto per...", "Probabile..."
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Classificazione TNM (tumori):</strong><br>
+                        <em>T</em> (Tumor): dimensione e estensione locale (T0-T4)<br>
+                        <em>N</em> (Nodes): coinvolgimento linfonodale (N0-N3)<br>
+                        <em>M</em> (Metastasis): presenza metastasi (M0-M1)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE RICERCA -->
+        <section id="research" class="section">
+            <div class="card">
+                <div class="card-header">Linguaggio della Ricerca Biomedica</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La comunicazione scientifica segue standard internazionali (IMRaD).</strong> [^6^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Sezione</th><th>Contenuto</th><th>Verbi tipici</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="medical-term">Introduction</td>
+                                <td>Contesto, stato dell'arte, obiettivi</td>
+                                <td>Aim to, seek to, investigate</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Methods</td>
+                                <td>Procedura, campione, strumenti</td>
+                                <td>Was performed, were enrolled, was measured</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Results</td>
+                                <td>Dati, statistiche, riscontri</td>
+                                <td>Was observed, showed, revealed, demonstrated</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Discussion</td>
+                                <td>Interpretazione, confronto, limiti</td>
+                                <td>Suggest, indicate, support, confirm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Formule di cautela epistemica</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Formula</th><th>Funzione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="medical-term">Suggestiscono che</td>
+                                <td>Evidenza preliminare</td>
+                                <td>I dati suggestiscono che...</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Sembrano indicare</td>
+                                <td>Prudenza interpretativa</td>
+                                <td>I risultati sembrano indicare...</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Potrebbero essere</td>
+                                <td>Ipotesi</td>
+                                <td>Questi fattori potrebbero essere...</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">È necessario</td>
+                                <td>Raccomandazione</td>
+                                <td>È necessario ulteriore studio...</td>
+                            </tr>
+                            <tr>
+                                <td class="medical-term">Non è possibile escludere</td>
+                                <td>Limite metodologico</td>
+                                <td>Non è possibile escludere bias...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="medical-context">
+                        <strong>Abstract strutturato - Esempio:</strong><br>
+                        <em>Background:</em> La malattia X colpisce il 5% della popolazione...<br>
+                        <em>Methods:</em> Studio randomizzato controllato su 200 pazienti...<br>
+                        <em>Results:</em> Riduzione significativa (p<0.05) dei sintomi...<br>
+                        <em>Conclusions:</em> Il trattamento si è dimostrato efficace...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C1 - Linguaggio Medico-Scientifico (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Terminologia base
+            {
+                id: 1,
+                type: 'choice',
+                question: 'La "cardiopatia" è una malattia che colpisce il __________.',
+                options: ['cuore', 'fegato', 'rene', 'polmone'],
+                correct: 'cuore',
+                explanation: '✅ Corretto! Cardio- (dal greco kardia) = cuore; -patia = malattia',
+                errorExplanation: '❌ Cardio- deriva dal greco "kardia" = cuore; -patia indica malattia'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'La "gastrite" è un\'infiammazione dello __________.',
+                correct: ['stomaco', ' stomaco'],
+                explanation: '✅ Corretto! Gastro- = stomaco; -ite = infiammazione'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Il prefisso "iper-" indica un valore __________ rispetto alla norma.',
+                options: ['superiore', 'inferiore', 'uguale', 'assente'],
+                correct: 'superiore',
+                explanation: '✅ Corretto! Iper- = sopra, superiore (es. ipertensione, iperteso)',
+                errorExplanation: '❌ Iper- indica eccesso/aumento; ipo- indica diminuzione/deficit'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'La "nefrite" colpisce i __________.',
+                correct: ['reni', 'rene'],
+                explanation: '✅ Corretto! Nefr- (greco nephros) = rene; -ite = infiammazione'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Il termine "ematoma" indica una raccolta di __________.',
+                options: ['sangue', 'pus', 'liquido', 'aria'],
+                correct: 'sangue',
+                explanation: '✅ Corretto! Hem- (greek haima) = sangue; -oma = tumore/raccolta',
+                errorExplanation: '❌ Ematoma = raccolta di sangue extravasato dai vasi (emo- = sangue)'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'La "neuropatia" colpisce il sistema __________.',
+                correct: ['nervoso'],
+                explanation: '✅ Corretto! Neuro- = nervo/sistema nervoso; -patia = malattia'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Il suffisso "-algia" indica __________.',
+                options: ['dolore', 'infiammazione', 'tumore', 'mancanza'],
+                correct: 'dolore',
+                explanation: '✅ Corretto! -Algia (greco algos) = dolore (es. nevralgia, mialgia)',
+                errorExplanation: '❌ -Algia deriva dal greco "algos" = dolore; -ite = infiammazione; -oma = tumore'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'L\'"epatite" è l\'infiammazione del __________.',
+                correct: ['fegato'],
+                explanation: '✅ Corretto! Hepat- (greco hepar) = fegato; -ite = infiammazione'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: '"Ipo-" è il prefisso contrario di __________.',
+                options: ['iper-', 'ana-', 'dis-', 'a-'],
+                correct: 'iper-',
+                explanation: '✅ Corretto! Ipo- = sotto, deficit; Iper- = sopra, eccesso',
+                errorExplanation: '❌ Ipo- (sotto, mancanza) è contrario di iper- (sopra, eccesso)'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'La "dermatite" colpisce la __________.',
+                correct: ['pelle'],
+                explanation: '✅ Corretto! Derma- = pelle; -ite = infiammazione'
+
+            },
+
+            // ESERCIZI 11-20: Impersonalità e sintassi
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Nella cartella clinica si preferisce: "Si __________ aumento di volume".',
+                options: ['riscontra', 'vede', 'trova', 'nota'],
+                correct: 'riscontra',
+                explanation: '✅ Corretto! "Riscontrare" è il verbo tecnico per indicare risultato obiettivo',
+                errorExplanation: '❌ "Riscontrare" indica constatazione oggettiva; evitare "vedere" o "trovare"'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Forma impersonale: "__________ eseguita risonanza magnetica".',
+                correct: ['È stata', 'Viene', 'Si è'],
+                explanation: '✅ Corretto! Passivo o si passivante per impersonalità'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Invece di "Ho visto una lesione" si scrive: "Si __________ una lesione".',
+                options: ['osserva', 'vedo', 'guardo', 'noto'],
+                correct: 'osserva',
+                explanation: '✅ Corretto! "Osservare" è impersonale e oggettivo; evitare la prima persona',
+                errorExplanation: '❌ La prima persona è da evitare; si usano verbi impersonali come "osservare", "rilevare"'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Il paziente __________ febbre e tosse produttiva.',
+                correct: ['presenta', 'riferisce', 'manifesta'],
+                explanation: '✅ Corretto! "Presentare" indica esibizione di sintomi'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: '"La TC __________ lesione occupativa di cm 3.5".',
+                options: ['evidenzia', 'vede', 'guarda', 'mostra'],
+                correct: 'evidenzia',
+                explanation: '✅ Corretto! "Evidenziare" è il termine tecnico per rendere visibile/rilievar',
+                errorExplanation: '❌ "Evidenziare" è il verbo tecnico per indicare ciò che l\'esame rende visibile'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: '__________ rilevati valori elevati di glicemia a digiuno.',
+                correct: ['Sono stati', 'Si sono'],
+                explanation: '✅ Corretto! Passivo impersonale per risultati di laboratorio'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Formulazione corretta: "__________ dolore al quadrante superiore destro".',
+                options: ['Si rileva', 'Sento', 'Avverto', 'Percepisco'],
+                correct: 'Si rileva',
+                explanation: '✅ Corretto! "Rilevare" è impersonale e oggettivo',
+                errorExplanation: '❌ Evitare verbi soggettivi; usare "rilevare", "riscontrare", "documentare"'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'L\'ECG __________ fibrillazione atriale parossistica.',
+                correct: ['documenta', 'evidenzia', 'rileva'],
+                explanation: '✅ Corretto! "Documentare" = registrare su supporto tecnico'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: '"Esame __________ in data 15/03/2024".',
+                options: ['eseguito', 'fatto', 'svolto', 'condotto'],
+                correct: 'eseguito',
+                explanation: '✅ Corretto! "Eseguire" è il verbo tecnico per procedure mediche',
+                errorExplanation: '❌ "Eseguire" è il termine standard per procedure diagnostiche e terapeutiche'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Si __________ ectasia delle vie biliari intraepatiche.',
+                correct: ['riscontra', 'osserva', 'evidenzia'],
+                explanation: '✅ Corretto! Verbo impersonale di riscontro oggettivo'
+
+            },
+
+            // ESERCIZI 21-30: Termini di posizione e anatomia
+            {
+                id: 21,
+                type: 'choice',
+                question: '"Anteriore" in anatomia equivale a __________.',
+                options: ['ventrale', 'dorsale', 'craniale', 'caudale'],
+                correct: 'ventrale',
+                explanation: '✅ Corretto! Anteriore = ventrale (verso la parte frontale); Posteriore = dorsale',
+                errorExplanation: '❌ Anteriore/ventrale = davanti; Posteriore/dorsale = dietro'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: '"Superiore" in anatomia equivale a __________ (verso la testa).',
+                correct: ['craniale', 'cefalico'],
+                explanation: '✅ Corretto! Craniale/cefalico = verso la testa; Caudale = verso i piedi'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: '"Mediale" significa verso la __________ del corpo.',
+                options: ['linea mediana', 'periferia', 'testa', 'estremità'],
+                correct: 'linea mediana',
+                explanation: '✅ Corretto! Mediale = verso il centro; Laterale = lontano dal centro',
+                errorExplanation: '❌ Mediale = verso la linea mediana; Laterale = verso i lati'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: '"Profondo" indica una posizione più __________ rispetto alla superficie.',
+                correct: ['interna', 'centrale'],
+                explanation: '✅ Corretto! Profondo = interno; Superficiale = esterno'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'La "pneumonia" colpisce i __________.',
+                options: ['polmoni', 'reni', 'fegato', 'cuore'],
+                correct: 'polmoni',
+                explanation: '✅ Corretto! Pneum- (greco pneuma) = aria/polmoni; -onia = condizione',
+                errorExplanation: '❌ Pneum- (greco pneuma = respiro/aria) si riferisce ai polmoni'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'L\'"osteoporosi" è una malattia delle __________.',
+                correct: ['ossa'],
+                explanation: '✅ Corretto! Osteo- = osso; -porosi = perdita di sostanza (pori)'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: '"Ipsilaterale" significa dalla __________ parte del corpo.',
+                options: ['stessa', 'opposta', 'superiore', 'inferiore'],
+                correct: 'stessa',
+                explanation: '✅ Corretto! Ipsilaterale = stesso lato; Controlaterale = lato opposto',
+                errorExplanation: '❌ Ipsilaterale = stesso lato; Contralaterale/controlaterale = lato opposto'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'La "mielografia" è l\'esame del __________ midollare.',
+                correct: ['canale', 'spazio'],
+                explanation: '✅ Corretto! Mielo- = midollo; -grafia = esame radiografico'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: '"Distale" è opposto a __________.',
+                options: ['prossimale', 'laterale', 'mediale', 'craniale'],
+                correct: 'prossimale',
+                explanation: '✅ Corretto! Prossimale = vicino al tronco; Distale = lontano dal tronco',
+                errorExplanation: '❌ Prossimale (vicino all\'origine) vs Distale (lontano dall\'origine)'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'La "pleurite" colpisce la __________ che riveste i polmoni.',
+                correct: ['membrana', 'pleura'],
+                explanation: '✅ Corretto! Pleura = membrana sierosa; -ite = infiammazione'
+
+            },
+
+            // ESERCIZI 31-40: Diagnosi e nosografia
+            {
+                id: 31,
+                type: 'choice',
+                question: 'La "diagnosi differenziale" serve a __________ altre patologie simili.',
+                options: ['escludere', 'confermare', 'ignorare', 'curare'],
+                correct: 'escludere',
+                explanation: '✅ Corretto! Diagnosi differenziale = processo di esclusione di alternative',
+                errorExplanation: '❌ Diagnosi differenziale = confronto tra patologie simili per escludere alternative'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Nella classificazione TNM, la "T" indica le dimensioni del __________.',
+                correct: ['tumore', 'tumore primario'],
+                explanation: '✅ Corretto! T = Tumor (dimensioni ed estensione); N = Nodes; M = Metastasis'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: '"Sospetto per" indica una diagnosi __________.',
+                options: ['probabile', 'certa', 'esclusa', 'irrilevante'],
+                correct: 'probabile',
+                explanation: '✅ Corretto! "Sospetto per" = ipotesi diagnostica non confermata',
+                errorExplanation: '❌ "Sospetto per" indica probabilità; per certezza si usa "diagnosi di" o "conferma di"'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'La "diagnosi per esclusione" si formula quando si escludono __________ alternative.',
+                correct: ['altre', 'tutte le altre'],
+                explanation: '✅ Corretto! Diagnosi per esclusione = escludendo tutte le altre possibilità'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: '"Da escludere" introduce una __________ diagnostica.',
+                options: ['ipotesi negativa', 'certezza', 'conferma', 'terapia'],
+                correct: 'ipotesi negativa',
+                explanation: '✅ Corretto! "Da escludere" = patologia da verificare e scartare',
+                errorExplanation: '❌ "Da escludere" introduce patologie alternative da scartare'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Patologia "acuta" vs "cronica" indica il __________ della malattia.',
+                correct: ['decorso', 'tempo', 'andamento'],
+                explanation: '✅ Corretto! Acuta = esordio rapido e breve; Cronica = prolungata nel tempo'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: '"Eziologia" indica la __________ della malattia.',
+                options: ['causa', 'sede', 'terapia', 'prognosi'],
+                correct: 'causa',
+                explanation: '✅ Corretto! Eziologia = studio delle cause; Patogenesi = meccanismo di sviluppo',
+                errorExplanation: '❌ Eziologia (greek aitia) = causa; Patogenesi = meccanismo; Prognosi = previsione'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: '"Idiopatica" significa di causa __________.',
+                correct: ['sconosciuta', 'ignota'],
+                explanation: '✅ Corretto! Idiopatico = di causa sconosciuta (greek idios = proprio, pathos = malattia)'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: '"Iatrogena" indica un effetto causato da __________.',
+                options: ['trattamento medico', 'cause naturali', 'traumi', 'infezioni'],
+                correct: 'trattamento medico',
+                explanation: '✅ Corretto! Iatrogeno = causato dal medico/trattamento (greek iatros = medico)',
+                errorExplanation: '❌ Iatrogeno = effetto indesiderato causato da intervento medico'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'La "prognosi" è la __________ dell\'evoluzione della malattia.',
+                correct: ['previsione'],
+                explanation: '✅ Corretto! Prognosi = previsione di esito (buona/favorevole o grave/ sfavorevole)'
+
+            },
+
+            // ESERCIZI 41-50: Ricerca e comunicazione scientifica
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Nella struttura IMRaD, "M" sta per __________.',
+                options: ['Methods', 'Materials', 'Medicine', 'Measurement'],
+                correct: 'Methods',
+                explanation: '✅ Corretto! IMRaD = Introduction, Methods, Results, and Discussion',
+                errorExplanation: '❌ IMRaD: Introduction, Methods, Results, Discussion (struttura articolo scientifico)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Nella sezione Results si usano verbi al __________ passivo.',
+                correct: ['passato', 'passivo'],
+                explanation: '✅ Corretto! "Was observed", "were measured" - passato passivo impersonale'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: '"Suggestiscono che" indica evidenza __________.',
+                options: ['preliminare', 'definitiva', 'assente', 'errata'],
+                correct: 'preliminare',
+                explanation: '✅ Corretto! Formule di cautela per evidenza non conclusiva',
+                errorExplanation: '❌ "Suggestiscono" indica cautela epistemica, evidenza preliminare'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: '"Non è possibile escludere" indica un __________ metodologico.',
+                correct: ['limite', 'bias', 'errore'],
+                explanation: '✅ Corretto! Formula per riconoscere limiti dello studio'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Il "consenso informato" è un testo __________.',
+                options: ['divulgativo', 'tecnico', 'letterario', 'poetico'],
+                correct: 'divulgativo',
+                explanation: '✅ Corretto! Deve essere comprensibile al paziente ma tecnicamente accurato',
+                errorExplanation: '❌ Il consenso informato bilancia precisione medica e comprensibilità per il paziente'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Nella Discussion si usano verbi come "indicate", "support", "__________".',
+                correct: ['confirm', 'suggest'],
+                explanation: '✅ Corretto! Verbi di interpretazione cauta: suggest, indicate, support, confirm'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: '"Randomizzato" in uno studio indica la __________ dei pazienti.',
+                options: ['assegnazione casuale', 'selezione', 'esclusione', 'cura'],
+                correct: 'assegnazione casuale',
+                explanation: '✅ Corretto! Randomizzazione = assegnazione casuale ai gruppi (RCT)',
+                errorExplanation: '❌ Randomized Controlled Trial (RCT) = assegnazione casuale ai gruppi sperimentale e di controllo'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Il valore "p<0.05" indica __________ statistica.',
+                correct: ['significatività', 'significanza'],
+                explanation: '✅ Corretto! p<0.05 = significatività statistica (probabilità <5% che sia casuale)'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: '"Follow-up" indica il __________ nel tempo dei pazienti.',
+                options: ['monitoraggio', 'trattamento', 'arruolamento', 'esclusione'],
+                correct: 'monitoraggio',
+                explanation: '✅ Corretto! Follow-up = osservazione prolungata nel tempo post-trattamento',
+                errorExplanation: '❌ Follow-up = monitoraggio nel tempo dell\'evoluzione clinica'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'La letteratura di "revisione" (review) __________ gli studi precedenti.',
+                correct: ['sintetizza', 'riassume', 'analizza'],
+                explanation: '✅ Corretto! Review article = sintesi critica della letteratura esistente. Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il termine medico..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi il linguaggio medico-scientifico come un professionista sanitario!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene la terminologia, ma fai attenzione alle sfumature sintattiche!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: iper- vs ipo-, riscontrare vs vedere, acuta vs cronica!';
+            } else {
+                message = '📚 Ripassa le tabelle! Concentrati su prefissi/suffissi, termini di posizione e strutture impersonali!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

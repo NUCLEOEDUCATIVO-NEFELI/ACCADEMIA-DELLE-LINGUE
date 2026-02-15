@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C2 - Traduzione Avanzata</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2c1810;
+            --secondary: #6c757d;
+            --accent: #8b4513;
+            --c2-color: #2196f3;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --translation: #9c27b0;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--translation);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--translation);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--translation);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--translation);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(156, 39, 176, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .translation-term { color: var(--translation); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #e3f2fd;
+            border: 2px solid var(--c2-color);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--translation);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--translation);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--translation);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #1a0f0a;
+        }
+        .btn-check { 
+            background: var(--translation); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #7b1fa2;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--translation);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--translation);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--translation);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--translation);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .translation-context {
+            background: #f3e5f5;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--translation);
+            font-style: italic;
+        }
+        .technique-box {
+            background: #f3e5f5;
+            border: 1px solid #ce93d8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .example-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .warning-box {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .strategy-card {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #9c27b0;
+        }
+        .flag-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        .translation-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+            background: white;
+            padding: 1rem;
+            border: 1px solid var(--border);
+        }
+        .source-text {
+            font-style: italic;
+            color: var(--secondary);
+        }
+        .target-text {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+            .translation-pair { grid-template-columns: 1fr; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C2 - Traduzione Avanzata</h1>
+            <p>Competenze traduttive, mediazione linguistica e riformulazione C2</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C2</a>
+            <span>›</span>
+            <strong>Traduzione Avanzata</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🔄 Traduzione Italiano C2</h1>
+            <p class="page-subtitle">Tecniche avanzate di traduzione, mediazione interculturale e riformulazione specialistica</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📖 Teoria</button>
+            <button class="nav-tab" onclick="showSection('techniques', this)">Tecniche</button>
+            <button class="nav-tab" onclick="showSection('strategies', this)">Strategie</button>
+            <button class="nav-tab" onclick="showSection('problems', this)">Problemi</button>
+            <button class="nav-tab" onclick="showSection('registers', this)">Registri</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">🔄</div>
+                    <div class="avatar-name">Prof. Traducto</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto nell'arte della traduzione C2! 📚</h3>
+                    <p>La <strong>traduzione a livello C2</strong> richiede padronanza assoluta di entrambe le lingue, comprensione profonda delle culture e capacità di <span class="translation-term">mediazione</span> sofisticata. Non si tratta più di tradurre parole, ma di <strong>ricreare mondi</strong>.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="translation-term">Tradurre è tradire</span> solo se si ignora che la fedeltà va al <em>senso</em>, non alla <em>forma</em>: 'It's raining cats and dogs' non diventa 'Piove gatti e cani', ma 'Piove a catinelle'".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Fondamenti della Traduzione C2</div>
+                <div class="card-body">
+                    <p>La <strong>competenza traduttiva C2</strong> implica la capacità di trasferire testi complessi tra italiano e altre lingue (tipicamente inglese, francese, spagnolo, tedesco) preservando sfumature stilistiche, registri, impliciti culturali e intenzioni comunicative. [^2^]</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Competenze traduttive C2 secondo il CEFR:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Comprensione profonda:</strong> Analisi di testi complessi, letterari, specialistici, giuridici</li>
+                            <li><strong>Riformulazione:</strong> Riespressione coerente mantenendo tono e stile</li>
+                            <li><strong>Mediazione culturale:</strong> Decodifica di riferimenti impliciti culturali</li>
+                            <li><strong>Gestione registri:</strong> Adattamento formale/informale, tecnico/literario</li>
+                            <li><strong>Precisione terminologica:</strong> Lessico specialistico e settoriale</li>
+                            <li><strong>Consapevolezza contrastiva:</strong> Riconoscimento di differenze strutturali</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Tipologie di traduzione C2:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Traduzione diretta (L2→L1):</strong> Verso la lingua madre o dominante</li>
+                            <li><strong>Traduzione inversa (L1→L2):</strong> Richiede competenza produttiva nativa-like</li>
+                            <li><strong>Traduzione audiovisiva:</strong> Sottotitoli, doppiaggio, voice-over</li>
+                            <li><strong>Traduzione specialistica:</strong> Giuridica, medica, tecnica, economica</li>
+                            <li><strong>Traduzione letteraria:</strong> Preservazione di stile, ritmo, figure retoriche</li>
+                            <li><strong>Localizzazione:</strong> Adattamento culturale di prodotti/software</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Principio fondamentale:</strong> La traduzione C2 privilegia l'<em>equivalenza funzionale</em> (stesso effetto sul lettore) rispetto all'<em>equivalenza formale</em> (stessa struttura sintattica).
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">La Competenza del Traduttore C2</div>
+                <div class="card-body">
+                    <p>Secondo il CEFR, al livello C2 il traduttore deve essere in grado di <strong>comprendere con facilità praticamente tutto ciò che legge o ascolta</strong>, riassumere informazioni da diverse fonti, ricostruire argomentazioni e resoconti in una presentazione coerente, esprimendosi spontaneamente, molto fluentemente e precisamente, differenziando sfumature di significato anche nelle situazioni più complesse. [^2^][^5^]</p>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Dimensione</th><th>Competenza C2</th><th>Esempio pratico</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="translation-term">Linguistica</td>
+                                <td>Padronanza totale di morfosintassi e lessico</td>
+                                <td>Gestione di periodi ipotetici complessi, congiuntivi storici</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Testuale</td>
+                                <td>Coesione, coerenza, strutture argomentative</td>
+                                <td>Ricostruzione di catene anaforiche, connettivi logici</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Pragmatica</td>
+                                <td>Atti linguistici, cortesia, ironia</td>
+                                <td>Riconoscimento di sottintesi, eufemismi, sarcasmo</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Culturale</td>
+                                <td>Riferimenti storici, sociali, letterari</td>
+                                <td>Traduzione di giochi di parole culturalmente ancorati</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Tecnica</td>
+                                <td>Strumenti CAT, ricerca terminologica</td>
+                                <td>Uso di memorie di traduzione, glossari settoriali</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TECNICHE -->
+        <section id="techniques" class="section">
+            <div class="card">
+                <div class="card-header">Tecniche Traduttive Avanzate</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il traduttore C2 dispone di un arsenale di tecniche per risolvere problemi di non-equivalenza lessicale e strutturale.</strong>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Tecniche di traduzione obbligatorie</h3>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tecnica</th><th>Descrizione</th><th>Esempio EN→IT</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="translation-term">Modulazione</td>
+                                <td>Cambio di punto di vista (causa↔effetto, parte↔tutto)</td>
+                                <td>"He limped out" → "Uscì zoppicando" (processo↔azione)</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Adattamento</td>
+                                <td>Sostituzione con riferimento culturale target</td>
+                                <td>"Thanksgiving" → "Pranzo di Natale" o spiegazione</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Amplificazione</td>
+                                <td>Aggiunta di informazioni implicite necessarie</td>
+                                <td>"The Bard" → "Shakespeare, il Bardo"</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Riduzione</td>
+                                <td>Omissione di ridondanze o ripetizioni</td>
+                                <td>"At this point in time" → "Ora"</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Calco</td>
+                                <td>Traduzione letterale di strutture idiomatiche</td>
+                                <td>"Skyscraper" → "Grattacielo" (creato per l'occasione)</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Prestito</td>
+                                <td>Importazione di termini non traducibili</td>
+                                <td>"Computer", "Software", "Browser"</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Transposizione</td>
+                                <td>Cambio di categoria grammaticale</td>
+                                <td>"His arrival was unexpected" → "Non ci aspettavamo il suo arrivo"</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Traduzione discorsiva</td>
+                                <td>Riformulazione libera mantenendo il senso</td>
+                                <td>"Break a leg!" → "In bocca al lupo!"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="technique-box">
+                        <strong>La Modulazione: variazioni semantiche</strong><br><br>
+                        <em>Negazione↔Affermazione:</em> "It's not unlikely" → "È probabile"<br>
+                        <em>Parte↔Tutto:</em> "He cleaned his teeth" → "Si è lavato i denti"<br>
+                        <em>Attivo↔Passivo:</em> "The book sells well" → "Il libro si vende bene"<br>
+                        <em>Spazio↔Tempo:</em> "A short walk away" → "A due passi" (spazio→tempo figurato)
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Esempio di adattamento culturale:</strong><br>
+                        <span class="source-text">EN: "He lives in a two-story house in the suburbs"</span><br>
+                        <span class="target-text">IT: "Vive in una villetta a schiera alla periferia" (per contesto italiano)</span><br><br>
+                        Nota: "Two-story house" (casa a due piani indipendente) viene adattata a "villetta a schiera" per coerenza con l'urbanistica italiana, mantenendo il concetto di abitazione periferica.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Traduzione di Figure Retoriche e Stile</div>
+                <div class="card-body">
+                    <p>La traduzione letteraria C2 richiede la preservazione di effetti stilistici, ritmi, allitterazioni e figure retoriche. [^1^]</p>
+                    
+                    <div class="translation-context">
+                        <strong>Strategie per la traduzione poetica/stilistica:</strong>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li><strong>Traduzione ritmica:</strong> Mantenimento del metro (decasillabi, endecasillabi) o compensazione con altri effetti sonori</li>
+                            <li><strong>Traduzione rima:</strong> Preservazione o sostituzione con allitterazioni/assonanze</li>
+                            <li><strong>Figure retoriche:</strong> Metaphore, similitudini, iperboli vanno ricreate culturalmente</li>
+                            <li><strong>Registro:</strong> Arcaicismi, neologismi, dialetti richiedono decisioni consapevoli</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>⚠️ Falso amico stilistico:</strong> L'allitterazione in inglese ("Peter Piper picked...") non sempre si riproduce in italiano con le stesse consonanti. È preferibile creare nuovi effetti sonori piuttosto che forzare la traduzione letterale.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE STRATEGIE -->
+        <section id="strategies" class="section">
+            <div class="card">
+                <div class="card-header">Strategie di Mediazione e Riformulazione</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La mediazione C2 include la capacità di facilitare la comunicazione tra interlocutori che non condividono la stessa lingua, attraverso traduzione, parafrasi e negoziazione del senso.</strong>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Scale di mediazione (CEFR)</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Livello</th><th>Attività</th><th>Competenze C2</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="translation-term">Mediare un testo</td>
+                                <td>Traduzione, parafrasi, riassunto</td>
+                                <td>Traduzione simultanea di discorsi complessi</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Mediare concetti</td>
+                                <td>Spiegare, chiarire, semplificare</td>
+                                <td>Spiegazione di concetti filosofici/scientifici</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Mediare comunicazione</td>
+                                <td>Facilitare, negoziare, gestire conflitti</td>
+                                <td>Mediazione in contesti diplomatici/aziendali</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Mediazione interculturale</td>
+                                <td>Ponte tra culture, decodificare pratiche</td>
+                                <td>Spiegazione di impliciti culturali profondi</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="strategy-card">
+                        <strong>Competenze del mediatore C2:</strong>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Riconoscere impliciti culturali (umorismo, ironia, eufemismi)</li>
+                            <li>Gestire asimmetrie di potere linguistico</li>
+                            <li>Adattare registri e stili in tempo reale</li>
+                            <li>Preservare tono e intenzione dell'oratore originale</li>
+                            <li>Gestire "non-traducibili" con tecniche compensatorie</li>
+                        </ul>
+                    </div>
+
+                    <div class="translation-context">
+                        <strong>Esempio di mediazione culturale avanzata:</strong><br>
+                        Spiegare il concetto italiano di <em>"fare bella figura"</em> a un anglosassone richiede molto più di una traduzione: implica spiegare la dimensione sociale della reputazione, l'importanza dell'apparenza nella cultura mediterranea, la differenza tra <em>fare figura</em> e <em>fare la figura</em>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Interpretariato e Traduzione Simultanea</div>
+                <div class="card-body">
+                    <p>Il C2 include competenze di interpretariato consecutivo e simultaneo, che richiedono abilità cognitive specifiche: [^6^]</p>
+                    
+                    <div class="technique-box">
+                        <strong>Interpretariato consecutivo:</strong><br>
+                        Ascolto → Analisi → Memorizzazione → Riformulazione<br>
+                        <em>Strategia C2:</em> Prendere appunti simbolici, segmentare il discorso in unità di senso, anticipare conclusioni argomentative
+                    </div>
+
+                    <div class="technique-box">
+                        <strong>Interpretariato simultaneo:</strong><br>
+                        Ascolto e produzione sovrapposti (décalage di 2-5 secondi)<br>
+                        <em>Strategia C2:</em> Anticipazione sintattica, semplificazione selettiva, gestione dello stress
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Nota:</strong> L'interpretariato C2 richiede competenze bilingue attive (L1 e L2) e la capacità di gestire registri estremi (formali, tecnici, emotivi).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PROBLEMI -->
+        <section id="problems" class="section">
+            <div class="card">
+                <div class="card-header">Problemi di Traduzione e Soluzioni C2</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il traduttore C2 deve affrontare e risolvere problemi di non-equivalenza a livello lessicale, sintattico, culturale e pragmatico.</strong>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Categorie di non-equivalenza</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Problema</th><th>Esempio</th><th>Soluzione C2</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="translation-term">Non-equivalenza culturale</td>
+                                <td>"Sunday roast", "Happy hour"</td>
+                                <td>Adattamento + nota esplicativa se necessario</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Non-equivalenza lessicale</td>
+                                <td>"Privacy", "Accountability"</td>
+                                <td>Calco accettato o perifrasi definitoria</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Non-equivalenza sintattica</td>
+                                <td>Passivo inglese vs italiano</td>
+                                <td>Transposizione (riflessivo, attivo, impersonalità)</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Non-equivalenza pragmatica</td>
+                                <td>Formule di cortesia (You→Lei/tu)</td>
+                                <td>Analisi del contesto sociale e scelta consapevole</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Giochi di parole</td>
+                                <td>Puns, double entendre</td>
+                                <td>Ricreazione con altri mezzi o compensazione</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Riferimenti intertestuali</td>
+                                <td>Allusioni letterarie, citazioni</td>
+                                <td>Riconoscimento e adattamento al patrimonio culturale target</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="warning-box">
+                        <strong>⚠️ False friends pericolosi (Traduzione):</strong><br>
+                        <em>Actually</em> ≠ Attualmente (in realtà)<br>
+                        <em>Eventually</em> ≠ Eventualmente (finalmente/infine)<br>
+                        <em>Argument</em> ≠ Argomento (litigio vs tema)<br>
+                        <em>Library</em> ≠ Libreria (biblioteca vs negozio libri)<br>
+                        <em>Magazine</em> ≠ Magazzino (rivista vs deposito)
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Caso studio: traduzione di "privacy"</strong><br>
+                        Il concetto anglosassone di <em>privacy</em> include dimensioni legali, spaziali e relazionali diverse dall'italiano "vita privata" o "riservatezza". Il traduttore C2 deve scegliere: "diritto alla riservatezza" (giuridico), "intimità" (spaziale), "sfera privata" (filosofico) a seconda del contesto.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Traduzione di Testi Specialistici</div>
+                <div class="card-body">
+                    <div class="strategy-card">
+                        <strong>Traduzione giuridica:</strong><br>
+                        Precisione terminologica assoluta, riconoscimento di false equivalenze (Common Law vs Civil Law), mantenimento della struttura sintattica formale
+                    </div>
+
+                    <div class="strategy-card">
+                        <strong>Traduzione medica:</strong><br>
+                        Conoscenza della nomenclatura internazionale (ICD, SNOMED), attenzione ai falsi amici ("morbidity" ≠ morbosità, ma morbilità/tasso di malattia)
+                    </div>
+
+                    <div class="strategy-card">
+                        <strong>Traduzione tecnica:</strong><br>
+                        Ricerca terminologica rigorosa, uso di corpus paralleli, standardizzazione secondo norme UNI/ISO
+                    </div>
+
+                    <div class="strategy-card">
+                        <strong>Traduzione economico-finanziaria:</strong><br>
+                        Conoscenza dei mercati di riferimento, adattamento di concetti fiscali diversi tra paesi
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE REGISTRI -->
+        <section id="registers" class="section">
+            <div class="card">
+                <div class="card-header">Variazione di Registro e Stile</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il traduttore C2 deve riconoscere e riprodurre variazioni di registro, diafasia (situazione comunicativa), diastratia (strato sociale) e diafasia (funzione).</strong> [^1^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Registro</th><th>Caratteristiche</th><th>Strategia traduttiva</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="translation-term">Alto/formale</td>
+                                <td>Lessico aulico, sintassi complessa, subordinate</td>
+                                <td>Mantenimento della complessità, lessico colto</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Tecnico-specialistico</td>
+                                <td>Terminologia settoriale, precisione</td>
+                                <td>Equivalenza terminologica, chiarezza</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Basso/informale</td>
+                                <td>Colloquialismi, ellissi, interiezioni</td>
+                                <td>Ricerca di equivalenti colloquiali naturali</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Gergale/slang</td>
+                                <td>Neologismi, espressioni di gruppo</td>
+                                <td>Adattamento culturale o mantenimento esotizzante</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Arcaico</td>
+                                <td>Forme obsolete, lessico storico</td>
+                                <td>Ricreazione di effetto storico o modernizzazione</td>
+                            </tr>
+                            <tr>
+                                <td class="translation-term">Dialettale</td>
+                                <td>Varianti regionali, marcatura sociale</td>
+                                <td>Strategia di estraneizzazione o naturalizzazione</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="translation-context">
+                        <strong>Esempio di variazione di registro:</strong><br>
+                        <span class="source-text">EN (formale): "I am writing to enquire whether..."</span><br>
+                        <span class="target-text">IT (formale): "Le scrivo per chiederLe se..."</span><br><br>
+                        <span class="source-text">EN (informale): "Just dropping a line to ask if..."</span><br>
+                        <span class="target-text">IT (informale): "Ti scrivo di corsa per chiederti se..."</span>
+                    </div>
+
+                    <div class="technique-box">
+                        <strong>Variazioni socio-linguistiche:</strong><br>
+                        Al livello C2, il traduttore deve gestire:<br>
+                        • <strong>Diafasia:</strong> Differenze tra scritto e parlato<br>
+                        • <strong>Diastratia:</strong> Varianti sociali (classe, istruzione)<br>
+                        • <strong>Diatopia:</strong> Varianti regionali (british vs american, settentrione vs sud Italia)<br>
+                        • <strong>Diafasia funzionale:</strong> Registri professionali vs privati
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Traduzione Audiovisiva e Localizzazione</div>
+                <div class="card-body">
+                    <p>Competenze specifiche per la traduzione multimediale:</p>
+                    
+                    <div class="strategy-card">
+                        <strong>Sottotitolazione:</strong><br>
+                        Condensazione (riduzione del 30-40%), sincronia, leggibilità, gestione di turni dialogici sovrapposti
+                    </div>
+
+                    <div class="strategy-card">
+                        <strong>Doppiaggio:</strong><br>
+                        Sincronia labiale (isocronia), adattamento di culture-specifics, "doppiaggio perfetto" (credibilità attore)
+                    </div>
+
+                    <div class="strategy-card">
+                        <strong>Localizzazione di videogiochi/software:</strong><br>
+                        Adattamento di riferimenti culturali, gestione di spazi limitati (UI), varianti regionali (IT→IT-CH, ES→ES-LA)
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Principio del "sospetto dell'equivalenza":</strong> Non esiste equivalenza perfetta. Ogni scelta traduttiva implica perdite e guadagni. Il C2 consiste nel rendere consapevoli queste scelte e minimizzare le perdite essenziali.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C2 - Traduzione Avanzata (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali) - Traduzione C2
+        const exercises = [
+            // ESERCIZI 1-10: Concetti base
+            {
+                id: 1,
+                type: 'choice',
+                question: 'La traduzione C2 privilegia l\'__________ funzionale rispetto alla forma.',
+                options: ['equivalenza', 'fedeltà', 'letteralità', 'adattamento'],
+                correct: 'equivalenza',
+                explanation: '✅ Corretto! L\'equivalenza funzionale (stesso effetto sul lettore) prevale sulla forma',
+                errorExplanation: '❌ Il C2 privilegia l\'equivalenza funzionale, non la fedeltà letterale'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'La __________ è la tecnica che cambia il punto di vista (causa↔effetto).',
+                correct: ['modulazione'],
+                explanation: '✅ Corretto! Modulazione = variazione del punto di vista prospettico'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: '"It\'s raining cats and dogs" richiede quale tecnica?',
+                options: ['Traduzione discorsiva', 'Calco', 'Prestito', 'Traduzione letterale'],
+                correct: 'Traduzione discorsiva',
+                explanation: '✅ Corretto! "Piove a catinelle" = traduzione discorsiva (equivalente idiomatico)',
+                errorExplanation: '❌ Non si traduce letteralmente, ma con l\'equivalente culturale'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'L\'interpretariato __________ richiede ascolto e produzione sovrapposti.',
+                correct: ['simultaneo'],
+                explanation: '✅ Corretto! Interpretariato simultaneo = décalage di 2-5 secondi'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'La __________ sostituisce un riferimento culturale con uno target.',
+                options: ['adattamento', 'modulazione', 'amplificazione', 'riduzione'],
+                correct: 'adattamento',
+                explanation: '✅ Corretto! Adattamento = sostituzione culturale (es. Thanksgiving→Natale)',
+                errorExplanation: '❌ L\'adattamento sostituisce riferimenti culturali specifici'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Il traduttore C2 deve gestire variazioni di ____, diafasia, diastratia.',
+                correct: ['diatopia', 'registro'],
+                explanation: '✅ Corretto! Diatopia = varianti regionali/spaziali'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: '"Actually" è un falso amico di:',
+                options: ['Attualmente', 'Attualmente (in realtà)', 'Eventualmente', 'Finalmente'],
+                correct: 'Attualmente',
+                explanation: '✅ Corretto! Actually = in realtà / Attualmente = currently/at present',
+                errorExplanation: '❌ Actually ≠ Attualmente (falso amico pericoloso)'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'La __________ aggiunge informazioni implicite necessarie al target.',
+                correct: ['amplificazione'],
+                explanation: '✅ Corretto! Amplificazione = esplicitazione di informazioni implicite'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Nel doppiaggio, la sincronia __________ si riferisce al movimento labiale.',
+                options: ['labiale', 'temporale', 'fonetica', 'culturale'],
+                correct: 'labiale',
+                explanation: '✅ Corretto! Sincronia labiale = isocronia con movimenti bocca',
+                errorExplanation: '❌ Nel doppiaggio la sincronia labiale è fondamentale'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'La traduzione __________ trasferisce testi verso la lingua madre.',
+                correct: ['diretta'],
+                explanation: '✅ Corretto! Traduzione diretta = verso L1 (più naturale)'
+            },
+            
+            // ESERCIZI 11-20: Tecniche avanzate
+            {
+                id: 11,
+                type: 'choice',
+                question: '"He limped out" → "Uscì zoppicando" è un esempio di:',
+                options: ['Modulazione', 'Transposizione', 'Adattamento', 'Calco'],
+                correct: 'Modulazione',
+                explanation: '✅ Corretto! Cambio di punto di vista: processo (limping) → azione (zoppicando)',
+                errorExplanation: '❌ È modulazione (cambio prospettico), non transposizione'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'La __________ cambia la categoria grammaticale (sostantivo→verbo).',
+                correct: ['transposizione'],
+                explanation: '✅ Corretto! Transposizione = cambio di parte del discorso'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: '"Break a leg!" → "In bocca al lupo!" dimostra:',
+                options: ['Traduzione discorsiva', 'Calco', 'Prestito', 'Modulazione'],
+                correct: 'Traduzione discorsiva',
+                explanation: '✅ Corretto! Riformulazione libera mantenendo funzione illocutiva',
+                errorExplanation: '❌ È traduzione discorsiva (equivalente funzionale culturale)'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'La riduzione omette __________ o ridondanze del testo source.',
+                correct: ['ripetizioni'],
+                explanation: '✅ Corretto! Riduzione = omissione di elementi ridondanti'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Il calco "grattacielo" (skyscraper) è:',
+                options: ['Un prestito creativo', 'Una modulazione', 'Un adattamento', 'Una transposizione'],
+                correct: 'Un prestito creativo',
+                explanation: '✅ Corretto! Calco = traduzione morfemica letterale accettata',
+                errorExplanation: '❌ Grattacielo è un calco accettato dall\'italiano'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'L\'interpretariato __________ prevede pause per la riformulazione.',
+                correct: ['consecutivo'],
+                explanation: '✅ Corretto! Consecutivo = note + riformulazione a segmenti'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'La sottotitolazione richiede tipicamente una condensazione del:',
+                options: ['30-40%', '10-20%', '50-60%', '70-80%'],
+                correct: '30-40%',
+                explanation: '✅ Corretto! Sottotitoli devono condensare del 30-40% per leggibilità',
+                errorExplanation: '❌ La condensazione standard è del 30-40%'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'La localizzazione adatta prodotti __________ e culturalmente al target.',
+                correct: ['linguisticamente'],
+                explanation: '✅ Corretto! Localizzazione = adattamento linguistico + culturale'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: '"Privacy" in italiano giuridico si traduce spesso con:',
+                options: ['Riservatezza', 'Vita privata', 'Entrambe a seconda del contesto', 'Segretezza'],
+                correct: 'Entrambe a seconda del contesto',
+                explanation: '✅ Corretto! Privacy → riservatezza (giuridica) o vita privata (generale)',
+                errorExplanation: '❌ Il C2 richiede distinzione contestuale: riservatezza vs vita privata'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'La mediazione __________ spiega concetti culturalmente specifici.',
+                correct: ['concettuale', 'culturale'],
+                explanation: '✅ Corretto! Mediazione concettuale = spiegazione di concetti'
+            },
+            
+            // ESERCIZI 21-30: Problemi specifici
+            {
+                id: 21,
+                type: 'choice',
+                question: '"Eventualmente" è falso amico di:',
+                options: ['Eventually', 'Actually', 'Finally', 'Possibly'],
+                correct: 'Eventually',
+                explanation: '✅ Corretto! Eventually = infine/finalmente / Eventualmente = possibly/if needed',
+                errorExplanation: '❌ Eventually ≠ Eventualmente (falso amico)'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'La non-equivalenza __________ riguarda termini assenti nella L2.',
+                correct: ['lessicale'],
+                explanation: '✅ Corretto! Non-equivalenza lessicale = lacune lessicali'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'In traduzione giuridica, "Common Law" vs "Civil Law" richiede:',
+                options: ['Attenzione a false equivalenze', 'Traduzione letterale', 'Calco', 'Prestito'],
+                correct: 'Attenzione a false equivalenze',
+                explanation: '✅ Corretto! Sistemi giuridici diversi non sono sovrapponibili',
+                errorExplanation: '❌ Traduzione giuridica = attenzione a false equivalenze strutturali'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'La __________ preserva effetti sonori (ritmo, rima) nella traduzione poetica.',
+                correct: ['compensazione'],
+                explanation: '✅ Corretto! Compensazione = ricreazione di effetti persi altrove'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: '"Morbidity" in medicina si traduce come:',
+                options: ['Morbilità', 'Morbosità', 'Malattia', 'Patologia'],
+                correct: 'Morbilità',
+                explanation: '✅ Corretto! Morbidity = tasso di malattia / Morbidity ≠ morbosità',
+                errorExplanation: '❌ Falso amico: morbidity = morbilità, non morbosità'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'La traduzione di giochi di parole richiede spesso __________ creativa.',
+                correct: ['ricreazione'],
+                explanation: '✅ Corretto! Ricreazione = nuovo gioco di parole target'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'L\'allitterazione "Peter Piper picked" in italiano:',
+                options: ['Va ricreata con altri mezzi', 'Si traduce letteralmente', 'Si omette', 'Si spiega in nota'],
+                correct: 'Va ricreata con altri mezzi',
+                explanation: '✅ Corretto! Effetti fonici vanno ricreati, non forzati',
+                errorExplanation: '❌ L\'allitterazione va ricreata culturalmente, non tradotta'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Il __________ è il mantenimento dello stesso effetto sul lettore target.',
+                correct: ['effetto equivalente'],
+                explanation: '✅ Corretto! Equivalenza funzionale = stesso effetto emotivo/cognitivo'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: '"Accountability" si traduce meglio con:',
+                options: ['Responsabilità rendicontabile', 'Contabilità', 'Responsabilità generica', 'Imputabilità'],
+                correct: 'Responsabilità rendicontabile',
+                explanation: '✅ Corretto! Accountability = responsabilità con obbligo di resoconto',
+                errorExplanation: '❌ Accountability implica rendicontazione, non solo responsabilità'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'La __________ è la traduzione verso la L2 (lingua non madre).',
+                correct: ['inversa'],
+                explanation: '✅ Corretto! Traduzione inversa = L1→L2 (richiede competenza nativa-like)'
+            },
+            
+            // ESERCIZI 31-40: Mediazione e registri
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Spiegare "fare bella figura" a un anglosassone è:',
+                options: ['Mediazione culturale', 'Traduzione diretta', 'Adattamento', 'Calco'],
+                correct: 'Mediazione culturale',
+                explanation: '✅ Corretto! Richiede spiegazione del concetto culturale italiano',
+                errorExplanation: '❌ È mediazione culturale, non semplice traduzione'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'La __________ gestisce asimmetrie di potere tra interlocutori.',
+                correct: ['mediazione', 'negoziazione'],
+                explanation: '✅ Corretto! Mediazione pragmatica = gestione delle dinamiche sociali'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Il registro "gergale" richiede:',
+                options: ['Adattamento culturale o esotizzazione', 'Traduzione formale', 'Amplificazione', 'Riduzione'],
+                correct: 'Adattamento culturale o esotizzazione',
+                explanation: '✅ Corretto! Slang va adattato o mantenuto come marca culturale',
+                errorExplanation: '❌ Il gergo richiede scelte consapevoli: adattare o esotizzare'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'La diafasia distingue tra __________ e parlato.',
+                correct: ['scritto'],
+                explanation: '✅ Corretto! Diafasia = variazione scritto vs parlato'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: '"Library" è falso amico di:',
+                options: ['Libreria', 'Biblioteca', 'Lettura', 'Libro'],
+                correct: 'Libreria',
+                explanation: '✅ Corretto! Library = biblioteca / Libreria = bookshop',
+                errorExplanation: '❌ Library ≠ Libreria (falso amico classico)'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'La traduzione di testi arcaici richiede competenze __________-linguistiche.',
+                correct: ['storico'],
+                explanation: '✅ Corretto! Conoscenza dello stadio storico della lingua'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'L\'uso di memorie di traduzione (CAT tools) riguarda:',
+                options: ['Competenza tecnica', 'Competenza linguistica', 'Competenza culturale', 'Competenza pragmatica'],
+                correct: 'Competenza tecnica',
+                explanation: '✅ Corretto! CAT tools = computer-assisted translation',
+                errorExplanation: '❌ CAT tools rientrano nella competenza tecnica/strumentale'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'La __________ è la gestione di turni sovrapposti nella sottotitoli.',
+                correct: ['sincronia'],
+                explanation: '✅ Corretto! Sincronia temporale nella sottotitoli audiovisiva'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: '"Argument" in italiano significa:',
+                options: ['Litigio', 'Argomento', 'Tema', 'Discussione'],
+                correct: 'Litigio',
+                explanation: '✅ Corretto! Argument = litigio/quarrel / Argomento = topic',
+                errorExplanation: '❌ Argument = litigio, non argomento (falso amico)'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Il __________ è il tempo di ritardo nell\'interpretariato simultaneo.',
+                correct: ['décalage', 'decalage'],
+                explanation: '✅ Corretto! Décalage = 2-5 secondi di distacco'
+            },
+            
+            // ESERCIZI 41-50: Casi complessi
+            {
+                id: 41,
+                type: 'choice',
+                question: '"Magazine" è falso amico di:',
+                options: ['Magazzino', 'Rivista', 'Giornale', 'Periodico'],
+                correct: 'Magazzino',
+                explanation: '✅ Corretto! Magazine = rivista / Magazzino = warehouse',
+                errorExplanation: '❌ Magazine ≠ Magazzino (falso amico)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'La traduzione di "Happy hour" richiede __________ culturale.',
+                correct: ['adattamento'],
+                explanation: '✅ Corretto! Concetto anglosassone diverso dall\'italiano'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'La "diastratia" si riferisce a:',
+                options: ['Varianti sociali/stratificate', 'Varianti regionali', 'Varianti scritto/parlato', 'Varianti funzionali'],
+                correct: 'Varianti sociali/stratificate',
+                explanation: '✅ Corretto! Diastratia = variazione sociale (classe/istruzione)',
+                errorExplanation: '❌ Diastratia = stratificazione sociale della lingua'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'La traduzione letteraria richiede preservazione di __________ e ritmo.',
+                correct: ['stile'],
+                explanation: '✅ Corretto! Stile, ritmo, effetti retorici vanno preservati'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'L\'omissione selettiva in sottotitoli si chiama:',
+                options: ['Condensazione', 'Riduzione', 'Amplificazione', 'Adattamento'],
+                correct: 'Condensazione',
+                explanation: '✅ Corretto! Condensazione = omissione controllata per leggibilità',
+                errorExplanation: '❌ Nella sottotitoli si parla di condensazione'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Il __________ è l\'equivalente funzionale di un elemento source.',
+                correct: ['corrispondente'],
+                explanation: '✅ Corretto! Corrispondente = equivalente funzionale'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: '"Fabric" si traduce come:',
+                options: ['Tessuto', 'Fabbrica', 'Struttura', 'Costruzione'],
+                correct: 'Tessuto',
+                explanation: '✅ Corretto! Fabric = tessuto / Fabbrica = factory',
+                errorExplanation: '❌ Fabric = tessuto (falso amico con fabbrica)'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'La traduzione giuridica richiede precisione __________ assoluta.',
+                correct: ['terminologica'],
+                explanation: '✅ Corretto! Precisione terminologica in ambito giuridico'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'La "compensazione" in traduzione poetica serve a:',
+                options: ['Ricreare effetti persi altrove', 'Aumentare la lunghezza', 'Semplificare il testo', 'Aggiungere note'],
+                correct: 'Ricreare effetti persi altrove',
+                explanation: '✅ Corretto! Compensazione = ricreare effetti in altri punti',
+                errorExplanation: '❌ Compensazione = bilanciamento delle perdite'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Il traduttore C2 deve differenziare sfumature anche nelle situazioni più __________.',
+                correct: ['complesse'],
+                explanation: '✅ Corretto! C2 = padronanza anche in situazioni complesse'
+            }
+        ];
+
+        let currentExercise = 0;
+        let score = 0;
+        let answered = false;
+
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            if (sectionId === 'exercises') {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            let html = `
+                <div class="exercise-counter">Esercizio ${ex.id} di 50</div>
+                <div class="question-box">
+                    <p class="question-text">${ex.question}</p>
+                </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += '<div class="options-grid">';
+                ex.options.forEach((opt, idx) => {
+                    html += `<button class="option-btn" onclick="checkAnswer('${opt}')" id="opt${idx}">${opt}</button>`;
+                });
+                html += '</div>';
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta...">
+                        <button class="btn-primary btn-check" onclick="checkFillAnswer()" style="margin-left: 10px;">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                <div class="feedback" id="feedback"></div>
+                <div class="text-center mt-2">
+                    <button class="btn-primary" onclick="nextExercise()" id="nextBtn" style="display: none;">
+                        Prossimo Esercizio →
+                    </button>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            answered = false;
+            
+            // Aggiorna barra progresso
+            const progress = ((currentExercise) / exercises.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / 50`;
+        }
+
+        function checkAnswer(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const isCorrect = selected === ex.correct;
+            const feedback = document.getElementById('feedback');
+            
+            // Disabilita tutti i bottoni
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent === selected && !isCorrect) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            if (isCorrect) {
+                score += 2;
+                feedback.className = 'feedback correct show';
+                feedback.textContent = ex.explanation;
+            } else {
+                feedback.className = 'feedback wrong show';
+                feedback.textContent = ex.errorExplanation || `❌ La risposta corretta è: ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${score} / 100`;
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        function checkFillAnswer() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const userAnswer = input.value.trim().toLowerCase();
+            const ex = exercises[currentExercise];
+            
+            if (!userAnswer) return;
+            
+            answered = true;
+            
+            const isCorrect = ex.correct.some(correct => 
+                userAnswer === correct.toLowerCase() || 
+                userAnswer.includes(correct.toLowerCase())
+            );
+            
+            const feedback = document.getElementById('feedback');
+            
+            if (isCorrect) {
+                score += 2;
+                feedback.className = 'feedback correct show';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+            } else {
+                feedback.className = 'feedback wrong show';
+                feedback.textContent = `❌ La risposta corretta è: ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+            }
+            
+            input.disabled = true;
+            document.getElementById('currentScore').textContent = `${score} / 100`;
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            if (currentExercise < exercises.length) {
+                loadExercise();
+            } else {
+                showFinalScore();
+            }
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.querySelector('.score-panel').style.display = 'none';
+            document.querySelector('.progress-bar').style.display = 'none';
+            
+            const finalSection = document.getElementById('finalScoreSection');
+            finalSection.classList.add('show');
+            
+            document.getElementById('finalScore').textContent = `${score}/100`;
+            
+            let message = '';
+            if (score >= 90) {
+                message = '🏆 Eccellente! Padronanza professionale della traduzione C2!';
+            } else if (score >= 70) {
+                message = '👍 Ottimo! Buona competenza traduttiva avanzata.';
+            } else if (score >= 50) {
+                message = '👌 Discreto. Alcune aree richiedono consolidamento.';
+            } else {
+                message = '📚 Da rivedere. Ripassa le tecniche fondamentali.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            score = 0;
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.querySelector('.score-panel').style.display = 'flex';
+            document.querySelector('.progress-bar').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('currentScore').textContent = '0 / 100';
+            loadExercise();
+        }
+
+        // Gestione tasto Enter per input testuali
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.getElementById('fillInput') && !answered) {
+                checkFillAnswer();
+            }
+        });
+    </script>
+</body>
+</html>

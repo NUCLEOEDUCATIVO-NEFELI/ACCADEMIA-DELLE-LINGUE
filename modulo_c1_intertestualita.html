@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C1 - Intertestualità</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --c1-color: #7b2cbf;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --intertext: #9d4edd;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--c1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #f3e8ff;
+            border-left: 4px solid var(--intertext);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(123, 44, 191, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .intertext { color: var(--intertext); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--c1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--c1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--c1-color); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #5a189a;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--c1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--c1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--c1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--c1-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .example-box {
+            background: #e9ecef;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--intertext);
+            font-style: italic;
+        }
+        .quote-box {
+            background: #f8f9fa;
+            border: 1px dashed var(--intertext);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C1 - Intertestualità</h1>
+            <p>I rapporti tra testi: citazione, allusione, parafrasi, pastiche e riscritture</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C1</a>
+            <span>›</span>
+            <strong>Intertestualità</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 Intertestualità</h1>
+            <p class="page-subtitle">Come i testi dialogano tra loro: teoria e pratica delle relazioni intertestuali</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('types', this)">Tipologie</button>
+            <button class="nav-tab" onclick="showSection('markers', this)">Marcatori</button>
+            <button class="nav-tab" onclick="showSection('techniques', this)">Tecniche</button>
+            <button class="nav-tab" onclick="showSection('genres', this)">Generi</button>
+            <button class="nav-tab" onclick="showSection('analysis', this)">Analisi</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👩‍🏫</div>
+                    <div class="avatar-name">Prof.ssa Bianchi</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo C1! 📖</h3>
+                    <p>Oggi esploriamo l'<strong>intertestualità</strong>: la rete di relazioni che ogni testo intrattiene con altri testi precedenti, contemporanei o futuri.</p>
+                    <p style="margin-top: 10px;"><strong>Definizione:</strong> "<span class="intertext">Nessun testo è un'isola</span>" — ogni scrittura è un tessuto di citazioni, allusioni e rimandi.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è l'Intertestualità?</div>
+                <div class="card-body">
+                    <p>L'<strong>intertestualità</strong> è la proprietà dei testi di richiamare, evocare o dialogare con altri testi, creando una rete di rimandi che arricchisce il significato. [^1^]</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Concetti fondamentali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Orizzonte d'attesa:</strong> Le convenzioni di genere che il lettore attiva</li>
+                            <li><strong>Presupposizione:</strong> Ciò che il testo dà per scontato che il lettore sappia</li>
+                            <li><strong>Interdiscorsività:</strong> Rapporti tra tipologie testuali e generi</li>
+                            <li><strong>Memoria culturale:</strong> L'archivio di testi condivisi da una comunità</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Teorie principali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Julia Kristeva (1969):</strong> Ogni testo è un "mosaico di citazioni"</li>
+                            <li><strong>Roland Barthes:</strong> Il testo è un "tessuto" di culture precedenti</li>
+                            <li><strong>Michael Riffaterre:</strong> L'intertesto come invarianza semantica</li>
+                            <li><strong>Gérard Genette:</strong> Trans-testualità e i cinque tipi di rapporti</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Distinzione cruciale:</strong> L'intertestualità <strong>esplicita</strong> (citazioni, epigrafi) è riconoscibile; quella <strong>implicita</strong> (allusioni, modelli) richiede competenza enciclopedica del lettore!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TIPOLOGIE -->
+        <section id="types" class="section">
+            <div class="card">
+                <div class="card-header">Tipologie di Intertestualità</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Classificazione secondo Gérard Genette (Palimpsestes, 1982).</strong> [^2^]
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tipo</th><th>Definizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="intertext">Intertestualità stretta</td>
+                                <td>Co-presenza effettiva di un testo in un altro (citazione, plagio)</td>
+                                <td>Epigrafi, citazioni tra virgolette</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Paratesto</td>
+                                <td>Materiali liminari e conclusivi (titoli, prefazioni, note)</td>
+                                <td>Titolo "Il nome della rosa" che rimanda a Eco</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Metatesto</td>
+                                <td>Commento critico a un testo senza fondersi (critica letteraria)</td>
+                                <td>Saggio interpretativo su Dante</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Architestualità</td>
+                                <td>Rapporto con il genere letterario, le convenzioni</td>
+                                <td>Romanzo giallo che segue le regole del genere</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Ipertestualità</td>
+                                <td>Trasformazione di un testo precedente (ipotesto)</td>
+                                <td>Modernizzazione, parodia, pastiche</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Ipertestualità - Tipologie:</strong><br>
+                        <em>Transformazione:</em> Modernizzazione, trasposizione (teatro da romanzo)<br>
+                        <em>Imitazione:</em> Pastiche, caricatura, parodia<br>
+                        <em>Transposizione seria:</em> Trascrizione, traduzione, trasposizione di genere
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE MARCATORI -->
+        <section id="markers" class="section">
+            <div class="card">
+                <div class="card-header">Marcatori e Segnali Intertestuali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Indicatori linguistici che segnalano la presenza di un altro testo.</strong> [^3^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Marcatori espliciti</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Categoria</th><th>Esempi</th><th>Funzione</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="intertext">Verba dicendi</td>
+                                <td>come dice..., secondo..., a detta di...</td>
+                                <td>Attribuzione esplicita</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Avverbi</td>
+                                <td>al contrario, diversamente, analogamente</td>
+                                <td>Confronto posizionale</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Congiunzioni</td>
+                                <td>come, quale, così come</td>
+                                <td>Comparazione esplicita</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Locuzioni</td>
+                                <td>per dirla con..., parafrasando...</td>
+                                <td>Riscrittura consapevole</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Marcatori impliciti</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tecnica</th><th>Descrizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="intertext">Stilema</td>
+                                <td>Segnale stilistico riconoscibile</td>
+                                <td>Stile dantesco, leopardiano</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Topos</td>
+                                <td>Luogo comune tematico</td>
+                                <td>Locus amoenus, ubi sunt</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Intertesto</td>
+                                <td>Segmento testuale riconducibile</td>
+                                <td>"Eli, Eli, lama sabacthani"</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Archetipo</td>
+                                <td>Modello narrativo universale</td>
+                                <td>Viaggio dell'eroe, morte-rinascita</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Esempio di analisi:</strong><br>
+                        "Nel mezzo del cammin di nostra vita" → Marcatore esplicito: citazione diretta di Dante; Marcatore implicito: endecasillabo, rima BCB, lessico alto.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TECNICHE -->
+        <section id="techniques" class="section">
+            <div class="card">
+                <div class="card-header">Tecniche Intertestuali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Modalità concrete di inserimento di un testo nell'altro.</strong> [^4^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tecnica</th><th>Definizione</th><th>Effetto</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="intertext">Citazione</td>
+                                <td>Riproduzione esatta con virgolette o corsivo</td>
+                                <td>Autorità, riconoscimento</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Epigrafe</td>
+                                <td>Citazione in testa al testo</td>
+                                <td>Chiave interpretativa</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Allusione</td>
+                                <td>Rinvio velato, riconoscibile solo da esperti</td>
+                                <td>Complicità, esclusività</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Parafrasi</td>
+                                <td>Riformulazione in altre parole</td>
+                                <td>Chiarimento, adattamento</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Plagio</td>
+                                <td>Appropriazione fraudolenta</td>
+                                <td>Truffa intellettuale</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Pastiche</td>
+                                <td>Imitazione fedele dello stile altrui</td>
+                                <td>Omaggio, esercizio stilistico</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Parodia</td>
+                                <td>Imitazione deformante per ridicolizzare</td>
+                                <td>Ironia, critica</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Centone</td>
+                                <td>Testo formato da versi altrui ricomposti</td>
+                                <td>Bricolage, intertestualità estrema</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="transformation-box">
+                        <strong>Scala di visibilità:</strong><br><br>
+                        <em>Massima visibilità:</em> Citazione diretta, epigrafe<br>
+                        <em>Visibilità media:</em> Parafrasi, pastiche<br>
+                        <em>Visibilità minima:</em> Allusione, archetipo, plagio
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> La <strong>parodia</strong> richiede deformazione ironica; il <strong>pastiche</strong> imitazione fedele. Entrambi sono leciti; il <strong>plagio</strong> è appropriazione non dichiarata!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE GENERI -->
+        <section id="genres" class="section">
+            <div class="card">
+                <div class="card-header">Intertestualità nei Generi</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Come l'intertestualità opera in specifici generi letterari e non.</strong> [^5^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Genere</th><th>Tipologia intertestuale</th><th>Esempi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="intertext">Romanzo storico</td>
+                                <td>Documenti d'epoca, cronache, lettere</td>
+                                <td>"I promessi sposi" (processi, editti)</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Fantascienza</td>
+                                <td>Intertesti scientifici, miti fondativi</td>
+                                <td>Asimov (robotica), Dick (simulazione)</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Giallo postmoderno</td>
+                                <td>Metaletteratura, citazione di regole del genere</td>
+                                <td>Eco, Calvino, Auster</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Poesia ermetica</td>
+                                <td>Intertesto simbolista, classico</td>
+                                <td>Ungaretti (latinismi), Montale (Dante)</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Saggistica</td>
+                                <td>Apparato critico, note, bibliografia</td>
+                                <td>Footnote, citazione accademica</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Giornalismo</td>
+                                <td>Fonti, agenzie, comunicati stampa</td>
+                                <td>"Secondo quanto riferisce..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Caso studio: "Il nome della rosa" (Umberto Eco)</strong><br>
+                        Intertestualità enciclopedica: testi medievali, Aristotele, Apocalisse, Sherlock Holmes, Borges. Ogni pagina è un palinsesto di rimandi.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ANALISI -->
+        <section id="analysis" class="section">
+            <div class="card">
+                <div class="card-header">Analisi Intertestuale: Metodologia</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Passaggi operativi per l'analisi intertestuale di un testo.</strong> [^6^]
+                    </div>
+
+                    <div class="transformation-box">
+                        <strong>Procedura analitica:</strong>
+                        <ol style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Identificazione:</strong> Rilevare segnali espliciti (virgolette, corsivo, note)</li>
+                            <li><strong>Ipotesi:</strong> Individuare possibili allusioni stilistiche o tematiche</li>
+                            <li><strong>Verifica:</strong> Confronto con testo/fonte ipotizzata</li>
+                            <li><strong>Classificazione:</strong> Tipologia di intertestualità (Genette)</li>
+                            <li><strong>Interpretazione:</strong> Funzione e significato del rimando</li>
+                            <li><strong>Contesto:</strong> Relazione con orizzonte d'attesa e pubblico</li>
+                        </ol>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Domande guida</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Livello</th><th>Domanda</th><th>Obiettivo</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="intertext">Linguistico</td>
+                                <td>Quali segnali testuali rivelano il rimando?</td>
+                                <td>Identificare marcatori</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Stilistico</td>
+                                <td>Quale registro/lessico viene evocato?</td>
+                                <td>Riconoscere modelli</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Tematico</td>
+                                <td>Quali contenuti/topoi sono richiamati?</td>
+                                <td>Individuare archetipi</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Pragmatico</td>
+                                <td>Che effetto si produce sul lettore?</td>
+                                <td>Valutare funzione</td>
+                            </tr>
+                            <tr>
+                                <td class="intertext">Ideologico</td>
+                                <td>Quale dialogo tra culture si instaura?</td>
+                                <td>Interpretare senso</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="quote-box">
+                        <strong>Schema di analisi:</strong><br>
+                        Testo A (analizzato) ←→ [tecnica: citazione/allusione/parafrasi] ←→ Testo B (fonte/ipotesto)<br>
+                        ↓<br>
+                        Funzione: [ironica/omaggio/critica/autorità/comicità]<br>
+                        ↓<br>
+                        Effetto: [complicità/esclusione/chiarimento/subversione]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C1 - Intertestualità (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Concetti base
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Secondo Julia Kristeva, ogni testo è un "mosaico di __________".',
+                options: ['citazioni', 'parole', 'idee', 'frasi'],
+                correct: 'citazioni',
+                explanation: '✅ Corretto! Kristeva (1969) definì il testo come "mosaico di citazioni"',
+                errorExplanation: '❌ Kristeva usa il termine "citazioni" per indicare la natura derivata di ogni testo'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'L\'intertestualità studia i __________ tra testi diversi.',
+                correct: ['rapporti', 'nodi', 'legami', 'relazioni', 'rimandi'],
+                explanation: '✅ Corretto! L\'intertestualità analizza le relazioni tra testi'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Gérard Genette ha teorizzato la __________ come trasformazione di un testo precedente.',
+                options: ['ipertestualità', 'intertestualità', 'paratesto', 'metatesto'],
+                correct: 'ipertestualità',
+                explanation: '✅ Corretto! Genette distingue 5 tipi di trans-testualità, tra cui l\'ipertestualità',
+                errorExplanation: '❌ Per Genette l\'ipertestualità è la relazione che unisce un testo B (ipertesto) a un testo A (ipotesto)'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Il __________ è il testo originale che viene trasformato.',
+                correct: ['ipotesto'],
+                explanation: '✅ Corretto! Ipotesto (Genette) = testo di partenza; Ipertesto = testo derivato'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'L\'epigrafe in testa a un romanzo è un esempio di __________.',
+                options: ['paratesto', 'metatesto', 'architesto', 'ipotesto'],
+                correct: 'paratesto',
+                explanation: '✅ Corretto! Il paratesto comprende tutti i materiali liminari (titoli, prefazioni, note)',
+                errorExplanation: '❌ Il paratesto (Genette) include tutto ciò che circonda il testo: titoli, sottotitoli, intertoli, prefazioni, epigrafi, note'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'La citazione diretta si riconosce dalle __________.',
+                correct: ['virgolette', 'parentesi', 'virgole'],
+                explanation: '✅ Corretto! Le virgolette (alte o basse) segnalano la citazione esplicita'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Un\'allusione è un rimando __________ riconoscibile solo da lettori esperti.',
+                options: ['implicito', 'esplicito', 'diretto', 'chiaro'],
+                correct: 'implicito',
+                explanation: '✅ Corretto! L\'allusione è velata e richiede competenza enciclopedica',
+                errorExplanation: '❌ L\'allusione è implicita, velata, richiede conoscenza pregressa per essere colta'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Il pastiche imita fedelmente lo __________ di un autore.',
+                correct: ['stile', 'tema', 'soggetto'],
+                explanation: '✅ Corretto! Il pastiche è imitazione stilistica fedele (omaggio o esercizio)'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'La parodia deforma il testo originale per __________.',
+                options: ['ridicolizzare', 'omaggiare', 'copiare', 'spiegare'],
+                correct: 'ridicolizzare',
+                explanation: '✅ Corretto! La parodia ha intento ironico e critico attraverso la deformazione',
+                errorExplanation: '❌ La parodia deforma per ridicolizzare; il pastiche imita per omaggiare'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'L\'interdiscorsività studia i rapporti tra __________ testuali.',
+                correct: ['tipologie', 'generi', 'tipi', 'forme'],
+                explanation: '✅ Corretto! Interdiscorsività = rapporti tra generi e tipologie testuali'
+
+            },
+
+            // ESERCIZI 11-20: Tipologie e tecniche
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Un saggio critico che commenta un testo senza fondersi con esso è un __________.',
+                options: ['metatesto', 'ipotesto', 'ipertesto', 'paratesto'],
+                correct: 'metatesto',
+                explanation: '✅ Corretto! Il metatesto commenta ma rimane distinto dal testo base',
+                errorExplanation: '❌ Il metatesto (Genette) è il commento critico che rimane esterno al testo'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'L\'architestualità riguarda il rapporto con le __________ di genere.',
+                correct: ['convenzioni', 'regole', 'norme', 'aspettative'],
+                explanation: '✅ Corretto! Architestualità = relazione con le convenzioni del genere letterario'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Il centone è un testo formato da __________ di testi precedenti.',
+                options: ['versi ricomposti', 'idee copiate', 'parole prese', 'titoli rubati'],
+                correct: 'versi ricomposti',
+                explanation: '✅ Corretto! Il centone (dal latino) ricompone versi altrui in nuovo ordine',
+                errorExplanation: '❌ Il centone è un testo formato da frammenti di testi precedenti ricomposti (bricolage estremo)'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'La parafrasi è una __________ in altre parole di un testo.',
+                correct: ['riformulazione', 'riscrittura', 'trasposizione'],
+                explanation: '✅ Corretto! Parafrasi = dire la stessa cosa con parole diverse'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Il plagio è appropriazione __________ di un testo altrui.',
+                options: ['fraudolenta', 'lecita', 'evidente', 'dichiarata'],
+                correct: 'fraudolenta',
+                explanation: '✅ Corretto! Il plagio è appropriazione non dichiarata, quindi fraudolenta',
+                errorExplanation: '❌ Il plagio è appropriazione non dichiarata del testo altrui (reato)'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Gli __________ sono luoghi comuni tematici ricorrenti (es. locus amoenus).',
+                correct: ['topoi', 'topos'],
+                explanation: '✅ Corretto! Topos (greco) = luogo comune, schema tematico ricorrente'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: '"Come dice Dante..." è un esempio di marcatore __________.',
+                options: ['esplicito', 'implicito', 'stilistico', 'tematico'],
+                correct: 'esplicito',
+                explanation: '✅ Corretto! I verba dicendi (come dice) sono marcatori espliciti di intertestualità',
+                errorExplanation: '❌ "Come dice..." è un marcatore esplicito perché dichiara apertamente la fonte'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'L\'orizzonte d\'attesa è l\'insieme delle __________ che il lettore attiva.',
+                correct: ['aspettative', 'convenzioni', 'previsioni'],
+                explanation: '✅ Corretto! Jauss: l\'orizzonte d\'attesa è lo schema di attese che il lettore proietta sul testo'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Un romanzo che segue le regole del giallo è un esempio di __________.',
+                options: ['architestualità', 'ipertestualità', 'metatesto', 'paratesto'],
+                correct: 'architestualità',
+                explanation: '✅ Corretto! L\'architestualità riguarda il rapporto con le convenzioni di genere',
+                errorExplanation: '❌ L\'architestualità è il rapporto con il genere letterario e le sue convenzioni'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'La modernizzazione di un testo antico è una forma di __________.',
+                correct: ['ipertestualità', 'trasformazione'],
+                explanation: '✅ Corretto! Modernizzazione, trasposizione, traduzione sono forme di ipertestualità'
+
+            },
+
+            // ESERCIZI 21-30: Marcatori linguistici
+            {
+                id: 21,
+                type: 'choice',
+                question: '"Al contrario di quanto sostiene..." è un marcatore di tipo __________.',
+                options: ['avverbiale', 'citativo', 'congiuntivo', 'stilistico'],
+                correct: 'avverbiale',
+                explanation: '✅ Corretto! "Al contrario" è un avverbio che segnala posizione polemica',
+                errorExplanation: '❌ Gli avverbi (al contrario, analogamente, diversamente) segnalano rapporti posizionali'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: '"Per dirla con __________..." introduce una citazione consapevole.',
+                correct: ['Manzoni', 'Dante', 'Leopardi', 'Pirandello'],
+                explanation: '✅ Corretto! "Per dirla con X" è formula che esplicita il prestito intertestuale'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'L\'uso dell\'endecasillabo e della rima BCB segnala un intertesto __________.',
+                options: ['dantesco', 'petrarchesco', 'ariostesco', 'tassesco'],
+                correct: 'dantesco',
+                explanation: '✅ Corretto! Terza rima = marchio stilistico della Commedia di Dante',
+                errorExplanation: '❌ La terza rima (ABA BCB CDC...) è il segno distintivo della Commedia dantesca'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'I verba dicendi (come dice, secondo, a detta di) sono marcatori __________.',
+                correct: ['espliciti', 'diretti', 'chiari'],
+                explanation: '✅ Corretto! I verba dicendi attribuiscono esplicitamente la paternità del detto'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: '"Parafrasando..." è una locuzione che introduce una __________.',
+                options: ['riscrittura', 'citazione', 'allusione', 'parodia'],
+                correct: 'riscrittura',
+                explanation: '✅ Corretto! "Parafrasando" dichiara l\'intenzione di riformulare',
+                errorExplanation: '❌ "Parafrasando" indica esplicitamente che si sta riformulando un testo precedente'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Il confronto posizionale si realizza con avverbi come __________ e analogamente.',
+                correct: ['al contrario', 'diversamente', 'viceversa'],
+                explanation: '✅ Corretto! Gli avverbi connettivi segnalano la posizione rispetto all\'altro testo'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Uno stilema leopardiano include lessico __________ e tematica del limite.',
+                options: ['alto', 'basso', 'tecnico', 'colloquiale'],
+                correct: 'alto',
+                explanation: '✅ Corretto! Leopardi usa lessico elevato, latineggiante, astratto',
+                errorExplanation: '❌ Lo stile leopardiano si riconosce per lessico alto, astrattismo, tematica del limite/infinito'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'L\'archetipo del "viaggio dell\'eroe" è un marcatore __________ universale.',
+                correct: ['tematico', 'narrativo', 'strutturale'],
+                explanation: '✅ Corretto! Gli archetipi sono schemi narrativi universali (Jung, Campbell)'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: '"Quale" e "come" usati in comparazione sono marcatore __________.',
+                options: ['congiuntivo', 'avverbiale', 'citativo', 'stilistico'],
+                correct: 'congiuntivo',
+                explanation: '✅ Corretto! Le congiunzioni comparative introducono confronti espliciti',
+                errorExplanation: '❌ "Quale", "come", "così come" sono congiunzioni che introducono comparazione'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'La presupposizione è ciò che il testo dà per __________ che il lettore sappia.',
+                correct: ['scontato', 'noto', 'dato'],
+                explanation: '✅ Corretto! Presupposizione = conoscenze pregresse attivate dal testo'
+
+            },
+
+            // ESERCIZI 31-40: Generi e casi studio
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Nel romanzo storico, l\'intertestualità si realizza attraverso __________ d\'epoca.',
+                options: ['documenti', 'fantasie', 'invenzioni', 'sogni'],
+                correct: 'documenti',
+                explanation: '✅ Corretto! Il romanzo storico fonde narrazione e documenti autentici',
+                errorExplanation: '❌ Il romanzo storico (Manzoni) inserisce documenti, editti, processi d\'epoca'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: '"Il nome della rosa" di Eco è un esempio di intertestualità __________.',
+                correct: ['enciclopedica', 'totale', 'massima'],
+                explanation: '✅ Corretto! Eco parla di "enciclopedia" come rete infinita di rimandi'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Il giallo postmoderno citando le regole del genere realizza __________.',
+                options: ['metaletteratura', 'realismo', 'naturalismo', 'decadentismo'],
+                correct: 'metaletteratura',
+                explanation: '✅ Corretto! La metaletteratura riflette su se stessa e sulle convenzioni',
+                errorExplanation: '❌ La metaletteratura è il testo che riflette sulle proprie convenzioni e sullo statuto di finzione'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Nella poesia ermetica, l\'intertesto __________ è fondamentale.',
+                correct: ['simbolista', 'classico', 'dantesco'],
+                explanation: '✅ Corretto! L\'ermetismo dialoga con il simbolismo francese (Baudelaire, Mallarmé)'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'La saggistica usa l\'intertestualità attraverso __________ e note.',
+                options: ['citazione', 'fantasia', 'narrazione', 'dialogo'],
+                correct: 'citazione',
+                explanation: '✅ Corretto! L\'apparato critico (note, biblio) è paratesto specialistico',
+                errorExplanation: '❌ La saggistica usa citazioni, note, bibliografia come apparato intertestuale'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Nel giornalismo, "Secondo quanto riferisce..." è una formula di __________.',
+                correct: ['attribuzione', 'fonte', 'riferimento'],
+                explanation: '✅ Corretto! Formule attributive che citano fonti (agenzie, comunicati)'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'La trasposizione di un romanzo in film è una forma di __________.',
+                options: ['ipertestualità', 'intertestualità', 'paratesto', 'metatesto'],
+                correct: 'ipertestualità',
+                explanation: '✅ Corretto! La trasposizione cinematografica è trasformazione di genere (ipertesto)',
+                errorExplanation: '❌ La trasposizione da un medium all\'altro è una forma di ipertestualità (trasformazione)'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Il __________ è l\'insieme dei testi condivisi da una comunità culturale.',
+                correct: ['canone', 'corpus', 'archivio', 'patrimonio'],
+                explanation: '✅ Corretto! Il canone è l\'insieme dei testi ritenuti fondamentali per una cultura'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Un testo che imita lo stile di Sherlock Holmes è un __________.',
+                options: ['pastiche', 'parodia', 'plagio', 'centone'],
+                correct: 'pastiche',
+                explanation: '✅ Corretto! Il pastiche imita fedelmente uno stile (omaggio o esercizio)',
+                errorExplanation: '❌ Il pastiche imita fedelmente; se fosse deformante sarebbe parodia'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'La traduzione è una forma di intertestualità __________.',
+                correct: ['interlinguistica', 'tra linguaggi'],
+                explanation: '✅ Corretto! Traduzione = rapporto tra testo in lingua A e testo in lingua B'
+
+            },
+
+            // ESERCIZI 41-50: Analisi e metodologia
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Il primo passo dell\'analisi intertestuale è l\'__________ dei segnali.',
+                options: ['identificazione', 'interpretazione', 'valutazione', 'classificazione'],
+                correct: 'identificazione',
+                explanation: '✅ Corretto! Si parte dal riconoscere marcatori espliciti e impliciti',
+                errorExplanation: '❌ La procedura analitica inizia con l\'identificazione dei segnali intertestuali'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'La verifica richiede il __________ con il testo/fonte ipotizzata.',
+                correct: ['confronto', 'paragone', 'raffronto'],
+                explanation: '✅ Corretto! Si confronta il testo A con il testo B per verificare il rapporto'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'A livello pragmatico, si valuta l\'__________ sul lettore.',
+                options: ['effetto', 'senso', 'significato', 'contenuto'],
+                correct: 'effetto',
+                explanation: '✅ Corretto! Il livello pragmatico studia gli effetti di senso prodotti',
+                errorExplanation: '❌ Il livello pragmatico si chiede "che effetto produce sul lettore?"'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'L\'analisi __________ studia il dialogo tra culture diverse.',
+                correct: ['ideologica', 'culturale'],
+                explanation: '✅ Corretto! Il livello ideologico/culturale interpreta il senso del dialogo tra testi'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'La funzione ironica crea __________ con il lettore che coglie l\'allusione.',
+                options: ['complicità', 'distanza', 'confusione', 'noia'],
+                correct: 'complicità',
+                explanation: '✅ Corretto! L\'allusione crea complicità con chi possiede la competenza per coglierla',
+                errorExplanation: '❌ L\'allusione implicita crea complicità con il lettore "iniziato"'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'L\'intertestualità può avere funzione __________ (autorità) o subversiva (critica).',
+                correct: ['confermativa', 'affermativa', 'legittimante'],
+                explanation: '✅ Corretto! Citare Dante o la Bibbia conferisce autorità; deformare critica'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'La memoria culturale è l\'__________ di testi condivisi da una comunità.',
+                options: ['archivio', 'dimenticanza', 'perdita', 'distruzione'],
+                correct: 'archivio',
+                explanation: '✅ Corretto! Memoria culturale = repertorio di testi che una cultura riconosce (Assmann)',
+                errorExplanation: '❌ La memoria culturale (Assmann) è l\'archivio di testi fondativi di una comunità'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'La competenza __________ del lettore è fondamentale per cogliere le allusioni.',
+                correct: ['enciclopedica', 'culturale', 'testuale'],
+                explanation: '✅ Corretto! Eco: il lettore modello possiede competenza enciclopedica'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'L\'ipertestualità si realizza attraverso __________, imitazione, transposizione.',
+                options: ['trasformazione', 'citazione', 'epigrafe', 'nota'],
+                correct: 'trasformazione',
+                explanation: '✅ Corretto! Genette: trasformazione (modernizzazione), imitazione (pastiche), transposizione (traduzione)',
+                errorExplanation: '❌ Per Genette l\'ipertestualità si realizza con trasformazione, imitazione, transposizione'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'L\'intertestualità __________ è riconoscibile; quella implicita richiede competenza.',
+                correct: ['esplicita', 'diretta', 'chiara'],
+                explanation: '✅ Corretto! Esplicita = virgolette, note; Implicita = allusioni, stilemi. Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il termine..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi la teoria e l\'analisi intertestuale come un esperto!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene i concetti, ma fai attenzione alle distinzioni tra tipologie!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: ipertesto ≠ ipotesto, parodia ≠ pastiche, esplicito ≠ implicito!';
+            } else {
+                message = '📚 Ripassa le tabelle! Concentrati su Genette (5 tipi) e sui marcatori linguistici!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

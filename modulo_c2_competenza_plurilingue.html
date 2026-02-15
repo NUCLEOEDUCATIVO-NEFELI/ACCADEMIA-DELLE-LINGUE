@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C2 - Competenza Plurilingue</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2c1810;
+            --secondary: #6c757d;
+            --accent: #8b4513;
+            --c2-color: #2196f3;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --plurilingual: #4caf50;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--plurilingual);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--plurilingual);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--plurilingual);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--plurilingual);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(76, 175, 80, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .plurilingual-term { color: var(--plurilingual); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #e3f2fd;
+            border: 2px solid var(--c2-color);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--plurilingual);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--plurilingual);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--plurilingual);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #1a0f0a;
+        }
+        .btn-check { 
+            background: var(--plurilingual); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #388e3c;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--plurilingual);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--plurilingual);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--plurilingual);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--plurilingual);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .plurilingual-context {
+            background: #e8f5e9;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--plurilingual);
+            font-style: italic;
+        }
+        .language-box {
+            background: #f1f8e9;
+            border: 1px solid #c5e1a5;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .strategy-card {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+        }
+        .flag-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        .wordplay-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C2 - Competenza Plurilingue</h1>
+            <p>Multilinguismo, strategie comunicative translinguistiche e intercomprensione</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C2</a>
+            <span>›</span>
+            <strong>Competenza Plurilingue</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🌍 Competenza Plurilingue</h1>
+            <p class="page-subtitle">Gestione di repertori linguistici multipli, transfer e comunicazione interculturale avanzata</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📖 Teoria</button>
+            <button class="nav-tab" onclick="showSection('repertoire', this)">Repertorio</button>
+            <button class="nav-tab" onclick="showSection('strategies', this)">Strategie</button>
+            <button class="nav-tab" onclick="showSection('transfer', this)">Transfer</button>
+            <button class="nav-tab" onclick="showSection('intercomprehension', this)">Intercomprensione</button>
+            <button class="nav-tab" onclick="showSection('mediation', this)">Mediazione</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">🌍</div>
+                    <div class="avatar-name">Prof. Polyglot</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto nel mondo plurilingue! 🌐</h3>
+                    <p>Oggi esploriamo la <strong>competenza plurilingue</strong>: la capacità di utilizzare più lingue in modo integrato, gestire il <span class="plurilingual-term">transfer</span> linguistico, praticare l'<span class="plurilingual-term">intercomprensione</span> e mediate tra culture diverse.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="plurilingual-term">Code-switching</span> strategico, <span class="plurilingual-term">borrowing</span> selettivo e <span class="plurilingual-term">calco</span> controllato: queste sono le armi del comunicatore plurilingue C2".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Fondamenti della Competenza Plurilingue</div>
+                <div class="card-body">
+                    <p>La <strong>competenza plurilingue</strong> (o multilinguismo integrato) è la capacità di utilizzare più lingue in modo sinergico, riconoscendo somiglianze, gestendo interferenze e sfruttando le risorse trasversali del proprio repertorio linguistico.</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Componenti della competenza plurilingue:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Repertorio integrato:</strong> Le lingue non sono isolate ma in continua interazione</li>
+                            <li><strong>Transfer strategico:</strong> Trasferimento consapevole di competenze tra L1, L2, L3...</li>
+                            <li><strong>Intercomprensione:</strong> Comprensione reciproca tra lingue affini (romance, germaniche)</li>
+                            <li><strong>Mediazione linguistica:</strong> Traduzione, interpretariato, riformulazione</li>
+                            <li><strong>Consapevolezza metalinguistica:</strong> Riflessione sul funzionamento delle lingue</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Modelli teorici:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Modello CEFR:</strong> Competenze parziali, competenze plurilingui</li>
+                            <li><strong>Teoria del Common Underlying Proficiency (Cummins):</strong> Proficienza comune sottostante</li>
+                            <li><strong>Dynamic Model of Multilingualism (Herdina & Jessner):</strong> Sviluppo dinamico</li>
+                            <li><strong>Translanguaging (García):</strong> Uso fluido di risorse linguistiche multiple</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Il plurilinguismo non è la somma di monolingui. È un sistema complesso dove le lingue si influenzano reciprocamente in modo creativo e funzionale.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE REPERTORIO -->
+        <section id="repertoire" class="section">
+            <div class="card">
+                <div class="card-header">Gestione del Repertorio Linguistico</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il repertorio plurilingue è organizzato gerarchicamente: lingue dominanti, lingue di comodità, lingue di apprendimento.</strong>
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tipologia</th><th>Caratteristiche</th><th>Esempi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="plurilingual-term">Lingua A (Dominante)</td>
+                                <td>Alta competenza, uso quotidiano</td>
+                                <td>Madrelingua, lingua di educazione</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Lingua B (Attiva)</td>
+                                <td>Buona competenza, uso professionale</td>
+                                <td>Seconda lingua, lingua di lavoro</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Lingua C (Ricettiva)</td>
+                                <td>Comprensione, produzione limitata</td>
+                                <td>Lingue affini, lingue studiate</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Lingua D (Rudimentale)</td>
+                                <td>Conoscenze di base, sopravvivenza</td>
+                                <td>Lingue di viaggio, apprendimento iniziale</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Lingua E (Latente)</td>
+                                <td>Appresa in passato, da riattivare</td>
+                                <td>Lingue scolastiche dimenticate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="language-box">
+                        <strong>Profilo plurilingue esemplificativo:</strong><br>
+                        <span class="flag-icon">🇮🇹</span> Italiano (L1) - Dominante<br>
+                        <span class="flag-icon">🇬🇧</span> Inglese (L2) - Attiva (C2)<br>
+                        <span class="flag-icon">🇫🇷</span> Francese (L3) - Ricettiva (B2)<br>
+                        <span class="flag-icon">🇪🇸</span> Spagnolo (L4) - Intercomprensione (B1)<br>
+                        <span class="flag-icon">🇩🇪</span> Tedesco (L5) - Rudimentale (A2)
+                    </div>
+
+                    <div class="strategy-card">
+                        <strong>Competenze parziali:</strong><br>
+                        Non è necessario essere "perfetti" in tutte le lingue. Una competenza C2 plurilingue include:
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Competenza ricettiva in molte lingue</li>
+                            <li>Competenza produttiva in poche lingue</li>
+                            <li>Competenza di mediazione tra lingue diverse</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE STRATEGIE -->
+        <section id="strategies" class="section">
+            <div class="card">
+                <div class="card-header">Strategie Comunicative Plurilingui</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il comunicatore plurilingue C2 utilizza strategie sofisticate per compensare lacune e sfruttare risorse multiple.</strong>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Strategie di produzione</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Strategia</th><th>Descrizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="plurilingual-term">Code-switching</td>
+                                <td>Alternanza tra lingue</td>
+                                <td>"Facciamo un brainstorming sulla campaign"</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Borrowing</td>
+                                <td>Prestito adattato</td>
+                                <td>"Spoilerare", "chattare", "ghostare"</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Calco</td>
+                                <td>Traduzione letterale di strutture</td>
+                                <td>"Running shoes" → "Scarpe da running"</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Interferenza controllata</td>
+                                <td>Uso consapevole di false friends</td>
+                                <td>"Attualmente" (it) vs "Actually" (en)</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Transfer positivo</td>
+                                <td>Sfruttamento di somiglianze</td>
+                                <td>Cognates romance: information/informazione</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Approximation</td>
+                                <td>Circumlocuzione strategica</td>
+                                <td>"Quella cosa per... come si dice..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="transformation-box">
+                        <strong>Tipologie di code-switching:</strong><br><br>
+                        <em>Intrafrasale:</em> "Ho un meeting <strong>very important</strong> domani"<br>
+                        <em>Interfrasale:</em> "Sono stanchissimo. <strong>I need a break.</strong>"<br>
+                        <em>Tag-switching:</em> "È bellissimo, <strong>you know?</strong>"<br>
+                        <em>Metaphorical:</em> Cambio per enfasi o inclusione/esclusione
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Nota:</strong> Il code-switching C2 è sempre <em>funzionale</em>, non è segno di deficienza: serve a marcare identità, includere/escludere, riempire lacune lessicali, o creare effetti stilistici.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TRANSFER -->
+        <section id="transfer" class="section">
+            <div class="card">
+                <div class="card-header">Transfer Linguistico e Interferenze</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il transfer è l'influenza di una lingua su un'altra, può essere positivo (facilitazione) o negativo (interferenza).</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tipo</th><th>Effetto</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="plurilingual-term">Transfer positivo</td>
+                                <td>Facilitazione, somiglianze</td>
+                                <td>Italiano → Spagnolo: vocabolario affine</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Transfer negativo</td>
+                                <td>Interferenza, errori</td>
+                                <td>"I am agree" (calco dall'italiano)</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Interferenza fonetica</td>
+                                <td>Accento straniero</td>
+                                <td>Pronuncia italiana dell'inglese</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Interferenza sintattica</td>
+                                <td>Strutture non target</td>
+                                <td>"The life is beautiful" (calco)</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">False friends</td>
+                                <td>Falsi amici semantici</td>
+                                <td>Attualmente/Actually, Fabbrica/Factory</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Cross-linguistic influence</td>
+                                <td>Influenza reciproca</td>
+                                <td>L3 influenzata da L1 e L2</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="language-box">
+                        <strong>False friends comuni (Italiano ↔ Inglese):</strong><br>
+                        <em>Attualmente</em> ≠ Actually (in realtà)<br>
+                        <em>Fabbrica</em> ≠ Factory (manifattura vs fabbricazione)<br>
+                        <em>Argument</em> ≠ Argomento (litigio vs tema)<br>
+                        <em>Library</em> ≠ Libreria (biblioteca vs bookshop)<br>
+                        <em>Magazine</em> ≠ Magazzino (rivista vs warehouse)
+                    </div>
+
+                    <div class="strategy-card">
+                        <strong>Gestione consapevole dell'interferenza:</strong><br>
+                        Il plurilingue C2:
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Riconosce i pattern di interferenza</li>
+                            <li>Monitora il proprio output</li>
+                            <li>Corregge autonomamente</li>
+                            <li>Sfrutta il transfer positivo</li>
+                            <li>Usa l'interferenza creativamente (stile)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE INTERCOMPRENSIONE -->
+        <section id="intercomprehension" class="section">
+            <div class="card">
+                <div class="card-header">Intercomprensione tra Lingue Affini</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>L'intercomprensione è la capacità di comprendere lingue affini senza studio formale, sfruttando somiglianze genetiche e tipologiche.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Famiglia</th><th>Lingue</th><th>Strategie</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="plurilingual-term">Romanze</td>
+                                <td>It, Fr, Sp, Pt, Ro, Cat</td>
+                                <td>Cognati, morfologia verbale, lessico comune</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Germaniche</td>
+                                <td>En, De, Nl, Sv, No, Da</td>
+                                <td>Radici comuni, strutture sintattiche</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Slave</td>
+                                <td>Ru, Pl, Cz, Sr, Bg</td>
+                                <td>Afinità lessicali, sistema casuale</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Baltiche</td>
+                                <td>Lit, Lav</td>
+                                <td>Conservatorismo linguistico</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Ugrofinniche</td>
+                                <td>Fi, Et, Hu</td>
+                                <td>Agglutinazione, casi</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="plurilingual-context">
+                        <strong>Esempio di intercomprensione romanze:</strong><br>
+                        <em>Italiano:</em> "La porta è chiusa"<br>
+                        <em>Francese:</em> "La porte est fermée"<br>
+                        <em>Spagnolo:</em> "La puerta está cerrada"<br>
+                        <em>Portoghese:</em> "A porta está fechada"<br>
+                        <em>Romeno:</em> "Uşa este închisă"<br>
+                        <strong>Riconoscimento:</strong> porte/porta/puerta = sostantivo; est/è/está = verbo essere; chiusa/fermée/cerrada = aggettivo
+                    </div>
+
+                    <div class="wordplay-box">
+                        <strong>Progetti europei di intercomprensione:</strong><br>
+                        <em>Galatea:</em> Metodologia per lingue romanze<br>
+                        <em>EuroCom:</em> Comprensione di lingue germaniche<br>
+                        <em>ICRom:</em> Intercomprensione romanza<br>
+                        <em>MuViT:</em> Multilinguismo virtuale
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Strategia:</strong> L'intercomprensione si basa su <em>cognati</em> (parole con origine comune), <em>morfologia trasparente</em> e <em>contesto</em>. Non richiede competenza produttiva nella lingua target.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE MEDIAZIONE -->
+        <section id="mediation" class="section">
+            <div class="card">
+                <div class="card-header">Mediazione Linguistica e Culturale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La mediazione è la capacità di facilitare la comunicazione tra interlocutori che non condividono la stessa lingua, attraverso traduzione, parafrasi e negoziazione del senso.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tipo</th><th>Attività</th><th>Competenze richieste</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="plurilingual-term">Traduzione</td>
+                                <td>Trasferimento testuale</td>
+                                <td>Competenza bilingue, consapevolezza culturale</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Interpretariato</td>
+                                <td>Mediazione orale simultanea/consecutiva</td>
+                                <td>Memoria, velocità, precisione</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Riformulazione</td>
+                                <td>Semplificazione, riassunto</td>
+                                <td>Analisi, sintesi, adattamento</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Negoziazione</td>
+                                <td>Gestione del malinteso</td>
+                                <td>Competenza pragmatica, sensibilità culturale</td>
+                            </tr>
+                            <tr>
+                                <td class="plurilingual-term">Mediation conceptuelle</td>
+                                <td>Spiegazione di concetti culturali</td>
+                                <td>Metalinguistica, cultura, contesto</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="transformation-box">
+                        <strong>Scale di mediazione (CEFR):</strong><br><br>
+                        <em>Mediare un testo:</em> Tradurre, parafrasare, riassumere<br>
+                        <em>Mediare concetti:</em> Spiegare, chiarire, semplificare<br>
+                        <em>Mediare la comunicazione:</em> Facilitare, negoziare, gestire conflitti<br>
+                        <em>Mediare interculturalmente:</em> Ponte tra culture, decodificare pratiche
+                    </div>
+
+                    <div class="plurilingual-context">
+                        <strong>Esempio di mediazione culturale:</strong><br>
+                        Spiegare "aperitivo" a un anglosassone non è solo tradurre "happy hour": richiede di spiegare la dimensione sociale, l'importanza del cibo, il tempo indefinito, la convivialità tipicamente italiana.
+                    </div>
+
+                    <div class="strategy-card">
+                        <strong>Competenze del mediatore C2:</strong><br>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li>Riconoscere impliciti culturali</li>
+                            <li>Gestire asimmetrie di potere linguistico</li>
+                            <li>Adattare registri e stili</li>
+                            <li>Preservare tono e intenzione</li>
+                            <li>Gestire "non-traducibili"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C2 - Competenza Plurilingue (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Concetti base e repertorio
+            {
+                id: 1,
+                type: 'choice',
+                question: 'La competenza plurilingue considera le lingue come __________ piuttosto che entità separate.',
+                options: ['un sistema integrato', 'compartimenti stagni', 'competenze parallele', 'abilità distinte'],
+                correct: 'un sistema integrato',
+                explanation: '✅ Corretto! Il plurilinguismo vede le lingue in continua interazione sinergica',
+                errorExplanation: '❌ Il modello plurilingue rifiuta la visione "a compartimenti stagni" delle lingue'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Il __________ è il trasferimento di competenze da una lingua all\'altra.',
+                correct: ['transfer', 'trasferimento'],
+                explanation: '✅ Corretto! Transfer = influenza di una lingua su un\'altra (positivo o negativo)'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Secondo Cummins, esiste una __________ comune sottostante alle lingue.',
+                options: ['proficienza', 'grammatica', 'fonologia', 'lessico'],
+                correct: 'proficienza',
+                explanation: '✅ Corretto! Common Underlying Proficiency (CUP) = competenza condivisa',
+                errorExplanation: '❌ Cummins: le lingue condividono una base comune di proficienza cognitiva'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'L\'__________ è la comprensione reciproca tra lingue affini senza studio formale.',
+                correct: ['intercomprensione'],
+                explanation: '✅ Corretto! Intercomprensione = comprensione tra lingue geneticamente vicine (romanze, germaniche)'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Il __________ è l\'uso fluido e integrato di risorse linguistiche multiple.',
+                options: ['translanguaging', 'code-switching', 'borrowing', 'transfer'],
+                correct: 'translanguaging',
+                explanation: '✅ Corretto! Translanguaging (García) = pratica fluida che supera i confini tra lingue',
+                errorExplanation: '❌ Translanguaging > code-switching: include pratiche semiotico-discorsive complesse'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Le lingue A, B, C, D nel repertorio indicano livelli di __________ decrescente.',
+                correct: ['competenza', 'dominio', 'padronanza'],
+                explanation: '✅ Corretto! A=dominante, B=attiva, C=ricettiva, D=rudimentale (modello del repertorio)'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Una "competenza parziale" implica __________ in alcune abilità linguistiche.',
+                options: ['eccellenza selettiva', 'lacune controllate', 'monolingualismo', 'perfezione assoluta'],
+                correct: 'lacune controllate',
+                explanation: '✅ Corretto! Competenza parziale = competenza ricettiva/produttiva asimmetrica',
+                errorExplanation: '❌ Il C2 plurilingue accetta competenze parziali strategiche'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Il __________ switching è l\'alternanza consapevole tra lingue nel discorso.',
+                correct: ['code', 'codice'],
+                explanation: '✅ Corretto! Code-switching = alternanza funzionale tra lingue (intrafrasale/interfrasale)'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Il "borrowing" è un prestito __________ nella lingua ricevente.',
+                options: ['adattato', 'identico', 'temporaneo', 'formale'],
+                correct: 'adattato',
+                explanation: '✅ Corretto! Borrowing = adattamento fonetico/morfologico del prestito',
+                errorExplanation: '❌ Il borrowing implica sempre adattamento (es. "chattare", "spoilerare")'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Il __________ è la traduzione letterale di strutture frasali.',
+                correct: ['calco', 'calco linguistico'],
+                explanation: '✅ Corretto! Calco = traduzione morfema per morfema (es. "skyscraper" → "grattacielo")'
+            },
+            
+            // ESERCIZI 11-20: Transfer e interferenze
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Il transfer __________ facilita l\'apprendimento sfruttando somiglianze.',
+                options: ['positivo', 'negativo', 'neutro', 'inverso'],
+                correct: 'positivo',
+                explanation: '✅ Corretto! Transfer positivo = facilitazione tra lingue affini',
+                errorExplanation: '❌ Transfer positivo = aiuto; negativo = interferenza'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Gli "__________ friends" sono parole simili ma con significati diversi.',
+                correct: ['false', 'falsi'],
+                explanation: '✅ Corretto! False friends = falsi amici (es. actually/attualmente)'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: '"I am agree" è un errore per __________ dall\'italiano.',
+                options: ['calco', 'interferenza', 'borrowing', 'code-switching'],
+                correct: 'interferenza',
+                explanation: '✅ Corretto! Interferenza sintattica dall\'italiano (sono d\'accordo → I am agree)',
+                errorExplanation: '❌ È interferenza (influenza negativa), non calco strutturale'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'L\'interferenza __________ riguarda la pronuncia influenzata dall\'L1.',
+                correct: ['fonetica', 'fonica', 'fonologica'],
+                explanation: '✅ Corretto! Interferenza fonetica = accento straniero, pronuncia non target'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'La "fabbrica" in italiano è un __________ di "factory"?',
+                options: ['falso amico', 'cognato vero', 'prestito', 'calco'],
+                correct: 'falso amico',
+                explanation: '✅ Corretto! Fabbrica (manifattura) ≠ Factory (fabbricazione)',
+                errorExplanation: '❌ Fabbrica = edificio industriale; Factory = processo produttivo'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Il __________ linguistico influisce su L3 sia da L1 che da L2.',
+                correct: ['cross', 'cross-linguistic', 'crosslinguistic'],
+                explanation: '✅ Corretto! Cross-linguistic influence = influenza multidirezionale nel repertorio'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'L\'accento straniero è una forma di interferenza __________.',
+                options: ['fonetica', 'lessicale', 'sintattica', 'pragmatica'],
+                correct: 'fonetica',
+                explanation: '✅ Corretto! Interferenza fonetica = trasferimento di suoni L1 nell\'L2',
+                errorExplanation: '❌ L\'accento riguarda la pronuncia (fonetica), non lessico o sintassi'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Il plurilingue C2 __________ autonomamente le proprie interferenze.',
+                correct: ['corregge', 'monitora', 'regola'],
+                explanation: '✅ Corretto! Il C2 ha metalinguistic awareness e autocorrezione'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: '"Attualmente" in italiano significa __________ rispetto a "actually".',
+                options: ['attualmente/ora', 'in realtà', 'attualmente/realmente', 'attualmente/veramente'],
+                correct: 'attualmente/ora',
+                explanation: '✅ Corretto! Attualmente = currently; Actually = in realtà',
+                errorExplanation: '❌ Attualmente = at present; Actually = in fact'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Il transfer __________ crea errori strutturali nell\'output.',
+                correct: ['negativo'],
+                explanation: '✅ Corretto! Transfer negativo = interferenza che causa errori'
+            },
+
+            // ESERCIZI 21-30: Intercomprensione
+            {
+                id: 21,
+                type: 'choice',
+                question: 'L\'intercomprensione si basa su __________ linguistiche.',
+                options: ['somiglianze genetiche', 'differenze strutturali', 'regole universali', 'prestiti moderni'],
+                correct: 'somiglianze genetiche',
+                explanation: '✅ Corretto! Intercomprensione = lingue della stessa famiglia (romanze, germaniche)',
+                errorExplanation: '❌ Richiede affinità genetiche, non solo contatto storico'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Le lingue __________ (it, fr, sp, pt) sono intercomprensibili.',
+                correct: ['romanze', 'romance'],
+                explanation: '✅ Corretto! Lingue romanze = derivate dal latino, vocabolario affine'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'I __________ sono parole con origine comune in lingue affini.',
+                options: ['cognati', 'prestiti', 'calchi', 'false friends'],
+                correct: 'cognati',
+                explanation: '✅ Corretto! Cognati = etimologia comune (es. information/informazione)',
+                errorExplanation: '❌ Cognati ≠ false friends: i primi hanno significato simile'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'L\'intercomprensione __________ non richiede competenza produttiva.',
+                correct: ['ricettiva', 'passiva'],
+                explanation: '✅ Corretto! Intercomprensione = comprensione senza necessità di parlare/scrivere'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Il progetto __________ promuove l\'intercomprensione romanze.',
+                options: ['Galatea', 'EuroCom', 'ICRom', 'MuViT'],
+                correct: 'Galatea',
+                explanation: '✅ Corretto! Galatea = progetto per intercomprensione lingue romanze',
+                errorExplanation: '❌ EuroCom è per lingue germaniche'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Le lingue __________ (en, de, nl) condividono radici germaniche.',
+                correct: ['germaniche', 'germanic'],
+                explanation: '✅ Corretto! Lingue germaniche = inglese, tedesco, olandese, scandinave'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'L\'intercomprensione sfrutta la morfologia __________.',
+                options: ['trasparente', 'opaca', 'irregolare', 'isolante'],
+                correct: 'trasparente',
+                explanation: '✅ Corretto! Morfologia trasparente = facilmente riconducibile (romanze)',
+                errorExplanation: '❌ La trasparenza morfologica facilita il riconoscimento'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Il __________ è il contesto che aiuta a comprendere senza conoscere tutte le parole.',
+                correct: ['contesto', 'context', 'co-testo'],
+                explanation: '✅ Corretto! Contesto = informazioni extralinguistiche e co-testuali'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: '"Porta" è un cognato tra italiano e __________.',
+                options: ['spagnolo (puerta)', 'inglese (port)', 'tedesco (Pforte)', 'tutte le precedenti'],
+                correct: 'tutte le precedenti',
+                explanation: '✅ Corretto! Porta = cognato romanze e germaniche (dal latino)',
+                errorExplanation: '❌ Deriva dal latino "porta", presente in molte lingue europee'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'L\'intercomprensione è una __________ strategica del plurilingue.',
+                correct: ['risorsa', 'competenza', 'abilità'],
+                explanation: '✅ Corretto! Intercomprensione = risorsa comunicativa valida'
+            },
+
+            // ESERCIZI 31-40: Mediazione
+            {
+                id: 31,
+                type: 'choice',
+                question: 'La mediazione richiede competenza in almeno __________ lingue.',
+                options: ['due', 'tre', 'una', 'quattro'],
+                correct: 'due',
+                explanation: '✅ Corretto! Mediazione minima = bilinguismo (L1 + L2)',
+                errorExplanation: '❌ La mediazione base richiede due lingue, ma può essere plurilingue'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'La __________ è il trasferimento scritto tra lingue.',
+                correct: ['traduzione'],
+                explanation: '✅ Corretto! Traduzione = mediazione scritta'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'L\'interpretariato è la mediazione __________.',
+                options: ['orale', 'scritta', 'culturale', 'gestuale'],
+                correct: 'orale',
+                explanation: '✅ Corretto! Interpretariato = mediazione orale (simultanea/consecutiva)',
+                errorExplanation: '❌ Interpretariato ≠ traduzione (orale vs scritta)'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'La __________ riduce un testo mantenendo l\'essenziale.',
+                correct: ['riformulazione', 'parafrasi', 'riassunto'],
+                explanation: '✅ Corretto! Riformulazione = semplificazione/riassunto'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Il mediatore C2 deve gestire __________ culturali.',
+                options: ['impliciti', 'espliciti', 'universali', 'verbali'],
+                correct: 'impliciti',
+                explanation: '✅ Corretto! Impliciti culturali = presupposti non dichiarati',
+                errorExplanation: '❌ I presupposti impliciti sono i più difficili da mediare'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'La mediazione __________ spiega concetti culturalmente specifici.',
+                correct: ['concettuale', 'conceptuelle'],
+                explanation: '✅ Corretto! Mediation conceptuelle = spiegazione di concetti culturali'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Spiegare "aperitivo" richiede mediazione __________.',
+                options: ['culturale', 'linguistica', 'letterale', 'tecnica'],
+                correct: 'culturale',
+                explanation: '✅ Corretto! Aperitivo richiede spiegazione della pratica sociale italiana',
+                errorExplanation: '❌ Non traducibile letteralmente (non è solo "happy hour")'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Il mediatore deve preservare __________ e intenzione comunicativa.',
+                correct: ['tono', 'il tono', 'registro'],
+                explanation: '✅ Corretto! Tono + intenzione = elementi pragmatici da mantenere'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'La "non-traducibilità" richiede __________.',
+                options: ['spiegazione culturale', 'traduzione letterale', 'omissione', 'trascrizione'],
+                correct: 'spiegazione culturale',
+                explanation: '✅ Corretto! Non-traducibili = concetti che richiedono parafrasi culturale',
+                errorExplanation: '❌ I non-traducibili vanno spiegati, non omessi o tradotti letteralmente'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'La mediazione gestisce __________ di potere linguistico.',
+                correct: ['asimmetrie', 'disequilibri', 'disuguaglianze'],
+                explanation: '✅ Corretto! Asimmetrie = disparità di competenza tra interlocutori'
+            },
+
+            // ESERCIZI 41-50: Strategie avanzate e C2
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Il "translanguaging" supera i confini tra __________.',
+                options: ['lingue', 'cultura', 'registri', 'generi'],
+                correct: 'lingue',
+                explanation: '✅ Corretto! Translanguaging = pratica oltre i confini linguistici',
+                errorExplanation: '❌ García: pratica discorsiva che ignora confini tra lingue'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Il code-switching __________ avviene all\'interno della stessa frase.',
+                correct: ['intrafrasale', 'intra-frasale'],
+                explanation: '✅ Corretto! Intrafrasale = alternanza all\'interno della frase'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Il tag-switching aggiunge __________ a fine frase.',
+                options: ['marcatori discorsivi', 'sostantivi', 'verbi', 'aggettivi'],
+                correct: 'marcatori discorsivi',
+                explanation: '✅ Corretto! Tag-switching = "you know", "capito?", "quoi" a fine frase',
+                errorExplanation: '❌ Sono elementi pragmatici, non contenuto lessicale'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Il plurilingue C2 usa il code-switching in modo __________.',
+                correct: ['funzionale', 'strategico', 'consapevole'],
+                explanation: '✅ Corretto! Funzionale = per scopi comunicativi specifici'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Il "borrowing" creativo produce __________.',
+                options: ['neologismi adattati', 'errori', 'interferenze', 'calchi'],
+                correct: 'neologismi adattati',
+                explanation: '✅ Corretto! Borrowing creativo = "ghostare", "spoilerare"',
+                errorExplanation: '❌ Il borrowing C2 è creativo, non un errore'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'La __________ metalinguistica è la riflessione sul funzionamento delle lingue.',
+                correct: ['consapevolezza', 'awareness'],
+                explanation: '✅ Corretto! Metalinguistic awareness = capacità di riflettere sulle lingue'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Il modello __________ descrive lo sviluppo dinamico del multilinguismo.',
+                options: ['di Herdina e Jessner', 'di Cummins', 'del CEFR', 'di Chomsky'],
+                correct: 'di Herdina e Jessner',
+                explanation: '✅ Corretto! Dynamic Model of Multilingualism (Herdina & Jessner)',
+                errorExplanation: '❌ Herdina & Jessner: sistema dinamico, non statico'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Il repertorio plurilingue è un sistema __________, non statico.',
+                correct: ['dinamico', 'in evoluzione'],
+                explanation: '✅ Corretto! Dinamico = in continua evoluzione e riorganizzazione'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'La competenza C2 plurilingue include la gestione di __________.',
+                options: ['repertori multipli', 'una sola lingua', 'registri formali', 'soli prestiti'],
+                correct: 'repertori multipli',
+                explanation: '✅ Corretto! C2 plurilingue = gestione integrata di più lingue',
+                errorExplanation: '❌ Il C2 plurilingue è per definizione multiplo'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Il multilinguismo integrato è maggiore della __________ delle singole competenze.',
+                correct: ['somma', 'sommatoria', 'somma aritmetica'],
+                explanation: '✅ Corretto! Il tutto è maggiore della somma delle parti (sinergia)'
+            }
+        ];
+
+        // Variabili di stato
+        let currentExercise = 0;
+        let score = 0;
+        let answered = false;
+
+        // Funzione per mostrare sezioni
+        function showSection(sectionId, btn) {
+            // Nascondi tutte le sezioni
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Rimuovi active da tutti i tab
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Mostra sezione selezionata
+            document.getElementById(sectionId).classList.add('active');
+            btn.classList.add('active');
+            
+            // Se è la sezione esercizi, carica il primo esercizio
+            if (sectionId === 'exercises') {
+                loadExercise();
+            }
+        }
+
+        // Carica esercizio corrente
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            // Aggiorna contatori
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${score} / 100`;
+            
+            // Calcola progresso
+            const progress = ((currentExercise) / exercises.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            
+            answered = false;
+            
+            // Genera HTML in base al tipo
+            let html = `
+                <div class="question-box">
+                    <div class="exercise-counter">Esercizio ${currentExercise + 1}</div>
+                    <div class="question-text">${ex.question}</div>
+                </div>
+            `;
+            
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid">`;
+                ex.options.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkAnswer('${opt.replace(/'/g, "\\'")}')">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
+                        <button class="btn-primary btn-check" onclick="checkFill()" style="margin-left: 10px;">Verifica</button>
+                    </div>
+                `;
+            }
+            
+            html += `
+                <div class="feedback" id="feedback"></div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <button class="btn-primary" id="nextBtn" onclick="nextExercise()" style="display: none;">Prossimo Esercizio →</button>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+            
+            // Focus sull'input se è un fill
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput')?.focus(), 100);
+            }
+        }
+
+        // Controlla risposta scelta multipla
+        function checkAnswer(selected) {
+            if (answered) return;
+            answered = true;
+            
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const isCorrect = selected === ex.correct;
+            
+            // Disabilita tutti i bottoni
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent === selected && !isCorrect) {
+                    btn.classList.add('wrong');
+                }
+            });
+            
+            // Mostra feedback
+            feedback.classList.add('show');
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = ex.explanation;
+                score += 2; // 2 punti per esercizio (max 100)
+            } else {
+                feedback.classList.add('wrong');
+                feedback.textContent = ex.errorExplanation || `❌ La risposta corretta è: ${ex.correct}`;
+            }
+            
+            document.getElementById('currentScore').textContent = `${score} / 100`;
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        // Controlla risposta fill-in
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            const ex = exercises[currentExercise];
+            
+            if (!value) return;
+            
+            answered = true;
+            
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+            const feedback = document.getElementById('feedback');
+            
+            feedback.classList.add('show');
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                score += 2;
+            } else {
+                feedback.classList.add('wrong');
+                feedback.textContent = `❌ La risposta corretta è: ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+            }
+            
+            document.getElementById('currentScore').textContent = `${score} / 100`;
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            input.disabled = true;
+        }
+
+        // Prossimo esercizio
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        // Mostra punteggio finale
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.querySelector('.score-panel').style.display = 'none';
+            document.querySelector('.progress-bar').style.display = 'none';
+            
+            const finalSection = document.getElementById('finalScoreSection');
+            finalSection.classList.add('show');
+            
+            document.getElementById('finalScore').textContent = `${score}/100`;
+            
+            let message = '';
+            if (score >= 90) {
+                message = '🌟 Eccellente! Padroneggi perfettamente la competenza plurilingue C2!';
+            } else if (score >= 70) {
+                message = '👍 Ottimo lavoro! Competenza plurilingue solida!';
+            } else if (score >= 50) {
+                message = '✅ Buon risultato! Continua a esercitarti sulle strategie plurilingui.';
+            } else {
+                message = '📚 Rivedi la teoria e riprova! La competenza plurilingue richiede pratica.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+        }
+
+        // Riavvia esercizi
+        function restartExercises() {
+            currentExercise = 0;
+            score = 0;
+            answered = false;
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.querySelector('.score-panel').style.display = 'flex';
+            document.querySelector('.progress-bar').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            
+            loadExercise();
+        }
+    </script>
+</body>
+</html>

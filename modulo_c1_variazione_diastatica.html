@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C1 - Variazione Diastratica</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --c1-color: #5d4e37;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --diastratic: #744210;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--c1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(93, 78, 55, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .diastratic { color: var(--diastratic); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--c1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--c1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--c1-color); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #4a3d2a;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--c1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .intro-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            border-left: 5px solid var(--c1-color);
+        }
+        .exercise-counter {
+            background: var(--c1-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C1 - Variazione Diastratica</h1>
+            <p>Stratificazione sociale della lingua: italiano colto, medio e popolare</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C1</a>
+            <span>›</span>
+            <strong>Variazione Diastratica</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🏛️ Variazione Diastratica</h1>
+            <p class="page-subtitle">La lingua come indicatore di stratificazione sociale e culturale</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('stratification', this)">Stratificazione</button>
+            <button class="nav-tab" onclick="showSection('levels', this)">Livelli</button>
+            <button class="nav-tab" onclick="showSection('phenomena', this)">Fenomeni</button>
+            <button class="nav-tab" onclick="showSection('education', this)">Istruzione</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="intro-box">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo C1! 🏛️</h3>
+                <p>Oggi studiamo la <strong>variazione diastratica</strong>, ovvero come la lingua varia in base alla collocazione socioculturale del parlante. Questo tipo di variazione riflette lo strato sociale, il livello di istruzione, la professione e l'identità culturale.</p>
+                <p style="margin-top: 10px;"><strong>Esempio:</strong> La stessa idea può essere espressa come <span class="diastratic">"Non posso accettare una simile proposta"</span> (italiano colto) o <span class="diastratic">"Non ci sto, è una fregatura"</span> (italiano popolare): la scelta riflette la stratificazione sociale e culturale del parlante.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è la Variazione Diastratica?</div>
+                <div class="card-body">
+                    <p>La <strong>variazione diastratica</strong> (dal greco <em>dia</em> = attraverso, <em>stratos</em> = strato) studia come la lingua varia in relazione alla stratificazione sociale dei parlanti. Questo concetto, teorizzato da Eugenio Coseriu e Lev Flydal, descrive la dimensione verticale della lingua.</p>
+                    
+                    <div class="transformation-box">
+                        <strong>1. Dimensione della variazione:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Verticale:</strong> Dallo strato alto (colto) allo strato basso (popolare)</li>
+                            <li><strong>Sociale:</strong> Classe sociale, reddito, professione</li>
+                            <li><strong>Culturale:</strong> Livello di istruzione, competenze linguistiche</li>
+                            <li><strong>Identitaria:</strong> Appartenenza di gruppo, status simbolico</li>
+                        </ul>
+                    </div>
+
+                    <div class="transformation-box">
+                        <strong>2. Fattori determinanti:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Livello di istruzione e scolarizzazione</li>
+                            <li>Professione e ambito lavorativo</li>
+                            <li>Origine geografica (intersezione con diatopia)</li>
+                            <li>Età e generazione</li>
+                            <li>Contesto familiare e relazionale</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Competenza C1 - Analisi diastratica:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Riconoscere le varietà diastratiche in un testo orale o scritto</li>
+                            <li>Comprendere il prestigio sociale associato alle diverse varietà</li>
+                            <li>Decodificare l'interferenza dialettale nella varietà popolare</li>
+                            <li>Riconoscere gli stereotipi linguistici e sociali</li>
+                            <li>Produrre testi adeguati al proprio o ad altri livelli socioculturali</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> La variazione diastratica si interseca spesso con la variazione diatopica (geografica). In Italia, l'uso del dialetto è spesso associato a posizioni sociali marginalizzate, mentre l'accento settentrionale gode di maggiore prestigio sociale. Questo fenomeno riflette dinamiche di potere e non valutazioni linguistiche oggettive.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE STRATIFICAZIONE -->
+        <section id="stratification" class="section">
+            <div class="card">
+                <div class="card-header">La Stratificazione Sociale della Lingua</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La società si stratifica verticalmente e la lingua riflette questa stratificazione attraverso varietà distinte ma in continuo contatto.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Strato</th><th>Caratteristiche</th><th>Indicatore sociale</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Alto/Colto</strong></td>
+                                <td>Lessico astratto, sintassi complessa, congiuntivo frequente</td>
+                                <td>Alta istruzione, professioni intellettuali</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Medio/Borghese</strong></td>
+                                <td>Standard italiano, lessico generico, forme corrette</td>
+                                <td>Istruzione media, impiego, commercio</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Basso/Popolare</strong></td>
+                                <td>Interferenza dialettale, lessico concreto, semplificazione sintattica</td>
+                                <td>Bassa scolarizzazione, lavoro manuale</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Marginale</strong></td>
+                                <td>Forti interferenze, code-switching, varietà etniche</td>
+                                <td>Immigrazione, esclusione sociale</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Il concetto di continuum:</strong><br>
+                        La variazione diastratica non è rigidamente compartimentata, ma forma un <strong>continuum</strong> dove i confini tra strati sono sfumati. Un parlante può muoversi verticalmente (stile shifting) in base al contesto, passando da un registro colto in ambito professionale a uno più popolare in famiglia.
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Prestigio linguistico:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Prestigio overt:</strong> Riconosciuto ufficialmente (italiano standard)</li>
+                            <li><strong>Prestigio covert:</strong> Valore identitario nel gruppo (dialetto, gergo)</li>
+                            <li><strong>Stigmatizzazione:</strong> Valutazione negativa di varietà basse</li>
+                            <li><strong>Ideologia linguistica:</strong> Credenze su "correttezza" e "bellezza"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE LIVELLI -->
+        <section id="levels" class="section">
+            <div class="card">
+                <div class="card-header">Livelli dell'Italiano Diastratico</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Gianrenzo P. Berruto distingue tre livelli principali dell'italiano: colto, medio (comune) e popolare.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Livello</th><th>Tratti linguistici</th><th>Esempi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Italiano colto</strong></td>
+                                <td>Lessico specialistico, periodi ipotetici, congiuntivo, lessico aulico</td>
+                                <td>"Non posso che constatare", "posto che", "in quanto"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Italiano medio/comune</strong></td>
+                                <td>Lessico standard, frasi coordinate, uso corretto ma semplice</td>
+                                <td>"Non posso fare niente", "perché", "quindi"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Italiano popolare</strong></td>
+                                <td>Interferenza dialettale, semplificazione, lessico concreto, diseguaglianze</td>
+                                <td>"Non ci posso fare niente", "che", "allora"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Caratteristiche dell'italiano popolare:</strong><br>
+                        • <strong>Fonetica:</strong> Monottongazione (foco), sostituzione di consonanti<br>
+                        • <strong>Morfologia:</strong> Semplificazione del verbo (stanno → stanno)<br>
+                        • <strong>Sintassi:</strong> Frase paratattica, uso di "che" polivalente<br>
+                        • <strong>Lessico:</strong> Termini concreti, espressioni dialettali, ipercorrezioni
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Interferenza dialettale:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Calchi:</strong> Traduzione letterale dal dialetto</li>
+                            <li><strong>Code-switching:</strong> Alternanza italiano/dialetto</li>
+                            <li><strong>Falsi amici:</strong> Parole simili ma significato diverso</li>
+                            <li><strong>Sintassi:</strong> Ordine delle parole tipico del dialetto</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE FENOMENI -->
+        <section id="phenomena" class="section">
+            <div class="card">
+                <div class="card-header">Fenomeni diastratici specifici</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Oltre ai livelli generali, esistono fenomeni specifici che caratterizzano la variazione diastratica.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Fenomeno</th><th>Descrizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Ipercorrezione</strong></td>
+                                <td>Correzione eccessiva verso la varietà alta</td>
+                                <td>"L'ho dato a lui" (invece del dativo etico)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ipo-correzione</strong></td>
+                                <td>Sottocorrezione verso la varietà bassa</td>
+                                <td>"A me mi piace" (pleonasmo)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Stile shifting</strong></td>
+                                <td>Passaggio da un registro all'altro</td>
+                                <td>Passaggio formale/informale in base all'interlocutore</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Accomodation</strong></td>
+                                <td>Adattamento all'interlocutore</td>
+                                <td>Abbassare il registro con persone di strato inferiore</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Solidarietà</strong></td>
+                                <td>Uso di varietà basse per affinità</td>
+                                <td>Dialetto con amici di quartiere</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Status</strong></td>
+                                <td>Uso di varietà alte per prestigio</td>
+                                <td>Italiano standard in contesti formali</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>La "doppia articolazione" di Berruto:</strong><br>
+                        In Italia esistono due standard: quello <strong>nazionale</strong> (usato dai media, insegnato a scuola) e quello <strong>regionale</strong> (usato localmente, con caratteristiche regionali). La competenza diastratica C1 richiede di padroneggiare entrambi e di saperli usare strategicamente.
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Indicatori diastratici nel parlato:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Velocità:</strong> Maggiore fluidezza nei livelli alti</li>
+                            <li><strong>Pause:</strong> Strategiche nei livelli alti, esitanti nei bassi</li>
+                            <li><strong>Lessico:</strong> Astratto vs concreto</li>
+                            <li><strong>Autocorrezioni:</strong> Frequenti nei livelli medio-alti</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ISTRUZIONE -->
+        <section id="education" class="section">
+            <div class="card">
+                <div class="card-header">Istruzione e Competenza Linguistica</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La scuola è l'agenzia principale di trasmissione della varietà alta e di mobilità sociale linguistica.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Livello scolastico</th><th>Competenza attesa</th><th>Variety mastery</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Scuola primaria</strong></td>
+                                <td>Acquisizione di base dell'italiano standard</td>
+                                <td>Passaggio dal dialetto alla lingua</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Scuola secondaria</strong></td>
+                                <td>Padronanza del registro medio-alto</td>
+                                <td>Italiano comune, registro formale</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Università</strong></td>
+                                <td>Competenza specialistica e registro aulico</td>
+                                <td>Italiano colto, linguaggi settoriali</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Autodidatta</strong></td>
+                                <td>Variabile, spesso ipercorretta o ibrida</td>
+                                <td>Dipende dall'esposizione ai media</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>La "promozione" linguistica:</strong><br>
+                        L'istruzione permette la <strong>mobilità sociolinguistica ascendente</strong>: chi accede a livelli di istruzione superiori acquisisce competenze linguistiche di strato superiore, potendo muoversi verticalmente nella scala sociale. Tuttavia, spesso mantiene tracce della varietà di origine (accento, espressioni).
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Disuguaglianze linguistiche:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Capitale linguistico:</strong> Bourdieu, la lingua come risorsa sociale</li>
+                            <li><strong>Reproduzione:</strong> La scuola premia chi già possiede competenze alte</li>
+                            <li><strong>Esclusione:</strong> Chi parla varietà basse è spesso escluso da opportunità</li>
+                            <li><strong>Glottofagia:</strong> Svalutazione delle varietà non standard</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C1 - Variazione Diastratica (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Concetti base
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Quale termine indica la variazione linguistica legata allo strato sociale?',
+                options: ['Diastratica', 'Diatopica', 'Diafasica', 'Diamesica'],
+                correct: 'Diastratica',
+                explanation: '✅ Corretto! La variazione diastratica riguarda la stratificazione sociale (da stratos = strato)',
+                errorExplanation: '❌ La variazione diastratica è quella legata allo strato sociale (dia = attraverso, stratos = strato)'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'La variazione diastratica è stata teorizzata da Eugenio __________ e Lev Flydal.',
+                correct: ['Coseriu'],
+                explanation: '✅ Corretto! Eugenio Coseriu ha teorizzato la variazione diastratica'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Quale fattore NON influenza direttamente la variazione diastratica?',
+                options: ['Clima', 'Istruzione', 'Professione', 'Reddito'],
+                correct: 'Clima',
+                explanation: '✅ Corretto! Il clima influenza la variazione diatopica (geografica), non quella diastratica',
+                errorExplanation: '❌ Il clima è un fattore geografico (diatopico), non sociale (diastratico)'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'La variazione diastratica descrive la dimensione __________ della lingua.',
+                correct: ['verticale'],
+                explanation: '✅ Corretto! La variazione diastratica è verticale (dall\'alto al basso sociale)'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Quale livello di italiano usa lessico astratto e sintassi complessa?',
+                options: ['Italiano colto', 'Italiano medio', 'Italiano popolare', 'Italiano regionale'],
+                correct: 'Italiano colto',
+                explanation: '✅ Corretto! L\'italiano colto si caratterizza per lessico astratto e strutture sintattiche complesse',
+                errorExplanation: '❌ L\'italiano colto (strato alto) usa lessico astratto e sintassi complessa'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'L\'italiano __________ è caratterizzato da interferenza dialettale e semplificazione sintattica.',
+                correct: ['popolare'],
+                explanation: '✅ Corretto! L\'italiano popolare presenta interferenze dialettali e semplificazione'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Quale fenomeno consiste nella correzione eccessiva verso la varietà alta?',
+                options: ['Ipercorrezione', 'Ipo-correzione', 'Accomodation', 'Code-switching'],
+                correct: 'Ipercorrezione',
+                explanation: '✅ Corretto! L\'ipercorrezione è la tendenza a "correggere" eccessivamente verso l\'alto',
+                errorExplanation: '❌ L\'ipercorrezione è la correzione eccessiva verso la varietà alta (es. "l\'ho dato a lui")'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Il passaggio da un registro all\'altro in base al contesto si chiama __________ shifting.',
+                correct: ['stile'],
+                explanation: '✅ Corretto! Lo stile shifting è il passaggio tra varietà diastratiche'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Quale sociologo ha introdotto il concetto di "capitale linguistico"?',
+                options: ['Bourdieu', 'Berruto', 'Coseriu', 'De Mauro'],
+                correct: 'Bourdieu',
+                explanation: '✅ Corretto! Pierre Bourdieu ha teorizzato il capitale linguistico',
+                errorExplanation: '❌ Pierre Bourdieu ha introdotto il concetto di capitale linguistico'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'L\'adattamento del parlante al registro dell\'interlocutore si chiama __________.',
+                correct: ['accomodation'],
+                explanation: '✅ Corretto! L\'accomodation è l\'adattamento del registro all\'interlocutore'
+
+            },
+
+            // ESERCIZI 11-20: Livelli e caratteristiche
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Quale connettivo è tipico dell\'italiano colto?',
+                options: ['Posto che', 'Perché', 'Allora', 'Così'],
+                correct: 'Posto che',
+                explanation: '✅ Corretto! "Posto che" è un connettivo formale tipico del registro colto',
+                errorExplanation: '❌ "Posto che" è un connettivo aulico/colto; "perché" è neutro'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'L\'italiano medio/comune corrisponde allo strato __________ della società.',
+                correct: ['borghese', 'medio'],
+                explanation: '✅ Corretto! L\'italiano medio corrisponde allo strato borghese/medio'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Quale fenomeno è tipico dell\'italiano popolare?',
+                options: ['Uso di "che" polivalente', 'Congiuntivo frequente', 'Periodi ipotetici', 'Lessico astratto'],
+                correct: 'Uso di "che" polivalente',
+                explanation: '✅ Corretto! L\'uso di "che" polivalente è tipico dell\'italiano popolare',
+                errorExplanation: '❌ L\'italiano popolare usa "che" in modo polivalente (causale, finale, ecc.)'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'La __________ è la tendenza a sottocorreggere verso la varietà bassa.',
+                correct: ['ipo-correzione'],
+                explanation: '✅ Corretto! L\'ipo-correzione è la sottocorrezione (es. "a me mi piace")'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Quale trattamento fonetico è tipico dell\'italiano popolare?',
+                options: ['Monottongazione', 'Dittongazione', 'Mantenimento del dittongo', 'Sostituzione di vocali'],
+                correct: 'Monottongazione',
+                explanation: '✅ Corretto! La monottongazione (foco invece di fuoco) è tipica dell\'italiano popolare',
+                errorExplanation: '❌ La monottongazione (foco, bona) è tipica dell\'italiano popolare/regionale'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Gianrenzo P. __________ ha distinto tre livelli: colto, medio e popolare.',
+                correct: ['Berruto'],
+                explanation: '✅ Corretto! Berruto è il sociolinguista che ha teorizzato i tre livelli'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Quale struttura sintattica caratterizza l\'italiano colto?',
+                options: ['Periodi ipotetici', 'Frasi paratattiche', 'Frasi semplici', 'Ellissi frequenti'],
+                correct: 'Periodi ipotetici',
+                explanation: '✅ Corretto! I periodi ipotetici complessi sono tipici del registro colto',
+                errorExplanation: '❌ L\'italiano colto usa periodi ipotetici e strutture subordinate complesse'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'L\'alternanza tra italiano e dialetto nella stessa conversazione si chiama __________-switching.',
+                correct: ['code'],
+                explanation: '✅ Corretto! Il code-switching è l\'alternanza tra lingue/varietà'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Quale varietà gode di "prestigio covert" nel gruppo?',
+                options: ['Dialetto', 'Italiano standard', 'Italiano aulico', 'Linguaggio scientifico'],
+                correct: 'Dialetto',
+                explanation: '✅ Corretto! Il dialetto ha prestigio covert (identitario) nel gruppo',
+                errorExplanation: '❌ Il dialetto ha prestigio covert (nascosto, identitario) nel gruppo di appartenenza'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'L\'italiano standard ha prestigio __________ (ufficiale/riconosciuto).',
+                correct: ['overt'],
+                explanation: '✅ Corretto! L\'italiano standard ha prestigio overt (riconosciuto ufficialmente)'
+
+            },
+
+            // ESERCIZI 21-30: Fenomeni specifici
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Quale fenomeno indica la svalutazione delle varietà non standard?',
+                options: ['Glottofagia', 'Accomodation', 'Stile shifting', 'Ipercorrezione'],
+                correct: 'Glottofagia',
+                explanation: '✅ Corretto! La glottofagia è la "mangiare" (svalutare) le lingue non standard',
+                errorExplanation: '❌ La glottofagia è la svalutazione/soppressione delle varietà non standard'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'L\'uso del dialetto con amici di quartiere esprime __________ sociale.',
+                correct: ['solidarietà'],
+                explanation: '✅ Corretto! L\'uso di varietà basse esprime solidarietà di gruppo'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Quale fenomeno descrive la riproduzione delle disuguaglianze attraverso la lingua?',
+                options: ['Reproduzione sociale', 'Mobilità', 'Accomodation', 'Glottofagia'],
+                correct: 'Reproduzione sociale',
+                explanation: '✅ Corretto! La scuola riproduce le disuguaglianze attraverso il capitale linguistico',
+                errorExplanation: '❌ La riproduzione sociale indica come le disuguaglianze si trasmettono attraverso generazioni'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'L\'espressione "a me mi piace" è un esempio di __________ (pleonasmo).',
+                correct: ['ipo-correzione'],
+                explanation: '✅ Corretto! "A me mi" è un pleonasmo tipico dell\'ipo-correzione'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Quale fattore contribuisce alla mobilità sociolinguistica ascendente?',
+                options: ['Istruzione', 'Clima', 'Geografia', 'Età'],
+                correct: 'Istruzione',
+                explanation: '✅ Corretto! L\'istruzione permette la mobilità verso strati linguistici superiori',
+                errorExplanation: '❌ L\'istruzione è il fattore principale di mobilità sociolinguistica ascendente'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Il __________ dialettale è la traduzione letterale di espressioni dal dialetto.',
+                correct: ['calco'],
+                explanation: '✅ Corretto! Il calco è la traduzione letterale (es. "fare una passeggiata" calco dell\'inglese)'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Quale accento in Italia gode generalmente di maggiore prestigio sociale?',
+                options: ['Settentrionale', 'Meridionale', 'Siciliano', 'Sardo'],
+                correct: 'Settentrionale',
+                explanation: '✅ Corretto! L\'accento settentrionale ha maggiore prestigio sociale in Italia',
+                errorExplanation: '❌ L\'accento settentrionale gode di maggiore prestigio sociale (carisma)'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'La competenza __________ richiede di padroneggiare sia lo standard nazionale che quello regionale.',
+                correct: ['C1', 'diastratica', 'sociolinguistica'],
+                explanation: '✅ Corretto! Il livello C1 richiede padronanza di entrambi gli standard'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Quale termine indica l\'ordine delle parole tipico del dialetto usato in italiano?',
+                options: ['Sintassi dialettale', 'Fonetica', 'Lessico', 'Morfologia'],
+                correct: 'Sintassi dialettale',
+                explanation: '✅ Corretto! La sintassi dialettale influenza l\'ordine delle parole',
+                errorExplanation: '❌ La sintassi dialettale si manifesta nell\'ordine delle parole (es. "il libro ho letto")'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'I "falsi amici" sono parole simili tra italiano e dialetto ma con __________ diverso.',
+                correct: ['significato'],
+                explanation: '✅ Corretto! I falsi amici hanno forma simile ma significato diverso'
+
+            },
+
+            // ESERCIZI 31-40: Istruzione e scuola
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Quale agenzia è principale per la trasmissione della varietà alta?',
+                options: ['Scuola', 'Famiglia', 'Media', 'Chiesa'],
+                correct: 'Scuola',
+                explanation: '✅ Corretto! La scuola è l\'agenzia principale di trasmissione della varietà alta',
+                errorExplanation: '❌ La scuola è l\'agenzia istituzionale principale per l\'italiano standard'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'La scuola __________ chi già possiede competenze linguistiche alte.',
+                correct: ['premia'],
+                explanation: '✅ Corretto! La scuola premia chi ha già capitale linguistico (Bourdieu)'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'A quale livello si acquisisce la padronanza del registro medio-alto?',
+                options: ['Scuola secondaria', 'Primaria', 'Università', 'Asilo'],
+                correct: 'Scuola secondaria',
+                explanation: '✅ Corretto! La scuola secondaria insegna il registro medio-alto/formale',
+                errorExplanation: '❌ La scuola secondaria è dove si consolida il registro medio-alto'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'All\'università si sviluppa la competenza __________ e il registro aulico.',
+                correct: ['specialistica'],
+                explanation: '✅ Corretto! L\'università sviluppa competenze specialistiche e registro aulico'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Quale fenomeno indica l\'esclusione di chi parla varietà basse?',
+                options: ['Esclusione sociale', 'Inclusione', 'Mobilità', 'Accomodation'],
+                correct: 'Esclusione sociale',
+                explanation: '✅ Corretto! Chi parla varietà basse è spesso escluso da opportunità',
+                errorExplanation: '❌ La variazione diastratica può causare esclusione sociale'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Il passaggio dal dialetto alla lingua avviene principalmente in __________ primaria.',
+                correct: ['scuola'],
+                explanation: '✅ Corretto! La scuola primaria è il luogo del passaggio dialetto-lingua'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Quale termine indica la lingua come risorsa per il successo sociale?',
+                options: ['Capitale linguistico', 'Capitale economico', 'Capitale culturale', 'Capitale sociale'],
+                correct: 'Capitale linguistico',
+                explanation: '✅ Corretto! Il capitale linguistico è la lingua come risorsa sociale (Bourdieu)',
+                errorExplanation: '❌ Bourdieu parla di capitale linguistico come risorsa per il successo'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Chi accede a istruzione superiore acquisisce competenze di strato __________.',
+                correct: ['superiore', 'alto'],
+                explanation: '✅ Corretto! L\'istruzione superiore porta a competenze di strato superiore'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Quale traccia della varietà di origine spesso persiste anche con istruzione alta?',
+                options: ['Accento', 'Sintassi', 'Lessico', 'Tutte le precedenti'],
+                correct: 'Tutte le precedenti',
+                explanation: '✅ Corretto! Possono persistere accento, espressioni, strutture sintattiche',
+                errorExplanation: '❌ Possono persistere tracce di accento, lessico e sintassi di origine'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'La scuola dovrebbe stimolare il passaggio da formulazioni __________ a quelle formali.',
+                correct: ['colloquiali'],
+                explanation: '✅ Corretto! La scuola insegna a passare dal colloquiale al formale'
+
+            },
+
+            // ESERCIZI 41-50: Analisi testuale e contesto avanzato
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Quale espressione indica uno strato sociale alto?',
+                options: ['Non posso che constatare', 'Non ci sto', 'Non posso fare niente', 'Non ce la faccio'],
+                correct: 'Non posso che constatare',
+                explanation: '✅ Corretto! "Non posso che constatare" è tipico dell\'italiano colto/aulico',
+                errorExplanation: '❌ "Non posso che constatare" è una struttura colta (doppia negazione)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: '"Non ci posso fare niente" è tipico dell\'italiano __________.',
+                correct: ['popolare'],
+                explanation: '✅ Corretto! La sintassi semplificata è tipica dell\'italiano popolare'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Quale connettivo è neutro e appartiene all\'italiano medio?',
+                options: ['Perché', 'Posto che', 'In quanto', 'Giaccché'],
+                correct: 'Perché',
+                explanation: '✅ Corretto! "Perché" è neutro; gli altri sono colti',
+                errorExplanation: '❌ "Perché" è il connettivo causale neutro dell\'italiano medio'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'La frase "l\'ho dato a lui" invece del dativo etico è un esempio di __________.',
+                correct: ['ipercorrezione'],
+                explanation: '✅ Corretto! "A lui" ipercorretto invece del dativo etico "gli"'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Quale varietà usa "allora" come connettivo polivalente?',
+                options: ['Italiano popolare', 'Italiano colto', 'Italiano aulico', 'Italiano scientifico'],
+                correct: 'Italiano popolare',
+                explanation: '✅ Corretto! "Allora" è usato in modo polivalente nell\'italiano popolare',
+                errorExplanation: '❌ L\'italiano popolare usa "allora" in modo polivalente (causale, temporale, conclusivo)'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Il __________ è il confine sfumato tra i diversi strati diastratici.',
+                correct: ['continuum'],
+                explanation: '✅ Corretto! La variazione diastratica forma un continuum, non comparti rigidi'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Quale fenomeno indica l\'uso di varietà alte per ottenere prestigio?',
+                options: ['Status', 'Solidarietà', 'Accomodation', 'Code-switching'],
+                correct: 'Status',
+                explanation: '✅ Corretto! L\'uso di varietà alte per prestigio è legato allo status sociale',
+                errorExplanation: '❌ Lo status spinge all\'uso di varietà alte per prestigio sociale'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'L\'ideologia __________ riguarda le credenze su "correttezza" e "bellezza" della lingua.',
+                correct: ['linguistica'],
+                explanation: '✅ Corretto! L\'ideologia linguistica influenza le valutazioni sulla lingua'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Quale lessico caratterizza l\'italiano colto?',
+                options: ['Astratto', 'Concreto', 'Tecnico-specialistico', 'Entrambi A e C'],
+                correct: 'Entrambi A e C',
+                explanation: '✅ Corretto! L\'italiano colto usa lessico astratto e specialistico',
+                errorExplanation: '❌ L\'italiano colto usa sia lessico astratto che specialistico'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'La variazione diastratica riflette la __________ verticale della società.',
+                correct: ['stratificazione'],
+                explanation: '✅ Corretto! La variazione diastratica riflette la stratificazione sociale verticale. Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente la variazione diastratica e la sociolinguistica!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene la stratificazione sociale della lingua!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: colto = astratto, popolare = concreto + dialetto!';
+            } else {
+                message = '📚 Ripassa le tabelle! Ricorda: diastratica = strato sociale, Berruto = 3 livelli!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

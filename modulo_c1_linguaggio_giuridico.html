@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C1 - Linguaggio Giuridico</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --c1-color: #7b2cbf;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --legal: #5a189a;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--c1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #f3e8ff;
+            border-left: 4px solid var(--legal);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(123, 44, 191, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .legal-term { color: var(--legal); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--c1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--c1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--c1-color); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #5a189a;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--c1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--c1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--c1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--c1-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .legal-context {
+            background: #e9ecef;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--legal);
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C1 - Linguaggio Giuridico</h1>
+            <p>Padronanza del linguaggio legale: terminologia, espressioni formali e strutture complesse</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C1</a>
+            <span>›</span>
+            <strong>Linguaggio Giuridico</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">⚖️ Linguaggio Giuridico</h1>
+            <p class="page-subtitle">Terminologia, formule e strutture sintattiche del linguaggio legale avanzato</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('terminology', this)">Terminologia</button>
+            <button class="nav-tab" onclick="showSection('formulas', this)">Formule</button>
+            <button class="nav-tab" onclick="showSection('syntax', this)">Sintassi</button>
+            <button class="nav-tab" onclick="showSection('contracts', this)">Contratti</button>
+            <button class="nav-tab" onclick="showSection('court', this)">Procedura</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍⚖️</div>
+                    <div class="avatar-name">Avv. Rossi</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo C1! ⚖️</h3>
+                    <p>Oggi approfondiamo il <strong>linguaggio giuridico</strong>, caratterizzato da precisione terminologica, formalità e strutture sintattiche complesse.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="legal-term">Premesso che</span> le parti hanno convenuto quanto segue" o "<span class="legal-term">Fatto salvo</span> quanto diversamente disposto".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Caratteristiche del Linguaggio Giuridico</div>
+                <div class="card-body">
+                    <p>Il <strong>linguaggio giuridico</strong> è un registro specialistico che richiede precisione assoluta, neutralità e rispetto di convenzioni consolidate. [^1^]</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Caratteristiche distintive:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Precisione terminologica:</strong> Ogni termine ha un significato tecnico specifico</li>
+                            <li><strong>Formalità:</strong> Registro elevato, nessuna colloquialità</li>
+                            <li><strong>Impersonaltà:</strong> Predominio di forme passive e soggetti inanimati</li>
+                            <li><strong>Complessità sintattica:</strong> Periodi lunghi con molte subordinate</li>
+                            <li><strong>Latinismi:</strong> Uso di locuzioni latine (de facto, de iure, a quo)</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Strutture fondamentali:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Formule introduttive:</strong> Premesso che, Considerato che, Visto che</li>
+                            <li><strong>Formule risolutive:</strong> Si conviene, Si stipula, Si dichiara</li>
+                            <li><strong>Formule limitative:</strong> Fatto salvo, Salvo diversa, Fermo restando</li>
+                            <li><strong>Formule conclusive:</strong> In fede di che, A tal fine, Per quanto sopra</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Nel linguaggio giuridico il tempo verbale ha valore preciso: il <strong>presente</strong> indica norme vigenti, il <strong>futuro</strong> obblighi da adempiere, il <strong>congiuntivo</strong> ipotesi e condizioni!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TERMINOLOGIA -->
+        <section id="terminology" class="section">
+            <div class="card">
+                <div class="card-header">Terminologia Giuridica Fondamentale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Termini di uso frequente con significato tecnico specifico.</strong> [^2^]
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Termine</th><th>Significato giuridico</th><th>Contesto d'uso</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="legal-term">Stipulare</td>
+                                <td>Concludere un contratto con forma solenne</td>
+                                <td>Stipulare un atto notarile</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Convenire</td>
+                                <td>Accordarsi, pattuire reciprocamente</td>
+                                <td>Le parti convengono quanto segue</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Dichiarare</td>
+                                <td>Rendere noto ufficialmente, affermare solennemente</td>
+                                <td>Dichiara sotto la propria responsabilità</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Riconoscere</td>
+                                <td>Accettare come valido, ammettere giuridicamente</td>
+                                <td>Riconoscere un diritto, un debito</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Obbligare</td>
+                                <td>Vincolare giuridicamente a un adempimento</td>
+                                <td>Obbligarsi al pagamento</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Costituire</td>
+                                <td>Creare, istituire; versare come garanzia</td>
+                                <td>Costituire una società; costituire in pegno</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Rinunciare</td>
+                                <td>Abdicare volontariamente a un diritto</td>
+                                <td>Rinunciare all'azione, alla prescrizione</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Decadere</td>
+                                <td>Perdere un diritto per mancato esercizio</td>
+                                <td>Decadere dal termine, dal beneficio</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Differenze cruciali:</strong><br>
+                        <em>Atto</em> = documento che contiene manifestazione di volontà<br>
+                        <em>Fatto</em> = evento giuridicamente rilevante<br>
+                        <em>Negozio giuridico</em> = fatto costituito da manifestazione di volontà
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE FORMULE -->
+        <section id="formulas" class="section">
+            <div class="card">
+                <div class="card-header">Formule Giuridiche Standard</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Le formule sono convenzioni linguistiche obbligate nel linguaggio legale.</strong> [^3^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Formule Premesse (Considerati)</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Formula</th><th>Funzione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="legal-term">Premesso che</td>
+                                <td>Introduce fatti preliminari noti</td>
+                                <td>Premesso che le parti sono già in rapporti commerciali...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Considerato che</td>
+                                <td>Esamina gli elementi di valutazione</td>
+                                <td>Considerato che il convenuto non ha ottemperato...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Visto che</td>
+                                <td>Richiama norme o documenti</td>
+                                <td>Visto il decreto legislativo n. 81/2008...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Ritenuto che</td>
+                                <td>Esprime valutazione del giudice</td>
+                                <td>Ritenuto che il ricorso sia fondato...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Formule Risolutive</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Formula</th><th>Funzione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="legal-term">Si conviene</td>
+                                <td>Patto tra le parti</td>
+                                <td>Si conviene che il pagamento avverrà...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Si dichiara</td>
+                                <td>Manifestazione unilaterale</td>
+                                <td>Si dichiara che l'immobile è libero...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Si impegna</td>
+                                <td>Assunzione di obbligo</td>
+                                <td>Il locatore si impegna a mantenere...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Si riserva</td>
+                                <td>Mantenimento di facoltà</td>
+                                <td>Si riserva il diritto di recesso...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> "Fatto salvo" introduce un'eccezione che mantiene valida una norma preesistente; "Salvo" introduce un'eccezione che limita l'efficacia di quanto appena detto!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE SINTASSI -->
+        <section id="syntax" class="section">
+            <div class="card">
+                <div class="card-header">Strutture Sintattiche Complesse</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il periodo giuridico si caratterizza per ipotassi e subordinazione marcata.</strong> [^4^]
+                    </div>
+
+                    <div class="transformation-box">
+                        <strong>Struttura del periodo normativo:</strong><br><br>
+                        <em>Condizione:</em> Qualora / Nel caso in cui / Ove + congiuntivo<br>
+                        <em>Prescrizione:</em> Deve / È tenuto / È obbligato a + infinito<br>
+                        <em>Sanzione:</em> Soggiacere a / Essere soggetto a / Incorrere in<br>
+                        <em>Eccezione:</em> Fermo restando / Fatto salvo / Salvo che
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Costruzioni tipiche</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Struttura</th><th>Esempio</th><th>Note</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="legal-term">Ove + congiuntivo</td>
+                                <td>Ove sorga controversia...</td>
+                                <td>Ipotesi condizionale formale</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Qualora + congiuntivo</td>
+                                <td>Qualora venisse meno...</td>
+                                <td>Eventualità futura</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Nel caso in cui</td>
+                                <td>Nel caso in cui il debitore risulti...</td>
+                                <td>Condizione estesa</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Allorché / Quando</td>
+                                <td>Allorché si verifichi...</td>
+                                <td>Temporalità con valore condizionale</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Nella more che</td>
+                                <td>Nella more che si definisca...</td>
+                                <td>Durata di un'attesa (formale)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="legal-context">
+                        <strong>Esempio di periodo complesso:</strong><br>
+                        "Qualora il conduttore non adempia puntualmente agli obblighi di pagamento, fermo restando il diritto del locatore di risolvere il contratto, il medesimo potrà procedere al disdetto con preavviso di sei mesi, salvo diversa pattuizione delle parti."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CONTRATTI -->
+        <section id="contracts" class="section">
+            <div class="card">
+                <div class="card-header">Linguaggio dei Contratti</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il contratto richiede strutture specifiche: premesse, definizioni, obblighi, clausole finali.</strong> [^5^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Struttura contrattuale standard</h3>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Sezione</th><th>Formule tipiche</th><th>Funzione</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="legal-term">Premesse</td>
+                                <td>Tra le sottoscritti..., Premesso che..., Considerato che...</td>
+                                <td>Contesto e informativa preliminare</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Definizioni</td>
+                                <td>Ai fini del presente contratto si intende per..., Si definisce...</td>
+                                <td>Chiarimento terminologico</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Oggetto</td>
+                                <td>Ha per oggetto..., Costituisce oggetto...</td>
+                                <td>Individuazione prestazioni</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Obblighi</td>
+                                <td>Si obbliga a..., È tenuto a..., Si impegna a...</td>
+                                <td>Prestazioni dovute</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Clausole finali</td>
+                                <td>Per ogni controversia..., In fede di che..., Letto e confermato...</td>
+                                <td>Disposizioni procedurali e conclusione</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="transformation-box">
+                        <strong>Verbi modali nel contratto:</strong><br><br>
+                        <em>Dovere:</em> Obbligo giuridico (Il debitore deve pagare)<br>
+                        <em>Potere:</em> Facoltà riconosciuta (Il creditore può rivalersi)<br>
+                        <em>Volere:</em> Volontà contrattuale (Le parti vogliono convenire)<br>
+                        <em>Essere tenuto:</em> Obbligo formale (È tenuto al risarcimento)
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Clausole tipiche:</strong><br>
+                        <em>Clausola compromissoria:</em> rinvio a arbitrato<br>
+                        <em>Clausola penale:</em> sanzione per inadempimento<br>
+                        <em>Clausola di esclusiva:</em> divieto di concorrenza<br>
+                        <em>Clausola risolutiva espressa:</em> risoluzione automatica
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PROCEDURA -->
+        <section id="court" class="section">
+            <div class="card">
+                <div class="card-header">Linguaggio della Procedura Civile</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Atti processuali, sentenze e provvedimenti giurisdizionali.</strong> [^6^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Termine/Formula</th><th>Significato</th><th>Contesto</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="legal-term">Costituirsi in giudizio</td>
+                                <td>Comparire davanti al giudice</td>
+                                <td>Il convenuto si è costituito...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Proporre ricorso</td>
+                                <td>Presentare appello o reclamo</td>
+                                <td>Propone ricorso avverso la sentenza...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Chiedere l'accoglimento</td>
+                                <td>Richiedere che venga dato seguito</td>
+                                <td>Chiede l'accoglimento della domanda...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Respingere il ricorso</td>
+                                <td>Rigettare la domanda</td>
+                                <td>Respinge il ricorso come infondato...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Condannare in coste</td>
+                                <td>Obbligare alle spese processuali</td>
+                                <td>Condanna in coste il ricorrente...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Vista la legge</td>
+                                <td>Richiamo normativo in sentenza</td>
+                                <td>Visti gli artt. 112 e 115 c.p.c.</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Per questi motivi</td>
+                                <td>Formula conclusiva motivazione</td>
+                                <td>Per questi motivi la Corte...</td>
+                            </tr>
+                            <tr>
+                                <td class="legal-term">Così decidendo</td>
+                                <td>Dispositivo della sentenza</td>
+                                <td>Così decidendo in diritto...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="legal-context">
+                        <strong>Struttura della sentenza:</strong><br>
+                        1. <em>Intestazione:</em> Autorità giudiziaria e parti<br>
+                        2. <em>Exordio:</em> Sintesi della controversia<br>
+                        3. <em>Fatti:</em> Ricostruzione storica<br>
+                        4. <em>Motivi:</em> Ragionamento giuridico (ratio decidendi)<br>
+                        5. <em>Dispositivo:</em> Decisione e provvedimenti
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C1 - Linguaggio Giuridico (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Terminologia base
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Le parti hanno __________ un contratto di locazione commerciale.',
+                options: ['stipulato', 'scritto', 'fatto', 'creato'],
+                correct: 'stipulato',
+                explanation: '✅ Corretto! "Stipulare" è il termine tecnico per concludere un atto giuridico con forma solenne',
+                errorExplanation: '❌ "Stipulare" è il verbo tecnico giuridico per la conclusione di contratti formalizzati'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Il debitore si __________ a pagare entro il termine convenuto.',
+                correct: ['impegna', 'obbliga'],
+                explanation: '✅ Corretto! "Impegnarsi/obbligarsi" indicano assunzione di obblighi giuridici'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: '__________ che le parti abbiano raggiunto un accordo amichevole...',
+                options: ['Premesso', 'Scritto', 'Detto', 'Fatto'],
+                correct: 'Premesso',
+                explanation: '✅ Corretto! "Premesso che" è la formula introduttiva standard per i fatti preliminari',
+                errorExplanation: '❌ "Premesso che" è la formula giuridica per introdurre fatti noti e preliminari'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Il conduttore ha __________ il canone di locazione per tre mesi.',
+                correct: ['omesso', 'tralasciato'],
+                explanation: '✅ Corretto! "Omettere" nel linguaggio giuridico significa non adempiere a un obbligo'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Si __________ che l\'immobile è libero da vincoli e ipoteche.',
+                options: ['dichiara', 'scrive', 'dice', 'afferma'],
+                correct: 'dichiara',
+                explanation: '✅ Corretto! "Dichiarare" è la formula tecnica per manifestazioni solenni di volontà',
+                errorExplanation: '❌ "Dichiarare" è il termine giuridico per manifestazioni ufficiali di volontà'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Il creditore ha il diritto di rivalersi sul __________ per il mancato pagamento.',
+                correct: ['debitore', 'contraente', 'obbligato'],
+                explanation: '✅ Corretto! "Debitore" è il soggetto tenuto all\'adempimento dell\'obbligazione'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: '__________ il decreto legislativo 81/2008, si dispone quanto segue:',
+                options: ['Visto', 'Letto', 'Considerato', 'Premesso'],
+                correct: 'Visto',
+                explanation: '✅ Corretto! "Visto" si usa per richiamare atti, documenti o normative',
+                errorExplanation: '❌ "Visto" è la formula specifica per richiamare atti normativi o documentali'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Il locatore si riserva il diritto di __________ in caso di morosità.',
+                correct: ['recesso', 'risoluzione', 'disdetta'],
+                explanation: '✅ Corretto! "Recesso" è la facoltà di recedere dal contratto in determinate ipotesi'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Le parti __________ quanto segue a integrazione del contratto principale.',
+                options: ['convengono', 'scrivono', 'dicono', 'pensano'],
+                correct: 'convengono',
+                explanation: '✅ Corretto! "Convenire" è il termine tecnico per l\'accordo pattizio tra le parti',
+                errorExplanation: '❌ "Convenire" indica l\'accordo reciproco delle parti in senso giuridico'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Il pagamento deve essere effettuato __________ entro il giorno 15.',
+                correct: ['entro', 'prima', 'non oltre'],
+                explanation: '✅ Corretto! "Entro" è il termine tecnico per indicare il termine perentorio'
+
+            },
+
+            // ESERCIZI 11-20: Formule e strutture
+            {
+                id: 11,
+                type: 'choice',
+                question: '__________ che il ricorrente non ha provato i futi dedotti in giudizio...',
+                options: ['Considerato', 'Visto', 'Premesso', 'Letto'],
+                correct: 'Considerato',
+                explanation: '✅ Corretto! "Considerato che" introduce elementi di valutazione del giudice',
+                errorExplanation: '❌ "Considerato che" è usato dal giudice per esaminare gli elementi di fatto e diritto'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: '__________ restando quanto disposto dall\'articolo 3, si applicano le seguenti modalità.',
+                correct: ['Fermo'],
+                explanation: '✅ Corretto! "Fermo restando" mantiene valida una disposizione preesistente'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Il conduttore è __________ al pagamento del canone e delle spese condominiali.',
+                options: ['tenuto', 'obbligato', 'costretto', 'forzato'],
+                correct: 'tenuto',
+                explanation: '✅ Corretto! "Essere tenuto" è la formula giuridica per indicare obblighi formali',
+                errorExplanation: '❌ "Essere tenuto a" è la costruzione impersonale formale per obblighi giuridici'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: '__________ il contratto preliminare del 15 marzo 2023...',
+                correct: ['Visto', 'Premesso', 'Considerato'],
+                explanation: '✅ Corretto! Formule introduttive per richiamare atti pregressi'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Il debitore ha __________ alla prescrizione del credito.',
+                options: ['rinunciato', 'omesso', 'dimenticato', 'trascurato'],
+                correct: 'rinunciato',
+                explanation: '✅ Corretto! "Rinunciare" è il termine tecnico per abdicare volontariamente a un diritto',
+                errorExplanation: '❌ "Rinunciare" indica la volontaria abdicazione a un diritto soggettivo'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: '__________ sorga controversia, le parti si rivolgeranno all\'Arbitro unico.',
+                correct: ['Qualora', 'Ove', 'Nel caso in cui'],
+                explanation: '✅ Corretto! Connettivi condizionali formali tipici del linguaggio giuridico'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Il locatore si __________ di mantenere l\'immobile in stato di efficienza.',
+                options: ['obbliga', 'impegna', 'costringe', 'forza'],
+                correct: 'obbliga',
+                explanation: '✅ Corretto! "Obbligarsi" indica assunzione di vincolo giuridico',
+                errorExplanation: '❌ "Obbligarsi" è più forte di "impegnarsi" e indica vincolo giuridico stretto'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Si __________ il presente contratto in duplice copia.',
+                correct: ['sottoscrive', 'stipula', 'redige'],
+                explanation: '✅ Corretto! "Sottoscrivere" è l\'atto formale di apporre la firma su un documento'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: '__________ diversa pattuizione, si applicano le norme del codice civile.',
+                options: ['Salvo', 'Fermo', 'Considerato', 'Premesso'],
+                correct: 'Salvo',
+                explanation: '✅ Corretto! "Salvo" introduce eccezioni che limitano l\'efficacia della norma',
+                errorExplanation: '❌ "Salvo" introduce eccezioni; "Fatto salvo" mantiene validità di norme preesistenti'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Il __________ ha proposto opposizione al decreto ingiuntivo emesso.',
+                correct: ['debitore', 'convenuto', 'controparte'],
+                explanation: '✅ Corretto! Terminologia processuale per indicare la parte attratta in giudizio'
+
+            },
+
+            // ESERCIZI 21-30: Procedura e atti processuali
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Il convenuto si è __________ in giudizio tramite avvocato.',
+                options: ['costituito', 'presentato', 'comparso', 'venuto'],
+                correct: 'costituito',
+                explanation: '✅ Corretto! "Costituirsi in giudizio" è il termine tecnico processuale',
+                errorExplanation: '❌ "Costituirsi in giudizio" indica la comparizione formale della parte davanti al giudice'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'La Corte ha respinto il ricorso come __________.',
+                correct: ['infondato', 'improcedibile', 'inammissibile'],
+                explanation: '✅ Corretto! Termini tecnici per qualificare la decisione di rigetto'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Si chiede l\'__________ della domanda proposta dal ricorrente.',
+                options: ['accoglimento', 'accettazione', 'ricevimento', 'presa in carico'],
+                correct: 'accoglimento',
+                explanation: '✅ Corretto! "Accoglimento" è il termine processuale per la decisione favorevole',
+                errorExplanation: '❌ "Accoglimento" è il termine tecnico per indicare che il giudice accoglie la domanda'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Il giudice ha condannato il soccombente in __________.',
+                correct: ['coste', 'spese'],
+                explanation: '✅ Corretto! "Condanna in coste" = obbligo di pagare le spese processuali'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: '__________ questi motivi, la Corte rigetta il ricorso.',
+                options: ['Per', 'Con', 'Da', 'Attraverso'],
+                correct: 'Per',
+                explanation: '✅ Corretto! "Per questi motivi" è la formula conclusiva standard delle sentenze',
+                errorExplanation: '❌ "Per questi motivi" è la formula fissa che introduce il dispositivo della sentenza'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Il ricorrente ha __________ domanda di risarcimento danni.',
+                correct: ['proposto', 'chiesto', 'istanziato'],
+                explanation: '✅ Corretto! "Proporre domanda" è la locuzione processuale corretta'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'La sentenza è stata __________ in appello dal parte soccombente.',
+                options: ['impugnata', 'criticata', 'attaccata', 'contestata'],
+                correct: 'impugnata',
+                explanation: '✅ Corretto! "Impugnare" è il termine tecnico per proporre mezzi di impugnazione',
+                errorExplanation: '❌ "Impugnare" indica formalmente la proposta di appello o altro mezzo di impugnazione'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Si è proceduto alla __________ del contratto per inadempimento.',
+                correct: ['risoluzione', 'recesso', 'disdetta'],
+                explanation: '✅ Corretto! "Risoluzione" è l\'estinzione del contratto per inadempimento grave'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Il decreto è stato emesso in forma __________ dal Tribunale.',
+                options: ['cautelare', 'preventiva', 'precauzionale', 'difensiva'],
+                correct: 'cautelare',
+                explanation: '✅ Corretto! "Cautelare" si riferisce ai provvedimenti d\'urgenza del giudice',
+                errorExplanation: '❌ "Cautelare" è il termine tecnico per i provvedimenti urgenti e provvisori'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'L\'attore ha chiesto il __________ del diritto di proprietà.',
+                correct: ['accertamento', 'riconoscimento', 'dichiarazione'],
+                explanation: '✅ Corretto! "Accertamento" è l\'azione giudiziaria per far dichiarare un diritto'
+
+            },
+
+            // ESERCIZI 31-40: Contratti e obblighi
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Il contratto ha per __________ la locazione dell\'immobile sito in...',
+                options: ['oggetto', 'scopo', 'fine', 'motivo'],
+                correct: 'oggetto',
+                explanation: '✅ Corretto! "Oggetto" del contratto è la prestazione principale',
+                errorExplanation: '❌ "Oggetto" è il termine giuridico per indicare cosa il contratto regola'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Le parti hanno convenuto una clausola di __________ esclusiva.',
+                correct: ['esclusiva', 'non concorrenza', 'devolutiva'],
+                explanation: '✅ Corretto! Clausole tipiche: esclusiva, penale, risolutiva, compromissoria'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'In caso di inadempimento, il debitore __________ nella penale convenuta.',
+                options: ['incorre', 'entra', 'cade', 'viene'],
+                correct: 'incorre',
+                explanation: '✅ Corretto! "Incorrere" è il termine tecnico per subire una sanzione',
+                errorExplanation: '❌ "Incorrere in" è la locuzione giuridica per subire sanzioni o conseguenze negative'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Il pagamento deve essere effettuato mediante __________ bancario.',
+                correct: ['bonifico', 'trasferimento', 'versamento'],
+                explanation: '✅ Corretto! Modalità di pagamento tipiche: bonifico, assegno, contanti'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Il contratto si __________ per il decorso del termine.',
+                options: ['estigue', 'finisce', 'termina', 'chiude'],
+                correct: 'estigue',
+                explanation: '✅ Corretto! "Estinguersi" è il termine tecnico per la cessazione degli effetti',
+                errorExplanation: '❌ "Estinguersi" indica la cessazione di un rapporto giuridico per adempimento o altro'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Si è costituita __________ a garanzia delle obbligazioni assunte.',
+                correct: ['penale', 'cauzione', 'fideiussione'],
+                explanation: '✅ Corretto! Garanzie tipiche: penale, cauzione, fideiussione, ipoteca'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Il __________ ha diritto di ritenzione fino al pagamento del compenso.',
+                options: ['professionista', 'lavoratore', 'dipendente', 'prestatore'],
+                correct: 'professionista',
+                explanation: '✅ Corretto! "Professionista" è il soggetto che esercita attività intellettuale',
+                errorExplanation: '❌ "Professionista" indica il libero professionista con diritto di ritenzione ex art. 2760 c.c.'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Le parti si sono __________ reciprocamente da ogni responsabilità.',
+                correct: ['manlevate', 'esonerate', 'scaricate'],
+                explanation: '✅ Corretto! "Manlevare" è il termine tecnico per la liberazione da responsabilità'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Il contratto è stato __________ per mancanza di requisiti di forma.',
+                options: ['annullato', 'cancellato', 'chiuso', 'sospeso'],
+                correct: 'annullato',
+                explanation: '✅ Corretto! "Annullare" è il termine per invalidità sanabile o insanabile',
+                errorExplanation: '❌ "Annullare" indica l\'invalidità del negozio giuridico per vizio'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Si applica la clausola di __________ espressa all\'articolo 5.',
+                correct: ['risoluzione', 'recesso', 'proroga'],
+                explanation: '✅ Corretto! Clausole risolutive espresse prevedono la risoluzione automatica'
+
+            },
+
+            // ESERCIZI 41-50: Sintassi complessa e latinismi
+            {
+                id: 41,
+                type: 'choice',
+                question: '__________ venisse meno una delle condizioni previste, il contratto si risolve.',
+                options: ['Qualora', 'Se', 'Quando', 'Mentre'],
+                correct: 'Qualora',
+                explanation: '✅ Corretto! "Qualora" è il connettivo condizionale formale del linguaggio giuridico',
+                errorExplanation: '❌ "Qualora" è più formale di "se" e tipico del linguaggio legale'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Il diritto si prescrive __________ dieci anni dalla nascita del titolo.',
+                correct: ['decennale', 'quindicennale', 'ventennale'],
+                explanation: '✅ Corretto! Termini per indicare i termini di prescrizione: decennale, quinquennale, biennale'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'La domanda è stata proposta in via __________ dal danneggiato.',
+                options: ['principale', 'prima', 'principia', 'primaria'],
+                correct: 'principale',
+                explanation: '✅ Corretto! "In via principale/subordinata" sono formule processuali standard',
+                errorExplanation: '❌ "In via principale" indica la domanda principale rispetto a quella subordinata'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: '__________ a quo: Tribunale di Milano, sezione specializzata.',
+                correct: ['Giudice', 'Tribunale', 'Corte'],
+                explanation: '✅ Corretto! "A quo" (latino) = dal quale; "Ad quem" = al quale (per i gradi di giudizio)'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Il possesso è __________ da ogni vizio di violenza.',
+                options: ['immune', 'libero', 'pulito', 'vuoto'],
+                correct: 'immune',
+                explanation: '✅ Corretto! "Imune" (o immune) è il termine giuridico per indicare assenza di vizi',
+                errorExplanation: '❌ "Imune/immune" è il termine tecnico per indicare che qualcosa è privo di vizi o limitazioni'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Si è proceduto alla __________ dei beni pignorati.',
+                correct: ['vendita', 'alienazione', 'cessione'],
+                explanation: '✅ Corretto! "Vendita giudiziaria" o "alienazione" sono termini tecnici espropriativi'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'L\'obbligazione si è __________ per compensazione con il credito vantato.',
+                options: ['estinta', 'finita', 'chiusa', 'terminata'],
+                correct: 'estinta',
+                explanation: '✅ Corretto! "Estinzione" è il termine tecnico per la cessazione dell\'obbligazione',
+                errorExplanation: '❌ "Estinguersi" è il termine giuridico per la cessazione di obbligazioni e rapporti'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: '__________ di che, letto e confermato, si sottoscrive.',
+                correct: ['In fede', 'In data', 'In atto'],
+                explanation: '✅ Corretto! "In fede di che" è la formula conclusiva dei contratti e atti notarili'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Il rapporto giuridico è stato __________ a favore del terzo acquirente.',
+                options: ['cessato', 'trasferito', 'dato', 'passato'],
+                correct: 'cessato',
+                explanation: '✅ Corretto! "Cessione" è il trasferimento di diritti (non "cessazione" che è estinzione!)',
+                errorExplanation: '❌ Attenzione: "cessione" è il trasferimento; "cessazione" è l\'interruzione/estinzione'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Si è dato atto che le parti hanno __________ il presente atto.',
+                correct: ['letto', 'visionato', 'esaminato'],
+                explanation: '✅ Corretto! "Dare atto" è la formula per confermare la conoscenza di un fatto. Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il termine giuridico..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi il linguaggio giuridico come un vero professionista del diritto!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene la terminologia, ma fai attenzione alle sfumature tra termini simili!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: "stipulare" ≠ "sottoscrivere", "salvo" ≠ "fatto salvo", "cessione" ≠ "cessazione"!';
+            } else {
+                message = '📚 Ripassa le tabelle! Concentrati sulle formule introduttive (Premesso che, Considerato che) e sulla terminologia processuale!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C2 - Giornalismo Investigativo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --c2-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --investigation: #8b0000;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--c2-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c2-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c2-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #fff8e1;
+            border-left: 4px solid var(--investigation);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .journalism-term { color: var(--investigation); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--c2-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--c2-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c2-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--c2-color); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c2-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--c2-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--c2-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--c2-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--c2-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .journalism-context {
+            background: #e9ecef;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--investigation);
+            font-style: italic;
+        }
+        .example-box {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .term-highlight {
+            color: var(--investigation);
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C2 - Giornalismo Investigativo</h1>
+            <p>Linguaggio, stile e tecniche narrative dell'inchiesta giornalistica avanzata</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C2</a>
+            <span>›</span>
+            <strong>Giornalismo Investigativo</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🕵️ Giornalismo Investigativo</h1>
+            <p class="page-subtitle">Linguaggio dell'inchiesta, stile brillante, gergo giuridico e tecniche di storytelling</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('style', this)">Stile</button>
+            <button class="nav-tab" onclick="showSection('lexicon', this)">Lessico</button>
+            <button class="nav-tab" onclick="showSection('structure', this)">Strutture</button>
+            <button class="nav-tab" onclick="showSection('mafia', this)">Gergo</button>
+            <button class="nav-tab" onclick="showSection('rhetoric', this)">Retorica</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">🕵️</div>
+                    <div class="avatar-name">Inves. Bianchi</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo C2! 🕵️</h3>
+                    <p>Il <strong>giornalismo investigativo</strong> rappresenta l'apice della professione giornalistica, caratterizzato da un linguaggio sofisticato, tecniche narrative complesse e una profonda conoscenza dei registri specializzati.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="journalism-term">Il dado è tratto</span>. <span class="journalism-term">Stante</span> la gravità delle <span class="journalism-term">emergenze</span> emerse, l'<span class="journalism-term">inchiesta</span> procede <span class="journalism-term">a ritmo serrato</span> verso la <span class="journalism-term">ricostruzione</span> dei fatti".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Caratteristiche del Giornalismo Investigativo</div>
+                <div class="card-body">
+                    <p>Il <strong>giornalismo investigativo</strong> è un'attività che va oltre la semplice informazione per scoprire fatti celati, corruzione e ingiustizie. Richiede competenze linguistiche avanzate e padronanza di registri specialistici. [^37^]</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Competenze linguistiche C2 nel giornalismo investigativo:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Stile brillante:</strong> Uso di metafore, neologismi e costruzioni sintattiche marcate</li>
+                            <li><strong>Lessico specialistico:</strong> Termini giuridici, economici, forensi e gergali</li>
+                            <li><strong>Tecniche narrative:</strong> Storytelling, suspense, costruzione del mistero</li>
+                            <li><strong>Registri misti:</strong> Alternanza tra formalità e colloquialità nel discorso diretto</li>
+                            <li><strong>Obliquità semantica:</strong> Uso di eufemismi e perifrasi nei contesti sensibili</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Tipologie di testi investigativi:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Inchiesta:</strong> Approfondimento su un tema specifico con documentazione</li>
+                            <li><strong>Reportage:</strong> Narrazione immersiva con elementi descrittivi e emotivi</li>
+                            <li><strong>Cronaca nera:</strong> Fatto di sangue con lessico tecnico e misura espressiva</li>
+                            <li><strong>Intervista-inchiesta:</strong> Domande mirate a ottenere rivelazioni</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Etica e deontologia:</strong> Il giornalista investigativo deve bilanciare il diritto all'informazione con il rispetto della privacy, evitando il sensazionalismo e verificando rigorosamente le fonti (fact-checking).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE STILE -->
+        <section id="style" class="section">
+            <div class="card">
+                <div class="card-header">Lo Stile Brillante</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Lo "stile brillante" caratterizza il giornalismo moderno con espressività, creatività e immediatezza.</strong> [^39^]
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Caratteristica</th><th>Descrizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="journalism-term">Metafore</td>
+                                <td>Trasferimento di significato</td>
+                                <td>"La sua corrente affila le armi"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Neologismi</td>
+                                <td>Formazioni lessicali nuove</td>
+                                <td>Tangentopoli, Vallettopoli, Russiagate</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Prefissazione</td>
+                                <td>Uso produttivo di prefissi</td>
+                                <td>Anti-, contro-, super-, iper-, mini-</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Sintassi frammentata</td>
+                                <td>Periodi brevi, paratassi</td>
+                                <td>"Notte. Freddo. Il silenzio rotto da un colpo"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Discorso diretto</td>
+                                <td>Citazioni, interviste</td>
+                                <td>"Il dado è tratto", disse Calenda</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Stile nominale</td>
+                                <td>Uso di sostantivi al posto dei verbi</td>
+                                <td>"Operare un arresto", "effettuare fermate"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Esempi di neologismi giornalistici:</strong><br>
+                        <em>-poli:</em> Tangentopoli, Vallettopoli, stipendiopoli<br>
+                        <em>-gate:</em> Russiagate, Moggigate, Laziogate<br>
+                        <em>-abile:</em> Bancabile, cantierabile, presidenziabile<br>
+                        <em>Composti:</em> Aereo-killer, verdetto-shock, affluenza-record
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE LESSICO -->
+        <section id="lexicon" class="section">
+            <div class="card">
+                <div class="card-header">Lessico Specialistico</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il giornalismo investigativo richiede padronanza di lessico giuridico, economico e forense.</strong> [^31^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Lessico giuridico</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Termine</th><th>Significato</th><th>Contesto</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="journalism-term">Misura cautelare</td>
+                                <td>Arresto, custodia cautelare</td>
+                                <td>"Il GIP ha disposto la misura cautelare"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Aggravante</td>
+                                <td>Circostanza che peggiora la pena</td>
+                                <td>"L'aggravante mafiosa è caduta"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Rito abbreviato</td>
+                                <td>Processo con riduzione di pena</td>
+                                <td>"Ha scelto il rito abbreviato"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Collaboratore di giustizia</td>
+                                <td>Pentito che collabora</td>
+                                <td>"Il collaboratore ha rivelato..."</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Intercettazione</td>
+                                <td>Registrazione di conversazioni</td>
+                                <td>"Dalle intercettazioni emerge..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Lessico economico-finanziario</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Termine</th><th>Significato</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="journalism-term">Riciclaggio</td>
+                                <td>Riutilizzo di denaro sporco</td>
+                                <td>"Il riciclaggio attraverso società offshore"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Appalto truccato</td>
+                                <td>Gara d'appalto fraudolenta</td>
+                                <td>"La maxi-gara risulta truccata"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Conflict of interest</td>
+                                <td>Conflitto di interessi</td>
+                                <td>"Sussiste un conflict of interest"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Conto estero</td>
+                                <td>Conto in paradiso fiscale</td>
+                                <td>"Denaro nascosto in conti esteri"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Fattura fittizia</td>
+                                <td>Fattura per operazione inesistente</td>
+                                <td>"Emissione di fatture fittizie"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Eufemismi nella cronaca nera:</strong><br>
+                        "Si è spento" (è morto), "persona di interesse" (sospettato), "teatro del crimine" (luogo del delitto), "fuori pericolo" (non morirà).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE STRUTTURE -->
+        <section id="structure" class="section">
+            <div class="card">
+                <div class="card-header">Strutture Testuali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>L'inchiesta giornalistica segue strutture narrative complesse che bilanciano informazione e storytelling.</strong> [^35^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">La piramide rovesciata</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Elemento</th><th>Funzione</th><th>Caratteristiche</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="journalism-term">Titolo</td>
+                                <td>Attrarre l'attenzione</td>
+                                <td>Breve, incisivo, spesso nominale</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Lead</td>
+                                <td>Riassumere la notizia</td>
+                                <td>5W (chi, cosa, quando, dove, perché)</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Corpo</td>
+                                <td>Sviluppare i fatti</td>
+                                <td>Dettagli, contesto, fonti</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Background</td>
+                                <td>Fornire contesto storico</td>
+                                <td>Precedenti, situazione precedente</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Conclusione</td>
+                                <td>Prospettive future</td>
+                                <td>Sviluppi, conseguenze, domande aperte</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Tecniche narrative</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tecnica</th><th>Descrizione</th><th>Effetto</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="journalism-term">Suspense</td>
+                                <td>Ritardo nella rivelazione</td>
+                                <td>Mantiene l'interesse del lettore</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Flashback</td>
+                                <td>Ritorno al passato</td>
+                                <td>Contestualizza i fatti presenti</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Mosaico di citazioni</td>
+                                <td>Interviste intrecciate</td>
+                                <td>Polifonia, oggettività apparente</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Ricostruzione</td>
+                                <td>Racconto sceneggiato</td>
+                                <td>Immediatezza, coinvolgimento</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Ellissi cataforica</td>
+                                <td>Ritardo del tema principale</td>
+                                <td>Curiosità, attesa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="journalism-context">
+                        <strong>Struttura dell'inchiesta investigativa:</strong><br>
+                        1. <em>Presentazione del problema</em> (hook iniziale)<br>
+                        2. <em>Raccolta prove</em> (documenti, interviste, dati)<br>
+                        3. <em>Contraddizioni e rivelazioni</em> (momento climax)<br>
+                        4. <em>Conferme e verifiche</em> (fact-checking)<br>
+                        5. <em>Conclusione e impatto</em> (conseguenze sociali)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE GERGO -->
+        <section id="mafia" class="section">
+            <div class="card">
+                <div class="card-header">Gergo e Linguaggi Speciali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il giornalismo investigativo deve decifrare gergi criminali, linguaggi criptici e sottintesi.</strong> [^45^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Gergo mafioso e criminale</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Termine</th><th>Significato gergale</th><th>Contesto</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="journalism-term">Amico nostro</td>
+                                <td>Membro dell'organizzazione</td>
+                                <td>"L'amico nostro ha risolto"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Fare una situazione</td>
+                                <td>Minacciare, intimidire</td>
+                                <td>"Gli facciamo una situazione"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Soldi pieni</td>
+                                <td>Denaro netto, non scontato</td>
+                                <td>"I centocinquanta sono pieni"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Tenersi il cecio al culo</td>
+                                <td>Stare zitti, tacere</td>
+                                <td>"Deve tenersi il cecio al culo"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Mondo di mezzo</td>
+                                <td>Area grigia tra legalità e illegalità</td>
+                                <td>"Il mondo di mezzo romano"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Linguaggio politico-economico</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Termine</th><th>Significato</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="journalism-term">Consultazioni</td>
+                                <td>Incontri per formare governo</td>
+                                <td>"Il Presidente avvia le consultazioni"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Iter parlamentare</td>
+                                <td>Procedura legislativa</td>
+                                <td>"L'iter è lungo e complesso"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Mozione di sfiducia</td>
+                                <td>Richiesta di dimissioni</td>
+                                <td>"Presentata mozione di sfiducia"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Lottizzazione</td>
+                                <td>Spartizione di cariche</td>
+                                <td>"La lottizzazione dei incarichi"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Commistione</td>
+                                <td>Confusione tra pubblico e privato</td>
+                                <td>"Pericolosa commistione di interessi"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Obliquità semantica:</strong> I mafiosi usano termini semanticamente obliqui per nascondere i significati reali. "Amicizia" indica rapporto criminale, "fare affari" può significare estorsione, "situazione" indica minaccia.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE RETORICA -->
+        <section id="rhetoric" class="section">
+            <div class="card">
+                <div class="card-header">Figure Retoriche e Espressività</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il linguaggio giornalistico investigativo fa ampio uso di figure retoriche per aumentare l'impatto emotivo.</strong> [^42^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Figure retoriche comuni</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Figura</th><th>Definizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="journalism-term">Metafora</td>
+                                <td>Trasferimento semantico</td>
+                                <td>"La guerra alla corruzione"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Metonimia</td>
+                                <td>Sostituzione per contiguità</td>
+                                <td>"Il Quirinale decide" (per il Presidente)</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Sineddoche</td>
+                                <td>Parte per il tutto</td>
+                                <td>"Due mani in manette"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Iperbole</td>
+                                <td>Eccesso espressivo</td>
+                                <td>"Uno tsunami di miliardi"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Ossimoro</td>
+                                <td>Contraddizione apparente</td>
+                                <td>"Un silenzio assordante"</td>
+                            </tr>
+                            <tr>
+                                <td class="journalism-term">Eufemismo</td>
+                                <td>Attenuazione del senso</td>
+                                <td>"Si è spento" per "è morto"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Metafore concettuali</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Campo sorgente</th><th>Campo target</th><th>Esempi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Guerra</td>
+                                <td>Criminalità/politica</td>
+                                <td>"Battaglia contro il crimine", "trincea"</td>
+                            </tr>
+                            <tr>
+                                <td>Malattia</td>
+                                <td>Corruzione</td>
+                                <td>"Il cancro della corruzione", "metastasi"</td>
+                            </tr>
+                            <tr>
+                                <td>Teatro</td>
+                                <td>Politica/giustizia</td>
+                                <td>"Teatro del crimine", "scena politica"</td>
+                            </tr>
+                            <tr>
+                                <td>Gioco</td>
+                                <td>Economia/finanza</td>
+                                <td>"Poker dei soldi", "scommessa politica"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Forestierismi e anglicismi:</strong><br>
+                        <em>Politicamente:</em> bipartisan, convention, intelligence, leak, whistleblower<br>
+                        <em>Economicamente:</em> hedge funds, rating, briefing, beige book<br>
+                        <em>Tecnicamente:</em> fact-checking, deep throat, insider, offshore
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C2 - Giornalismo Investigativo (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Stile e lessico giornalistico
+            {
+                id: 1,
+                type: 'choice',
+                question: '"Tangentopoli" è un esempio di:',
+                options: ['Neologismo composito', 'Forestierismo', 'Arcaismo', 'Tecnicismo'],
+                correct: 'Neologismo composito',
+                explanation: '✅ Corretto! Tangentopoli = tangente + poli (città), modello per altri -poli',
+                errorExplanation: '❌ Tangentopoli è un neologismo formato da tangente + poli (come Metropolis)'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: '"__________" è l\'eufemismo giornalistico per "è morto".',
+                correct: ['si è spento', 'è scomparso'],
+                explanation: '✅ Corretto! "Si è spento" attenua la crudezza del decesso'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Lo "stile brillante" si caratterizza per:',
+                options: ['Espressività e creatività', 'Sobrietà e oggettività', 'Tecnicismo e formalità', 'Archaicità e classicismo'],
+                correct: 'Espressività e creatività',
+                explanation: '✅ Corretto! Lo stile brillante usa metafore, neologismi, sintassi marcata',
+                errorExplanation: '❌ Lo stile brillante (Dardano) è espressivo, creativo, spettacolarizzato'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: '"__________ del crimine" indica il luogo dove è avvenuto il fatto.',
+                correct: ['teatro', 'scenario'],
+                explanation: '✅ Corretto! "Teatro del crimine" è una metonimia spaziale'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: '"Russiagate" segue il modello lessicale di:',
+                options: ['Watergate', 'Tangentopoli', 'Vallettopoli', 'Mani pulite'],
+                correct: 'Watergate',
+                explanation: '✅ Corretto! -gate indica scandalo politico (dal caso Watergate)',
+                errorExplanation: '❌ Il suffisso -gate deriva dallo scandalo Watergate (1972)'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: '"Operare un __________" è uno stile nominale per "arrestare".',
+                correct: ['arresto'],
+                explanation: '✅ Corretto! Stile nominale: verbo sostituito da sostantivo + fare/operare'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: '"Il dado è tratto" è un:',
+                options: ['Modo di dire', 'Tecnicismo giuridico', 'Neologismo', 'Forestierismo'],
+                correct: 'Modo di dire',
+                explanation: '✅ Corretto! "Alea iacta est" (Cesare), modo di dire per decisione irrevocabile',
+                errorExplanation: '❌ "Il dado è tratto" (alea iacta est) è un latinismo usato come modo di dire'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: '"__________ di interesse" è l\'eufemismo per sospettato.',
+                correct: ['persona'],
+                explanation: '✅ Corretto! "Persona di interesse" = eufemismo per sospettato/indagato'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: '"Super-" e "iper-" sono:',
+                options: ['Prefissi elativi', 'Suffissi', 'Preposizioni', 'Avverbi'],
+                correct: 'Prefissi elativi',
+                explanation: '✅ Corretto! Prefissi elativi (superpagato, ipermoderno)',
+                errorExplanation: '❌ Super- e iper- sono prefissi elativi molto produttivi nel giornalismo'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: '"__________" indica una notizia esclusiva e importante.',
+                correct: ['scoop'],
+                explanation: '✅ Corretto! Scoop = notizia esclusiva (dall\'inglese)'
+
+            },
+
+            // ESERCIZI 11-20: Lessico giuridico e investigativo
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Il "GIP" è:',
+                options: ['Giudice per le indagini preliminari', 'Giornalista investigativo professionista', 'Gruppo di indagine e prevenzione', 'Guardia di investigazione penale'],
+                correct: 'Giudice per le indagini preliminari',
+                explanation: '✅ Corretto! GIP = Giudice per le Indagini Preliminari',
+                errorExplanation: '❌ GIP = Giudice per le Indagini Preliminari (ordinanza cautelare)'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: '"__________ di giustizia" è il termine tecnico per "pentito".',
+                correct: ['collaboratore'],
+                explanation: '✅ Corretto! Collaboratore di giustizia = chi collabora con la giustizia'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: '"Misura cautelare" si riferisce a:',
+                options: ['Arresto o custodia', 'Indagine preliminare', 'Sentenza definitiva', 'Perquisizione'],
+                correct: 'Arresto o custodia',
+                explanation: '✅ Corretto! Misure cautelari: arresto, custodia cautelare, divieto di dimora',
+                errorExplanation: '❌ Misura cautelare = restrizione della libertà personale (arresto, carcere)'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: '"__________ telefonica" è la registrazione di conversazioni.',
+                correct: ['intercettazione'],
+                explanation: '✅ Corretto! Intercettazione = registrazione autorizzata di comunicazioni'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: '"Aggravante mafiosa" indica:',
+                options: ['Circostanza che aumenta la pena per reato di tipo mafioso', 'Protezione fornita dalla mafia', 'Collaborazione con la mafia', 'Appartenenza all\'organizzazione'],
+                correct: 'Circostanza che aumenta la pena per reato di tipo mafioso',
+                explanation: '✅ Corretto! Aggravante = circostanza che aumenta la pena',
+                errorExplanation: '❌ Aggravante = circostanza che peggiora la posizione dell\'imputato'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: '"__________ di sfiducia" è la richiesta di dimissioni del governo.',
+                correct: ['mozione'],
+                explanation: '✅ Corretto! Mozione di sfiducia = atto parlamentare per far cadere il governo'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: '"Rito abbreviato" permette:',
+                options: ['Riduzione di pena in cambio di confessione', 'Processo più rapido', 'Appello abbreviato', 'Esecuzione immediata'],
+                correct: 'Riduzione di pena in cambio di confessione',
+                explanation: '✅ Corretto! Rito abbreviato: riduzione pena fino a 1/3 per patteggiamento',
+                errorExplanation: '❌ Rito abbreviato = procedura con riduzione pena in cambio di confessione'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: '"__________ fittizia" è una fattura per operazione inesistente.',
+                correct: ['fattura'],
+                explanation: '✅ Corretto! Fattura fittizia = documento falso per frode fiscale'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: '"Riciclaggio" nel linguaggio investigativo indica:',
+                options: ['Riutilizzo di denaro sporco', 'Riciclo di rifiuti', 'Pulizia di documenti', 'Riutilizzo di informazioni'],
+                correct: 'Riutilizzo di denaro sporco',
+                explanation: '✅ Corretto! Riciclaggio = reinserimento denaro illecito nel circuito legale',
+                errorExplanation: '❌ Riciclaggio = rendere "pulito" denaro proveniente da attività illecite'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: '"__________ of interest" è il conflitto di interessi.',
+                correct: ['conflict'],
+                explanation: '✅ Corretto! Conflict of interest = situazione in cui interessi pubblici e privati si sovrappongono'
+
+            },
+
+            // ESERCIZI 21-30: Gergo mafioso e criminale
+            {
+                id: 21,
+                type: 'choice',
+                question: '"Amico nostro" nel gergo mafioso indica:',
+                options: ['Membro dell\'organizzazione', 'Complice esterno', 'Vittima', 'Poliziotto corrotto'],
+                correct: 'Membro dell\'organizzazione',
+                explanation: '✅ Corretto! "Amico nostro" = affiliato alla cosca (eufemismo)',
+                errorExplanation: '❌ "Amico nostro" indica un membro effettivo dell\'organizzazione mafiosa'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: '"Fare una __________" significa minacciare o intimidire.',
+                correct: ['situazione'],
+                explanation: '✅ Corretto! "Fare una situazione" = creare problemi, minacciare'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: '"Soldi pieni" nel gergo criminale significano:',
+                options: ['Denaro netto senza sconti', 'Tanti soldi', 'Soldi falsi', 'Denaro estorto'],
+                correct: 'Denaro netto senza sconti',
+                explanation: '✅ Corretto! "Pieni" = pagamento integrale, senza sconto',
+                errorExplanation: '❌ "Soldi pieni" = pagamento netto, senza applicazione di sconti/ritenute'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: '"Tenere il __________ al culo" significa stare zitti.',
+                correct: ['cecio'],
+                explanation: '✅ Corretto! "Tenere il cecio al culo" = tacere, non parlare (gergo romano)'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: '"Mondo di mezzo" si riferisce a:',
+                options: ['Area grigia tra legalità e illegalità', 'Mafia tradizionale', 'Politica istituzionale', 'Economia sommersa'],
+                correct: 'Area grigia tra legalità e illegalità',
+                explanation: '✅ Corretto! Mondo di mezzo = area grigia, eversione istituzionale',
+                errorExplanation: '❌ "Mondo di mezzo" (inchiesta romana) = area grigia tra politica e criminalità'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: '"__________ nostra" è la denominazione tradizionale della mafia siciliana.',
+                correct: ['cosa'],
+                explanation: '✅ Corretto! Cosa nostra = organizzazione mafiosa siciliana'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: '"Omertà" significa:',
+                options: ['Silenzio, non collaborare con la giustizia', 'Rispetto gerarchico', 'Codice d\'onore', 'Vendetta'],
+                correct: 'Silenzio, non collaborare con la giustizia',
+                explanation: '✅ Corretto! Omertà = codice del silenzio, non denunciare',
+                errorExplanation: '❌ Omertà = codice di silenzio, rifiuto di collaborare con le autorità'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: '"__________ di sangue" è il rito di affiliazione mafiosa.',
+                correct: ['giuramento'],
+                explanation: '✅ Corretto! Giuramento di sangue = rito di affiliazione alla mafia'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: '"Pizzo" nel linguaggio mafioso è:',
+                options: ['Estorsione periodica', 'Informatore', 'Arma da fuoco', 'Nascondiglio'],
+                correct: 'Estorsione periodica',
+                explanation: '✅ Corretto! Pizzo = somma estorta periodicamente agli imprenditori',
+                errorExplanation: '❌ Pizzo = estorsione sistematica a imprenditori e commercianti'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: '"__________ di mezzo" è il sistema criminale romano.',
+                correct: ['mondo'],
+                explanation: '✅ Corretto! Mondo di mezzo = inchiesta su corruzione a Roma (Mafia Capitale)'
+
+            },
+
+            // ESERCIZI 31-40: Strutture e tecniche narrative
+            {
+                id: 31,
+                type: 'choice',
+                question: 'La "piramide rovesciata" prevede:',
+                options: ['Informazioni in ordine decrescente di importanza', 'Cronologia inversa', 'Struttura a monte-russo', 'Presentazione finale del colpevole'],
+                correct: 'Informazioni in ordine decrescente di importanza',
+                explanation: '✅ Corretto! Piramide rovesciata: notizia importante all\'inizio',
+                errorExplanation: '❌ Piramide rovesciata: ordine decrescente di importanza (lead con 5W)'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Il "__________" è il primo paragrafo che riassume la notizia.',
+                correct: ['lead'],
+                explanation: '✅ Corretto! Lead = paragrafo iniziale con informazioni essenziali (5W)'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: '"Ellissi cataforica" significa:',
+                options: ['Ritardo del tema principale', 'Omissione del verbo', 'Uso di pronomi', 'Ripetizione di termini'],
+                correct: 'Ritardo del tema principale',
+                explanation: '✅ Corretto! Ellissi cataforica = ritardo del tema per creare suspense',
+                errorExplanation: '❌ Ellissi cataforica = ritardo del tema principale per creare attesa'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: '"__________ di citazioni" è la tecnica di intrecciare diverse voci.',
+                correct: ['mosaico'],
+                explanation: '✅ Corretto! Mosaico di citazioni = alternanza voci giornalista e intervistati'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Lo "storytelling" nel giornalismo investigativo serve a:',
+                options: ['Rendere la narrazione coinvolgente', 'Velocizzare la scrittura', 'Semplificare il lessico', 'Eliminare le fonti'],
+                correct: 'Rendere la narrazione coinvolgente',
+                explanation: '✅ Corretto! Storytelling = tecniche narrative per coinvolgere il lettore',
+                errorExplanation: '❌ Storytelling = uso di tecniche narrative per rendere l\'inchiesta coinvolgente'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: '"__________ checking" è la verifica dei fatti.',
+                correct: ['fact'],
+                explanation: '✅ Corretto! Fact-checking = verifica rigorosa delle informazioni'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: '"Deep throat" nel giornalismo investigativo è:',
+                options: ['Fonte anonima interna', 'Metodo di interrogatorio', 'Tecnica di registrazione', 'Tipo di inchiesta'],
+                correct: 'Fonte anonima interna',
+                explanation: '✅ Corretto! Deep throat = fonte anonima che rivela segreti (caso Watergate)',
+                errorExplanation: '❌ Deep throat = informatore anonimo all\'interno di un\'istituzione'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: '"__________ blower" è chi denuncia illeciti interni.',
+                correct: ['whistle'],
+                explanation: '✅ Corretto! Whistleblower = chi segnala illeciti dall\'interno'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: '"Sintagma nominale" nel giornalismo è:',
+                options: ['Costruzione senza verbo', 'Proposizione principale', 'Discorso diretto', 'Titolo di giornale'],
+                correct: 'Costruzione senza verbo',
+                explanation: '✅ Corretto! Sintagma nominale = costruzione basata su sostantivi (stile nominale)',
+                errorExplanation: '❌ Sintagma nominale = costruzione del periodo basata su sostantivi (es. "arresto lampo")'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: '"__________" è il titolo secondario che precede il titolo principale.',
+                correct: ['occhiello'],
+                explanation: '✅ Corretto! Occhiello = sopratitolo, titoletto introduttivo'
+
+            },
+
+            // ESERCIZI 41-50: Figure retoriche e metonimie
+            {
+                id: 41,
+                type: 'choice',
+                question: '"Il Quirinale decide" è una:',
+                options: ['Metonimia', 'Metafora', 'Sineddoche', 'Iperbole'],
+                correct: 'Metonimia',
+                explanation: '✅ Corretto! Metonimia: luogo per chi vi abita (Presidente)',
+                errorExplanation: '❌ Metonimia: sostituzione per contiguità (Quirinale = Presidente)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: '"La __________ alla corruzione" è una metafora bellica.',
+                correct: ['guerra'],
+                explanation: '✅ Corretto! Metafora bellica: guerra, battaglia, trincea, armi'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: '"Un silenzio assordante" è un:',
+                options: ['Ossimoro', 'Pleonasmo', 'Eufemismo', 'Ironia'],
+                correct: 'Ossimoro',
+                explanation: '✅ Corretto! Ossimoro: accostamento di termini contraddittori',
+                errorExplanation: '❌ Ossimoro: accostamento di concetti opposti (silenzio/assordante)'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: '"Due __________ in manette" è una sineddoche.',
+                correct: ['mani'],
+                explanation: '✅ Corretto! Sineddoche: parte (mani) per il tutto (persona)'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: '"Il cancro della corruzione" è una metafora:',
+                options: ['Patologica', 'Bellica', 'Giuridica', 'Economica'],
+                correct: 'Patologica',
+                explanation: '✅ Corretto! Metafora patologica: malattia, cancro, metastasi, virus',
+                errorExplanation: '❌ Metafora patologica: corruzione come malattia sociale'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: '"__________ Street" per l\'economia USA è una metonimia.',
+                correct: ['wall'],
+                explanation: '✅ Corretto! Wall Street = mercato finanziario (metonimia)'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: '"Uno tsunami di miliardi" è un\'',
+                options: ['Iperbole', 'Metafora', 'Sineddoche', 'Metonimia'],
+                correct: 'Iperbole',
+                explanation: '✅ Corretto! Iperbole: esagerazione per effetto espressivo',
+                errorExplanation: '❌ Iperbole: esagerazione (tsunami per indicare grande quantità)'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: '"__________ bianca" è la metonimia per la presidenza USA.',
+                correct: ['casa'],
+                explanation: '✅ Corretto! Casa Bianca = amministrazione presidenziale USA'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: '"Stare in bianco" nel gergo mafioso significa:',
+                options: ['Essere puliti, non ricercati', 'Essere innocenti', 'Avere paura', 'Essere informati'],
+                correct: 'Essere puliti, non ricercati',
+                explanation: '✅ Corretto! "Stare in bianco" = non essere ricercati dalla polizia',
+                errorExplanation: '❌ "Stare in bianco" = non avere precedenti penali, essere puliti'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: '"__________" è il termine per la spartizione di cariche politiche.',
+                correct: ['lottizzazione'],
+                explanation: '✅ Corretto! Lottizzazione = spartizione di incarichi tra partiti. Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il termine..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi il linguaggio giornalistico investigativo come un professionista!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene il lessico investigativo, ma approfondisci il gergo specialistico!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: GIP, collaboratore di giustizia, stile brillante, metonimie!';
+            } else {
+                message = '📚 Ripassa le tabelle! Concentrati sui termini giuridici, il gergo mafioso e le figure retoriche!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

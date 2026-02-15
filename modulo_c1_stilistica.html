@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C1 - Stilistica e Registro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --c1-color: #8b5a2b;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --stylistic: #6b46c1;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--c1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(139, 90, 43, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .stylistic { color: var(--stylistic); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--c1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--c1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--c1-color); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #6b4423;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--c1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .intro-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            border-left: 5px solid var(--c1-color);
+        }
+        .exercise-counter {
+            background: var(--c1-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C1 - Stilistica e Registro</h1>
+            <p>Padronanza stilistica: registri linguistici, figure retoriche e variazione diamesica</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C1</a>
+            <span>›</span>
+            <strong>Stilistica</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">✍️ Stilistica e Registro</h1>
+            <p class="page-subtitle">Variazione stilistica, figure retoriche e adeguamento comunicativo avanzato</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('registers', this)">Registri</button>
+            <button class="nav-tab" onclick="showSection('figures', this)">Figure Retoriche</button>
+            <button class="nav-tab" onclick="showSection('variation', this)">Variazione</button>
+            <button class="nav-tab" onclick="showSection('intensification', this)">Intensificazione</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="intro-box">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo C1! ✍️</h3>
+                <p>Oggi studiamo la <strong>stilistica</strong> e il <strong>registro linguistico</strong>, ovvero come variare la lingua in base al contesto comunicativo, all'interlocutore e agli scopi espressivi. Un parlante C1 padroneggia la variazione stilistica con consapevolezza.</p>
+                <p style="margin-top: 10px;"><strong>Esempio:</strong> La stessa idea può essere espressa come <span class="stylistic">"Ho commesso un grave errore"</span> (formale) o <span class="stylistic">"Ho fatto una cazzata"</span> (colloquiale): la scelta dipende dal registro adeguato.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è la Stilistica?</div>
+                <div class="card-body">
+                    <p>La <strong>stilistica</strong> studia le scelte linguistiche che caratterizzano un testo o un parlato in relazione al contesto comunicativo. Al livello C1 si richiede la padronanza della <strong>variazione diamesica</strong> (adattamento al contesto).</p>
+                    
+                    <div class="transformation-box">
+                        <strong>1. Registro linguistico (variazione diamesica):</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Aulico/Solenne:</strong> Estremamente formale, cerimoniale (Vostra Signoria)</li>
+                            <li><strong>Alto/Formale:</strong> Ufficiale, professionale, distante (Lei, formule cortesi)</li>
+                            <li><strong>Medio:</strong> Standard, quotidiano, neutro</li>
+                            <li><strong>Basso/Informale:</strong> Colloquiale, familiare (tu, espressioni generiche)</li>
+                            <li><strong>Gergale:</strong> Specifico di gruppi (giovanile, professionale)</li>
+                        </ul>
+                    </div>
+
+                    <div class="transformation-box">
+                        <strong>2. Figure retoriche e stile:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Metafore, similitudini, iperboli per intensificare</li>
+                            <li>Allitterazioni e assonanze per effetti sonori</li>
+                            <li>Ironia e sottintesi per implicature</li>
+                            <li>Sintassi marcata per enfasi</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Competenza stilistica C1:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Riconoscere e produrre variazioni di registro appropriate</li>
+                            <li>Utilizzare figure retoriche complesse</li>
+                            <li>Intensificare o attenuare il messaggio strategicamente</li>
+                            <li>Decodificare testi letterari, burocratici e specialistici</li>
+                            <li>Riscrivere testi cambiando registro mantenendo il contenuto</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola fondamentale:</strong> Il registro deve essere <strong>coerente</strong> all'interno dello stesso testo o conversazione. Evitare il cosiddetto "italiano grigio" (mescolanza inappropriata di registri) o passaggi bruschi da formale a informale.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE REGISTRI -->
+        <section id="registers" class="section">
+            <div class="card">
+                <div class="card-header">I Registri Linguistici</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il registro è l'insieme delle scelte lessicali, sintattiche e morfologiche determinate dal contesto comunicativo.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Registro</th><th>Caratteristiche</th><th>Esempi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Aulico/Solenne</strong></td>
+                                <td>Estremamente formale, cerimoniale, arcaico</td>
+                                <td>"Vostra Signoria", " Ella", "siamo lieti"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Alto/Formale</strong></td>
+                                <td>Professionale, distante, cortese</td>
+                                <td>"Egregio", "Gentile", "La ringrazio", "desidererei"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Medio</strong></td>
+                                <td>Standard, quotidiano, corretto</td>
+                                <td>"Buongiorno", "Mi scusi", "Non so"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Basso/Informale</strong></td>
+                                <td>Colloquiale, familiare, dialettale</td>
+                                <td>"Ciao", "boh", "un sacco", "che casino"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gergale</strong></td>
+                                <td>Gruppo-specifico, identitario</td>
+                                <td>"figo", "sfigato", "scialla", termini tecnici</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Confronto formale vs informale:</strong><br>
+                        <em>Saluti:</em> Buongiorno → Ciao<br>
+                        <em>Scuse:</em> Mi rincresce enormemente → Scusa<br>
+                        <em>Quantità:</em> Parecchio/Molto → Un sacco/Un casino<br>
+                        <em>Disordine:</em> Che confusione → Che macello/Che bordello<br>
+                        <em>Negazione:</em> Non è rilevante → Chi se ne frega
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Indicatori di registro:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Allocutivi:</strong> Lei/Ella vs tu</li>
+                            <li><strong>Formule di cortesia:</strong> "potrebbe" vs "puoi"</li>
+                            <li><strong>Lessico:</strong> termini astratti vs concreti</li>
+                            <li><strong>Sintassi:</strong> periodo ipotetico vs frase semplice</li>
+                            <li><strong>Modi verbali:</strong> congiuntivo vs indicativo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE FIGURE RETORICHE -->
+        <section id="figures" class="section">
+            <div class="card">
+                <div class="card-header">Figure Retoriche e Stile</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Le figure retoriche sono strumenti stilistici che modificano il significato letterale per effetti espressivi.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Figura</th><th>Definizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Metafora</strong></td>
+                                <td>Trasferimento di significato per analogia</td>
+                                <td>"La vita è un viaggio"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Similitudine</strong></td>
+                                <td>Confronto esplicito con "come", "quale"</td>
+                                <td>"Piove a catinelle"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Iperbole</strong></td>
+                                <td>Eccesso espressivo per intensificare</td>
+                                <td>"Ho mille cose da fare"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ironia</strong></td>
+                                <td>Contrapposizione tra detto e significato</td>
+                                <td>"Carina l'utilitaria!" (di una Mercedes)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Allitterazione</strong></td>
+                                <td>Ripetizione dello stesso suono</td>
+                                <td>"Casa calda e cara"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Chiasmo</strong></td>
+                                <td>Inversione simmetrica di elementi</td>
+                                <td>"Ama il prossimo tuo come te stesso"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Litote</strong></td>
+                                <td>Affermazione per negazione del contrario</td>
+                                <td>"Non è male" (= è buono)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ossimoro</strong></td>
+                                <td>Accostamento di termini contraddittori</td>
+                                <td>"Un silenzio assordante"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Indicatori di ironia:</strong><br>
+                        <em>Morfosintattici:</em> Frasi sospese, enunciati esclamativi<br>
+                        <em>Lessicali:</em> Aggettivi inappropriati ("economico: 300 euro a testa")<br>
+                        <em>Contestuali:</em> Contrasto tra detto e realtà
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Uso stilistico del congiuntivo (C1):</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Valore consecutivo: "Che bella giornata che sia!"</li>
+                            <li>Valore finale: "Affinché tutto sia chiaro"</li>
+                            <li>Valore concessivo: "Per quanto studi, non passa"</li>
+                            <li>Valore modale: "È come se fosse vero"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE VARIAZIONE -->
+        <section id="variation" class="section">
+            <div class="card">
+                <div class="card-header">Variazione Diamesica e Diafasica</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La variazione diamesica riguarda il mezzo di comunicazione (orale vs scritto); la diafasica riguarda il registro formale vs informale.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tipo</th><th>Descrizione</th><th>Esempi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Diamesica</strong></td>
+                                <td>Variazione per mezzo comunicativo</td>
+                                <td>Scritto formale vs parlato colloquiale</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Diafasica</strong></td>
+                                <td>Variazione per situazione comunicativa</td>
+                                <td>Registro alto vs basso</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Diastratica</strong></td>
+                                <td>Variazione per stratificazione sociale</td>
+                                <td>Livello culturale, istruzione</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Diatopica</strong></td>
+                                <td>Variazione geografica</td>
+                                <td>Regionalismi, dialetti</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Adattamento contestuale C1:</strong><br>
+                        • <strong>Scritto formale:</strong> Periodi complessi, lessico astratto, congiuntivo<br>
+                        • <strong>Scritto informale:</strong> Frasi brevi, abbreviazioni, emoticons<br>
+                        • <strong>Orale formale:</strong> Pronuncia accurata, pause, formule di cortesia<br>
+                        • <strong>Orale informale:</strong> Ellissi, interiezioni, modalità dialettali
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Decodifica e riscrittura:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Linguaggio burocratico:</strong> "Si invita a prendere visione" → "Guarda"</li>
+                            <li><strong>Linguaggio giuridico:</strong> "In data odierna" → "Oggi"</li>
+                            <li><strong>Linguaggio scientifico:</strong> "Si è proceduto all'analisi" → "Abbiamo analizzato"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE INTENSIFICAZIONE -->
+        <section id="intensification" class="section">
+            <div class="card">
+                <div class="card-header">Intensificazione e Attenuazione</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Strategie per rafforzare o minimizzare il messaggio comunicativo.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Strategia</th><th>Strumento</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Suffissi intensificanti</strong></td>
+                                <td>-one, -issimo, -errimo</td>
+                                <td>"grandissimo", "celeberrimo"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Diminutivi</strong></td>
+                                <td>-etto, -ello, -uccio, -ellino</td>
+                                <td>"giretto", "amoruccio"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spregiativi</strong></td>
+                                <td>-accio, -astro, -occio</td>
+                                <td>"poveraccio", "giovinastro"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Quantificatori</strong></td>
+                                <td>ben, bello</td>
+                                <td>"ben caldo", "bella fresca"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Avverbi intensivi</strong></td>
+                                <td>davvero, proprio, semplicemente</td>
+                                <td>"proprio inaccettabile"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Condizionali sospesi</strong></td>
+                                <td>se (mai)</td>
+                                <td>"Se mai vengo a sapere..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Formule fisse esclamative:</strong><br>
+                        <em>Intensificazione:</em> "Non ci posso credere!", "Santo cielo!", "Per carità!"<br>
+                        <em>Attenuazione:</em> "Per lo meno", "In qualche modo", "Più o meno"
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Focalizzazione e prospettiva temporale:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Marcatori escludenti:</strong> "Semplicemente inaccettabile"</li>
+                            <li><strong>Futuro al presente:</strong> "Per te farà lo stesso" (= fa)</li>
+                            <li><strong>Imperfetto di scusa:</strong> "E io che ne sapevo?"</li>
+                            <li><strong>Imperfetto di sorpresa:</strong> "Non dovevi andare dal dentista?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C1 - Stilistica e Registro (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Concetti base (registro e stilistica)
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Quale termine indica l\'insieme delle scelte linguistiche in base al contesto comunicativo?',
+                options: ['Registro linguistico', 'Dialetto', 'Accento', 'Pronuncia'],
+                correct: 'Registro linguistico',
+                explanation: '✅ Corretto! Il registro linguistico è l\'insieme delle scelte lessicali e sintattiche determinate dal contesto',
+                errorExplanation: '❌ Il registro linguistico è l\'insieme delle scelte linguistiche appropriate al contesto comunicativo'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'La __________ studia le scelte linguistiche che caratterizzano un testo in relazione al contesto.',
+                correct: ['stilistica'],
+                explanation: '✅ Corretto! La stilistica analizza le scelte espressive e il loro effetto'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Quale registro è estremamente formale e cerimoniale?',
+                options: ['Registro aulico', 'Registro medio', 'Registro colloquiale', 'Registro gergale'],
+                correct: 'Registro aulico',
+                explanation: '✅ Corretto! Il registro aulico/solenne è il più formale (Vostra Signoria, Ella)',
+                errorExplanation: '❌ Il registro aulico/solenne è quello estremamente formale e cerimoniale'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'In italiano formale ci si rivolge con il pronome di cortesia __________.',
+                correct: ['Lei', 'lei'],
+                explanation: '✅ Corretto! Il "Lei" è la forma di cortesia usata nel registro formale'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Quale espressione appartiene al registro formale?',
+                options: ['Mi rincresce enormemente', 'Scusa', 'Boh', 'Che casino'],
+                correct: 'Mi rincresce enormemente',
+                explanation: '✅ Corretto! "Mi rincresce enormemente" è una formula formale per scusarsi',
+                errorExplanation: '❌ "Mi rincresce enormemente" è formale; le altre sono colloquiali'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'La variazione __________ riguarda l\'adattamento al contesto situazionale (formale vs informale).',
+                correct: ['diafasica'],
+                explanation: '✅ Corretto! La variazione diafasica riguarda il registro linguistico'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Quale figura retorica trasferisce significato per analogia?',
+                options: ['Metafora', 'Iperbole', 'Ironia', 'Allitterazione'],
+                correct: 'Metafora',
+                explanation: '✅ Corretto! La metafora trasferisce significato per analogia ("la vita è un viaggio")',
+                errorExplanation: '❌ La metafora è il trasferimento di significato basato su analogia'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'La __________ è una figura retorica che consiste nell\'eccesso espressivo per intensificare.',
+                correct: ['iperbole'],
+                explanation: '✅ Corretto! L\'iperbole esagera per effetto espressivo ("ho mille cose da fare")'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Quale espressione è appropriata in una email formale?',
+                options: ['Egregio signor Bianchi', 'Ciao Mario', 'Hey!', 'Caro'],
+                correct: 'Egregio signor Bianchi',
+                explanation: '✅ Corretto! "Egregio" è la formula di apertura formale per lettere e email',
+                errorExplanation: '❌ "Egregio" è l\'apertura formale; le altre sono informali'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'L\'__________ è la figura retorica che esprime il contrario di ciò che si intende dire.',
+                correct: ['ironia'],
+                explanation: '✅ Corretto! L\'ironia dice il contrario del significato reale (es. "Carina l\'utilitaria" di una Mercedes)'
+            },
+
+            // ESERCIZI 11-20: Registri linguistici
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Quale allocutivo è tipico del registro aulico?',
+                options: ['Vostra Signoria', 'Lei', 'Tu', 'Voi'],
+                correct: 'Vostra Signoria',
+                explanation: '✅ Corretto! "Vostra Signoria" (abbreviato V.S.) è tipico del registro aulico',
+                errorExplanation: '❌ "Vostra Signoria" è usato nel registro aulico/solenne'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Nel registro informale, "molto" può diventare "un __________" o "una cifra".',
+                correct: ['sacco', 'casino'],
+                explanation: '✅ Corretto! "Un sacco" e "un casino" sono intensificatori colloquiali'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Quale formula di chiusura è formale?',
+                options: ['Distinti saluti', 'Ciao', 'A presto', 'Baci'],
+                correct: 'Distinti saluti',
+                explanation: '✅ Corretto! "Distinti saluti" è la formula di chiusura formale standard',
+                errorExplanation: '❌ "Distinti saluti" è la chiusura formale; le altre sono informali'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'La forma "Ella" è un pronome allocutivo del registro __________.',
+                correct: ['formale', 'alto', 'aulico'],
+                explanation: '✅ Corretto! "Ella" è un pronome formale arcaico usato come soggetto'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Quale espressione indica disordine nel registro informale?',
+                options: ['Che casino', 'Che confusione', 'Che disordine', 'Caos'],
+                correct: 'Che casino',
+                explanation: '✅ Corretto! "Che casino" è l\'espressione colloquiale per disordine',
+                errorExplanation: '❌ "Che casino" è informale; "che confusione" è neutra/formale'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: '"Non è rilevante" nel registro informale diventa "Chi se ne __________".',
+                correct: ['frega'],
+                explanation: '✅ Corretto! "Chi se ne frega" è l\'equivalente colloquiale di "non importa"'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Quale verbo modale è tipico del registro formale?',
+                options: ['Potrebbe', 'Puoi', 'Devi', 'Sai'],
+                correct: 'Potrebbe',
+                explanation: '✅ Corretto! "Potrebbe" è il condizionale di cortesia (formale)',
+                errorExplanation: '❌ "Potrebbe" è il condizionale di cortesia usato nel formale'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Il registro __________ è usato da gruppi specifici per rafforzare l\'identità (es. giovanile).',
+                correct: ['gergale'],
+                explanation: '✅ Corretto! Il registro gergale è specifico di gruppi (giovanile, professionale, ecc.)'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Quale espressione è ironica?',
+                options: ['Carina l\'utilitaria (di una Ferrari)', 'Bel tempo oggi (se piove)', 'Tutto bene', 'Grazie mille'],
+                correct: 'Carina l\'utilitaria (di una Ferrari)',
+                explanation: '✅ Corretto! L\'ironia dice il contrario: un\'utilitaria non è una Ferrari',
+                errorExplanation: '❌ L\'ironia consiste nel dire il contrario di ciò che si pensa'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: '"Mi scusi" è la forma formale di "__________".',
+                correct: ['scusa', 'scusami'],
+                explanation: '✅ Corretto! "Scusa/scusami" è l\'informale di "Mi scusi"'
+            },
+
+            // ESERCIZI 21-30: Figure retoriche
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Quale figura retorica usa il confronto esplicito con "come"?',
+                options: ['Similitudine', 'Metafora', 'Iperbole', 'Ironia'],
+                correct: 'Similitudine',
+                explanation: '✅ Corretto! La similitudine usa esplicitamente "come", "quale"',
+                errorExplanation: '❌ La similitudine è il confronto esplicito (con "come", "quale")'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'La ripetizione dello stesso suono iniziale si chiama __________.',
+                correct: ['allitterazione'],
+                explanation: '✅ Corretto! L\'allitterazione è la ripetizione di suoni iniziali (es. "Casa calda")'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Quale figura accosta termini contraddittori?',
+                options: ['Ossimoro', 'Chiasmo', 'Litote', 'Iperbole'],
+                correct: 'Ossimoro',
+                explanation: '✅ Corretto! L\'ossimoro unisce contraddittori ("silenzio assordante")',
+                errorExplanation: '❌ L\'ossimoro unisce termini semanticamente opposti'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'La __________ è l\'affermazione per negazione del contrario (es. "Non è male" = è buono).',
+                correct: ['litote'],
+                explanation: '✅ Corretto! La litote nega il contrario per affermare ("non è male" = è buono)'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Quale figura presenta inversione simmetrica di elementi?',
+                options: ['Chiasmo', 'Anafora', 'Epifora', 'Climax'],
+                correct: 'Chiasmo',
+                explanation: '✅ Corretto! Il chiasmo inverte simmetricamente (Ama il prossimo tuo come te stesso)',
+                errorExplanation: '❌ Il chiasmo è l\'inversione simmetrica di elementi corrispondenti'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: '"Piove a catinelle" è una __________ che esagera l\'intensità della pioggia.',
+                correct: ['iperbole'],
+                explanation: '✅ Corretto! "Piove a catinelle" è un\'iperbole espressiva'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Quale figura retorica usa la ripetizione di suoni vocalici?',
+                options: ['Assonanza', 'Allitterazione', 'Consonanza', 'Onomatopea'],
+                correct: 'Assonanza',
+                explanation: '✅ Corretto! L\'assonanza è la ripetizione di suoni vocalici',
+                errorExplanation: '❌ L\'assonanza riguarda la ripetizione di vocali, l\'allitterazione di consonanti'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Una __________ è una parola che imita il suono che rappresenta (es. "bum!").',
+                correct: ['onomatopea'],
+                explanation: '✅ Corretto! L\'onomatopea imita il suono ("bum", "splash", "tick")'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Quale figura accumula elementi in ordine crescente di intensità?',
+                options: ['Climax', 'Anticlimax', 'Anafora', 'Chiasmo'],
+                correct: 'Climax',
+                explanation: '✅ Corretto! Il climax ordina per intensità crescente',
+                errorExplanation: '❌ Il climax è la disposizione per gradi crescenti di intensità'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'L\'__________ è la ripetizione della stessa parola all\'inizio di versi o frasi successive.',
+                correct: ['anafora'],
+                explanation: '✅ Corretto! L\'anafora ripete la stessa parola all\'inizio di elementi successivi'
+            },
+
+            // ESERCIZI 31-40: Intensificazione e morfologia
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Quale suffisso indica aumentativo?',
+                options: ['-one', '-etto', '-uccio', '-ino'],
+                correct: '-one',
+                explanation: '✅ Corretto! "-one" è il suffisso aumentativo ("grandone", "donnone")',
+                errorExplanation: '❌ Il suffisso aumentativo è "-one" (anche al femminile: donnone)'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: '"Celeberrimo" e "miserrimo" sono superlativi in __________.',
+                correct: ['-errimo', 'errimo'],
+                explanation: '✅ Corretto! Il suffisso "-errimo" forma superlativi assoluti latineggianti'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Quale suffisso è spregiativo?',
+                options: ['-accio', '-ello', '-etto', '-uccio'],
+                correct: '-accio',
+                explanation: '✅ Corretto! "-accio" è spregiativo ("poveraccio", "bruttaccio")',
+                errorExplanation: '❌ "-accio" è il suffisso spregiativo per eccellenza'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: '"Giovinastro" usa il suffisso spregiativo __________.',
+                correct: ['-astro'],
+                explanation: '✅ Corretto! "-astro" indica qualità insufficiente (giovinastro, poetastro)'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Quale avverbio intensifica un aggettivo?',
+                options: ['Proprio', 'Forse', 'Quasi', 'Poco'],
+                correct: 'Proprio',
+                explanation: '✅ Corretto! "Proprio" intensifica ("proprio inaccettabile")',
+                errorExplanation: '❌ "Proprio" è un avverbio intensivo ("proprio bello", "proprio così")'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'La struttura "se mai" crea un condizionale __________ con valore intensivo.',
+                correct: ['sospeso'],
+                explanation: '✅ Corretto! Il condizionale sospeso "se mai" intensifica la minaccia o ipotesi'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Quale formula è tipica dell\'intensificazione emotiva?',
+                options: ['Non ci posso credere!', 'Forse', 'Più o meno', 'Non lo so'],
+                correct: 'Non ci posso credere!',
+                explanation: '✅ Corretto! "Non ci posso credere!" è una formula esclamativa intensiva',
+                errorExplanation: '❌ "Non ci posso credere!" è una formula fissa esclamativa intensiva'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: '"Per lo meno" è un quantificatore __________ che attenua.',
+                correct: ['escludente'],
+                explanation: '✅ Corretto! "Per lo meno" è un quantificatore escludente che minimizza'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Quale suffisso diminutivo vezzeggiativo?',
+                options: ['-uccio', '-occio', '-astro', '-accio'],
+                correct: '-uccio',
+                explanation: '✅ Corretto! "-uccio" è vezzeggiativo ("amoruccio", "fiorellino")',
+                errorExplanation: '❌ "-uccio" è il suffisso diminutivo vezzeggiativo'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: '"Bella fresca" usa il quantificatore __________ come intensificatore.',
+                correct: ['bello'],
+                explanation: '✅ Corretto! "Bello/ben" funziona come quantificatore intensivo ("ben caldo")'
+            },
+
+            // ESERCIZI 41-50: Variazione e contesto avanzato
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Quale variazione riguarda il mezzo di comunicazione (orale vs scritto)?',
+                options: ['Diamesica', 'Diafasica', 'Diastratica', 'Diatopica'],
+                correct: 'Diamesica',
+                explanation: '✅ Corretto! La variazione diamesica riguarda il canale (orale/scritto)',
+                errorExplanation: '❌ La variazione diamesica riguarda il mezzo di comunicazione'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'La variazione __________ riguarda la stratificazione sociale (livello culturale).',
+                correct: ['diastratica'],
+                explanation: '✅ Corretto! La variazione diastratica dipende dal livello sociale/culturale'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Quale varietà linguistica è tipica della comunicazione burocratica?',
+                options: ['In data odierna', 'Oggi', 'Adesso', 'Stamattina'],
+                correct: 'In data odierna',
+                explanation: '✅ Corretto! "In data odierna" è tipico del linguaggio burocratico/formale',
+                errorExplanation: '❌ "In data odierna" è la perifrasi burocratica per "oggi"'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: '"Si invita a prendere visione" nel linguaggio semplice diventa "__________".',
+                correct: ['guarda', 'leggi', 'vedi'],
+                explanation: '✅ Corretto! La riscrittura semplice di "prendere visione" è "guardare/vedere"'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Quale tempo verbale caratterizza il registro formale scritto?',
+                options: ['Congiuntivo', 'Indicativo presente', 'Imperativo', 'Infinito'],
+                correct: 'Congiuntivo',
+                explanation: '✅ Corretto! Il congiuntivo è tipico del registro formale scritto',
+                errorExplanation: '❌ Il congiuntivo è caratteristico del registro formale e culturale'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'L\'__________ è l\'uso del futuro al presente: "Per te farà lo stesso" (= fa).',
+                correct: ['ampliamento temporale', 'ampliamento del futuro'],
+                explanation: '✅ Corretto! L\'ampliamento del futuro usa il futuro per indicare presente'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Quale è l\'imperfetto di sorpresa?',
+                options: ['Tu non dovevi andare dal dentista?', 'Vado dal dentista', 'Sono andato dal dentista', 'Andrò dal dentista'],
+                correct: 'Tu non dovevi andare dal dentista?',
+                explanation: '✅ Corretto! L\'imperfetto di sorpresa indica un\'aspettativa non realizzata',
+                errorExplanation: '❌ L\'imperfetto di sorpresa esprime aspettative ("non dovevi...?")'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'L\'imperfetto di __________ esprime scuse: "E io che ne sapevo?"',
+                correct: ['scusa', 'scuse'],
+                explanation: '✅ Corretto! L\'imperfetto di scusa giustifica con l\'ignoranza passata'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Quale anteposizione ha valore ironico?',
+                options: ['Bel modo di rispondere!', 'Un bel modo di rispondere', 'Hai risposto bene', 'Rispondi bene'],
+                correct: 'Bel modo di rispondere!',
+                explanation: '✅ Corretto! L\'anteposizione dell\'aggettivo con esclamativa è ironica',
+                errorExplanation: '❌ L\'anteposizione con esclamativa ("Bel modo!") è ironica'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'La competenza stilistica C1 richiede la padronanza della variazione __________.',
+                correct: ['diamesica'],
+                explanation: '✅ Corretto! La variazione diamesica (adattamento al contesto) è competenza C1. Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente la stilistica e i registri linguistici!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene la variazione stilistica, ma fai attenzione alle sfumature!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: registro formale = Lei, congiuntivo; informale = tu, espressioni colloquiali!';
+            } else {
+                message = '📚 Ripassa le tabelle! Ricorda: metafora = analogia, iperbole = esagerazione, ironia = contraddittorio!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

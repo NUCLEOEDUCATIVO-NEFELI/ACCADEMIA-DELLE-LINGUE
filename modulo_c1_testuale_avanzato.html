@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C1 - Organizzazione Testuale</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --text: #0891b2;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .text { color: var(--text); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--b1-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .intro-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            border-left: 5px solid var(--b1-color);
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B2 - Organizzazione Testuale</h1>
+            <p>Strutturare testi coerenti, coesi e efficaci</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B2</a>
+            <span>›</span>
+            <strong>Organizzazione Testuale</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📝 Organizzazione Testuale</h1>
+            <p class="page-subtitle">Coesione, coerenza, connettivi logici e strutture testuali</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('cohesion', this)">Coesione</button>
+            <button class="nav-tab" onclick="showSection('coherence', this)">Coerenza</button>
+            <button class="nav-tab" onclick="showSection('connectors', this)">Connettivi</button>
+            <button class="nav-tab" onclick="showSection('types', this)">Tipologie</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="intro-box">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B2! 📝</h3>
+                <p>Oggi studiamo l'<strong>organizzazione testuale</strong>, ovvero come strutturare un testo in modo logico, chiaro ed efficace.</p>
+                <p style="margin-top: 10px;"><strong>Esempio:</strong> Invece di "<span class="text">Sono andato al mare. Pioveva. Ho preso l'ombrello. Faceva caldo.</span>" (incoerente), scriviamo "<span class="text">Nonostante facesse caldo, pioveva improvvisamente, quindi ho preso l'ombrello prima di andare al mare.</span>" (coeso e coerente).</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è l'Organizzazione Testuale?</div>
+                <div class="card-body">
+                    <p>L'<strong>organizzazione testuale</strong> riguarda le strategie linguistiche e strutturali che permettono di creare testi ben strutturati, logici e comprensibili. Un testo ben organizzato possiede due caratteristiche fondamentali.</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Le due proprietà fondamentali del testo:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>La coesione:</strong> La connessione grammaticale e lessicale tra le frasi (il "come" si lega il testo)</li>
+                            <li><strong>La coerenza:</strong> La congruenza semantica e logica del contenuto (il "senso" del testo)</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Elementi dell'organizzazione testuale:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Connettivi logici:</strong> Parole che collegano frasi e periodi (perciò, tuttavia, infatti)</li>
+                            <li><strong>Anafora e catafora:</strong> Riferimenti a elementi precedenti o successivi nel testo</li>
+                            <li><strong>Progressione tematica:</strong> Sviluppo lineare dell'argomento</li>
+                            <li><strong>Schemi strutturali:</strong> Organizzazione macrotestuale (introduzione-sviluppo-conclusione)</li>
+                            <li><strong>Tipologie testuali:</strong> Narrativo, descrittivo, argomentativo, espositivo, regolativo</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola fondamentale:</strong> Un testo può essere grammaticalmente corretto (coeso) ma privo di senso logico (incoerente), o viceversa. Il testo efficace richiede entrambe le proprietà: deve essere ben collegato (coeso) e logicamente consistente (coerente).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE COESIONE -->
+        <section id="cohesion" class="section">
+            <div class="card">
+                <div class="card-header">La Coesione Testuale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La coesione è la connessione grammaticale e lessicale che rende il testo un tutt'uno, collegando le frasi tra loro.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Meccanismo</th><th>Funzione</th><th>Esempi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Connettivi</strong></td>
+                                <td>Collegare logicamente le frasi</td>
+                                <td>"perciò", "tuttavia", "infatti", "d'altra parte"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Anafora</strong></td>
+                                <td>Riferimento a elementi precedenti</td>
+                                <td>Pronomi ("lo", "la"), dimostrativi ("questo", "tale")</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Catafora</strong></td>
+                                <td>Preannuncio di elementi successivi</td>
+                                <td>"Ecco il problema: non abbiamo tempo"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ellissi</strong></td>
+                                <td>Omissione di elementi ripetuti</td>
+                                <td>"Marco è arrivato, Maria [è arrivata] alle 18"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lessico</strong></td>
+                                <td>Continuità tematica lessicale</td>
+                                <td>Sinonimi, iperonimi, ripetizioni controllate</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tempo/Modo</strong></td>
+                                <td>Continuità verbale</td>
+                                <td>Passato prossimo → imperfetto → trapassato</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Tipi di connettivi essenziali:</strong><br>
+                        <em>Additivi:</em> e, inoltre, altresì, per giunta<br>
+                        <em>Avversativi:</em> ma, però, tuttavia, nondimeno<br>
+                        <em>Causali:</em> perché, poiché, dato che, siccome<br>
+                        <em>Conclusivi:</em> dunque, perciò, quindi, in conclusione<br>
+                        <em>Temporali:</em> prima, poi, intanto, successivamente
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Progressione tematica:</strong> Tecnica per mantenere la coesione<br>
+                        <em>Tema costante:</em> Il tema rimane uguale, cambia il rema<br>
+                        <em>Tema derivato:</em> Il nuovo tema deriva dal rema precedente<br>
+                        <em>Tema concatenato:</em> Tema e rema si alternano in catena
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE COERENZA -->
+        <section id="coherence" class="section">
+            <div class="card">
+                <div class="card-header">La Coerenza Testuale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La coerenza è la proprietà di un testo di essere logicamente consistente, senza contraddizioni, con un filo conduttore chiaro.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Principio</th><th>Descrizione</th><th>Errori comuni</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Isotopia</strong></td>
+                                <td>Uniformità semantica del campo tematico</td>
+                                <td>Mescolare argomenti non correlati</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Non contraddizione</strong></td>
+                                <td>Evitare affermazioni opposte</td>
+                                <td>"Faceva caldo. C'era un freddo intenso."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Progressione logica</strong></td>
+                                <td>Ordine cronologico o causale chiaro</td>
+                                <td>Salti logici, inversioni temporali confuse</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pertinenza</strong></td>
+                                <td>Ogni informazione deve essere rilevante</td>
+                                <td>Digressioni inutili, informazioni superflue</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Completezza</strong></td>
+                                <td>Tutti gli elementi necessari devono esserci</td>
+                                <td>Lacune informative, salti argomentativi</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Strategie per garantire la coerenza:</strong><br>
+                        <em>Pianificazione:</em> Definire obiettivo, destinatario, contenuti prima di scrivere<br>
+                        <em>Scaletta:</em> Organizzare i punti in sequenza logica<br>
+                        <em>Controllo:</em> Verificare che ogni frase contribuisca al senso generale<br>
+                        <em>Eliminazione:</em> Togliere elementi che non servono all'obiettivo
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Macrostruttura del testo coerente:</strong><br>
+                        <em>Introduzione:</em> Presentazione tema, contestualizzazione, tesi (se argomentativo)<br>
+                        <em>Sviluppo:</em> Argomenti organizzati logicamente, esempi, prove<br>
+                        <em>Conclusione:</em> Riassunto, sintesi, prospettive future, chiusura
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CONNETTIVI -->
+        <section id="connectors" class="section">
+            <div class="card">
+                <div class="card-header">I Connettivi Logici</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>I connettivi sono le "parole-ponte" che esplicitano le relazioni logiche tra le frasi, rendendo esplicite le inferenze del lettore.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Relazione</th><th>Connettivi principali</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Addizione</strong></td>
+                                <td>e, anche, inoltre, oltre a, per giunta, altresì</td>
+                                <td>"Studia molto; inoltre, partecipa attivamente"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Opposizione</strong></td>
+                                <td>ma, però, tuttavia, bensì, nondimeno, invece</td>
+                                <td>"È pigro; tuttavia, ottiene buoni risultati"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Causa</strong></td>
+                                <td>perché, poiché, dato che, siccome, visto che</td>
+                                <td>"Siccome pioveva, siamo rimasti a casa"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Conseguenza</strong></td>
+                                <td>dunque, perciò, quindi, così, di conseguenza</td>
+                                <td>"Pioveva; quindi siamo rimasti a casa"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tempo</strong></td>
+                                <td>prima, poi, intanto, mentre, quando, successivamente</td>
+                                <td>"Prima studiò, poi si rilassò"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spiegazione</strong></td>
+                                <td>infatti, cioè, ossia, vale a dire, in altre parole</td>
+                                <td>"È un ipocrita; infatti, dice una cosa e ne fa un'altra"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Esempio</strong></td>
+                                <td>ad esempio, per esempio, come, in particolare</td>
+                                <td>"Amo i dolci, ad esempio il tiramisù"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Restrizione</strong></td>
+                                <td>però, tuttavia, sebbene, benché, nonostante, malgrado</td>
+                                <td>"Benché fosse stanco, continuò a lavorare"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Uso avanzato dei connettivi:</strong><br>
+                        <em>Connettivi testuali:</em> In primo luogo, in secondo luogo, da un lato... dall'altro, in conclusione<br>
+                        <em>Connettivi argomentativi:</em> D'altra parte, per contro, viceversa, al contrario<br>
+                        <em>Connettivi riformulativi:</em> In altri termini, detto altrimenti, per meglio dire
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Posizione dei connettivi:</strong><br>
+                        <em>Iniziale:</em> "Perciò, ho deciso di..." (enfatico)<br>
+                        <em>Mediana:</em> "Ho, perciò, deciso di..." (raro)<br>
+                        <em>Finale:</em> "Ho deciso di cambiare, perciò" (conclusivo)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TIPOLOGIE TESTUALI -->
+        <section id="types" class="section">
+            <div class="card">
+                <div class="card-header">Le Tipologie Testuali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Ogni tipo testuale ha una struttura, funzione comunicativa e caratteristiche linguistiche specifiche.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tipologia</th><th>Funzione</th><th>Struttura tipica</th><th>Tempi verbali</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Narrativo</strong></td>
+                                <td>Raccontare eventi reali o fantastici</td>
+                                <td>Stato iniziale → Nodo → Svolgimento → Risultato → Stato finale</td>
+                                <td>Passato (remoto, prossimo, imperfetto)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Descrittivo</strong></td>
+                                <td>Rappresentare persone, luoghi, oggetti</td>
+                                <td>Quadro generale → Dettagli specifici → Impressione finale</td>
+                                <td>Presente, imperfetto descrittivo</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Argomentativo</strong></td>
+                                <td>Convincere, dimostrare, persuadere</td>
+                                <td>Tesi → Argomenti a sostegno → Confutazione antitesi → Conclusione</td>
+                                <td>Presente, condizionale, futuro</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Espositivo</strong></td>
+                                <td>Spiegare, informare, illustrare</td>
+                                <td>Definizione → Analisi componenti → Esempi → Sintesi</td>
+                                <td>Presente, imperfetto</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Regolativo/Istruttivo</strong></td>
+                                <td>Indicare procedure, norme, comportamenti</td>
+                                <td>Scopo → Materiali/condizioni → Fasi operative → Avvertenze</td>
+                                <td>Imperativo, presente</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Indicatori linguistici per tipologia:</strong><br>
+                        <em>Narrativo:</em> Aggettivi di modo, avverbi temporali, dialogo diretto<br>
+                        <em>Descrittivo:</em> Aggettivi qualificativi, termini specifici, metafore<br>
+                        <em>Argomentativo:</em> Connettivi logici, verbi assertivi, dati/statistiche<br>
+                        <em>Espositivo:</em> Termini tecnici, definizioni, connettivi spiegativi<br>
+                        <em>Regolativo:</em> Imperativi, avverbi di modo, segnaletica testuale
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>I testi ibridi:</strong> Molti testi reali combinano tipologie (es. articolo giornalistico: espositivo + argomentativo; racconto storico: narrativo + descrittivo). È importante riconoscere la tipologia dominante e le seconde tipologie presenti.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B2 - Organizzazione Testuale (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali) - Organizzazione Testuale
+        const exercises = [
+            // ESERCIZI 1-10: Coesione e meccanismi di connessione
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Quale connettivo esprime una relazione di causa?',
+                options: ['perciò', 'poiché', 'tuttavia', 'inoltre'],
+                correct: 'poiché',
+                explanation: '✅ Corretto! "Poiché" introduce la causa (diversamente da "perciò" che introduce la conseguenza)',
+                errorExplanation: '❌ "Poiché" è il connettivo causale. "Perciò" è conclusivo, "tuttavia" avversativo, "inoltre" additivo'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Completa con un connettivo avversativo: "Studio molto, __________ non ottengo buoni voti."',
+                correct: ['ma', 'però', 'tuttavia', 'eppure'],
+                explanation: '✅ Corretto! Connettivi avversativi esprimono opposizione tra le proposizioni'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Quale meccanismo di coesione usa "questo", "tale", "codesto"?',
+                options: ['Connettivo temporale', 'Anafora dimostrativa', 'Ellissi', 'Catafora'],
+                correct: 'Anafora dimostrativa',
+                explanation: '✅ Corretto! I dimostrativi rimandano a elementi già citati (anafora)',
+                errorExplanation: '❌ Gli aggettivi dimostrativi ("questo", "tale") creano anafora, rimandando a elementi precedenti'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Completa con un connettivo conclusivo: "Pioveva molto, __________ siamo rimasti a casa."',
+                correct: ['quindi', 'perciò', 'dunque', 'così', 'di conseguenza'],
+                explanation: '✅ Corretto! I connettivi conclusivi esprimono la conseguenza di quanto detto'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Nella frase "Marco è arrivato alle 9, Maria [è arrivata] alle 10", che meccanismo si usa?',
+                options: ['Ripetizione', 'Ellissi', 'Sostituzione pronominale', 'Connettivo'],
+                correct: 'Ellissi',
+                explanation: '✅ Corretto! L\'ellissi omette elementi ripetuti ma sottintesi',
+                errorExplanation: '❌ L\'ellissi consiste nell\'omettere elementi ripetuti (qui "è arrivata") mantenendo la comprensibilità'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Quale connettivo temporale indica successione? "Prima ho studiato, __________ sono uscito."',
+                correct: ['poi', 'dopo', 'successivamente', 'quindi'],
+                explanation: '✅ Corretto! "Poi", "dopo", "successivamente" indicano successione temporale'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'La catafora è un riferimento:',
+                options: ['A elementi precedenti', 'A elementi successivi', 'A sinonimi', 'A connettivi'],
+                correct: 'A elementi successivi',
+                explanation: '✅ Corretto! La catafora anticipa elementi che verranno dopo',
+                errorExplanation: '❌ La catafora (vs anafora) preannuncia elementi che verranno esplicitati dopo nel testo'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Completa con un connettivo spiegativo: "Non ha studiato; __________, ha fallito l\'esame."',
+                correct: ['infatti', 'cioè', 'ossia', 'vale a dire'],
+                explanation: '✅ Corretto! "Infatti" spiega, giustifica, conferma quanto detto prima'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Quale connettivo esprime una restrizione/concessione?',
+                options: ['perché', 'sebbene', 'dunque', 'inoltre'],
+                correct: 'sebbene',
+                explanation: '✅ Corretto! "Sebbene" (congiunzione concessiva) introduce una circostanza ostacolante ma non impedente',
+                errorExplanation: '❌ "Sebbene" è concessivo (come "benché", "nonostante"). "Perché" è causale, "dunque" conclusivo'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Meccanismo di coesione lessicale: usare "automobile" poi "macchina" è un __________.',
+                correct: ['sinonimo', 'sinonimo'],
+                explanation: '✅ Corretto! La ripetizione di sinonimi è un meccanismo di coesione lessicale'
+
+            },
+
+            // ESERCIZI 11-20: Coerenza e progressione tematica
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Quale testo è INCOERENTE?',
+                options: ['Pioveva. Uscii con l\'ombrello.', 'Faceva caldo. Indossai il cappotto.', 'Studiai molto. Passai l\'esame.', 'Ero stanco. Mi addormentai presto.'],
+                correct: 'Faceva caldo. Indossai il cappotto.',
+                explanation: '✅ Corretto! Contraddizione logica: se fa caldo non si mette il cappotto',
+                errorExplanation: '❌ "Faceva caldo. Indossai il cappotto" è incoerente (contraddittorio) a livello logico-semantico'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'La __________ tematica mantiene il tema uguale mentre cambia il rema.',
+                correct: ['progressione', 'progressione costante'],
+                explanation: '✅ Corretto! Nella progressione a tema costante, il tema rimane identico nelle frasi successive'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Quale principio garantisce che tutte le parti del testo siano rilevanti per l\'argomento?',
+                options: ['Non contraddizione', 'Pertinenza', 'Completezza', 'Isotopia'],
+                correct: 'Pertinenza',
+                explanation: '✅ Corretto! La pertinenza esclude informazioni superflue o digressioni',
+                errorExplanation: '❌ La pertinenza richiede che ogni informazione sia rilevante per l\'obiettivo comunicativo'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'La __________ è l\'uniformità semantica del campo tematico in un testo.',
+                correct: ['isotopia'],
+                explanation: '✅ Corretto! L\'isotopia garantisce che il testo tratti un campo semantico coerente'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Quale sequenza temporale è corretta?',
+                options: ['Dopo aver cenato, mi lavai i denti, mi coricai.', 'Mi coricai, dopo aver cenato, mi lavai i denti.', 'Mi lavai i denti, mi coricai, dopo aver cenato.', 'Dopo aver cenato, mi coricai, mi lavai i denti.'],
+                correct: 'Dopo aver cenato, mi lavai i denti, mi coricai.',
+                explanation: '✅ Corretto! Ordine cronologico logico: cena → lavarsi denti → coricarsi',
+                errorExplanation: '❌ L\'ordine cronologico logico è: cena → lavarsi i denti → coricarsi'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Principio di __________: evitare affermazioni contraddittorie nello stesso testo.',
+                correct: ['non contraddizione'],
+                explanation: '✅ Corretto! La non contraddizione è fondamentale per la coerenza logica'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Quale elemento NON appartiene alla macrostruttura tipica di un testo?',
+                options: ['Introduzione', 'Sviluppo', 'Interruzione', 'Conclusione'],
+                correct: 'Interruzione',
+                explanation: '✅ Corretto! La struttura canonica è Introduzione-Sviluppo-Conclusione',
+                errorExplanation: '❌ La struttura standard è: Introduzione → Sviluppo → Conclusione'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Nella progressione a tema __________, il rema della frase precedente diventa tema della successiva.',
+                correct: ['derivato', 'concatenato', 'derivato'],
+                explanation: '✅ Corretto! Nel tema derivato (o progressione concatenata) c\'è continuità rema-tema'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Quale testo viola il principio di completezza?',
+                options: ['Ho comprato il pane. Era fresco.', 'Sono andato al mare. Ho nuotato.', 'Ho visto un film. Bello.', 'Ho partecipato alla riunione. Ho espresso il mio parere.'],
+                correct: 'Ho visto un film. Bello.',
+                explanation: '✅ Corretto! "Bello" è incompleto: manca l\'informazione essenziale (perché è bello?)',
+                errorExplanation: '❌ "Ho visto un film. Bello" è incompleto: manca l\'argomentazione (perché è bello?)'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'La __________ è la proprietà di un testo di essere logicamente consistente.',
+                correct: ['coerenza'],
+                explanation: '✅ Corretto! La coerenza è la consistenza logico-semantica del testo'
+
+            },
+
+            // ESERCIZI 21-30: Connettivi avanzati e uso
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Quale connettivo introduce un\'alternativa?',
+                options: ['oppure', 'infatti', 'perciò', 'poi'],
+                correct: 'oppure',
+                explanation: '✅ Corretto! "Oppure" (o "o") esprime alternativa/disgiunzione',
+                errorExplanation: '❌ "Oppure" è il connettivo disgiuntivo/alternativo. "Infatti" è spiegativo, "perciò" conclusivo'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Connettivo conclusivo formale: "Non aveva studiato; __________, non superò l\'esame."',
+                correct: ['pertanto', 'quindi', 'dunque', 'perciò'],
+                explanation: '✅ Corretto! "Pertanto" è un connettivo conclusivo di registro elevato'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Quale connettivo è appropriato per aggiungere un\'informazione di pari livello?',
+                options: ['inoltre', 'però', 'quindi', 'cioè'],
+                correct: 'inoltre',
+                explanation: '✅ Corretto! "Inoltre" è additivo, aggiunge informazioni sullo stesso piano',
+                errorExplanation: '❌ "Inoltre" (come "anche", "oltre a") è un connettivo additivo'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Connettivo concessivo: "__________ fosse stanco, continuò a lavorare."',
+                correct: ['Sebbene', 'Benché', 'Nonostante', 'Malgrado'],
+                explanation: '✅ Corretto! Le congiunzioni concessive introducono un ostacolo non impedente'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Quale connettivo riformula o spiega meglio quanto detto?',
+                options: ['ad esempio', 'cioè', 'tuttavia', 'prima'],
+                correct: 'cioè',
+                explanation: '✅ Corretto! "Cioè", "ossia", "vale a dire" riformulano spiegando',
+                errorExplanation: '❌ "Cioè" (e sinonimi) riformula il concetto precedente in modo più chiaro'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Connettivo che introduce un esempio: "Amo la frutta, __________ le mele e le pere."',
+                correct: ['ad esempio', 'per esempio', 'come', 'in particolare'],
+                explanation: '✅ Corretto! Gli connettivi esemplificativi introducono casi specifici'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Quale connettivo esprime opposizione forte (correttivo)?',
+                options: ['ma', 'bensì', 'e', 'poi'],
+                correct: 'bensì',
+                explanation: '✅ Corretto! "Bensì" corregge o contrappone energicamente (non... bensì)',
+                errorExplanation: '❌ "Bensì" (usato spesso con "non") esprime correzione/opposizione forte'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Connettivo temporale di simultaneità: "__________ telefonavo, lui bussava alla porta."',
+                correct: ['Mentre', 'Quando', 'Nel momento in cui', 'Al tempo in cui'],
+                explanation: '✅ Corretto! "Mentre" indica contemporaneità di azioni'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Quale connettivo è tipico della lingua scritta formale per strutturare un testo?',
+                options: ['cioè', 'in primo luogo', 'poi', 'però'],
+                correct: 'in primo luogo',
+                explanation: '✅ Corretto! "In primo luogo" (e "in secondo luogo") organizzano il testo formale',
+                errorExplanation: '❌ "In primo luogo", "in secondo luogo", "infine" sono connettivi testuali strutturali'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Connettivo che introduce una condizione: "__________ piove, resteremo a casa."',
+                correct: ['Se'],
+                explanation: '✅ Corretto! "Se" è la congiunzione condizionale principale'
+
+            },
+
+            // ESERCIZI 31-40: Tipologie testuali
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Quale tipologia testuale ha la funzione di raccontare eventi?',
+                options: ['Descrittivo', 'Narrativo', 'Argomentativo', 'Espositivo'],
+                correct: 'Narrativo',
+                explanation: '✅ Corretto! Il testo narrativo racconta vicende reali o immaginarie',
+                errorExplanation: '❌ Il testo narrativo serve a raccontare eventi seguendo una sequenza temporale'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Nel testo __________ prevale l\'uso dell\'imperativo e del presente.',
+                correct: ['regolativo', 'istruzioni', 'regolativo/istruzioni'],
+                explanation: '✅ Corretto! Il testo regolativo/istruzioni usa imperativo e presente per indicare procedure'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Quale tempo verbale è tipico del testo descrittivo?',
+                options: ['Passato remoto', 'Imperfetto', 'Futuro anteriore', 'Congiuntivo'],
+                correct: 'Imperfetto',
+                explanation: '✅ Corretto! L\'imperfetto descrive stati, qualità, azioni prolungate nel passato',
+                errorExplanation: '❌ L\'imperfetto è il tempo della descrizione (stati, qualità, abitudini)'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Il testo __________ ha la funzione di convincere il lettore attraverso argomenti.',
+                correct: ['argomentativo'],
+                explanation: '✅ Corretto! Il testo argomentativo mira a persuadere con prove e ragionamenti'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Quale elemento strutturale è tipico del testo narrativo?',
+                options: ['Definizione', 'Nodo/Conflitto', 'Tesi', 'Procedimento'],
+                correct: 'Nodo/Conflitto',
+                explanation: '✅ Corretto! Il testo narrativo ha struttura: stato iniziale → nodo → svolgimento → finale',
+                errorExplanation: '❌ Il "nodo" o "conflitto" è l\'elemento fondamentale della struttura narrativa'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Nel testo espositivo prevale la funzione __________ (informativa/spiegativa).',
+                correct: ['referenziale'],
+                explanation: '✅ Corretto! La funzione referenziale/informativa è dominante nel testo espositivo'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Quale connettivo è tipico del testo argomentativo?',
+                options: ['Una volta', 'D\'altra parte', 'All\'improvviso', 'Mentre'],
+                correct: 'D\'altra parte',
+                explanation: '✅ Corretto! "D\'altra parte" presenta argomenti contrapposti o alternative',
+                errorExplanation: '❌ "D\'altra parte" è tipico dell\'argomentazione per presentare prospettive diverse'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Il testo __________ presenta oggetti, persone o luoghi attraverso le loro caratteristiche.',
+                correct: ['descrittivo'],
+                explanation: '✅ Corretto! Il testo descrittivo rappresenta la realtà attraverso qualità e attributi'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Quale tipologia testuale usa dati, definizioni, spiegazioni oggettive?',
+                options: ['Narrativo', 'Argomentativo', 'Espositivo', 'Regolativo'],
+                correct: 'Espositivo',
+                explanation: '✅ Corretto! Il testo espositivo informa e spiega in modo oggettivo',
+                errorExplanation: '❌ Il testo espositivo si caratterizza per oggettività, dati, definizioni, spiegazioni'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'La struttura del testo argomentativo prevede: Tesi → Argomenti → __________ → Conclusione.',
+                correct: ['confutazione', 'confutazione antitesi', 'antitesi'],
+                explanation: '✅ Corretto! La struttura argomentativa classica include confutazione delle obiezioni'
+
+            },
+
+            // ESERCIZI 41-50: Analisi testuale e competenze avanzate
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Quale sequenza di connettivi organizza correttamente un testo?',
+                options: ['In conclusione - Inoltre - Infatti', 'In primo luogo - In secondo luogo - Infine', 'Tuttavia - Perciò - Benché', 'Cioè - Oppure - Ad esempio'],
+                correct: 'In primo luogo - In secondo luogo - Infine',
+                explanation: '✅ Corretto! Sequenza additiva ordinata tipica della strutturazione testuale',
+                errorExplanation: '❌ "In primo luogo - In secondo luogo - Infine" è la sequenza corretta per organizzare argomenti'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'L\'uso di pronomi personali ("lui", "lei", "esso") crea coesione per __________.',
+                correct: ['sostituzione', 'anafora', 'sostituzione/anafora'],
+                explanation: '✅ Corretto! I pronomi sostituiscono nomi già citati, creando anafora'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Quale testo è COERENTE?',
+                options: ['Era estate. Nevicava.', 'Studiò tutta la notte. Superò l\'esame.', 'Mangiò molto. Perse peso.', 'Era tardi. Si alzò presto.'],
+                correct: 'Studiò tutta la notte. Superò l\'esame.',
+                explanation: '✅ Corretto! Relazione logica causa-effetto coerente',
+                errorExplanation: '❌ "Studiò tutta la notte. Superò l\'esame" è coerente (causa-effetto logico)'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Connettivo che esprime condizione necessaria: "Solo __________ avrai finito, potrai uscire."',
+                correct: ['se'],
+                explanation: '✅ Corretto! "Solo se" introduce condizione necessaria e restrittiva'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Quale elemento rende un testo COESO ma non necessariamente COERENTE?',
+                options: ['Logica interna', 'Connettivi grammaticali', 'Verità referenziale', 'Pertinenza'],
+                correct: 'Connettivi grammaticali',
+                explanation: '✅ Corretto! I connettivi garantiscono coesione grammaticale, non coerenza semantica',
+                errorExplanation: '❌ I connettivi grammaticali garantiscono la coesione superficiale, non la coerenza profonda'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'La ripetizione dello stesso termine in un testo si chiama __________ lessicale.',
+                correct: ['ripetizione', 'iterazione'],
+                explanation: '✅ Corretto! La ripetizione/iterazione lessicale è un meccanismo di coesione'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Quale connettivo è INADEQUATO in un testo formale?',
+                options: ['Inoltre', 'Tuttavia', 'Comunque (colloquiale)', 'Pertanto'],
+                correct: 'Comunque (colloquiale)',
+                explanation: '✅ Corretto! "Comunque" è troppo colloquiale per testi formali (meglio "tuttavia", "nondimeno")',
+                errorExplanation: '❌ "Comunque" è di registro colloquiale; nei testi formali si preferisce "tuttavia" o "nondimeno"'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Per garantire coerenza, ogni frase deve avere __________ con il tema generale del testo.',
+                correct: ['pertinenza', 'rilevanza', 'pertinenza/rilevanza'],
+                explanation: '✅ Corretto! La pertinenza garantisce che ogni elemento sia rilevante per il tema'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Quale sequenza rappresenta correttamente la progressione tematica a tema derivato?',
+                options: ['Il gatto dorme. Il cane abbaia.', 'Marco studia. Lui è diligente.', 'Ho comprato un libro. Il libro è interessante.', 'Piove. Sono triste.'],
+                correct: 'Ho comprato un libro. Il libro è interessante.',
+                explanation: '✅ Corretto! Il rema "un libro" diventa tema della frase successiva',
+                errorExplanation: '❌ "Ho comprato un libro. Il libro..." mostra progressione a tema derivato (rema → tema)'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'L\'organizzazione testuale richiede equilibrio tra coesione (legami __________) e coerenza (senso logico).',
+                correct: ['grammaticali', 'superficiali', 'grammaticali/superficiali'],
+                explanation: '✅ Corretto! La coesione riguarda i legami grammaticali superficiali, la coerenza il senso profondo. Complimenti per aver completato tutti gli esercizi!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente l\'organizzazione testuale, coesione e coerenza!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene i meccanismi testuali, ma fai attenzione ai connettivi avanzati!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: coesione (connettivi, anafora), coerenza (logica, non contraddizione), tipologie testuali!';
+            } else {
+                message = '📚 Ripassa le tabelle! Ricorda: connettivi (causa, conseguenza, opposizione), progressione tematica, coerenza vs coesione!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

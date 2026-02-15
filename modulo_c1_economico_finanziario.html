@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C1 - Italiano Economico-Finanziario</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --c1-color: #d4af37;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --finance: #047857;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--c1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c1-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #ecfdf5;
+            border-left: 4px solid var(--finance);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(212, 175, 55, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .finance { color: var(--finance); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0fdf4;
+            border: 2px solid var(--finance);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--c1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--c1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--c1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .intro-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            border-left: 5px solid var(--c1-color);
+        }
+        .exercise-counter {
+            background: var(--c1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C1 - Italiano Economico-Finanziario</h1>
+            <p>Comunicazione avanzata in contesti economici e finanziari</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C1</a>
+            <span>›</span>
+            <strong>Economico-Finanziario</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">💰 Italiano Economico-Finanziario</h1>
+            <p class="page-subtitle">Linguaggio avanzato: mercati, investimenti, bilanci e analisi finanziaria</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('mercati', this)">Mercati</button>
+            <button class="nav-tab" onclick="showSection('investimenti', this)">Investimenti</button>
+            <button class="nav-tab" onclick="showSection('bilancio', this)">Bilancio</button>
+            <button class="nav-tab" onclick="showSection('banca', this)">Banca</button>
+            <button class="nav-tab" onclick="showSection('esercizi', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="intro-box">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo C1! 💰</h3>
+                <p>Oggi studiamo l'<strong>italiano economico-finanziario</strong> di livello C1, ovvero il linguaggio specialistico utilizzato in contesti bancari, di investimento, analisi finanziaria e gestione aziendale.</p>
+                <p style="margin-top: 10px;"><strong>Esempio:</strong> Invece di "<span class="finance">Il prezzo sale</span>" (semplice), usiamo "<span class="finance">L'asset registra una crescita sostenuta con trend rialzista</span>" (tecnico).</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è l'Italiano Economico-Finanziario C1?</div>
+                <div class="card-body">
+                    <p>L'<strong>italiano economico-finanziario</strong> di livello C1 è il registro linguistico specialistico utilizzato in contesti professionali avanzati: banche, società di investimento, analisi finanziaria, consulenza patrimoniale e gestione d'impresa.</p>
+
+                    <div class="transformation-box">
+                        <strong>Competenze comunicative avanzate:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Analisi di mercato:</strong> Descrivere trend, volatilità, correlazioni tra asset</li>
+                            <li><strong>Gestione investimenti:</strong> Diversificazione, asset allocation, profilo di rischio</li>
+                            <li><strong>Bilancio e contabilità:</strong> Stato patrimoniale, conto economico, indicatori</li>
+                            <li><strong>Finanza aziendale:</strong> Valutazioni, M&A, struttura del capitale</li>
+                            <li><strong>Prodotti bancari:</strong> Mutui, prestiti, garanzie, fideiussioni</li>
+                            <li><strong>Fiscalità:</strong> Imposte, detrazioni, pianificazione fiscale</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Caratteristiche del linguaggio C1:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Lessico tecnico:</strong> Terminologia specialistica (EBITDA, spread, yield)</li>
+                            <li><strong>Registro formale:</strong> Strutture sintattiche complesse</li>
+                            <li><strong>Precisione numerica:</strong> Dati, percentuali, confronti quantitativi</li>
+                            <li><strong>Connettivi logici:</strong> "In virtù di", "fatto salvo", "con riferimento a"</li>
+                            <li><strong>Passivo e impersonale:</strong> "Si rileva che", "è emerso"</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola fondamentale:</strong> Il livello C1 richiede padronanza di collocazioni ristrette (es. "contrarre un debito", "estinguere un mutuo", "deteriorarsi del credito") e capacità di rielaborare concetti complessi con linguaggio appropriato.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE MERCATI -->
+        <section id="mercati" class="section">
+            <div class="card">
+                <div class="card-header">Mercati Finanziari</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>I mercati finanziari richiedono un lessico specifico per descrivere movimenti, tendenze e strumenti.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Concetto</th><th>Termine C1</th><th>Definizione/Utilizzo</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Tendenza rialzista</strong></td>
+                                <td>Bull market</td>
+                                <td>Fase di espansione con prezzi in crescita sostenuta</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tendenza ribassista</strong></td>
+                                <td>Bear market</td>
+                                <td>Fase di contrazione con prezzi in calo</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Variabilità prezzi</strong></td>
+                                <td>Volatilità</td>
+                                <td>Misura dell'incertezza/rischio di un asset</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Guadagno capitale</strong></td>
+                                <td>Capital gain</td>
+                                <td>Plusvalenza dalla vendita di asset</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Perdita capitale</strong></td>
+                                <td>Capital loss</td>
+                                <td>Minusvalenza dalla vendita di asset</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Prezzo/Utile</strong></td>
+                                <td>P/E ratio (Price/Earnings)</td>
+                                <td>Indicatore di valutazione azionaria</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rendimento</strong></td>
+                                <td>Yield</td>
+                                <td>Reddito generato da un investimento</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Indici principali:</strong><br>
+                        <em>FTSE MIB:</em> Indice principale di Borsa Italiana<br>
+                        <em>Dow Jones/NASDAQ:</em> Mercati USA<br>
+                        <em>Spread BTP-Bund:</em> Differenza di rendimento tra titoli italiani e tedeschi<br>
+                        <em>VIX:</em> Indice di volatilità implicita ("indice della paura")
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Espressioni avanzate per descrivere mercati:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>"Il mercato sta <strong>consolidando</strong> i guadagni" (stabilizzazione)</li>
+                            <li>"Si registra un <strong>pullback</strong> tecnico" (correzione temporanea)</li>
+                            <li>"L'asset <strong>viaggia</strong> sopra la media mobile" (trend positivo)</li>
+                            <li>"Il <strong>volumetrico</strong> sostiene il movimento" (conferma con volumi)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE INVESTIMENTI -->
+        <section id="investimenti" class="section">
+            <div class="card">
+                <div class="card-header">Investimenti e Gestione Patrimoniale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La gestione del patrimonio richiede competenze specifiche in diversi strumenti finanziari.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Strumento</th><th>Caratteristiche</th><th>Terminologia C1</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Azioni</strong></td>
+                                <td>Quote di proprietà societaria</td>
+                                <td>Dividendo, split, buyback, blue chips</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Obbligazioni</strong></td>
+                                <td>Titoli di debito</td>
+                                <td>Cedola, scadenza, duration, rating</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fondi comuni</strong></td>
+                                <td>Gestione collettiva</td>
+                                <td>SICAV, quote, NAV, benchmark</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ETF</strong></td>
+                                <td>Fondi quotati che replicano indici</td>
+                                <td>Replicazione fisica/sintetica, TER</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Derivati</strong></td>
+                                <td>Strumenti a leva</td>
+                                <td>Future, opzioni, call, put, strike</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Commodities</strong></td>
+                                <td>Materie prime</td>
+                                <td>Oro "safe haven", petrolio, grano</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Strategie di investimento C1:</strong><br>
+                        <em>Asset allocation:</em> Distribuzione tra classi di attività<br>
+                        <em>Diversificazione:</em> Riduzione del rischio specifico<br>
+                        <em>Dollar cost averaging:</em> Investimento programmato costante<br>
+                        <em>Rebalancing:</em> Riequilibrio periodico del portafoglio<br>
+                        <em>Core-satellite:</em> Nucleo stabile + investimenti tematici
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Profili di rischio:</strong><br>
+                        <em>Conservatore:</em> Prevalescenza obbligazioni e liquidità<br>
+                        <em>Moderato:</em> Bilanciamento azioni/obbligazioni 50/50<br>
+                        <em>Dinamico:</em> Maggior esposizione azionaria e mercati emergenti<br>
+                        <em>Aggressivo:</em> Elevata esposizione a rischio per massimizzare rendimenti
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE BILANCIO -->
+        <section id="bilancio" class="section">
+            <div class="card">
+                <div class="card-header">Bilancio e Analisi di Bilancio</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il bilancio d'esercizio è il documento fondamentale per la valutazione della salute economica di un'impresa.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Documento</th><th>Funzione</th><th>Elementi chiave</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Stato Patrimoniale</strong></td>
+                                <td>Fotografia patrimoniale</td>
+                                <td>Attività, Passività, Patrimonio Netto</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Conto Economico</strong></td>
+                                <td>Risultati dell'esercizio</td>
+                                <td>Ricavi, Costi, Utile/Perdita</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rendiconto Finanziario</strong></td>
+                                <td>Flussi di cassa</td>
+                                <td>Operativi, Investimenti, Finanziari</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Indicatori di performance (KPI) C1:</strong><br>
+                        <em>EBITDA:</em> Earnings Before Interest, Taxes, Depreciation and Amortization<br>
+                        <em>EBIT:</em> Risultato operativo lordo<br>
+                        <em>ROS:</em> Return On Sales (redditività vendite)<br>
+                        <em>ROI:</em> Return On Investment<br>
+                        <em>ROE:</em> Return On Equity (redditività capitale proprio)<br>
+                        <em>Current ratio:</em> Indice di liquidità corrente
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Terminologia contabile avanzata:</strong><br>
+                        <em>Ammortamento:</em> Svalutazione sistematica di beni materiali<br>
+                        <em>Svalutazione crediti:</em> Riduzione valore crediti dubbia esigibilità<br>
+                        <em>Fondo svalutazione:</em> Accantonamento per rischi futuri<br>
+                        <em>Rimanenze:</em> Scorte di magazzino<br>
+                        <em>Ratei e risconti:</em> Competenza temporale costi/ricavi
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE BANCA -->
+        <section id="banca" class="section">
+            <div class="card">
+                <div class="card-header">Prodotti e Servizi Bancari</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il rapporto con gli istituti di credito richiede conoscenza di prodotti e terminologia bancaria.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Prodotto</th><th>Caratteristiche C1</th><th>Terminologia</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Mutuo ipotecario</strong></td>
+                                <td>Prestito garantito da immobile</td>
+                                <td>TAEG, tasso fisso/variabile, piano ammortamento</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fido bancario</strong></td>
+                                <td>Linea di credito autorizzata</td>
+                                <td>Scoperto conto, massimo fido, commissione istruttoria</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Leasing</strong></td>
+                                <td>Locazione finanziaria</td>
+                                <td>Canone, riscatto, bene strumentale</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Factoring</strong></td>
+                                <td>Cessione crediti commerciali</td>
+                                <td>Cessione pro soluto/pro solvendo, anticipo</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Garanzie</strong></td>
+                                <td>Copertura rischio credito</td>
+                                <td>Fideiussione, pegno, ipoteca, aval</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Tassi e indicatori bancari:</strong><br>
+                        <em>Euribor:</em> Tasso interbancario europeo<br>
+                        <em>Spread:</em> Differenza tra tasso applicato e parametro di riferimento<br>
+                        <em>TEGM:</em> Tasso Effettivo Globale Medio (usura)<br>
+                        <em>TAE:</em> Tasso Annuo Effettivo<br>
+                        <em>ISC:</em> Indicatore Sintetico di Costo
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Formule per operazioni bancarie:</strong><br>
+                        "<em>Chiedere un fido</em>" (richiesta linea credito)<br>
+                        "<em>Estinguere anticipatamente</em>" (rimborso prima scadenza)<br>
+                        "<em>Rinnovare la polizza</em>" (proroga garanzia)<br>
+                        "<em>Costituire pegno</em>" (dare garanzia reale)<br>
+                        "<em>Decurtare la rata</em>" (ridurre importo periodico)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="esercizi" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C1 - Economico-Finanziario (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi C1 (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Mercati e trend
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Quale termine descrive una fase di mercato con prezzi in crescita sostenuta?',
+                options: ['Bull market', 'Bear market', 'Sideways market', 'Flat market'],
+                correct: 'Bull market',
+                explanation: '✅ Corretto! Il bull market indica una tendenza rialzista del mercato',
+                errorExplanation: '❌ Il bull market (mercato del toro) indica trend rialzista, bear market indica ribasso'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'La __________ misura l\'incertezza e la variabilità del rendimento di un asset.',
+                correct: ['volatilità'],
+                explanation: '✅ Corretto! La volatilità è l\'indicatore chiave del rischio di un investimento'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Cosa indica il P/E ratio (Price/Earnings)?',
+                options: ['Il rapporto prezzo/utile per valutare azioni', 'Il tasso di interesse effettivo', 'Il rendimento del bond', 'La volatilità implicita'],
+                correct: 'Il rapporto prezzo/utile per valutare azioni',
+                explanation: '✅ Corretto! Il P/E ratio confronta il prezzo di mercato con l\'utile per azione',
+                errorExplanation: '❌ Il P/E ratio (Price/Earnings) è l\'indicatore di valutazione azionaria più usato'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Il __________ rappresenta la plusvalenza derivante dalla vendita di un asset a prezzo superiore all\'acquisto.',
+                correct: ['capital gain'],
+                explanation: '✅ Corretto! Il capital gain è il guadagno in conto capitale'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Quale indice misura la "paura" del mercato azionario?',
+                options: ['VIX', 'FTSE MIB', 'S&P 500', 'Dow Jones'],
+                correct: 'VIX',
+                explanation: '✅ Corretto! Il VIX (Volatility Index) è l\'indice della volatilità implicita',
+                errorExplanation: '❌ Il VIX è noto come "indice della paura" per misurare l\'attesa di volatilità'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Lo __________ BTP-Bund rappresenta il differenziale di rendimento tra titoli di Stato italiani e tedeschi.',
+                correct: ['spread'],
+                explanation: '✅ Corretto! Lo spread è un indicatore chiave della percezione di rischio paese'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Cosa significa "consolidare i guadagni" in analisi tecnica?',
+                options: ['Stabilizzazione dei prezzi dopo un rialzo', 'Vendere tutte le posizioni', 'Acquistare nuovi asset', 'Perdere denaro'],
+                correct: 'Stabilizzazione dei prezzi dopo un rialzo',
+                explanation: '✅ Corretto! Il consolidamento è una pausa nel trend per assorbire il movimento',
+                errorExplanation: '❌ Consolidare significa stabilizzare/sostenere i guadagni realizzati'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Un __________ tecnico è una correzione temporanea dei prezzi all\'interno di un trend principale.',
+                correct: ['pullback'],
+                explanation: '✅ Corretto! Il pullback è un ritracciamento temporaneo prima della ripresa'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Quale termine indica il volume degli scambi che conferma un movimento di prezzo?',
+                options: ['Volumetrico', 'Spread', 'Yield', 'Duration'],
+                correct: 'Volumetrico',
+                explanation: '✅ Corretto! L\'analisi volumetrica conferma la solidità di un movimento',
+                errorExplanation: '❌ Il volumetrico si riferisce all\'analisi dei volumi di scambio'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Il mercato sta __________ sopra la media mobile a 200 giorni, segnale tecnico positivo.',
+                correct: ['viaggiando', 'muovendosi'],
+                explanation: '✅ Corretto! "Viaggiare sopra" è l\'espressione tecnica per indicare posizione rialzista'
+            },
+
+            // ESERCIZI 11-20: Investimenti
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Cosa rappresentano le "blue chips"?',
+                options: ['Azioni di grandi società solide e affidabili', 'Obbligazioni governative', 'Titoli di alta volatilità', 'Derivati speculativi'],
+                correct: 'Azioni di grandi società solide e affidabili',
+                explanation: '✅ Corretto! Le blue chips sono titoli di prima fascia, società leader',
+                errorExplanation: '❌ Le blue chips sono azioni di grandi aziende stabili e quotate'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'L\'__________ è la distribuzione periodica di utili agli azionisti da parte di una società.',
+                correct: ['dividendo'],
+                explanation: '✅ Corretto! Il dividendo è il compenso per chi detiene azioni'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Cosa indica la "duration" di un\'obbligazione?',
+                options: ['La sensibilità del prezzo alle variazioni dei tassi', 'La data di scadenza', 'Il tasso di cedola', 'Il rating del credito'],
+                correct: 'La sensibilità del prezzo alle variazioni dei tassi',
+                explanation: '✅ Corretto! La duration misura il rischio di tasso di un bond',
+                errorExplanation: '❌ La duration indica la sensibilità del prezzo dell\'obbligazione ai tassi'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Il __________ di un fondo comune rappresenta il valore complessivo del patrimonio diviso per il numero delle quote.',
+                correct: ['NAV', 'Net Asset Value'],
+                explanation: '✅ Corretto! Il NAV è il valore di mercato di ogni quota del fondo'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Cosa significa ETF?',
+                options: ['Exchange Traded Fund', 'European Trade Finance', 'Electronic Transfer Fund', 'Equity Total Fund'],
+                correct: 'Exchange Traded Fund',
+                explanation: '✅ Corretto! Gli ETF sono fondi quotati che replicano indici',
+                errorExplanation: '❌ ETF = Exchange Traded Fund, fondo scambiato in borsa'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'L\'__________ è la strategia di distribuzione del patrimonio tra diverse classi di attività (azioni, obbligazioni, liquidità).',
+                correct: ['asset allocation'],
+                explanation: '✅ Corretto! L\'asset allocation è la chiave della gestione patrimoniale'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Quale strategia prevede investimenti periodici di importo costante indipendentemente dal prezzo?',
+                options: ['Dollar cost averaging', 'Market timing', 'Day trading', 'Short selling'],
+                correct: 'Dollar cost averaging',
+                explanation: '✅ Corretto! Il DCA riduce l\'impatto della volatilità nel tempo',
+                errorExplanation: '❌ Il dollar cost averaging prevede investimenti regolari di importo fisso'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Il __________ è il rientro periodico delle quote di un fondo per mantenere la composizione originaria del portafoglio.',
+                correct: ['rebalancing', 'riequilibrio'],
+                explanation: '✅ Corretto! Il rebalancing mantiene l\'asset allocation target'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Cosa rappresenta lo "strike price" in un\'opzione?',
+                options: ['Il prezzo prefissato a cui si può esercitare l\'opzione', 'Il premio pagato', 'La scadenza del contratto', 'La volatilità implicita'],
+                correct: 'Il prezzo prefissato a cui si può esercitare l\'opzione',
+                explanation: '✅ Corretto! Lo strike è il prezzo di esercizio dell\'opzione',
+                errorExplanation: '❌ Lo strike price è il prezzo concordato per l\'esercizio dell\'opzione'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'L\'oro è considerato un asset "__________" perché rifugio di valore in periodi di incertezza.',
+                correct: ['safe haven'],
+                explanation: '✅ Corretto! Safe haven = rifugio sicuro in turbature di mercato'
+            },
+
+            // ESERCIZI 21-30: Bilancio e analisi
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Cosa rappresenta l\'EBITDA?',
+                options: ['Utile ante interessi, tasse, ammortamenti e svalutazioni', 'Utile netto finale', 'Fatturato totale', 'Patrimonio netto'],
+                correct: 'Utile ante interessi, tasse, ammortamenti e svalutazioni',
+                explanation: '✅ Corretto! EBITDA = margine operativo lordo',
+                errorExplanation: '❌ EBITDA = Earnings Before Interest, Taxes, Depreciation and Amortization'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Il __________ patrimoniale fornisce una fotografia della situazione patrimoniale di un\'azienda a una certa data.',
+                correct: ['stato'],
+                explanation: '✅ Corretto! Lo stato patrimoniale mostra attività, passività e patrimonio netto'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Cosa misura il ROE (Return On Equity)?',
+                options: ['La redditività del capitale proprio', 'La redditività delle vendite', 'La liquidità corrente', 'L\'indebitamento'],
+                correct: 'La redditività del capitale proprio',
+                explanation: '✅ Corretto! ROE = Utile netto / Patrimonio netto',
+                errorExplanation: '❌ ROE misura quanto rende il capitale investito dagli azionisti'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Il __________ economico riassume i ricavi, i costi e il risultato d\'esercizio di un periodo.',
+                correct: ['conto'],
+                explanation: '✅ Corretto! Il conto economico mostra la performance dell\'esercizio'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Cosa indica il ROS (Return On Sales)?',
+                options: ['La redditività operativa sulle vendite', 'Il rendimento totale', 'Il rischio operativo', 'La rotazione delle scorte'],
+                correct: 'La redditività operativa sulle vendite',
+                explanation: '✅ Corretto! ROS = EBIT / Ricavi, indica marginalità',
+                errorExplanation: '❌ ROS = Return On Sales, misura la redditività operativa'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'L\'__________ è la svalutazione sistematica del costo di un bene strumentale lungo la sua vita utile.',
+                correct: ['ammortamento'],
+                explanation: '✅ Corretto! L\'ammortamento ripartisce il costo su più esercizi'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Cosa rappresentano le "rimanenze" in bilancio?',
+                options: ['Le scorte di magazzino', 'I crediti verso clienti', 'I debiti verso fornitori', 'Le disponibilità liquide'],
+                correct: 'Le scorte di magazzino',
+                explanation: '✅ Corretto! Rimanenze = materie prime, prodotti in corso, finiti',
+                errorExplanation: '❌ Le rimanenze sono le scorte di magazzino al termine dell\'esercizio'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Il __________ ratio confronta l\'attivo circolante con le passività correnti per misurare la liquidità.',
+                correct: ['current'],
+                explanation: '✅ Corretto! Current ratio = Attivo circolante / Passività correnti'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Cosa sono i "ratei e risconti"?',
+                options: ['Aggiustamenti di competenza temporale', 'Debiti a lungo termine', 'Investimenti immateriali', 'Riserve utili'],
+                correct: 'Aggiustamenti di competenza temporale',
+                explanation: '✅ Corretto! Ratei = costi/ricavi di competenza non ancora pagati/riscossi',
+                errorExplanation: '❌ Ratei e risconti ripartiscono costi e ricavi nell\'esercizio di competenza'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'La __________ del credito è l\'accantonamento per coprire il rischio di insolvenza dei clienti.',
+                correct: ['svalutazione'],
+                explanation: '✅ Corretto! La svalutazione riduce il valore dei crediti dubbi'
+            },
+
+            // ESERCIZI 31-40: Banca e finanza
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Cosa indica il TAEG (Tasso Annuo Effettivo Globale)?',
+                options: ['Il costo totale del credito comprensivo di tutte le spese', 'Solo il tasso di interesse nominale', 'La durata del prestito', 'L\'importo della rata'],
+                correct: 'Il costo totale del credito comprensivo di tutte le spese',
+                explanation: '✅ Corretto! TAEG include interessi, commissioni e spese accessorie',
+                errorExplanation: '❌ TAEG è l\'indicatore completo del costo di un finanziamento'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Il __________ è il piano di rimborso graduale di un mutuo attraverso rate periodiche.',
+                correct: ['ammortamento'],
+                explanation: '✅ Corretto! Il piano di ammortamento può essere francese, italiano o tedesco'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Cosa è una "fideiussione bancaria"?',
+                options: ['Una garanzia con cui la banca si impegna a pagare al posto del cliente', 'Un prestito personale', 'Un conto deposito', 'Una carta di credito'],
+                correct: 'Una garanzia con cui la banca si impegna a pagare al posto del cliente',
+                explanation: '✅ Corretto! La fideiussione è una garanzia di terzi (aval)',
+                errorExplanation: '❌ La fideiussione è una garanzia bancaria a favore di un creditore'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Lo __________ di conto si verifica quando il saldo diventa negativo oltre il fido autorizzato.',
+                correct: ['scoperto'],
+                explanation: '✅ Corretto! Lo scoperto conto genera interessi passivi elevati'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Cosa è il "factoring"?',
+                options: ['La cessione di crediti commerciali a una società specializzata', 'Un tipo di mutuo', 'Un fondo comune di investimento', 'Una garanzia reale'],
+                correct: 'La cessione di crediti commerciali a una società specializzata',
+                explanation: '✅ Corretto! Il factoring anticipa liquidità sui crediti commerciali',
+                errorExplanation: '❌ Il factoring è la cessione pro soluto/pro solvendo di crediti'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Il __________ è il tasso interbancario di riferimento per i mutui a tasso variabile in Europa.',
+                correct: ['Euribor'],
+                explanation: '✅ Corretto! Euribor = EURO InterBank Offered Rate'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Cosa significa "estinguere anticipatamente" un mutuo?',
+                options: ['Rimborsare il debito residuo prima della scadenza naturale', 'Rinnovare il contratto', 'Sospendere le rate', 'Aumentare l\'importo del prestito'],
+                correct: 'Rimborsare il debito residuo prima della scadenza naturale',
+                explanation: '✅ Corretto! L\'estinzione anticipata può prevedere penali',
+                errorExplanation: '❌ Estinguere anticipatamente significa saldare il debito in anticipo'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Il __________ è il contratto di locazione finanziaria con riscatto finale del bene.',
+                correct: ['leasing'],
+                explanation: '✅ Corretto! Il leasing può essere operativo o finanziario'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Cosa è il "pegno" in ambito bancario?',
+                options: ['Una garanzia reale su beni mobili', 'Un tipo di conto corrente', 'Un tasso di interesse', 'Una commissione'],
+                correct: 'Una garanzia reale su beni mobili',
+                explanation: '✅ Corretto! Il pegno è garanzia su titoli, crediti o merci',
+                errorExplanation: '❌ Il pegno è una garanzia reale su beni mobili (diversa dall\'ipoteca)'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'La __________ istruttoria è la commissione bancaria per l\'analisi e l\'approvazione di un finanziamento.',
+                correct: ['commissione'],
+                explanation: '✅ Corretto! Le commissioni fanno parte del costo totale del credito'
+            },
+
+            // ESERCIZI 41-50: Avanzati e contesti professionali
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Cosa indica il TEGM (Tasso Effettivo Globale Medio)?',
+                options: ['La soglia di usura oltre cui il tasso è illegale', 'Il tasso minimo applicabile', 'La media dei depositi', 'L\'inflazione annua'],
+                correct: 'La soglia di usura oltre cui il tasso è illegale',
+                explanation: '✅ Corretto! Superare il TEGM costituisce il reato di usura',
+                errorExplanation: '❌ Il TEGM è il limite legale per i tassi di interesse (usura)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'L\'__________ è la capacità di un\'azienda di far fronte agli impegni a breve termine.',
+                correct: ['liquidità'],
+                explanation: '✅ Corretto! La liquidità si misura con indici come il current ratio'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Cosa significa "deteriorarsi del credito"?',
+                options: ['Peggioramento della qualità dei crediti verso clienti', 'Aumento dei depositi', 'Crescita del fatturato', 'Riduzione dei costi'],
+                correct: 'Peggioramento della qualità dei crediti verso clienti',
+                explanation: '✅ Corretto! Il deterioramento crediti richiede svalutazioni',
+                errorExplanation: '❌ Il deterioramento del credito indica rischio crescente di insolvenze'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Il __________ finanziario illustra le variazioni delle disponibilità liquide nel periodo.',
+                correct: ['rendiconto'],
+                explanation: '✅ Corretto! Il rendiconto finanziario analizza i flussi di cassa'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Cosa è una "OPV" (Offerta Pubblica di Vendita)?',
+                options: ['La vendita al pubblico di azioni di una società già quotata', 'L\'acquisto di obbligazioni', 'Un prestito bancario', 'Una fusione aziendale'],
+                correct: 'La vendita al pubblico di azioni di una società già quotata',
+                explanation: '✅ Corretto! OPV = offerta pubblica di vendita (vs OPV = offerta pubblica di acquisto)',
+                errorExplanation: '❌ OPV = Offerta Pubblica di Vendita di azioni in borsa'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'La __________ finanziaria indica il rapporto tra capitale di debito e capitale proprio.',
+                correct: ['leva', 'leverage'],
+                explanation: '✅ Corretto! La leva finanziaria amplifica rischi e rendimenti'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Cosa è il "break-even point"?',
+                options: ['Il punto di pareggio tra costi e ricavi', 'Il massimo profitto possibile', 'La chiusura dell\'azienda', 'Il dividendo per azione'],
+                correct: 'Il punto di pareggio tra costi e ricavi',
+                explanation: '✅ Corretto! Al break-even l\'utile è zero',
+                errorExplanation: '❌ Il break-even point è la soglia di redditività (costi = ricavi)'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Il __________ è il processo di riduzione del debito attraverso il rimborso graduale del capitale.',
+                correct: ['deleverage', 'deleveraging'],
+                explanation: '✅ Corretto! Il deleverage riduce l\'esposizione finanziaria'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Cosa significa "contrarre un debito"?',
+                options: ['Assumere un obbligo finanziario verso terzi', 'Pagare un fornitore', 'Riscuotere un credito', 'Investire in azioni'],
+                correct: 'Assumere un obbligo finanziario verso terzi',
+                explanation: '✅ Corretto! "Contrarre" è il verbo tecnico per assumere debiti',
+                errorExplanation: '❌ "Contrarre un debito" è la collocazione ristretta del linguaggio finanziario'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'L\'analisi __________ esamina la solidità patrimoniale, la redditività e la liquidità di un\'impresa.',
+                correct: ['patrimoniale', 'di bilancio', 'finanziaria'],
+                explanation: '✅ Corretto! L\'analisi patrimoniale valuta la struttura finanziaria. Complimenti per aver completato il modulo C1!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'esercizi' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente il linguaggio economico-finanziario C1!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene la terminologia, ma approfondisci alcuni concetti avanzati!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: EBITDA (margine operativo), ROE (redditività capitale proprio), spread BTP-Bund!';
+            } else {
+                message = '📚 Ripassa le tabelle! Focus su: mercati (bull/bear, volatilità), investimenti (duration, NAV), bilancio (EBITDA, ROE), banca (TAEG, Euribor)!';
+            }
+
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+
+            exercises.sort(() => Math.random() - 0.5);
+
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

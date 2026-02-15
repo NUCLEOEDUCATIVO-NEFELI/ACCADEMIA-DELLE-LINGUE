@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C2 - Negoziazione Strategica e Linguaggio Persuasivo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1a365d;
+            --secondary: #4a5568;
+            --accent: #c53030;
+            --c2-color: #d69e2e;
+            --bg-light: #f7fafc;
+            --text-dark: #2d3748;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #fdfbf7;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --border: #e2e8f0;
+            --negotiation: #744210;
+            --strategic: #2c5282;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--c2-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c2-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c2-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #fefcbf;
+            border-left: 4px solid var(--c2-color);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fffaf0;
+            border: 1px solid #ed8936;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(214, 158, 46, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .negotiation-term { color: var(--negotiation); font-weight: bold; }
+        .strategic-term { color: var(--strategic); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #ebf8ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--c2-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--c2-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c2-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--c2-color); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #b7791f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c2-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a202c 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--c2-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #d69e2e 0%, #b7791f 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--primary);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--c2-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--c2-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .negotiation-context {
+            background: #fffaf0;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--negotiation);
+            font-style: italic;
+        }
+        .strategic-box {
+            background: #ebf8ff;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C2 - Negoziazione Strategica</h1>
+            <p>Strategie avanzate, linguaggio persuasivo e tecniche negoziali complesse</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C2</a>
+            <span>›</span>
+            <strong>Negoziazione Strategica</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🤝 Negoziazione Strategica e Linguaggio Persuasivo</h1>
+            <p class="page-subtitle">Tecniche avanzate di comunicazione negoziale, gestione dei conflitti e costruzione di accordi win-win</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('models', this)">Modelli</button>
+            <button class="nav-tab" onclick="showSection('language', this)">Linguaggio</button>
+            <button class="nav-tab" onclick="showSection('tactics', this)">Tattiche</button>
+            <button class="nav-tab" onclick="showSection('emotions', this)">Emozioni</button>
+            <button class="nav-tab" onclick="showSection('advanced', this)">Strategie</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">🎯</div>
+                    <div class="avatar-name">Stratega</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo C2! 🤝</h3>
+                    <p>Oggi esploriamo la <strong>negoziazione strategica</strong>: un'arte che richiede padronanza linguistica, analisi psicologica e competenze avanzate di comunicazione persuasiva.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="negotiation-term">Se ho ben compreso</span>, la sua priorità è <span class="negotiation-term">garantire continuità</span>; <span class="negotiation-term">proporrei</span> un accordo quadro che <span class="negotiation-term">salvi i reciproci interessi</span>".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Fondamenti della Negoziazione Strategica C2</div>
+                <div class="card-body">
+                    <p>La <strong>negoziazione strategica</strong> è un processo comunicativo finalizzato a raggiungere accordi sostenibili attraverso la creazione di valore condiviso, la gestione delle asimmetrie informative e il controllo delle dinamiche relazionali. [^1^]</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Competenze C2 distintive:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Padronanza pragmatica:</strong> Uso di atti linguistici complessi (suggerimenti indiretti, implicature conversazionali)</li>
+                            <li><strong>Registro adattivo:</strong> Modulazione tra formalità istituzionale e empatia relazionale</li>
+                            <li><strong>Strutturazione argomentativa:</strong> Costruzione di syllogismi persuasivi e refutazione anticipata</li>
+                            <li><strong>Gestione della faccia:</strong> Salvaguardia dell'immagine propria e altrui (face-saving)</li>
+                            <li><strong>Meta-comunicazione:</strong> Controllo del processo negoziale attraverso commenti sul dialogo stesso</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Parametri della negoziazione avanzata:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>BATNA:</strong> Best Alternative to a Negotiated Agreement (alternativa all'accordo)</li>
+                            <li><strong>ZOPA:</strong> Zone of Possible Agreement (zona di accordo possibile)</li>
+                            <li><strong>Reservation Point:</strong> Punto di riserva (limite invalicabile)</li>
+                            <li><strong>Anchor Point:</strong> Punto di ancoraggio (prima offerta che condiziona il range)</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Principio fondamentale:</strong> La negoziazione integrativa (win-win) differisce da quella distributiva (win-lose) per la ricerca di <em>valore aggiunto</em> piuttosto che della semplice spartizione della risorsa scarsa.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE MODELLI -->
+        <section id="models" class="section">
+            <div class="card">
+                <div class="card-header">Modelli Teorici di Riferimento</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il Metodo di Harvard (Principled Negotiation) rappresenta lo standard internazionale per la negoziazione efficace.</strong> [^1^]
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Modello</th><th>Principio chiave</th><th>Applicazione linguistica</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="negotiation-term">Metodo Harvard</td>
+                                <td>Separare persone dal problema</td>
+                                <td>"Non metto in discussione la sua professionalità, ma il dato tecnico..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Cialdini - Reciprocità</td>
+                                <td>Obligo del contraccambio</td>
+                                <td>"Abbiamo già dimostrato flessibilità su X; confidiamo in un gesto analogo"</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Cialdini - Scarsità</td>
+                                <td>Valore per rarità</td>
+                                <td>"Questa opportunità resterà disponibile solo entro..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Cialdini - Autorità</td>
+                                <td>Credibilità esperta</td>
+                                <td>"Come evidenziato nello studio di..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Cialdini - Impegno</td>
+                                <td>Coerenza dichiarativa</td>
+                                <td>"Lei stesso ha sottolineato l'importanza di..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Cialdini - Prova sociale</td>
+                                <td>Conformità alla maggioranza</td>
+                                <td>"Tutti i principali operatori del settore hanno adottato..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Cialdini - Simpatia</td>
+                                <td>Affinità personale</td>
+                                <td>"Condividiamo la stessa visione strategica..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="strategic-box">
+                        <strong>Le 4 C della negoziazione strategica:</strong><br>
+                        <em>Creatività</em> = generazione di opzioni win-win | <em>Competenza</em> = conoscenza tecnica del dominio<br>
+                        <em>Comunicazione</em> = chiarezza e persuasione | <em>Controllo</em> = gestione emotiva e processuale
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE LINGUAGGIO -->
+        <section id="language" class="section">
+            <div class="card">
+                <div class="card-header">Linguaggio Negoziale Avanzato</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il linguaggio C2 si caratterizza per l'uso di moduli pragmatici sofisticati e la gestione delle implicature.</strong> [^3^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Atti linguistici strategici</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Funzione</th><th>Formula C2</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="negotiation-term">Riformulazione</td>
+                                <td>"Se ho ben compreso..." / "Corregga se sbaglio..."</td>
+                                <td>Se ho ben compreso, lei privilegia la tempistica rispetto al costo</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Rilancio</td>
+                                <td>"Proporrei di..." / "Che ne direbbe di..."</td>
+                                <td>Che ne direbbe di strutturare il pagamento in tre tranches?</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Ricondizionamento</td>
+                                <td>"A condizione che..." / "Posto che..."</td>
+                                <td>Possiamo accettare, a condizione che venga anticipata la consegna</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Salvaguardia faccia</td>
+                                <td>"Non voglio certo..." / "Non è mia intenzione..."</td>
+                                <td>Non è mia intenzione mettere in dubbio la sua valutazione</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Commitment</td>
+                                <td>"Siamo disposti a..." / "Possiamo garantire..."</td>
+                                <td>Siamo disposti a vincolarci su questo punto</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Minaccia velata</td>
+                                <td>"Dovremmo valutare..." / "Non escludiamo..."</td>
+                                <td>Dovremmo valutare alternative più strutturate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Verbi modali negoziali</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Verbo</th><th>Grado di impegno</th><th>Uso strategico</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="negotiation-term">Dovere</td>
+                                <td>Obbligo morale/deontico</td>
+                                <td>Creare pressione etica: "Dovremmo onorare l'intesa"</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Potere</td>
+                                <td>Capacità/fattibilità</td>
+                                <td>Esplorare flessibilità: "Potremmo ipotizzare uno scenario..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Volere</td>
+                                <td>Intenzione/desiderio</td>
+                                <td>Manifestare priorità: "Vorremmo concentrarci su..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Dover potere</td>
+                                <td>Condizionalità</td>
+                                <td>Condizionare reciprocamente: "Dovremmo poter concordare..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Sembrare/Parere</td>
+                                <td>Epistemicità debole</td>
+                                <td>Introducere cautela: "Sembrerebbe opportuno..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Evitare l'assolutismo ("Impossibile", "Mai") in favore del condizionale ("Difficile ipotizzare...", "Non risulta praticabile...").<br>
+                        Sostituire il "Ma" (contrastivo) con "Tuttavia", "Nondimeno", "Ciò nonostante" (attenuativo).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TATTICHE -->
+        <section id="tactics" class="section">
+            <div class="card">
+                <div class="card-header">Tattiche e Stratagemmi</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La negoziazione avanzata richiede il riconoscimento e il contrasto delle tattiche opache (stratagemmi).</strong> [^5^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Stratagemma</th><th>Meccanismo</th><th>Controtattica linguistica</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="negotiation-term">Appello all'autorità</td>
+                                <td>Invocare superiori gerarchici</td>
+                                <td>"Chiediamo di poter interloquire direttamente con chi decide"</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Ritardo tattico</td>
+                                <td>Posticipare decisioni</td>
+                                <td>"Fissiamo una deadline perentoria: oltre tale data..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Nibbling</td>
+                                <td>Piccole richieste post-accordo</td>
+                                <td>"Questo aspetto era già consolidato; eventuali varianti richiedono..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Good Guy/Bad Guy</td>
+                                <td>Dualità ruoli (buon/cattivo)</td>
+                                <td>"Preferiamo interfacciarci con un unico referente decisionale"</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Appello alle emozioni</td>
+                                <td>Lamentele, sensi di colpa</td>
+                                <td>"Riconosciamo le difficoltà, ma dobbiamo attenerci agli equilibri..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Falso interesse</td>
+                                <td>Simulare desiderio di accordo</td>
+                                <td>"Apprezziamo l'entusiasmo; attendiamo conferma formale"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="negotiation-context">
+                        <strong>Esempio di riformulazione strategica:</strong><br>
+                        <em>Controparte:</em> "Il prezzo è troppo alto, non possiamo sostenerlo"<br>
+                        <em>Riformulazione C2:</em> "Se ho compreso correttamente, il problema è la sostenibilità finanziaria nel breve periodo, non il valore intrinseco della soluzione. Proporrei di dilazionare l'impatto cash-flow..."
+                    </div>
+
+                    <div class="strategic-box">
+                        <strong>Le Five P's della comunicazione negoziale:</strong><br>
+                        <em>Premessa</em> (cattura attenzione) → <em>Scopo</em> (obiettivo chiaro) → <em>Piano</em> (struttura logica) → <em>Presenza</em> (autorevolezza) → <em>Preparazione audience</em> (aspettative)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE EMOZIONI -->
+        <section id="emotions" class="section">
+            <div class="card">
+                <div class="card-header">Gestione Emotiva e Intelligenza Negoziale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La regolazione emotiva è determinante per mantenere la lucidità decisionale.</strong> [^1^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Tecniche di regolazione emotiva</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tecnica</th><th>Descrizione</th><th>Formula linguistica</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="negotiation-term">Etichettatura emotiva</td>
+                                <td>Nominare l'emozione altrui</td>
+                                <td>"Percepisco una certa frustrazione; è corretto?"</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Parafrasi empatica</td>
+                                <td>Riassumere contenuto + affetto</td>
+                                <td>"Quindi lei si sente escluso dal processo decisionale..."</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Validazione</td>
+                                <td>Legittimare l'emozione</td>
+                                <td>"Comprendo che questa situazione possa generare preoccupazione"</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Ricentraggio</td>
+                                <td>Riportare al problema sostanziale</td>
+                                <td>"Torniamo al punto sostanziale: l'allineamento degli interessi"</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Pausa riflessiva</td>
+                                <td>Sospensione temporale</td>
+                                <td>"Ci concediamo un momento di riflessione per valutare..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Principio:</strong> Le emozioni vanno <em>gestite</em>, non represse. L'etichettatura emotiva riduce l'attivazione fisiologica dell'interlocutore e facilita il passaggio alla logica.
+                    </div>
+
+                    <div class="negotiation-context">
+                        <strong>Sequenza di de-escalation:</strong><br>
+                        1. Riconoscimento: "Noto che il tono si è elevato..."<br>
+                        2. Sospensione: "Proponiamo una pausa di 10 minuti"<br>
+                        3. Riconnessione: "Al di là delle tensioni, condividiamo l'obiettivo di..."<br>
+                        4. Ristrutturazione: "Rivediamo insieme i punti di convergenza già acquisiti"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE AVANZATA -->
+        <section id="advanced" class="section">
+            <div class="card">
+                <div class="card-header">Strategie Avanzate e Cross-Cultural Negotiation</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La negoziazione internazionale richiede competenze interculturali e adattamento stilistico.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Dimensione culturale</th><th>Approccio alto/basso contesto</th><th>Adattamento linguistico</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="negotiation-term">Alto contesto</td>
+                                <td>Implicito, relazionale (Asia, Medio Oriente)</td>
+                                <td>Usare metafore, allusioni, silenzi significativi</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Basso contesto</td>
+                                <td>Esplicito, contrattuale (Germania, Scandinavia)</td>
+                                <td>Precisione terminologica, checklist dettagliate</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Monocronico</td>
+                                <td>Tempo lineare, agenda rigida</td>
+                                <td>"Passiamo al punto 3 secondo l'agenda concordata"</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Policroico</td>
+                                <td>Tempo flessibile, relazioni multiple</td>
+                                <td>"Prima di entrare nel merito, vorrei comprendere meglio..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Documentazione negoziale</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Strumento</th><th>Funzione</th><th>Struttura</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="negotiation-term">Letter of Intent</td>
+                                <td>Manifestazione preliminare</td>
+                                <td>Intenti, riservatezza, esclusiva temporanea</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Memorandum</td>
+                                <td>Verbale di incontro</td>
+                                <td>Punti trattati, convergenze, divergence, azioni</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">Term Sheet</td>
+                                <td>Condizioni essenziali</td>
+                                <td>Prezzo, timing, garanzie, closing conditions</td>
+                            </tr>
+                            <tr>
+                                <td class="negotiation-term">NDA</td>
+                                <td>Riservatezza</td>
+                                <td>Oggetto, durata, restituzione documenti, penale</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="strategic-box">
+                        <strong>Closing techniques:</strong><br>
+                        <em>Assumptive close:</em> "Quando preferirebbe iniziare l'implementazione?"<br>
+                        <em>Alternative close:</em> "Preferisce la soluzione A o la B?"<br>
+                        <em>Sharp angle:</em> "Se accettassimo X, lei sarebbe in grado di definire oggi?"<br>
+                        <em>Balance sheet:</em> "Facciamo il punto di insieme dei vantaggi reciproci..."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C2 - Negoziazione Strategica (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: BATNA, ZOPA e parametri negoziali
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Il __________ rappresenta l\'alternativa migliore se la negoziazione fallisce.',
+                options: ['BATNA', 'ZOPA', 'NDA', 'LOI'],
+                correct: 'BATNA',
+                explanation: '✅ Corretto! BATNA = Best Alternative to a Negotiated Agreement (Fisher & Ury)',
+                errorExplanation: '❌ BATNA è l\'alternativa all\'accordo; ZOPA è la zona di accordo possibile'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'La ZOPA (Zone of Possible Agreement) è la __________ tra punto di riserva venditore e acquirente.',
+                correct: ['zona di sovrapposizione', 'sovrapposizione', 'area di intersezione'],
+                explanation: '✅ Corretto! ZOPA = range in cui entrambe le parti preferiscono l\'accordo all\'alternativa'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Il principio di __________ di Cialdini sfrutta l\'obbligo del contraccambio.',
+                options: ['reciprocità', 'scarsità', 'autorità', 'impegno'],
+                correct: 'reciprocità',
+                explanation: '✅ Corretto! La reciprocità crea un debito sociale che condiziona la controparte',
+                errorExplanation: '❌ Reciprocità = dovere di contraccambio; Scarsità = valore per rarità'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Il __________ point è il punto di ancoraggio che condiziona le successive valutazioni.',
+                correct: ['anchor', 'anchoring'],
+                explanation: '✅ Corretto! Anchor point = prima offerta che fissa il range psicologico della negoziazione'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Nella negoziazione __________ si cerca di massimizzare il valore per entrambe le parti.',
+                options: ['integrativa', 'distributiva', 'competitiva', 'zero-sum'],
+                correct: 'integrativa',
+                explanation: '✅ Corretto! Negoziazione integrativa (win-win) vs distributiva (win-lose)',
+                errorExplanation: '❌ Integrativa = espansione della torta; Distributiva = spartizione della torta'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Il __________ point è il limite invalicabile oltre cui si preferisce l\'alternativa.',
+                correct: ['reservation', 'riserva'],
+                explanation: '✅ Corretto! Reservation point = walk-away point (punto di uscita)'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'L\'uso di "Se ho ben compreso..." è una tecnica di __________.',
+                options: ['riformulazione', 'minaccia', 'chiusura', 'impegno'],
+                correct: 'riformulazione',
+                explanation: '✅ Corretto! Riformulazione = parafrasi per verifica comprensione e costruzione fiducia',
+                errorExplanation: '❌ Riformulazione (active listening) verifica comprensione e valida l\'interlocutore'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'La __________ emotiva consiste nel nominare l\'emozione per ridurne l\'intensità.',
+                correct: ['etichettatura', 'labeling'],
+                explanation: '✅ Corretto! Etichettatura emotiva = "Percepisco una certa frustrazione..."'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: '"Dovremmo valutare alternative" è un esempio di __________ velata.',
+                options: ['minaccia', 'promessa', 'concessione', 'impegno'],
+                correct: 'minaccia',
+                explanation: '✅ Corretto! Minaccia velata = avvertimento implicito di conseguenze negative',
+                errorExplanation: '❌ Minaccia velata mantiene la faccia ma segnala alternative esterne (BATNA)'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Il __________ è il documento preliminare che fissa le condizioni essenziali (price, timing).',
+                correct: ['term sheet', 'termsheet'],
+                explanation: '✅ Corretto! Term Sheet = lettera d\'intenti vincolante sui punti essenziali'
+
+            },
+
+            // ESERCIZI 11-20: Atti linguistici e pragmatica
+            {
+                id: 11,
+                type: 'choice',
+                question: '"A condizione che..." introduce un atto di __________.',
+                options: ['condizionamento', 'riformulazione', 'concessione', 'impegno'],
+                correct: 'condizionamento',
+                explanation: '✅ Corretto! Condizionamento = subordinare l\'accetto a specifiche controprestazioni',
+                errorExplanation: '❌ Condizionamento = if-then logic nella negoziazione'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: '"Che ne __________ di strutturare il pagamento in tranches?" è un rilancio propositivo.',
+                correct: ['direbbe', 'diresti'],
+                explanation: '✅ Corretto! "Che ne direbbe" = formula di cortesia per proposte alternative'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Il "Nibbling" consiste in __________ dopo aver raggiunto l\'accordo principale.',
+                options: ['piccole richieste aggiuntive', 'grandi concessioni', 'interruzione trattativa', 'firma immediata'],
+                correct: 'piccole richieste aggiuntive',
+                explanation: '✅ Corretto! Nibbling = mordere bocconi post-accordo ("Già che ci siamo...")',
+                errorExplanation: '❌ Nibbling = richieste marginali post-accordo che erodono valore'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: '"Non è mia __________ mettere in dubbio la sua valutazione" è face-saving.',
+                correct: ['intenzione', 'volontà'],
+                explanation: '✅ Corretto! Face-saving = salvaguardia dell\'immagine propria e altrui'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'La tecnica del "Good Guy/Bad Guy" sfrutta la __________ dei ruoli.',
+                options: ['dualità', 'unità', 'rotazione', 'eliminaione'],
+                correct: 'dualità',
+                explanation: '✅ Corretto! Dualità buon/cattivo poliziotto per creare falsa empatia',
+                errorExplanation: '❌ Good Guy/Bad Guy = tattica di squadra con ruoli contrastanti'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'La __________ sociale sfrutta la tendenza a conformarsi al comportamento della maggioranza.',
+                correct: ['prova', 'evidenza'],
+                explanation: '✅ Corretto! Prova sociale (social proof) = "Tutti i principali operatori..."'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: '"Sembrerebbe opportuno..." esprime un grado di __________ epistemica debole.',
+                options: ['certezza', 'impegno', 'dovere', 'potere'],
+                correct: 'certezza',
+                explanation: '✅ Corretto! Epistemicità debole = cautela, non assolutismo',
+                errorExplanation: '❌ "Sembrerebbe" = modalità epistemica debole (cautela vs assolutismo)'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'La __________ close assume l\'accordo chiedendo dettagli implementativi.',
+                correct: ['assumptive', 'assunta'],
+                explanation: '✅ Corretto! Assumptive close = "Quando preferirebbe iniziare?"'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Nelle culture ad __________ contesto il linguaggio è implicito e allusivo.',
+                options: ['alto', 'basso', 'medio', 'nessun'],
+                correct: 'alto',
+                explanation: '✅ Corretto! Alto contesto (Asia, Arabo) = implicito, relazionale',
+                errorExplanation: '❌ Alto contesto = implicito, relazionale; Basso contesto = esplicito, contrattuale'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Il __________ close offre alternative limitate per forzare la scelta.',
+                correct: ['alternative', 'alternativa'],
+                explanation: '✅ Corretto! Alternative close = "Preferisce A o B?" (assunzione di acquisto)'
+
+            },
+
+            // ESERCIZI 21-30: Principi di Cialdini avanzati
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Il principio di __________ sfrutta il valore percepito per rarità.',
+                options: ['scarsità', 'reciprocità', 'autorità', 'impegno'],
+                correct: 'scarsità',
+                explanation: '✅ Corretto! Scarsità = "Opportunità disponibile solo entro..."',
+                errorExplanation: '❌ Scarsità = valore per rarità/perdita potenziale'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Il principio di __________ richiede coerenza con dichiarazioni precedenti.',
+                correct: ['impegno', 'coerenza', 'commitment'],
+                explanation: '✅ Corretto! Impegno e coerenza = "Lei stesso ha sottolineato..."'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'L\'appello alla __________ invoca esperti o dati oggettivi.',
+                options: ['autorità', 'simpatia', 'scarsità', 'reciprocità'],
+                correct: 'autorità',
+                explanation: '✅ Corretto! Autorità = "Come evidenziato nello studio di..."',
+                errorExplanation: '❌ Autorità = credibilità esperta, titoli, riconoscimenti'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Il principio di __________ sfrutta l\'affinità personale e la condivisione.',
+                correct: ['simpatia', 'liking'],
+                explanation: '✅ Corretto! Simpatia = "Condividiamo la stessa visione..."'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: '"Già che ci siamo..." introduce tipicamente una richiesta di __________.',
+                options: ['nibbling', 'anchoring', 'closing', 'reframing'],
+                correct: 'nibbling',
+                explanation: '✅ Corretto! Nibbling = richieste marginali post-accordo principale',
+                errorExplanation: '❌ Nibbling (mordere) = piccole richieste post-accordo'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'La __________ di riflessione consente di calmare l\'attivazione emotiva.',
+                correct: ['pausa', 'sospensione'],
+                explanation: '✅ Corretto! Pausa riflessiva = break strategico per regolazione emotiva'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: '"Non risulta praticabile..." è preferibile a "Impossibile" per mantenere __________.',
+                options: ['flessibilità', 'autorità', 'scarsità', 'impegno'],
+                correct: 'flessibilità',
+                explanation: '✅ Corretto! Evitare assolutismi per preservare margine negoziale',
+                errorExplanation: '❌ "Non risulta praticabile" = cautela vs assolutismo chiuso'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'La negoziazione __________ punta a dividere una risorsa scarsa (win-lose).',
+                correct: ['distributiva', 'competitiva'],
+                explanation: '✅ Corretto! Distributiva = zero-sum game (una torta da dividere)'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'Il __________ angle close condiziona l\'accordo a una concessione specifica.',
+                options: ['sharp', 'assumptive', 'alternative', 'balance'],
+                correct: 'sharp',
+                explanation: '✅ Corretto! Sharp angle = "Se accettassimo X, lei definirebbe oggi?"',
+                errorExplanation: '❌ Sharp angle = condizionamento immediato a concessione'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Il __________ of Intent manifesta preliminarmente gli intenti negoziali.',
+                correct: ['letter', 'loi'],
+                explanation: '✅ Corretto! LOI (Letter of Intent) = manifestazione pre-accordo'
+
+            },
+
+            // ESERCIZI 31-40: Gestione conflitti e comunicazione avanzata
+            {
+                id: 31,
+                type: 'choice',
+                question: 'La __________ empatica ripete contenuto + emozione dell\'interlocutore.',
+                options: ['parafrasi', 'riformulazione', 'etichettatura', 'validazione'],
+                correct: 'parafrasi',
+                explanation: '✅ Corretto! Parafrasi empatica = "Quindi lei si sente..."',
+                errorExplanation: '❌ Parafrasi = riformulazione per verifica comprensione'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'La __________ legittima l\'emozione senza necessariamente condividerla.',
+                correct: ['validazione'],
+                explanation: '✅ Corretto! Validazione = "Comprendo che possa generare preoccupazione"'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Il __________ riporta la conversazione al problema sostanziale.',
+                options: ['ricentraggio', 'nibbling', 'anchoring', 'closing'],
+                correct: 'ricentraggio',
+                explanation: '✅ Corretto! Ricentraggio = "Torniamo al punto sostanziale..."',
+                errorExplanation: '❌ Ricentraggio = riportare focus sul merito vs emozione'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Il __________ sheet è il documento che riassume i termini essenziali dell\'accordo.',
+                correct: ['term', 'termine'],
+                explanation: '✅ Corretto! Term Sheet = condizioni essenziali pre-contrattuali'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'L\'NDA regola la __________ delle informazioni scambiate.',
+                options: ['riservatezza', 'pubblicazione', 'condivisione', 'distruzione'],
+                correct: 'riservatezza',
+                explanation: '✅ Corretto! NDA = Non-Disclosure Agreement (accordo di riservatezza)',
+                errorExplanation: '❌ NDA = accordo di riservatezza/confidenzialità'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'La tecnica del __________ close elenca pro e contro per facilitare la scelta.',
+                correct: ['balance', 'bilancio'],
+                explanation: '✅ Corretto! Balance sheet close = "Facciamo il punto dei vantaggi..."'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: '"Preferiremmo interfacciarci con un unico referente" contrasta il __________.',
+                options: ['Good Guy/Bad Guy', 'Nibbling', 'Low Ball', 'Bait and Switch'],
+                correct: 'Good Guy/Bad Guy',
+                explanation: '✅ Corretto! Controtattica alla dualità di ruoli',
+                errorExplanation: '❌ Good Guy/Bad Guy = tattica della squadra divisa'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Il __________ close assume che l\'accordo sia già stato raggiunto.',
+                correct: ['assumptive', 'assunto'],
+                explanation: '✅ Corretto! Assumptive = assumere l\'accordo chiedendo dettagli'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Nelle culture __________ il tempo è visto come flessibile e polidirezionale.',
+                options: ['policrone', 'monocrome', 'lineari', 'rigide'],
+                correct: 'policrone',
+                explanation: '✅ Corretto! Policronico = tempo flessibile, relazioni multiple simultanee',
+                errorExplanation: '❌ Policronico (Mediterraneo, Latino) vs Monocronico (anglosassone)'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Il __________ Agreement è l\'accordo negoziato principale vs alternative.',
+                correct: ['negotiated', 'negoziato'],
+                explanation: '✅ Corretto! NA = Negoziated Agreement (BATNA = Best Alternative to NA)'
+
+            },
+
+            // ESERCIZI 41-50: Sintesi e casi complessi
+            {
+                id: 41,
+                type: 'choice',
+                question: '"Tuttavia" è preferibile a "Ma" perché più __________.',
+                options: ['attenuativo', 'contrastivo', 'forte', 'tecnico'],
+                correct: 'attenuativo',
+                explanation: '✅ Corretto! "Tuttavia" attenua il contrasto vs "Ma" marcato',
+                errorExplanation: '❌ "Tuttavia/Nondimeno" = attenuativo; "Ma" = contrastivo forte'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Il __________ angle close collega concessione immediata a chiusura definitiva.',
+                correct: ['sharp', 'tagliente'],
+                explanation: '✅ Corretto! Sharp angle = angolo acuto, condizionamento diretto'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'La tecnica del __________ consiste in offerte irrealisticamente basse per agganciare.',
+                options: ['Low Ball', 'High Ball', 'Nibbling', 'Bogey'],
+                correct: 'Low Ball',
+                explanation: '✅ Corretto! Low Ball = offerta bassa per agganciare, poi aumentare',
+                errorExplanation: '❌ Low Ball = offerta iniziale bassa per attrarre, poi revisione'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'La __________ close elenca vantaggi e svantaggi per decisione razionale.',
+                correct: ['balance', 'bilanciata'],
+                explanation: '✅ Corretto! Balance sheet = pro/contro per facilitare decisione'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: '"Corregga se sbaglio..." è una formula di __________ che invita alla correzione.',
+                options: ['cortesia negoziale', 'minaccia', 'impegno', 'chiusura'],
+                correct: 'cortesia negoziale',
+                explanation: '✅ Corretto! Cortesia negoziale = apertura alla correzione, umiltà strategica',
+                errorExplanation: '❌ "Corregga se sbaglio" = formula di apertura e validazione'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Il __________ Memorandum documenta punti trattati, convergenze e divergence.',
+                correct: ['memorandum', 'memo'],
+                explanation: '✅ Corretto! Memorandum of Understanding (MoU) = verbale di incontro'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'La __________ emotiva riduce l\'attivazione fisiologica nominando l\'emozione.',
+                options: ['etichettatura', 'parafrasi', 'riformulazione', 'validazione'],
+                correct: 'etichettatura',
+                explanation: '✅ Corretto! Etichettatura = "Percepisco frustrazione..." riduce arousal',
+                errorExplanation: '❌ Etichettatura (labeling) = nominare per ridurre intensità'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Il __________ point è la prima offerta che ancorra le aspettative.',
+                correct: ['anchor', 'ancoraggio'],
+                explanation: '✅ Corretto! Anchoring = effetto di ancoraggio cognitivo (Kahneman)'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: '"Posto che..." introduce una __________ condizionale all\'accordo.',
+                options: ['clausola', 'concessione', 'minaccia', 'riformulazione'],
+                correct: 'clausola',
+                explanation: '✅ Corretto! "Posto che" = subordinazione condizionante',
+                errorExplanation: '❌ "Posto che/A condizione che" = condizionamento contrattuale'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'La negoziazione __________ cerca soluzioni win-win espandendo la torta.',
+                correct: ['integrativa', 'collaborativa', 'principled'],
+                explanation: '✅ Corretto! Integrativa = espandere la torta vs distributiva (dividere). Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il termine negoziale..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi la negoziazione strategica come un professionista!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene i principi, ma approfondisci le sfumature linguistiche!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: BATNA vs ZOPA, Cialdini, face-saving, closing techniques!';
+            } else {
+                message = '📚 Ripassa le tabelle! Concentrati sui principi di Cialdini, le tattiche e il linguaggio modale!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

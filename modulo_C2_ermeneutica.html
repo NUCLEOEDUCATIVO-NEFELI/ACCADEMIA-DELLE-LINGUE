@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C2 - Ermeneutica e Teoria dell'Interpretazione</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2c3e50;
+            --secondary: #5d6d7e;
+            --accent: #8e44ad;
+            --c2-color: #9b59b6;
+            --bg-light: #f8f9fa;
+            --text-dark: #2c3e50;
+            --success: #27ae60;
+            --success-bg: #d5f4e6;
+            --error: #c0392b;
+            --error-bg: #fadbd8;
+            --parchment: #fdfcf8;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --philosophy: #4a235a;
+        }
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--philosophy) 100%);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--c2-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: normal;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', serif;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', serif;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c2-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c2-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #f5eef8;
+            border-left: 4px solid var(--philosophy);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fef9e7;
+            border: 1px solid #f4d03f;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(155, 89, 182, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .philosophy-term { color: var(--philosophy); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f8f9f9;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--c2-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--c2-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-family: 'Georgia', serif;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c2-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: var(--philosophy);
+        }
+        .btn-check { 
+            background: var(--c2-color); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #8e44ad;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c2-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--philosophy) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #d7bde2;
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #9b59b6 0%, #4a235a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--c2-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--c2-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--c2-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .philosophy-context {
+            background: #f5eef8;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--philosophy);
+            font-style: italic;
+        }
+        .concept-box {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .quote-box {
+            background: #fff;
+            border-left: 4px solid var(--c2-color);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C2 - Ermeneutica e Teoria dell'Interpretazione</h1>
+            <p>Il circolo ermeneutico, pregiudizio storico, fusione degli orizzonti e decostruzione del testo</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C2</a>
+            <span>›</span>
+            <strong>Ermeneutica e Teoria dell'Interpretazione</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📜 Ermeneutica e Teoria dell'Interpretazione</h1>
+            <p class="page-subtitle">Dalla filologia biblica alla filosofia contemporanea: Schleiermacher, Dilthey, Heidegger, Gadamer, Ricoeur, Derrida</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('history', this)">Storia</button>
+            <button class="nav-tab" onclick="showSection('methods', this)">Metodi</button>
+            <button class="nav-tab" onclick="showSection('concepts', this)">Concetti</button>
+            <button class="nav-tab" onclick="showSection('texts', this)">Analisi</button>
+            <button class="nav-tab" onclick="showSection('contemporary', this)">Contemporaneità</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">🦉</div>
+                    <div class="avatar-name">Prof. Bianchi</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo C2! 📜</h3>
+                    <p>Oggi esploriamo l'<strong>ermeneutica</strong>, la disciplina che studia i principi e i metodi dell'interpretazione, dalla filologia sacra alla fenomenologia esistenziale.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="philosophy-term">Il circolo ermeneutico</span> implica che comprendere il tutto presuppone la comprensione delle parti, e viceversa".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è l'Ermeneutica?</div>
+                <div class="card-body">
+                    <p>L'<strong>ermeneutica</strong> (dal greco <em>hermeneuein</em>, interpretare) nasce come disciplina filologica per l'esegesi dei testi sacri, ma diventa nel Novecento una riflessione filosofica fondamentale sulla natura della comprensione umana.</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Definizione filosofica (Gadamer):</strong>
+                        <p style="margin-top: 0.5rem; font-style: italic;">"L'ermeneutica non è una metodologia delle scienze dello spirito, né una teoria del metodo, ma un tentativo di comprendere che cosa accade quando comprendiamo."</p>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Caratteristiche distintive dell'approccio ermeneutico C2:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Circolarità:</strong> Il rapporto dialettico tra parte e tutto</li>
+                            <li><strong>Storicità:</strong> Il pregiudizio come condizione di comprensione</li>
+                            <li><strong>Dialogicità:</strong> La comprensione come fusione di orizzonti</li>
+                            <li><strong>Sospensione:</strong> L'epoché ermeneutica rispetto al proprio pre-giudizio</li>
+                            <li><strong>Aporeticità:</strong> La comprensione come processo infinito</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Distinzione fondamentale:</strong> L'ermeneutica <em>romantica</em> (Schleiermacher) cerca di ricostruire l'intenzione originaria dell'autore; l'ermeneutica <em>filosofica</em> (Gadamer) comprende il senso che il testo ha per il lettore storico.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE STORIA -->
+        <section id="history" class="section">
+            <div class="card">
+                <div class="card-header">Storia dell'Ermeneutica</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Dall'ermeneutica speciale all'ermeneutica generale: un percorso storico-filosofico.</strong>
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Periodo</th><th>Autore</th><th>Contributo fondamentale</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Antichità</td>
+                                <td>Aristotele</td>
+                                <td><em>Peri hermeneias</em>: l'interpretazione del linguaggio</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">XVII-XVIII sec.</td>
+                                <td>Chladenius, Meier</td>
+                                <td>Ermeneutica come disciplina autonoma</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Romanticismo</td>
+                                <td>Schleiermacher</td>
+                                <td>Divinatoria vs comparativa; comprendere meglio dell'autore</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Storicismo</td>
+                                <td>Dilthey</td>
+                                <td>Comprensione vs spiegazione; nesso tra vita e comprensione</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Fenomenologia</td>
+                                <td>Heidegger</td>
+                                <td>Ontologia ermeneutica; comprensione come modo dell'essere</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Ermeneutica filosofica</td>
+                                <td>Gadamer</td>
+                                <td>Verità e metodo; fusione degli orizzonti; effetto-storia</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Ermeneutica critica</td>
+                                <td>Ricoeur</td>
+                                <td>Simbologia del male; sé come un altro; archetipo e istante</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Decostruzione</td>
+                                <td>Derrida</td>
+                                <td>Differenza; decostruzione; critica della presenza</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="quote-box">
+                        "Comprendere un autore meglio di quanto egli abbia compreso se stesso è quello che ho chiamato l'arte ermeneutica, senza la quale non si fa nulla di valido nella critica."
+                        <br><span style="font-size: 0.9rem; color: var(--secondary);">— Friedrich Schleiermacher</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE METODI -->
+        <section id="methods" class="section">
+            <div class="card">
+                <div class="card-header">Metodi e Procedure Interpretative</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Dalla grammatica alla psicologia, dall'analisi strutturale alla decostruzione.</strong>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Metodi classici</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Metodo</th><th>Procedura</th><th>Obiettivo</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Grammaticale</td>
+                                <td>Analisi linguistica, sintattica, lessicale</td>
+                                <td>Determinare il senso letterale</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Psicologico</td>
+                                <td>Ricostruzione dell'intenzione autoriale</td>
+                                <td>Comprendere il genio creativo</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Storico-critico</td>
+                                <td>Contesto storico-culturale</td>
+                                <td>Ricostruire l'orizzonte originario</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Fenomenologico</td>
+                                <td>Epoché, descrizione dell'essenza</td>
+                                <td>Intuire il senso nascosto</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Verbi ermeneutici fondamentali</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Verbo</th><th>Significato tecnico</th><th>Esempio d'uso</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Decifrare</td>
+                                <td>Risolvere l'ambiguità del testo</td>
+                                <td>Decifrare il senso nascosto del mito</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Ricostruire</td>
+                                <td>Ri-comporre l'unità originaria</td>
+                                <td>Ricostruire l'intenzione autoriale</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Problematizzare</td>
+                                <td>Rendere visibile l'aporia</td>
+                                <td>Problematizzare l'evidenza apparente</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Decostruire</td>
+                                <td>Scomporre le opposizioni binarie</td>
+                                <td>Decostruire la metafisica della presenza</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Sospendere</td>
+                                <td>Mettere tra parentesi il pregiudizio</td>
+                                <td>Sospendere il proprio orizzonte</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Attualizzare</td>
+                                <td>Rendere presente il senso storico</td>
+                                <td>Attualizzare il messaggio biblico</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> "Interpretare" non significa "spiegare" (Dilthey): la spiegazione è causale-naturale; la comprensione è psicologico-storica; l'interpretazione è il processo circolare di appropriazione del senso.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CONCETTI -->
+        <section id="concepts" class="section">
+            <div class="card">
+                <div class="card-header">Concetti Chiave dell'Ermeneutica C2</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Lessico tecnico della comprensione filosofica.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Concetto</th><th>Definizione</th><th>Autore di riferimento</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Circolo ermeneutico</td>
+                                <td>La comprensione del tutto presuppone quella delle parti e viceversa</td>
+                                <td>Schleiermacher, Heidegger</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Pre-giudizio (Vorurteil)</td>
+                                <td>Giudizio preliminare che rende possibile la comprensione</td>
+                                <td>Gadamer</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Fusione degli orizzonti</td>
+                                <td>Il dialogo tra l'orizzonte storico del testo e quello del lettore</td>
+                                <td>Gadamer</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Effetto-storia (Wirkungsgeschichte)</td>
+                                <td>La storia degli effetti che condiziona la comprensione</td>
+                                <td>Gadamer</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Distanza temporale</td>
+                                <td>Lo scarto temporale che permette la comprensione critica</td>
+                                <td>Gadamer</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Simbologia</td>
+                                <td>Il linguaggio che esprime l'ineffabile (male, colpa)</td>
+                                <td>Ricoeur</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Differance</td>
+                                <td>Differimento e differenza costitutiva del significato</td>
+                                <td>Derrida</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Traccia</td>
+                                <td>Segno della presenza assente, origine differita</td>
+                                <td>Derrida</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="concept-box">
+                        <strong>La struttura del circolo ermeneutico:</strong><br>
+                        <em>1. Pre-comprensione:</em> Si parte da un pre-giudizio (Vorgriff)<br>
+                        <em>2. Proiezione:</em> Si anticipa il senso d'insieme (Vorgriff)<br>
+                        <em>3. Confronto:</em> Le parti confermano o smentiscono il tutto<br>
+                        <em>4. Revisione:</em> Il tutto si modifica alla luce delle parti<br>
+                        <em>5. Nuova comprensione:</em> Il circolo si ripete a livelli superiori
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ANALISI -->
+        <section id="texts" class="section">
+            <div class="card">
+                <div class="card-header">Analisi del Testo e Generi Ermeneutici</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Diversi tipi di testi richiedono diverse strategie interpretative.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Genere</th><th>Caratteristiche</th><th>Strategia interpretativa</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Testo sacro</td>
+                                <td>Verità rivelata, autorità divina</td>
+                                <td>Allegoria, tipologia, sensus plenior</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Testo giuridico</td>
+                                <td>Normatività, applicabilità</td>
+                                <td>Estensione vs analogia, intentio legis</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Testo letterario</td>
+                                <td>Polisemia, autonomia estetica</td>
+                                <td>Close reading, archetipi, intertestualità</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Testo filosofico</td>
+                                <td>Concettualità, sistematicità</td>
+                                <td>Ricostruzione argomentativa, critica immanente</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Testo storico</td>
+                                <td>Documentarietà, contestualità</td>
+                                <td>Critica del documento, contestualizzazione</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Testo psicoanalitico</td>
+                                <td>Latenza, rimozione, simbolismo</td>
+                                <td>Decifrazione, sospensione del senso manifesto</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="philosophy-context">
+                        <strong>Esempio di analisi ermeneutica (Gadamer):</strong><br>
+                        "L'interpretazione di un'opera d'arte non consiste nel recuperare l'intenzione psicologica dell'autore, ma nel lasciare che l'opera parli, mettendo in gioco l'orizzonte del lettore in una fusione che produce un nuovo senso, mai definitivamente acquisibile."
+                    </div>
+
+                    <div class="transformation-box">
+                        <strong>Errori ermeneutici da evitare:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Psicologismo:</strong> Ridurre il senso all'intenzione soggettiva</li>
+                            <li><strong>Oggettivismo:</strong> Credere in un senso univoco e statico</li>
+                            <li><strong>Storicismo:</strong> Imprigionare il testo nel suo contesto di origine</li>
+                            <li><strong>Presentismo:</strong> Proiettare acriticamente il proprio orizzonte</li>
+                            <li><strong>Romanticismo:</strong> Cercare un significato originario puro</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CONTEMPORANEITÀ -->
+        <section id="contemporary" class="section">
+            <div class="card">
+                <div class="card-header">Ermeneutica Contemporanea e Decostruzione</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Dall'ontologia ermeneutica alla grammatologia: le sfide postmoderne.</strong>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Concetto</th><th>Significato</th><th>Implicazione</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Decostruzione</td>
+                                <td>Scomposizione delle gerarchie concettuali</td>
+                                <td>Il senso è sempre differito, mai presente</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Pharmakon</td>
+                                <td>Remedio/veleno: ambivalenza del significante</td>
+                                <td>Instabilità irriducibile del significato</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Supplemento</td>
+                                <td>Ciò che aggiunge e sostituisce</td>
+                                <td>La presenza è sempre già supplément</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Archi-scrittura</td>
+                                <td>Struttura originaria della traccia</td>
+                                <td>La voce è già scrittura</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Dissenso (Rancière)</td>
+                                <td>Riconfigurazione del sensibile</td>
+                                <td>L'interpretazione come atto politico</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Ermeneutica radicale (Vattimo)</td>
+                                <td>Pensiero debole, verità come evento</td>
+                                <td>La verità è interpretazione, non fondamento</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="quote-box">
+                        "Non c'è niente fuori del testo."
+                        <br><span style="font-size: 0.9rem; color: var(--secondary);">— Jacques Derrida (con riserve: "il testo" qui significa il contesto esteso della traccia)</span>
+                    </div>
+
+                    <div class="philosophy-context">
+                        <strong>La svolta ermeneutica (Heidegger-Gadamer):</strong><br>
+                        L'ermeneutica smette di essere una metodologia per diventare un'ontologia: comprendere non è un modo di conoscere tra gli altri, ma il modo fondamentale dell'essere-nel-mondo (<em>In-der-Welt-sein</em>).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C2 - Ermeneutica e Teoria dell'Interpretazione (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali) - Livello C2
+        const exercises = [
+            // ESERCIZI 1-10: Terminologia base e storia
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Il termine "ermeneutica" deriva dal greco __________, che significa "interpretare".',
+                options: ['hermeneuein', 'logos', 'aletheia', 'poiesis'],
+                correct: 'hermeneuein',
+                explanation: '✅ Corretto! Hermeneuein (ἑρμηνεύειν) = interpretare, tradurre, spiegare',
+                errorExplanation: '❌ Hermeneuein è il verbo greco da cui deriva "ermeneutica"; logos = ragione/discorso; aletheia = verità'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Schleiermacher distingue il metodo __________ (ricostruzione psicologica) dal metodo comparativo.',
+                correct: ['divinatorio', 'divinatoria'],
+                explanation: '✅ Corretto! Metodo divinatorio = intuizione simpatetica dell\'intenzione autoriale'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Per Dilthey, le scienze dello spirito si fondano sulla __________, diversa dalla spiegazione naturale.',
+                options: ['comprensione', 'deduzione', 'induzione', 'sperimentazione'],
+                correct: 'comprensione',
+                explanation: '✅ Corretto! Dilthey: Verstehen (comprensione) vs Erklären (spiegazione)',
+                errorExplanation: '❌ Dilthey distingue nettamente comprensione (scienze dello spirito) da spiegazione (scienze della natura)'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Heidegger trasforma l\'ermeneutica in __________, ovvero analisi dell\'essere.',
+                correct: ['ontologia', 'ontologia fondamentale'],
+                explanation: '✅ Corretto! Ontologia ermeneutica = comprensione come modo dell\'essere-nel-mondo'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Il "circolo ermeneutico" indica il rapporto tra __________.',
+                options: ['parte e tutto', 'soggetto e oggetto', 'forma e contenuto', 'segno e significato'],
+                correct: 'parte e tutto',
+                explanation: '✅ Corretto! Si comprende il tutto dalle parti e le parti dal tutto',
+                errorExplanation: '❌ Il circolo ermeneutico è la struttura dialettica parte-tutto, non soggetto-oggetto'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Gadamer parla di "fusione degli __________" per indicare l\'incontro tra testo e lettore.',
+                correct: ['orizzonti', 'orizzonte'],
+                explanation: '✅ Corretto! Horizontverschmelzung = fusione dell\'orizzonte storico con quello attuale'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Il "pre-giudizio" (Vorurteil) in Gadamer è __________.',
+                options: ['condizione di possibilità della comprensione', 'un errore da eliminare', 'un opinione falsa', 'un giudizio morale'],
+                correct: 'condizione di possibilità della comprensione',
+                explanation: '✅ Corretto! Il pre-giudizio (pregiudizio) è l\'orizzonte pre-comprensivo che rende possibile intendere',
+                errorExplanation: '❌ Per Gadamer il pre-giudizio non è negativo: è la condizione storica di ogni comprensione'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'L\'"effetto-storia" (Wirkungsgeschichte) indica la storia degli __________ del testo.',
+                correct: ['effetti', 'effetto'],
+                explanation: '✅ Corretto! Wirkungsgeschichte = storia degli effetti che condiziona ogni comprensione'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Ricoeur distingue l\'ermeneutica della __________ da quella del sospetto.',
+                options: ['recupero', 'suspicion', 'sospensione', 'certezza'],
+                correct: 'recupero',
+                explanation: '✅ Corretto! Ricoeur: ermeneutica del recupero (senso manifesto) vs del sospetto (Freud, Marx, Nietzsche)',
+                errorExplanation: '❌ Ricoeur contrappone l\'ermeneutica del recupero (Gadamer) a quella del sospetto (maestri del sospetto)'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Derrida introduce il concetto di "__________" per indicare la differenza e il differimento del significato.',
+                correct: ['differance', 'différance'],
+                explanation: '✅ Corretto! Différance (con "a") = differenza + differimento (déferrement) del senso',
+
+            },
+
+            // ESERCIZI 11-20: Concetti fondamentali
+            {
+                id: 11,
+                type: 'choice',
+                question: 'La "distanza temporale" per Gadamer è __________.',
+                options: ['fattore positivo di comprensione', 'un ostacolo da superare', 'irrilevante', 'un errore storico'],
+                correct: 'fattore positivo di comprensione',
+                explanation: '✅ Corretto! La distanza temporale permette di filtrare i pregiudizi non produttivi',
+                errorExplanation: '❌ Gadamer rovescia la valutazione: la distanza temporale è condizione di comprensione critica'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'La "decostruzione" di Derrida mira a scomporre le __________ binarie (presenza/assenza, voce/scrittura).',
+                correct: ['opposizioni', 'gerarchie', 'opposizioni gerarchiche'],
+                explanation: '✅ Corretto! Decostruire = svelare l\'instabilità delle opposizioni metafisiche'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Il "sé come un altro" (Soi-même comme un autre) è un concetto di __________.',
+                options: ['Ricoeur', 'Gadamer', 'Heidegger', 'Derrida'],
+                correct: 'Ricoeur',
+                explanation: '✅ Corretto! Paul Ricoeur: l\'identità narrativa come ipseità mediatizzata dall\'alterità',
+                errorExplanation: '❌ "Soi-même comme un autre" (1990) è l\'opera principale di Paul Ricoeur sull\'identità'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'L\'"epoché" fenomenologica consiste nello __________ il proprio giudizio naturale.',
+                correct: ['sospendere', 'mettere tra parentesi', 'bracketing'],
+                explanation: '✅ Corretto! Epoché = sospensione del giudizio (epoché) per descrivere l\'essenza'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Il "pharmakon" platonico è per Derrida __________.',
+                options: ['ambivalente (rimedio e veleno)', 'solo rimedio', 'solo veleno', 'irrilevante'],
+                correct: 'ambivalente (rimedio e veleno)',
+                explanation: '✅ Corretto! Pharmakon = scrittura come rimedio e veleno della memoria',
+                errorExplanation: '❌ Derrida legge in "pharmakon" l\'indécidable: rimedio/veleno, bene/male insieme'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'La "traccia" (trace) in Derrida indica la __________ della presenza.',
+                correct: ['assenza', 'differenza', 'origine differita'],
+                explanation: '✅ Corretto! La traccia è il segno di una presenza sempre già assente, differita'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: '"Verità e metodo" (1960) è l\'opera principale di __________.',
+                options: ['Gadamer', 'Heidegger', 'Ricoeur', 'Dilthey'],
+                correct: 'Gadamer',
+                explanation: '✅ Corretto! Hans-Georg Gadamer: Wahrheit und Methode',
+                errorExplanation: '❌ "Wahrheit und Methode" (1960) è il capolavoro di Hans-Georg Gadamer'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'L\'ermeneutica "romantica" di Schleiermacher mira a comprendere l\'autore __________ di quanto abbia compreso se stesso.',
+                correct: ['meglio', 'più'],
+                explanation: '✅ Corretto! "Divinatorisch": intuire l\'autore meglio di come si è inteso'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Per Heidegger, la comprensione è un modo dell\'__________.',
+                options: ['Essere', 'Conoscere', 'Percepire', 'Giudicare'],
+                correct: 'Essere',
+                explanation: '✅ Corretto! In "Essere e tempo" la comprensione è esistenziale dell\'Esserci (Dasein)',
+                errorExplanation: '❌ Heidegger: la comprensione non è atto epistemico ma modo dell\'essere-nel-mondo'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Il "pensiero debole" (Vattimo) rifiuta la verità come __________ metafisico.',
+                correct: ['fondamento', 'struttura', 'sostanza'],
+                explanation: '✅ Corretto! Verità come evento ermeneutico, non come fondamento oggettivo',
+
+            },
+
+            // ESERCIZI 21-30: Metodi e procedure
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Il metodo "grammaticale" in Schleiermacher riguarda l\'analisi __________.',
+                options: ['linguistica e sintattica', 'psicologica', 'storica', 'teologica'],
+                correct: 'linguistica e sintattica',
+                explanation: '✅ Corretto! Metodo grammaticale = analisi della lingua come sistema',
+                errorExplanation: '❌ Schleiermacher distingue metodo grammaticale (lingua) da metodo divinatorio (psicologia)'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'L\'ermeneutica "psicologica" mira a ricostruire l\'__________ autoriale.',
+                correct: ['intenzione', 'intento', 'ispirazione'],
+                explanation: '✅ Corretto! Ricostruzione psicologica del processo creativo'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: '"Problematizzare" significa __________.',
+                options: ['rendere problematico ciò che sembra evidente', 'risolvere un problema', 'ignorare la difficoltà', 'semplificare'],
+                correct: 'rendere problematico ciò che sembra evidente',
+                explanation: '✅ Corretto! Problematizzare = mettere in questione l\'evidenza apparente',
+                errorExplanation: '❌ Problematizzare non è risolvere, ma rendere visibile l\'aporia, la difficoltà'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'La "sospensione" (epoché) fenomenologica mette tra __________ il proprio pregiudizio.',
+                correct: ['parentesi', 'sospeso'],
+                explanation: '✅ Corretto! Epoché = bracketing (mettere tra parentesi) per descrizione pura'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: '"Decostruire" non significa __________.',
+                options: ['distruggere', 'analizzare', 'scomporre', 'destrutturare'],
+                correct: 'distruggere',
+                explanation: '✅ Corretto! Decostruire ≠ distruggere; è svelare l\'instabilità interna del testo',
+                errorExplanation: '❌ Decostruzione non è demolizione, ma analisi della differance, della traccia'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'L\'"attualizzazione" (Aktualisierung) rende __________ il senso storico del testo.',
+                correct: ['presente', 'attuale', 'attivo'],
+                explanation: '✅ Corretto! Attualizzazione = rendere presente il senso per il lettore contemporaneo'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'La "lettura simptomatica" (Althusser) cerca __________.',
+                options: ['i silenzi e le lacune del testo', 'il senso manifesto', 'la bellezza formale', 'l\'intenzione autoriale'],
+                correct: 'i silenzi e le lacune del testo',
+                explanation: '✅ Corretto! Lettura simptomatica = decifrare ciò che il testo non dice esplicitamente',
+                errorExplanation: '❌ Althusser: leggere ciò che è "presente come assente", i sintomi del discorso'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Il "close reading" (new criticism) richiede un\'analisi __________ del testo letterario.',
+                correct: ['attenta', 'minuziosa', 'rigorosa'],
+                explanation: '✅ Corretto! Close reading = lettura ravvicinata, analisi testuale dettagliata'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'L\'"ermeneutica del sospetto" (Ricoeur) include __________.',
+                options: ['Marx, Nietzsche, Freud', 'Gadamer, Heidegger, Dilthey', 'Derrida, Deleuze, Foucault', 'Husserl, Scheler, Hartmann'],
+                correct: 'Marx, Nietzsche, Freud',
+                explanation: '✅ Corretto! I "maestri del sospetto" demistificano le illusioni del senso manifesto',
+                errorExplanation: '❌ Ricoeur chiama "maestri del sospetto" Marx, Nietzsche e Freud per la demistificazione'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'La "contestualizzazione" storica ricostruisce il __________ di produzione del testo.',
+                correct: ['contesto', 'orizzonte', 'contesto storico-culturale'],
+                explanation: '✅ Corretto! Contestualizzazione = ricostruzione del Sitz im Leben',
+
+            },
+
+            // ESERCIZI 31-40: Generi e applicazioni
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Nell\'ermeneutica biblica, la "tipologia" cerca __________.',
+                options: ['corrispondenze tra Antico e Nuovo Testamento', 'errori di traduzione', 'bellezza letteraria', 'strutture grammaticali'],
+                correct: 'corrispondenze tra Antico e Nuovo Testamento',
+                explanation: '✅ Corretto! Tipologia: figure (typos) dell\'Antico si realizzano nel Nuovo',
+                errorExplanation: '❌ Esegesi tipologica: relazione prefigurazione- adempimento (es. Abramo-Isacco → Padre-Figlio)'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'L\'interpretazione giuridica distingue tra __________ legis (intenzione del legislatore) e lettera della legge.',
+                correct: ['intentio', 'volontà', 'spirito'],
+                explanation: '✅ Corretto! Intentio legis = spirito della legge vs verba legis = lettera'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'L\'"ermeneutica psicoanalitica" (Freud) interpreta i __________.',
+                options: ['sintomi e i sogni', 'testi sacri', 'leggi', 'poemi epici'],
+                correct: 'sintomi e i sogni',
+                explanation: '✅ Corretto! L\'interpretazione dei sogni è il via regia per l\'inconscio',
+                errorExplanation: '❌ Freud: interpretazione del sogno, del lapsus, del sintomo come testo da decifrare'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Nella lettura letteraria, l\'"intertestualità" (Kristeva) studia le __________ tra testi.',
+                correct: ['relazioni', 'connessioni', 'rimandi'],
+                explanation: '✅ Corretto! Intertestualità = tessuto di rimandi tra testi (dialogicità)'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'L\'"ermeneutica filosofica" (Gadamer) si distingue dall\'ermeneutica __________.',
+                options: ['romantica', 'biblica', 'giuridica', 'tutte le precedenti'],
+                correct: 'tutte le precedenti',
+                explanation: '✅ Corretto! Gadamer supera l\'ermeneutica come metodologia specializzata',
+                errorExplanation: '❌ L\'ermeneutica filosofica è universale, non limitata a specifici generi testuali'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'La "lettura allegorica" cerca un senso __________ rispetto a quello letterale.',
+                correct: ['nascosto', 'spirituale', 'profondo', 'simbolico'],
+                explanation: '✅ Corretto! Allegoria: senso letterale (historia) vs senso spirituale (allegoria)'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Il "sensus plenior" è il senso __________ della Scrittura.',
+                options: ['pieno/più profondo', 'letterale', 'storico', 'grammaticale'],
+                correct: 'pieno/più profondo',
+                explanation: '✅ Corretto! Sensus plenior = senso pieno, più profondo di quello inteso dall\'autore umano',
+                errorExplanation: '❌ Sensus plenior: senso pieno che lo Spirito ha inserito oltre l\'intenzione dell\'autore'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'L\'"ermeneutica radicale" (Vattimo) propone una verità senza __________.',
+                correct: ['fondamento', 'certezze', 'assoluti'],
+                explanation: '✅ Corretto! Verità come interpretazione, non come fondamento metafisico'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'La "grammatologia" (Derrida) è la scienza della __________.',
+                options: ['scrittura', 'grammatica', 'voce', 'logica'],
+                correct: 'scrittura',
+                explanation: '✅ Corretto! "De la grammatologie" (1967): priorità della scrittura sulla voce',
+                errorExplanation: '❌ Grammatologia = studio della scrittura come struttura originaria, non derivata'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Il "supplemento" derridiano è ciò che aggiunge e __________ contemporaneamente.',
+                correct: ['sostituisce', 'rimpiazza'],
+                explanation: '✅ Corretto! Supplemento (supplément) = aggiunta che sostituisce, presenza che supplisce all\'assenza',
+
+            },
+
+            // ESERCIZI 41-50: Concetti avanzati e contemporaneità
+            {
+                id: 41,
+                type: 'choice',
+                question: 'L\'"ipseità" in Ricoeur si distingue dalla __________.',
+                options: ['memetà', 'alterità', 'identità', 'sostanza'],
+                correct: 'memetà',
+                explanation: '✅ Corretto! Ipse-identity (sé come) vs memetà (idem-identity, stesso)',
+                errorExplanation: '❌ Ricoeur: ipseità (sé come agente) vs memetà (sé come stesso, identità numerica)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'La "dissenso" (Rancière) è una __________ del campo dell\'esperienza.',
+                correct: ['riconfigurazione', 'ridistribuzione'],
+                explanation: '✅ Corretto! Le part du sans-part: chi non ha parte rivendica il sensibile'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: '"Non c\'è niente fuori del testo" significa che __________.',
+                options: ['il contesto è testo esteso', 'il mondo non esiste', 'la realtà è illusione', 'tutto è letteratura'],
+                correct: 'il contesto è testo esteso',
+                explanation: '✅ Corretto! Il "testo" è la traccia differenziale, il sistema di rimandi',
+                errorExplanation: '❌ Derrida: "testo" = tessuto di tracce, non solo libro; il contesto è già testo'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'L\'"archeologia" (Foucault) analizza le __________ epistemiche che rendono possibile il sapere.',
+                correct: ['condizioni', 'formazioni', 'dispositivi'],
+                explanation: '✅ Corretto! Archeologia = analisi delle condizioni di possibilità del discorso'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'La "genealogia" (Nietzsche/Foucault) è __________.',
+                options: ['storia delle emergenze e delle discontinuità', 'ricerca delle origini pure', 'metafisica della presenza', 'ermeneutica del recupero'],
+                correct: 'storia delle emergenze e delle discontinuità',
+                explanation: '✅ Corretto! Genealogia = storia critica delle emergenze, delle lotte, dei corpi',
+                errorExplanation: '❌ Genealogia ≠ ricerca di origini; è storia dei casi, delle contingenze, delle lotte'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'L\'"evento" ermeneutico (Gadamer) è l\'__________ del senso che avviene nel dialogo.',
+                correct: ['accadimento', 'avvenimento', 'emergere'],
+                explanation: '✅ Corretto! L\'evento è l\'accadere della verità nell\'incontro tra orizzonti'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'La "differance" si scrive con "a" per indicare __________.',
+                options: ['il differimento temporale', 'un errore ortografico', 'la differenza spaziale', 'l\'assenza di senso'],
+                correct: 'il differimento temporale',
+                explanation: '✅ Corretto! Différance (a) = differenza spaziale + differimento temporale (déferrer)',
+                errorExplanation: '❌ La "a" scritta indica l\'aspetto temporale del differimento, non udibile nel parlato'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'L\'"ontologia ermeneutica" (Heidegger) sostiene che la comprensione è __________ dell\'Esserci.',
+                correct: ['strutturale', 'costitutiva', 'essenziale'],
+                explanation: '✅ Corretto! La comprensione è un esistenziale, non un atto epistemico'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Il "gioco" (Spiel) in Gadamer indica __________.',
+                options: ['la dinamica che travalica i soggetti', 'il divertimento', 'l\'arbitrio interpretativo', 'la regola fissa'],
+                correct: 'la dinamica che travalica i soggetti',
+                explanation: '✅ Corretto! Il gioco si gioca attraverso di noi, non lo giochiamo noi',
+                errorExplanation: '❌ Gadamer: il gioco è struttura olografica che include i giocatori, non viceversa'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'L\'ermeneutica C2 riconosce che la comprensione è sempre __________ e mai definitiva.',
+                correct: ['aperta', 'infinite', 'incompiuta', 'provvisoria'],
+                explanation: '✅ Corretto! La comprensione è processo aperto, dialogo infinito. Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il termine filosofico..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi l\'ermeneutica filosofica come un ricercatore!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene i concetti, ma approfondisci le sfumature!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: circolo ermeneutico, pregiudizio, fusione degli orizzonti!';
+            } else {
+                message = '📚 Ripassa le tabelle! Concentrati su Gadamer, Heidegger, Derrida e Ricoeur!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>
