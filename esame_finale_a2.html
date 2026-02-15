@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CE.CO.L A2 - Esame Simulato Permesso di Lungo Soggiorno</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --a2-color: #2e8b57;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --exam: #0891b2;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--a2-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .exam-badge {
+            display: inline-block;
+            background: var(--a2-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            text-align: center;
+        }
+        .page-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+            flex: 1;
+            text-align: center;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--a2-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--a2-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-score {
+            background: var(--a2-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .text-box {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 140px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+            text-align: center;
+        }
+        .word-option {
+            display: inline-block;
+            background: white;
+            border: 2px solid var(--border);
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+        .word-option:hover {
+            border-color: var(--primary);
+            background: #e7f3ff;
+        }
+        .word-option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .word-option.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+        .word-option.wrong {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+        }
+        .word-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .word-pool {
+            background: #fff3cd;
+            border: 2px dashed var(--a2-color);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        .word-pool-title {
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            color: var(--a2-color);
+            margin-bottom: 0.5rem;
+        }
+        .question-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #fafafa;
+            border-left: 3px solid var(--primary);
+        }
+        .question-number {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .location-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .location-btn {
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            background: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .location-btn:hover {
+            border-color: var(--primary);
+            background: #e7f3ff;
+        }
+        .location-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .location-btn.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+        .location-btn.wrong {
+            background: var(--error);
+            color: white;
+            border-color: var(--error);
+        }
+        .writing-area {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+        .writing-area:focus {
+            outline: none;
+            border-color: var(--a2-color);
+        }
+        .word-count {
+            text-align: right;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-radius: 8px;
+        }
+        .score-section {
+            text-align: center;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+        }
+        .score-value {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: var(--light);
+            border: 2px solid var(--border);
+            margin: 1rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--a2-color), #3cb371);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin: 1rem 0;
+            border: 2px solid;
+            border-radius: 4px;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+            border-radius: 4px;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--a2-color); 
+            color: white; 
+            font-weight: bold;
+        }
+        .btn-check:hover {
+            background: #236b43;
+        }
+        .btn-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--a2-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .result-details {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: left;
+        }
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .exercise-counter {
+            background: var(--a2-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 0.5rem; font-size: 0.85rem; flex: 1 1 33%; }
+            .header h1 { font-size: 1.3rem; }
+            .page-title { font-size: 1.4rem; }
+            .final-score-value { font-size: 3rem; }
+            .location-options { grid-template-columns: 1fr; }
+            .score-panel { flex-direction: column; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>UNIDA Università per Stranieri "Dante Alighieri"</h1>
+            <p>Reggio Calabria - Prova per il Certificato di Conoscenza della Lingua Italiana</p>
+            <div class="exam-badge">CE.CO.L A2 - PERMESSO DI LUNGO SOGGIORNO</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Esami Permesso di Soggiorno</a>
+            <span>›</span>
+            <strong>CE.CO.L A2 Simulazione</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📝 Esame Simulato CE.CO.L A2</h1>
+            <p class="page-subtitle">Prova di Comprensione della Lettura e Produzione di Testi Scritti</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('parte-a1', this)">Parte A - Testo 1</button>
+            <button class="nav-tab" onclick="showSection('parte-a2', this)">Parte A - Testo 2</button>
+            <button class="nav-tab" onclick="showSection('parte-b', this)">Parte B - Scrittura</button>
+            <button class="nav-tab" onclick="showSection('risultati', this)">📊 Risultati</button>
+        </nav>
+
+        <!-- PARTE A - TESTO 1 (Cloze con word bank) -->
+        <section id="parte-a1" class="section active">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte A - Prova di Comprensione della Lettura</span>
+                    <span class="card-score">N. 1 - max 20 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> Leggi il testo e completa con le parole corrette. <strong>Attenzione: ci sono due parole in più!</strong> Ogni risposta esatta vale <strong>2 punti</strong>.
+                    </div>
+
+                    <div class="word-pool">
+                        <div class="word-pool-title">📦 Parole disponibili (clicca per selezionare):</div>
+                        <span class="word-option" onclick="selectWord('colloquio')">colloquio</span>
+                        <span class="word-option" onclick="selectWord('guardiamo')">guardiamo</span>
+                        <span class="word-option" onclick="selectWord('segretaria')">segretaria</span>
+                        <span class="word-option" onclick="selectWord('a piedi')">a piedi</span>
+                        <span class="word-option" onclick="selectWord('prepariamo')">prepariamo</span>
+                        <span class="word-option" onclick="selectWord('esco')">esco</span>
+                        <span class="word-option" onclick="selectWord('colazione')">colazione</span>
+                        <span class="word-option" onclick="selectWord('giorno libero')">giorno libero</span>
+                        <span class="word-option" onclick="selectWord('mi sveglio')">mi sveglio</span>
+                        <span class="word-option" onclick="selectWord('ristorante')">ristorante</span>
+                        <span class="word-option" onclick="selectWord('passeggiata')">passeggiata</span>
+                        <span class="word-option" onclick="selectWord('lavoro')">lavoro</span>
+                    </div>
+
+                    <div class="text-box">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Elisabetta racconta la sua giornata</h3>
+
+                        <p>Mi chiamo Elisabetta e lavoro come <span class="blank" id="blank1" onclick="fillBlank(1)">__________</span> nella scuola primaria della mia cittadina. Ogni mattina, <span class="blank" id="blank2" onclick="fillBlank(2)">__________</span> alle sette e preparo la colazione per tutta la famiglia. Mentre i miei figli fanno <span class="blank" id="blank3" onclick="fillBlank(3)">__________</span>, mi lavo e mi vesto per andare a lavoro. Dopo aver accompagnato Sara e Marco all'asilo, mi incammino verso il mio ufficio. Preferisco andare <span class="blank" id="blank4" onclick="fillBlank(4)">__________</span> perché sia l'asilo dei miei figli che la scuola dove lavoro sono molto vicini alla mia casa.</p>
+
+                        <p>Il mio orario di <span class="blank" id="blank5" onclick="fillBlank(5)">__________</span> va dalle nove del mattino alle cinque del pomeriggio, ho un'ora di pausa per il pranzo e con le mie colleghe andiamo a mangiare qualcosa insieme nel piccolo <span class="blank" id="blank6" onclick="fillBlank(6)">__________</span> vicino la scuola. Ci sono dei piatti buonissimi, in particolare la pasta è cucinata in varie ricette tradizionali italiane. Se ci rimane del tempo facciamo una breve <span class="blank" id="blank7" onclick="fillBlank(7)">__________</span> nel parco pubblico di fronte al ristorante e poi ritorniamo a lavoro.</p>
+
+                        <p>Quando <span class="blank" id="blank8" onclick="fillBlank(8)">__________</span> dall'ufficio vado a prendere i bambini e, se c'è il sole, ci fermiamo un po' al parco per giocare. Altri giorni, invece, vado a fare spese mentre i bimbi giocano a casa con il papà. Verso le sette della sera, io e mio marito <span class="blank" id="blank9" onclick="fillBlank(9)">__________</span> la cena ed è anche un momento per raccontarci della nostra giornata. Sara e Marco vanno a letto alle nove, mentre noi ci rilassiamo sul divano e <span class="blank" id="blank10" onclick="fillBlank(10)">__________</span> un film in televisione, prima di andare a dormire.</p>
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="checkParteA1()">Verifica Risposte</button>
+                    </div>
+                    <div class="feedback" id="feedback-a1"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTE A - TESTO 2 (Luoghi) -->
+        <section id="parte-a2" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte A - Prova di Comprensione della Lettura</span>
+                    <span class="card-score">N. 2 - max 5 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> Leggi con attenzione queste informazioni. In quale luogo puoi trovarle o ascoltarle? Scegli il luogo esatto per ogni messaggio. Ogni risposta corretta vale <strong>1 punto</strong>.
+                    </div>
+
+                    <div id="questions-parte-a2">
+                        <!-- Domande luoghi generate via JS -->
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="checkParteA2()">Verifica Risposte</button>
+                    </div>
+                    <div class="feedback" id="feedback-a2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTE B - PRODUZIONE SCRITTA -->
+        <section id="parte-b" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte B - Prova di Produzione di Testi Scritti</span>
+                    <span class="card-score">max 25 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> La tua amica Elena è in ospedale da qualche giorno perché è stata operata ad una gamba dopo un incidente. Scrivi un messaggio ad Elena per sapere come sta e per quanti giorni deve restare in ospedale. Chiedile, anche, quando puoi andare a trovarla e tutto quello che ritieni necessario domandare. <strong>Usa circa 60 parole.</strong>
+                    </div>
+
+                    <div class="text-box" style="background: white; border: 2px solid var(--primary);">
+                        <p style="margin-bottom: 1rem;"><strong>A:</strong> Elena</p>
+                        <textarea class="writing-area" id="writing-text" placeholder="Ciao Elena," style="min-height: 150px;"></textarea>
+                    </div>
+
+                    <div class="word-count" id="word-count">Parole: 0 / 60</div>
+
+                    <div class="instruction-box" style="margin-top: 1.5rem;">
+                        <strong>Elementi da includere (auto-valutazione):</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Saluto iniziale</li>
+                            <li>Domanda su come sta</li>
+                            <li>Domanda sui giorni di degenza</li>
+                            <li>Richiesta di visita</li>
+                            <li>Altre domande di cortesia</li>
+                            <li>Saluto finale</li>
+                        </ul>
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="saveWriting()">Salva Messaggio</button>
+                    </div>
+                    <div class="feedback" id="feedback-b"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RISULTATI -->
+        <section id="risultati" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div class="score-section">
+                        <div class="score-label">Parte A1</div>
+                        <div class="score-value" id="score-a1">0/20</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">Parte A2</div>
+                        <div class="score-value" id="score-a2">0/5</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">Parte B</div>
+                        <div class="score-value" id="score-b">-/25</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">TOTALE</div>
+                        <div class="score-value" id="score-total">0/50</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Valutazione Finale</div>
+                    <div class="card-body">
+                        <div id="evaluation-content">
+                            <p style="text-align: center; color: var(--secondary); padding: 2rem;">
+                                Completa tutte le parti dell'esame per visualizzare la valutazione finale.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button class="btn-primary" onclick="restartExam()">🔄 Nuovo Tentativo</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 UNIDA Università per Stranieri "Dante Alighieri" - Reggio Calabria</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Simulazione CE.CO.L A2 Permesso di Lungo Soggiorno</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dati dell'esame
+        const parteA1Answers = {
+            1: 'segretaria',
+            2: 'mi sveglio',
+            3: 'colazione',
+            4: 'a piedi',
+            5: 'lavoro',
+            6: 'ristorante',
+            7: 'passeggiata',
+            8: 'esco',
+            9: 'prepariamo',
+            10: 'guardiamo'
+        };
+
+        const parteA2Questions = [
+            { 
+                id: 1, 
+                text: 'Gli utenti possono richiedere certificati di residenza o lo stato di famiglia il martedì e il giovedì dalle ore 9 alle ore 13.',
+                correct: 'UFFICIO ANAGRAFE DEL COMUNE',
+                options: ['STAZIONE FERROVIARIA', 'TABACCHI', 'SUPERMERCATO', 'UFFICIO ANAGRAFE DEL COMUNE', 'ISTITUTO SCOLASTICO']
+            },
+            { 
+                id: 2, 
+                text: 'Il reparto frutta e verdura rimarrà chiuso al pubblico per lavori di ristrutturazione.',
+                correct: 'SUPERMERCATO',
+                options: ['STAZIONE FERROVIARIA', 'TABACCHI', 'SUPERMERCATO', 'UFFICIO ANAGRAFE DEL COMUNE', 'ISTITUTO SCOLASTICO']
+            },
+            { 
+                id: 3, 
+                text: 'Si avvisano gli studenti ed il personale che le lezioni sono sospese nei giorni 23 e 24 ottobre per procedere alla sanificazione dei locali.',
+                correct: 'ISTITUTO SCOLASTICO',
+                options: ['STAZIONE FERROVIARIA', 'TABACCHI', 'SUPERMERCATO', 'UFFICIO ANAGRAFE DEL COMUNE', 'ISTITUTO SCOLASTICO']
+            },
+            { 
+                id: 4, 
+                text: 'Il treno in arrivo al binario 4, diretto a Monza, ha un ritardo di 20 minuti.',
+                correct: 'STAZIONE FERROVIARIA',
+                options: ['STAZIONE FERROVIARIA', 'TABACCHI', 'SUPERMERCATO', 'UFFICIO ANAGRAFE DEL COMUNE', 'ISTITUTO SCOLASTICO']
+            },
+            { 
+                id: 5, 
+                text: 'Qui si vendono anche francobolli e marche da bollo.',
+                correct: 'TABACCHI',
+                options: ['STAZIONE FERROVIARIA', 'TABACCHI', 'SUPERMERCATO', 'UFFICIO ANAGRAFE DEL COMUNE', 'ISTITUTO SCOLASTICO']
+            }
+        ];
+
+        // Stato dell'esame
+        let scores = {
+            a1: 0,
+            a2: 0,
+            b: 0
+        };
+        let answers = {
+            a1: {},
+            a2: {}
+        };
+        let selectedWord = null;
+        let selectedBlank = null;
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            generateParteA2();
+            setupWritingArea();
+        });
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if (id === 'risultati') {
+                updateResults();
+            }
+        }
+
+        function selectWord(word) {
+            selectedWord = word;
+            // Evidenzia la parola selezionata
+            document.querySelectorAll('.word-option').forEach(el => {
+                el.classList.remove('selected');
+                if (el.textContent === word) {
+                    el.classList.add('selected');
+                }
+            });
+        }
+
+        function fillBlank(num) {
+            if (!selectedWord) {
+                alert('Seleziona prima una parola dalla lista sopra!');
+                return;
+            }
+
+            // Se la parola è già stata usata in un altro blank, rimuovila da lì
+            for (let key in answers.a1) {
+                if (answers.a1[key] === selectedWord) {
+                    delete answers.a1[key];
+                    document.getElementById('blank' + key).textContent = '__________';
+                }
+            }
+
+            answers.a1[num] = selectedWord;
+            document.getElementById('blank' + num).textContent = selectedWord;
+            document.getElementById('blank' + num).style.color = 'var(--primary)';
+            document.getElementById('blank' + num).style.borderBottom = '2px solid var(--primary)';
+        }
+
+        function checkParteA1() {
+            let correct = 0;
+            let answered = Object.keys(answers.a1).length;
+
+            if (answered < 10) {
+                alert('Per favore, completa tutti i 10 spazi vuoti prima di verificare.');
+                return;
+            }
+
+            parteA1Correct = {};
+
+            for (let i = 1; i <= 10; i++) {
+                const userAnswer = answers.a1[i];
+                const correctAnswer = parteA1Answers[i];
+                const blank = document.getElementById('blank' + i);
+
+                if (userAnswer === correctAnswer) {
+                    correct += 2;
+                    blank.style.background = 'var(--success-bg)';
+                    blank.style.borderBottom = '2px solid var(--success)';
+                    blank.style.color = 'var(--success)';
+                } else {
+                    blank.style.background = 'var(--error-bg)';
+                    blank.style.borderBottom = '2px solid var(--error)';
+                    blank.style.color = 'var(--error)';
+                    // Mostra la risposta corretta
+                    blank.title = 'Risposta corretta: ' + correctAnswer;
+                }
+            }
+
+            scores.a1 = correct;
+
+            // Mostra feedback
+            const feedback = document.getElementById('feedback-a1');
+            feedback.className = 'feedback show ' + (correct >= 12 ? 'correct' : 'wrong');
+            feedback.innerHTML = `
+                <strong>Hai ottenuto ${correct}/20 punti!</strong><br>
+                ${correct >= 12 ? 'Ottimo risultato!' : 'Rivedi le risposte sbagliate (passa il mouse sugli errori per vedere la risposta corretta).'}<br>
+                <small>Passa alla sezione successiva cliccando su "Parte A - Testo 2"</small>
+            `;
+
+            // Disabilita interazione
+            document.querySelectorAll('.blank').forEach(b => b.onclick = null);
+            document.querySelectorAll('.word-option').forEach(w => w.classList.add('disabled'));
+        }
+
+        function generateParteA2() {
+            const container = document.getElementById('questions-parte-a2');
+            let html = '';
+
+            parteA2Questions.forEach((q, index) => {
+                html += `
+                    <div class="question-item">
+                        <div class="question-number">${index + 1}. ${q.text}</div>
+                        <div class="location-options" id="options-${q.id}">
+                            ${q.options.map(opt => `
+                                <button class="location-btn" onclick="selectA2(${q.id}, '${opt}')">${opt}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function selectA2(id, value) {
+            answers.a2[id] = value;
+            // Resetta stili
+            document.querySelectorAll(`#options-${id} .location-btn`).forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            // Seleziona
+            event.target.classList.add('selected');
+        }
+
+        function checkParteA2() {
+            let correct = 0;
+            let allAnswered = true;
+
+            parteA2Questions.forEach(q => {
+                if (!answers.a2[q.id]) {
+                    allAnswered = false;
+                } else if (answers.a2[q.id] === q.correct) {
+                    correct += 1;
+                }
+            });
+
+            if (!allAnswered) {
+                alert('Per favore, rispondi a tutte le domande prima di verificare.');
+                return;
+            }
+
+            scores.a2 = correct;
+
+            // Mostra feedback
+            const feedback = document.getElementById('feedback-a2');
+            feedback.className = 'feedback show ' + (correct >= 3 ? 'correct' : 'wrong');
+            feedback.innerHTML = `
+                <strong>Hai ottenuto ${correct}/5 punti!</strong><br>
+                ${correct >= 3 ? 'Buon risultato!' : 'Rivedi le risposte sbagliate.'}<br>
+                <small>Passa alla sezione successiva cliccando su "Parte B - Scrittura"</small>
+            `;
+
+            // Mostra risposte corrette
+            parteA2Questions.forEach(q => {
+                const buttons = document.querySelectorAll(`#options-${q.id} .location-btn`);
+                buttons.forEach(btn => {
+                    btn.disabled = true;
+                    if (btn.textContent === q.correct) {
+                        btn.classList.add('correct');
+                    } else if (btn.classList.contains('selected') && btn.textContent !== q.correct) {
+                        btn.classList.add('wrong');
+                    }
+                });
+            });
+        }
+
+        function setupWritingArea() {
+            const textarea = document.getElementById('writing-text');
+            const wordCount = document.getElementById('word-count');
+
+            textarea.addEventListener('input', function() {
+                const text = this.value.trim();
+                const words = text ? text.split(/\s+/).length : 0;
+                wordCount.textContent = `Parole: ${words} / 60`;
+
+                if (words >= 50 && words <= 70) {
+                    wordCount.style.color = 'var(--success)';
+                } else {
+                    wordCount.style.color = 'var(--secondary)';
+                }
+            });
+        }
+
+        function saveWriting() {
+            const text = document.getElementById('writing-text').value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+
+            if (words < 15) {
+                alert('Il messaggio è troppo corto. Scrivi almeno 40-60 parole.');
+                return;
+            }
+
+            // Salva in localStorage per valutazione manuale
+            localStorage.setItem('cecol_a2_writing', text);
+            localStorage.setItem('cecol_a2_writing_words', words);
+
+            const feedback = document.getElementById('feedback-b');
+            feedback.className = 'feedback show correct';
+            feedback.innerHTML = `
+                <strong>Messaggio salvato!</strong><br>
+                Hai scritto ${words} parole.<br>
+                <small>La valutazione della Parte B (0-25 punti) deve essere fatta dall'insegnante.</small>
+            `;
+
+            document.getElementById('writing-text').disabled = true;
+        }
+
+        function updateResults() {
+            const total = scores.a1 + scores.a2;
+            const percentage = (total / 25) * 100;
+
+            document.getElementById('score-a1').textContent = `${scores.a1}/20`;
+            document.getElementById('score-a2').textContent = `${scores.a2}/5`;
+            document.getElementById('score-b').textContent = `-/25`;
+            document.getElementById('score-total').textContent = `${total}/50 (Parte A)`;
+
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+
+            // Valutazione
+            let evaluation = '';
+            if (scores.a1 === 0 && scores.a2 === 0) {
+                evaluation = '<p style="text-align: center; color: var(--secondary);">Completa le sezioni A1 e A2 per vedere la valutazione.</p>';
+            } else {
+                let message = '';
+                let color = '';
+
+                if (total >= 17) {
+                    message = '🏆 Ottimo! Hai superato la Parte A con successo!';
+                    color = 'var(--success)';
+                } else if (total >= 12) {
+                    message = '👍 Buon risultato! Sei sulla buona strada.';
+                    color = '#d4a017';
+                } else {
+                    message = '💪 Continua a studiare! Riprova il test.';
+                    color = 'var(--error)';
+                }
+
+                evaluation = `
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">${message.split(' ')[0]}</div>
+                        <h3 style="color: ${color};">${message.substring(2)}</h3>
+                    </div>
+                    <div class="result-details">
+                        <div class="result-row">
+                            <span>Comprensione lettura - Testo 1 (Cloze):</span>
+                            <strong>${scores.a1}/20 ${scores.a1 >= 10 ? '✓' : '✗'}</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Comprensione lettura - Testo 2 (Luoghi):</span>
+                            <strong>${scores.a2}/5 ${scores.a2 >= 3 ? '✓' : '✗'}</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Produzione scritta (da valutare):</span>
+                            <strong>-/25</strong>
+                        </div>
+                        <div class="result-row" style="border-top: 2px solid var(--primary); margin-top: 0.5rem; padding-top: 0.5rem; font-size: 1.1rem;">
+                            <span>TOTALE PARTE A:</span>
+                            <strong>${total}/25</strong>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 4px;">
+                        <strong>Nota:</strong> Per superare l'esame CE.CO.L A2 serve ottenere almeno <strong>12/25</strong> nella Parte A e <strong>12/25</strong> nella Parte B.
+                    </div>
+                `;
+            }
+
+            document.getElementById('evaluation-content').innerHTML = evaluation;
+        }
+
+        function restartExam() {
+            if (confirm('Sei sicuro di voler ricominciare l\'esame? Tutte le risposte verranno cancellate.')) {
+                scores = { a1: 0, a2: 0, b: 0 };
+                answers = { a1: {}, a2: {} };
+                selectedWord = null;
+
+                // Reset UI
+                document.querySelectorAll('.blank').forEach((blank, i) => {
+                    blank.textContent = '__________';
+                    blank.style.color = 'var(--accent)';
+                    blank.style.borderBottom = '2px solid var(--accent)';
+                    blank.style.background = 'transparent';
+                    blank.onclick = () => fillBlank(i + 1);
+                });
+
+                document.querySelectorAll('.word-option').forEach(w => {
+                    w.classList.remove('selected', 'disabled', 'correct', 'wrong');
+                });
+
+                generateParteA2();
+
+                document.getElementById('writing-text').value = '';
+                document.getElementById('writing-text').disabled = false;
+                document.getElementById('word-count').textContent = 'Parole: 0 / 60';
+
+                document.querySelectorAll('.feedback').forEach(f => {
+                    f.className = 'feedback';
+                    f.innerHTML = '';
+                });
+
+                showSection('parte-a1', document.querySelectorAll('.nav-tab')[0]);
+            }
+        }
+    </script>
+</body>
+</html>
