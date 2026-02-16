@@ -1783,130 +1783,83 @@
                     <h1 class="section-title">🎓 Simulazione Esami CE.CO.L</h1>
                     <p class="section-subtitle">Seleziona il livello QCER per accedere alla simulazione d'esame. <br>
                     <strong style="color: var(--secondary);">⚠️ Nota:</strong> Per accedere a un esame devi aver completato tutti i moduli del livello corrispondente con almeno il 60% di punteggio.</p>
+                    </div>
+                   <!-- PULSANTE ESAME FINALE A1 -->
+                <div style="margin: 24px 0; text-align: center;">
+                    <a href="esame_finale_a1.html" target="_blank" style="
+                        display: inline-block;
+                        background: linear-gradient(135deg, var(--level-a1) 0%, #1e5c3e 100%);
+                        color: white;
+                        border: none;
+                        padding: 20px 40px;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        cursor: pointer;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        box-shadow: 0 4px 12px rgba(39, 103, 73, 0.3);
+                        transition: all 0.3s;
+                        font-family: inherit;
+                        text-decoration: none;
+                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(39, 103, 73, 0.4)'" 
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(39, 103, 73, 0.3)'">
+                        🌱 ESAME FINALE A1
+                    </a>
+                    <p style="margin-top: 12px; color: var(--text-secondary); font-size: 0.9rem; font-style: italic;">
+                        Esame CE.CO.L A1 per il permesso di soggiorno
+                    </p>
                 </div>
-                
-                <div class="games-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
-                    <!-- ESAME A1 -->
-                    <div class="exam-card" id="exam-card-a1" style="background: var(--bg-card); border: 2px solid var(--border); padding: 0; overflow: hidden; position: relative;">
-                        <div style="background: var(--level-a1); color: white; padding: 20px; text-align: center;">
-                            <div style="font-size: 3rem; margin-bottom: 8px;">🌱</div>
-                            <div style="font-size: 1.5rem; font-weight: bold;">ESAME A1</div>
-                            <div style="font-size: 0.85rem; opacity: 0.9;">Livello Principiante</div>
-                        </div>
-                        <div style="padding: 20px;">
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">
-                                Esame finale per il livello A1. 11 moduli richiesti.
-                            </p>
-                            <div id="status-a1" style="margin-bottom: 16px;">
-                                <span class="status-badge status-pending">⏳ Verifica requisiti...</span>
-                            </div>
-                            <a id="link-a1" href="esame_a1.html" target="_blank" class="btn btn-a1" style="width: 100%; display: block; text-align: center; text-decoration: none; opacity: 0.5; pointer-events: none;">
-                                🔒 Accesso Negato
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- ESAME A2 -->
-                    <div class="exam-card" id="exam-card-a2" style="background: var(--bg-card); border: 2px solid var(--border); padding: 0; overflow: hidden; position: relative;">
-                        <div style="background: var(--level-a2); color: white; padding: 20px; text-align: center;">
-                            <div style="font-size: 3rem; margin-bottom: 8px;">🌿</div>
-                            <div style="font-size: 1.5rem; font-weight: bold;">ESAME A2</div>
-                            <div style="font-size: 0.85rem; opacity: 0.9;">Livello Elementare</div>
-                        </div>
-                        <div style="padding: 20px;">
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">
-                                Esame finale per il livello A2. 5 moduli richiesti.
-                            </p>
-                            <div id="status-a2" style="margin-bottom: 16px;">
-                                <span class="status-badge status-pending">⏳ Verifica requisiti...</span>
-                            </div>
-                            <a id="link-a2" href="esame_a2.html" target="_blank" class="btn btn-a2" style="width: 100%; display: block; text-align: center; text-decoration: none; opacity: 0.5; pointer-events: none;">
-                                🔒 Accesso Negato
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- ESAME B1 -->
-                    <div class="exam-card" id="exam-card-b1" style="background: var(--bg-card); border: 2px solid var(--border); padding: 0; overflow: hidden; position: relative;">
-                        <div style="background: var(--level-b1); color: #000; padding: 20px; text-align: center;">
-                            <div style="font-size: 3rem; margin-bottom: 8px;">🌳</div>
-                            <div style="font-size: 1.5rem; font-weight: bold;">ESAME B1</div>
-                            <div style="font-size: 0.85rem; opacity: 0.9;">Livello Intermedio - Cittadinanza</div>
-                        </div>
-                        <div style="padding: 20px;">
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">
-                                Esame CE.CO.L B1 per la cittadinanza italiana. 8 moduli richiesti.
-                            </p>
-                            <div id="status-b1" style="margin-bottom: 16px;">
-                                <span class="status-badge status-pending">⏳ Verifica requisiti...</span>
-                            </div>
-                            <a id="link-b1" href="esame_finale_b1_cittadinanza.html" target="_blank" class="btn btn-b1" style="width: 100%; display: block; text-align: center; text-decoration: none; opacity: 0.5; pointer-events: none; color: #000;">
-                                🔒 Accesso Negato
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- ESAME B2 -->
-                    <div class="exam-card" id="exam-card-b2" style="background: var(--bg-card); border: 2px solid var(--border); padding: 0; overflow: hidden; position: relative;">
-                        <div style="background: var(--level-b2); color: white; padding: 20px; text-align: center;">
-                            <div style="font-size: 3rem; margin-bottom: 8px;">🏆</div>
-                            <div style="font-size: 1.5rem; font-weight: bold;">ESAME B2</div>
-                            <div style="font-size: 0.85rem; opacity: 0.9;">Livello Avanzato</div>
-                        </div>
-                        <div style="padding: 20px;">
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">
-                                Esame finale per il livello B2. 8 moduli richiesti.
-                            </p>
-                            <div id="status-b2" style="margin-bottom: 16px;">
-                                <span class="status-badge status-pending">⏳ Verifica requisiti...</span>
-                            </div>
-                            <a id="link-b2" href="esame_b2.html" target="_blank" class="btn btn-b2" style="width: 100%; display: block; text-align: center; text-decoration: none; opacity: 0.5; pointer-events: none;">
-                                🔒 Accesso Negato
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- ESAME C1 -->
-                    <div class="exam-card" id="exam-card-c1" style="background: var(--bg-card); border: 2px solid var(--border); padding: 0; overflow: hidden; position: relative;">
-                        <div style="background: #6b21a8; color: white; padding: 20px; text-align: center;">
-                            <div style="font-size: 3rem; margin-bottom: 8px;">🎓</div>
-                            <div style="font-size: 1.5rem; font-weight: bold;">ESAME C1</div>
-                            <div style="font-size: 0.85rem; opacity: 0.9;">Livello Autonomo</div>
-                        </div>
-                        <div style="padding: 20px;">
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">
-                                Esame finale per il livello C1. 8 moduli richiesti.
-                            </p>
-                            <div id="status-c1" style="margin-bottom: 16px;">
-                                <span class="status-badge status-pending">⏳ Verifica requisiti...</span>
-                            </div>
-                            <a id="link-c1" href="esame_c1.html" target="_blank" class="btn" style="width: 100%; display: block; text-align: center; text-decoration: none; opacity: 0.5; pointer-events: none; background: #6b21a8;">
-                                🔒 Accesso Negato
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- ESAME C2 -->
-                    <div class="exam-card" id="exam-card-c2" style="background: var(--bg-card); border: 2px solid var(--border); padding: 0; overflow: hidden; position: relative;">
-                        <div style="background: #0f172a; color: white; padding: 20px; text-align: center;">
-                            <div style="font-size: 3rem; margin-bottom: 8px;">👑</div>
-                            <div style="font-size: 1.5rem; font-weight: bold;">ESAME C2</div>
-                            <div style="font-size: 0.85rem; opacity: 0.9;">Livello Maestria</div>
-                        </div>
-                        <div style="padding: 20px;">
-                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">
-                                Esame finale per il livello C2. 8 moduli richiesti.
-                            </p>
-                            <div id="status-c2" style="margin-bottom: 16px;">
-                                <span class="status-badge status-pending">⏳ Verifica requisiti...</span>
-                            </div>
-                            <a id="link-c2" href="esame_c2.html" target="_blank" class="btn" style="width: 100%; display: block; text-align: center; text-decoration: none; opacity: 0.5; pointer-events: none; background: #0f172a;">
-                                🔒 Accesso Negato
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
+                <!-- PULSANTE ESAME FINALE A2 -->
+                <div style="margin: 24px 0; text-align: center;">
+                    <a href="esame_finale_a2.html" target="_blank" style="
+                        display: inline-block;
+                        background: linear-gradient(135deg, var(--level-a2) 0%, #1e40af 100%);
+                        color: white;
+                        border: none;
+                        padding: 20px 40px;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        cursor: pointer;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+                        transition: all 0.3s;
+                        font-family: inherit;
+                        text-decoration: none;
+                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(37, 99, 235, 0.4)'" 
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(37, 99, 235, 0.3)'">
+                        📝 ESAME FINALE A2
+                    </a>
+                    <p style="margin-top: 12px; color: var(--text-secondary); font-size: 0.9rem; font-style: italic;">
+                        Esame finale per il livello A2 - Permesso di Lungo Soggiorno CE.CO.L
+                    </p>
+                </div> 
+                                <!-- PULSANTE ESAME FINALE B1 CITTADINANZA -->
+                <div style="margin: 24px 0; text-align: center;">
+                    <a href="esame_finale_b1_cittadinanza.html" target="_blank" style="
+                        display: inline-block;
+                        background: linear-gradient(135deg, var(--level-b1) 0%, #b8941f 100%);
+                        color: #000;
+                        border: none;
+                        padding: 20px 40px;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        cursor: pointer;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3);
+                        transition: all 0.3s;
+                        font-family: inherit;
+                        text-decoration: none;
+                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(201, 162, 39, 0.4)'" 
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(201, 162, 39, 0.3)'">
+                        🇮🇹 ESAME B1 CITTADINANZA
+                    </a>
+                    <p style="margin-top: 12px; color: var(--text-secondary); font-size: 0.9rem; font-style: italic;">
+                        Esame CE.CO.L B1 per la cittadinanza italiana
+                    </p>
+                </div>               
+               
                 <div style="margin-top: 32px; text-align: center;">
                     <button onclick="showSection('home')" class="btn btn-secondary" style="width: auto; padding: 12px 24px;">
                         ← Torna al Cruscotto
