@@ -22,6 +22,7 @@
             --dark: #212529;
             --border: #dee2e6;
             --exam: #0891b2;
+            --audio: #e11d48;
         }
         body {
             font-family: Georgia, serif;
@@ -438,6 +439,75 @@
         .mt-2 { margin-top: 1rem; }
         .mb-2 { margin-bottom: 1rem; }
         
+        /* Stili per la sezione audio */
+        .audio-container {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+            border: 3px solid var(--audio);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+        .audio-icon {
+            font-size: 3rem;
+            color: var(--audio);
+            margin-bottom: 1rem;
+        }
+        .audio-player {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+            display: block;
+            border-radius: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .listen-btn {
+            background: var(--audio);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px rgba(225, 29, 72, 0.3);
+        }
+        .listen-btn:hover {
+            background: #be123c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(225, 29, 72, 0.4);
+        }
+        .listen-btn:active {
+            transform: translateY(0);
+        }
+        .listen-btn.playing {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(225, 29, 72, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+        }
+        .audio-status {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: var(--audio);
+            min-height: 1.5rem;
+        }
+        .audio-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
         @media (max-width: 768px) {
             .nav-tabs { flex-wrap: wrap; }
             .nav-tab { padding: 0.75rem 0.5rem; font-size: 0.85rem; flex: 1 1 33%; }
@@ -446,8 +516,10 @@
             .final-score-value { font-size: 3rem; }
             .options-inline { flex-direction: column; gap: 0.5rem; }
             .score-panel { flex-direction: column; }
+            .listen-btn { font-size: 1rem; padding: 1rem 2rem; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <header class="header">
@@ -471,13 +543,14 @@
     <main class="main-container">
         <div class="page-header">
             <h1 class="page-title">📝 Esame Simulato CE.CO.L B1</h1>
-            <p class="page-subtitle">Prova di Comprensione della Lettura e Produzione di Testi Scritti</p>
+            <p class="page-subtitle">Prova di Comprensione della Lettura, Produzione di Testi Scritti e Ascolto</p>
         </div>
 
         <nav class="nav-tabs">
             <button class="nav-tab active" onclick="showSection('parte-a1', this)">Parte A - Testo 1</button>
             <button class="nav-tab" onclick="showSection('parte-a2', this)">Parte A - Testo 2</button>
             <button class="nav-tab" onclick="showSection('parte-b', this)">Parte B - Scrittura</button>
+            <button class="nav-tab" onclick="showSection('parte-c', this)">🎧 Parte C - Ascolto</button>
             <button class="nav-tab" onclick="showSection('risultati', this)">📊 Risultati</button>
         </nav>
 
@@ -601,6 +674,55 @@
             </div>
         </section>
 
+        <!-- PARTE C - ASCOLTO (SOLO AUDIO) -->
+        <section id="parte-c" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--audio);">
+                    <span>🎧 Parte C - Prova di Comprensione dell'Ascolto</span>
+                    <span class="card-score">Simulazione</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box" style="border-left-color: var(--audio); background: #fdf2f8;">
+                        <strong>Istruzioni:</strong> Ascolta l'audio attentamente. Puoi ascoltarlo <strong>massimo 2 volte</strong>. Questa è una simulazione dell'esame orale.
+                    </div>
+
+                    <div class="audio-container">
+                        <div class="audio-icon">🎙️</div>
+                        <h3 style="color: var(--audio); margin-bottom: 1rem;">Simulazione Esame Orale</h3>
+                        <p style="margin-bottom: 1.5rem; color: var(--secondary);">Clicca sul pulsante qui sotto per ascoltare il dialogo</p>
+                        
+                        <button class="listen-btn" id="listenBtn" onclick="playAudio()">
+                            <span id="btnIcon">▶️</span>
+                            <span id="btnText">ASCOLTA LA SIMULAZIONE</span>
+                        </button>
+                        
+                        <div class="audio-status" id="audioStatus"></div>
+                        
+                        <audio id="examAudio" class="audio-player" controls style="display: none;" onended="onAudioEnded()" onplay="onAudioPlay()" onpause="onAudioPause()">
+                            <source src="WhatsApp Audio 2026-02-16 at 23.31.21.mp3" type="audio/mpeg">
+                            Il tuo browser non supporta l'elemento audio.
+                        </audio>
+                        
+                        <div class="audio-warning" id="audioWarning" style="display: none;">
+                            ⚠️ <strong>Attenzione:</strong> Hai già ascoltato l'audio 2 volte. Non puoi riascoltarlo.
+                        </div>
+                        
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--secondary);">
+                            Ascolti rimanenti: <strong id="playsRemaining">2</strong>/2
+                        </div>
+                    </div>
+
+                    <div class="instruction-box" style="margin-top: 2rem; background: #f0f9ff; border-left-color: #0ea5e9;">
+                        <strong>💡 Suggerimento per lo studio:</strong>
+                        <p style="margin-top: 0.5rem;">
+                            Ascolta attentamente la conversazione e prova a comprendere il contesto, chi sono i personaggi e di cosa parlano. 
+                            Questo ti aiuterà a prepararti per la vera prova di ascolto dell'esame CE.CO.L B1.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- RISULTATI -->
         <section id="risultati" class="section">
             <div class="game-container">
@@ -686,11 +808,17 @@
             a2: {}
         };
 
+        // Stato audio
+        let playCount = 0;
+        let maxPlays = 2;
+        let audioPlaying = false;
+
         // Inizializzazione
         document.addEventListener('DOMContentLoaded', function() {
             generateParteA1();
             generateParteA2();
             setupWritingArea();
+            loadAudioState();
         });
 
         function showSection(id, btn) {
@@ -704,6 +832,7 @@
             }
         }
 
+        // PARTE A1
         function generateParteA1() {
             const container = document.getElementById('questions-parte-a1');
             let html = '';
@@ -731,7 +860,6 @@
 
         function selectA1(id, value) {
             answers.a1[id] = value;
-            // Aggiorna il blank nel testo
             const question = parteA1Questions.find(q => q.id === id);
             const blank = document.getElementById(question.blank);
             if (blank) {
@@ -760,7 +888,6 @@
             
             scores.a1 = correct;
             
-            // Mostra feedback
             const feedback = document.getElementById('feedback-a1');
             feedback.className = 'feedback show ' + (correct >= 14 ? 'correct' : 'wrong');
             feedback.innerHTML = `
@@ -769,7 +896,6 @@
                 <small>Passa alla sezione successiva cliccando su "Parte A - Testo 2"</small>
             `;
             
-            // Disabilita input
             document.querySelectorAll('#questions-parte-a1 input').forEach(input => {
                 input.disabled = true;
                 const question = parteA1Questions.find(q => q.id === parseInt(input.name.substring(1)));
@@ -784,6 +910,7 @@
             });
         }
 
+        // PARTE A2
         function generateParteA2() {
             const container = document.getElementById('questions-parte-a2');
             let html = '';
@@ -805,10 +932,8 @@
 
         function selectA2(id, value) {
             answers.a2[id] = value;
-            // Resetta stili
             document.getElementById(`vf-${id}-V`).className = 'vf-btn';
             document.getElementById(`vf-${id}-F`).className = 'vf-btn';
-            // Seleziona
             document.getElementById(`vf-${id}-${value}`).classList.add('selected');
         }
 
@@ -831,7 +956,6 @@
             
             scores.a2 = correct;
             
-            // Mostra feedback
             const feedback = document.getElementById('feedback-a2');
             feedback.className = 'feedback show ' + (correct >= 3 ? 'correct' : 'wrong');
             feedback.innerHTML = `
@@ -840,7 +964,6 @@
                 <small>Passa alla sezione successiva cliccando su "Parte B - Scrittura"</small>
             `;
             
-            // Mostra risposte corrette
             parteA2Questions.forEach(q => {
                 const btnV = document.getElementById(`vf-${q.id}-V`);
                 const btnF = document.getElementById(`vf-${q.id}-F`);
@@ -859,6 +982,7 @@
             });
         }
 
+        // PARTE B
         function setupWritingArea() {
             const textarea = document.getElementById('writing-text');
             const wordCount = document.getElementById('word-count');
@@ -885,7 +1009,6 @@
                 return;
             }
             
-            // Salva in localStorage per valutazione manuale
             localStorage.setItem('cecol_b1_writing', text);
             localStorage.setItem('cecol_b1_writing_words', words);
             
@@ -900,9 +1023,96 @@
             document.getElementById('writing-text').disabled = true;
         }
 
+        // PARTE C - ASCOLTO (solo funzioni audio)
+        function loadAudioState() {
+            const savedCount = localStorage.getItem('cecol_b1_audio_plays');
+            if (savedCount) {
+                playCount = parseInt(savedCount);
+                updateAudioUI();
+            }
+        }
+
+        function saveAudioState() {
+            localStorage.setItem('cecol_b1_audio_plays', playCount);
+        }
+
+        function playAudio() {
+            if (playCount >= maxPlays) {
+                document.getElementById('audioWarning').style.display = 'block';
+                return;
+            }
+
+            const audio = document.getElementById('examAudio');
+            
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        function onAudioPlay() {
+            audioPlaying = true;
+            const btn = document.getElementById('listenBtn');
+            const icon = document.getElementById('btnIcon');
+            const text = document.getElementById('btnText');
+            const status = document.getElementById('audioStatus');
+            
+            btn.classList.add('playing');
+            icon.textContent = '⏸️';
+            text.textContent = 'IN ASCOLTO...';
+            status.textContent = '🔊 Audio in riproduzione';
+            
+            if (playCount === 0) {
+                playCount++;
+                saveAudioState();
+                updateAudioUI();
+            }
+        }
+
+        function onAudioPause() {
+            audioPlaying = false;
+            const btn = document.getElementById('listenBtn');
+            const icon = document.getElementById('btnIcon');
+            const text = document.getElementById('btnText');
+            const status = document.getElementById('audioStatus');
+            
+            btn.classList.remove('playing');
+            
+            if (playCount >= maxPlays) {
+                icon.textContent = '✅';
+                text.textContent = 'ASCOLTO COMPLETATO';
+                status.textContent = 'Hai esaurito gli ascolti disponibili';
+            } else {
+                icon.textContent = '▶️';
+                text.textContent = 'RIASCOLTA (ultima volta)';
+                status.textContent = 'Audio in pausa. Clicca per riprendere.';
+            }
+        }
+
+        function onAudioEnded() {
+            if (playCount < maxPlays) {
+                playCount++;
+                saveAudioState();
+                updateAudioUI();
+            }
+            onAudioPause();
+        }
+
+        function updateAudioUI() {
+            document.getElementById('playsRemaining').textContent = Math.max(0, maxPlays - playCount);
+            
+            if (playCount >= maxPlays) {
+                document.getElementById('audioWarning').style.display = 'block';
+                document.getElementById('listenBtn').disabled = true;
+                document.getElementById('listenBtn').style.opacity = '0.6';
+            }
+        }
+
+        // RISULTATI
         function updateResults() {
             const total = scores.a1 + scores.a2;
-            const percentage = (total / 25) * 100; // Solo Parte A calcolabile automaticamente
+            const percentage = (total / 25) * 100;
             
             document.getElementById('score-a1').textContent = `${scores.a1}/20`;
             document.getElementById('score-a2').textContent = `${scores.a2}/5`;
@@ -911,7 +1121,6 @@
             
             document.getElementById('progressBar').style.width = `${percentage}%`;
             
-            // Valutazione
             let evaluation = '';
             if (scores.a1 === 0 && scores.a2 === 0) {
                 evaluation = '<p style="text-align: center; color: var(--secondary);">Completa le sezioni A1 e A2 per vedere la valutazione.</p>';
@@ -966,6 +1175,8 @@
             if (confirm('Sei sicuro di voler ricominciare l\'esame? Tutte le risposte verranno cancellate.')) {
                 scores = { a1: 0, a2: 0, b: 0 };
                 answers = { a1: {}, a2: {} };
+                playCount = 0;
+                saveAudioState();
                 
                 // Reset UI
                 document.querySelectorAll('input[type="radio"]').forEach(input => {
@@ -997,6 +1208,17 @@
                     f.className = 'feedback';
                     f.innerHTML = '';
                 });
+
+                // Reset audio
+                const audio = document.getElementById('examAudio');
+                audio.pause();
+                audio.currentTime = 0;
+                document.getElementById('listenBtn').disabled = false;
+                document.getElementById('listenBtn').style.opacity = '1';
+                document.getElementById('btnIcon').textContent = '▶️';
+                document.getElementById('btnText').textContent = 'ASCOLTA LA SIMULAZIONE';
+                document.getElementById('audioStatus').textContent = '';
+                document.getElementById('audioWarning').style.display = 'none';
                 
                 showSection('parte-a1', document.querySelectorAll('.nav-tab')[0]);
             }
