@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CE.CO.L C1 - Esame Simulato Livello Autonomo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --c1-color: #6b21a8;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --exam: #0891b2;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--c1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .exam-badge {
+            display: inline-block;
+            background: var(--c1-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            text-align: center;
+        }
+        .page-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+            flex: 1;
+            text-align: center;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c1-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c1-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-score {
+            background: var(--c1-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .text-box {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+        .highlight { 
+            background: rgba(107, 33, 168, 0.15); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .blank {
+            display: inline-block;
+            min-width: 160px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .question-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #fafafa;
+            border-left: 3px solid var(--primary);
+        }
+        .question-number {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .options-inline {
+            display: flex;
+            gap: 2rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .option-label:hover {
+            background: #e7f3ff;
+        }
+        .option-label input[type="radio"] {
+            cursor: pointer;
+        }
+        .inference-box {
+            background: #faf5ff;
+            border: 2px solid var(--c1-color);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+        }
+        .inference-title {
+            font-weight: bold;
+            color: var(--c1-color);
+            margin-bottom: 0.5rem;
+        }
+        .writing-area {
+            width: 100%;
+            min-height: 300px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+        .writing-area:focus {
+            outline: none;
+            border-color: var(--c1-color);
+        }
+        .word-count {
+            text-align: right;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-radius: 8px;
+        }
+        .score-section {
+            text-align: center;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+        }
+        .score-value {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: var(--light);
+            border: 2px solid var(--border);
+            margin: 1rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--c1-color), #8b5cf6);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin: 1rem 0;
+            border: 2px solid;
+            border-radius: 4px;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+            border-radius: 4px;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--c1-color); 
+            color: white; 
+            font-weight: bold;
+        }
+        .btn-check:hover {
+            background: #581c87;
+        }
+        .btn-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #a78bfa;
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .result-details {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: left;
+        }
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .exercise-counter {
+            background: var(--c1-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 0.5rem; font-size: 0.85rem; flex: 1 1 33%; }
+            .header h1 { font-size: 1.3rem; }
+            .page-title { font-size: 1.4rem; }
+            .final-score-value { font-size: 3rem; }
+            .options-inline { flex-direction: column; gap: 0.5rem; }
+            .score-panel { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>UNIDA Università per Stranieri "Dante Alighieri"</h1>
+            <p>Reggio Calabria - Prova per il Certificato di Conoscenza della Lingua Italiana</p>
+            <div class="exam-badge">CE.CO.L C1 - LIVELLO AUTONOMO</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Esami Livello Autonomo</a>
+            <span>›</span>
+            <strong>CE.CO.L C1 Simulazione</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📝 Esame Simulato CE.CO.L C1</h1>
+            <p class="page-subtitle">Prova di Comprensione della Lettura e Produzione di Testi Scritti</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('parte-a1', this)">Parte A - Testo 1</button>
+            <button class="nav-tab" onclick="showSection('parte-a2', this)">Parte A - Testo 2</button>
+            <button class="nav-tab" onclick="showSection('parte-b', this)">Parte B - Scrittura</button>
+            <button class="nav-tab" onclick="showSection('risultati', this)">📊 Risultati</button>
+        </nav>
+
+        <!-- PARTE A - TESTO 1 (Cloze con connettivi e stile formale avanzato) -->
+        <section id="parte-a1" class="section active">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte A - Prova di Comprensione della Lettura</span>
+                    <span class="card-score">N. 1 - max 20 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> Leggi il testo con attenzione e scegli l'alternativa corretta tra le due opzioni proposte. Scegli le espressioni più appropriate per un testo formale e accademico. Ogni risposta esatta vale <strong>2 punti</strong>.
+                    </div>
+
+                    <div class="text-box">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">L'impatto dell'intelligenza artificiale sul mercato del lavoro</h3>
+                        
+                        <p>Il dibattito sulle trasformazioni indotte dall'intelligenza artificiale (IA) nel mondo del lavoro ha assunto negli ultimi anni dimensioni via via più rilevanti. <span class="blank" id="blank1">_____</span> si tenda a enfatizzare gli aspetti apocalittici della sostituzione uomo-macchina, una lettura più attenta dei fenomeni in corso suggerisce scenari assai più articolati e, in molti casi, meno drammatici di quanto comunemente si creda.</p>
+                        
+                        <p><span class="blank" id="blank2">_____</span> primo luogo, è opportuno distinguere tra automazione e innovazione complementare. <span class="blank" id="blank3">_____</span> la prima comporta la sostituzione diretta del lavoratore con la macchina, la seconda configura un rapporto sinergico nel quale l'IA amplifica le capacità umane <span class="blank" id="blank4">_____</span> sostituirle. Tale distinzione, <span class="blank" id="blank5">_____</span> spesso sottovalutata nei discorsi pubblici, riveste un'importanza cruciale per la formulazione di politiche adeguate.</p>
+                        
+                        <p>Le previsioni occupazionali, <span class="blank" id="blank6">_____</span> debbano essere prese con la dovuta cautela, indicano che i mestieri più esposti al rischio di estinzione sono quelli caratterizzati da elevata ripetitività e basso contenuto cognitivo. <span class="blank" id="blank7">_____</span>, emergono profili professionali nuovi o profondamente trasformati, legati alla supervisione dei sistemi intelligenti, all'interpretazione dei dati e alla governance etica delle tecnologie.</p>
+                        
+                        <p><span class="blank" id="blank8">_____</span> quanto concerne le competenze richieste, il panorama appare in rapida evoluzione. Le cosiddette soft skills – pensiero critico, creatività, empatia –, <span class="blank" id="blank9">_____</span> ritenute secondarie rispetto alle competenze tecniche, si rivelano oggi fondamentali e difficilmente replicabili dall'IA. <span class="blank" id="blank10">_____</span> conclusione, l'adattamento continuo e l'apprendimento permanente rappresentano l'unica strategia vincente per affrontare le sfide del futuro.</p>
+                    </div>
+
+                    <div id="questions-parte-a1">
+                        <!-- Domande generate via JS -->
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="checkParteA1()">Verifica Risposte</button>
+                    </div>
+                    <div class="feedback" id="feedback-a1"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTE A - TESTO 2 (Inferenze e sottintesi) -->
+        <section id="parte-a2" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte A - Prova di Comprensione della Lettura</span>
+                    <span class="card-score">N. 2 - max 5 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> Leggi il testo e individua ciò che l'autore <strong>implica</strong> ma non dice esplicitamente. Scegli l'inferenza corretta tra le opzioni proposte. Ogni risposta corretta vale <strong>1 punto</strong>.
+                    </div>
+
+                    <div class="text-box">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">La crisi della rappresentanza politica</h3>
+                        
+                        <p>La partecipazione elettorale, già in declino da decenni, ha toccato nelle ultime consultazioni amministrative minimi storici in molti comuni capoluogo. I dati, peraltro, non sorprendono più di tanto chi osserva con attenzione i fenomeni politici contemporanei. Da tempo, infatti, si registra una progressiva distanza tra le istituzioni rappresentative e la società civile, una distanza che si traduce in astensionismo, certo, ma anche – e forse soprattutto – in forme di engagement politico alternate e spesso contraddittorie.</p>
+                        
+                        <p>I cittadini, specialmente le generazioni più giovani, non sembrano affatto disinteressati alle questioni pubbliche. Le mobilitazioni sui temi ambientali, le proteste per l'accesso alla casa, le iniziative di mutualismo sociale testimoniano un'attenzione vivace, talora tradotta in pratiche di cittadinanza attiva che eludono i canali tradizionali. Il problema, piuttosto, risiede nella percezione di un sistema politico incapace di recepire queste istanze, di tradurle in proposte concrete, di offrire risposte credibili.</p>
+                        
+                        <p>La sfida, allora, non è tanto quella di richiamare all'obbligo del voto – soluzione quanto mai illusoria – quanto piuttosto di ripensare radicalmente le forme della partecipazione, sperimentando strumenti di democrazia diretta e deliberativa che restituiscano ai cittadini un senso di efficacia politica. Altrimenti, il rischio è quello di una spirale perversa: minore legittimità delle istituzioni, maggiore disaffezione, crescente vulnerabilità dei sistemi democratici alle sirene autoritarie.</p>
+                    </div>
+
+                    <div id="questions-parte-a2">
+                        <!-- Domande inferenze generate via JS -->
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="checkParteA2()">Verifica Risposte</button>
+                    </div>
+                    <div class="feedback" id="feedback-a2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTE B - PRODUZIONE SCRITTA -->
+        <section id="parte-b" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte B - Prova di Produzione di Testi Scritti</span>
+                    <span class="card-score">max 25 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> Redigi un saggio breve (testo argomentativo) sul tema: <strong>"La sostenibilità ambientale come sfida etica e non solo tecnologica"</strong>. Devi esporre tesi contrapposte, prendere posizione e argomentare la tua scelta. <strong>Usa circa 180 parole.</strong>
+                    </div>
+
+                    <div class="text-box" style="background: white; border: 2px solid var(--primary);">
+                        <textarea class="writing-area" id="writing-text" placeholder="La sostenibilità ambientale..."></textarea>
+                    </div>
+
+                    <div class="word-count" id="word-count">Parole: 0 / 180</div>
+
+                    <div class="instruction-box" style="margin-top: 1.5rem;">
+                        <strong>Elementi da includere (auto-valutazione):</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Introduzione chiara del tema e tesi</li>
+                            <li>Presentazione di almeno due punti di vista contrapposti</li>
+                            <li>Argomentazione solida a sostegno della propria posizione</li>
+                            <li>Uso di connettivi logici adeguati (causa-effetto, concessione, conclusione)</li>
+                            <li>Lessico specialistico appropriato</li>
+                            <li>Conclusione che riprenda la tesi iniziale</li>
+                        </ul>
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="saveWriting()">Salva Testo</button>
+                    </div>
+                    <div class="feedback" id="feedback-b"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RISULTATI -->
+        <section id="risultati" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div class="score-section">
+                        <div class="score-label">Parte A1</div>
+                        <div class="score-value" id="score-a1">0/20</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">Parte A2</div>
+                        <div class="score-value" id="score-a2">0/5</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">Parte B</div>
+                        <div class="score-value" id="score-b">-/25</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">TOTALE</div>
+                        <div class="score-value" id="score-total">0/50</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Valutazione Finale</div>
+                    <div class="card-body">
+                        <div id="evaluation-content">
+                            <p style="text-align: center; color: var(--secondary); padding: 2rem;">
+                                Completa tutte le parti dell'esame per visualizzare la valutazione finale.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button class="btn-primary" onclick="restartExam()">🔄 Nuovo Tentativo</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 UNIDA Università per Stranieri "Dante Alighieri" - Reggio Calabria</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Simulazione CE.CO.L C1 Livello Autonomo</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dati dell'esame
+        const parteA1Questions = [
+            { id: 1, blank: 'blank1', options: ['Benché', 'Poiché'], correct: 'Benché', explanation: '"Benché" introduce una concessione: nonostante si enfatizzi l\'aspetto apocalittico...' },
+            { id: 2, blank: 'blank2', options: ['In', 'Nel'], correct: 'In', explanation: '"In primo luogo" è l\'espressione fissa per iniziare un elenco argomentativo.' },
+            { id: 3, blank: 'blank3', options: ['Se', 'Mentre'], correct: 'Mentre', explanation: '"Mentre" introduce un contrasto tra automazione e innovazione complementare.' },
+            { id: 4, blank: 'blank4', options: ['senza', 'piuttosto che'], correct: 'piuttosto che', explanation: '"Piuttosto che" indica l\'alternativa: amplifica le capacità invece di sostituirle.' },
+            { id: 5, blank: 'blank5', options: ['pur essendo', 'essendo'], correct: 'pur essendo', explanation: '"Pur essendo" introduce una concessione: sebbene sia sottovalutata...' },
+            { id: 6, blank: 'blank6', options: ['che', 'le quali'], correct: 'che', explanation: '"Che" è il pronome relativo corretto per "previsioni".' },
+            { id: 7, blank: 'blank7', options: ['D\'altro canto', 'Pertanto'], correct: 'D\'altro canto', explanation: '"D\'altro canto" introduce un\'opposizione/altra prospettiva.' },
+            { id: 8, blank: 'blank8', options: ['Per', 'Quanto'], correct: 'Per', explanation: '"Per quanto concerne" è l\'espressione fissa per introdurre un nuovo argomento.' },
+            { id: 9, blank: 'blank9', options: ['un tempo', 'sempre'], correct: 'un tempo', explanation: '"Un tempo" indica il passato: in passato erano ritenute secondarie.' },
+            { id: 10, blank: 'blank10', options: ['In', 'Per'], correct: 'In', explanation: '"In conclusione" è l\'espressione fissa per concludere.' }
+        ];
+
+        const parteA2Questions = [
+            { 
+                id: 1, 
+                text: 'Secondo l\'autore, l\'astensionismo elettorale è principalmente dovuto a:',
+                options: ['Disinteresse totale per la politica', 'Mancanza di fiducia nelle istituzioni tradizionali', 'Preferenza per i regimi autoritari'],
+                correct: 'Mancanza di fiducia nelle istituzioni tradizionali',
+                explanation: 'L\'autore parla di "percezione di un sistema politico incapace di recepire queste istanze".'
+            },
+            { 
+                id: 2, 
+                text: 'L\'autore suggerisce implicitamente che i giovani:',
+                options: ['Sono apatici e disinteressati', 'Sono politicamente attivi ma fuori dai canali tradizionali', 'Preferiscono il mutualismo alla politica'],
+                correct: 'Sono politicamente attivi ma fuori dai canali tradizionali',
+                explanation: 'Le mobilitazioni testimoniano attenzione vivace "talora tradotta in pratiche... che eludono i canali tradizionali".'
+            },
+            { 
+                id: 3, 
+                text: 'Secondo il testo, il richiamo all\'obbligo del voto è considerato:',
+                options: ['Una soluzione efficace', 'Una soluzione illusoria', 'Una necessità democratica'],
+                correct: 'Una soluzione illusoria',
+                explanation: 'Esplicitamente definito "soluzione quanto mai illusoria".'
+            },
+            { 
+                id: 4, 
+                text: 'L\'autore teme che la crisi della rappresentanza possa portare a:',
+                options: ['Maggiore democrazia diretta', 'Vulnerabilità ai sistemi autoritari', 'Aumento del mutualismo sociale'],
+                correct: 'Vulnerabilità ai sistemi autoritari',
+                explanation: 'Il testo parla di "crescente vulnerabilità dei sistemi democratici alle sirene autoritarie".'
+            },
+            { 
+                id: 5, 
+                text: 'Il tono generale del testo può essere definito:',
+                options: ['Ottimista rassicurante', 'Allarmista apocalittico', 'Analitico e critico'],
+                correct: 'Analitico e critico',
+                explanation: 'Il testo offre un\'analisi ragionata dei fenomeni con una valutazione critica della situazione.'
+            }
+        ];
+
+        // Stato dell'esame
+        let scores = {
+            a1: 0,
+            a2: 0,
+            b: 0
+        };
+        let answers = {
+            a1: {},
+            a2: {}
+        };
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            generateParteA1();
+            generateParteA2();
+            setupWritingArea();
+        });
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+            
+            if (id === 'risultati') {
+                updateResults();
+            }
+        }
+
+        function generateParteA1() {
+            const container = document.getElementById('questions-parte-a1');
+            let html = '';
+            
+            parteA1Questions.forEach((q, index) => {
+                html += `
+                    <div class="question-item">
+                        <div class="question-number">${index + 1}. Scegli l'alternativa corretta:</div>
+                        <div class="options-inline">
+                            <label class="option-label">
+                                <input type="radio" name="q${q.id}" value="${q.options[0]}" onchange="selectA1(${q.id}, '${q.options[0]}')">
+                                <span>${q.options[0]}</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q${q.id}" value="${q.options[1]}" onchange="selectA1(${q.id}, '${q.options[1]}')">
+                                <span>${q.options[1]}</span>
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function selectA1(id, value) {
+            answers.a1[id] = value;
+            const question = parteA1Questions.find(q => q.id === id);
+            const blank = document.getElementById(question.blank);
+            if (blank) {
+                blank.textContent = value;
+                blank.style.color = 'var(--primary)';
+                blank.style.borderBottom = '2px solid var(--primary)';
+            }
+        }
+
+        function checkParteA1() {
+            let correct = 0;
+            let allAnswered = true;
+            
+            parteA1Questions.forEach(q => {
+                if (!answers.a1[q.id]) {
+                    allAnswered = false;
+                } else if (answers.a1[q.id] === q.correct) {
+                    correct += 2;
+                }
+            });
+            
+            if (!allAnswered) {
+                alert('Per favore, rispondi a tutte le domande prima di verificare.');
+                return;
+            }
+            
+            scores.a1 = correct;
+            
+            const feedback = document.getElementById('feedback-a1');
+            feedback.className = 'feedback show ' + (correct >= 14 ? 'correct' : 'wrong');
+            feedback.innerHTML = `
+                <strong>Hai ottenuto ${correct}/20 punti!</strong><br>
+                ${correct >= 14 ? 'Ottimo risultato!' : 'Rivedi le risposte sbagliate.'}<br>
+                <small>Passa alla sezione successiva cliccando su "Parte A - Testo 2"</small>
+            `;
+            
+            document.querySelectorAll('#questions-parte-a1 input').forEach(input => {
+                input.disabled = true;
+                const question = parteA1Questions.find(q => q.id === parseInt(input.name.substring(1)));
+                const label = input.closest('.option-label');
+                if (input.value === question.correct) {
+                    label.style.background = '#c6f6d5';
+                    label.style.border = '2px solid #276749';
+                } else if (input.checked && input.value !== question.correct) {
+                    label.style.background = '#fed7d7';
+                    label.style.border = '2px solid #c53030';
+                }
+            });
+        }
+
+        function generateParteA2() {
+            const container = document.getElementById('questions-parte-a2');
+            let html = '';
+            
+            parteA2Questions.forEach((q, index) => {
+                html += `
+                    <div class="question-item">
+                        <div class="inference-box">
+                            <div class="inference-title">Inferenza ${index + 1}</div>
+                            <div class="question-number">${q.text}</div>
+                            <div class="options-inline" style="flex-direction: column; align-items: flex-start;">
+                                ${q.options.map((opt, i) => `
+                                    <label class="option-label" style="width: 100%;">
+                                        <input type="radio" name="inf${q.id}" value="${opt}" onchange="selectA2(${q.id}, '${opt}')">
+                                        <span>${String.fromCharCode(65 + i)}. ${opt}</span>
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function selectA2(id, value) {
+            answers.a2[id] = value;
+        }
+
+        function checkParteA2() {
+            let correct = 0;
+            let allAnswered = true;
+            
+            parteA2Questions.forEach(q => {
+                if (!answers.a2[q.id]) {
+                    allAnswered = false;
+                } else if (answers.a2[q.id] === q.correct) {
+                    correct += 1;
+                }
+            });
+            
+            if (!allAnswered) {
+                alert('Per favore, rispondi a tutte le domande prima di verificare.');
+                return;
+            }
+            
+            scores.a2 = correct;
+            
+            const feedback = document.getElementById('feedback-a2');
+            feedback.className = 'feedback show ' + (correct >= 3 ? 'correct' : 'wrong');
+            feedback.innerHTML = `
+                <strong>Hai ottenuto ${correct}/5 punti!</strong><br>
+                ${correct >= 3 ? 'Buon risultato!' : 'Rivedi le risposte sbagliate.'}<br>
+                <small>Passa alla sezione successiva cliccando su "Parte B - Scrittura"</small>
+            `;
+            
+            parteA2Questions.forEach(q => {
+                document.querySelectorAll(`input[name="inf${q.id}"]`).forEach(input => {
+                    input.disabled = true;
+                    const label = input.closest('.option-label');
+                    if (input.value === q.correct) {
+                        label.style.background = '#c6f6d5';
+                        label.style.border = '2px solid #276749';
+                    } else if (input.checked && input.value !== q.correct) {
+                        label.style.background = '#fed7d7';
+                        label.style.border = '2px solid #c53030';
+                    }
+                });
+            });
+        }
+
+        function setupWritingArea() {
+            const textarea = document.getElementById('writing-text');
+            const wordCount = document.getElementById('word-count');
+            
+            textarea.addEventListener('input', function() {
+                const text = this.value.trim();
+                const words = text ? text.split(/\s+/).length : 0;
+                wordCount.textContent = `Parole: ${words} / 180`;
+                
+                if (words >= 160 && words <= 200) {
+                    wordCount.style.color = 'var(--success)';
+                } else {
+                    wordCount.style.color = 'var(--secondary)';
+                }
+            });
+        }
+
+        function saveWriting() {
+            const text = document.getElementById('writing-text').value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            
+            if (words < 40) {
+                alert('Il testo è troppo corto. Scrivi almeno 160-180 parole.');
+                return;
+            }
+            
+            localStorage.setItem('cecol_c1_writing', text);
+            localStorage.setItem('cecol_c1_writing_words', words);
+            
+            const feedback = document.getElementById('feedback-b');
+            feedback.className = 'feedback show correct';
+            feedback.innerHTML = `
+                <strong>Testo salvato!</strong><br>
+                Hai scritto ${words} parole.<br>
+                <small>La valutazione della Parte B (0-25 punti) deve essere fatta dall'insegnante.</small>
+            `;
+            
+            document.getElementById('writing-text').disabled = true;
+        }
+
+        function updateResults() {
+            const total = scores.a1 + scores.a2;
+            const percentage = (total / 25) * 100;
+            
+            document.getElementById('score-a1').textContent = `${scores.a1}/20`;
+            document.getElementById('score-a2').textContent = `${scores.a2}/5`;
+            document.getElementById('score-b').textContent = `-/25`;
+            document.getElementById('score-total').textContent = `${total}/50 (Parte A)`;
+            
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+            
+            let evaluation = '';
+            if (scores.a1 === 0 && scores.a2 === 0) {
+                evaluation = '<p style="text-align: center; color: var(--secondary);">Completa le sezioni A1 e A2 per vedere la valutazione.</p>';
+            } else {
+                let message = '';
+                let color = '';
+                
+                if (total >= 20) {
+                    message = '🏆 Eccellente! Hai superato la Parte A con ottimi risultati!';
+                    color = 'var(--success)';
+                } else if (total >= 15) {
+                    message = '👍 Buon risultato! Sei sulla buona strada.';
+                    color = '#d4a017';
+                } else {
+                    message = '💪 Continua a studiare! Riprova il test.';
+                    color = 'var(--error)';
+                }
+                
+                evaluation = `
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">${message.split(' ')[0]}</div>
+                        <h3 style="color: ${color};">${message.substring(2)}</h3>
+                    </div>
+                    <div class="result-details">
+                        <div class="result-row">
+                            <span>Comprensione lettura - Testo 1 (Stile formale):</span>
+                            <strong>${scores.a1}/20 ${scores.a1 >= 12 ? '✓' : '✗'}</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Comprensione lettura - Testo 2 (Inferenze):</span>
+                            <strong>${scores.a2}/5 ${scores.a2 >= 3 ? '✓' : '✗'}</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Produzione scritta (da valutare):</span>
+                            <strong>-/25</strong>
+                        </div>
+                        <div class="result-row" style="border-top: 2px solid var(--primary); margin-top: 0.5rem; padding-top: 0.5rem; font-size: 1.1rem;">
+                            <span>TOTALE PARTE A:</span>
+                            <strong>${total}/25</strong>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 4px;">
+                        <strong>Nota:</strong> Per superare l'esame CE.CO.L C1 serve ottenere almeno <strong>15/25</strong> nella Parte A e <strong>15/25</strong> nella Parte B.
+                    </div>
+                `;
+            }
+            
+            document.getElementById('evaluation-content').innerHTML = evaluation;
+        }
+
+        function restartExam() {
+            if (confirm('Sei sicuro di voler ricominciare l\'esame? Tutte le risposte verranno cancellate.')) {
+                scores = { a1: 0, a2: 0, b: 0 };
+                answers = { a1: {}, a2: {} };
+                
+                document.querySelectorAll('input[type="radio"]').forEach(input => {
+                    input.checked = false;
+                    input.disabled = false;
+                });
+                
+                document.querySelectorAll('.option-label').forEach(label => {
+                    label.style.background = '';
+                    label.style.border = '';
+                });
+                
+                document.querySelectorAll('.blank').forEach(blank => {
+                    blank.textContent = '_____';
+                    blank.style.color = 'var(--accent)';
+                    blank.style.borderBottom = '2px solid var(--accent)';
+                });
+                
+                document.getElementById('writing-text').value = '';
+                document.getElementById('writing-text').disabled = false;
+                document.getElementById('word-count').textContent = 'Parole: 0 / 180';
+                
+                document.querySelectorAll('.feedback').forEach(f => {
+                    f.className = 'feedback';
+                    f.innerHTML = '';
+                });
+                
+                showSection('parte-a1', document.querySelectorAll('.nav-tab')[0]);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CE.CO.L C2 - Esame Simulato Livello Maestria</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --c2-color: #0f172a;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --exam: #0891b2;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--c2-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .exam-badge {
+            display: inline-block;
+            background: var(--c2-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            text-align: center;
+        }
+        .page-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+            flex: 1;
+            text-align: center;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c2-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c2-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-score {
+            background: var(--c2-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .text-box {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+        .highlight { 
+            background: rgba(15, 23, 42, 0.15); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .blank {
+            display: inline-block;
+            min-width: 180px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .question-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #fafafa;
+            border-left: 3px solid var(--primary);
+        }
+        .question-number {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .options-inline {
+            display: flex;
+            gap: 2rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .option-label:hover {
+            background: #e7f3ff;
+        }
+        .option-label input[type="radio"] {
+            cursor: pointer;
+        }
+        .critical-box {
+            background: #f1f5f9;
+            border: 2px solid var(--c2-color);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+        }
+        .critical-title {
+            font-weight: bold;
+            color: var(--c2-color);
+            margin-bottom: 0.5rem;
+        }
+        .writing-area {
+            width: 100%;
+            min-height: 350px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+        .writing-area:focus {
+            outline: none;
+            border-color: var(--c2-color);
+        }
+        .word-count {
+            text-align: right;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-radius: 8px;
+        }
+        .score-section {
+            text-align: center;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+        }
+        .score-value {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: var(--light);
+            border: 2px solid var(--border);
+            margin: 1rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--c2-color), #334155);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin: 1rem 0;
+            border: 2px solid;
+            border-radius: 4px;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+            border-radius: 4px;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--c2-color); 
+            color: white; 
+            font-weight: bold;
+        }
+        .btn-check:hover {
+            background: #1e293b;
+        }
+        .btn-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #94a3b8;
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .result-details {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: left;
+        }
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .exercise-counter {
+            background: var(--c2-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 0.5rem; font-size: 0.85rem; flex: 1 1 33%; }
+            .header h1 { font-size: 1.3rem; }
+            .page-title { font-size: 1.4rem; }
+            .final-score-value { font-size: 3rem; }
+            .options-inline { flex-direction: column; gap: 0.5rem; }
+            .score-panel { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>UNIDA Università per Stranieri "Dante Alighieri"</h1>
+            <p>Reggio Calabria - Prova per il Certificato di Conoscenza della Lingua Italiana</p>
+            <div class="exam-badge">CE.CO.L C2 - LIVELLO MAESTRIA</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Esami Livello Maestria</a>
+            <span>›</span>
+            <strong>CE.CO.L C2 Simulazione</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📝 Esame Simulato CE.CO.L C2</h1>
+            <p class="page-subtitle">Prova di Comprensione della Lettura e Produzione di Testi Scritti</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('parte-a1', this)">Parte A - Testo 1</button>
+            <button class="nav-tab" onclick="showSection('parte-a2', this)">Parte A - Testo 2</button>
+            <button class="nav-tab" onclick="showSection('parte-b', this)">Parte B - Scrittura</button>
+            <button class="nav-tab" onclick="showSection('risultati', this)">📊 Risultati</button>
+        </nav>
+
+        <!-- PARTE A - TESTO 1 (Cloze con stile accademico, figure retoriche, registri) -->
+        <section id="parte-a1" class="section active">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte A - Prova di Comprensione della Lettura</span>
+                    <span class="card-score">N. 1 - max 20 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> Leggi il testo con attenzione e scegli l'alternativa corretta tra le due opzioni proposte. Il testo presenta caratteristiche del registro filosofico-letterario con uso di figure retoriche e sintassi complessa. Ogni risposta esatta vale <strong>2 punti</strong>.
+                    </div>
+
+                    <div class="text-box">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">La nostalgia come paradosso del moderno</h3>
+                        
+                        <p>La nostalgia, <span class="blank" id="blank1">_____</span> etimologicamente al dolore per il ritorno (nostos-algos), si configura oggi come uno dei sentimenti più paradossali della nostra epoca. <span class="blank" id="blank2">_____</span> in un'epoca che ha celebrato il progresso come valore assoluto, ci troviamo a rimpiangere ciò che abbiamo deliberatamente abbandonato. Questo sentimento non è <span class="blank" id="blank3">_____</na> semplice malinconia per il passato, bensì una forma di coscienza critica che interroga il presente attraverso la lente di ciò che è stato perduto.</p>
+                        
+                        <p>La modernità, <span class="blank" id="blank4">_____</span> il suo incedere inarrestabile, ha dissolto le comunità tradizionali, le certezze metafisiche, i legami di sangue e di terra. <span class="blank" id="blank5">_____</span> tale dissoluzione abbia comportato innegabili conquiste in termini di libertà individuale e di emancipazione dai vincoli oppressivi, essa ha altresì prodotto quel vuoto esistenziale che la nostalgia tenta, vanamente, di colmare. <span class="blank" id="blank6">_____</span> dire con Proust: la vera paradiso è un paradiso perduto.</p>
+                        
+                        <p><span class="blank" id="blank7">_____</span> ciò che distingue la nostalgia contemporanea dalle forme precedenti è la sua natura riflessiva e consapevole. <span class="blank" id="blank8">_____</span> i nostri antenati rimpiangevano ingenuamente un passato idealizzato, noi ne riconosciamo la costruzione ideologica, <span class="blank" id="blank9">_____</span> continuiamo a esserne attratti. Questo scarto tra consapevolezza critica e affettività irriducibile costituisce il <span class="blank" id="blank10">_____</span> della condizione postmoderna: sappiamo che la nostalgia è un inganno, ma non possiamo fare a meno di esserne ingannati.</p>
+                    </div>
+
+                    <div id="questions-parte-a1">
+                        <!-- Domande generate via JS -->
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="checkParteA1()">Verifica Risposte</button>
+                    </div>
+                    <div class="feedback" id="feedback-a1"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTE A - TESTO 2 (Analisi critica e intertestualità) -->
+        <section id="parte-a2" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte A - Prova di Comprensione della Lettura</span>
+                    <span class="card-score">N. 2 - max 5 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> Leggi il brano e rispondi alle domande che ne verificano la comprensione critica, inclusi riferimenti intertestuali e sottintesi culturali. Ogni risposta corretta vale <strong>1 punto</strong>.
+                    </div>
+
+                    <div class="text-box">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">L'arte della memoria</h3>
+                        
+                        <p>"Il passato è un paese straniero: fanno le cose diversamente lì", scriveva lo storico David Lowenthal, parafrasando il celebre incipit di <em>The Go-Between</em> di L.P. Hartley. Eppure, nel nostro presente globalizzato, quel "paese straniero" sembra aver invaso il territorio del quotidiano, trasformandosi in un parco tematico permanente dove il passato viene ricostruito, simulato, consumato.</p>
+                        
+                        <p>Le città storiche, un tempo luoghi di vita, diventano musei a cielo aperto; i monumenti, testimoni muti di tragedie e glorie, sono ridotti a sfondi per selfie; la memoria collettiva, sostituita dalla memoria digitale, si frammenta in post e stories che scompaiono nel giro di ventiquattrore. Ciò che Walter Benjamin chiamava "aura" dell'opera d'arte – la sua unicità e irripetibilità – sembra essersi dissolta nell'era della riproducibilità digitale, dove ogni esperienza è immediatamente condivisibile e quindi, in qualche modo, tradita.</p>
+                        
+                        <p>Eppure, proprio in questo scenario apparentemente desolante, emergono forme di resistenza. Artisti, scrittori, archivisti del quotidiano lavorano per recuperare le microstorie, le memorie sommerse, le voci escluse dalla grande narrazione storica. Non si tratta di nostalgia reazionaria, ma di un atto etico: testimoniare ciò che rischia di essere cancellato, dare voce a chi non ha avvoce, preservare la complessità contro la semplificazione.</p>
+                    </div>
+
+                    <div id="questions-parte-a2">
+                        <!-- Domande critiche generate via JS -->
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="checkParteA2()">Verifica Risposte</button>
+                    </div>
+                    <div class="feedback" id="feedback-a2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTE B - PRODUZIONE SCRITTA -->
+        <section id="parte-b" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte B - Prova di Produzione di Testi Scritti</span>
+                    <span class="card-score">max 25 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> Redigi un testo argomentativo sul tema: <strong>"La traduzione come tradimento creativo: riflessioni sul rapporto tra fedeltà e libertà nel passaggio tra lingue e culture"</strong>. Devi articolare la tua argomentazione in modo coerente, utilizzando un registro elevato e appropriato a un saggio di tipo filosofico-letterario. <strong>Usa circa 220 parole.</strong>
+                    </div>
+
+                    <div class="text-box" style="background: white; border: 2px solid var(--primary);">
+                        <textarea class="writing-area" id="writing-text" placeholder="La traduzione, lungi dall'essere un'operazione meccanica..."></textarea>
+                    </div>
+
+                    <div class="word-count" id="word-count">Parole: 0 / 220</div>
+
+                    <div class="instruction-box" style="margin-top: 1.5rem;">
+                        <strong>Elementi da includere (auto-valutazione):</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Introduzione che presenti la tesi centrale in modo articolato</li>
+                            <li>Discussione della dialettica tra fedeltà e libertà traduttiva</li>
+                            <li>Riferimenti teorici o esempi concreti a sostegno dell'argomentazione</li>
+                            <li>Considerazione delle implicazioni culturali della traduzione</li>
+                            <li>Uso di connettivi logici complessi e figure retoriche</li>
+                            <li>Lessico specialistico e variazione di registro</li>
+                            <li>Conclusione che riprenda e sviluppi la tesi iniziale</li>
+                        </ul>
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="saveWriting()">Salva Testo</button>
+                    </div>
+                    <div class="feedback" id="feedback-b"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RISULTATI -->
+        <section id="risultati" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div class="score-section">
+                        <div class="score-label">Parte A1</div>
+                        <div class="score-value" id="score-a1">0/20</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">Parte A2</div>
+                        <div class="score-value" id="score-a2">0/5</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">Parte B</div>
+                        <div class="score-value" id="score-b">-/25</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">TOTALE</div>
+                        <div class="score-value" id="score-total">0/50</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Valutazione Finale</div>
+                    <div class="card-body">
+                        <div id="evaluation-content">
+                            <p style="text-align: center; color: var(--secondary); padding: 2rem;">
+                                Completa tutte le parti dell'esame per visualizzare la valutazione finale.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button class="btn-primary" onclick="restartExam()">🔄 Nuovo Tentativo</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 UNIDA Università per Stranieri "Dante Alighieri" - Reggio Calabria</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Simulazione CE.CO.L C2 Livello Maestria</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dati dell'esame
+        const parteA1Questions = [
+            { id: 1, blank: 'blank1', options: ['risalente', 'discendente'], correct: 'risalente', explanation: '"Risalente" indica l\'origine etimologica nel tempo; "discendente" ha altri significati.' },
+            { id: 2, blank: 'blank2', options: ['Vivendo', 'Vissuti'], correct: 'Vivendo', explanation: '"Vivendo in un\'epoca" è la forma corretta; "vissuti" sarebbe un participio passato.' },
+            { id: 3, blank: 'blank3', options: ['tuttavia', 'peraltro'], correct: 'peraltro', explanation: '"Peraltro" (inoltre) introduce una specificazione; "tuttavia" indicherebbe contrasto.' },
+            { id: 4, blank: 'blank4', options: ['con', 'nel'], correct: 'nel', explanation: '"Nel suo incedere" è l\'espressione più appropriata per indicare il procedere.' },
+            { id: 5, blank: 'blank5', options: ['Sebbene', 'Poiché'], correct: 'Sebbene', explanation: '"Sebbene" introduce una concessione: nonostante le conquiste...' },
+            { id: 6, blank: 'blank6', options: ['Per', 'A'], correct: 'Per', explanation: '"Per dire con..." è l\'espressione fissa per citare qualcuno.' },
+            { id: 7, blank: 'blank7', options: ['Tuttavia', 'D\'altro canto'], correct: 'Tuttavia', explanation: '"Tuttavia" introduce una distinzione/novità rispetto a quanto detto.' },
+            { id: 8, blank: 'blank8', options: ['Se', 'Mentre'], correct: 'Mentre', explanation: '"Mentre" introduce un confronto temporale tra passato e presente.' },
+            { id: 9, blank: 'blank9', options: ['e tuttavia', 'e quindi'], correct: 'e tuttavia', explanation: '"E tuttavia" esprime la contraddizione tra consapevolezza e attrazione.' },
+            { id: 10, blank: 'blank10', options: ['cuore', 'essenza'], correct: 'cuore', explanation: '"Cuore" è metaforicamente più appropriato per indicare il centro vitale.' }
+        ];
+
+        const parteA2Questions = [
+            { 
+                id: 1, 
+                text: 'Il riferimento a Proust ("la vera paradiso è un paradiso perduto") nel testo serve a:',
+                options: ['Confermare l\'importanza del progresso', 'Illustrare la natura paradossale della nostalgia', 'Criticare la società moderna'],
+                correct: 'Illustrare la natura paradossale della nostalgia',
+                explanation: 'La citazione evidenzia come il valore del paradiso derivi dalla sua perdita.'
+            },
+            { 
+                id: 2, 
+                text: 'Il "parco tematico permanente" di cui parla l\'autore è una metafora per indicare:',
+                options: ['La musealizzazione del passato nella società contemporanea', 'I parchi divertimenti moderni', 'La globalizzazione culturale'],
+                correct: 'La musealizzazione del passato nella società contemporanea',
+                explanation: 'Metafora critica della trasformazione del passato in spettacolo consumabile.'
+            },
+            { 
+                id: 3, 
+                text: 'Il riferimento a Walter Benjamin e all\'"aura" serve a:',
+                options: ['Lodare la riproducibilità tecnica', 'Lamentare la perdita di autenticità nell\'era digitale', 'Celebrare la democrazia dell\'arte'],
+                correct: 'Lamentare la perdita di autenticità nell\'era digitale',
+                explanation: 'Benjamin sosteneva che la riproducibilità distruggesse l\'aura dell\'opera.'
+            },
+            { 
+                id: 4, 
+                text: 'Secondo l\'autore, il recupero delle "microstorie" rappresenta:',
+                options: ['Un atto di nostalgia reazionaria', 'Un atto etico di resistenza', 'Un\'operazione inutile'],
+                correct: 'Un atto etico di resistenza',
+                explanation: 'Esplicitamente definito "non nostalgia reazionaria, ma atto etico".'
+            },
+            { 
+                id: 5, 
+                text: 'Il tono complessivo del brano può essere definito:',
+                options: ['Apologetico ottimista', 'Critico ma costruttivo', 'Nichilistico disperato'],
+                correct: 'Critico ma costruttivo',
+                explanation: 'Pur riconoscendo problemi, l\'autore evidenzia forme di resistenza e speranza.'
+            }
+        ];
+
+        // Stato dell'esame
+        let scores = {
+            a1: 0,
+            a2: 0,
+            b: 0
+        };
+        let answers = {
+            a1: {},
+            a2: {}
+        };
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            generateParteA1();
+            generateParteA2();
+            setupWritingArea();
+        });
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+            
+            if (id === 'risultati') {
+                updateResults();
+            }
+        }
+
+        function generateParteA1() {
+            const container = document.getElementById('questions-parte-a1');
+            let html = '';
+            
+            parteA1Questions.forEach((q, index) => {
+                html += `
+                    <div class="question-item">
+                        <div class="question-number">${index + 1}. Scegli l'alternativa corretta:</div>
+                        <div class="options-inline">
+                            <label class="option-label">
+                                <input type="radio" name="q${q.id}" value="${q.options[0]}" onchange="selectA1(${q.id}, '${q.options[0]}')">
+                                <span>${q.options[0]}</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q${q.id}" value="${q.options[1]}" onchange="selectA1(${q.id}, '${q.options[1]}')">
+                                <span>${q.options[1]}</span>
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function selectA1(id, value) {
+            answers.a1[id] = value;
+            const question = parteA1Questions.find(q => q.id === id);
+            const blank = document.getElementById(question.blank);
+            if (blank) {
+                blank.textContent = value;
+                blank.style.color = 'var(--primary)';
+                blank.style.borderBottom = '2px solid var(--primary)';
+            }
+        }
+
+        function checkParteA1() {
+            let correct = 0;
+            let allAnswered = true;
+            
+            parteA1Questions.forEach(q => {
+                if (!answers.a1[q.id]) {
+                    allAnswered = false;
+                } else if (answers.a1[q.id] === q.correct) {
+                    correct += 2;
+                }
+            });
+            
+            if (!allAnswered) {
+                alert('Per favore, rispondi a tutte le domande prima di verificare.');
+                return;
+            }
+            
+            scores.a1 = correct;
+            
+            const feedback = document.getElementById('feedback-a1');
+            feedback.className = 'feedback show ' + (correct >= 14 ? 'correct' : 'wrong');
+            feedback.innerHTML = `
+                <strong>Hai ottenuto ${correct}/20 punti!</strong><br>
+                ${correct >= 14 ? 'Eccellente risultato!' : 'Rivedi le risposte sbagliate.'}<br>
+                <small>Passa alla sezione successiva cliccando su "Parte A - Testo 2"</small>
+            `;
+            
+            document.querySelectorAll('#questions-parte-a1 input').forEach(input => {
+                input.disabled = true;
+                const question = parteA1Questions.find(q => q.id === parseInt(input.name.substring(1)));
+                const label = input.closest('.option-label');
+                if (input.value === question.correct) {
+                    label.style.background = '#c6f6d5';
+                    label.style.border = '2px solid #276749';
+                } else if (input.checked && input.value !== question.correct) {
+                    label.style.background = '#fed7d7';
+                    label.style.border = '2px solid #c53030';
+                }
+            });
+        }
+
+        function generateParteA2() {
+            const container = document.getElementById('questions-parte-a2');
+            let html = '';
+            
+            parteA2Questions.forEach((q, index) => {
+                html += `
+                    <div class="question-item">
+                        <div class="critical-box">
+                            <div class="critical-title">Comprensione critica ${index + 1}</div>
+                            <div class="question-number">${q.text}</div>
+                            <div class="options-inline" style="flex-direction: column; align-items: flex-start;">
+                                ${q.options.map((opt, i) => `
+                                    <label class="option-label" style="width: 100%;">
+                                        <input type="radio" name="crit${q.id}" value="${opt}" onchange="selectA2(${q.id}, '${opt}')">
+                                        <span>${String.fromCharCode(65 + i)}. ${opt}</span>
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function selectA2(id, value) {
+            answers.a2[id] = value;
+        }
+
+        function checkParteA2() {
+            let correct = 0;
+            let allAnswered = true;
+            
+            parteA2Questions.forEach(q => {
+                if (!answers.a2[q.id]) {
+                    allAnswered = false;
+                } else if (answers.a2[q.id] === q.correct) {
+                    correct += 1;
+                }
+            });
+            
+            if (!allAnswered) {
+                alert('Per favore, rispondi a tutte le domande prima di verificare.');
+                return;
+            }
+            
+            scores.a2 = correct;
+            
+            const feedback = document.getElementById('feedback-a2');
+            feedback.className = 'feedback show ' + (correct >= 3 ? 'correct' : 'wrong');
+            feedback.innerHTML = `
+                <strong>Hai ottenuto ${correct}/5 punti!</strong><br>
+                ${correct >= 3 ? 'Ottimo risultato!' : 'Rivedi le risposte sbagliate.'}<br>
+                <small>Passa alla sezione successiva cliccando su "Parte B - Scrittura"</small>
+            `;
+            
+            parteA2Questions.forEach(q => {
+                document.querySelectorAll(`input[name="crit${q.id}"]`).forEach(input => {
+                    input.disabled = true;
+                    const label = input.closest('.option-label');
+                    if (input.value === q.correct) {
+                        label.style.background = '#c6f6d5';
+                        label.style.border = '2px solid #276749';
+                    } else if (input.checked && input.value !== q.correct) {
+                        label.style.background = '#fed7d7';
+                        label.style.border = '2px solid #c53030';
+                    }
+                });
+            });
+        }
+
+        function setupWritingArea() {
+            const textarea = document.getElementById('writing-text');
+            const wordCount = document.getElementById('word-count');
+            
+            textarea.addEventListener('input', function() {
+                const text = this.value.trim();
+                const words = text ? text.split(/\s+/).length : 0;
+                wordCount.textContent = `Parole: ${words} / 220`;
+                
+                if (words >= 200 && words <= 250) {
+                    wordCount.style.color = 'var(--success)';
+                } else {
+                    wordCount.style.color = 'var(--secondary)';
+                }
+            });
+        }
+
+        function saveWriting() {
+            const text = document.getElementById('writing-text').value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            
+            if (words < 50) {
+                alert('Il testo è troppo corto. Scrivi almeno 200-220 parole.');
+                return;
+            }
+            
+            localStorage.setItem('cecol_c2_writing', text);
+            localStorage.setItem('cecol_c2_writing_words', words);
+            
+            const feedback = document.getElementById('feedback-b');
+            feedback.className = 'feedback show correct';
+            feedback.innerHTML = `
+                <strong>Testo salvato!</strong><br>
+                Hai scritto ${words} parole.<br>
+                <small>La valutazione della Parte B (0-25 punti) deve essere fatta dall'insegnante.</small>
+            `;
+            
+            document.getElementById('writing-text').disabled = true;
+        }
+
+        function updateResults() {
+            const total = scores.a1 + scores.a2;
+            const percentage = (total / 25) * 100;
+            
+            document.getElementById('score-a1').textContent = `${scores.a1}/20`;
+            document.getElementById('score-a2').textContent = `${scores.a2}/5`;
+            document.getElementById('score-b').textContent = `-/25`;
+            document.getElementById('score-total').textContent = `${total}/50 (Parte A)`;
+            
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+            
+            let evaluation = '';
+            if (scores.a1 === 0 && scores.a2 === 0) {
+                evaluation = '<p style="text-align: center; color: var(--secondary);">Completa le sezioni A1 e A2 per vedere la valutazione.</p>';
+            } else {
+                let message = '';
+                let color = '';
+                
+                if (total >= 22) {
+                    message = '👑 Maestria! Risultato eccellente, tipico di un livello C2!';
+                    color = 'var(--success)';
+                } else if (total >= 17) {
+                    message = '🏆 Ottimo risultato! Hai superato la Parte A con successo.';
+                    color = '#d4a017';
+                } else if (total >= 15) {
+                    message = '👍 Buon risultato, ma c\'è ancora margine di miglioramento.';
+                    color = '#d4a017';
+                } else {
+                    message = '💪 Continua a studiare! Riprova il test.';
+                    color = 'var(--error)';
+                }
+                
+                evaluation = `
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">${message.split(' ')[0]}</div>
+                        <h3 style="color: ${color};">${message.substring(2)}</h3>
+                    </div>
+                    <div class="result-details">
+                        <div class="result-row">
+                            <span>Comprensione lettura - Testo 1 (Stile filosofico-letterario):</span>
+                            <strong>${scores.a1}/20 ${scores.a1 >= 12 ? '✓' : '✗'}</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Comprensione lettura - Testo 2 (Analisi critica e intertestualità):</span>
+                            <strong>${scores.a2}/5 ${scores.a2 >= 3 ? '✓' : '✗'}</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Produzione scritta (da valutare):</span>
+                            <strong>-/25</strong>
+                        </div>
+                        <div class="result-row" style="border-top: 2px solid var(--primary); margin-top: 0.5rem; padding-top: 0.5rem; font-size: 1.1rem;">
+                            <span>TOTALE PARTE A:</span>
+                            <strong>${total}/25</strong>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 4px;">
+                        <strong>Nota:</strong> Per superare l'esame CE.CO.L C2 serve ottenere almeno <strong>17/25</strong> nella Parte A e <strong>17/25</strong> nella Parte B.
+                    </div>
+                `;
+            }
+            
+            document.getElementById('evaluation-content').innerHTML = evaluation;
+        }
+
+        function restartExam() {
+            if (confirm('Sei sicuro di voler ricominciare l\'esame? Tutte le risposte verranno cancellate.')) {
+                scores = { a1: 0, a2: 0, b: 0 };
+                answers = { a1: {}, a2: {} };
+                
+                document.querySelectorAll('input[type="radio"]').forEach(input => {
+                    input.checked = false;
+                    input.disabled = false;
+                });
+                
+                document.querySelectorAll('.option-label').forEach(label => {
+                    label.style.background = '';
+                    label.style.border = '';
+                });
+                
+                document.querySelectorAll('.blank').forEach(blank => {
+                    blank.textContent = '_____';
+                    blank.style.color = 'var(--accent)';
+                    blank.style.borderBottom = '2px solid var(--accent)';
+                });
+                
+                document.getElementById('writing-text').value = '';
+                document.getElementById('writing-text').disabled = false;
+                document.getElementById('word-count').textContent = 'Parole: 0 / 220';
+                
+                document.querySelectorAll('.feedback').forEach(f => {
+                    f.className = 'feedback';
+                    f.innerHTML = '';
+                });
+                
+                showSection('parte-a1', document.querySelectorAll('.nav-tab')[0]);
+            }
+        }
+    </script>
+</body>
+</html>
