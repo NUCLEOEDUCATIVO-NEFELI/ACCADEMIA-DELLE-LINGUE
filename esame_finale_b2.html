@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CE.CO.L B2 - Esame Simulato Livello Avanzato</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b2-color: #dc2626;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --exam: #0891b2;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b2-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .exam-badge {
+            display: inline-block;
+            background: var(--b2-color);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            text-align: center;
+        }
+        .page-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+            flex: 1;
+            text-align: center;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b2-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b2-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-score {
+            background: var(--b2-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .text-box {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        .highlight { 
+            background: rgba(220, 38, 38, 0.1); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .blank {
+            display: inline-block;
+            min-width: 140px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .question-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #fafafa;
+            border-left: 3px solid var(--primary);
+        }
+        .question-number {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .options-inline {
+            display: flex;
+            gap: 2rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .option-label:hover {
+            background: #e7f3ff;
+        }
+        .option-label input[type="radio"] {
+            cursor: pointer;
+        }
+        .synonym-box {
+            background: #fff5f5;
+            border: 2px solid var(--b2-color);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+        }
+        .synonym-title {
+            font-weight: bold;
+            color: var(--b2-color);
+            margin-bottom: 0.5rem;
+        }
+        .writing-area {
+            width: 100%;
+            min-height: 250px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+        .writing-area:focus {
+            outline: none;
+            border-color: var(--b2-color);
+        }
+        .word-count {
+            text-align: right;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-radius: 8px;
+        }
+        .score-section {
+            text-align: center;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+        }
+        .score-value {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: var(--light);
+            border: 2px solid var(--border);
+            margin: 1rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--b2-color), #ef4444);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin: 1rem 0;
+            border: 2px solid;
+            border-radius: 4px;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+            border-radius: 4px;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b2-color); 
+            color: white; 
+            font-weight: bold;
+        }
+        .btn-check:hover {
+            background: #b91c1c;
+        }
+        .btn-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b2-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .result-details {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: left;
+        }
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .exercise-counter {
+            background: var(--b2-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 0.5rem; font-size: 0.85rem; flex: 1 1 33%; }
+            .header h1 { font-size: 1.3rem; }
+            .page-title { font-size: 1.4rem; }
+            .final-score-value { font-size: 3rem; }
+            .options-inline { flex-direction: column; gap: 0.5rem; }
+            .score-panel { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>UNIDA Università per Stranieri "Dante Alighieri"</h1>
+            <p>Reggio Calabria - Prova per il Certificato di Conoscenza della Lingua Italiana</p>
+            <div class="exam-badge">CE.CO.L B2 - LIVELLO AVANZATO</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Esami Livello Avanzato</a>
+            <span>›</span>
+            <strong>CE.CO.L B2 Simulazione</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📝 Esame Simulato CE.CO.L B2</h1>
+            <p class="page-subtitle">Prova di Comprensione della Lettura e Produzione di Testi Scritti</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('parte-a1', this)">Parte A - Testo 1</button>
+            <button class="nav-tab" onclick="showSection('parte-a2', this)">Parte A - Testo 2</button>
+            <button class="nav-tab" onclick="showSection('parte-b', this)">Parte B - Scrittura</button>
+            <button class="nav-tab" onclick="showSection('risultati', this)">📊 Risultati</button>
+        </nav>
+
+        <!-- PARTE A - TESTO 1 (Cloze con connettivi avanzati) -->
+        <section id="parte-a1" class="section active">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte A - Prova di Comprensione della Lettura</span>
+                    <span class="card-score">N. 1 - max 20 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> Leggi il testo con attenzione e scegli l'alternativa corretta tra le due opzioni proposte. Scegli i connettivi e le espressioni più appropriate per un testo formale. Ogni risposta esatta vale <strong>2 punti</strong>.
+                    </div>
+
+                    <div class="text-box">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Il lavoro da remoto: opportunità e sfide</h3>
+                        
+                        <p>Nell'ultimo decennio, il modo di concepire il lavoro ha subito trasformazioni radicali. <span class="blank" id="blank1">_____</span> l'avvento delle tecnologie digitali, molte aziende hanno dovuto adattarsi a nuove modalità organizzative. Il lavoro da remoto, <span class="blank" id="blank2">_____</span> inizialmente considerato una soluzione temporanea, si è rivelato una realtà strutturale per molti settori produttivi.</p>
+                        
+                        <p><span class="blank" id="blank3">_____</span> i vantaggi di questa organizzazione sono indubbi: maggiore flessibilità oraria, riduzione degli spostamenti e migliore conciliazione tra vita privata e professionale. <span class="blank" id="blank4">_____</span>, non mancano le criticità. La mancanza di interazione diretta con i colleghi può generare isolamento, <span class="blank" id="blank5">_____</span> la difficoltà di separare gli spazi domestici da quelli lavorativi spesso compromette il benessere psicologico.</p>
+                        
+                        <p><span class="blank" id="blank6">_____</span> quanto riguarda la produttività, gli studi condotti in materia offrono risultati contrastanti. <span class="blank" id="blank7">_____</span> alcuni ricercatori sostengano un incremento dell'efficienza, altri evidenziano come la supervisione diretta risulti compromessa. <span class="blank" id="blank8">_____</span> di ciò, le aziende dovrebbero investire nella formazione dei manager per gestire team distribuiti geograficamente.</p>
+                        
+                        <p><span class="blank" id="blank9">_____</span> conclusione, il lavoro agile rappresenta una sfida epocale che richiede equilibrio tra innovazione tecnologica e tutela dei lavoratori. <span class="blank" id="blank10">_____</span> adottare politiche aziendali rigide, sarebbe opportuno sviluppare modelli ibridi che valorizzino sia l'autonomia individuale sia la collaborazione collettiva.</p>
+                    </div>
+
+                    <div id="questions-parte-a1">
+                        <!-- Domande generate via JS -->
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="checkParteA1()">Verifica Risposte</button>
+                    </div>
+                    <div class="feedback" id="feedback-a1"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTE A - TESTO 2 (Sinonimi e riformulazioni) -->
+        <section id="parte-a2" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte A - Prova di Comprensione della Lettura</span>
+                    <span class="card-score">N. 2 - max 5 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> Leggi il testo e individua il significato delle espressioni evidenziate. Scegli la riformulazione corretta tra le opzioni proposte. Ogni risposta corretta vale <strong>1 punto</strong>.
+                    </div>
+
+                    <div class="text-box">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">L'importanza della lettura</h3>
+                        
+                        <p>La lettura rappresenta un'attività fondamentale per lo sviluppo cognitivo e culturale dell'individuo. <span class="highlight">Contrariamente a quanto si possa pensare</span>, non si tratta di un'occupazione passiva, bensì di un'esperienza che coinvolge attivamente la mente. Chi legge abitualmente sviluppa capacità analitiche e critiche che si rivelano preziose in molti contesti della vita quotidiana.</p>
+                        
+                        <p><span class="highlight">Nonostante la diffusione dei media digitali</span>, il libro cartaceo mantiene un fascino incomparabile. La sensazione tattile delle pagine, l'odore della carta e la possibilità di annotare i margini creano un legame unico tra lettore e testo. <span class="highlight">È indubbio che</span> la lettura digitale offra vantaggi in termini di accessibilità e portabilità, ma molti lettori rimangono fedeli al formato tradizionale.</p>
+                        
+                        <p>Le biblioteche pubbliche, <span class="highlight">lungi dall'essere superate</span>, si sono trasformate in poli culturali dinamici. Oltre al prestito dei volumi, offrono spazi di studio, laboratori creativi e incontri con gli autori. <span class="highlight">In definitiva</span>, promuovere la lettura significa investire nel capitale culturale di una comunità, garantendo a tutti l'accesso alla conoscenza.</p>
+                    </div>
+
+                    <div id="questions-parte-a2">
+                        <!-- Domande sinonimi generate via JS -->
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="checkParteA2()">Verifica Risposte</button>
+                    </div>
+                    <div class="feedback" id="feedback-a2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTE B - PRODUZIONE SCRITTA -->
+        <section id="parte-b" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Parte B - Prova di Produzione di Testi Scritti</span>
+                    <span class="card-score">max 25 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Istruzioni:</strong> Hai partecipato a un convegno sul tema "Sostenibilità ambientale e stili di vita". Scrivi una relazione per il tuo capo ufficio in cui illustri: i contenuti principali del convegno, le proposte concrete emerse, le criticità evidenziate e le possibili applicazioni nel tuo contesto lavorativo. <strong>Usa circa 120 parole.</strong>
+                    </div>
+
+                    <div class="text-box" style="background: white; border: 2px solid var(--primary);">
+                        <p style="margin-bottom: 1rem;"><strong>Destinatario:</strong> Direzione Risorse Umane</p>
+                        <p style="margin-bottom: 1rem;"><strong>Oggetto:</strong> Relazione convegno "Sostenibilità ambientale e stili di vita"</p>
+                        <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--border);">
+                        <p>Egregi Signori,</p>
+                        <textarea class="writing-area" id="writing-text" placeholder="In riferimento al convegno..."></textarea>
+                        <p style="margin-top: 1rem;">Cordiali saluti,<br>[Il tuo nome]</p>
+                    </div>
+
+                    <div class="word-count" id="word-count">Parole: 0 / 120</div>
+
+                    <div class="instruction-box" style="margin-top: 1.5rem;">
+                        <strong>Elementi da includere (auto-valutazione):</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Presentazione del convegno e contenuti principali</li>
+                            <li>Proposte concrete emerse</li>
+                            <li>Criticità evidenziate</li>
+                            <li>Applicazioni nel contesto lavorativo</li>
+                            <li>Registro formale appropriato</li>
+                            <li>Connettivi logici e coesione testuale</li>
+                        </ul>
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-check" onclick="saveWriting()">Salva Testo</button>
+                    </div>
+                    <div class="feedback" id="feedback-b"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RISULTATI -->
+        <section id="risultati" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div class="score-section">
+                        <div class="score-label">Parte A1</div>
+                        <div class="score-value" id="score-a1">0/20</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">Parte A2</div>
+                        <div class="score-value" id="score-a2">0/5</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">Parte B</div>
+                        <div class="score-value" id="score-b">-/25</div>
+                    </div>
+                    <div class="score-section">
+                        <div class="score-label">TOTALE</div>
+                        <div class="score-value" id="score-total">0/50</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Valutazione Finale</div>
+                    <div class="card-body">
+                        <div id="evaluation-content">
+                            <p style="text-align: center; color: var(--secondary); padding: 2rem;">
+                                Completa tutte le parti dell'esame per visualizzare la valutazione finale.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button class="btn-primary" onclick="restartExam()">🔄 Nuovo Tentativo</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 UNIDA Università per Stranieri "Dante Alighieri" - Reggio Calabria</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Simulazione CE.CO.L B2 Livello Avanzato</p>
+        </div>
+    </footer>
+
+    <script>
+        // Dati dell'esame
+        const parteA1Questions = [
+            { id: 1, blank: 'blank1', options: ['Con', 'A causa di'], correct: 'Con', explanation: '"Con l\'avvento" è l\'espressione corretta per indicare l\'arrivo di qualcosa.' },
+            { id: 2, blank: 'blank2', options: ['inizialmente', 'prima'], correct: 'inizialmente', explanation: '"Inizialmente" è più formale e appropriato in questo contesto.' },
+            { id: 3, blank: 'blank3', options: ['Tra', 'Fra'], correct: 'Tra', explanation: '"Tra i vantaggi" è la preposizione corretta per indicare l\'insieme.' },
+            { id: 4, blank: 'blank4', options: ['Tuttavia', 'Inoltre'], correct: 'Tuttavia', explanation: 'Si introduce un contrasto, quindi "Tuttavia" è corretto.' },
+            { id: 5, blank: 'blank5', options: ['mentre', 'poiché'], correct: 'mentre', explanation: '"Mentre" introduce un\'ulteriore critica parallela.' },
+            { id: 6, blank: 'blank6', options: ['Per', 'In'], correct: 'Per', explanation: '"Per quanto riguarda" è l\'espressione fissa corretta.' },
+            { id: 7, blank: 'blank7', options: ['Se', 'Benché'], correct: 'Se', explanation: '"Se alcuni... altri" è la struttura corretta di confronto.' },
+            { id: 8, blank: 'blank8', options: ['A causa', 'Indipendentemente'], correct: 'Indipendentemente', explanation: '"Indipendentemente da ciò" indica una considerazione separata.' },
+            { id: 9, blank: 'blank9', options: ['In', 'Per'], correct: 'In', explanation: '"In conclusione" è l\'espressione fissa per concludere.' },
+            { id: 10, blank: 'blank10', options: ['Invece di', 'Piuttosto che'], correct: 'Piuttosto che', explanation: '"Piuttosto che" è più formale e appropriato per un testo scritto.' }
+        ];
+
+        const parteA2Questions = [
+            { 
+                id: 1, 
+                text: '"Contrariamente a quanto si possa pensare"',
+                options: ['A differenza di ciò che si crede', 'Come tutti sanno', 'In accordo con l\'opinione comune'],
+                correct: 'A differenza di ciò che si crede',
+                explanation: 'Indica un\'opposizione rispetto a un\'opinione diffusa.'
+            },
+            { 
+                id: 2, 
+                text: '"Nonostante la diffusione dei media digitali"',
+                options: ['A causa dei media digitali', 'Malgrado la presenza dei media digitali', 'Grazie ai media digitali'],
+                correct: 'Malgrado la presenza dei media digitali',
+                explanation: '"Nonostante" introduce una concessione, equivalente a "malgrado".'
+            },
+            { 
+                id: 3, 
+                text: '"È indubbio che"',
+                options: ['È possibile che', 'È certo che', 'È dubbio che'],
+                correct: 'È certo che',
+                explanation: '"Indubbio" significa che non ci sono dubbi, quindi "certo".'
+            },
+            { 
+                id: 4, 
+                text: '"lungi dall\'essere superate"',
+                options: ['vicine a scomparire', 'molto distanti dall\'essere obsolete', 'appena rinnovate'],
+                correct: 'molto distanti dall\'essere obsolete',
+                explanation: '"Lungi dall\'essere" significa "molto lontane dall\'essere".'
+            },
+            { 
+                id: 5, 
+                text: '"In definitiva"',
+                options: ['All\'inizio', 'In conclusione', 'In modo specifico'],
+                correct: 'In conclusione',
+                explanation: '"In definitiva" introduce la conclusione del discorso.'
+            }
+        ];
+
+        // Stato dell'esame
+        let scores = {
+            a1: 0,
+            a2: 0,
+            b: 0
+        };
+        let answers = {
+            a1: {},
+            a2: {}
+        };
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            generateParteA1();
+            generateParteA2();
+            setupWritingArea();
+        });
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+            
+            if (id === 'risultati') {
+                updateResults();
+            }
+        }
+
+        function generateParteA1() {
+            const container = document.getElementById('questions-parte-a1');
+            let html = '';
+            
+            parteA1Questions.forEach((q, index) => {
+                html += `
+                    <div class="question-item">
+                        <div class="question-number">${index + 1}. Scegli l'alternativa corretta:</div>
+                        <div class="options-inline">
+                            <label class="option-label">
+                                <input type="radio" name="q${q.id}" value="${q.options[0]}" onchange="selectA1(${q.id}, '${q.options[0]}')">
+                                <span>${q.options[0]}</span>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="q${q.id}" value="${q.options[1]}" onchange="selectA1(${q.id}, '${q.options[1]}')">
+                                <span>${q.options[1]}</span>
+                            </label>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function selectA1(id, value) {
+            answers.a1[id] = value;
+            const question = parteA1Questions.find(q => q.id === id);
+            const blank = document.getElementById(question.blank);
+            if (blank) {
+                blank.textContent = value;
+                blank.style.color = 'var(--primary)';
+                blank.style.borderBottom = '2px solid var(--primary)';
+            }
+        }
+
+        function checkParteA1() {
+            let correct = 0;
+            let allAnswered = true;
+            
+            parteA1Questions.forEach(q => {
+                if (!answers.a1[q.id]) {
+                    allAnswered = false;
+                } else if (answers.a1[q.id] === q.correct) {
+                    correct += 2;
+                }
+            });
+            
+            if (!allAnswered) {
+                alert('Per favore, rispondi a tutte le domande prima di verificare.');
+                return;
+            }
+            
+            scores.a1 = correct;
+            
+            const feedback = document.getElementById('feedback-a1');
+            feedback.className = 'feedback show ' + (correct >= 14 ? 'correct' : 'wrong');
+            feedback.innerHTML = `
+                <strong>Hai ottenuto ${correct}/20 punti!</strong><br>
+                ${correct >= 14 ? 'Ottimo risultato!' : 'Rivedi le risposte sbagliate.'}<br>
+                <small>Passa alla sezione successiva cliccando su "Parte A - Testo 2"</small>
+            `;
+            
+            document.querySelectorAll('#questions-parte-a1 input').forEach(input => {
+                input.disabled = true;
+                const question = parteA1Questions.find(q => q.id === parseInt(input.name.substring(1)));
+                const label = input.closest('.option-label');
+                if (input.value === question.correct) {
+                    label.style.background = '#c6f6d5';
+                    label.style.border = '2px solid #276749';
+                } else if (input.checked && input.value !== question.correct) {
+                    label.style.background = '#fed7d7';
+                    label.style.border = '2px solid #c53030';
+                }
+            });
+        }
+
+        function generateParteA2() {
+            const container = document.getElementById('questions-parte-a2');
+            let html = '';
+            
+            parteA2Questions.forEach((q, index) => {
+                html += `
+                    <div class="question-item">
+                        <div class="synonym-box">
+                            <div class="synonym-title">Espressione ${index + 1}: "${q.text}"</div>
+                            <div class="question-number">Scegli la riformulazione corretta:</div>
+                            <div class="options-inline" style="flex-direction: column; align-items: flex-start;">
+                                ${q.options.map((opt, i) => `
+                                    <label class="option-label" style="width: 100%;">
+                                        <input type="radio" name="syn${q.id}" value="${opt}" onchange="selectA2(${q.id}, '${opt}')">
+                                        <span>${String.fromCharCode(65 + i)}. ${opt}</span>
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function selectA2(id, value) {
+            answers.a2[id] = value;
+        }
+
+        function checkParteA2() {
+            let correct = 0;
+            let allAnswered = true;
+            
+            parteA2Questions.forEach(q => {
+                if (!answers.a2[q.id]) {
+                    allAnswered = false;
+                } else if (answers.a2[q.id] === q.correct) {
+                    correct += 1;
+                }
+            });
+            
+            if (!allAnswered) {
+                alert('Per favore, rispondi a tutte le domande prima di verificare.');
+                return;
+            }
+            
+            scores.a2 = correct;
+            
+            const feedback = document.getElementById('feedback-a2');
+            feedback.className = 'feedback show ' + (correct >= 3 ? 'correct' : 'wrong');
+            feedback.innerHTML = `
+                <strong>Hai ottenuto ${correct}/5 punti!</strong><br>
+                ${correct >= 3 ? 'Buon risultato!' : 'Rivedi le risposte sbagliate.'}<br>
+                <small>Passa alla sezione successiva cliccando su "Parte B - Scrittura"</small>
+            `;
+            
+            parteA2Questions.forEach(q => {
+                document.querySelectorAll(`input[name="syn${q.id}"]`).forEach(input => {
+                    input.disabled = true;
+                    const label = input.closest('.option-label');
+                    if (input.value === q.correct) {
+                        label.style.background = '#c6f6d5';
+                        label.style.border = '2px solid #276749';
+                    } else if (input.checked && input.value !== q.correct) {
+                        label.style.background = '#fed7d7';
+                        label.style.border = '2px solid #c53030';
+                    }
+                });
+            });
+        }
+
+        function setupWritingArea() {
+            const textarea = document.getElementById('writing-text');
+            const wordCount = document.getElementById('word-count');
+            
+            textarea.addEventListener('input', function() {
+                const text = this.value.trim();
+                const words = text ? text.split(/\s+/).length : 0;
+                wordCount.textContent = `Parole: ${words} / 120`;
+                
+                if (words >= 100 && words <= 140) {
+                    wordCount.style.color = 'var(--success)';
+                } else {
+                    wordCount.style.color = 'var(--secondary)';
+                }
+            });
+        }
+
+        function saveWriting() {
+            const text = document.getElementById('writing-text').value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            
+            if (words < 30) {
+                alert('Il testo è troppo corto. Scrivi almeno 100-120 parole.');
+                return;
+            }
+            
+            localStorage.setItem('cecol_b2_writing', text);
+            localStorage.setItem('cecol_b2_writing_words', words);
+            
+            const feedback = document.getElementById('feedback-b');
+            feedback.className = 'feedback show correct';
+            feedback.innerHTML = `
+                <strong>Testo salvato!</strong><br>
+                Hai scritto ${words} parole.<br>
+                <small>La valutazione della Parte B (0-25 punti) deve essere fatta dall'insegnante.</small>
+            `;
+            
+            document.getElementById('writing-text').disabled = true;
+        }
+
+        function updateResults() {
+            const total = scores.a1 + scores.a2;
+            const percentage = (total / 25) * 100;
+            
+            document.getElementById('score-a1').textContent = `${scores.a1}/20`;
+            document.getElementById('score-a2').textContent = `${scores.a2}/5`;
+            document.getElementById('score-b').textContent = `-/25`;
+            document.getElementById('score-total').textContent = `${total}/50 (Parte A)`;
+            
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+            
+            let evaluation = '';
+            if (scores.a1 === 0 && scores.a2 === 0) {
+                evaluation = '<p style="text-align: center; color: var(--secondary);">Completa le sezioni A1 e A2 per vedere la valutazione.</p>';
+            } else {
+                let message = '';
+                let color = '';
+                
+                if (total >= 20) {
+                    message = '🏆 Ottimo! Hai superato la Parte A con successo!';
+                    color = 'var(--success)';
+                } else if (total >= 15) {
+                    message = '👍 Buon risultato! Sei sulla buona strada.';
+                    color = '#d4a017';
+                } else {
+                    message = '💪 Continua a studiare! Riprova il test.';
+                    color = 'var(--error)';
+                }
+                
+                evaluation = `
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">${message.split(' ')[0]}</div>
+                        <h3 style="color: ${color};">${message.substring(2)}</h3>
+                    </div>
+                    <div class="result-details">
+                        <div class="result-row">
+                            <span>Comprensione lettura - Testo 1 (Connettivi):</span>
+                            <strong>${scores.a1}/20 ${scores.a1 >= 12 ? '✓' : '✗'}</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Comprensione lettura - Testo 2 (Sinonimi):</span>
+                            <strong>${scores.a2}/5 ${scores.a2 >= 3 ? '✓' : '✗'}</strong>
+                        </div>
+                        <div class="result-row">
+                            <span>Produzione scritta (da valutare):</span>
+                            <strong>-/25</strong>
+                        </div>
+                        <div class="result-row" style="border-top: 2px solid var(--primary); margin-top: 0.5rem; padding-top: 0.5rem; font-size: 1.1rem;">
+                            <span>TOTALE PARTE A:</span>
+                            <strong>${total}/25</strong>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 4px;">
+                        <strong>Nota:</strong> Per superare l'esame CE.CO.L B2 serve ottenere almeno <strong>15/25</strong> nella Parte A e <strong>15/25</strong> nella Parte B.
+                    </div>
+                `;
+            }
+            
+            document.getElementById('evaluation-content').innerHTML = evaluation;
+        }
+
+        function restartExam() {
+            if (confirm('Sei sicuro di voler ricominciare l\'esame? Tutte le risposte verranno cancellate.')) {
+                scores = { a1: 0, a2: 0, b: 0 };
+                answers = { a1: {}, a2: {} };
+                
+                document.querySelectorAll('input[type="radio"]').forEach(input => {
+                    input.checked = false;
+                    input.disabled = false;
+                });
+                
+                document.querySelectorAll('.option-label').forEach(label => {
+                    label.style.background = '';
+                    label.style.border = '';
+                });
+                
+                document.querySelectorAll('.blank').forEach(blank => {
+                    blank.textContent = '_____';
+                    blank.style.color = 'var(--accent)';
+                    blank.style.borderBottom = '2px solid var(--accent)';
+                });
+                
+                document.getElementById('writing-text').value = '';
+                document.getElementById('writing-text').disabled = false;
+                document.getElementById('word-count').textContent = 'Parole: 0 / 120';
+                
+                document.querySelectorAll('.feedback').forEach(f => {
+                    f.className = 'feedback';
+                    f.innerHTML = '';
+                });
+                
+                showSection('parte-a1', document.querySelectorAll('.nav-tab')[0]);
+            }
+        }
+    </script>
+</body>
+</html>
