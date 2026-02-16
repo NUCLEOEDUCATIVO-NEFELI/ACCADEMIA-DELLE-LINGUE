@@ -22,6 +22,7 @@
             --dark: #212529;
             --border: #dee2e6;
             --exam: #0891b2;
+            --oral: #d97706;
         }
         body {
             font-family: Georgia, serif;
@@ -62,6 +63,22 @@
             font-weight: bold;
             margin-top: 0.5rem;
             font-size: 0.9rem;
+        }
+        .oral-badge {
+            display: inline-block;
+            background: var(--oral);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(217, 119, 6, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0); }
         }
         .breadcrumbs {
             background: var(--light);
@@ -136,6 +153,18 @@
             border-bottom-color: var(--a2-color);
             font-weight: bold;
         }
+        .nav-tab.oral-tab {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            color: var(--oral);
+            font-weight: bold;
+        }
+        .nav-tab.oral-tab:hover {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+        .nav-tab.oral-tab.active {
+            border-bottom-color: var(--oral);
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
         .section {
             display: none;
             animation: fadeIn 0.4s ease;
@@ -168,12 +197,19 @@
             justify-content: space-between;
             align-items: center;
         }
+        .card-header.oral-header {
+            border-left-color: var(--oral);
+            background: linear-gradient(90deg, #fffbeb 0%, var(--light) 100%);
+        }
         .card-score {
             background: var(--a2-color);
             color: white;
             padding: 0.25rem 0.75rem;
             border-radius: 15px;
             font-size: 0.85rem;
+        }
+        .card-score.oral-score {
+            background: var(--oral);
         }
         .card-body {
             padding: 1.5rem;
@@ -184,6 +220,10 @@
             padding: 1rem 1.5rem;
             margin-bottom: 1.5rem;
             font-size: 0.95rem;
+        }
+        .instruction-box.oral-box {
+            background: #fffbeb;
+            border-left-color: var(--oral);
         }
         .text-box {
             background: #f8f9fa;
@@ -412,6 +452,19 @@
         .btn-check:hover {
             background: #236b43;
         }
+        .btn-oral {
+            background: var(--oral);
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 1.2rem 2.5rem;
+            box-shadow: 0 4px 6px rgba(217, 119, 6, 0.3);
+        }
+        .btn-oral:hover {
+            background: #b45309;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(217, 119, 6, 0.4);
+        }
         .btn-container {
             text-align: center;
             margin: 2rem 0;
@@ -465,6 +518,85 @@
         .mt-2 { margin-top: 1rem; }
         .mb-2 { margin-bottom: 1rem; }
 
+        /* Stili per la prova orale */
+        .oral-section {
+            background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+            border: 2px solid var(--oral);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .oral-part {
+            background: white;
+            border-left: 4px solid var(--oral);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .oral-part h3 {
+            color: var(--oral);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        .oral-timer {
+            font-size: 3rem;
+            color: var(--oral);
+            font-weight: bold;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+        }
+        .oral-questions {
+            background: #fef3c7;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        .oral-questions li {
+            margin-bottom: 0.5rem;
+            list-style-type: none;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .oral-questions li:before {
+            content: "🎤";
+            position: absolute;
+            left: 0;
+        }
+        .topic-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1rem;
+            margin: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 8px;
+            display: inline-block;
+            width: calc(50% - 1rem);
+        }
+        .topic-card:hover {
+            border-color: var(--oral);
+            background: #fffbeb;
+            transform: translateY(-2px);
+        }
+        .topic-card.selected {
+            border-color: var(--oral);
+            background: #fef3c7;
+            box-shadow: 0 4px 8px rgba(217, 119, 6, 0.2);
+        }
+        .audio-player-container {
+            background: #f3f4f6;
+            border: 2px dashed var(--border);
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+        .audio-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
         @media (max-width: 768px) {
             .nav-tabs { flex-wrap: wrap; }
             .nav-tab { padding: 0.75rem 0.5rem; font-size: 0.85rem; flex: 1 1 33%; }
@@ -473,8 +605,10 @@
             .final-score-value { font-size: 3rem; }
             .location-options { grid-template-columns: 1fr; }
             .score-panel { flex-direction: column; }
+            .topic-card { width: 100%; margin: 0.5rem 0; }
         }
     </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -499,13 +633,14 @@
     <main class="main-container">
         <div class="page-header">
             <h1 class="page-title">📝 Esame Simulato CE.CO.L A2</h1>
-            <p class="page-subtitle">Prova di Comprensione della Lettura e Produzione di Testi Scritti</p>
+            <p class="page-subtitle">Prova di Comprensione della Lettura, Produzione di Testi Scritti e Produzione Orale</p>
         </div>
 
         <nav class="nav-tabs">
             <button class="nav-tab active" onclick="showSection('parte-a1', this)">Parte A - Testo 1</button>
             <button class="nav-tab" onclick="showSection('parte-a2', this)">Parte A - Testo 2</button>
             <button class="nav-tab" onclick="showSection('parte-b', this)">Parte B - Scrittura</button>
+            <button class="nav-tab oral-tab" onclick="showSection('parte-orale', this)">🎤 Prova Orale</button>
             <button class="nav-tab" onclick="showSection('risultati', this)">📊 Risultati</button>
         </nav>
 
@@ -618,6 +753,128 @@
             </div>
         </section>
 
+        <!-- PARTE ORALE - SIMULAZIONE -->
+        <section id="parte-orale" class="section">
+            <div class="card">
+                <div class="card-header oral-header">
+                    <span>🎤 Simulazione Prova Orale</span>
+                    <span class="card-score oral-score">max 25 punti</span>
+                </div>
+                <div class="card-body">
+                    <div class="instruction-box oral-box">
+                        <strong>Benvenuto alla simulazione della prova orale!</strong><br>
+                        La prova orale dura circa <strong>5 minuti</strong> totali ed è divisa in due parti:
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li><strong>Prova 1 (2-3 min):</strong> Conversazione faccia a faccia - presentazione personale</li>
+                            <li><strong>Prova 2 (1.5 min):</strong> Monologo guidato su un argomento a scelta</li>
+                        </ul>
+                        <em>Nota: Questa è una simulazione guidata. Registra la tua voce con il telefono o chiedi a qualcuno di farti da esaminatore.</em>
+                    </div>
+
+                    <!-- Audio Player per l'esempio -->
+                    <div class="audio-player-container">
+                        <div class="audio-icon">🎧</div>
+                        <h3 style="margin-bottom: 1rem; color: var(--primary);">Audio di Esempio</h3>
+                        <p style="margin-bottom: 1rem; color: var(--secondary);">Ascolta un esempio di conversazione orale di livello A2:</p>
+                        <audio controls style="width: 100%; max-width: 400px;">
+                            <source src="a2.mp3" type="audio/mpeg">
+                            Il tuo browser non supporta l'elemento audio.
+                        </audio>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--secondary);">
+                            <em>Esempio di interazione orale - Livello A2</em>
+                        </p>
+                    </div>
+
+                    <div class="oral-section">
+                        <h2 style="color: var(--oral); text-align: center; margin-bottom: 1.5rem;">Struttura della Prova Orale</h2>
+                        
+                        <!-- Prova 1 -->
+                        <div class="oral-part">
+                            <h3>📋 Prova 1: Conversazione Faccia a Faccia (2-3 minuti)</h3>
+                            <p style="margin-bottom: 1rem;">L'esaminatore ti farà domande di presentazione personale. Ecco alcune domande tipiche:</p>
+                            
+                            <div class="oral-questions">
+                                <h4 style="color: var(--oral); margin-bottom: 0.5rem;">Domande di presentazione:</h4>
+                                <ul>
+                                    <li>Come ti chiami? Di dove sei?</li>
+                                    <li>Quanti anni hai? Quando sei nato/a?</li>
+                                    <li>Dove vivi? Vivi da solo/a o con la famiglia?</li>
+                                    <li>Lavori? Che lavoro fai? Oppure: Che studi?</li>
+                                    <li>Da quanto tempo sei in Italia?</li>
+                                    <li>Perché hai imparato l'italiano?</li>
+                                    <li>Come passi il tempo libero?</li>
+                                    <li>Quando hai fatto le ultime vacanze? Dove sei andato/a?</li>
+                                </ul>
+                            </div>
+
+                            <div style="background: #e0f2fe; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                                <strong>💡 Suggerimento:</strong> Rispondi in modo chiaro e semplice. Usa frasi breve ma complete. Se non capisci, chiedi "Può ripetere, per favore?"
+                            </div>
+                        </div>
+
+                        <!-- Prova 2 -->
+                        <div class="oral-part">
+                            <h3>🎯 Prova 2: Monologo Guidato (1.5 minuti)</h3>
+                            <p style="margin-bottom: 1rem;">Scegli <strong>uno</strong> degli argomenti qui sotto e parla per circa 1-2 minuti. Devi descrivere, raccontare o spiegare l'argomento scelto.</p>
+                            
+                            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0;">
+                                <div class="topic-card" onclick="selectTopic(this, 1)">
+                                    <strong>🍝 La tua giornata tipica</strong><br>
+                                    <small>Descrivi cosa fai dalla mattina alla sera</small>
+                                </div>
+                                <div class="topic-card" onclick="selectTopic(this, 2)">
+                                    <strong>🏠 La tua casa</strong><br>
+                                    <small>Descrivi dove vivi e le stanze</small>
+                                </div>
+                                <div class="topic-card" onclick="selectTopic(this, 3)">
+                                    <strong>👔 Il tuo lavoro</strong><br>
+                                    <small>Parla del tuo lavoro o di quello che vorresti fare</small>
+                                </div>
+                                <div class="topic-card" onclick="selectTopic(this, 4)">
+                                    <strong>🛒 Fare la spesa</strong><br>
+                                    <small>Dove vai e cosa compri di solito</small>
+                                </div>
+                                <div class="topic-card" onclick="selectTopic(this, 5)">
+                                    <strong>📱 Il cellulare</strong><br>
+                                    <small>Come lo usi e perché è importante</small>
+                                </div>
+                                <div class="topic-card" onclick="selectTopic(this, 6)">
+                                    <strong>🎬 Tempo libero</strong><br>
+                                    <small>Cosa fai quando non lavori</small>
+                                </div>
+                            </div>
+
+                            <div id="selected-topic-display" style="display: none; background: #fef3c7; padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid var(--oral);">
+                                <strong>Argomento scelto:</strong> <span id="topic-name"></span>
+                                <div class="oral-timer" id="timer">03:00</div>
+                                <button class="btn-primary btn-oral" onclick="startTimer()" id="start-btn">▶️ Inizia a Parlare</button>
+                                <button class="btn-primary" onclick="stopTimer()" id="stop-btn" style="display:none; background: var(--error);">⏹️ Ferma Registrazione</button>
+                            </div>
+                        </div>
+
+                        <!-- Valutazione -->
+                        <div class="oral-part" style="background: #f0fdf4; border-left-color: var(--success);">
+                            <h3 style="color: var(--success);">✅ Criteri di Valutazione</h3>
+                            <p style="margin-bottom: 1rem;">La prova orale viene valutata su <strong>25 punti</strong> totali:</p>
+                            <ul style="margin-left: 1.5rem; line-height: 2;">
+                                <li><strong>Prova 1 (10 punti):</strong> Capacità di presentarsi e rispondere alle domande</li>
+                                <li><strong>Prova 2 (15 punti):</strong> Capacità di esporre un argomento in modo coerente</li>
+                            </ul>
+                            <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 8px;">
+                                <strong>Punteggio minimo per superare:</strong> 15/25 (60%)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-container">
+                        <button class="btn-primary btn-oral" onclick="showSection('risultati', document.querySelectorAll('.nav-tab')[4])">
+                            Vai ai Risultati Finali
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- RISULTATI -->
         <section id="risultati" class="section">
             <div class="game-container">
@@ -635,8 +892,12 @@
                         <div class="score-value" id="score-b">-/25</div>
                     </div>
                     <div class="score-section">
+                        <div class="score-label">Prova Orale</div>
+                        <div class="score-value" id="score-orale">-/25</div>
+                    </div>
+                    <div class="score-section">
                         <div class="score-label">TOTALE</div>
-                        <div class="score-value" id="score-total">0/50</div>
+                        <div class="score-value" id="score-total">0/75</div>
                     </div>
                 </div>
 
@@ -721,7 +982,8 @@
         let scores = {
             a1: 0,
             a2: 0,
-            b: 0
+            b: 0,
+            orale: 0
         };
         let answers = {
             a1: {},
@@ -729,6 +991,8 @@
         };
         let selectedWord = null;
         let selectedBlank = null;
+        let timerInterval = null;
+        let seconds = 180; // 3 minuti per il monologo
 
         // Inizializzazione
         document.addEventListener('DOMContentLoaded', function() {
@@ -937,6 +1201,62 @@
             document.getElementById('writing-text').disabled = true;
         }
 
+        // Funzioni per la prova orale
+        function selectTopic(element, topicId) {
+            document.querySelectorAll('.topic-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            const topics = {
+                1: "La tua giornata tipica",
+                2: "La tua casa",
+                3: "Il tuo lavoro",
+                4: "Fare la spesa",
+                5: "Il cellulare",
+                6: "Tempo libero"
+            };
+            
+            document.getElementById('topic-name').textContent = topics[topicId];
+            document.getElementById('selected-topic-display').style.display = 'block';
+            
+            // Reset timer
+            seconds = 180;
+            updateTimerDisplay();
+            clearInterval(timerInterval);
+            document.getElementById('start-btn').style.display = 'inline-block';
+            document.getElementById('stop-btn').style.display = 'none';
+        }
+
+        function startTimer() {
+            document.getElementById('start-btn').style.display = 'none';
+            document.getElementById('stop-btn').style.display = 'inline-block';
+            
+            timerInterval = setInterval(function() {
+                seconds--;
+                updateTimerDisplay();
+                
+                if (seconds <= 0) {
+                    stopTimer();
+                    alert('Tempo scaduto! La prova orale dura circa 1-2 minuti.');
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            document.getElementById('stop-btn').style.display = 'none';
+            document.getElementById('start-btn').style.display = 'inline-block';
+            document.getElementById('start-btn').textContent = '🔄 Ricomincia';
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            document.getElementById('timer').textContent = 
+                (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+        }
+
         function updateResults() {
             const total = scores.a1 + scores.a2;
             const percentage = (total / 25) * 100;
@@ -944,7 +1264,8 @@
             document.getElementById('score-a1').textContent = `${scores.a1}/20`;
             document.getElementById('score-a2').textContent = `${scores.a2}/5`;
             document.getElementById('score-b').textContent = `-/25`;
-            document.getElementById('score-total').textContent = `${total}/50 (Parte A)`;
+            document.getElementById('score-orale').textContent = `-/25`;
+            document.getElementById('score-total').textContent = `${total}/75 (Parte A)`;
 
             document.getElementById('progressBar').style.width = `${percentage}%`;
 
@@ -985,13 +1306,20 @@
                             <span>Produzione scritta (da valutare):</span>
                             <strong>-/25</strong>
                         </div>
+                        <div class="result-row">
+                            <span>Produzione orale (da valutare):</span>
+                            <strong>-/25</strong>
+                        </div>
                         <div class="result-row" style="border-top: 2px solid var(--primary); margin-top: 0.5rem; padding-top: 0.5rem; font-size: 1.1rem;">
                             <span>TOTALE PARTE A:</span>
                             <strong>${total}/25</strong>
                         </div>
                     </div>
                     <div style="margin-top: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 4px;">
-                        <strong>Nota:</strong> Per superare l'esame CE.CO.L A2 serve ottenere almeno <strong>12/25</strong> nella Parte A e <strong>12/25</strong> nella Parte B.
+                        <strong>Nota:</strong> Per superare l'esame CE.CO.L A2 serve ottenere almeno <strong>12/25</strong> nella Parte A, <strong>12/25</strong> nella Parte B e <strong>15/25</strong> nella Prova Orale.
+                    </div>
+                    <div style="margin-top: 1rem; padding: 1rem; background: #e0f2fe; border-radius: 4px;">
+                        <strong>🎤 Prova Orale:</strong> Ricorda di esercitarti con la simulazione nella sezione "Prova Orale". La prova orale richiede una valutazione diretta da parte dell'esaminatore.
                     </div>
                 `;
             }
@@ -1001,7 +1329,7 @@
 
         function restartExam() {
             if (confirm('Sei sicuro di voler ricominciare l\'esame? Tutte le risposte verranno cancellate.')) {
-                scores = { a1: 0, a2: 0, b: 0 };
+                scores = { a1: 0, a2: 0, b: 0, orale: 0 };
                 answers = { a1: {}, a2: {} };
                 selectedWord = null;
 
@@ -1023,6 +1351,15 @@
                 document.getElementById('writing-text').value = '';
                 document.getElementById('writing-text').disabled = false;
                 document.getElementById('word-count').textContent = 'Parole: 0 / 60';
+
+                // Reset oral section
+                document.querySelectorAll('.topic-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+                document.getElementById('selected-topic-display').style.display = 'none';
+                clearInterval(timerInterval);
+                seconds = 180;
+                updateTimerDisplay();
 
                 document.querySelectorAll('.feedback').forEach(f => {
                     f.className = 'feedback';
