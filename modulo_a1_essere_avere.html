@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Essere e Avere - 50 Esercizi</title>
+    <title>Essere e Avere - 100 Esercizi Multilingue</title>
     <style>
         * {
             margin: 0;
@@ -12,66 +12,76 @@
         }
 
         :root {
-            --primary: #003366;
-            --secondary: #6c757d;
-            --accent: #8b0000;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --border: #dee2e6;
-            --success: #155724;
-            --success-bg: #d4edda;
-            --error: #721c24;
-            --error-bg: #f8d7da;
-            --parchment: #faf8f3;
-            --b1-color: #c9a227;
-            --essere: #1a4480;
-            --avere: #8b4513;
+            --primary: #1a365d;
+            --secondary: #4a5568;
+            --accent: #c53030;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --border: #e2e8f0;
+            --success: #22543d;
+            --success-bg: #c6f6d5;
+            --error: #742a2a;
+            --error-bg: #fed7d7;
+            --parchment: #faf9f6;
+            --gold: #d69e2e;
+            --essere: #2c5282;
+            --avere: #9c4221;
         }
 
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background-color: var(--parchment);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--parchment) 0%, #f0f4f8 100%);
             color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
         }
 
         .header {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, #2d3748 100%);
             color: white;
-            padding: 1.5rem 0;
+            padding: 2rem 0;
             border-bottom: 4px solid var(--accent);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .header-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
             text-align: center;
         }
 
         .header h1 {
-            font-size: 2rem;
-            font-weight: normal;
-            letter-spacing: 0.5px;
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 1px;
             margin-bottom: 0.5rem;
         }
 
         .header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.9;
             font-style: italic;
+        }
+
+        .lang-selector {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.9rem;
         }
 
         .breadcrumbs {
             background: var(--light);
             border-bottom: 1px solid var(--border);
-            padding: 0.75rem 2rem;
+            padding: 1rem 2rem;
             font-size: 0.9rem;
         }
 
         .breadcrumbs-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -84,13 +94,8 @@
             text-decoration: underline;
         }
 
-        .breadcrumbs span {
-            color: var(--secondary);
-            margin: 0 0.5rem;
-        }
-
         .main-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -98,20 +103,20 @@
         .page-header {
             margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 2px solid var(--primary);
+            border-bottom: 3px solid var(--primary);
+            text-align: center;
         }
 
         .page-title {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary);
-            font-weight: normal;
+            font-weight: 300;
             margin-bottom: 0.5rem;
         }
 
         .page-subtitle {
             color: var(--secondary);
             font-size: 1.1rem;
-            font-style: italic;
         }
 
         .nav-tabs {
@@ -120,19 +125,23 @@
             margin-bottom: 2rem;
             background: white;
             flex-wrap: wrap;
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
         }
 
         .nav-tab {
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             background: none;
             border: none;
             border-bottom: 3px solid transparent;
             cursor: pointer;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--secondary);
             transition: all 0.3s;
-            position: relative;
+            flex: 1;
+            text-align: center;
+            font-weight: 500;
         }
 
         .nav-tab:hover {
@@ -143,7 +152,8 @@
         .nav-tab.active {
             color: var(--primary);
             border-bottom-color: var(--accent);
-            font-weight: bold;
+            background: white;
+            font-weight: 600;
         }
 
         .section {
@@ -156,28 +166,32 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .card {
             background: white;
             border: 1px solid var(--border);
-            border-radius: 0;
+            border-radius: 12px;
             margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
         }
 
         .card-header {
-            background: var(--light);
-            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, var(--light) 0%, #edf2f7 100%);
+            padding: 1.25rem 1.5rem;
             border-bottom: 1px solid var(--border);
-            font-weight: bold;
+            font-weight: 600;
             color: var(--primary);
             font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            border-left: 4px solid var(--accent);
+            border-left: 5px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .card-header.essere {
@@ -195,19 +209,38 @@
         }
 
         .instruction-box {
-            background: #e7f3ff;
+            background: #ebf8ff;
             border-left: 4px solid var(--primary);
-            padding: 1rem 1.5rem;
+            padding: 1.25rem;
             margin-bottom: 1.5rem;
-            font-size: 0.95rem;
+            border-radius: 0 8px 8px 0;
         }
 
         .rule-box {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            padding: 1rem;
+            background: #fffaf0;
+            border: 1px solid #fbd38d;
+            padding: 1.25rem;
             margin: 1rem 0;
-            border-radius: 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .lang-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .lang-label {
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
         }
 
         .verb-table {
@@ -225,21 +258,22 @@
             color: white;
             padding: 15px;
             text-align: left;
+            font-weight: 500;
         }
 
         .verb-table td {
             padding: 12px 15px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .verb-table tr:hover {
-            background: #f8f9fa;
+            background: #f7fafc;
         }
 
         .verb-display {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: bold;
-            font-family: 'Times New Roman', serif;
+            font-family: 'Georgia', serif;
         }
 
         .verb-display.essere {
@@ -259,6 +293,7 @@
             margin-left: 0.5rem;
             color: white;
             font-weight: bold;
+            border-radius: 12px;
         }
 
         .tag-essere {
@@ -270,31 +305,34 @@
         }
 
         .game-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .score-panel {
-            background: var(--light);
+            background: white;
             border: 1px solid var(--border);
-            padding: 1rem 1.5rem;
+            padding: 1.5rem;
             margin-bottom: 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .score-label {
-            font-weight: bold;
+            font-weight: 600;
             color: var(--secondary);
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
         }
 
         .score-value {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--primary);
             font-weight: bold;
             font-family: 'Courier New', monospace;
@@ -302,17 +340,20 @@
 
         .progress-bar {
             width: 100%;
-            height: 20px;
-            background: var(--light);
-            border: 1px solid var(--border);
+            height: 24px;
+            background: #e2e8f0;
+            border-radius: 12px;
             margin: 1rem 0;
+            overflow: hidden;
+            border: 1px solid var(--border);
         }
 
         .progress-fill {
             height: 100%;
-            background: var(--b1-color);
+            background: linear-gradient(90deg, var(--gold) 0%, #d69e2e 100%);
             width: 0%;
-            transition: width 0.5s;
+            transition: width 0.5s ease;
+            border-radius: 12px;
         }
 
         .question-box {
@@ -321,21 +362,25 @@
             padding: 2rem;
             text-align: center;
             margin-bottom: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
         .question-text {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 1rem;
             line-height: 1.8;
+            color: var(--dark);
         }
 
         .blank {
             display: inline-block;
-            min-width: 150px;
-            border-bottom: 2px solid var(--accent);
+            min-width: 120px;
+            border-bottom: 3px solid var(--accent);
             color: var(--accent);
             font-weight: bold;
             margin: 0 0.3rem;
+            padding: 0 0.5rem;
         }
 
         .options-grid {
@@ -346,29 +391,34 @@
         }
 
         .option-btn {
-            padding: 1rem;
+            padding: 1.25rem;
             background: white;
             border: 2px solid var(--border);
             cursor: pointer;
             font-family: inherit;
             font-size: 1.1rem;
             transition: all 0.2s;
+            border-radius: 8px;
+            font-weight: 500;
         }
 
         .option-btn:hover:not(:disabled) {
-            border-color: var(--b1-color);
-            background: var(--light);
+            border-color: var(--gold);
+            background: #fffaf0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .option-btn:disabled {
             cursor: not-allowed;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .option-btn.correct {
             background: var(--success-bg);
             border-color: var(--success);
             color: var(--success);
+            font-weight: bold;
         }
 
         .option-btn.wrong {
@@ -378,16 +428,24 @@
         }
 
         .feedback {
-            padding: 1rem;
+            padding: 1.25rem;
             text-align: center;
-            font-weight: bold;
+            font-weight: 500;
             display: none;
             margin-bottom: 1rem;
-            border: 1px solid;
+            border-radius: 8px;
+            border: 2px solid;
+            font-size: 1.05rem;
         }
 
         .feedback.show {
             display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .feedback.correct {
@@ -403,55 +461,61 @@
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, #2d3748 100%);
             color: white;
             border: none;
-            padding: 0.75rem 2rem;
+            padding: 0.875rem 2.5rem;
             font-family: inherit;
             font-size: 1rem;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            border-radius: 8px;
+            font-weight: 600;
         }
 
         .btn-primary:hover {
-            background: #002147;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
         .btn-check {
-            background: var(--b1-color);
-            color: #000;
+            background: linear-gradient(135deg, var(--gold) 0%, #b7791f 100%);
+            color: #1a202c;
         }
 
         .btn-check:hover {
-            background: #b8941f;
+            background: linear-gradient(135deg, #d69e2e 0%, #975a16 100%);
         }
 
         .fill-blank {
             display: inline-block;
-            width: 220px;
-            padding: 10px 15px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
+            width: 280px;
+            padding: 12px 16px;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
             margin: 0 5px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-family: inherit;
+            transition: all 0.3s;
         }
 
         .fill-blank:focus {
             outline: none;
-            border-color: var(--b1-color);
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(214, 158, 46, 0.2);
         }
 
         .final-score-section {
-            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #1a202c 100%);
             color: white;
             padding: 3rem;
-            border-radius: 15px;
+            border-radius: 16px;
             text-align: center;
             margin-top: 2rem;
             display: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         .final-score-section.show {
@@ -460,25 +524,28 @@
         }
 
         .final-score-value {
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: bold;
-            color: var(--b1-color);
+            color: var(--gold);
             margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .final-message {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 2rem;
+            opacity: 0.95;
         }
 
         .exercise-counter {
-            background: var(--b1-color);
-            color: #000;
-            padding: 0.5rem 1rem;
+            background: var(--gold);
+            color: #1a202c;
+            padding: 0.5rem 1.25rem;
             border-radius: 20px;
             font-weight: bold;
             display: inline-block;
             margin-bottom: 1rem;
+            font-size: 0.9rem;
         }
 
         .text-center { text-align: center; }
@@ -486,7 +553,7 @@
         .mb-2 { margin-bottom: 1rem; }
 
         .pronoun-display {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: var(--dark);
             margin-bottom: 0.5rem;
@@ -503,10 +570,17 @@
             justify-content: space-around;
             align-items: center;
             font-size: 1.2rem;
-            padding: 0.8rem 0;
+            padding: 1rem;
             background: white;
             border: 1px solid var(--border);
-            margin: 0.3rem 0;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .comparison-row:hover {
+            background: #f7fafc;
+            transform: translateX(5px);
         }
 
         .verb-essere {
@@ -519,24 +593,47 @@
             font-weight: bold;
         }
 
+        .multilang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .theory-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            margin: 1rem 0;
+        }
+
+        .highlight {
+            background: #fef3c7;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
         @media (max-width: 768px) {
             .nav-tabs { flex-wrap: wrap; }
-            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.85rem; flex: 1 1 50%; }
             .options-grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.5rem; }
-            .page-title { font-size: 1.5rem; }
+            .header h1 { font-size: 1.8rem; }
+            .page-title { font-size: 1.6rem; }
             .final-score-value { font-size: 3rem; }
-            .fill-blank { width: 180px; }
-            .comparison-row { flex-direction: column; gap: 0.3rem; }
+            .fill-blank { width: 100%; max-width: 300px; }
+            .comparison-row { flex-direction: column; gap: 0.5rem; text-align: center; }
+            .multilang-grid { grid-template-columns: 1fr; }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
     <header class="header">
         <div class="header-container">
-            <h1>Essere e Avere - Modulo A1</h1>
-            <p>I verbi ausiliari fondamentali - 50 Esercizi Interattivi</p>
+            <h1>Essere e Avere - Modulo A1-A2</h1>
+            <p>I verbi ausiliari fondamentali - 100 Esercizi Interattivi Multilingue</p>
+            <div class="lang-selector">🌍 Wolof | العربية | English | Français | Bambara | اردو | ਪੰਜਾਬੀ | Shqip | Español | Português | বাংলা | हिंदी | 中文</div>
         </div>
     </header>
 
@@ -544,16 +641,16 @@
         <div class="breadcrumbs-container">
             <a href="#">Home</a>
             <span>›</span>
-            <a href="#">Italiano A1</a>
+            <a href="#">Italiano A1-A2</a>
             <span>›</span>
-            <strong>Essere e Avere (50 Esercizi)</strong>
+            <strong>Essere e Avere (100 Esercizi Multilingue)</strong>
         </div>
     </nav>
 
     <main class="main-container">
         <div class="page-header">
             <h1 class="page-title">📚 I Verbi Ausiliari ESSERE e AVERE</h1>
-            <p class="page-subtitle">Sono, sei, è, siamo, siete, sono - Ho, hai, ha, abbiamo, avete, hanno</p>
+            <p class="page-subtitle">Teoria completa in 13 lingue + 100 esercizi interattivi</p>
         </div>
 
         <nav class="nav-tabs">
@@ -561,62 +658,106 @@
             <button class="nav-tab" onclick="showSection('essere', this)">Essere</button>
             <button class="nav-tab" onclick="showSection('avere', this)">Avere</button>
             <button class="nav-tab" onclick="showSection('confronto', this)">Confronto</button>
-            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+            <button class="nav-tab" onclick="showSection('ausiliari', this)">Come Ausiliari</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 100 Esercizi</button>
         </nav>
 
-        <!-- SEZIONE TEORIA -->
+        <!-- SEZIONE TEORIA MULTILINGUE -->
         <section id="theory" class="section active">
             <div class="card">
-                <div class="card-header">I Verbi Ausiliari del Italiano</div>
-                <div class="card-body">
-                    <p>I verbi <strong>ESSERE</strong> e <strong>AVERE</strong> sono i verbi più importanti della lingua italiana. Servono come ausiliari per formare i tempi composti e hanno molti usi autonomi.</p>
-                    
-                    <div class="instruction-box">
-                        <strong>ESSERE</strong> - Verbo copulativo (collega soggetto e attributo)
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>Identità: <em>Io sono Marco</em></li>
-                            <li>Nazionalità: <em>Sono italiano</em></li>
-                            <li>Professione: <em>Sei medico?</em></li>
-                            <li>Stato fisico: <em>È stanco</em></li>
-                            <li>Posizione: <em>Siamo a casa</em></li>
-                        </ul>
-                    </div>
-
-                    <div class="instruction-box">
-                        <strong>AVERE</strong> - Verbo transitivo (indica possesso o sensazioni)
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>Possesso: <em>Ho una macchina</em></li>
-                            <li>Età: <em>Ho 25 anni</em> (non "sono 25")</li>
-                            <li>Sensazioni: <em>Hai fame? Ho sete</em></li>
-                            <li>Necessità: <em>Abbiamo bisogno di aiuto</em></li>
-                        </ul>
-                    </div>
-
-                    <div class="rule-box">
-                        <strong>⚠️ Attenzione:</strong> In italiano si "hanno" gli anni, non si "sono"! Si dice <strong>"Ho 20 anni"</strong>, non "Sono 20 anni".
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">Come Ausiliari</div>
+                <div class="card-header">🌍 Teoria Multilingue - I Verbi Ausiliari</div>
                 <div class="card-body">
                     <div class="instruction-box">
-                        <strong>ESSERE come ausiliare:</strong>
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>Verbi intransitivi di moto (andare, venire, arrivare)</li>
-                            <li>Verbi riflessivi (mi sono alzato, ti sei lavato)</li>
-                            <li>Verbi di stato (stare, rimanere)</li>
-                        </ul>
+                        <strong>🇮🇹 Italiano:</strong> I verbi <strong>ESSERE</strong> (to be) e <strong>AVERE</strong> (to have) sono i verbi più importanti della lingua italiana. Servono come ausiliari per formare i tempi composti e hanno molti usi autonomi.
                     </div>
 
-                    <div class="instruction-box">
-                        <strong>AVERE come ausiliare:</strong>
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>Verbi transitivi (ho mangiato, hai letto)</li>
-                            <li>Verbi impersonali</li>
-                            <li>Molti verbi intransitivi (ho dormito, hai lavorato)</li>
-                        </ul>
+                    <div class="multilang-grid">
+                        <div class="lang-box">
+                            <span class="lang-label">🇸🇳 Wolof</span>
+                            <strong>ESSERE</strong> (nekk) ak <strong>AVERE</strong> (am) ñi ngi nekk ci àllukaayu woy ñi gëna am solo ci woyu Taliañ. Ñuy jàppale ci woy yu bari.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇸🇦 العربية</span>
+                            <strong>ESSERE</strong> (يكون) و <strong>AVERE</strong> (يمتلك) هما أهم فعلين في اللغة الإيطالية. يستخدمان كأفعال مساعدة لتكوين الأزمنة المركبة.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇬🇧 English</span>
+                            <strong>ESSERE</strong> (to be) and <strong>AVERE</strong> (to have) are the most important verbs in Italian. They serve as auxiliary verbs to form compound tenses and have many independent uses.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇫🇷 Français</span>
+                            <strong>ESSERE</strong> (être) et <strong>AVERE</strong> (avoir) sont les verbes les plus importants de la langue italienne. Ils servent d'auxiliaires pour former les temps composés.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇲🇱 Bambara</span>
+                            <strong>ESSERE</strong> (ka kɛ) ni <strong>AVERE</strong> (ka bolo) ye kumasenw koromuɲumanw ye Italien kɔnɔ. U bɛ baara kɛ kumasen dɛmɛbaara pɔnpekanw la.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇵🇰 اردو</span>
+                            <strong>ESSERE</strong> (ہونا) اور <strong>AVERE</strong> (رکھنا/ہونا) اطالوی زبان کے سب سے اہم افعال ہیں۔ یہ مرکب اوقات بنانے کے لیے معاون افعال کے طور پر استعمال ہوتے ہیں۔
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇮🇳 ਪੰਜਾਬੀ</span>
+                            <strong>ESSERE</strong> (ਹੋਣਾ) ਅਤੇ <strong>AVERE</strong> (ਰੱਖਣਾ) ਇਤਾਲਵੀ ਭਾਸ਼ਾ ਦੇ ਸਭ ਤੋਂ ਮਹੱਤਵਪੂਰਨ ਕਿਰਿਆਵਾਂ ਹਨ। ਇਹ ਮਿਸ਼ਰਤ ਸਮਾਂ ਬਣਾਉਣ ਲਈ ਸਹਾਇਕ ਕਿਰਿਆਵਾਂ ਵਜੋਂ ਕੰਮ ਕਰਦੇ ਹਨ।
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇦🇱 Shqip</span>
+                            <strong>ESSERE</strong> (të jesh) dhe <strong>AVERE</strong> (të kesh) janë foljet më të rëndësishme të gjuhës italiane. Ato shërbejnë si folje ndihmuese për të formuar kohët e përbëra.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇪🇸 Español</span>
+                            <strong>ESSERE</strong> (ser/estar) y <strong>AVERE</strong> (tener) son los verbos más importantes del italiano. Sirven como verbos auxiliares para formar tiempos compuestos.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇧🇷 Português</span>
+                            <strong>ESSERE</strong> (ser/estar) e <strong>AVERE</strong> (ter) são os verbos mais importantes da língua italiana. Servem como verbos auxiliares para formar tempos compostos.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇧🇩 বাংলা</span>
+                            <strong>ESSERE</strong> (হওয়া) এবং <strong>AVERE</strong> (থাকা) ইতালীয় ভাষার সবচেয়ে গুরুত্বপূর্ণ ক্রিয়াগুলো। এগুলো যৌগিক কাল গঠনে সহায়ক ক্রিয়া হিসেবে কাজ করে।
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇮🇳 हिंदी</span>
+                            <strong>ESSERE</strong> (होना) और <strong>AVERE</strong> (रखना/होना) इतालवी भाषा के सबसे महत्वपूर्ण क्रियाएँ हैं। ये संयुक्त काल बनाने में सहायक क्रियाओं के रूप में कार्य करते हैं।
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇨🇳 中文</span>
+                            <strong>ESSERE</strong> (是/在) 和 <strong>AVERE</strong> (有) 是意大利语中最重要的动词。它们用作助动词来构成复合时态。
+                        </div>
+                    </div>
+
+                    <div class="theory-section">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">📖 Regole Fondamentali / Fundamental Rules</h3>
+                        
+                        <div class="rule-box">
+                            <strong>🇮🇹 ESSERE</strong> - Verbo copulativo (collega soggetto e attributo)
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Identità: <em>Io sono Marco</em> (I am Marco / 我是马可)</li>
+                                <li>Nazionalità: <em>Sono italiano</em> (I am Italian / मैं इतालवी हूँ)</li>
+                                <li>Professione: <em>Sei medico?</em> (Are you a doctor? / هل أنت طبيب؟)</li>
+                                <li>Stato fisico: <em>È stanco</em> (He is tired / Il est fatigué)</li>
+                                <li>Posizione: <em>Siamo a casa</em> (We are at home / Estamos en casa)</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>🇮🇹 AVERE</strong> - Verbo transitivo (indica possesso o sensazioni)
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Possesso: <em>Ho una macchina</em> (I have a car / 我有一辆车)</li>
+                                <li>Età: <em>Ho 25 anni</em> (I am 25 years old / Tengo 25 años)</li>
+                                <li>Sensazioni: <em>Hai fame? Ho sete</em> (Are you hungry? I am thirsty / 你饿吗？我渴了)</li>
+                                <li>Necessità: <em>Abbiamo bisogno di aiuto</em> (We need help / Nous avons besoin d'aide)</li>
+                            </ul>
+                        </div>
+
+                        <div class="instruction-box" style="border-left-color: var(--accent); background: #fff5f5;">
+                            <strong>⚠️ Attenzione / Attention / انتباه / सावधानी:</strong><br>
+                            In italiano si <strong>"hanno"</strong> gli anni, non si "sono"! Si dice <strong>"Ho 20 anni"</strong>, non "Sono 20 anni".<br>
+                            <em>English:</em> In Italian you "have" years, not "are" years!<br>
+                            <em>Français:</em> En italien, on "a" l'âge, on ne "est" pas l'âge !<br>
+                            <em>Español:</em> ¡En italiano se "tienen" años, no se "son" años!<br>
+                            <em>中文:</em> 在意大利语中，说"有"岁数，而不是"是"岁数！
+                        </div>
                     </div>
                 </div>
             </div>
@@ -625,52 +766,82 @@
         <!-- SEZIONE ESSERE -->
         <section id="essere" class="section">
             <div class="card">
-                <div class="card-header essere">ESSERE - Coniugazione Completa</div>
+                <div class="card-header essere">ESSERE - Coniugazione Completa / Full Conjugation</div>
                 <div class="card-body">
                     <div class="instruction-box" style="border-left-color: var(--essere);">
-                        <strong>Verbo irregolare</strong> - Coniugazione al presente indicativo:
+                        <strong>🇮🇹 Verbo irregolare</strong> - Coniugazione al presente indicativo<br>
+                        <strong>🇬🇧 Irregular verb</strong> - Present indicative conjugation<br>
+                        <strong>🇫🇷 Verbe irrégulier</strong> - Conjugaison au présent de l'indicatif<br>
+                        <strong>🇸🇦 فعل غير منتظم</strong> - تصريف المضارع المبني للمعلوم
                     </div>
                     
                     <table class="verb-table">
                         <tr>
-                            <th>Pronome</th>
-                            <th>Forma</th>
-                            <th>Esempio</th>
+                            <th>Pronome<br><small>Pronoun</small></th>
+                            <th>Forma<br><small>Form</small></th>
+                            <th>Esempio<br><small>Example</small></th>
+                            <th>Traduzioni</th>
                         </tr>
                         <tr>
-                            <td><strong>Io</strong></td>
+                            <td><strong>Io</strong> (I/我/أنا)</td>
                             <td class="verb-display essere">sono</td>
-                            <td>Io sono studente <span class="verb-tag tag-essere">ESSERE</span></td>
+                            <td>Io sono studente</td>
+                            <td>🇬🇧 I am a student<br>🇫🇷 Je suis étudiant<br>🇪🇸 Soy estudiante<br>🇨🇳 我是学生</td>
                         </tr>
                         <tr>
-                            <td><strong>Tu</strong></td>
+                            <td><strong>Tu</strong> (You/你/أنت)</td>
                             <td class="verb-display essere">sei</td>
-                            <td>Tu sei italiano? <span class="verb-tag tag-essere">ESSERE</span></td>
+                            <td>Tu sei italiano?</td>
+                            <td>🇬🇧 Are you Italian?<br>🇫🇷 Es-tu italien?<br>🇪🇸 ¿Eres italiano?<br>🇨🇳 你是意大利人吗？</td>
                         </tr>
                         <tr>
-                            <td><strong>Lui/Lei</strong></td>
+                            <td><strong>Lui/Lei</strong> (He/She/他/她/هو/هي)</td>
                             <td class="verb-display essere">è</td>
-                            <td>Lui è medico <span class="verb-tag tag-essere">ESSERE</span></td>
+                            <td>Lui è medico</td>
+                            <td>🇬🇧 He is a doctor<br>🇫🇷 Il est médecin<br>🇪🇸 Él es médico<br>🇨🇳 他是医生</td>
                         </tr>
                         <tr>
-                            <td><strong>Noi</strong></td>
+                            <td><strong>Noi</strong> (We/我们/نحن)</td>
                             <td class="verb-display essere">siamo</td>
-                            <td>Noi siamo amici <span class="verb-tag tag-essere">ESSERE</span></td>
+                            <td>Noi siamo amici</td>
+                            <td>🇬🇧 We are friends<br>🇫🇷 Nous sommes amis<br>🇪🇸 Somos amigos<br>🇨🇳 我们是朋友</td>
                         </tr>
                         <tr>
-                            <td><strong>Voi</strong></td>
+                            <td><strong>Voi</strong> (You pl./你们/أنتم)</td>
                             <td class="verb-display essere">siete</td>
-                            <td>Voi siete stanchi? <span class="verb-tag tag-essere">ESSERE</span></td>
+                            <td>Voi siete stanchi?</td>
+                            <td>🇬🇧 Are you tired?<br>🇫🇷 Êtes-vous fatigués?<br>🇪🇸 ¿Estáis cansados?<br>🇨🇳 你们累了吗？</td>
                         </tr>
                         <tr>
-                            <td><strong>Loro</strong></td>
+                            <td><strong>Loro</strong> (They/他们/هن/هم)</td>
                             <td class="verb-display essere">sono</td>
-                            <td>Loro sono a Roma <span class="verb-tag tag-essere">ESSERE</span></td>
+                            <td>Loro sono a Roma</td>
+                            <td>🇬🇧 They are in Rome<br>🇫🇷 Ils sont à Rome<br>🇪🇸 Ellos están en Roma<br>🇨🇳 他们在罗马</td>
                         </tr>
                     </table>
 
+                    <div class="multilang-grid">
+                        <div class="lang-box">
+                            <span class="lang-label">🇸🇳 Wolof</span>
+                            "Sono" am na "Io" ak "Loro" - Woneb mu niroo ci mbir mi
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇲🇱 Bambara</span>
+                            "Io sono" ni "Loro sono" kelen ye - A yɛrɛyɛra kuma minnu na
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇮🇳 हिंदी</span>
+                            "Io sono" और "Loro sono" दोनों एक समान हैं! संदर्भ से पता चलेगा कौन है।
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇨🇳 中文</span>
+                            "Io sono" 和 "Loro sono" 是一样的！上下文会说明是谁。
+                        </div>
+                    </div>
+
                     <div class="rule-box">
-                        <strong>⚠️ Nota:</strong> "Io sono" e "loro sono" sono uguali! Il contesto chiarirà chi è il soggetto.
+                        <strong>⚠️ Nota importante:</strong> "Io sono" e "loro sono" sono uguali! Il contesto chiarirà chi è il soggetto.<br>
+                        <em>🇬🇧 "I am" and "they are" are the same in Italian! Context will clarify the subject.</em>
                     </div>
                 </div>
             </div>
@@ -679,10 +850,13 @@
         <!-- SEZIONE AVERE -->
         <section id="avere" class="section">
             <div class="card">
-                <div class="card-header avere">AVERE - Coniugazione Completa</div>
+                <div class="card-header avere">AVERE - Coniugazione Completa / Full Conjugation</div>
                 <div class="card-body">
                     <div class="instruction-box" style="border-left-color: var(--avere);">
-                        <strong>Verbo irregolare</strong> - Coniugazione al presente indicativo:
+                        <strong>🇮🇹 Verbo irregolare</strong> - Coniugazione al presente indicativo<br>
+                        <strong>🇬🇧 Irregular verb</strong> - To have<br>
+                        <strong>🇫🇷 Verbe irrégulier</strong - Avoir<br>
+                        <strong>🇸🇦 فعل غير منتظم</strong> - يملك / لديه
                     </div>
                     
                     <table class="verb-table">
@@ -690,41 +864,64 @@
                             <th>Pronome</th>
                             <th>Forma</th>
                             <th>Esempio</th>
+                            <th>Traduzioni</th>
                         </tr>
                         <tr>
                             <td><strong>Io</strong></td>
                             <td class="verb-display avere">ho</td>
-                            <td>Io ho fame <span class="verb-tag tag-avere">AVERE</span></td>
+                            <td>Io ho fame</td>
+                            <td>🇬🇧 I am hungry<br>🇫🇷 J'ai faim<br>🇪🇸 Tengo hambre<br>🇨🇳 我饿了</td>
                         </tr>
                         <tr>
                             <td><strong>Tu</strong></td>
                             <td class="verb-display avere">hai</td>
-                            <td>Tu hai sete? <span class="verb-tag tag-avere">AVERE</span></td>
+                            <td>Tu hai sete?</td>
+                            <td>🇬🇧 Are you thirsty?<br>🇫🇷 As-tu soif?<br>🇪🇸 ¿Tienes sed?<br>🇨🇳 你渴吗？</td>
                         </tr>
                         <tr>
                             <td><strong>Lui/Lei</strong></td>
                             <td class="verb-display avere">ha</td>
-                            <td>Lei ha 25 anni <span class="verb-tag tag-avere">AVERE</span></td>
+                            <td>Lei ha 25 anni</td>
+                            <td>🇬🇧 She is 25 years old<br>🇫🇷 Elle a 25 ans<br>🇪🇸 Ella tiene 25 años<br>🇨🇳 她25岁</td>
                         </tr>
                         <tr>
                             <td><strong>Noi</strong></td>
                             <td class="verb-display avere">abbiamo</td>
-                            <td>Noi abbiamo bisogno di aiuto <span class="verb-tag tag-avere">AVERE</span></td>
+                            <td>Noi abbiamo bisogno di aiuto</td>
+                            <td>🇬🇧 We need help<br>🇫🇷 Nous avons besoin d'aide<br>🇪🇸 Necesitamos ayuda<br>🇨🇳 我们需要帮助</td>
                         </tr>
                         <tr>
                             <td><strong>Voi</strong></td>
                             <td class="verb-display avere">avete</td>
-                            <td>Voi avete una macchina? <span class="verb-tag tag-avere">AVERE</span></td>
+                            <td>Voi avete una macchina?</td>
+                            <td>🇬🇧 Do you have a car?<br>🇫🇷 Avez-vous une voiture?<br>🇪🇸 ¿Tenéis un coche?<br>🇨🇳 你们有车吗？</td>
                         </tr>
                         <tr>
                             <td><strong>Loro</strong></td>
                             <td class="verb-display avere">hanno</td>
-                            <td>Loro hanno freddo <span class="verb-tag tag-avere">AVERE</span></td>
+                            <td>Loro hanno freddo</td>
+                            <td>🇬🇧 They are cold<br>🇫🇷 Ils ont froid<br>🇪🇸 Ellos tienen frío<br>🇨🇳 他们冷</td>
                         </tr>
                     </table>
 
+                    <div class="multilang-grid">
+                        <div class="lang-box">
+                            <span class="lang-label">🇵🇰 اردو</span>
+                            <strong>غلطی:</strong> "ho" (میں) اور "ha" (وہ) میں فرق نہ کریں! "Lui ha" کہیں، "Lui ho" نہیں۔
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇮🇳 ਪੰਜਾਬੀ</span>
+                            <strong>ਆਮ ਗਲਤੀ:</strong> "ho" (ਮੈਂ) ਅਤੇ "ha" (ਉਹ) ਨੂੰ ਉਲਝਾਉ ਨਾ ਕਰੋ! "Lui ha" ਕਹੋ, "Lui ho" ਨਹੀਂ।
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇧🇩 বাংলা</span>
+                            <strong>সাধারণ ভুল:</strong> "ho" (আমি) এবং "ha" (তিনি) মিলিয়ে ফেলবেন না! "Lui ha" বলুন, "Lui ho" নয়।
+                        </div>
+                    </div>
+
                     <div class="rule-box">
-                        <strong>⚠️ Errore comune:</strong> Non confondere "ho" (io) con "ha" (lui/lei)! Si dice <strong>"Lui ha"</strong>, non "Lui ho".
+                        <strong>⚠️ Errore comune:</strong> Non confondere "ho" (io) con "ha" (lui/lei)! Si dice <strong>"Lui ha"</strong>, non "Lui ho".<br>
+                        <em>🇬🇧 Common mistake: Don't confuse "ho" (I) with "ha" (he/she)! Say "He has", not "He have".</em>
                     </div>
                 </div>
             </div>
@@ -733,57 +930,156 @@
         <!-- SEZIONE CONFRONTO -->
         <section id="confronto" class="section">
             <div class="card">
-                <div class="card-header">Quando usare ESSERE e quando AVERE?</div>
+                <div class="card-header">Quando usare ESSERE e quando AVERE? / When to use ESSERE vs AVERE?</div>
                 <div class="card-body">
                     <div class="instruction-box">
-                        <strong>Confronto semantico:</strong>
+                        <strong>🇮🇹 Confronto semantico / 🇬🇧 Semantic comparison / 🇫🇷 Comparaison sémantique</strong>
                     </div>
                     
                     <div class="comparison-row">
                         <span><span class="verb-essere">ESSERE</span> (identità)</span>
                         <span>→</span>
                         <span>Io sono Marco</span>
+                        <span class="lang-label" style="font-size: 0.7rem;">🇬🇧 I am Marco</span>
                     </div>
                     <div class="comparison-row">
                         <span><span class="verb-avere">AVERE</span> (possesso)</span>
                         <span>→</span>
                         <span>Ho una macchina</span>
+                        <span class="lang-label" style="font-size: 0.7rem;">🇬🇧 I have a car</span>
                     </div>
                     <div class="comparison-row">
                         <span><span class="verb-essere">ESSERE</span> (nazionalità)</span>
                         <span>→</span>
                         <span>Sono italiano</span>
+                        <span class="lang-label" style="font-size: 0.7rem;">🇬🇧 I am Italian</span>
                     </div>
                     <div class="comparison-row">
                         <span><span class="verb-avere">AVERE</span> (età)</span>
                         <span>→</span>
                         <span>Ho 25 anni</span>
+                        <span class="lang-label" style="font-size: 0.7rem;">🇬🇧 I am 25</span>
                     </div>
                     <div class="comparison-row">
                         <span><span class="verb-essere">ESSERE</span> (professione)</span>
                         <span>→</span>
                         <span>Sei medico?</span>
+                        <span class="lang-label" style="font-size: 0.7rem;">🇬🇧 Are you a doctor?</span>
                     </div>
                     <div class="comparison-row">
                         <span><span class="verb-avere">AVERE</span> (sensazioni)</span>
                         <span>→</span>
                         <span>Ho fame/sete/freddo/caldo</span>
+                        <span class="lang-label" style="font-size: 0.7rem;">🇬🇧 I am hungry/thirsty/cold/hot</span>
                     </div>
                     <div class="comparison-row">
                         <span><span class="verb-essere">ESSERE</span> (stato fisico)</span>
                         <span>→</span>
                         <span>Sono stanco/felice/malato</span>
+                        <span class="lang-label" style="font-size: 0.7rem;">🇬🇧 I am tired/happy/sick</span>
                     </div>
                     <div class="comparison-row">
                         <span><span class="verb-avere">AVERE</span> (necessità)</span>
                         <span>→</span>
                         <span>Ho bisogno di...</span>
+                        <span class="lang-label" style="font-size: 0.7rem;">🇬🇧 I need...</span>
+                    </div>
+
+                    <div class="multilang-grid" style="margin-top: 2rem;">
+                        <div class="lang-box">
+                            <span class="lang-label">🇸🇳 Wolof</span>
+                            <strong>ESSERE</strong> = lii nga <strong>DOON</strong><br>
+                            <strong>AVERE</strong> = lii nga <strong>AM</strong> walla <strong>NDEEMAX</strong>
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇸🇦 العربية</span>
+                            <strong>ESSERE</strong> = ما <strong>أنت</strong> عليه (الهوية)<br>
+                            <strong>AVERE</strong> = ما <strong>تمتلكه</strong> أو <strong>تحسه</strong>
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇲🇱 Bambara</span>
+                            <strong>ESSERE</strong> = min <strong>I Kɛ</strong><br>
+                            <strong>AVERE</strong> = min <strong>I Bolo</strong> walima <strong>I Nɛɛm</strong>
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇮🇳 हिंदी</span>
+                            <strong>ESSERE</strong> = जो आप <strong>हैं</strong> (पहचान)<br>
+                            <strong>AVERE</strong> = जो आप <strong>रखते हैं</strong> या <strong>महसूस करते हैं</strong>
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇨🇳 中文</span>
+                            <strong>ESSERE</strong> = 你<strong>是</strong>什么（身份）<br>
+                            <strong>AVERE</strong> = 你<strong>拥有</strong>或<strong>感觉</strong>什么
+                        </div>
                     </div>
 
                     <div class="rule-box">
-                        <strong>💡 Regola mnemonica:</strong><br>
-                        - ESSERE = ciò che <strong>sei</strong> (identità, stato, posizione)<br>
-                        - AVERE = ciò che <strong>possiedi</strong> o <strong>senti</strong> (oggetti, età, sensazioni fisiche)
+                        <strong>💡 Regola mnemonica / Mnemonic rule:</strong><br>
+                        - <strong>ESSERE</strong> = ciò che <strong>sei</strong> (identità, stato, posizione)<br>
+                        - <strong>AVERE</strong> = ciò che <strong>possiedi</strong> o <strong>senti</strong> (oggetti, età, sensazioni fisiche)<br><br>
+                        <em>🇬🇧 ESSERE = what you ARE (identity, state, position)<br>
+                        AVERE = what you HAVE or FEEL (objects, age, physical sensations)</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE AUSILIARI -->
+        <section id="ausiliari" class="section">
+            <div class="card">
+                <div class="card-header">ESSERE e AVERE come Ausiliari / As Auxiliary Verbs</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>🇮🇹 Uso nei tempi composti (Passato Prossimo)</strong><br>
+                        <strong>🇬🇧 Use in compound tenses (Present Perfect)</strong><br>
+                        <strong>🇸🇦 الاستخدام في الأزمنة المركبة</strong>
+                    </div>
+
+                    <div class="theory-section">
+                        <h3 style="color: var(--essere); margin-bottom: 1rem;">ESSERE come ausiliare</h3>
+                        <div class="lang-box">
+                            <span class="lang-label">🇮🇹 Italiano</span>
+                            Si usa con verbi intransitivi di moto (andare, venire, arrivare), verbi riflessivi (mi sono alzato), verbi di stato (stare, rimanere).
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇬🇧 English</span>
+                            Used with intransitive movement verbs (to go, to come, to arrive), reflexive verbs (I got up), state verbs (to stay, to remain).
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇫🇷 Français</span>
+                            Utilisé avec les verbes intransitifs de mouvement (aller, venir, arriver), verbes réfléchis (je me suis levé), verbes d'état (rester).
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇪🇸 Español</span>
+                            Se usa con verbos intransitivos de movimiento (ir, venir, llegar), verbos reflexivos (me levanté), verbos de estado (quedarse).
+                        </div>
+                    </div>
+
+                    <div class="theory-section">
+                        <h3 style="color: var(--avere); margin-bottom: 1rem;">AVERE come ausiliare</h3>
+                        <div class="lang-box">
+                            <span class="lang-label">🇮🇹 Italiano</span>
+                            Si usa con verbi transitivi (ho mangiato, hai letto), verbi impersonali, molti verbi intransitivi (ho dormito, hai lavorato).
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇬🇧 English</span>
+                            Used with transitive verbs (I ate, you read), impersonal verbs, many intransitive verbs (I slept, you worked).
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇸🇦 العربية</span>
+                            يستخدم مع الأفعال المتعدية (أكلت، قرأت)، الأفعال غير الشخصية، العديد من الأفعال اللازمة (نمت، عملت).
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇮🇳 हिंदी</span>
+                            सकर्मक क्रियाओं के साथ उपयोग किया जाता है (मैंने खाया, तुमने पढ़ा), अनैपथ्य क्रियाएँ, कई अकर्मक क्रियाएँ (मैं सोया, तुमने काम किया)।
+                        </div>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Nota importante:</strong> Con l'ausiliare ESSERE, il participio passato concorda in genere e numero con il soggetto.<br>
+                        <em>🇬🇧 With ESSERE as auxiliary, the past participle agrees in gender and number with the subject.</em><br>
+                        <em>🇫🇷 Avec l'auxiliaire ESSERE, le participe passé s'accorde en genre et en nombre avec le sujet.</em><br>
+                        <em>🇪🇸 Con el auxiliar ESSERE, el participio concuerda en género y número con el sujeto.</em>
                     </div>
                 </div>
             </div>
@@ -794,11 +1090,11 @@
             <div class="game-container">
                 <div class="score-panel">
                     <div>
-                        <div class="score-label">Esercizio</div>
-                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                        <div class="score-label">Esercizio / Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 100</div>
                     </div>
                     <div>
-                        <div class="score-label">Punteggio</div>
+                        <div class="score-label">Punteggio / Score</div>
                         <div class="score-value" id="currentScore">0 / 100</div>
                     </div>
                 </div>
@@ -813,11 +1109,11 @@
 
                 <!-- SEZIONE PUNTEGGIO FINALE -->
                 <div class="final-score-section" id="finalScoreSection">
-                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <h2>🎉 Complimenti! / Congratulations!</h2>
                     <div class="final-score-value" id="finalScore">0/100</div>
                     <p class="final-message" id="finalMessage"></p>
                     <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
-                        🔄 Riprova tutti gli esercizi
+                        🔄 Riprova / Try Again
                     </button>
                 </div>
             </div>
@@ -826,14 +1122,15 @@
 
     <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
         <div style="max-width: 1200px; margin: 0 auto;">
-            <p>© 2024 Corso di Italiano A1 - Essere e Avere (50 Esercizi)</p>
+            <p>© 2024 Corso di Italiano A1-A2 - Essere e Avere (100 Esercizi Multilingue)</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🌍 Per studenti di tutto il mondo / For students worldwide</p>
         </div>
     </footer>
 
     <script>
-        // Database degli esercizi (50 totali)
+        // Database degli esercizi (100 totali)
         const exercises = [
-            // ESERCIZI 1-10: ESSERE - Coniugazione base
+            // ESERCIZI 1-15: ESSERE - Coniugazione base e identità
             {
                 id: 1,
                 type: 'choice',
@@ -913,12 +1210,52 @@
                 question: 'Completa: Loro _____ studenti universitari. (ruolo)',
                 correct: ['sono'],
                 explanation: '✅ Corretto! "Loro sono studenti" (essere).'
-
             },
-
-            // ESERCIZI 11-20: AVERE - Coniugazione base
             {
                 id: 11,
+                type: 'choice',
+                question: 'Completa: Io _____ di Roma. (provenienza)',
+                options: ['sono', 'ho', 'sei', 'hai'],
+                correct: 'sono',
+                explanation: '✅ Corretto! Per la provenienza: io SONO di Roma.',
+                errorExplanation: '❌ Per la provenienza si usa ESSERE: sono'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Completa: Tu _____ pronto per uscire? (stato)',
+                correct: ['sei'],
+                explanation: '✅ Corretto! "Tu sei pronto?" (essere).'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Completa: Lei _____ molto gentile. (carattere)',
+                options: ['è', 'ha', 'sono', 'ho'],
+                correct: 'è',
+                explanation: '✅ Corretto! Per il carattere: lei È gentile.',
+                errorExplanation: '❌ Per le caratteristiche personali si usa ESSERE: è'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Completa: Noi _____ in classe. (posizione)',
+                correct: ['siamo'],
+                explanation: '✅ Corretto! "Noi siamo in classe" (essere).'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Completa: Voi _____ sposati? (stato civile)',
+                options: ['siete', 'avete', 'siamo', 'abbiamo'],
+                correct: 'siete',
+                explanation: '✅ Corretto! Per lo stato civile: voi SIETE sposati.',
+                errorExplanation: '❌ Per lo stato civile si usa ESSERE: siete'
+            },
+
+            // ESERCIZI 16-30: AVERE - Coniugazione base e possesso
+            {
+                id: 16,
                 type: 'choice',
                 question: 'Completa: Io _____ una macchina. (possesso)',
                 options: ['sono', 'ho', 'sei', 'hai'],
@@ -927,30 +1264,30 @@
                 errorExplanation: '❌ Per il possesso si usa AVERE, non ESSERE'
             },
             {
-                id: 12,
+                id: 17,
                 type: 'fill',
                 question: 'Completa: Tu _____ 20 anni? (età)',
                 correct: ['hai'],
                 explanation: '✅ Corretto! "Tu hai 20 anni?" (avere).'
             },
             {
-                id: 13,
+                id: 18,
                 type: 'choice',
                 question: 'Completa: Lui _____ fame. (sensazione)',
                 options: ['è', 'ha', 'sono', 'ho'],
                 correct: 'ha',
                 explanation: '✅ Corretto! Per fame/sete: lui HA fame.',
-                errorExplanation: '❌ Per fame, sete, sonno si usa AVERE: ha'
+                errorExplanation: '❌ Per fame e sete si usa AVERE: ha'
             },
             {
-                id: 14,
+                id: 19,
                 type: 'fill',
                 question: 'Completa: Noi _____ sete. (sensazione)',
                 correct: ['abbiamo'],
                 explanation: '✅ Corretto! "Noi abbiamo sete" (avere).'
             },
             {
-                id: 15,
+                id: 20,
                 type: 'choice',
                 question: 'Completa: Voi _____ freddo? (sensazione termica)',
                 options: ['siete', 'avete', 'siamo', 'abbiamo'],
@@ -959,14 +1296,14 @@
                 errorExplanation: '❌ Per freddo/caldo si usa AVERE: avete'
             },
             {
-                id: 16,
+                id: 21,
                 type: 'fill',
                 question: 'Completa: Loro _____ sonno. (sensazione)',
                 correct: ['hanno'],
                 explanation: '✅ Corretto! "Loro hanno sonno" (avere).'
             },
             {
-                id: 17,
+                id: 22,
                 type: 'choice',
                 question: 'Completa: Io _____ bisogno di aiuto. (necessità)',
                 options: ['sono', 'ho', 'sei', 'hai'],
@@ -975,14 +1312,14 @@
                 errorExplanation: '❌ Per "avere bisogno" si usa AVERE: ho'
             },
             {
-                id: 18,
+                id: 23,
                 type: 'fill',
                 question: 'Completa: Tu _____ caldo oggi? (sensazione termica)',
                 correct: ['hai'],
                 explanation: '✅ Corretto! "Tu hai caldo?" (avere).'
             },
             {
-                id: 19,
+                id: 24,
                 type: 'choice',
                 question: 'Completa: Lei _____ una casa grande. (possesso)',
                 options: ['è', 'ha', 'sono', 'ho'],
@@ -991,17 +1328,57 @@
                 errorExplanation: '❌ Per il possesso si usa AVERE: ha'
             },
             {
-                id: 20,
+                id: 25,
                 type: 'fill',
                 question: 'Completa: Noi _____ paura del buio. (emozione)',
                 correct: ['abbiamo'],
                 explanation: '✅ Corretto! "Noi abbiamo paura" (avere).'
-
+            },
+            {
+                id: 26,
+                type: 'choice',
+                question: 'Completa: Io _____ voglia di mangiare. (desiderio)',
+                options: ['sono', 'ho', 'sei', 'hai'],
+                correct: 'ho',
+                explanation: '✅ Corretto! Per "avere voglia": io HO voglia.',
+                errorExplanation: '❌ Per "avere voglia" si usa AVERE: ho'
+            },
+            {
+                id: 27,
+                type: 'fill',
+                question: 'Completa: Tu _____ ragione! (espressione fissa)',
+                correct: ['hai'],
+                explanation: '✅ Corretto! "Tu hai ragione" (avere ragione = essere corretto).'
+            },
+            {
+                id: 28,
+                type: 'choice',
+                question: 'Completa: Lui _____ torto in questa situazione. (espressione fissa)',
+                options: ['è', 'ha', 'sono', 'ho'],
+                correct: 'ha',
+                explanation: '✅ Corretto! Per "avere torto": lui HA torto.',
+                errorExplanation: '❌ "Avere torto" è un\'espressione fissa con AVERE'
+            },
+            {
+                id: 29,
+                type: 'fill',
+                question: 'Completa: Voi _____ sonno dopo il lungo viaggio. (sensazione)',
+                correct: ['avete'],
+                explanation: '✅ Corretto! "Voi avete sonno" (avere).'
+            },
+            {
+                id: 30,
+                type: 'choice',
+                question: 'Completa: Loro _____ molti amici. (possesso)',
+                options: ['sono', 'hanno', 'siete', 'avete'],
+                correct: 'hanno',
+                explanation: '✅ Corretto! Per il possesso: loro HANNO molti amici.',
+                errorExplanation: '❌ Per il possesso si usa AVERE: hanno'
             },
 
-            // ESERCIZI 21-30: ESSERE vs AVERE - Scelta del verbo
+            // ESERCIZI 31-45: ESSERE vs AVERE - Scelta del verbo
             {
-                id: 21,
+                id: 31,
                 type: 'choice',
                 question: 'Io _____ 25 anni. (età)',
                 options: ['sono', 'ho', 'sei', 'hai'],
@@ -1010,14 +1387,14 @@
                 errorExplanation: '❌ ATTENZIONE: In italiano si "hanno" gli anni, non si "sono"!'
             },
             {
-                id: 22,
+                id: 32,
                 type: 'fill',
                 question: 'Tu _____ professore, vero? (professione)',
                 correct: ['sei'],
                 explanation: '✅ Corretto! "Tu sei professore?" (essere per professione).'
             },
             {
-                id: 23,
+                id: 33,
                 type: 'choice',
                 question: 'Loro _____ fame perché non hanno mangiato. (sensazione)',
                 options: ['sono', 'hanno', 'siete', 'avete'],
@@ -1026,14 +1403,14 @@
                 errorExplanation: '❌ Per fame/sete si usa AVERE, non ESSERE'
             },
             {
-                id: 24,
+                id: 34,
                 type: 'fill',
                 question: 'Noi _____ in Italia per le vacanze. (posizione)',
                 correct: ['siamo'],
                 explanation: '✅ Corretto! "Noi siamo in Italia" (essere per posizione).'
             },
             {
-                id: 25,
+                id: 35,
                 type: 'choice',
                 question: 'Lei _____ una bella voce. (possesso/attributo)',
                 options: ['è', 'ha', 'sono', 'ho'],
@@ -1042,14 +1419,14 @@
                 errorExplanation: '❌ Per caratteristiche possedute si usa AVERE: ha'
             },
             {
-                id: 26,
+                id: 36,
                 type: 'fill',
                 question: 'Io _____ molto stanco dopo il lavoro. (stato fisico)',
                 correct: ['sono'],
                 explanation: '✅ Corretto! "Io sono stanco" (essere per stato fisico).'
             },
             {
-                id: 27,
+                id: 37,
                 type: 'choice',
                 question: 'Voi _____ tempo per parlare? (disponibilità)',
                 options: ['siete', 'avete', 'siamo', 'abbiamo'],
@@ -1058,33 +1435,73 @@
                 errorExplanation: '❌ Per "avere tempo" si usa AVERE: avete'
             },
             {
-                id: 28,
+                id: 38,
                 type: 'fill',
                 question: 'Loro _____ spagnoli, non italiani. (nazionalità)',
                 correct: ['sono'],
                 explanation: '✅ Corretto! "Loro sono spagnoli" (essere per nazionalità).'
             },
             {
-                id: 29,
+                id: 39,
                 type: 'choice',
-                question: 'Tu _____ ragione! (avere ragione = essere corretto)',
+                question: 'Tu _____ ragione! (espressione fissa)',
                 options: ['sei', 'hai', 'siete', 'avete'],
                 correct: 'hai',
                 explanation: '✅ Corretto! "Avere ragione" è un\'espressione fissa: tu HAI ragione.',
                 errorExplanation: '❌ "Avere ragione" è un\'espressione fissa con AVERE'
             },
             {
-                id: 30,
+                id: 40,
                 type: 'fill',
                 question: 'Noi _____ felici di vederti. (stato d\'animo)',
                 correct: ['siamo'],
                 explanation: '✅ Corretto! "Noi siamo felici" (essere per stato d\'animo).'
-
+            },
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Io _____ freddo, posso chiudere la finestra? (sensazione)',
+                options: ['sono', 'ho', 'sei', 'hai'],
+                correct: 'ho',
+                explanation: '✅ Corretto! Per freddo/caldo si usa AVERE: io HO freddo.',
+                errorExplanation: '❌ Per freddo/caldo si usa AVERE, non ESSERE'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Tu _____ di Napoli, _____ 22 anni e _____ uno studente. (essere/avere)',
+                correct: ['sei... hai... sei', 'sei hai sei'],
+                explanation: '✅ Corretto! Sei di Napoli (provenienza), hai 22 anni (età), sei uno studente (professione).'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Lei _____ un\'insegnante molto brava. (professione)',
+                options: ['è', 'ha', 'sono', 'ho'],
+                correct: 'è',
+                explanation: '✅ Corretto! Per la professione: lei È un\'insegnante.',
+                errorExplanation: '❌ Per la professione si usa ESSERE: è'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Noi _____ fame e _____ anche sete. (sensazioni)',
+                correct: ['abbiamo... abbiamo', 'abbiamo abbiamo'],
+                explanation: '✅ Corretto! "Abbiamo fame e abbiamo sete" (avere per entrambi).'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Loro _____ a casa oggi perché _____ malati. (posizione/stato)',
+                options: ['sono... sono', 'hanno... hanno', 'sono... hanno', 'hanno... sono'],
+                correct: 'sono... sono',
+                explanation: '✅ Corretto! Posizione e stato fisico usano entrambi ESSERE.',
+                errorExplanation: '❌ Posizione e stato fisico usano ESSERE'
             },
 
-            // ESERCIZI 31-40: Frasi complete con ESSERE
+            // ESERCIZI 46-60: Frasi complete con ESSERE
             {
-                id: 31,
+                id: 46,
                 type: 'choice',
                 question: 'Ciao! Io _____ Anna e _____ di Roma. (essere)',
                 options: ['sono... sono', 'ho... ho', 'sono... ho', 'ho... sono'],
@@ -1093,14 +1510,14 @@
                 errorExplanation: '❌ Identità e provenienza usano ESSERE'
             },
             {
-                id: 32,
+                id: 47,
                 type: 'fill',
                 question: 'Lui _____ medico e _____ molto impegnato. (essere)',
                 correct: ['è... è', 'è è'],
                 explanation: '✅ Corretto! "Lui è medico e è molto impegnato" (essere).'
             },
             {
-                id: 33,
+                id: 48,
                 type: 'choice',
                 question: 'Noi _____ studenti e _____ sempre in biblioteca. (essere)',
                 options: ['siamo... siamo', 'abbiamo... abbiamo', 'siamo... abbiamo', 'abbiamo... siamo'],
@@ -1109,14 +1526,14 @@
                 errorExplanation: '❌ Professione e posizione usano ESSERE'
             },
             {
-                id: 34,
+                id: 49,
                 type: 'fill',
                 question: 'Voi _____ pronti per l\'esame? (essere)',
                 correct: ['siete'],
                 explanation: '✅ Corretto! "Voi siete pronti?" (essere per stato).'
             },
             {
-                id: 35,
+                id: 50,
                 type: 'choice',
                 question: 'Loro _____ i miei migliori amici e _____ sempre gentili. (essere)',
                 options: ['sono... sono', 'hanno... hanno', 'sono... hanno', 'hanno... sono'],
@@ -1125,14 +1542,14 @@
                 errorExplanation: '❌ Relazioni e caratteristiche personali usano ESSERE'
             },
             {
-                id: 36,
+                id: 51,
                 type: 'fill',
                 question: 'Tu _____ molto cambiato dall\'ultima volta! (essere)',
                 correct: ['sei'],
                 explanation: '✅ Corretto! "Tu sei cambiato" (essere come ausiliario).'
             },
             {
-                id: 37,
+                id: 52,
                 type: 'choice',
                 question: 'Io _____ nato a Milano ma ora _____ a Roma. (essere)',
                 options: ['sono... sono', 'ho... ho', 'sono... ho', 'ho... sono'],
@@ -1141,14 +1558,14 @@
                 errorExplanation: '❌ "Essere nato" e posizione usano ESSERE'
             },
             {
-                id: 38,
+                id: 53,
                 type: 'fill',
                 question: 'Lei _____ un\'ottima insegnante e _____ molto paziente. (essere)',
                 correct: ['è... è', 'è è'],
                 explanation: '✅ Corretto! "Lei è insegnante e è paziente" (essere).'
             },
             {
-                id: 39,
+                id: 54,
                 type: 'choice',
                 question: 'Noi _____ in ritardo, il treno _____ già partito. (essere)',
                 options: ['siamo... è', 'abbiamo... ha', 'siamo... ha', 'abbiamo... è'],
@@ -1157,17 +1574,57 @@
                 errorExplanation: '❌ Posizione e ausiliario per partire usano ESSERE'
             },
             {
-                id: 40,
+                id: 55,
                 type: 'fill',
                 question: 'Voi _____ i benvenuti alla festa! (essere)',
                 correct: ['siete'],
                 explanation: '✅ Corretto! "Voi siete i benvenuti" (essere).'
-
+            },
+            {
+                id: 56,
+                type: 'choice',
+                question: 'Loro _____ andati al cinema ieri sera. (essere ausiliario)',
+                options: ['sono', 'hanno', 'siete', 'avete'],
+                correct: 'sono',
+                explanation: '✅ Corretto! "Andare" usa ESSERE come ausiliare: sono andati.',
+                errorExplanation: '❌ I verbi di moto (andare, venire) usano ESSERE come ausiliare'
+            },
+            {
+                id: 57,
+                type: 'fill',
+                question: 'Noi _____ arrivati stamattina presto. (essere ausiliario)',
+                correct: ['siamo'],
+                explanation: '✅ Corretto! "Arrivare" usa ESSERE: siamo arrivati.'
+            },
+            {
+                id: 58,
+                type: 'choice',
+                question: 'Tu _____ venuto da solo o con gli amici? (essere ausiliario)',
+                options: ['sei', 'hai', 'siete', 'avete'],
+                correct: 'sei',
+                explanation: '✅ Corretto! "Venire" usa ESSERE: sei venuto.',
+                errorExplanation: '❌ "Venire" è un verbo di moto e usa ESSERE'
+            },
+            {
+                id: 59,
+                type: 'fill',
+                question: 'Io _____ rimasto a casa ieri. (essere ausiliario)',
+                correct: ['sono'],
+                explanation: '✅ Corretto! "Rimanere" usa ESSERE: sono rimasto.'
+            },
+            {
+                id: 60,
+                type: 'choice',
+                question: 'Lei _____ stata molto gentile con noi. (essere ausiliario)',
+                options: ['è', 'ha', 'sono', 'ho'],
+                correct: 'è',
+                explanation: '✅ Corretto! "Essere" usa sé stesso come ausiliare: è stata.',
+                errorExplanation: '❌ "Essere" usa ESSERE anche come ausiliare'
             },
 
-            // ESERCIZI 41-47: Frasi complete con AVERE
+            // ESERCIZI 61-75: Frasi complete con AVERE
             {
-                id: 41,
+                id: 61,
                 type: 'choice',
                 question: 'Io _____ fame e _____ anche sete. (avere)',
                 options: ['ho... ho', 'sono... sono', 'ho... sono', 'sono... ho'],
@@ -1176,14 +1633,14 @@
                 errorExplanation: '❌ Fame e sete usano AVERE, non ESSERE'
             },
             {
-                id: 42,
+                id: 62,
                 type: 'fill',
                 question: 'Tu _____ una macchina nuova? _____ anche un garage? (avere)',
                 correct: ['hai... hai', 'hai hai'],
                 explanation: '✅ Corretto! "Tu hai una macchina? Hai anche un garage?" (avere).'
             },
             {
-                id: 43,
+                id: 63,
                 type: 'choice',
                 question: 'Lui _____ 30 anni, _____ una casa e _____ un cane. (avere)',
                 options: ['ha... ha... ha', 'è... è... è', 'ha... è... ha', 'è... ha... è'],
@@ -1192,14 +1649,14 @@
                 errorExplanation: '❌ Età e possesso usano AVERE'
             },
             {
-                id: 44,
+                id: 64,
                 type: 'fill',
                 question: 'Noi _____ bisogno di vacanze. _____ anche voglia di mare. (avere)',
                 correct: ['abbiamo... abbiamo', 'abbiamo abbiamo'],
                 explanation: '✅ Corretto! "Abbiamo bisogno e abbiamo voglia" (avere).'
             },
             {
-                id: 45,
+                id: 65,
                 type: 'choice',
                 question: 'Voi _____ freddo o _____ caldo in questa stanza? (avere)',
                 options: ['avete... avete', 'siete... siete', 'avete... siete', 'siete... avete'],
@@ -1208,26 +1665,89 @@
                 errorExplanation: '❌ Freddo e caldo usano AVERE: avete freddo/caldo'
             },
             {
-                id: 46,
+                id: 66,
                 type: 'fill',
                 question: 'Loro _____ paura dei ragni ma non _____ paura del buio. (avere)',
                 correct: ['hanno... hanno', 'hanno hanno'],
                 explanation: '✅ Corretto! "Hanno paura... non hanno paura" (avere).'
             },
             {
-                id: 47,
+                id: 67,
                 type: 'choice',
                 question: 'Io _____ sonno perché _____ dormito poco. (avere)',
                 options: ['ho... ho', 'sono... sono', 'ho... sono', 'sono... ho'],
                 correct: 'ho... ho',
                 explanation: '✅ Corretto! Sonno usa AVERE, e "avere dormito" usa AVERE come ausiliario.',
                 errorExplanation: '❌ Sonno usa AVERE, e dormire (transitivo) usa AVERE come ausiliario'
-
+            },
+            {
+                id: 68,
+                type: 'fill',
+                question: 'Tu _____ ragione, io _____ torto. (avere)',
+                correct: ['hai... ho', 'hai ho'],
+                explanation: '✅ Corretto! "Hai ragione, ho torto" (avere per entrambe).'
+            },
+            {
+                id: 69,
+                type: 'choice',
+                question: 'Lei _____ una bella famiglia e _____ molti amici. (avere)',
+                options: ['ha... ha', 'è... è', 'ha... è', 'è... ha'],
+                correct: 'ha... ha',
+                explanation: '✅ Corretto! Possesso e possesso usano AVERE.',
+                errorExplanation: '❌ Per il possesso si usa AVERE: ha'
+            },
+            {
+                id: 70,
+                type: 'fill',
+                question: 'Noi _____ fretta, non _____ tempo da perdere. (avere)',
+                correct: ['abbiamo... abbiamo', 'abbiamo abbiamo'],
+                explanation: '✅ Corretto! "Abbiamo fretta, non abbiamo tempo" (avere).'
+            },
+            {
+                id: 71,
+                type: 'choice',
+                question: 'Voi _____ mangiato bene al ristorante? (avere ausiliario)',
+                options: ['avete', 'siete', 'abbiamo', 'siamo'],
+                correct: 'avete',
+                explanation: '✅ Corretto! "Mangiare" (transitivo) usa AVERE: avete mangiato.',
+                errorExplanation: '❌ I verbi transitivi usano AVERE come ausiliare'
+            },
+            {
+                id: 72,
+                type: 'fill',
+                question: 'Io _____ letto un bel libro questa settimana. (avere ausiliario)',
+                correct: ['ho'],
+                explanation: '✅ Corretto! "Leggere" (transitivo) usa AVERE: ho letto.'
+            },
+            {
+                id: 73,
+                type: 'choice',
+                question: 'Loro _____ comprato una casa nuova. (avere ausiliario)',
+                options: ['hanno', 'sono', 'ha', 'è'],
+                correct: 'hanno',
+                explanation: '✅ Corretto! "Comprare" (transitivo) usa AVERE: hanno comprato.',
+                errorExplanation: '❌ I verbi transitivi usano AVERE'
+            },
+            {
+                id: 74,
+                type: 'fill',
+                question: 'Tu _____ bevuto troppo caffè oggi. (avere ausiliario)',
+                correct: ['hai'],
+                explanation: '✅ Corretto! "Bere" usa AVERE: hai bevuto.'
+            },
+            {
+                id: 75,
+                type: 'choice',
+                question: 'Noi _____ fatto i compiti ieri sera. (avere ausiliario)',
+                options: ['abbiamo', 'siamo', 'avete', 'siete'],
+                correct: 'abbiamo',
+                explanation: '✅ Corretto! "Fare" (transitivo) usa AVERE: abbiamo fatto.',
+                errorExplanation: '❌ "Fare" usa AVERE come ausiliare'
             },
 
-            // ESERCIZI 48-50: MISTO - Scegli il verbo corretto
+            // ESERCIZI 76-90: MISTO - Scegli il verbo corretto
             {
-                id: 48,
+                id: 76,
                 type: 'choice',
                 question: 'Completa: Io _____ Marco, _____ 25 anni, _____ di Roma e _____ un gatto. (essere/avere)',
                 options: [
@@ -1241,16 +1761,100 @@
                 errorExplanation: '❌ Identità/provenienza = ESSERE; Età/possesso = AVERE'
             },
             {
-                id: 49,
+                id: 77,
                 type: 'fill',
-                question: 'Tu _____ Anna, _____ 30 anni, _____ insegnante e _____ molto studenti. (essere/avere)',
+                question: 'Tu _____ Anna, _____ 30 anni, _____ insegnante e _____ molti studenti. (essere/avere)',
                 correct: ['sei... hai... sei... hai', 'sei hai sei hai'],
                 explanation: '✅ Corretto! Sei Anna (identità), hai 30 anni (età), sei insegnante (professione), hai studenti (possesso).'
             },
             {
-                id: 50,
+                id: 78,
                 type: 'choice',
-                question: 'Completa la presentazione: "Ciao! _____ Paolo, _____ di Milano, _____ 28 anni, _____ ingegnere e _____ una passione per la musica. _____ molto felice di conoscervi!"',
+                question: 'Lui _____ medico, _____ 40 anni e _____ due figli. (essere/avere)',
+                options: [
+                    'è... ha... ha',
+                    'ha... è... ha',
+                    'è... è... ha',
+                    'ha... ha... è'
+                ],
+                correct: 'è... ha... ha',
+                explanation: '✅ Corretto! È medico (professione), ha 40 anni (età), ha due figli (possesso).',
+                errorExplanation: '❌ Professione = ESSERE; Età/Possesso = AVERE'
+            },
+            {
+                id: 79,
+                type: 'fill',
+                question: 'Noi _____ in ufficio, _____ molto lavoro e _____ stanchi. (essere/avere)',
+                correct: ['siamo... abbiamo... siamo', 'siamo abbiamo siamo'],
+                explanation: '✅ Corretto! Siamo in ufficio (posizione), abbiamo lavoro (possesso), siamo stanchi (stato).'
+            },
+            {
+                id: 80,
+                type: 'choice',
+                question: 'Voi _____ pronti? _____ tutto il necessario? (essere/avere)',
+                options: [
+                    'siete... avete',
+                    'avete... siete',
+                    'siete... siete',
+                    'avete... avete'
+                ],
+                correct: 'siete... avete',
+                explanation: '✅ Corretto! Siete pronti (stato), avete tutto (possesso).',
+                errorExplanation: '❌ Pronti = ESSERE; Avere tutto = AVERE'
+            },
+            {
+                id: 81,
+                type: 'fill',
+                question: 'Loro _____ spagnoli, _____ a Madrid e _____ una bella casa. (essere/avere)',
+                correct: ['sono... sono... hanno', 'sono sono hanno'],
+                explanation: '✅ Corretto! Sono spagnoli (nazionalità), sono a Madrid (posizione), hanno una casa (possesso).'
+            },
+            {
+                id: 82,
+                type: 'choice',
+                question: 'Io _____ fame, _____ stanco e _____ voglia di dormire. (essere/avere)',
+                options: [
+                    'ho... sono... ho',
+                    'sono... ho... sono',
+                    'ho... ho... sono',
+                    'sono... sono... ho'
+                ],
+                correct: 'ho... sono... ho',
+                explanation: '✅ Corretto! Ho fame (sensazione), sono stanco (stato), ho voglia (desiderio).',
+                errorExplanation: '❌ Fame/Voglia = AVERE; Stanco = ESSERE'
+            },
+            {
+                id: 83,
+                type: 'fill',
+                question: 'Tu _____ ragione: loro _____ in ritardo e _____ torto. (avere/essere)',
+                correct: ['hai... sono... hanno', 'hai sono hanno'],
+                explanation: '✅ Corretto! Hai ragione (avere), sono in ritardo (essere), hanno torto (avere).'
+            },
+            {
+                id: 84,
+                type: 'choice',
+                question: 'Lei _____ un\'ottima cuoca, _____ 35 anni e _____ tre ristoranti. (essere/avere)',
+                options: [
+                    'è... ha... ha',
+                    'ha... è... ha',
+                    'è... è... ha',
+                    'ha... ha... è'
+                ],
+                correct: 'è... ha... ha',
+                explanation: '✅ Corretto! È cuoca (professione), ha 35 anni (età), ha ristoranti (possesso).',
+                errorExplanation: '❌ Professione = ESSERE; Età/Possesso = AVERE'
+            },
+            {
+                id: 85,
+                type: 'fill',
+                question: 'Noi _____ freddo, _____ in montagna e _____ bisogno di un fuoco. (avere/essere)',
+                correct: ['abbiamo... siamo... abbiamo', 'abbiamo siamo abbiamo'],
+                explanation: '✅ Corretto! Abbiamo freddo (avere), siamo in montagna (essere), abbiamo bisogno (avere).'
+            },
+            {
+                id: 86,
+                type: 'choice',
+                question: 'Completa: "Ciao! _____ Paolo, _____ di Milano, _____ 28 anni, _____ ingegnere e _____ una passione per la musica. _____ molto felice di conoscervi!"',
                 options: [
                     'Sono... sono... ho... sono... ho... Sono',
                     'Ho... ho... sono... ho... sono... Ho',
@@ -1258,8 +1862,157 @@
                     'Sono... sono... sono... ho... ho... Sono'
                 ],
                 correct: 'Sono... sono... ho... sono... ho... Sono',
-                explanation: '✅ Corretto! Sono Paolo (identità), sono di Milano (provenienza), ho 28 anni (età), sono ingegnere (professione), ho una passione (possesso), sono felice (stato). Complimenti!',
+                explanation: '✅ Corretto! Sono Paolo (identità), sono di Milano (provenienza), ho 28 anni (età), sono ingegnere (professione), ho una passione (possesso), sono felice (stato).',
                 errorExplanation: '❌ Ricorda: ESSERE per identità, provenienza, professione, stato; AVERE per età e possesso'
+            },
+            {
+                id: 87,
+                type: 'fill',
+                question: 'Ieri io _____ andato al cinema e _____ visto un bel film. (ausiliari)',
+                correct: ['sono... ho', 'sono ho'],
+                explanation: '✅ Corretto! "Sono andato" (essere - moto), "ho visto" (avere - transitivo).'
+            },
+            {
+                id: 88,
+                type: 'choice',
+                question: 'Loro _____ arrivati tardi e _____ perso il treno. (ausiliari)',
+                options: [
+                    'sono... hanno',
+                    'hanno... sono',
+                    'sono... sono',
+                    'hanno... hanno'
+                ],
+                correct: 'sono... hanno',
+                explanation: '✅ Corretto! "Sono arrivati" (essere - moto), "hanno perso" (avere - transitivo).',
+                errorExplanation: '❌ Arrivare usa ESSERE, perdere usa AVERE'
+            },
+            {
+                id: 89,
+                type: 'fill',
+                question: 'Noi _____ mangiato al ristorante e _____ tornati a casa presto. (ausiliari)',
+                correct: ['abbiamo... siamo', 'abbiamo siamo'],
+                explanation: '✅ Corretto! "Abbiamo mangiato" (avere - transitivo), "siamo tornati" (essere - moto).'
+            },
+            {
+                id: 90,
+                type: 'choice',
+                question: 'Tu _____ fatto i compiti e _____ uscito con gli amici? (ausiliari)',
+                options: [
+                    'hai... sei',
+                    'sei... hai',
+                    'hai... hai',
+                    'sei... sei'
+                ],
+                correct: 'hai... sei',
+                explanation: '✅ Corretto! "Hai fatto" (avere - transitivo), "sei uscito" (essere - moto).',
+                errorExplanation: '❌ Fare usa AVERE, uscire usa ESSERE'
+            },
+
+            // ESERCIZI 91-100: Difficili - Contesti complessi
+            {
+                id: 91,
+                type: 'fill',
+                question: 'Quando _____ piccolo, io _____ molti giocattoli, ma ora non _____ più. (essere/avere)',
+                correct: ['ero... avevo... ho', 'ero avevo ho'],
+                explanation: '✅ Corretto! "Quando ero piccolo" (imperfetto essere), "avevo molti giocattoli" (imperfetto avere), "non ho più" (presente avere).'
+            },
+            {
+                id: 92,
+                type: 'choice',
+                question: 'Se tu _____ più paziente, _____ meno problemi con gli altri. (condizionale)',
+                options: [
+                    'fossi... avresti',
+                    'saresti... avessi',
+                    'fossi... saresti',
+                    'avessi... fosse'
+                ],
+                correct: 'fossi... avresti',
+                explanation: '✅ Corretto! "Se tu fossi" (congiuntivo essere), "avresti meno problemi" (condizionale avere).',
+                errorExplanation: '❌ Congiuntivo di essere = fossi; Condizionale di avere = avresti'
+            },
+            {
+                id: 93,
+                type: 'fill',
+                question: 'Loro _____ contenti se noi _____ venuti alla festa. (condizionale)',
+                correct: ['sarebbero... fossimo', 'sarebbero fossimo'],
+                explanation: '✅ Corretto! "Sarebbero contenti" (condizionale essere), "se fossimo venuti" (congiuntivo essere).'
+            },
+            {
+                id: 94,
+                type: 'choice',
+                question: 'Io credo che lui _____ ragione e che tu _____ torto. (congiuntivo)',
+                options: [
+                    'abbia... abbia',
+                    'sia... sia',
+                    'abbia... sia',
+                    'sia... abbia'
+                ],
+                correct: 'abbia... abbia',
+                explanation: '✅ Corretto! "Avere ragione/torto" al congiuntivo: abbia.',
+                errorExplanation: '❌ "Avere ragione/torto" usa sempre AVERE, anche al congiuntivo'
+            },
+            {
+                id: 95,
+                type: 'fill',
+                question: 'Penso che loro _____ stanchi e che _____ bisogno di riposare. (congiuntivo)',
+                correct: ['siano... abbiano', 'siano abbiano'],
+                explanation: '✅ Corretto! "Siano stanchi" (congiuntivo essere), "abbiano bisogno" (congiuntivo avere).'
+            },
+            {
+                id: 96,
+                type: 'choice',
+                question: 'Se io _____ te, non _____ fatto quell\'errore. (congiuntivo/condizionale)',
+                options: [
+                    'fossi... avrei',
+                    'sarei... avessi',
+                    'avessi... sarei',
+                    'fossi... sarei'
+                ],
+                correct: 'fossi... avrei',
+                explanation: '✅ Corretto! "Se fossi te" (congiuntivo essere), "non avrei fatto" (condizionale avere).',
+                errorExplanation: '❌ "Se fossi" (essere congiuntivo), "avrei fatto" (avere condizionale)'
+            },
+            {
+                id: 97,
+                type: 'fill',
+                question: 'Lui dice che _____ occupato, ma io credo che _____ solo pigro. (indicativo/congiuntivo)',
+                correct: ['è... sia', 'è sia'],
+                explanation: '✅ Corretto! "Dice che è occupato" (indicativo), "credo che sia pigro" (congiuntivo).'
+            },
+            {
+                id: 98,
+                type: 'choice',
+                question: 'Non _____ mai stato così felice come quando _____ vinto la lotteria! (trapassato)',
+                options: [
+                    'ero... avevo',
+                    'avevo... ero',
+                    'ero... ero',
+                    'avevo... avevo'
+                ],
+                correct: 'ero... avevo',
+                explanation: '✅ Corretto! "Non ero mai stato" (trapassato essere), "avevo vinto" (trapassato avere).',
+                errorExplanation: '❌ "Essere felice" usa ESSERE, "vincere" (transitivo) usa AVERE'
+            },
+            {
+                id: 99,
+                type: 'fill',
+                question: 'Quando _____ finito di mangiare, _____ andato a dormire perché _____ molto stanco. (ausiliari/essere)',
+                correct: ['ho... sono... ero', 'ho sono ero'],
+                explanation: '✅ Corretto! "Ho finito" (avere), "sono andato" (essere), "ero stanco" (imperfetto essere).'
+            },
+            {
+                id: 100,
+                type: 'choice',
+                question: 'Ultima domanda! Completa: "_____ stato un piacere conoscervi. Spero che ci _____ modo di rivederci presto. Io _____ sempre disponibile!"',
+                options: [
+                    'È... sia... sono',
+                    'È... sia... sia',
+                    'Ha... sia... sono',
+                    'È... sia... ho'
+                ],
+                correct: 'È... sia... sono',
+                explanation: '🎉 PERFETTO! "È stato" (essere passato prossimo), "sia modo" (congiuntivo essere), "sono disponibile" (essere presente). Complimenti per aver completato tutti gli esercizi!',
+                errorExplanation: '❌ Ricorda: "Essere" per stati e disponibilità, "avere" per possesso'
             }
         ];
 
@@ -1316,7 +2069,7 @@
                         <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la forma verbale..." onkeypress="if(event.key==='Enter') checkFill()">
                     </div>
                     <div class="text-center">
-                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica / Check</button>
                     </div>
                 `;
             }
@@ -1324,7 +2077,7 @@
             html += `
                         <div class="feedback" id="feedback"></div>
                         <div class="text-center" id="nextBtnContainer" style="display: none;">
-                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                            <button class="btn-primary" onclick="nextExercise()">Successivo → / Next</button>
                         </div>
                     </div>
                 </div>
@@ -1360,27 +2113,27 @@
             if (selected === ex.correct) {
                 feedback.className = 'feedback show correct';
                 feedback.textContent = ex.explanation;
-                totalScore += 2;
+                totalScore += 1;
             } else {
                 feedback.className = 'feedback show wrong';
                 let errorMsg = ex.errorExplanation;
                 
                 // Messaggi specifici per errori comuni
                 if (ex.question.includes('età') && selected.includes('sono')) {
-                    errorMsg += '<br><strong>⚠️ ERRORE CLASSICO: In italiano si "hanno" gli anni, non si "sono"!</strong>';
+                    errorMsg += '\n\n⚠️ ERRORE CLASSICO: In italiano si "hanno" gli anni, non si "sono"!';
                 }
                 if (ex.question.includes('fame') || ex.question.includes('sete')) {
                     if (selected.includes('sei') || selected.includes('sono') || selected.includes('siete')) {
-                        errorMsg += '<br><strong>⚠️ Fame e sete usano AVERE, non ESSERE!</strong>';
+                        errorMsg += '\n\n⚠️ Fame e sete usano AVERE, non ESSERE!';
                     }
                 }
                 if (ex.question.includes('stanco') || ex.question.includes('felice') || ex.question.includes('malato')) {
                     if (selected.includes('ho') || selected.includes('hai') || selected.includes('ha')) {
-                        errorMsg += '<br><strong>⚠️ Stati fisici usano ESSERE, non AVERE!</strong>';
+                        errorMsg += '\n\n⚠️ Stati fisici usano ESSERE, non AVERE!';
                     }
                 }
                 
-                feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+                feedback.innerHTML = `${errorMsg}<br><br><strong>Risposta corretta:</strong> ${ex.correct}`;
             }
 
             document.getElementById('currentScore').textContent = `${totalScore} / 100`;
@@ -1410,20 +2163,20 @@
                 feedback.textContent = ex.explanation;
                 input.style.borderColor = 'var(--success)';
                 input.style.background = '#f0fff4';
-                totalScore += 2;
+                totalScore += 1;
             } else {
                 feedback.className = 'feedback show wrong';
-                let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                let errorMsg = `❌ Sbagliato / Wrong.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
                 
                 // Messaggi specifici per errori comuni
                 if (ex.question.includes('età') && value.includes('sono')) {
-                    errorMsg += '<br><strong>⚠️ ERRORE CLASSICO: In italiano si "hanno" gli anni!</strong>';
+                    errorMsg += '<br><br>⚠️ ERRORE CLASSICO: In italiano si "hanno" gli anni!';
                 }
                 if ((ex.question.includes('fame') || ex.question.includes('sete')) && value.includes('sei')) {
-                    errorMsg += '<br><strong>⚠️ Fame e sete usano AVERE!</strong>';
+                    errorMsg += '<br><br>⚠️ Fame e sete usano AVERE!';
                 }
                 if ((ex.question.includes('stanco') || ex.question.includes('felice')) && value.includes('ho')) {
-                    errorMsg += '<br><strong>⚠️ Stati d\'animo usano ESSERE!</strong>';
+                    errorMsg += '<br><br>⚠️ Stati d\'animo usano ESSERE!';
                 }
                 
                 feedback.innerHTML = errorMsg;
@@ -1448,13 +2201,13 @@
             
             let message = '';
             if (totalScore >= 90) {
-                message = '🏆 Eccellente! Padroneggi perfettamente ESSERE e AVERE!';
+                message = '🏆 Eccellente! / Excellent!\nPadroneggi perfettamente ESSERE e AVERE!\nYou perfectly master ESSERE and AVERE!';
             } else if (totalScore >= 70) {
-                message = '👍 Ottimo lavoro! Conosci bene la differenza tra ESSERE e AVERE!';
+                message = '👍 Ottimo lavoro! / Great job!\nConosci bene la differenza tra ESSERE e AVERE!\nYou know well the difference between ESSERE and AVERE!';
             } else if (totalScore >= 50) {
-                message = '💪 Buon lavoro! Ricorda: ESSERE per identità/stato, AVERE per possesso/età/sensazioni!';
+                message = '💪 Buon lavoro! / Good work!\nRipassa: ESSERE per identità/stato, AVERE per possesso/età/sensazioni!\nReview: ESSERE for identity/state, AVERE for possession/age/sensations!';
             } else {
-                message = '📚 Ripassa le regole! Ricorda: sono stanco (ESSERE) ma ho fame (AVERE)!';
+                message = '📚 Ripassa le regole! / Review the rules!\nRicorda: sono stanco (ESSERE) ma ho fame (AVERE)!\nRemember: I am tired (ESSERE) but I am hungry (AVERE)!';
             }
             
             document.getElementById('finalMessage').textContent = message;
@@ -1466,7 +2219,14 @@
             totalScore = 0;
             answered = false;
             
-            exercises.sort(() => Math.random() - 0.5);
+            // Mischia gli esercizi mantenendo una progressione di difficoltà approssimativa
+            const easy = exercises.slice(0, 30).sort(() => Math.random() - 0.5);
+            const medium = exercises.slice(30, 60).sort(() => Math.random() - 0.5);
+            const hard = exercises.slice(60, 100).sort(() => Math.random() - 0.5);
+            
+            // Ricostruisci l'array mantenendo la progressione
+            exercises.length = 0;
+            exercises.push(...easy, ...medium, ...hard);
             
             document.getElementById('exerciseContainer').style.display = 'block';
             document.getElementById('finalScoreSection').classList.remove('show');
@@ -1476,7 +2236,13 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            exercises.sort(() => Math.random() - 0.5);
+            // Mischia gli esercizi all'avvio mantenendo la progressione di difficoltà
+            const easy = exercises.slice(0, 30).sort(() => Math.random() - 0.5);
+            const medium = exercises.slice(30, 60).sort(() => Math.random() - 0.5);
+            const hard = exercises.slice(60, 100).sort(() => Math.random() - 0.5);
+            
+            exercises.length = 0;
+            exercises.push(...easy, ...medium, ...hard);
         });
     </script>
 </body>

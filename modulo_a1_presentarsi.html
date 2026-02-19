@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verbi di Presentazione - 50 Esercizi</title>
+    <title>Verbi di Presentazione - 50 Esercizi Multilingue</title>
     <style>
         * {
             margin: 0;
@@ -27,6 +27,8 @@
             --chiamarsi: #5d4e75;
             --venire: #2d5a3d;
             --abitare: #1e4a5c;
+            --lang-bg: #e3f2fd;
+            --lang-border: #2196f3;
         }
 
         body {
@@ -181,6 +183,12 @@
             border-left: 4px solid var(--accent);
         }
 
+        .card-header.lang {
+            border-left-color: var(--lang-border);
+            color: var(--primary);
+            background: var(--lang-bg);
+        }
+
         .card-body {
             padding: 1.5rem;
         }
@@ -266,6 +274,62 @@
 
         .tag-abitare {
             background: var(--abitare);
+        }
+
+        /* Language section styles */
+        .lang-section {
+            margin-bottom: 2rem;
+            border: 1px solid var(--lang-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .lang-header {
+            background: var(--lang-bg);
+            padding: 0.75rem 1rem;
+            font-weight: bold;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lang-header:hover {
+            background: #bbdefb;
+        }
+
+        .lang-content {
+            padding: 1rem;
+            display: none;
+            background: white;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        .lang-flag {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .urdu-text, .arabic-text {
+            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+            line-height: 2;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s;
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
         }
 
         .game-container {
@@ -530,13 +594,14 @@
             .conj-row { flex-direction: column; gap: 0.3rem; }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=Noto+Sans+SC&display=swap" rel="stylesheet">
 <base target="_blank">
 </head>
 <body>
     <header class="header">
         <div class="header-container">
             <h1>Verbi di Presentazione - Modulo A1</h1>
-            <p>Chiamarsi, Venire, Abitare - 50 Esercizi Interattivi</p>
+            <p>Chiamarsi, Venire, Abitare - 50 Esercizi Interattivi Multilingue</p>
         </div>
     </header>
 
@@ -546,32 +611,33 @@
             <span>›</span>
             <a href="#">Italiano A1</a>
             <span>›</span>
-            <strong>Verbi di Presentazione (50 Esercizi)</strong>
+            <strong>Verbi di Presentazione (50 Esercizi Multilingue)</strong>
         </div>
     </nav>
 
     <main class="main-container">
         <div class="page-header">
             <h1 class="page-title">📚 I Verbi della Presentazione Personale</h1>
-            <p class="page-subtitle">Chiamarsi (nome), Venire da (provenienza), Abitare a (residenza)</p>
+            <p class="page-subtitle">Chiamarsi (nome), Venire da (provenienza), Abitare a (residenza) - Teoria in 13 lingue</p>
         </div>
 
         <nav class="nav-tabs">
             <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('languages', this)">🌍 Lingue</button>
             <button class="nav-tab" onclick="showSection('chiamarsi', this)">Chiamarsi</button>
             <button class="nav-tab" onclick="showSection('venire', this)">Venire</button>
             <button class="nav-tab" onclick="showSection('abitare', this)">Abitare</button>
             <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
         </nav>
 
-        <!-- SEZIONE TEORIA -->
+        <!-- SEZIONE TEORIA ITALIANO -->
         <section id="theory" class="section active">
             <div class="card">
                 <div class="card-header">I Tre Verbi della Presentazione</div>
                 <div class="card-body">
                     <p>Per presentarsi in italiano si usano principalmente tre verbi, ognuno con una funzione specifica:</p>
                     
-                    <div class="instruction-box">
+                    <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
                         <strong>1. CHIAMARSI (verbo riflessivo)</strong> - Per dire il proprio nome
                         <ul style="margin-left: 2rem; margin-top: 0.5rem;">
                             <li>Richiede il pronome riflessivo (mi, ti, si, ci, vi, si)</li>
@@ -579,7 +645,7 @@
                         </ul>
                     </div>
 
-                    <div class="instruction-box">
+                    <div class="instruction-box" style="border-left-color: var(--venire);">
                         <strong>2. VENIRE DA (verbo irregolare)</strong> - Per indicare la provenienza
                         <ul style="margin-left: 2rem; margin-top: 0.5rem;">
                             <li>Richiede la preposizione "da"</li>
@@ -587,7 +653,7 @@
                         </ul>
                     </div>
 
-                    <div class="instruction-box">
+                    <div class="instruction-box" style="border-left-color: var(--abitare);">
                         <strong>3. ABITARE A (verbo regolare)</strong> - Per indicare la residenza
                         <ul style="margin-left: 2rem; margin-top: 0.5rem;">
                             <li>Richiede la preposizione "a" (per le città)</li>
@@ -622,6 +688,827 @@
                         <span class="pronoun">RESIDENZA</span>
                         <span class="form"><span style="color: var(--abitare); font-weight: bold;">ABITARE A</span></span>
                         <span>→ Abito a Torino</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE LINGUE MULTILINGUE -->
+        <section id="languages" class="section">
+            <div class="card">
+                <div class="card-header lang">🌍 Spiegazioni Multilingue - I Verbi di Presentazione</div>
+                <div class="card-body">
+                    <p style="margin-bottom: 1.5rem;">Clicca su una lingua per leggere la spiegazione dei tre verbi di presentazione (nome, provenienza, residenza) nella tua lingua madre.</p>
+
+                    <!-- English -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇬🇧</span> <strong>English</strong> - Italian Presentation Verbs</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>The Three Presentation Verbs</h4>
+                            <p>In Italian, to introduce yourself you need three specific verbs, each with a distinct function:</p>
+
+                            <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                                <strong>1. CHIAMARSI (Reflexive Verb) - To say your name</strong>
+                                <p>This is a <strong>reflexive verb</strong>, meaning it requires a reflexive pronoun before the conjugated verb.</p>
+                                <table class="verb-table">
+                                    <tr><th>Subject</th><th>Form</th><th>Example</th></tr>
+                                    <tr><td>I</td><td class="verb-display chiamarsi">mi chiamo</td><td>My name is Marco</td></tr>
+                                    <tr><td>You (informal)</td><td class="verb-display chiamarsi">ti chiami</td><td>Your name is Anna</td></tr>
+                                    <tr><td>He/She</td><td class="verb-display chiamarsi">si chiama</td><td>His/Her name is Luigi</td></tr>
+                                    <tr><td>We</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>Our names are...</td></tr>
+                                    <tr><td>You (plural)</td><td class="verb-display chiamarsi">vi chiamate</td><td>Your names are...</td></tr>
+                                    <tr><td>They</td><td class="verb-display chiamarsi">si chiamano</td><td>Their names are...</td></tr>
+                                </table>
+                                <p><strong>⚠️ Common mistake:</strong> Don't say "Chiamo Marco" - you MUST use the reflexive pronoun: "<strong>Mi chiamo</strong> Marco"!</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--venire);">
+                                <strong>2. VENIRE DA (Irregular Verb) - To indicate origin/provenance</strong>
+                                <p>Used to say where you come from. Always requires the preposition <strong>DA</strong> (from).</p>
+                                <table class="verb-table">
+                                    <tr><th>Subject</th><th>Form</th><th>Example</th></tr>
+                                    <tr><td>I</td><td class="verb-display venire">vengo da</td><td>I come from Rome</td></tr>
+                                    <tr><td>You</td><td class="verb-display venire">vieni da</td><td>You come from Milan</td></tr>
+                                    <tr><td>He/She</td><td class="verb-display venire">viene da</td><td>He/She comes from Naples</td></tr>
+                                    <tr><td>We</td><td class="verb-display venire">veniamo da</td><td>We come from Turin</td></tr>
+                                    <tr><td>You (pl.)</td><td class="verb-display venire">venite da</td><td>You come from Palermo</td></tr>
+                                    <tr><td>They</td><td class="verb-display venire">vengono da</td><td>They come from Florence</td></tr>
+                                </table>
+                                <p><strong>⚠️ Note:</strong> "Da" combines with articles: da + il = dal, da + la = dalla, da + l' = dall'</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--abitare);">
+                                <strong>3. ABITARE A (Regular Verb) - To indicate residence</strong>
+                                <p>Used to say where you live. Requires preposition <strong>A</strong> for cities.</p>
+                                <table class="verb-table">
+                                    <tr><th>Subject</th><th>Form</th><th>Example</th></tr>
+                                    <tr><td>I</td><td class="verb-display abitare">abito a</td><td>I live in Bologna</td></tr>
+                                    <tr><td>You</td><td class="verb-display abitare">abiti a</td><td>You live in Genoa</td></tr>
+                                    <tr><td>He/She</td><td class="verb-display abitare">abita a</td><td>He/She lives in Venice</td></tr>
+                                    <tr><td>We</td><td class="verb-display abitare">abitiamo a</td><td>We live in Verona</td></tr>
+                                    <tr><td>You (pl.)</td><td class="verb-display abitare">abitate a</td><td>You live in Padua</td></tr>
+                                    <tr><td>They</td><td class="verb-display abitare">abitano a</td><td>They live in Trieste</td></tr>
+                                </table>
+                                <p><strong>⚠️ Important:</strong> Unlike English "live IN", Italian uses <strong>A</strong> for cities: "Abito <strong>a</strong> Milano" (not "in Milano")!</p>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>💡 Complete Example:</strong><br>
+                                "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                (Hi! My name is Luca, I come from Rome and I live in Milan.)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Français -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇫🇷</span> <strong>Français</strong> - Les Verbes de Présentation en Italien</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Les Trois Verbes de Présentation</h4>
+                            <p>En italien, pour se présenter on utilise trois verbes spécifiques, chacun avec une fonction distincte :</p>
+
+                            <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                                <strong>1. CHIAMARSI (Verbe Pronominal/Réfléchi) - Pour dire son nom</strong>
+                                <p>C'est un <strong>verbe pronominal</strong> (comme "s'appeler" en français), qui nécessite un pronom réfléchi.</p>
+                                <table class="verb-table">
+                                    <tr><th>Sujet</th><th>Forme</th><th>Exemple</th></tr>
+                                    <tr><td>Je</td><td class="verb-display chiamarsi">mi chiamo</td><td>Je m'appelle Marco</td></tr>
+                                    <tr><td>Tu</td><td class="verb-display chiamarsi">ti chiami</td><td>Tu t'appelles Anna</td></tr>
+                                    <tr><td>Il/Elle</td><td class="verb-display chiamarsi">si chiama</td><td>Il/Elle s'appelle Luigi</td></tr>
+                                    <tr><td>Nous</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>Nous nous appelons...</td></tr>
+                                    <tr><td>Vous</td><td class="verb-display chiamarsi">vi chiamate</td><td>Vous vous appelez...</td></tr>
+                                    <tr><td>Ils/Elles</td><td class="verb-display chiamarsi">si chiamano</td><td>Ils/Elles s'appellent...</td></tr>
+                                </table>
+                                <p><strong>⚠️ Attention :</strong> Ne dites pas "Chiamo Marco" - il FAUT le pronom réfléchi : "<strong>Mi chiamo</strong> Marco" !</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--venire);">
+                                <strong>2. VENIRE DA (Verbe Irrégulier) - Pour indiquer la provenance</strong>
+                                <p>Utilisé pour dire d'où l'on vient. Nécessite toujours la préposition <strong>DA</strong> (de).</p>
+                                <table class="verb-table">
+                                    <tr><th>Sujet</th><th>Forme</th><th>Exemple</th></tr>
+                                    <tr><td>Je</td><td class="verb-display venire">vengo da</td><td>Je viens de Rome</td></tr>
+                                    <tr><td>Tu</td><td class="verb-display venire">vieni da</td><td>Tu viens de Milan</td></tr>
+                                    <tr><td>Il/Elle</td><td class="verb-display venire">viene da</td><td>Il/Elle vient de Naples</td></tr>
+                                    <tr><td>Nous</td><td class="verb-display venire">veniamo da</td><td>Nous venons de Turin</td></tr>
+                                    <tr><td>Vous</td><td class="verb-display venire">venite da</td><td>Vous venez de Palerme</td></tr>
+                                    <tr><td>Ils/Elles</td><td class="verb-display venire">vengono da</td><td>Ils viennent de Florence</td></tr>
+                                </table>
+                                <p><strong>⚠️ Note :</strong> "Da" s'élide avec les articles : da + il = dal, da + la = dalla</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--abitare);">
+                                <strong>3. ABITARE A (Verbe Régulier) - Pour indiquer la résidence</strong>
+                                <p>Utilisé pour dire où l'on habite. Nécessite la préposition <strong>A</strong> pour les villes.</p>
+                                <table class="verb-table">
+                                    <tr><th>Sujet</th><th>Forme</th><th>Exemple</th></tr>
+                                    <tr><td>Je</td><td class="verb-display abitare">abito a</td><td>J'habite à Bologne</td></tr>
+                                    <tr><td>Tu</td><td class="verb-display abitare">abiti a</td><td>Tu habites à Gênes</td></tr>
+                                    <tr><td>Il/Elle</td><td class="verb-display abitare">abita a</td><td>Il/Elle habite à Venise</td></tr>
+                                    <tr><td>Nous</td><td class="verb-display abitare">abitiamo a</td><td>Nous habitons à Vérone</td></tr>
+                                    <tr><td>Vous</td><td class="verb-display abitare">abitate a</td><td>Vous habitez à Padoue</td></tr>
+                                    <tr><td>Ils/Elles</td><td class="verb-display abitare">abitano a</td><td>Ils habitent à Trieste</td></tr>
+                                </table>
+                                <p><strong>⚠️ Important :</strong> Contrairement au français "habiter À", l'italien utilise <strong>A</strong> pour les villes, mais attention aux contractions !</p>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>💡 Exemple Complet :</strong><br>
+                                "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                (Bonjour ! Je m'appelle Luca, je viens de Rome et j'habite à Milan.)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Español -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇪🇸</span> <strong>Español</strong> - Los Verbos de Presentación en Italiano</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Los Tres Verbos de Presentación</h4>
+                            <p>En italiano, para presentarse se usan tres verbos específicos, cada uno con una función distinta:</p>
+
+                            <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                                <strong>1. CHIAMARSI (Verbo Reflexivo) - Para decir el nombre</strong>
+                                <p>Es un <strong>verbo reflexivo</strong> (como "llamarse" en español), que requiere un pronombre reflexivo.</p>
+                                <table class="verb-table">
+                                    <tr><th>Sujeto</th><th>Forma</th><th>Ejemplo</th></tr>
+                                    <tr><td>Yo</td><td class="verb-display chiamarsi">mi chiamo</td><td>Me llamo Marco</td></tr>
+                                    <tr><td>Tú</td><td class="verb-display chiamarsi">ti chiami</td><td>¿Te llamas Anna?</td></tr>
+                                    <tr><td>Él/Ella</td><td class="verb-display chiamarsi">si chiama</td><td>Se llama Luigi</td></tr>
+                                    <tr><td>Nosotros</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>Nos llamamos...</td></tr>
+                                    <tr><td>Vosotros</td><td class="verb-display chiamarsi">vi chiamate</td><td>Os llamáis...</td></tr>
+                                    <tr><td>Ellos</td><td class="verb-display chiamarsi">si chiamano</td><td>Se llaman...</td></tr>
+                                </table>
+                                <p><strong>⚠️ Error común:</strong> ¡No digas "Chiamo Marco" - DEBES usar el pronombre: "<strong>Mi chiamo</strong> Marco"!</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--venire);">
+                                <strong>2. VENIRE DA (Verbo Irregular) - Para indicar el origen</strong>
+                                <p>Usado para decir de dónde vienes. Siempre requiere la preposición <strong>DA</strong> (de).</p>
+                                <table class="verb-table">
+                                    <tr><th>Sujeto</th><th>Forma</th><th>Ejemplo</th></tr>
+                                    <tr><td>Yo</td><td class="verb-display venire">vengo da</td><td>Vengo de Roma</td></tr>
+                                    <tr><td>Tú</td><td class="verb-display venire">vieni da</td><td>¿Vienes de Milán?</td></tr>
+                                    <tr><td>Él/Ella</td><td class="verb-display venire">viene da</td><td>Viene de Nápoles</td></tr>
+                                    <tr><td>Nosotros</td><td class="verb-display venire">veniamo da</td><td>Venimos de Turín</td></tr>
+                                    <tr><td>Vosotros</td><td class="verb-display venire">venite da</td><td>Venís de Palermo</td></tr>
+                                    <tr><td>Ellos</td><td class="verb-display venire">vengono da</td><td>Vienen de Florencia</td></tr>
+                                </table>
+                                <p><strong>⚠️ Nota:</strong> "Da" se combina con artículos: da + il = dal, da + la = dalla</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--abitare);">
+                                <strong>3. ABITARE A (Verbo Regular) - Para indicar la residencia</strong>
+                                <p>Usado para decir dónde vives. Requiere la preposición <strong>A</strong> para ciudades.</p>
+                                <table class="verb-table">
+                                    <tr><th>Sujeto</th><th>Forma</th><th>Ejemplo</th></tr>
+                                    <tr><td>Yo</td><td class="verb-display abitare">abito a</td><td>Vivo en Bolonia</td></tr>
+                                    <tr><td>Tú</td><td class="verb-display abitare">abiti a</td><td>¿Vives en Génova?</td></tr>
+                                    <tr><td>Él/Ella</td><td class="verb-display abitare">abita a</td><td>Vive en Venecia</td></tr>
+                                    <tr><td>Nosotros</td><td class="verb-display abitare">abitiamo a</td><td>Vivimos en Verona</td></tr>
+                                    <tr><td>Vosotros</td><td class="verb-display abitare">abitate a</td><td>Vivís en Padua</td></tr>
+                                    <tr><td>Ellos</td><td class="verb-display abitare">abitano a</td><td>Viven en Trieste</td></tr>
+                                </table>
+                                <p><strong>⚠️ Importante:</strong> A diferencia del español "vivir EN", el italiano usa <strong>A</strong> para ciudades: "Abito <strong>a</strong> Milano" (¡no "in Milano" ni "a Milano" como "en Milán"!)</p>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>💡 Ejemplo Completo:</strong><br>
+                                "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                (¡Hola! Me llamo Luca, vengo de Roma y vivo en Milán.)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Português -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇵🇹</span> <strong>Português</strong> - Os Verbos de Apresentação em Italiano</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Os Três Verbos de Apresentação</h4>
+                            <p>Em italiano, para se apresentar usam-se três verbos específicos, cada um com uma função distinta:</p>
+
+                            <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                                <strong>1. CHIAMARSI (Verbo Reflexivo) - Para dizer o nome</strong>
+                                <p>É um <strong>verbo reflexivo</strong> (como "chamar-se" em português), que requer um pronome reflexivo.</p>
+                                <table class="verb-table">
+                                    <tr><th>Sujeito</th><th>Forma</th><th>Exemplo</th></tr>
+                                    <tr><td>Eu</td><td class="verb-display chiamarsi">mi chiamo</td><td>Chamo-me Marco / Meu nome é Marco</td></tr>
+                                    <tr><td>Tu</td><td class="verb-display chiamarsi">ti chiami</td><td>Chamas-te Anna?</td></tr>
+                                    <tr><td>Ele/Ela</td><td class="verb-display chiamarsi">si chiama</td><td>Chama-se Luigi</td></tr>
+                                    <tr><td>Nós</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>Chamamo-nos...</td></tr>
+                                    <tr><td>Vós</td><td class="verb-display chiamarsi">vi chiamate</td><td>Chamais-vos...</td></tr>
+                                    <tr><td>Eles/Elas</td><td class="verb-display chiamarsi">si chiamano</td><td>Chamam-se...</td></tr>
+                                </table>
+                                <p><strong>⚠️ Erro comum:</strong> Não diga "Chiamo Marco" - DEVE usar o pronome: "<strong>Mi chiamo</strong> Marco"!</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--venire);">
+                                <strong>2. VENIRE DA (Verbo Irregular) - Para indicar a origem</strong>
+                                <p>Usado para dizer de onde se vem. Sempre requer a preposição <strong>DA</strong> (de).</p>
+                                <table class="verb-table">
+                                    <tr><th>Sujeito</th><th>Forma</th><th>Exemplo</th></tr>
+                                    <tr><td>Eu</td><td class="verb-display venire">vengo da</td><td>Eu venho de Roma</td></tr>
+                                    <tr><td>Tu</td><td class="verb-display venire">vieni da</td><td>Tu vens de Milão?</td></tr>
+                                    <tr><td>Ele/Ela</td><td class="verb-display venire">viene da</td><td>Ele/Ela vem de Nápoles</td></tr>
+                                    <tr><td>Nós</td><td class="verb-display venire">veniamo da</td><td>Nós vimos de Turim</td></tr>
+                                    <tr><td>Vós</td><td class="verb-display venire">venite da</td><td>Vós vindes de Palermo?</td></tr>
+                                    <tr><td>Eles/Elas</td><td class="verb-display venire">vengono da</td><td>Eles vêm de Florença</td></tr>
+                                </table>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--abitare);">
+                                <strong>3. ABITARE A (Verbo Regular) - Para indicar a residência</strong>
+                                <p>Usado para dizer onde se mora. Requer a preposição <strong>A</strong> para cidades.</p>
+                                <table class="verb-table">
+                                    <tr><th>Sujeito</th><th>Forma</th><th>Exemplo</th></tr>
+                                    <tr><td>Eu</td><td class="verb-display abitare">abito a</td><td>Eu moro em Bolonha</td></tr>
+                                    <tr><td>Tu</td><td class="verb-display abitare">abiti a</td><td>Tu moras em Génova?</td></tr>
+                                    <tr><td>Ele/Ela</td><td class="verb-display abitare">abita a</td><td>Ele/Ela mora em Veneza</td></tr>
+                                    <tr><td>Nós</td><td class="verb-display abitare">abitiamo a</td><td>Nós moramos em Verona</td></tr>
+                                    <tr><td>Vós</td><td class="verb-display abitare">abitate a</td><td>Vós morais em Pádua?</td></tr>
+                                    <tr><td>Eles/Elas</td><td class="verb-display abitare">abitano a</td><td>Eles moram em Trieste</td></tr>
+                                </table>
+                                <p><strong>⚠️ Importante:</strong> Ao contrário do português "morar EM", o italiano usa <strong>A</strong> para cidades!</p>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>💡 Exemplo Completo:</strong><br>
+                                "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                (Olá! Chamo-me Luca, venho de Roma e moro em Milão.)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- العربية (Arabic) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇸🇦</span> <strong>العربية</strong> - أفعال التعريف بالإيطالية</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content rtl">
+                            <div class="arabic-text">
+                                <h4>الأفعال الثلاثة للتعريف</h4>
+                                <p>في الإيطالية، لتقديم نفسك تحتاج إلى ثلاثة أفعال محددة، كل منها له وظيفة مميزة:</p>
+
+                                <div class="instruction-box" style="border-right: 4px solid var(--chiamarsi); border-left: none; text-align: right;">
+                                    <strong>1. CHIAMARSI (فعل انعكاسي) - لقول الاسم</strong>
+                                    <p>هو <strong>فعل انعكاسي</strong>، مما يعني أنه يتطلب ضميراً انعكاسياً قبل الفعل المصرّف.</p>
+                                    <table class="verb-table" style="text-align: right;">
+                                        <tr><th>الضمير</th><th>الصيغة</th><th>المثال</th></tr>
+                                        <tr><td>أنا</td><td class="verb-display chiamarsi">mi chiamo</td><td>اسمي ماركو</td></tr>
+                                        <tr><td>أنت</td><td class="verb-display chiamarsi">ti chiami</td><td>اسمك آنا؟</td></tr>
+                                        <tr><td>هو/هي</td><td class="verb-display chiamarsi">si chiama</td><td>اسمه/اسمها لويجي</td></tr>
+                                        <tr><td>نحن</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>أسماؤنا...</td></tr>
+                                        <tr><td>أنتم</td><td class="verb-display chiamarsi">vi chiamate</td><td>أسماؤكم...</td></tr>
+                                        <tr><td>هم</td><td class="verb-display chiamarsi">si chiamano</td><td>أسماؤهم...</td></tr>
+                                    </table>
+                                    <p><strong>⚠️ خطأ شائع:</strong> لا تقول "Chiamo Marco" - يجب استخدام الضمير الانعكاسي: "<strong>Mi chiamo</strong> Marco"!</p>
+                                </div>
+
+                                <div class="instruction-box" style="border-right: 4px solid var(--venire); border-left: none; text-align: right;">
+                                    <strong>2. VENIRE DA (فعل شاذ) - للإشارة إلى الأصل/المنشأ</strong>
+                                    <p>يُستخدم لقول من أين أنت. يتطلب دائماً حرف الجر <strong>DA</strong> (من).</p>
+                                    <table class="verb-table" style="text-align: right;">
+                                        <tr><th>الضمير</th><th>الصيغة</th><th>المثال</th></tr>
+                                        <tr><td>أنا</td><td class="verb-display venire">vengo da</td><td>أنا من روما</td></tr>
+                                        <tr><td>أنت</td><td class="verb-display venire">vieni da</td><td>أنت من ميلانو؟</td></tr>
+                                        <tr><td>هو/هي</td><td class="verb-display venire">viene da</td><td>هو/هي من نابولي</td></tr>
+                                        <tr><td>نحن</td><td class="verb-display venire">veniamo da</td><td>نحن من تورينو</td></tr>
+                                        <tr><td>أنتم</td><td class="verb-display venire">venite da</td><td>أنتم من باليرمو؟</td></tr>
+                                        <tr><td>هم</td><td class="verb-display venire">vengono da</td><td>هم من فلورنسا</td></tr>
+                                    </table>
+                                </div>
+
+                                <div class="instruction-box" style="border-right: 4px solid var(--abitare); border-left: none; text-align: right;">
+                                    <strong>3. ABITARE A (فعل منتظم) - للإشارة إلى الإقامة</strong>
+                                    <p>يُستخدم لقول أين تعيش. يتطلب حرف الجر <strong>A</strong> للمدن.</p>
+                                    <table class="verb-table" style="text-align: right;">
+                                        <tr><th>الضمير</th><th>الصيغة</th><th>المثال</th></tr>
+                                        <tr><td>أنا</td><td class="verb-display abitare">abito a</td><td>أسكن في بولونيا</td></tr>
+                                        <tr><td>أنت</td><td class="verb-display abitare">abiti a</td><td>أنت تسكن في جنوة؟</td></tr>
+                                        <tr><td>هو/هي</td><td class="verb-display abitare">abita a</td><td>هو/هي يسكن/تسكن في البندقية</td></tr>
+                                        <tr><td>نحن</td><td class="verb-display abitare">abitiamo a</td><td>نحن نسكن في فيرونا</td></tr>
+                                        <tr><td>أنتم</td><td class="verb-display abitare">abitate a</td><td>أنتم تسكنون في بادوفا؟</td></tr>
+                                        <tr><td>هم</td><td class="verb-display abitare">abitano a</td><td>هم يسكنون في ترييستي</td></tr>
+                                    </table>
+                                    <p><strong>⚠️ مهم:</strong> على عكس العربية "أسكن في"، الإيطالية تستخدم <strong>A</strong> للمدن!</p>
+                                </div>
+
+                                <div class="rule-box" style="text-align: right;">
+                                    <strong>💡 مثال كامل:</strong><br>
+                                    "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                    (مرحباً! اسمي لوكا، أنا من روما وأسكن في ميلانو.)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wolof -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇸🇳</span> <strong>Wolof</strong> - Verbi yi ñu jëfandikoo ci Itali</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Verbi ñatt yi ñu jëfandikoo</h4>
+                            <p>Ci Itali, bu bëgg nga woonale sa bopp, am na verbi ñatt, te benn verbe am na liggéeyam:</p>
+
+                            <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                                <strong>1. CHIAMARSI (Verbe bu dëgër) - Tur</strong>
+                                <p>Mooy wax sa tur. Dafay jëfandikoo ci pronoom bu dëgër (mi, ti, si...).</p>
+                                <table class="verb-table">
+                                    <tr><th>Kenn</th><th>Forme</th><th>Misal</th></tr>
+                                    <tr><td>Man</td><td class="verb-display chiamarsi">mi chiamo</td><td>Turuma Marco</td></tr>
+                                    <tr><td>Yow</td><td class="verb-display chiamarsi">ti chiami</td><td>Tur nga Anna?</td></tr>
+                                    <tr><td>Moom</td><td class="verb-display chiamarsi">si chiama</td><td>Turam Luigi</td></tr>
+                                    <tr><td>Nun</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>Tur nuni...</td></tr>
+                                    <tr><td>Yeen</td><td class="verb-display chiamarsi">vi chiamate</td><td>Tur ngeen...</td></tr>
+                                    <tr><td>Ñoom</td><td class="verb-display chiamarsi">si chiamano</td><td>Tur ñoom...</td></tr>
+                                </table>
+                                <p><strong>⚠️ Xoolal:</strong> Bul wax "Chiamo Marco" - war nga jëfandikoo pronoom: "<strong>Mi chiamo</strong> Marco"!</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--venire);">
+                                <strong>2. VENIRE DA - Fanaan</strong>
+                                <p>Mooy wax fan nga fanaan. Dafay jëfandikoo preposition <strong>DA</strong>.</p>
+                                <table class="verb-table">
+                                    <tr><th>Kenn</th><th>Forme</th><th>Misal</th></tr>
+                                    <tr><td>Man</td><td class="verb-display venire">vengo da</td><td>Dama fanaan Roma</td></tr>
+                                    <tr><td>Yow</td><td class="verb-display venire">vieni da</td><td>Nga fanaan Milano?</td></tr>
+                                    <tr><td>Moom</td><td class="verb-display venire">viene da</td><td>Mu fanaan Napoli</td></tr>
+                                    <tr><td>Nun</td><td class="verb-display venire">veniamo da</td><td>Nungi fanaan Torino</td></tr>
+                                    <tr><td>Yeen</td><td class="verb-display venire">venite da</td><td>Ngeen fanaan Palermo?</td></tr>
+                                    <tr><td>Ñoom</td><td class="verb-display venire">vengono da</td><td>Ñungi fanaan Firenze</td></tr>
+                                </table>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--abitare);">
+                                <strong>3. ABITARE A - Dëkk</strong>
+                                <p>Mooy wax fan nga dëkk. Dafay jëfandikoo preposition <strong>A</strong>.</p>
+                                <table class="verb-table">
+                                    <tr><th>Kenn</th><th>Forme</th><th>Misal</th></tr>
+                                    <tr><td>Man</td><td class="verb-display abitare">abito a</td><td>Dama dëkk Bologna</td></tr>
+                                    <tr><td>Yow</td><td class="verb-display abitare">abiti a</td><td>Nga dëkk Genova?</td></tr>
+                                    <tr><td>Moom</td><td class="verb-display abitare">abita a</td><td>Mu dëkk Venezia</td></tr>
+                                    <tr><td>Nun</td><td class="verb-display abitare">abitiamo a</td><td>Nungi dëkk Verona</td></tr>
+                                    <tr><td>Yeen</td><td class="verb-display abitare">abitate a</td><td>Ngeen dëkk Padova?</td></tr>
+                                    <tr><td>Ñoom</td><td class="verb-display abitare">abitano a</td><td>Ñungi dëkk Trieste</td></tr>
+                                </table>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>💡 Misal bu mat:</strong><br>
+                                "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                (Salam! Turuma Luca, dama fanaan Roma te dama dëkk Milano.)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bambara -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇲🇱</span> <strong>Bambara</strong> - Verbes de Présentation en Italien</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Verbes ñaa saba</h4>
+                            <p>Italien kan na, ni i bɛ fanga i yɛrɛ la, verbe saba bɛ yen, bɛɛ ka baara kɛ kelen:</p>
+
+                            <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                                <strong>1. CHIAMARSI (Verbe reflexif) - Tɔgɔ</strong>
+                                <p>Oluyɛrɛ ye tɔgɔ fɔ. A bɛ jɛɲɔgɔnya kɛ ni pronom ye (mi, ti, si...).</p>
+                                <table class="verb-table">
+                                    <tr><th>Mɔgɔ</th><th>Forme</th><th>Misali</th></tr>
+                                    <tr><td>Ne</td><td class="verb-display chiamarsi">mi chiamo</td><td>Tɔgɔ ne ye Marco</td></tr>
+                                    <tr><td>I</td><td class="verb-display chiamarsi">ti chiami</td><td>Tɔgɔ i ye Anna?</td></tr>
+                                    <tr><td>Ale</td><td class="verb-display chiamarsi">si chiama</td><td>Tɔgɔ ale ye Luigi</td></tr>
+                                    <tr><td>An</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>Tɔgɔ an ye...</td></tr>
+                                    <tr><td>Aw</td><td class="verb-display chiamarsi">vi chiamate</td><td>Tɔgɔ aw ye...</td></tr>
+                                    <tr><td>U</td><td class="verb-display chiamarsi">si chiamano</td><td>Tɔgɔ u ye...</td></tr>
+                                </table>
+                                <p><strong>⚠️ Kɔlɔsili:</strong> Kana fɔ "Chiamo Marco" - i ka kan ka jɛɲɔgɔnya kɛ: "<strong>Mi chiamo</strong> Marco"!</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--venire);">
+                                <strong>2. VENIRE DA - Fanga bɔ</strong>
+                                <p>Moɔ bɛ fɔ i bɔ min na. A bɛ jɛɲɔgɔnya kɛ ni preposition <strong>DA</strong> ye.</p>
+                                <table class="verb-table">
+                                    <tr><th>Mɔgɔ</th><th>Forme</th><th>Misali</th></tr>
+                                    <tr><td>Ne</td><td class="verb-display venire">vengo da</td><td>Ne bɔ Roma</td></tr>
+                                    <tr><td>I</td><td class="verb-display venire">vieni da</td><td>I bɔ Milano?</td></tr>
+                                    <tr><td>Ale</td><td class="verb-display venire">viene da</td><td>Ale bɔ Napoli</td></tr>
+                                    <tr><td>An</td><td class="verb-display venire">veniamo da</td><td>An bɔ Torino</td></tr>
+                                    <tr><td>Aw</td><td class="verb-display venire">venite da</td><td>Aw bɔ Palermo?</td></tr>
+                                    <tr><td>U</td><td class="verb-display venire">vengono da</td><td>U bɔ Firenze</td></tr>
+                                </table>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--abitare);">
+                                <strong>3. ABITARE A - Soo</strong>
+                                <p>Moɔ bɛ fɔ i bɛ soo min. A bɛ jɛɲgɔnya kɛ ni preposition <strong>A</strong> ye.</p>
+                                <table class="verb-table">
+                                    <tr><th>Mɔgɔ</th><th>Forme</th><th>Misali</th></tr>
+                                    <tr><td>Ne</td><td class="verb-display abitare">abito a</td><td>Ne bɛ soo Bologna</td></tr>
+                                    <tr><td>I</td><td class="verb-display abitare">abiti a</td><td>I bɛ soo Genova?</td></tr>
+                                    <tr><td>Ale</td><td class="verb-display abitare">abita a</td><td>Ale bɛ soo Venezia</td></tr>
+                                    <tr><td>An</td><td class="verb-display abitare">abitiamo a</td><td>An bɛ soo Verona</td></tr>
+                                    <tr><td>Aw</td><td class="verb-display abitare">abitate a</td><td>Aw bɛ soo Padova?</td></tr>
+                                    <tr><td>U</td><td class="verb-display abitare">abitano a</td><td>U bɛ soo Trieste</td></tr>
+                                </table>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>💡 Misali:</strong><br>
+                                "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                (Awr! Tɔgɔ ne ye Luca, ne bɔ Roma, ne bɛ soo Milano.)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shqip (Albanian) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇦🇱</span> <strong>Shqip</strong> - Foljet e Prezantimit në Italisht</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Tre Foljet e Prezantimit</h4>
+                            <p>Në italisht, për t'u prezantuar përdoren tre folje specifike, secili me një funksion të veçantë:</p>
+
+                            <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                                <strong>1. CHIAMARSI (Folje Refleksive) - Për të thënë emrin</strong>
+                                <p>Është një <strong>folje refleksive</strong> (si "quhemi" në shqip), që kërkon një pronem refleksiv.</p>
+                                <table class="verb-table">
+                                    <tr><th>Përkthimi</th><th>Forma</th><th>Shembull</th></tr>
+                                    <tr><td>Unë</td><td class="verb-display chiamarsi">mi chiamo</td><td>Unë quhem Marco</td></tr>
+                                    <tr><td>Ti</td><td class="verb-display chiamarsi">ti chiami</td><td>Ti quhesh Anna?</td></tr>
+                                    <tr><td>Ai/Ajo</td><td class="verb-display chiamarsi">si chiama</td><td>Ai/Ajo quhet Luigi</td></tr>
+                                    <tr><td>Ne</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>Ne quhemi...</td></tr>
+                                    <tr><td>Ju</td><td class="verb-display chiamarsi">vi chiamate</td><td>Ju quheni...</td></tr>
+                                    <tr><td>Ata/Ato</td><td class="verb-display chiamarsi">si chiamano</td><td>Ata quhen...</td></tr>
+                                </table>
+                                <p><strong>⚠️ Gabim i zakonshëm:</strong> Mos thuaj "Chiamo Marco" - DUHET të përdorësh shqueshoren: "<strong>Mi chiamo</strong> Marco"!</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--venire);">
+                                <strong>2. VENIRE DA (Folje Irregullare) - Për të treguar origjinën</strong>
+                                <p>Përdoret për të thënë nga vjen. Kërkon gjithmonë parafjalën <strong>DA</strong> (nga).</p>
+                                <table class="verb-table">
+                                    <tr><th>Përkthimi</th><th>Forma</th><th>Shembull</th></tr>
+                                    <tr><td>Unë</td><td class="verb-display venire">vengo da</td><td>Unë vij nga Roma</td></tr>
+                                    <tr><td>Ti</td><td class="verb-display venire">vieni da</td><td>Ti vjen nga Milano?</td></tr>
+                                    <tr><td>Ai/Ajo</td><td class="verb-display venire">viene da</td><td>Ai/Ajo vjen nga Napoli</td></tr>
+                                    <tr><td>Ne</td><td class="verb-display venire">veniamo da</td><td>Ne vjmë nga Torino</td></tr>
+                                    <tr><td>Ju</td><td class="verb-display venire">venite da</td><td>Ju vini nga Palermo?</td></tr>
+                                    <tr><td>Ata/Ato</td><td class="verb-display venire">vengono da</td><td>Ata vijnë nga Firence</td></tr>
+                                </table>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--abitare);">
+                                <strong>3. ABITARE A (Folje Regulltare) - Për të treguar vendbanimin</strong>
+                                <p>Përdoret për të thënë ku jeton. Kërkon parafjalën <strong>A</strong> për qytetet.</p>
+                                <table class="verb-table">
+                                    <tr><th>Përkthimi</th><th>Forma</th><th>Shembull</th></tr>
+                                    <tr><td>Unë</td><td class="verb-display abitare">abito a</td><td>Unë jetoj në Bolonja</td></tr>
+                                    <tr><td>Ti</td><td class="verb-display abitare">abiti a</td><td>Ti jeton në Gjenova?</td></tr>
+                                    <tr><td>Ai/Ajo</td><td class="verb-display abitare">abita a</td><td>Ai/Ajo jeton në Venecia</td></tr>
+                                    <tr><td>Ne</td><td class="verb-display abitare">abitiamo a</td><td>Ne jetojmë në Verona</td></tr>
+                                    <tr><td>Ju</td><td class="verb-display abitare">abitate a</td><td>Ju jetoni në Padova?</td></tr>
+                                    <tr><td>Ata/Ato</td><td class="verb-display abitare">abitano a</td><td>Ata jetojnë në Trieste</td></tr>
+                                </table>
+                                <p><strong>⚠️ E rëndësishme:</strong> Ndryshe nga shqipja "jetoj NË", italishtja përdor <strong>A</strong> për qytetet!</p>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>💡 Shembull i Plotë:</strong><br>
+                                "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                (Përshëndetje! Unë quhem Luca, vij nga Roma dhe jetoj në Milano.)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- اردو (Urdu) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇵🇰</span> <strong>اردو</strong> - اطالوی متعارفہ اعمال</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content rtl">
+                            <div class="urdu-text">
+                                <h4>تعارف کے تین افعال</h4>
+                                <p>اطالوی میں، اپنے آپ کو متعارف کروانے کے لیے تین مخصوص افعال استعمال ہوتے ہیں، ہر ایک کی ایک الگ خصوصیت ہے:</p>
+
+                                <div class="instruction-box" style="border-right: 4px solid var(--chiamarsi); border-left: none; text-align: right;">
+                                    <strong>1. CHIAMARSI (انعکاسی فعل) - نام بتانے کے لیے</strong>
+                                    <p>یہ ایک <strong>انعکاسی فعل</strong> ہے، جس کے لیے انعکاسی ضمیر (mi, ti, si...) درکار ہے۔</p>
+                                    <table class="verb-table" style="text-align: right;">
+                                        <tr><th>ضمیر</th><th>صیغہ</th><th>مثال</th></tr>
+                                        <tr><td>میں</td><td class="verb-display chiamarsi">mi chiamo</td><td>میرا نام مارکو ہے</td></tr>
+                                        <tr><td>تم</td><td class="verb-display chiamarsi">ti chiami</td><td>تمہارا نام آنا ہے؟</td></tr>
+                                        <tr><td>وہ</td><td class="verb-display chiamarsi">si chiama</td><td>اس کا نام لوئیجی ہے</td></tr>
+                                        <tr><td>ہم</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>ہمارے نام... ہیں</td></tr>
+                                        <tr><td>آپ (جمع)</td><td class="verb-display chiamarsi">vi chiamate</td><td>آپ کے نام... ہیں</td></tr>
+                                        <tr><td>وہ (جمع)</td><td class="verb-display chiamarsi">si chiamano</td><td>ان کے نام... ہیں</td></tr>
+                                    </table>
+                                    <p><strong>⚠️ عام غلطی:</strong> "Chiamo Marco" مت کہیں - ضمیر لازمی ہے: "<strong>Mi chiamo</strong> Marco"!</p>
+                                </div>
+
+                                <div class="instruction-box" style="border-right: 4px solid var(--venire); border-left: none; text-align: right;">
+                                    <strong>2. VENIRE DA (غیر معیاری فعل) - تعلق بتانے کے لیے</strong>
+                                    <p>یہ بتانے کے لیے استعمال ہوتا ہے کہ آپ کہاں سے ہیں۔ ہمیشہ <strong>DA</strong> (سے) حرفِ جار درکار ہے۔</p>
+                                    <table class="verb-table" style="text-align: right;">
+                                        <tr><th>ضمیر</th><th>صیغہ</th><th>مثال</th></tr>
+                                        <tr><td>میں</td><td class="verb-display venire">vengo da</td><td>میں روم سے ہوں</td></tr>
+                                        <tr><td>تم</td><td class="verb-display venire">vieni da</td><td>تم میلان سے ہو؟</td></tr>
+                                        <tr><td>وہ</td><td class="verb-display venire">viene da</td><td>وہ نیپلس سے ہے</td></tr>
+                                        <tr><td>ہم</td><td class="verb-display venire">veniamo da</td><td>ہم ٹورین سے ہیں</td></tr>
+                                        <tr><td>آپ (جمع)</td><td class="verb-display venire">venite da</td><td>آپ پالرمو سے ہیں؟</td></tr>
+                                        <tr><td>وہ (جمع)</td><td class="verb-display venire">vengono da</td><td>وہ فلورنس سے ہیں</td></tr>
+                                    </table>
+                                </div>
+
+                                <div class="instruction-box" style="border-right: 4px solid var(--abitare); border-left: none; text-align: right;">
+                                    <strong>3. ABITARE A (معیاری فعل) - رہائش بتانے کے لیے</strong>
+                                    <p>یہ بتانے کے لیے استعمال ہوتا ہے کہ آپ کہاں رہتے ہیں۔ شہروں کے لیے <strong>A</strong> حرفِ جار درکار ہے۔</p>
+                                    <table class="verb-table" style="text-align: right;">
+                                        <tr><th>ضمیر</th><th>صیغہ</th><th>مثال</th></tr>
+                                        <tr><td>میں</td><td class="verb-display abitare">abito a</td><td>میں بولونیا میں رہتا ہوں</td></tr>
+                                        <tr><td>تم</td><td class="verb-display abitare">abiti a</td><td>تم جنوا میں رہتے ہو؟</td></tr>
+                                        <tr><td>وہ</td><td class="verb-display abitare">abita a</td><td>وہ وینس میں رہتا ہے</td></tr>
+                                        <tr><td>ہم</td><td class="verb-display abitare">abitiamo a</td><td>ہم ویرونا میں رہتے ہیں</td></tr>
+                                        <tr><td>آپ (جمع)</td><td class="verb-display abitare">abitate a</td><td>آپ پڈووا میں رہتے ہیں؟</td></tr>
+                                        <tr><td>وہ (جمع)</td><td class="verb-display abitare">abitano a</td><td>وہ ٹرائیسٹ میں رہتے ہیں</td></tr>
+                                    </table>
+                                    <p><strong>⚠️ اہم:</strong> اردو "میں رہتا ہوں" کے برعکس، اطالوی شہروں کے لیے <strong>A</strong> استعمال کرتا ہے!</p>
+                                </div>
+
+                                <div class="rule-box" style="text-align: right;">
+                                    <strong>💡 مکمل مثال:</strong><br>
+                                    "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                    (ہیلو! میرا نام لوکا ہے، میں روم سے ہوں اور میں میلان میں رہتا ہوں۔)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ਪੰਜਾਬੀ (Punjabi) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇮🇳</span> <strong>ਪੰਜਾਬੀ</strong> - ਇਤਾਲਵੀ ਪੇਸ਼ਕਾਰੀ ਕਿਰਿਆਵਾਂ</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>ਤਿੰਨ ਪੇਸ਼ਕਾਰੀ ਕਿਰਿਆਵਾਂ</h4>
+                            <p>ਇਤਾਲਵੀ ਵਿੱਚ, ਆਪਣੇ ਆਪ ਨੂੰ ਪੇਸ਼ ਕਰਨ ਲਈ ਤਿੰਨ ਖਾਸ ਕਿਰਿਆਵਾਂ ਵਰਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ, ਹਰ ਇੱਕ ਦੀ ਇੱਕ ਵਿਸ਼ੇਸ਼ ਕਾਰਜ ਹੈ:</p>
+
+                            <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                                <strong>1. CHIAMARSI (ਪ੍ਰਤੀਵਾਚੀ ਕਿਰਿਆ) - ਨਾਂ ਦੱਸਣ ਲਈ</strong>
+                                <p>ਇਹ ਇੱਕ <strong>ਪ੍ਰਤੀਵਾਚੀ ਕਿਰਿਆ</strong> ਹੈ, ਜਿਸ ਲਈ ਪ੍ਰਤੀਵਾਚੀ ਸਰਵਨਾਮ (mi, ti, si...) ਚਾਹੀਦਾ ਹੈ।</p>
+                                <table class="verb-table">
+                                    <tr><th>ਵਿਅਕਤੀ</th><th>ਰੂਪ</th><th>ਉਦਾਹਰਨ</th></tr>
+                                    <tr><td>ਮੈਂ</td><td class="verb-display chiamarsi">mi chiamo</td><td>ਮੇਰਾ ਨਾਮ ਮਾਰਕੋ ਹੈ</td></tr>
+                                    <tr><td>ਤੂੰ</td><td class="verb-display chiamarsi">ti chiami</td><td>ਤੇਰਾ ਨਾਮ ਅੰਨਾ ਹੈ?</td></tr>
+                                    <tr><td>ਉਹ</td><td class="verb-display chiamarsi">si chiama</td><td>ਉਸਦਾ ਨਾਮ ਲੂਈਜੀ ਹੈ</td></tr>
+                                    <tr><td>ਅਸੀਂ</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>ਸਾਡੇ ਨਾਮ... ਹਨ</td></tr>
+                                    <tr><td>ਤੁਸੀਂ</td><td class="verb-display chiamarsi">vi chiamate</td><td>ਤੁਹਾਡੇ ਨਾਮ... ਹਨ</td></tr>
+                                    <tr><td>ਉਹ (ਜਮਾ)</td><td class="verb-display chiamarsi">si chiamano</td><td>ਉਹਨਾਂ ਦੇ ਨਾਮ... ਹਨ</td></tr>
+                                </table>
+                                <p><strong>⚠️ ਆਮ ਗਲਤੀ:</strong> "Chiamo Marco" ਨਾ ਕਹੋ - ਸਰਵਨਾਮ ਜ਼ਰੂਰੀ ਹੈ: "<strong>Mi chiamo</strong> Marco"!</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--venire);">
+                                <strong>2. VENIRE DA (ਅਨਿਯਮਿਤ ਕਿਰਿਆ) - ਮੂਲ ਦੱਸਣ ਲਈ</strong>
+                                <p>ਇਹ ਦੱਸਣ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ ਕਿ ਤੁਸੀਂ ਕਿੱਥੋਂ ਹੋ। ਹਮੇਸ਼ਾ <strong>DA</strong> (ਤੋਂ) ਅਵਿਆਯ ਚਾਹੀਦਾ ਹੈ।</p>
+                                <table class="verb-table">
+                                    <tr><th>ਵਿਅਕਤੀ</th><th>ਰੂਪ</th><th>ਉਦਾਹਰਨ</th></tr>
+                                    <tr><td>ਮੈਂ</td><td class="verb-display venire">vengo da</td><td>ਮੈਂ ਰੋਮ ਤੋਂ ਹਾਂ</td></tr>
+                                    <tr><td>ਤੂੰ</td><td class="verb-display venire">vieni da</td><td>ਤੂੰ ਮਿਲਾਨ ਤੋਂ ਹੈਂ?</td></tr>
+                                    <tr><td>ਉਹ</td><td class="verb-display venire">viene da</td><td>ਉਹ ਨੇਪਲਜ਼ ਤੋਂ ਹੈ</td></tr>
+                                    <tr><td>ਅਸੀਂ</td><td class="verb-display venire">veniamo da</td><td>ਅਸੀਂ ਟੋਰੀਨੋ ਤੋਂ ਹਾਂ</td></tr>
+                                    <tr><td>ਤੁਸੀਂ</td><td class="verb-display venire">venite da</td><td>ਤੁਸੀਂ ਪਾਲਰਮੋ ਤੋਂ ਹੋ?</td></tr>
+                                    <tr><td>ਉਹ (ਜਮਾ)</td><td class="verb-display venire">vengono da</td><td>ਉਹ ਫਲੋਰੈਂਸ ਤੋਂ ਹਨ</td></tr>
+                                </table>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--abitare);">
+                                <strong>3. ABITARE A (ਨਿਯਮਿਤ ਕਿਰਿਆ) - ਰਿਹਾਇਸ਼ ਦੱਸਣ ਲਈ</strong>
+                                <p>ਇਹ ਦੱਸਣ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ ਕਿ ਤੁਸੀਂ ਕਿੱਥੇ ਰਹਿੰਦੇ ਹੋ। ਸ਼ਹਿਰਾਂ ਲਈ <strong>A</strong> ਅਵਿਆਯ ਚਾਹੀਦਾ ਹੈ।</p>
+                                <table class="verb-table">
+                                    <tr><th>ਵਿਅਕਤੀ</th><th>ਰੂਪ</th><th>ਉਦਾਹਰਨ</th></tr>
+                                    <tr><td>ਮੈਂ</td><td class="verb-display abitare">abito a</td><td>ਮੈਂ ਬੋਲੋਗਨਾ ਵਿੱਚ ਰਹਿੰਦਾ ਹਾਂ</td></tr>
+                                    <tr><td>ਤੂੰ</td><td class="verb-display abitare">abiti a</td><td>ਤੂੰ ਜੇਨੋਵਾ ਵਿੱਚ ਰਹਿੰਦਾ ਹੈਂ?</td></tr>
+                                    <tr><td>ਉਹ</td><td class="verb-display abitare">abita a</td><td>ਉਹ ਵੈਨਿਸ ਵਿੱਚ ਰਹਿੰਦਾ ਹੈ</td></tr>
+                                    <tr><td>ਅਸੀਂ</td><td class="verb-display abitare">abitiamo a</td><td>ਅਸੀਂ ਵੇਰੋਨਾ ਵਿੱਚ ਰਹਿੰਦੇ ਹਾਂ</td></tr>
+                                    <tr><td>ਤੁਸੀਂ</td><td class="verb-display abitare">abitate a</td><td>ਤੁਸੀਂ ਪਾਡੋਵਾ ਵਿੱਚ ਰਹਿੰਦੇ ਹੋ?</td></tr>
+                                    <tr><td>ਉਹ (ਜਮਾ)</td><td class="verb-display abitare">abitano a</td><td>ਉਹ ਟ੍ਰਾਏਸਟ ਵਿੱਚ ਰਹਿੰਦੇ ਹਨ</td></tr>
+                                </table>
+                                <p><strong>⚠️ ਮਹੱਤਵਪੂਰਨ:</strong> ਪੰਜਾਬੀ "ਵਿੱਚ ਰਹਿੰਦਾ ਹਾਂ" ਦੇ ਉਲਟ, ਇਤਾਲਵੀ ਸ਼ਹਿਰਾਂ ਲਈ <strong>A</strong> ਵਰਤਦਾ ਹੈ!</p>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>💡 ਪੂਰਨ ਉਦਾਹਰਨ:</strong><br>
+                                "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                (ਹੈਲੋ! ਮੇਰਾ ਨਾਮ ਲੂਕਾ ਹੈ, ਮੈਂ ਰੋਮ ਤੋਂ ਹਾਂ ਅਤੇ ਮੈਂ ਮਿਲਾਨ ਵਿੱਚ ਰਹਿੰਦਾ ਹਾਂ।)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- বাংলা (Bangla/Bengali) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇧🇩</span> <strong>বাংলা</strong> - ইতালীয় পরিচয় ক্রিয়াগুলো</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>তিনটি পরিচয় ক্রিয়া</h4>
+                            <p>ইতালীয় ভাষায়, নিজেকে পরিচয় করাতে তিনটি নির্দিষ্ট ক্রিয়া ব্যবহৃত হয়, প্রত্যেকের একটি ভিন্ন কাজ রয়েছে:</p>
+
+                            <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                                <strong>1. CHIAMARSI (প্রতিবর্তী ক্রিয়া) - নাম বলার জন্য</strong>
+                                <p>এটি একটি <strong>প্রতিবর্তী ক্রিয়া</strong>, যার জন্য একটি প্রতিবর্তী সর্বনাম (mi, ti, si...) প্রয়োজন।</p>
+                                <table class="verb-table">
+                                    <tr><th>ব্যক্তি</th><th>রূপ</th><th>উদাহরণ</th></tr>
+                                    <tr><td>আমি</td><td class="verb-display chiamarsi">mi chiamo</td><td>আমার নাম মার্কো</td></tr>
+                                    <tr><td>তুমি</td><td class="verb-display chiamarsi">ti chiami</td><td>তোমার নাম আন্না?</td></tr>
+                                    <tr><td>সে</td><td class="verb-display chiamarsi">si chiama</td><td>তার নাম লুইজি</td></tr>
+                                    <tr><td>আমরা</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>আমাদের নাম...</td></tr>
+                                    <tr><td>তোমরা</td><td class="verb-display chiamarsi">vi chiamate</td><td>তোমাদের নাম...</td></tr>
+                                    <tr><td>তারা</td><td class="verb-display chiamarsi">si chiamano</td><td>তাদের নাম...</td></tr>
+                                </table>
+                                <p><strong>⚠️ সাধারণ ভুল:</strong> "Chiamo Marco" বলবেন না - সর্বনাম আবশ্যক: "<strong>Mi chiamo</strong> Marco"!</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--venire);">
+                                <strong>2. VENIRE DA (অনিয়মিত ক্রিয়া) - উৎপত্তি জানানোর জন্য</strong>
+                                <p>এটি ব্যবহৃত হয় আপনি কোথা থেকে এসেছেন তা বলতে। সর্বদা <strong>DA</strong> (থেকে) অব্যয় প্রয়োজন।</p>
+                                <table class="verb-table">
+                                    <tr><th>ব্যক্তি</th><th>রূপ</th><th>উদাহরণ</th></tr>
+                                    <tr><td>আমি</td><td class="verb-display venire">vengo da</td><td>আমি রোম থেকে এসেছি</td></tr>
+                                    <tr><td>তুমি</td><td class="verb-display venire">vieni da</td><td>তুমি মিলান থেকে এসেছো?</td></tr>
+                                    <tr><td>সে</td><td class="verb-display venire">viene da</td><td>সে নেপলস থেকে এসেছে</td></tr>
+                                    <tr><td>আমরা</td><td class="verb-display venire">veniamo da</td><td>আমরা তুরিন থেকে এসেছি</td></tr>
+                                    <tr><td>তোমরা</td><td class="verb-display venire">venite da</td><td>তোমরা পালেরমো থেকে এসেছো?</td></tr>
+                                    <tr><td>তারা</td><td class="verb-display venire">vengono da</td><td>তারা ফ্লোরেন্স থেকে এসেছে</td></tr>
+                                </table>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--abitare);">
+                                <strong>3. ABITARE A (নিয়মিত ক্রিয়া) - বাসস্থান জানানোর জন্য</strong>
+                                <p>এটি ব্যবহৃত হয় আপনি কোথায় থাকেন তা বলতে। শহরের জন্য <strong>A</strong> অব্যয় প্রয়োজন।</p>
+                                <table class="verb-table">
+                                    <tr><th>ব্যক্তি</th><th>রূপ</th><th>উদাহরণ</th></tr>
+                                    <tr><td>আমি</td><td class="verb-display abitare">abito a</td><td>আমি বোলোনিয়ায় থাকি</td></tr>
+                                    <tr><td>তুমি</td><td class="verb-display abitare">abiti a</td><td>তুমি জেনোয়ায় থাকো?</td></tr>
+                                    <tr><td>সে</td><td class="verb-display abitare">abita a</td><td>সে ভেনিসে থাকে</td></tr>
+                                    <tr><td>আমরা</td><td class="verb-display abitare">abitiamo a</td><td>আমরা ভেরোনায় থাকি</td></tr>
+                                    <tr><td>তোমরা</td><td class="verb-display abitare">abitate a</td><td>তোমরা পাডোয়ায় থাকো?</td></tr>
+                                    <tr><td>তারা</td><td class="verb-display abitare">abitano a</td><td>তারা ট্রাইস্টে থাকে</td></tr>
+                                </table>
+                                <p><strong>⚠️ গুরুত্বপূর্ণ:</strong> বাংলা "এ থাকি" এর বিপরীতে, ইতালীয় শহরের জন্য <strong>A</strong> ব্যবহার করে!</p>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>💡 সম্পূর্ণ উদাহরণ:</strong><br>
+                                "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                (হ্যালো! আমার নাম লুকা, আমি রোম থেকে এসেছি এবং আমি মিলানে থাকি।)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- हिंदी (Hindi) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇮🇳</span> <strong>हिंदी</strong> - इतालवी परिचय क्रियाएँ</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>तीन परिचय क्रियाएँ</h4>
+                            <p>इतालवी में, अपना परिचय देने के लिए तीन विशिष्ट क्रियाएँ उपयोग की जाती हैं, प्रत्येक की एक अलग भूमिका है:</p>
+
+                            <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                                <strong>1. CHIAMARSI (प्रतिवर्ती क्रिया) - नाम बताने के लिए</strong>
+                                <p>यह एक <strong>प्रतिवर्ती क्रिया</strong> है, जिसके लिए एक प्रतिवर्ती सर्वनाम (mi, ti, si...) आवश्यक है।</p>
+                                <table class="verb-table">
+                                    <tr><th>व्यक्ति</th><th>रूप</th><th>उदाहरण</th></tr>
+                                    <tr><td>मैं</td><td class="verb-display chiamarsi">mi chiamo</td><td>मेरा नाम मार्को है</td></tr>
+                                    <tr><td>तुम</td><td class="verb-display chiamarsi">ti chiami</td><td>क्या तुम्हारा नाम अन्ना है?</td></tr>
+                                    <tr><td>वह</td><td class="verb-display chiamarsi">si chiama</td><td>उसका नाम लुइगी है</td></tr>
+                                    <tr><td>हम</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>हमारे नाम... हैं</td></tr>
+                                    <tr><td>आप (बहुवचन)</td><td class="verb-display chiamarsi">vi chiamate</td><td>आपके नाम... हैं</td></tr>
+                                    <tr><td>वे</td><td class="verb-display chiamarsi">si chiamano</td><td>उनके नाम... हैं</td></tr>
+                                </table>
+                                <p><strong>⚠️ सामान्य गलती:</strong> "Chiamo Marco" मत कहें - सर्वनाम आवश्यक है: "<strong>Mi chiamo</strong> Marco"!</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--venire);">
+                                <strong>2. VENIRE DA (अनियमित क्रिया) - मूल बताने के लिए</strong>
+                                <p>यह बताने के लिए प्रयोग किया जाता है कि आप कहाँ से हैं। हमेशा <strong>DA</strong> (से) अव्यय आवश्यक है।</p>
+                                <table class="verb-table">
+                                    <tr><th>व्यक्ति</th><th>रूप</th><th>उदाहरण</th></tr>
+                                    <tr><td>मैं</td><td class="verb-display venire">vengo da</td><td>मैं रोम से हूँ</td></tr>
+                                    <tr><td>तुम</td><td class="verb-display venire">vieni da</td><td>क्या तुम मिलान से हो?</td></tr>
+                                    <tr><td>वह</td><td class="verb-display venire">viene da</td><td>वह नेपल्स से है</td></tr>
+                                    <tr><td>हम</td><td class="verb-display venire">veniamo da</td><td>हम ट्यूरिन से हैं</td></tr>
+                                    <tr><td>आप (बहुवचन)</td><td class="verb-display venire">venite da</td><td>क्या आप पालेर्मो से हैं?</td></tr>
+                                    <tr><td>वे</td><td class="verb-display venire">vengono da</td><td>वे फ्लोरेंस से हैं</td></tr>
+                                </table>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--abitare);">
+                                <strong>3. ABITARE A (नियमित क्रिया) - निवास बताने के लिए</strong>
+                                <p>यह बताने के लिए प्रयोग किया जाता है कि आप कहाँ रहते हैं। शहरों के लिए <strong>A</strong> अव्यय आवश्यक है।</p>
+                                <table class="verb-table">
+                                    <tr><th>व्यक्ति</th><th>रूप</th><th>उदाहरण</th></tr>
+                                    <tr><td>मैं</td><td class="verb-display abitare">abito a</td><td>मैं बोलोग्ना में रहता हूँ</td></tr>
+                                    <tr><td>तुम</td><td class="verb-display abitare">abiti a</td><td>क्या तुम जेनोवा में रहते हो?</td></tr>
+                                    <tr><td>वह</td><td class="verb-display abitare">abita a</td><td>वह वेनिस में रहता है</td></tr>
+                                    <tr><td>हम</td><td class="verb-display abitare">abitiamo a</td><td>हम वेरोना में रहते हैं</td></tr>
+                                    <tr><td>आप (बहुवचन)</td><td class="verb-display abitare">abitate a</td><td>क्या आप पडुआ में रहते हैं?</td></tr>
+                                    <tr><td>वे</td><td class="verb-display abitare">abitano a</td><td>वे ट्रिएस्टे में रहते हैं</td></tr>
+                                </table>
+                                <p><strong>⚠️ महत्वपूर्ण:</strong> हिंदी "में रहता हूँ" के विपरीत, इतालवी शहरों के लिए <strong>A</strong> का प्रयोग करता है!</p>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>💡 पूर्ण उदाहरण:</strong><br>
+                                "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                (नमस्ते! मेरा नाम लूका है, मैं रोम से हूँ और मैं मिलान में रहता हूँ।)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 中文 (Chinese) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇨🇳</span> <strong>中文</strong> - 意大利语自我介绍动词</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>三个自我介绍动词</h4>
+                            <p>在意大利语中，自我介绍需要使用三个特定的动词，每个动词都有不同的功能：</p>
+
+                            <div class="instruction-box" style="border-left-color: var(--chiamarsi);">
+                                <strong>1. CHIAMARSI (自反动词) - 用于说名字</strong>
+                                <p>这是一个<strong>自反动词</strong>，需要在变位动词前使用自反代词。</p>
+                                <table class="verb-table">
+                                    <tr><th>人称</th><th>形式</th><th>例句</th></tr>
+                                    <tr><td>我</td><td class="verb-display chiamarsi">mi chiamo</td><td>我叫马可</td></tr>
+                                    <tr><td>你</td><td class="verb-display chiamarsi">ti chiami</td><td>你叫安娜吗？</td></tr>
+                                    <tr><td>他/她</td><td class="verb-display chiamarsi">si chiama</td><td>他叫路易吉</td></tr>
+                                    <tr><td>我们</td><td class="verb-display chiamarsi">ci chiamiamo</td><td>我们叫...</td></tr>
+                                    <tr><td>你们</td><td class="verb-display chiamarsi">vi chiamate</td><td>你们叫...</td></tr>
+                                    <tr><td>他们</td><td class="verb-display chiamarsi">si chiamano</td><td>他们叫...</td></tr>
+                                </table>
+                                <p><strong>⚠️ 常见错误：</strong>不要说 "Chiamo Marco" - 必须使用自反代词: "<strong>Mi chiamo</strong> Marco"!</p>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--venire);">
+                                <strong>2. VENIRE DA (不规则动词) - 用于表示来自哪里</strong>
+                                <p>用于说你来自哪里。总是需要介词 <strong>DA</strong> (从/来自)。</p>
+                                <table class="verb-table">
+                                    <tr><th>人称</th><th>形式</th><th>例句</th></tr>
+                                    <tr><td>我</td><td class="verb-display venire">vengo da</td><td>我从罗马来</td></tr>
+                                    <tr><td>你</td><td class="verb-display venire">vieni da</td><td>你从米兰来吗？</td></tr>
+                                    <tr><td>他/她</td><td class="verb-display venire">viene da</td><td>他从那不勒斯来</td></tr>
+                                    <tr><td>我们</td><td class="verb-display venire">veniamo da</td><td>我们从都灵来</td></tr>
+                                    <tr><td>你们</td><td class="verb-display venire">venite da</td><td>你们从巴勒莫来吗？</td></tr>
+                                    <tr><td>他们</td><td class="verb-display venire">vengono da</td><td>他们从佛罗伦萨来</td></tr>
+                                </table>
+                            </div>
+
+                            <div class="instruction-box" style="border-left-color: var(--abitare);">
+                                <strong>3. ABITARE A (规则动词) - 用于表示住在哪里</strong>
+                                <p>用于说你住在哪里。城市前需要介词 <strong>A</strong>。</p>
+                                <table class="verb-table">
+                                    <tr><th>人称</th><th>形式</th><th>例句</th></tr>
+                                    <tr><td>我</td><td class="verb-display abitare">abito a</td><td>我住在博洛尼亚</td></tr>
+                                    <tr><td>你</td><td class="verb-display abitare">abiti a</td><td>你住在热那亚吗？</td></tr>
+                                    <tr><td>他/她</td><td class="verb-display abitare">abita a</td><td>他住在威尼斯</td></tr>
+                                    <tr><td>我们</td><td class="verb-display abitare">abitiamo a</td><td>我们住在维罗纳</td></tr>
+                                    <tr><td>你们</td><td class="verb-display abitare">abitate a</td><td>你们住在帕多瓦吗？</td></tr>
+                                    <tr><td>他们</td><td class="verb-display abitare">abitano a</td><td>他们住在的里雅斯特</td></tr>
+                                </table>
+                                <p><strong>⚠️ 重要：</strong>与中文"住在..."不同，意大利语在城市前使用 <strong>A</strong>!</p>
+                            </div>
+
+                            <div class="rule-box">
+                                <strong>💡 完整示例：</strong><br>
+                                "Ciao! <strong>Mi chiamo</strong> Luca, <strong>vengo da</strong> Roma e <strong>abito a</strong> Milano."<br>
+                                (你好！我叫卢卡，我来自罗马，我住在米兰。)
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -826,7 +1713,8 @@
 
     <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
         <div style="max-width: 1200px; margin: 0 auto;">
-            <p>© 2024 Corso di Italiano A1 - Verbi di Presentazione (50 Esercizi)</p>
+            <p>© 2024 Corso di Italiano A1 - Verbi di Presentazione (50 Esercizi Multilingue)</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Teoria disponibile in: Italiano, English, Français, Español, Português, العربية, Wolof, Bambara, Shqip, اردو, ਪੰਜਾਬੀ, বাংলা, हिंदी, 中文</p>
         </div>
     </footer>
 
@@ -1267,6 +2155,14 @@
             if(id === 'exercises' && currentExercise === 0) {
                 loadExercise();
             }
+        }
+
+        // Toggle language sections
+        function toggleLang(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            content.classList.toggle('active');
+            icon.classList.toggle('rotated');
         }
 
         function loadExercise() {
