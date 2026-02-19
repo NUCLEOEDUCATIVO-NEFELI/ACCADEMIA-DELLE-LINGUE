@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C2 - Linguaggio Politico-Istituzionale</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1a365d;
+            --secondary: #4a5568;
+            --accent: #c53030;
+            --c2-color: #2b6cb0;
+            --bg-light: #f7fafc;
+            --text-dark: #2d3748;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf9f6;
+            --light: #f8f9fa;
+            --dark: #1a202c;
+            --border: #e2e8f0;
+            --political: #744210;
+            --institutional: #2c5282;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c2-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c2-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #ebf8ff;
+            border-left: 4px solid var(--institutional);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fffaf0;
+            border: 1px solid #ed8936;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(43, 108, 176, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .political-term { color: var(--political); font-weight: bold; }
+        .institutional-term { color: var(--institutional); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f0f4f8;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--c2-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--c2-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c2-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #2c5282;
+        }
+        .btn-check { 
+            background: var(--c2-color); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #2c5282;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c2-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #63b3ed;
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #2b6cb0 0%, #1a365d 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--c2-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--c2-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--c2-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .political-context {
+            background: #fffaf0;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--political);
+            font-style: italic;
+        }
+        .institutional-box {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C2 - Linguaggio Politico-Istituzionale</h1>
+            <p>Comunicazione governativa, lessico costituzionale e strategie argomentative della governance</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C2</a>
+            <span>›</span>
+            <strong>Linguaggio Politico-Istituzionale</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🏛️ Linguaggio Politico-Istituzionale</h1>
+            <p class="page-subtitle">Retorica parlamentare, linguaggio giuridico-amministrativo e comunicazione della pubblica amministrazione</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📖 Teoria</button>
+            <button class="nav-tab" onclick="showSection('terminology', this)">Terminologia</button>
+            <button class="nav-tab" onclick="showSection('syntax', this)">Sintassi</button>
+            <button class="nav-tab" onclick="showSection('genres', this)">Generi</button>
+            <button class="nav-tab" onclick="showSection('rhetoric', this)">Retorica Politica</button>
+            <button class="nav-tab" onclick="showSection('institutional', this)">Istituzionale</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">⚖️</div>
+                    <div class="avatar-name">Prof. Bianchi</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo C2! 🏛️</h3>
+                    <p>Oggi esploriamo il <strong>linguaggio politico-istituzionale</strong>, caratterizzato da formalità procedurale, impersonalità amministrativa e strategie persuasive nella sfera pubblica.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="institutional-term">Si è proceduto all'adozione</span> del <span class="political-term">provvedimento</span> in <span class="institutional-term">via d'urgenza</span>, <span class="institutional-term">fatti salvi</span> i <span class="political-term">diritti acquisiti</span> e nel <span class="institutional-term">rispetto del principio</span> di <span class="political-term">sussidiarietà</span>".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Caratteristiche del Linguaggio Politico-Istituzionale</div>
+                <div class="card-body">
+                    <p>Il <strong>linguaggio politico-istituzionale</strong> è un registro specialistico finalizzato alla governance, alla legittimazione del potere e alla gestione amministrativa dei beni comuni. [^1^]</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Caratteristiche distintive:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Impersonalità:</strong> Uso della terza persona, si passivante, formule rituali ("Si comunica che...")</li>
+                            <li><strong>Formalità procedurale:</strong> Riferimento a norme, articoli, commi, procedure burocratiche</li>
+                            <li><strong>Eufemizzazione:</strong> Attenuazione lessicale (adeguamento = taglio, riorganizzazione = licenziamento)</li>
+                            <li><strong>Polisemia strategica:</strong> Termini ambigui per consenso differenziato (sviluppo sostenibile, sicurezza)</li>
+                            <li><strong>Sintassi nominale:</strong> Preferenza per sostantivi astratti e gerundi amministrativi</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Figure retoriche politiche:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Enumerazione:</strong> Cumulo di voci per ampiezza (salute, lavoro, famiglia, futuro)</li>
+                            <li><strong>Antitesi:</strong> Contrasto noi/loro, prima/dopo, vecchio/nuovo</li>
+                            <li><strong>Climax:</strong> Progressione verso il culmine (dal locale al globale)</li>
+                            <li><strong>Perifrasi istituzionali:</strong> "Organo di vertice" = presidente, "Massimo organo deliberativo" = parlamento</li>
+                            <li><strong>Litote:</strong> "Non è privo di significato" = è molto significativo</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Distinzione tra <em>potere</em> (fattuale) e <em>potestà</em> (legittima); <em>governo</em> (esecutivo) e <em>Governo</em> (organo costituzionale); <em>decreto</em> (atto normativo) e <em>decretazione</em> (azione).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TERMINOLOGIA -->
+        <section id="terminology" class="section">
+            <div class="card">
+                <div class="card-header">Terminologia Costituzionale e Istituzionale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Il lessico politico-istituzionale si articola in diritto costituzionale, diritto amministrativo e scienza politica.</strong> [^2^]
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Termine</th><th>Campo</th><th>Significato</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="political-term">Sovranità</td>
+                                <td>Costituzionale</td>
+                                <td>Potere supremo non derivante da altro potere</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Legittimità</td>
+                                <td>Politico-giuridico</td>
+                                <td>Conformità a norme giuridiche e consenso popolare</td>
+                            </tr>
+                            <tr>
+                                <td class="political-term">Sussidiarietà</td>
+                                <td>UE/Costituzionale</td>
+                                <td>Competenza al livello più vicino ai cittadini</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Procedimento</td>
+                                <td>Amministrativo</td>
+                                <td>Iter amministrativo regolato da norme</td>
+                            </tr>
+                            <tr>
+                                <td class="political-term">Governance</td>
+                                <td>Scienza politica</td>
+                                <td>Modo di governare che include stakeholder privati</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Atto amministrativo</td>
+                                <td>Diritto</td>
+                                <td>Manifestazione di volontà della PA</td>
+                            </tr>
+                            <tr>
+                                <td class="political-term">Mandato</td>
+                                <td>Elettorale</td>
+                                <td>Investitura popolare con poteri rappresentativi</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Decreto legge</td>
+                                <td>Normativo</td>
+                                <td>Atto del Governo con forza di legge (urgenza)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="institutional-box">
+                        <strong>Formule burocratiche standard:</strong><br>
+                        <em>Vista la legge...</em> | <em>Visto il decreto...</em> | <em>Considerato che...</em><br>
+                        <em>Preso atto che...</em> | <em>Fatti salvi...</em> | <em>Salvo quanto diverso...</em><br>
+                        <em>In ottemperanza a...</em> | <em>Ai sensi dell'art...</em> | <em>Come da oggetto...</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE SINTASSI -->
+        <section id="syntax" class="section">
+            <div class="card">
+                <div class="card-header">Strutture Sintattiche Istituzionali</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La sintassi politico-istituzionale privilegia l'oggettività normativa e la complessità subordinativa.</strong> [^3^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Costrutti amministrativi</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Struttura</th><th>Esempio</th><th>Funzione</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="institutional-term">Si passivante</td>
+                                <td>Si comunica che...</td>
+                                <td>Impersonalità, astrazione dall'agente</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Congiuntivo normativo</td>
+                                <td>Qualora sussistano...</td>
+                                <td>Condizione prefigurata dalla norma</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Infinito giuridico</td>
+                                <td>Dovere di..., Diritto di...</td>
+                                <td>Oggettivazione della posizione giuridica</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Participio assoluto</td>
+                                <td>Preso atto che..., Vista la legge...</td>
+                                <td>Premessa argomentativa formale</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Condizionale diplomatico</td>
+                                <td>Si sarebbe propensi a...</td>
+                                <td>Attenuazione, apertura negoziale</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Verbi e locuzioni istituzionali</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Verbo/Locuzione</th><th>Uso</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="institutional-term">Disporre</td>
+                                <td>Comando normativo</td>
+                                <td>Si dispone quanto segue...</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Provvedere</td>
+                                <td>Adozione di misure</td>
+                                <td>Provvedere all'adozione...</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Conferire</td>
+                                <td>Attribuzione di incarichi</td>
+                                <td>Conferire la delega...</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Stare a</td>
+                                <td>Competenza</td>
+                                <td>Sta al Presidente...</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Rimettere</td>
+                                <td>Delega/sottomissione</td>
+                                <td>Rimettere alla decisione...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Evitare:</strong> "Decidiamo di..." → "Si <em>dispone</em>..."; "Dobbiamo fare..." → "Si <em>provvede</em> a..."<br>
+                        Evitare: "Vedo che..." → "Si <em>rileva</em> che...", "Dalle risultanze emerge che...".
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE GENERI -->
+        <section id="genres" class="section">
+            <div class="card">
+                <div class="card-header">Generi della Comunicazione Politico-Istituzionale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Diversi tipi di testi richiedono registri e strutture specifiche nella sfera pubblica.</strong> [^4^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Genere</th><th>Destinatario</th><th>Caratteristiche</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="political-term">Disegno di legge</td>
+                                <td>Parlamento</td>
+                                <td>Tecnico, articolato, ratio delle norme</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Determinazione dirigenziale</td>
+                                <td>PA/Uffici</td>
+                                <td>Impersonale, motivata, vincolante</td>
+                            </tr>
+                            <tr>
+                                <td class="political-term">Interrogazione parlamentare</td>
+                                <td>Governo</td>
+                                <td>Interlocutiva, critica, richiesta di chiarimenti</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Circolare esplicativa</td>
+                                <td>Funzionari</td>
+                                <td>Esegetica, interpretativa, non vincolante</td>
+                            </tr>
+                            <tr>
+                                <td class="political-term">Dichiarazione di voto</td>
+                                <td>Assemblea/Opinione</td>
+                                <td>Argomentata, posizionale, mediatica</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Ordinanza sindacale</td>
+                                <td>Cittadini</td>
+                                <td>Imperativa, contingibile, esecutiva</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="political-context">
+                        <strong>Esempio di atto amministrativo:</strong><br>
+                        "VISTA la legge n. 241/1990; VISTO il regolamento interno; CONSIDERATO che sussistono i presupposti per l'adozione del provvedimento in esame; RITENUTO necessario garantire la trasparenza dell'azione amministrativa; DISPOSTO quanto segue: Art. 1 (Oggetto) Il presente provvedimento disciplina..."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE RETORICA POLITICA -->
+        <section id="rhetoric" class="section">
+            <div class="card">
+                <div class="card-header">Retorica e Strategie di Persuasione Politica</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La comunicazione politica impiega strategie retoriche specifiche per costruire consenso e legittimare decisioni.</strong> [^5^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Figure e strategie</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Strategia</th><th>Definizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="political-term">Populismo</td>
+                                <td>Appello al "popolo" vs élite</td>
+                                <td>"La volontà dei cittadini contro la casta"</td>
+                            </tr>
+                            <tr>
+                                <td class="political-term">Tecnocrazia</td>
+                                <td>Legittimazione per competenza</td>
+                                <td>"I dati dimostrano inevitabilmente..."</td>
+                            </tr>
+                            <tr>
+                                <td class="political-term">Urgency framing</td>
+                                <td>Costruzione dell'emergenza</td>
+                                <td>"Non c'è tempo da perdere..."</td>
+                            </tr>
+                            <tr>
+                                <td class="political-term">Fear appeal</td>
+                                <td>Appello alla minaccia</td>
+                                <td>"Il rischio di collasso è imminente"</td>
+                            </tr>
+                            <tr>
+                                <td class="political-term">Bandwagon</td>
+                                <td>Appello alla maggioranza</td>
+                                <td>"Tutti i paesi civili fanno così"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="transformation-box">
+                        <strong>Metafore concettuali politiche:</strong><br><br>
+                        <em>Stato come azienda:</em> efficientamento, spending review, tagli alla spesa<br>
+                        <em>Società come organismo:</em> corpo malato, metastasi, cura, terapia d'urto<br>
+                        <em>Politica come guerra:</em> battaglia, campo, trincea, vittoria, resa dei conti<br>
+                        <em>Nazione come famiglia:</em> casa comune, padri costituenti, debiti dei figli
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Attenzione:</strong> L'eufemizzazione politica trasforma "aumento tasse" in "contributo di solidarietà", "tagli" in "razionalizzazione", "guerra" in "missione di pace".
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ISTITUZIONALE -->
+        <section id="institutional" class="section">
+            <div class="card">
+                <div class="card-header">Comunicazione della Pubblica Amministrazione</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La comunicazione istituzionale segue principi di trasparenza, accessibilità e legalità, ma mantiene tratti di formalità burocratica.</strong> [^6^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Principio</th><th>Applicazione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="institutional-term">Trasparenza</td>
+                                <td>Pubblicazione atti, open data</td>
+                                <td>"Si pubblica in forma integrale..."</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Partecipazione</td>
+                                <td>Consultazione pubblica</td>
+                                <td>"Si invitano i portatori di interesse..."</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Accessibilità</td>
+                                <td>Linguaggio chiaro (Plain language)</td>
+                                <td>Semplificazione amministrativa</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Tracciabilità</td>
+                                <td>Protocollo, registrazione</td>
+                                <td>"Prot. n. 12345 del..."</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Imparzialità</td>
+                                <td>Neutralità decisionale</td>
+                                <td>"Nella forma e nei termini di legge"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Linguaggio giuridico vs amministrativo</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Ambito</th><th>Caratteristiche</th><th>Esempi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="institutional-term">Giuridico</td>
+                                <td>Precisione, sistematicità, latinità</td>
+                                <td>Salvo, fermo restando, ove</td>
+                            </tr>
+                            <tr>
+                                <td class="institutional-term">Amministrativo</td>
+                                <td>Procedimentalità, impersonalità</td>
+                                <td>Si trasmette, si prende atto</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="political-context">
+                        <strong>Esempio di comunicato istituzionale:</strong><br>
+                        "Il Ministero, in considerazione dell'evolversi della situazione epidemiologica e in attuazione delle disposizioni del D.L. n. XX/2024, ha disposto la proroga dei termini di presentazione delle istanze, fermo restando il rispetto dei requisiti previsti dalla normativa vigente."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C2 - Linguaggio Politico-Istituzionale (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Terminologia costituzionale e istituzionale base
+            {
+                id: 1,
+                type: 'choice',
+                question: 'La "sovranità" è il potere __________ non derivante da altro potere.',
+                options: ['supremo', 'locale', 'delegato', 'amministrativo'],
+                correct: 'supremo',
+                explanation: '✅ Corretto! Sovranità = potere assoluto e illimitato (internamente) e indipendente (esternamente)',
+                errorExplanation: '❌ Sovranità indica il potere supremo, assoluto, non subordinato ad altri poteri'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'La "legittimità" implica conformità alle __________ e consenso popolare.',
+                correct: ['norme', 'norme giuridiche', 'leggi'],
+                explanation: '✅ Corretto! Legittimità = conformità al diritto positivo + accettazione sociale (Weber)'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Il principio di "sussidiarietà" assegna le competenze al livello più __________ ai cittadini.',
+                options: ['vicino', 'alto', 'centrale', 'tecnico'],
+                correct: 'vicino',
+                explanation: '✅ Corretto! Sussidiarietà verticale: competenze al livello più basso possibile (art. 118 Cost.)',
+                errorExplanation: '❌ Sussidiarietà = principio per cui ciò che può fare il livello inferiore non deve fare quello superiore'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'La "governance" indica un modo di governare che include anche gli __________ privati.',
+                correct: ['stakeholder', 'attori', 'soggetti'],
+                explanation: '✅ Corretto! Governance = governo condiviso, network pubblico-privato (vs Government = governo istituzionale)'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Un "atto amministrativo" è una manifestazione di __________ della Pubblica Amministrazione.',
+                options: ['volontà', 'forza', 'debito', 'diritto'],
+                correct: 'volontà',
+                explanation: '✅ Corretto! Atto amministrativo = espressione unilaterale di volontà della PA con effetti giuridici',
+                errorExplanation: '❌ Atto amministrativo = manifestazione di volontà della PA rivolta a produrre effetti giuridici'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Il "mandato" è l\'investitura popolare con poteri __________.',
+                correct: ['rappresentativi', 'di rappresentanza'],
+                explanation: '✅ Corretto! Mandato imperativo vietato in Italia (art. 67 Cost.): il deputato rappresenta la Nazione'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Il "decreto legge" è un atto del Governo con forza di legge in caso di __________.',
+                options: ['urgenza', 'routine', 'festività', 'crisi di governo'],
+                correct: 'urgenza',
+                explanation: '✅ Corretto! D.L. (art. 77 Cost.): necessità e urgenza, conversione entro 60 giorni',
+                errorExplanation: '❌ Decreto legge = atto del Presidente del Consiglio su proposta del Governo, necessità e urgenza'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'La "determinazione dirigenziale" è un atto __________ e vincolante della PA.',
+                correct: ['motivata', 'formale'],
+                explanation: '✅ Corretto! Determinazione = atto amministrativo generale o individuale del dirigente'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'L\'"ordinanza" è un atto tipicamente del Sindaco, di natura __________.',
+                options: ['regolamentare', 'legislativa', 'giurisdizionale', 'politica'],
+                correct: 'regolamentare',
+                explanation: '✅ Corretto! Ordinanza = atto regolamentare o contingibile e urgente del sindaco/Ministro/Presidente',
+                errorExplanation: '❌ Ordinanza = atto con cui l\'autorità esecutiva regola l\'esecuzione della legge o fronteggia urgenze'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'La "circolare" ha funzione __________ e interpretativa, ma non è vincolante.',
+                correct: ['esplicativa', 'direttiva'],
+                explanation: '✅ Corretto! Circolare = atto di indirizzo e chiarimento della amministrazione centrale verso gli uffici periferici'
+
+            },
+
+            // ESERCIZI 11-20: Sintassi e formule istituzionali
+            {
+                id: 11,
+                type: 'choice',
+                question: '"Si comunica che..." è un esempio di __________ istituzionale.',
+                options: ['si passivante', 'attivo', 'colloquiale', 'diretto'],
+                correct: 'si passivante',
+                explanation: '✅ Corretto! Si passivante = forma impersonale per astrarre dall\'agente (neutralità burocratica)',
+                errorExplanation: '❌ "Si comunica" = si passivante impersonale, tipico della comunicazione formale PA'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: '"Qualora sussistano..." introduce un __________ normativo ipotetico.',
+                correct: ['congiuntivo', 'periodo ipotetico'],
+                explanation: '✅ Corretto! Congiuntivo burocratico per condizioni previste dalla norma'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: '"Vista la legge..." è un __________ assoluto che introduce la premessa normativa.',
+                options: ['participio', 'gerundio', 'infinito', 'indicativo'],
+                correct: 'participio',
+                explanation: '✅ Corretto! Participio assoluto (visto, considerato, preso atto) = formula preambolare',
+                errorExplanation: '❌ "Vista la legge" = participio passato assoluto, tipico dei preamboli degli atti amministrativi'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: '"Si dispone quanto segue..." esprime un __________ normativo imperativo.',
+                correct: ['comando', 'ordine', 'provvedimento'],
+                explanation: '✅ Corretto! Disporre = verbo imperativo dell\'atto autoritativo (art. 1 comma 1)'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: '"Fatti salvi i diritti acquisiti" è una formula di __________.',
+                options: ['salvaguardia', 'revoca', 'sospensione', 'abolizione'],
+                correct: 'salvaguardia',
+                explanation: '✅ Corretto! "Fatti salvi" = formula di salvaguardia di situazioni giuridiche pregresse',
+                errorExplanation: '❌ "Fatti salvi" = locuzione latina (salvis iuribus) che preserva diritti già acquisiti'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: '"Ai sensi dell\'articolo..." indica la __________ normativa dell\'atto.',
+                correct: ['base', 'fondamento', 'fonte'],
+                explanation: '✅ Corretto! "Ai sensi di" = in forza di, in base a (rinvio normativo)'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: '"In ottemperanza a..." significa in __________ a una norma.',
+                options: ['adempimento', 'contrasto', 'deroga', 'sospensione'],
+                correct: 'adempimento',
+                explanation: '✅ Corretto! Ottemperanza = esecuzione, adempimento di un obbligo giuridico',
+                errorExplanation: '❌ Ottemperanza = adempimento, esecuzione conforme a prescrizioni'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: '"Sta al Presidente..." indica la __________ decisionale.',
+                correct: ['competenza', 'attribuzione'],
+                explanation: '✅ Corretto! "Stare a" = spettare, essere di competenza'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: '"Si sarebbe propensi a..." è un condizionale __________ per attenuare la posizione.',
+                options: ['diplomatico', 'imperativo', 'passato', 'proibitivo'],
+                correct: 'diplomatico',
+                explanation: '✅ Corretto! Condizionale diplomatico = attenuazione, apertura negoziale, non imposizione',
+                errorExplanation: '❌ Il condizionale "sarebbe" attenua, rende la posizione negoziale e non perentoria'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: '"Preso atto che..." esprime una __________ preliminare non contestata.',
+                correct: ['constatazione', 'verifica'],
+                explanation: '✅ Corretto! "Prendere atto" = rilevare, constatare senza opporsi (atto di conoscenza)'
+
+            },
+
+            // ESERCIZI 21-30: Retorica politica e strategie persuasive
+            {
+                id: 21,
+                type: 'choice',
+                question: 'L\'"enumerazione" cumula voci per dare __________ al discorso.',
+                options: ['ampiezza', 'precisione', 'brevità', 'dubbio'],
+                correct: 'ampiezza',
+                explanation: '✅ Corretto! Enumerazione = cumulo di elementi per ampiezza rappresentativa (salute, lavoro, famiglia...)',
+                errorExplanation: '❌ Enumerazione = figura di accumulo per coprire più ambiti e amplificare'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'L\'"antitesi" politica contrappone spesso "noi" e "__________".',
+                correct: ['loro', 'gli altri', 'l\'avversario'],
+                explanation: '✅ Corretto! Antitesi politica = polarizzazione noi/loro, prima/dopo, cambiamento/immobilismo'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'Il "populismo" retorico contrappone il "popolo" alle __________.',
+                options: ['élite', 'masse', 'istituzioni', 'forze armate'],
+                correct: 'élite',
+                explanation: '✅ Corretto! Populismo = discorso che contrappone il popolo virtuoso alle élite corrotte',
+                errorExplanation: '❌ Populismo = logica del noi (popolo) vs loro (casta, élite, establishment)'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'La "tecnocrazia" si legittima attraverso i __________ e l\'evidenza scientifica.',
+                correct: ['dati', 'numeri', 'fatti'],
+                explanation: '✅ Corretto! Tecnocrazia = governo degli esperti, legittimazione per competenza tecnica'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'L\'"urgency framing" costruisce artificialmente una situazione di __________.',
+                options: ['emergenza', 'calma', 'stabilità', 'routine'],
+                correct: 'emergenza',
+                explanation: '✅ Corretto! Urgency framing = costruzione retorica dell\'emergenza per giustificare scelte',
+                errorExplanation: '❌ Urgency framing = strategia comunicativa per creare senso di urgenza e necessità'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Il "fear appeal" è l\'appello alla __________ come strategia persuasiva.',
+                correct: ['paura', 'minaccia', 'paura e minaccia'],
+                explanation: '✅ Corretto! Fear appeal = utilizzo della minaccia per spingere all\'azione (sicurezza, salute, economia)'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'Il "bandwagon" appella alla conformità con la __________.',
+                options: ['maggioranza', 'minoranza', 'élite', 'tradizione'],
+                correct: 'maggioranza',
+                explanation: '✅ Corretto! Bandwagon (salire sul carro) = "tutti lo fanno, anche tu dovresti"',
+                errorExplanation: '❌ Bandwagon effect = tendenza ad aderire a ciò che fa la maggioranza'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'L\'"eufemizzazione" trasforma "tagli" in "__________".',
+                correct: ['razionalizzazione', 'contenimento', 'adeguamento'],
+                explanation: '✅ Corretto! Eufemismo politico = attenuazione lessicale (tagli = ottimizzazione, riorganizzazione)'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'La metafora dello "Stato azienda" usa termini come "efficientamento" e __________.',
+                options: ['spending review', 'crescita', 'sviluppo', 'benessere'],
+                correct: 'spending review',
+                explanation: '✅ Corretto! Metafora managerialistica: spending review, downsizing, benchmarking, best practices',
+                errorExplanation: '❌ Spending review = revisione della spesa, termine managerialista per tagli'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'La metafora della "società organismo" usa termini medici come "metastasi" e __________.',
+                correct: ['cura', 'terapia', 'intervento'],
+                explanation: '✅ Corretto! Metafora organicistica: corpo malato, terapia d\'urto, risanamento, cauterizzazione'
+
+            },
+
+            // ESERCIZI 31-40: Principi e comunicazione PA
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Il principio di "trasparenza" richiede la __________ degli atti amministrativi.',
+                options: ['pubblicazione', 'segretezza', 'distruzione', 'modifica'],
+                correct: 'pubblicazione',
+                explanation: '✅ Corretto! Trasparenza (l. 241/1990, d.lgs. 33/2013) = accesso agli atti, open data, pubblicità',
+                errorExplanation: '❌ Trasparenza = pubblicità, accessibilità, rintracciabilità dell\'azione amministrativa'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'La "partecipazione" richiede la consultazione dei __________ di interesse.',
+                correct: ['portatori', 'stakeholder', 'soggetti'],
+                explanation: '✅ Corretto! Partecipazione = coinvolgimento dei destinatari e stakeholder nelle decisioni'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'L\'"accessibilità" richiede il linguaggio __________ (Plain language).',
+                options: ['chiaro', 'tecnico', 'latino', 'cifrato'],
+                correct: 'chiaro',
+                explanation: '✅ Corretto! Plain language = semplificazione, chiarezza, comprensibilità per il cittadino',
+                errorExplanation: '❌ Accessibilità linguistica = semplificazione amministrativa, linguaggio chiaro'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'La "tracciabilità" si realizza attraverso il __________ e la registrazione.',
+                correct: ['protocollo', 'numero di protocollo'],
+                explanation: '✅ Corretto! Protocollo = registrazione cronologica degli atti in entrata e uscita'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'L\'"imparzialità" richiede __________ nella decisione amministrativa.',
+                options: ['neutralità', 'favore', 'clientelismo', 'corruzione'],
+                correct: 'neutralità',
+                explanation: '✅ Corretto! Imparzialità = assenza di favoritismi, uguaglianza di trattamento',
+                errorExplanation: '❌ Imparzialità = principio per cui la PA deve comportarsi senza favoritismi'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: '"Salvo quanto diverso" è una formula di __________ rispetto a norme speciali.',
+                correct: ['salvezza', 'riserva', 'eccezione'],
+                explanation: '✅ Corretto! Clausola di salvezza = salvaguardia di disposizioni particolari non abrogate'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: '"Fermo restando" indica una __________ di ciò che precede.',
+                options: ['conferma', 'abrogazione', 'modifica', 'sospensione'],
+                correct: 'conferma',
+                explanation: '✅ Corretto! "Fermo restando" = salvo, a prescindere da, confermando quanto precede',
+                errorExplanation: '❌ Fermo restando = locuzione che conferma e mantiene valide disposizioni precedenti'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: '"Ove" è un avverbio __________ che significa "dove" o "nel caso in cui".',
+                correct: ['congiuntivo', 'relativo'],
+                explanation: '✅ Corretto! Ove = dove, nel luogo in cui, se (con valore condizionale)'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: '"Salvo" introduce una __________ alla regola generale.',
+                options: ['eccezione', 'conferma', 'estensione', 'ripetizione'],
+                correct: 'eccezione',
+                explanation: '✅ Corretto! Salvo = eccetto che, fatta eccezione per (clausola eccezionale)',
+                errorExplanation: '❌ Salvo = preposizione che introduce eccezioni e riserve'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Il "diritto di accesso" è il potere di ottenere i __________ della PA.',
+                correct: ['documenti', 'atti', 'informazioni'],
+                explanation: '✅ Corretto! Accesso agli atti (l. 241/1990) = diritto di prendere visione e copia di documenti amministrativi'
+
+            },
+
+            // ESERCIZI 41-50: Generi e concetti avanzati
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Un "disegno di legge" è il testo legislativo presentato al __________.',
+                options: ['Parlamento', 'Governo', 'Presidente', 'Corte'],
+                correct: 'Parlamento',
+                explanation: '✅ Corretto! Disegno di legge (DDL) = proposta di legge in Parlamento (vs decreto del Governo)',
+                errorExplanation: '❌ Disegno di legge = proposta legislativa in Parlamento; Decreto legge = atto del Governo'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'L\'"interrogazione parlamentare" richiede __________ al Governo.',
+                correct: ['chiarimenti', 'risposte', 'informazioni'],
+                explanation: '✅ Corretto! Interrogazione = atto ispettivo per chiedere notizie o spiegazioni al Governo'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'La "dichiarazione di voto" è un atto __________ in assemblea.',
+                options: ['argomentativo', 'segreto', 'scritto', 'giuridico'],
+                correct: 'argomentativo',
+                explanation: '✅ Corretto! Dichiarazione di voto = spiegazione pubblica del proprio voto, posizione politica',
+                errorExplanation: '❌ Dichiarazione di voto = atto orale per motivare il proprio voto in assemblea'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'La "delibera" è un atto collegiale di un __________ amministrativo.',
+                correct: ['organo', 'consiglio', 'organo collegiale'],
+                explanation: '✅ Corretto! Delibera = atto di un organo collegiale (consiglio, giunta, commissione)'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'La "determina" è un atto __________ del dirigente.',
+                options: ['individuale', 'collegiale', 'parlamentare', 'giudiziario'],
+                correct: 'individuale',
+                explanation: '✅ Corretto! Determina = atto del dirigente (unipersonale), vs Delibera (collegiale)',
+                errorExplanation: '❌ Determina = atto del dirigente unipersonale; Delibera = atto di organo collegiale'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Il "regolamento" ha forza __________ rispetto alla legge.',
+                correct: ['subordinata', 'inferiore'],
+                explanation: '✅ Corretto! Regolamento = atto avente forza di legge del Governo (art. 17 Cost.), ma subordinato alla legge'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'La "risoluzione" parlamentare esprime una __________ non vincolante.',
+                options: ['volontà', 'legge', 'sentenza', 'ordine'],
+                correct: 'volontà',
+                explanation: '✅ Corretto! Risoluzione = atto di indirizzo politico, non vincolante per il Governo',
+                errorExplanation: '❌ Risoluzione = atto di indirizzo politico del Parlamento, non vincolante giuridicamente'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'L\'"odg" o __________ è l\'elenco delle materie da trattare in assemblea.',
+                correct: ['ordine del giorno', 'ordine del giorno'],
+                explanation: '✅ Corretto! Ordine del giorno = scaletta delle questioni da discutere e votare'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'L\'"emendamento" è una proposta di __________ a un testo legislativo.',
+                options: ['modifica', 'approvazione', 'reiezione', 'sospensione'],
+                correct: 'modifica',
+                explanation: '✅ Corretto! Emendamento = proposta di modifica, aggiunta o soppressione di parti di un disegno di legge',
+                errorExplanation: '❌ Emendamento = proposta di modifica di un articolo o comma di un progetto di legge'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'La "fiducia" è la __________ politica del Parlamento al Governo.',
+                correct: ['approvazione', 'conferma', 'validazione'],
+                explanation: '✅ Corretto! Fiducia = investitura politica, necessaria per il Governo (art. 94 Cost.). Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il termine politico-istituzionale..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi il linguaggio politico-istituzionale come un alto funzionario!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene la terminologia, ma approfondisci le sfumature giuridiche!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: sovranità vs legittimità, decreto legge vs disegno di legge, delibera vs determina!';
+            } else {
+                message = '📚 Ripassa le tabelle! Concentrati su formule burocratiche, generi degli atti e principi costituzionali!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

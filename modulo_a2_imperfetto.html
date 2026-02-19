@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Imperfetto - 50 Esercizi</title>
+    <title>L'Imperfetto - 100 Esercizi Multilingue</title>
     <style>
         * {
             margin: 0;
@@ -28,6 +28,8 @@
             --are: #2c5282;
             --ere: #702459;
             --ire: #276749;
+            --lang-bg: #e3f2fd;
+            --lang-border: #2196f3;
         }
 
         body {
@@ -92,7 +94,7 @@
         }
 
         .main-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -125,13 +127,13 @@
         }
 
         .nav-tab {
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             background: none;
             border: none;
             border-bottom: 3px solid transparent;
             cursor: pointer;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--secondary);
             transition: all 0.3s;
             position: relative;
@@ -185,6 +187,12 @@
         .card-header.imperfetto {
             border-left-color: var(--imperfetto);
             color: var(--imperfetto);
+        }
+
+        .card-header.lang {
+            border-left-color: var(--lang-border);
+            color: var(--primary);
+            background: var(--lang-bg);
         }
 
         .card-body {
@@ -496,23 +504,106 @@
             font-family: 'Courier New', monospace;
         }
 
+        /* Language section styles */
+        .lang-section {
+            margin-bottom: 2rem;
+            border: 1px solid var(--lang-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .lang-header {
+            background: var(--lang-bg);
+            padding: 0.75rem 1rem;
+            font-weight: bold;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lang-header:hover {
+            background: #bbdefb;
+        }
+
+        .lang-content {
+            padding: 1rem;
+            display: none;
+            background: white;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        .lang-flag {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .urdu-text, .arabic-text, .punjabi-text {
+            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+            line-height: 2;
+        }
+
+        .chinese-text {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        .hindi-text, .bangla-text {
+            font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif;
+        }
+
         @media (max-width: 768px) {
             .nav-tabs { flex-wrap: wrap; }
-            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.85rem; flex: 1 1 33%; }
             .options-grid { grid-template-columns: 1fr; }
             .header h1 { font-size: 1.5rem; }
             .page-title { font-size: 1.5rem; }
             .final-score-value { font-size: 3rem; }
             .fill-blank { width: 180px; }
         }
+
+        .toggle-icon {
+            transition: transform 0.3s;
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .highlight {
+            background: #fff9c4;
+            padding: 0.2rem 0.4rem;
+            font-weight: bold;
+        }
+
+        .verb-ending {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 0 0.2rem;
+        }
+
+        .ending-are { background: #e3f2fd; color: #1565c0; }
+        .ending-ere { background: #f3e5f5; color: #7b1fa2; }
+        .ending-ire { background: #e8f5e9; color: #2e7d32; }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=Noto+Sans+SC&display=swap" rel="stylesheet">
 <base target="_blank">
 </head>
 <body>
     <header class="header">
         <div class="header-container">
-            <h1>L'Imperfetto - Modulo A2</h1>
-            <p>Il tempo del passato per descrizioni, abitudini e azioni in corso</p>
+            <h1>L'Imperfetto - Modulo A2/B1</h1>
+            <p>Il tempo del passato per descrizioni, abitudini e azioni in corso - 100 Esercizi</p>
         </div>
     </header>
 
@@ -520,27 +611,28 @@
         <div class="breadcrumbs-container">
             <a href="#">Home</a>
             <span>›</span>
-            <a href="#">Italiano A2</a>
+            <a href="#">Italiano A2/B1</a>
             <span>›</span>
-            <strong>L'Imperfetto (50 Esercizi)</strong>
+            <strong>L'Imperfetto (100 Esercizi Multilingue)</strong>
         </div>
     </nav>
 
     <main class="main-container">
         <div class="page-header">
             <h1 class="page-title">⏳ L'Imperfetto Indicativo</h1>
-            <p class="page-subtitle">Come descrivere il passato: abitudini, stati d'animo e azioni in corso - 50 Esercizi</p>
+            <p class="page-subtitle">Come descrivere il passato: abitudini, stati d'animo e azioni in corso - 100 Esercizi con spiegazioni in 13 lingue</p>
         </div>
 
         <nav class="nav-tabs">
             <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('languages', this)">🌍 Lingue</button>
             <button class="nav-tab" onclick="showSection('regolari', this)">Regolari</button>
             <button class="nav-tab" onclick="showSection('irregolari', this)">Irregolari</button>
             <button class="nav-tab" onclick="showSection('uso', this)">Quando usarlo</button>
-            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (100)</button>
         </nav>
 
-        <!-- SEZIONE TEORIA -->
+        <!-- SEZIONE TEORIA AMPLIATA -->
         <section id="theory" class="section active">
             <div class="card">
                 <div class="card-header imperfetto">Che cos'è l'Imperfetto?</div>
@@ -551,6 +643,9 @@
                         <li><strong>Descrizioni</strong> di luoghi, persone, situazioni ("Il cielo era azzurro")</li>
                         <li><strong>Azioni in corso</strong> interrotte da altre ("Mentre leggevo, ha suonato il telefono")</li>
                         <li><strong>Stati d'animo</strong> o condizioni fisiche ("Ero stanco", "Mi sentivo felice")</li>
+                        <li><strong>Età nel passato</strong> ("Quando avevo 10 anni...")</li>
+                        <li><strong>Ora nel passato</strong> ("Erano le 8 di sera")</li>
+                        <li><strong>Background narrativo</strong> ("Faceva freddo, nevicava...")</li>
                     </ul>
 
                     <div class="instruction-box">
@@ -558,13 +653,13 @@
                     </div>
 
                     <div class="rule-box">
-                        <strong>⚠️ Regola importante:</strong> Le desinenze sono <strong>identiche</strong> per tutte e tre le coniugazioni (-are, -ere, -ire), ma i verbi in <strong>-ire</strong> con doppia consonante (-isco) mantengono la doppia consonante.
+                        <strong>⚠️ Regola importante:</strong> Le desinenze sono <strong>identiche</strong> per tutte e tre le coniugazioni (-are, -ere, -ire), ma i verbi in <strong>-ire</strong> con doppia consonante (-isco) mantengono la doppia consonante all'imperfetto.
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header imperfetto">Schema di Coniugazione</div>
+                <div class="card-header imperfetto">Schema di Coniugazione Completo</div>
                 <div class="card-body">
                     <table class="conjugation-table">
                         <thead>
@@ -577,47 +672,250 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr onclick="speak('Io parlavo, vedevo, dormivo, finivo')">
+                            <tr>
                                 <td class="person">Io</td>
-                                <td class="verb-form">parlavo</td>
-                                <td class="verb-form">vedevo</td>
-                                <td class="verb-form">dormivo</td>
-                                <td class="verb-form">finivo</td>
+                                <td class="verb-form">parl<span class="ending-are">avo</span></td>
+                                <td class="verb-form">ved<span class="ending-ere">evo</span></td>
+                                <td class="verb-form">dorm<span class="ending-ire">ivo</span></td>
+                                <td class="verb-form">fin<span class="ending-ire">ivo</span></td>
                             </tr>
-                            <tr onclick="speak('Tu parlavi, vedevi, dormivi, finivi')">
+                            <tr>
                                 <td class="person">Tu</td>
-                                <td class="verb-form">parlavi</td>
-                                <td class="verb-form">vedevi</td>
-                                <td class="verb-form">dormivi</td>
-                                <td class="verb-form">finivi</td>
+                                <td class="verb-form">parl<span class="ending-are">avi</span></td>
+                                <td class="verb-form">ved<span class="ending-ere">evi</span></td>
+                                <td class="verb-form">dorm<span class="ending-ire">ivi</span></td>
+                                <td class="verb-form">fin<span class="ending-ire">ivi</span></td>
                             </tr>
-                            <tr onclick="speak('Lui parlava, vedeva, dormiva, finiva')">
+                            <tr>
                                 <td class="person">Lui/Lei</td>
-                                <td class="verb-form">parlava</td>
-                                <td class="verb-form">vedeva</td>
-                                <td class="verb-form">dormiva</td>
-                                <td class="verb-form">finiva</td>
+                                <td class="verb-form">parl<span class="ending-are">ava</span></td>
+                                <td class="verb-form">ved<span class="ending-ere">eva</span></td>
+                                <td class="verb-form">dorm<span class="ending-ire">iva</span></td>
+                                <td class="verb-form">fin<span class="ending-ire">iva</span></td>
                             </tr>
-                            <tr onclick="speak('Noi parlavamo, vedevamo, dormivamo, finivamo')">
+                            <tr>
                                 <td class="person">Noi</td>
-                                <td class="verb-form">parlavamo</td>
-                                <td class="verb-form">vedevamo</td>
-                                <td class="verb-form">dormivamo</td>
-                                <td class="verb-form">finivamo</td>
+                                <td class="verb-form">parl<span class="ending-are">avamo</span></td>
+                                <td class="verb-form">ved<span class="ending-ere">evamo</span></td>
+                                <td class="verb-form">dorm<span class="ending-ire">ivamo</span></td>
+                                <td class="verb-form">fin<span class="ending-ire">ivamo</span></td>
                             </tr>
-                            <tr onclick="speak('Voi parlavate, vedevate, dormivate, finivate')">
+                            <tr>
                                 <td class="person">Voi</td>
-                                <td class="verb-form">parlavate</td>
-                                <td class="verb-form">vedevate</td>
-                                <td class="verb-form">dormivate</td>
-                                <td class="verb-form">finivate</td>
+                                <td class="verb-form">parl<span class="ending-are">avate</span></td>
+                                <td class="verb-form">ved<span class="ending-ere">evate</span></td>
+                                <td class="verb-form">dorm<span class="ending-ire">ivate</span></td>
+                                <td class="verb-form">fin<span class="ending-ire">ivate</span></td>
                             </tr>
-                            <tr onclick="speak('Loro parlavano, vedevano, dormivano, finivano')">
+                            <tr>
                                 <td class="person">Loro</td>
-                                <td class="verb-form">parlavano</td>
-                                <td class="verb-form">vedevano</td>
-                                <td class="verb-form">dormivano</td>
-                                <td class="verb-form">finivano</td>
+                                <td class="verb-form">parl<span class="ending-are">avano</span></td>
+                                <td class="verb-form">ved<span class="ending-ere">evano</span></td>
+                                <td class="verb-form">dorm<span class="ending-ire">ivano</span></td>
+                                <td class="verb-form">fin<span class="ending-ire">ivano</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>💡 Trucco mnemonico:</strong><br>
+                        Ricorda la canzone delle desinenze: <em>"VO-VI-VA-VAMO-VATE-VANO"</em><br>
+                        La desinenza cambia solo la vocale iniziale in base alla coniugazione:<br>
+                        <span class="ending-are">-AV-</span> per i verbi in -ARE<br>
+                        <span class="ending-ere">-EV-</span> per i verbi in -ERE<br>
+                        <span class="ending-ire">-IV-</span> per i verbi in -IRE
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header imperfetto">Verbi Irregolari - Tabella Completa</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Attenzione:</strong> Questi verbi sono irregolari ma molto frequenti. Da memorizzare assolutamente!
+                    </div>
+
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Infinito</th>
+                                <th>Io</th>
+                                <th>Tu</th>
+                                <th>Lui/Lei</th>
+                                <th>Noi</th>
+                                <th>Voi</th>
+                                <th>Loro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="person">ESSERE</td>
+                                <td class="verb-form">ero</td>
+                                <td class="verb-form">eri</td>
+                                <td class="verb-form">era</td>
+                                <td class="verb-form">eravamo</td>
+                                <td class="verb-form">eravate</td>
+                                <td class="verb-form">erano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">AVERE</td>
+                                <td class="verb-form">avevo</td>
+                                <td class="verb-form">avevi</td>
+                                <td class="verb-form">aveva</td>
+                                <td class="verb-form">avevamo</td>
+                                <td class="verb-form">avevate</td>
+                                <td class="verb-form">avevano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">FARE</td>
+                                <td class="verb-form">facevo</td>
+                                <td class="verb-form">facevi</td>
+                                <td class="verb-form">faceva</td>
+                                <td class="verb-form">facevamo</td>
+                                <td class="verb-form">facevate</td>
+                                <td class="verb-form">facevano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">DIRE</td>
+                                <td class="verb-form">dicevo</td>
+                                <td class="verb-form">dicevi</td>
+                                <td class="verb-form">diceva</td>
+                                <td class="verb-form">dicevamo</td>
+                                <td class="verb-form">dicevate</td>
+                                <td class="verb-form">dicevano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">BERE</td>
+                                <td class="verb-form">bevevo</td>
+                                <td class="verb-form">bevevi</td>
+                                <td class="verb-form">beveva</td>
+                                <td class="verb-form">bevevamo</td>
+                                <td class="verb-form">bevevate</td>
+                                <td class="verb-form">bevevano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">ANDARE</td>
+                                <td class="verb-form">andavo</td>
+                                <td class="verb-form">andavi</td>
+                                <td class="verb-form">andava</td>
+                                <td class="verb-form">andavamo</td>
+                                <td class="verb-form">andavate</td>
+                                <td class="verb-form">andavano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">VENIRE</td>
+                                <td class="verb-form">venivo</td>
+                                <td class="verb-form">venivi</td>
+                                <td class="verb-form">veniva</td>
+                                <td class="verb-form">venivamo</td>
+                                <td class="verb-form">venivate</td>
+                                <td class="verb-form">venivano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">VOLERE</td>
+                                <td class="verb-form">volevo</td>
+                                <td class="verb-form">volevi</td>
+                                <td class="verb-form">voleva</td>
+                                <td class="verb-form">volevamo</td>
+                                <td class="verb-form">volevate</td>
+                                <td class="verb-form">volevano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">POTERE</td>
+                                <td class="verb-form">potevo</td>
+                                <td class="verb-form">potevi</td>
+                                <td class="verb-form">poteva</td>
+                                <td class="verb-form">potevamo</td>
+                                <td class="verb-form">potevate</td>
+                                <td class="verb-form">potevano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">DOVERE</td>
+                                <td class="verb-form">dovevo</td>
+                                <td class="verb-form">dovevi</td>
+                                <td class="verb-form">doveva</td>
+                                <td class="verb-form">dovevamo</td>
+                                <td class="verb-form">dovevate</td>
+                                <td class="verb-form">dovevano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">SAPERE</td>
+                                <td class="verb-form">sapevo</td>
+                                <td class="verb-form">sapevi</td>
+                                <td class="verb-form">sapeva</td>
+                                <td class="verb-form">sapevamo</td>
+                                <td class="verb-form">sapevate</td>
+                                <td class="verb-form">sapevano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">STARE</td>
+                                <td class="verb-form">stavo</td>
+                                <td class="verb-form">stavi</td>
+                                <td class="verb-form">stava</td>
+                                <td class="verb-form">stavamo</td>
+                                <td class="verb-form">stavate</td>
+                                <td class="verb-form">stavano</td>
+                            </tr>
+                            <tr>
+                                <td class="person">DARE</td>
+                                <td class="verb-form">davo</td>
+                                <td class="verb-form">davi</td>
+                                <td class="verb-form">dava</td>
+                                <td class="verb-form">davamo</td>
+                                <td class="verb-form">davate</td>
+                                <td class="verb-form">davano</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header imperfetto">Espressioni tipiche con l'Imperfetto</div>
+                <div class="card-body">
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Espressione</th>
+                                <th>Significato</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Da bambino/a...</strong></td>
+                                <td>Abitudine infantile</td>
+                                <td>"Da bambino giocavo sempre con le macchinine"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Quando ero giovane...</strong></td>
+                                <td>Periodo giovanile</td>
+                                <td>"Quando ero giovane, ballavo ogni sabato"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ogni giorno/settimana...</strong></td>
+                                <td>Frequenza abituale</td>
+                                <td>"Ogni giorno andavo a scuola in bici"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Di solito...</strong></td>
+                                <td>Azione abituale</td>
+                                <td>"Di solito mangiavo a casa di mia nonna"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mentre...</strong></td>
+                                <td>Azione in corso</td>
+                                <td>"Mentre dormivo, ha telefonato Marco"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Erano le...</strong></td>
+                                <td>Ora nel passato</td>
+                                <td>"Erano le 10 di sera quando è arrivato"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sembrava che...</strong></td>
+                                <td>Apparenza nel passato</td>
+                                <td>"Sembrava che fosse arrabbiato"</td>
                             </tr>
                         </tbody>
                     </table>
@@ -625,38 +923,767 @@
             </div>
         </section>
 
+        <!-- SEZIONE LINGUE -->
+        <section id="languages" class="section">
+            <div class="card">
+                <div class="card-header lang">🌍 Spiegazioni Multilingue dell'Imperfetto</div>
+                <div class="card-body">
+                    <p style="margin-bottom: 1.5rem;">Clicca su una lingua per leggere la spiegazione dell'imperfetto italiano nella tua lingua madre.</p>
+
+                    <!-- English -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇬🇧</span> <strong>English</strong> - The Italian Imperfect Tense</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>What is the Imperfect Tense?</h4>
+                            <p>The <strong>imperfetto</strong> is a past tense used to describe:</p>
+                            <ul>
+                                <li><strong>Habits</strong> in the past ("As a child, I used to eat ice cream every day")</li>
+                                <li><strong>Descriptions</strong> of places, people, situations ("The sky was blue")</li>
+                                <li><strong>Ongoing actions</strong> interrupted by others ("While I was reading, the phone rang")</li>
+                                <li><strong>States of mind</strong> or physical conditions ("I was tired")</li>
+                                <li><strong>Age in the past</strong> ("When I was 10 years old...")</li>
+                                <li><strong>Time in the past</strong> ("It was 8 PM")</li>
+                            </ul>
+                            
+                            <h4>How to Form It:</h4>
+                            <p>Remove the infinitive ending (-are, -ere, -ire) and add:</p>
+                            <table class="conjugation-table">
+                                <tr><th>Person</th><th>-ARE verbs</th><th>-ERE verbs</th><th>-IRE verbs</th></tr>
+                                <tr><td>I</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                <tr><td>You</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                <tr><td>He/She</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                <tr><td>We</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                <tr><td>You (pl.)</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                <tr><td>They</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                            </table>
+
+                            <h4>Key Irregular Verbs:</h4>
+                            <ul>
+                                <li><strong>ESSERE</strong> (to be): ero, eri, era, eravamo, eravate, erano</li>
+                                <li><strong>AVERE</strong> (to have): avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                <li><strong>FARE</strong> (to do/make): facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                <li><strong>DIRE</strong> (to say): dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                <li><strong>BERE</strong> (to drink): bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                            </ul>
+
+                            <h4>Imperfect vs. Past Perfect (Passato Prossimo):</h4>
+                            <ul>
+                                <li>Use <strong>IMPERFECT</strong> for: habits, descriptions, ongoing actions, states of mind</li>
+                                <li>Use <strong>PAST PERFECT</strong> for: completed single actions, specific events</li>
+                            </ul>
+                            <p><em>Example: "Mentre <strong>mangiavo</strong> (imperfect - ongoing), ha <strong>suonato</strong> (past perfect - interruption) il telefono."</em></p>
+                        </div>
+                    </div>
+
+                    <!-- Français -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇫🇷</span> <strong>Français</strong> - L'Imparfait Italien</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Qu'est-ce que l'Imparfait ?</h4>
+                            <p>L'<strong>imperfetto</strong> est un temps du passé utilisé pour décrire :</p>
+                            <ul>
+                                <li><strong>Les habitudes</strong> dans le passé ("Quand j'étais enfant, je mangeais toujours de la glace")</li>
+                                <li><strong>Les descriptions</strong> de lieux, de personnes, de situations ("Le ciel était bleu")</li>
+                                <li><strong>Les actions en cours</strong> interrompues par d'autres ("Pendant que je lisais, le téléphone a sonné")</li>
+                                <li><strong>Les états d'âme</strong> ou conditions physiques ("J'étais fatigué")</li>
+                                <li><strong>L'âge dans le passé</strong> ("Quand j'avais 10 ans...")</li>
+                                <li><strong>L'heure dans le passé</strong> ("Il était 20h")</li>
+                            </ul>
+
+                            <h4>Comment le former :</h4>
+                            <p>Enlevez la terminaison de l'infinitif (-are, -ere, -ire) et ajoutez :</p>
+                            <table class="conjugation-table">
+                                <tr><th>Personne</th><th>Verbes en -ARE</th><th>Verbes en -ERE</th><th>Verbes en -IRE</th></tr>
+                                <tr><td>Je</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                <tr><td>Tu</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                <tr><td>Il/Elle</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                <tr><td>Nous</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                <tr><td>Vous</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                <tr><td>Ils/Elles</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                            </table>
+
+                            <h4>Principaux verbes irréguliers :</h4>
+                            <ul>
+                                <li><strong>ESSERE</strong> (être) : ero, eri, era, eravamo, eravate, erano</li>
+                                <li><strong>AVERE</strong> (avoir) : avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                <li><strong>FARE</strong> (faire) : facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                <li><strong>DIRE</strong> (dire) : dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                <li><strong>BERE</strong> (boire) : bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                            </ul>
+
+                            <h4>Imparfait vs. Passé Composé :</h4>
+                            <ul>
+                                <li>Utilisez l'<strong>IMPARFAIT</strong> pour : les habitudes, les descriptions, les actions en cours, les états d'âme</li>
+                                <li>Utilisez le <strong>PASSÉ COMPOSÉ</strong> pour : les actions ponctuelles terminées, les événements spécifiques</li>
+                            </ul>
+                            <p><em>Exemple : "Pendant que je <strong>mangeais</strong> (imparfait - action en cours), le téléphone a <strong>sonné</strong> (passé composé - interruption)."</em></p>
+                        </div>
+                    </div>
+
+                    <!-- Español -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇪🇸</span> <strong>Español</strong> - El Imperfecto Italiano</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>¿Qué es el Imperfecto?</h4>
+                            <p>El <strong>imperfetto</strong> es un tiempo del pasado que sirve para describir:</p>
+                            <ul>
+                                <li><strong>Hábitos</strong> en el pasado ("De niño comía helado todos los días")</li>
+                                <li><strong>Descripciones</strong> de lugares, personas, situaciones ("El cielo era azul")</li>
+                                <li><strong>Acciones en curso</strong> interrumpidas por otras ("Mientras leía, sonó el teléfono")</li>
+                                <li><strong>Estados de ánimo</strong> o condiciones físicas ("Estaba cansado")</li>
+                                <li><strong>Edad en el pasado</strong> ("Cuando tenía 10 años...")</li>
+                                <li><strong>Hora en el pasado</strong> ("Eran las 8 de la tarde")</li>
+                            </ul>
+
+                            <h4>Cómo formarlo:</h4>
+                            <p>Quita la terminación del infinitivo (-are, -ere, -ire) y añade:</p>
+                            <table class="conjugation-table">
+                                <tr><th>Persona</th><th>Verbos en -ARE</th><th>Verbos en -ERE</th><th>Verbos en -IRE</th></tr>
+                                <tr><td>Yo</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                <tr><td>Tú</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                <tr><td>Él/Ella</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                <tr><td>Nosotros</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                <tr><td>Vosotros</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                <tr><td>Ellos</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                            </table>
+
+                            <h4>Principales verbos irregulares:</h4>
+                            <ul>
+                                <li><strong>ESSERE</strong> (ser/estar): ero, eri, era, eravamo, eravate, erano</li>
+                                <li><strong>AVERE</strong> (tener): avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                <li><strong>FARE</strong> (hacer): facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                <li><strong>DIRE</strong> (decir): dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                <li><strong>BERE</strong> (beber): bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                            </ul>
+
+                            <h4>Imperfecto vs. Pretérito Perfecto:</h4>
+                            <ul>
+                                <li>Usa el <strong>IMPERFECTO</strong> para: hábitos, descripciones, acciones en curso, estados de ánimo</li>
+                                <li>Usa el <strong>PRETÉRITO PERFECTO</strong> para: acciones puntuales completadas, eventos específicos</li>
+                            </ul>
+                            <p><em>Ejemplo: "Mientras <strong>comía</strong> (imperfecto - acción en curso), <strong>sonó</strong> (pretérito perfecto - interrupción) el teléfono."</em></p>
+                        </div>
+                    </div>
+
+                    <!-- Português -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇵🇹</span> <strong>Português</strong> - O Pretérito Imperfeito Italiano</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>O que é o Pretérito Imperfeito?</h4>
+                            <p>O <strong>imperfetto</strong> é um tempo do passado usado para descrever:</p>
+                            <ul>
+                                <li><strong>Hábitos</strong> no passado ("Quando criança, eu comia sorvete todos os dias")</li>
+                                <li><strong>Descrições</strong> de lugares, pessoas, situações ("O céu estava azul")</li>
+                                <li><strong>Ações em andamento</strong> interrompidas por outras ("Enquanto eu lia, o telefone tocou")</li>
+                                <li><strong>Estados de espírito</strong> ou condições físicas ("Eu estava cansado")</li>
+                                <li><strong>Idade no passado</strong> ("Quando eu tinha 10 anos...")</li>
+                                <li><strong>Hora no passado</strong> ("Eram 8 da noite")</li>
+                            </ul>
+
+                            <h4>Como formá-lo:</h4>
+                            <p>Remova a terminação do infinitivo (-are, -ere, -ire) e adicione:</p>
+                            <table class="conjugation-table">
+                                <tr><th>Pessoa</th><th>Verbos em -ARE</th><th>Verbos em -ERE</th><th>Verbos em -IRE</th></tr>
+                                <tr><td>Eu</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                <tr><td>Tu</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                <tr><td>Ele/Ela</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                <tr><td>Nós</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                <tr><td>Vós</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                <tr><td>Eles/Elas</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                            </table>
+
+                            <h4>Principais verbos irregulares:</h4>
+                            <ul>
+                                <li><strong>ESSERE</strong> (ser/estar): ero, eri, era, eravamo, eravate, erano</li>
+                                <li><strong>AVERE</strong> (ter): avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                <li><strong>FARE</strong> (fazer): facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                <li><strong>DIRE</strong> (dizer): dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                <li><strong>BERE</strong> (beber): bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                            </ul>
+
+                            <h4>Imperfeito vs. Pretérito Perfeito:</h4>
+                            <ul>
+                                <li>Use o <strong>IMPERFEITO</strong> para: hábitos, descrições, ações em andamento, estados de espírito</li>
+                                <li>Use o <strong>PRETÉRITO PERFEITO</strong> para: ações pontuais completadas, eventos específicos</li>
+                            </ul>
+                            <p><em>Exemplo: "Enquanto eu <strong>comia</strong> (imperfeito - ação em andamento), o telefone <strong>tocou</strong> (pretérito perfeito - interrupção)."</em></p>
+                        </div>
+                    </div>
+
+                    <!-- العربية (Arabic) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇸🇦</span> <strong>العربية</strong> - الماضي المستمر في الإيطالية</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content rtl">
+                            <div class="arabic-text">
+                                <h4>ما هو الماضي المستمر (Imperfetto)؟</h4>
+                                <p>زمن <strong>الماضي المستمر</strong> هو زمن الماضي يستخدم لوصف:</p>
+                                <ul style="margin-right: 2rem; text-align: right;">
+                                    <li><strong>العادات</strong> في الماضي ("عندما كنت طفلاً، كنت آكل الآيس كريم كل يوم")</li>
+                                    <li><strong>الأوصاف</strong> للأماكن والأشخاص والمواقف ("السماء كانت زرقاء")</li>
+                                    <li><strong>الأفعال المستمرة</strong> التي تقاطعها أفعال أخرى ("بينما كنت أقرأ، رن الهاتف")</li>
+                                    <li><strong>حالات المزاج</strong> أو الحالات الجسدية ("كنت متعباً")</li>
+                                    <li><strong>العمر في الماضي</strong> ("عندما كنت في العاشرة من عمري...")</li>
+                                    <li><strong>الوقت في الماضي</strong> ("كانت الساعة الثامنة مساءً")</li>
+                                </ul>
+
+                                <h4>كيفية تشكيله:</h4>
+                                <p>أحذف نهاية المصدر (-are, -ere, -ire) وأضف:</p>
+                                <table class="conjugation-table">
+                                    <tr><th>الشخص</th><th>أفعال -ARE</th><th>أفعال -ERE</th><th>أفعال -IRE</th></tr>
+                                    <tr><td>أنا</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                    <tr><td>أنت</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                    <tr><td>هو/هي</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                    <tr><td>نحن</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                    <tr><td>أنتم</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                    <tr><td>هم</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                                </table>
+
+                                <h4>أهم الأفعال الشاذة:</h4>
+                                <ul style="margin-right: 2rem; text-align: right;">
+                                    <li><strong>ESSERE</strong> (يكون): ero, eri, era, eravamo, eravate, erano</li>
+                                    <li><strong>AVERE</strong> (لديه): avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                    <li><strong>FARE</strong> (يفعل): facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                    <li><strong>DIRE</strong> (يقول): dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                    <li><strong>BERE</strong> (يشرب): bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                                </ul>
+
+                                <h4>الماضي المستمر vs. الماضي التام:</h4>
+                                <ul style="margin-right: 2rem; text-align: right;">
+                                    <li>استخدم <strong>الماضي المستمر</strong> للعادات والأوصاف والأفعال المستمرة وحالات المزاج</li>
+                                    <li>استخدم <strong>الماضي التام</strong> للأفعال المنفردة المكتملة والأحداث المحددة</li>
+                                </ul>
+                                <p><em>مثال: "بينما كنت <strong>آكل</strong> (ماضي مستمر - فعل مستمر)، <strong>رن</strong> (ماضي تام - مقاطعة) الهاتف."</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wolof -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇸🇳</span> <strong>Wolof</strong> - Imperfetto ci Itali</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Lan mooy Imperfetto?</h4>
+                            <p><strong>Imperfetto</strong> dafa nekk benn ci ay tàmbaliu yàgg yi ñuy jëfandikoo ngir wax:</p>
+                            <ul>
+                                <li><strong>Dëgg-dëgg yi</strong> ci biir ñàkk ("Bii ma doon ndey, dama lekk ice cream bes bu nekk")</li>
+                                <li><strong>Leeral yi</strong> ci àll, ci nit, ci xew-xew ("Asamaan dafa weex")</li>
+                                <li><strong>Jëf ji dafay dëgg</strong> te benn jëf daf ko dindi ("Bii ma doon jàng, telefon dafay sonn")</li>
+                                <li><strong>Xel wi</strong> walla dëgg-dëggu xol ("Dama sonn")</li>
+                                <li><strong>At yi</strong> ci biir ñàkk ("Bii ma amoon 10 at...")</li>
+                                <li><strong>Tàmbaliu ji</strong> ci biir ñàkk ("Doon na 8 ci gudi")</li>
+                            </ul>
+
+                            <h4>Naka lañuy soppal:</h4>
+                            <p>Dindi benn bi jëf ji di jeex (-are, -ere, -ire) te yokk:</p>
+                            <table class="conjugation-table">
+                                <tr><th>Kenn</th><th>Jëf yi -ARE</th><th>Jëf yi -ERE</th><th>Jëf yi -IRE</th></tr>
+                                <tr><td>Man</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                <tr><td>Yow</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                <tr><td>Moom</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                <tr><td>Ñun</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                <tr><td>Yeen</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                <tr><td>Ñoom</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                            </table>
+
+                            <h4>Ëllug jëf yi ñu sopp:</h4>
+                            <ul>
+                                <li><strong>ESSERE</strong> (nekk): ero, eri, era, eravamo, eravate, erano</li>
+                                <li><strong>AVERE</strong> (am): avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                <li><strong>FARE</strong> (def): facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                <li><strong>DIRE</strong> (wax): dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                <li><strong>BERE</strong> (naan): bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                            </ul>
+
+                            <h4>Imperfetto vs. Passato Prossimo:</h4>
+                            <ul>
+                                <li>Jëfandikoo <strong>IMPERFETTO</strong> ngir: dëgg-dëgg yi, leeral yi, jëf ji dafay dëgg, xel wi</li>
+                                <li>Jëfandikoo <strong>PASSATO PROSSIMO</strong> ngir: jëf yu nekk benn yépp, xew-xew yu am solo</li>
+                            </ul>
+                            <p><em>Par exemple: "Bii ma doon <strong>lekk</strong> (imperfetto - jëf dafay dëgg), telefon dafay <strong>sonn</strong> (passato prossimo - dindi)."</em></p>
+                        </div>
+                    </div>
+
+                    <!-- Bambara -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇲🇱</span> <strong>Bambara</strong> - Imperfetto ka kalan Itali</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Imperfetto ye mun ye?</h4>
+                            <p><strong>Imperfetto</strong> ye waati dɔ ye min bɛ kɛ ka ɲɛsin:</p>
+                            <ul>
+                                <li><strong>Kɛcogo minnu</strong> kɔnɔ ("N'tɔgɔ den ye, n bɛ ta ice cream don o don")</li>
+                                <li><strong>Fasojon</strong> yɔrɔw, mɔgɔw, ko minnu ("Sanji ye blan ye")</li>
+                                <li><strong>Kɛwale min bɛ kɛ</strong> min bɛ dafalen kɛwale dɔ fɛ ("N bɛ kalan waati min na, telefoni bɛ kɛlɛ")</li>
+                                <li><strong>Hakili</strong> walima ɲɛnamaya ("N bɛ rɔ")</li>
+                                <li><strong>Den</strong> kɔnɔ ("N den ye 10 san...")</li>
+                                <li><strong>Waati</strong> kɔnɔ ("A tun ye 8 su ye")</li>
+                            </ul>
+
+                            <h4>Nka a bɛ kɛ cogo min na:</h4>
+                            <p>I bɛ dafalen dafalen (-are, -ere, -ire) ka bɔ ka ɲɛsin:</p>
+                            <table class="conjugation-table">
+                                <tr><th>Mɔgɔ</th><th>Kɛwale -ARE</th><th>Kɛwale -ERE</th><th>Kɛwale -IRE</th></tr>
+                                <tr><td>N</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                <tr><td>I</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                <tr><td>Ale</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                <tr><td>An</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                <tr><td>Aw</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                <tr><td>U</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                            </table>
+
+                            <h4>Kɛwale minnu ka ɲɛsin:</h4>
+                            <ul>
+                                <li><strong>ESSERE</strong> (ka kɛ): ero, eri, era, eravamo, eravate, erano</li>
+                                <li><strong>AVERE</strong> (ka bɛ): avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                <li><strong>FARE</strong> (ka kɛ): facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                <li><strong>DIRE</strong> (ka fɔ): dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                <li><strong>BERE</strong> (ka min): bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                            </ul>
+
+                            <h4>Imperfetto vs. Passato Prossimo:</h4>
+                            <ul>
+                                <li>Ɛ <strong>IMPERFETTO</strong> kɛrɛ fɛ: kɛcogo minnu, fasojon, kɛwale min bɛ kɛ, hakili</li>
+                                <li>Ɛ <strong>PASSATO PROSSIMO</strong> kɛrɛ fɛ: kɛwale minnu bɛɛ kɛ, ko minnu ka ɲɛsin</li>
+                            </ul>
+                            <p><em>Misali: "N bɛ <strong>lekk</strong> (imperfetto - kɛwale min bɛ kɛ), telefoni bɛ <strong>kɛlɛ</strong> (passato prossimo - dafalen)."</em></p>
+                        </div>
+                    </div>
+
+                    <!-- Shqip (Albanian) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇦🇱</span> <strong>Shqip</strong> - Koha e Pakryer në Italisht</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Çfarë është Koha e Pakryer (Imperfetto)?</h4>
+                            <p><strong>Imperfetto</strong> është një kohë e shkuar që përdoret për të përshkruar:</p>
+                            <ul>
+                                <li><strong>Zakonet</strong> në të shkuarën ("Kur isha fëmijë, hahesha akullore çdo ditë")</li>
+                                <li><strong>Përshkrimet</strong> e vendeve, njerëzve, situatave ("Qielli ishte blu")</li>
+                                <li><strong>Veprimet në zhvillim</strong> të ndërprera nga të tjera ("Ndërsa lexoja, telefoni ra")</li>
+                                <li><strong>Gjendjet shpirtërore</strong> ose fizike ("Isha i lodhur")</li>
+                                <li><strong>Mosha në të shkuarën</strong> ("Kur isha 10 vjeç...")</li>
+                                <li><strong>Ora në të shkuarën</strong> ("Ishte ora 8 të mbrëmjes")</li>
+                            </ul>
+
+                            <h4>Si të formohet:</h4>
+                            <p>Hiqni mbarimin e paskajores (-are, -ere, -ire) dhe shtoni:</p>
+                            <table class="conjugation-table">
+                                <tr><th>Veta</th><th>Foljet -ARE</th><th>Foljet -ERE</th><th>Foljet -IRE</th></tr>
+                                <tr><td>Unë</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                <tr><td>Ti</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                <tr><td>Ai/Ajo</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                <tr><td>Ne</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                <tr><td>Ju</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                <tr><td>Ata/Ato</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                            </table>
+
+                            <h4>Foljet e parregullta kryesore:</h4>
+                            <ul>
+                                <li><strong>ESSERE</strong> (të jesh): ero, eri, era, eravamo, eravate, erano</li>
+                                <li><strong>AVERE</strong> (të kesh): avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                <li><strong>FARE</strong> (të bësh): facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                <li><strong>DIRE</strong> (të thuash): dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                <li><strong>BERE</strong> (të pish): bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                            </ul>
+
+                            <h4>Koha e Pakryer vs. E Kryera e Shkuar:</h4>
+                            <ul>
+                                <li>Përdorni <strong>KOHËN E PAKRYER</strong> për: zakonet, përshkrimet, veprimet në zhvillim, gjendjet shpirtërore</li>
+                                <li>Përdorni <strong>E KRYERËN E SHKUAR</strong> për: veprimet e përfunduara, ngjarjet specifike</li>
+                            </ul>
+                            <p><em>Shembull: "Ndërsa <strong>hahesha</strong> (koha e pakryer - veprim në zhvillim), telefoni <strong>ra</strong> (e kryera e shkuar - ndërprerje)."</em></p>
+                        </div>
+                    </div>
+
+                    <!-- اردو (Urdu) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇵🇰</span> <strong>اردو</strong> - اطالوی ماضی مستقل</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content rtl">
+                            <div class="urdu-text">
+                                <h4>ماضی مستقل (Imperfetto) کیا ہے؟</h4>
+                                <p><strong>امپرفیتو</strong> ماضی کا ایک زمانہ ہے جو بیان کرنے کے لیے استعمال ہوتا ہے:</p>
+                                <ul style="margin-right: 2rem; text-align: right;">
+                                    <li><strong>ماضی کی عادات</strong> ("بچپن میں میں ہر روز آئس کریم کھاتا تھا")</li>
+                                    <li><strong>مقامات، افراد، صورت حال کی تفصیلات</strong> ("آسمان نیلا تھا")</li>
+                                    <li><strong>جاری اعمال</strong> جو دوسرے اعمال سے ٹوٹے ("جب میں پڑھ رہا تھا، فون بجا")</li>
+                                    <li><strong>ذہنی حالتیں</strong> یا جسمانی حالتیں ("میں تھکا ہوا تھا")</li>
+                                    <li><strong>ماضی میں عمر</strong> ("جب میں 10 سال کا تھا...")</li>
+                                    <li><strong>ماضی میں وقت</strong> ("شام کے 8 بجے تھے")</li>
+                                </ul>
+
+                                <h4>اسے کیسے بنائیں:</h4>
+                                <p>مصدر کی گردان (-are, -ere, -ire) کو ہٹا کر شامل کریں:</p>
+                                <table class="conjugation-table">
+                                    <tr><th>شخص</th><th>افعال -ARE</th><th>افعال -ERE</th><th>افعال -IRE</th></tr>
+                                    <tr><td>میں</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                    <tr><td>تم</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                    <tr><td>وہ</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                    <tr><td>ہم</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                    <tr><td>آپ</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                    <tr><td>وہ (جمع)</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                                </table>
+
+                                <h4>اہم غیر معیاری افعال:</h4>
+                                <ul style="margin-right: 2rem; text-align: right;">
+                                    <li><strong>ESSERE</strong> (ہونا): ero, eri, era, eravamo, eravate, erano</li>
+                                    <li><strong>AVERE</strong> (رکھنا): avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                    <li><strong>FARE</strong> (کرنا): facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                    <li><strong>DIRE</strong> (کہنا): dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                    <li><strong>BERE</strong> (پینا): bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                                </ul>
+
+                                <h4>ماضی مستقل بمقابلہ ماضی قریب:</h4>
+                                <ul style="margin-right: 2rem; text-align: right;">
+                                    <li><strong>ماضی مستقل</strong> استعمال کریں: عادات، تفصیلات، جاری اعمال، ذہنی حالتوں کے لیے</li>
+                                    <li><strong>ماضی قریب</strong> استعمال کریں: مکمل ہونے والے واحد اعمال، مخصوص واقعات کے لیے</li>
+                                </ul>
+                                <p><em>مثال: "جب میں <strong>کھا رہا تھا</strong> (ماضی مستقل - جاری عمل)، فون <strong>بجا</strong> (ماضی قریب - رکاوٹ)."</em></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ਪੰਜਾਬੀ (Punjabi) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇮🇳</span> <strong>ਪੰਜਾਬੀ</strong> - ਇਤਾਲਵੀ ਅਪੂਰਨ ਭੂਤਕਾਲ</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>ਅਪੂਰਨ ਭੂਤਕਾਲ (Imperfetto) ਕੀ ਹੈ?</h4>
+                            <p><strong>ਇੰਪਰਫੇਟੋ</strong> ਭੂਤਕਾਲ ਦਾ ਇੱਕ ਕਾਲ ਹੈ ਜੋ ਵਰਣਨ ਕਰਨ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ:</p>
+                            <ul>
+                                <li><strong>ਭੂਤਕਾਲ ਦੀਆਂ ਆਦਤਾਂ</strong> ("ਬਚਪਨ ਵਿੱਚ ਮੈਂ ਹਰ ਰੋਜ਼ ਆਈਸਕ੍ਰੀਮ ਖਾਂਦਾ ਸੀ")</li>
+                                <li><strong>ਥਾਵਾਂ, ਲੋਕਾਂ, ਸਥਿਤੀਆਂ ਦਾ ਵਰਣਨ</strong> ("ਅਸਮਾਨ ਨੀਲਾ ਸੀ")</li>
+                                <li><strong>ਜਾਰੀ ਕਿਰਿਆਵਾਂ</strong> ਜੋ ਹੋਰਾਂ ਦੁਆਰਾ ਟੁੱਟੀਆਂ ("ਜਦੋਂ ਮੈਂ ਪੜ੍ਹ ਰਿਹਾ ਸੀ, ਫੋਨ ਵੱਜਿਆ")</li>
+                                <li><strong>ਮਨੋਭਾਵ</strong> ਜਾਂ ਸਰੀਰਕ ਸਥਿਤੀਆਂ ("ਮੈਂ ਥੱਕਿਆ ਹੋਇਆ ਸੀ")</li>
+                                <li><strong>ਭੂਤਕਾਲ ਵਿੱਚ ਉਮਰ</strong> ("ਜਦੋਂ ਮੈਂ 10 ਸਾਲ ਦਾ ਸੀ...")</li>
+                                <li><strong>ਭੂਤਕਾਲ ਵਿੱਚ ਸਮਾਂ</strong> ("ਸ਼ਾਮ ਦੇ 8 ਵਜੇ ਸਨ")</li>
+                            </ul>
+
+                            <h4>ਇਸਨੂੰ ਕਿਵੇਂ ਬਣਾਉਣਾ ਹੈ:</h4>
+                            <p>ਇਨਫਿਨੀਟਿਵ ਦਾ ਅੰਤ (-are, -ere, -ire) ਹਟਾਓ ਅਤੇ ਸ਼ਾਮਲ ਕਰੋ:</p>
+                            <table class="conjugation-table">
+                                <tr><th>ਵਿਅਕਤੀ</th><th>ਕਿਰਿਆਵਾਂ -ARE</th><th>ਕਿਰਿਆਵਾਂ -ERE</th><th>ਕਿਰਿਆਵਾਂ -IRE</th></tr>
+                                <tr><td>ਮੈਂ</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                <tr><td>ਤੂੰ</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                <tr><td>ਉਹ</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                <tr><td>ਅਸੀਂ</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                <tr><td>ਤੁਸੀਂ</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                <tr><td>ਉਹ (ਜਮਾਤ)</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                            </table>
+
+                            <h4>ਮੁੱਖ ਅਨਿਯਮਿਤ ਕਿਰਿਆਵਾਂ:</h4>
+                            <ul>
+                                <li><strong>ESSERE</strong> (ਹੋਣਾ): ero, eri, era, eravamo, eravate, erano</li>
+                                <li><strong>AVERE</strong> (ਰੱਖਣਾ): avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                <li><strong>FARE</strong> (ਕਰਨਾ): facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                <li><strong>DIRE</strong> (ਕਹਿਣਾ): dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                <li><strong>BERE</strong> (ਪੀਣਾ): bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                            </ul>
+
+                            <h4>ਅਪੂਰਨ ਭੂਤਕਾਲ ਬਨਾਮ ਪੂਰਨ ਭੂਤਕਾਲ:</h4>
+                            <ul>
+                                <li><strong>ਅਪੂਰਨ ਭੂਤਕਾਲ</strong> ਵਰਤੋ: ਆਦਤਾਂ, ਵਰਣਨ, ਜਾਰੀ ਕਿਰਿਆਵਾਂ, ਮਨੋਭਾਵਾਂ ਲਈ</li>
+                                <li><strong>ਪੂਰਨ ਭੂਤਕਾਲ</strong> ਵਰਤੋ: ਪੂਰੀਆਂ ਹੋਈਆਂ ਇਕੱਲੀਆਂ ਕਿਰਿਆਵਾਂ, ਖਾਸ ਘਟਨਾਵਾਂ ਲਈ</li>
+                            </ul>
+                            <p><em>ਉਦਾਹਰਨ: "ਜਦੋਂ ਮੈਂ <strong>ਖਾ ਰਿਹਾ ਸੀ</strong> (ਅਪੂਰਨ ਭੂਤਕਾਲ - ਜਾਰੀ ਕਿਰਿਆ), ਫੋਨ <strong>ਵੱਜਿਆ</strong> (ਪੂਰਨ ਭੂਤਕਾਲ - ਰੁਕਾਵਟ)."</em></p>
+                        </div>
+                    </div>
+
+                    <!-- বাংলা (Bangla/Bengali) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇧🇩</span> <strong>বাংলা</strong> - ইতালীয় অপূর্ণ অতীত</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>অপূর্ণ অতীত (Imperfetto) কী?</h4>
+                            <p><strong>ইম্পারফেটো</strong> অতীতের একটি কাল যা বর্ণনা করতে ব্যবহৃত হয়:</p>
+                            <ul>
+                                <li><strong>অতীতের অভ্যাস</strong> ("বাচ্চা থাকতে আমি প্রতিদিন আইসক্রিম খেতাম")</li>
+                                <li><strong>স্থান, মানুষ, পরিস্থিতির বর্ণনা</strong> ("আকাশ নীল ছিল")</li>
+                                <li><strong>চলমান ক্রিয়া</strong> যা অন্যদের দ্বারা বাধাপ্রাপ্ত ("আমি পড়ছিলাম যখন, ফোন বেজে উঠল")</li>
+                                <li><strong>মানসিক অবস্থা</strong> বা শারীরিক অবস্থা ("আমি ক্লান্ত ছিলাম")</li>
+                                <li><strong>অতীতের বয়স</strong> ("যখন আমি 10 বছর বয়সী ছিলাম...")</li>
+                                <li><strong>অতীতের সময়</strong> ("রাত ৮টা বাজে ছিল")</li>
+                            </ul>
+
+                            <h4>এটি কীভাবে গঠন করবেন:</h4>
+                            <p>ইনফিনিটিভের শেষ (-are, -ere, -ire) সরিয়ে যোগ করুন:</p>
+                            <table class="conjugation-table">
+                                <tr><th>ব্যক্তি</th><th>ক্রিয়া -ARE</th><th>ক্রিয়া -ERE</th><th>ক্রিয়া -IRE</th></tr>
+                                <tr><td>আমি</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                <tr><td>তুমি</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                <tr><td>সে</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                <tr><td>আমরা</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                <tr><td>তোমরা</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                <tr><td>তারা</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                            </table>
+
+                            <h4>প্রধান অনিয়মিত ক্রিয়া:</h4>
+                            <ul>
+                                <li><strong>ESSERE</strong> (হওয়া): ero, eri, era, eravamo, eravate, erano</li>
+                                <li><strong>AVERE</strong> (থাকা): avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                <li><strong>FARE</strong> (করা): facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                <li><strong>DIRE</strong> (বলা): dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                <li><strong>BERE</strong> (পান করা): bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                            </ul>
+
+                            <h4>অপূর্ণ অতীত বনাম পূর্ণ অতীত:</h4>
+                            <ul>
+                                <li><strong>অপূর্ণ অতীত</strong> ব্যবহার করুন: অভ্যাস, বর্ণনা, চলমান ক্রিয়া, মানসিক অবস্থার জন্য</li>
+                                <li><strong>পূর্ণ অতীত</strong> ব্যবহার করুন: সম্পন্ন একক ক্রিয়া, নির্দিষ্ট ঘটনার জন্য</li>
+                            </ul>
+                            <p><em>উদাহরণ: "আমি <strong>খাচ্ছিলাম</strong> (অপূর্ণ অতীত - চলমান ক্রিয়া) যখন, ফোন <strong>বেজে উঠল</strong> (পূর্ণ অতীত - বাধা)."</em></p>
+                        </div>
+                    </div>
+
+                    <!-- हिंदी (Hindi) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇮🇳</span> <strong>हिंदी</strong> - इतालवी अपूर्ण भूतकाल</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>अपूर्ण भूतकाल (Imperfetto) क्या है?</h4>
+                            <p><strong>इम्परफेटो</strong> भूतकाल का एक काल है जो वर्णन करने के लिए उपयोग किया जाता है:</p>
+                            <ul>
+                                <li><strong>भूतकाल की आदतें</strong> ("बचपन में मैं हर दिन आइसक्रीम खाता था")</li>
+                                <li><strong>स्थानों, लोगों, स्थितियों का वर्णन</strong> ("आसमान नीला था")</li>
+                                <li><strong>जारी क्रियाएं</strong> जो दूसरों द्वारा टूटी ("जब मैं पढ़ रहा था, फोन बजा")</li>
+                                <li><strong>मानसिक अवस्थाएं</strong> या शारीरिक अवस्थाएं ("मैं थका हुआ था")</li>
+                                <li><strong>भूतकाल में उम्र</strong> ("जब मैं 10 साल का था...")</li>
+                                <li><strong>भूतकाल में समय</strong> ("रात के 8 बजे थे")</li>
+                            </ul>
+
+                            <h4>इसे कैसे बनाएं:</h4>
+                            <p>इनफिनिटिव का अंत (-are, -ere, -ire) हटाएं और जोड़ें:</p>
+                            <table class="conjugation-table">
+                                <tr><th>व्यक्ति</th><th>क्रियाएं -ARE</th><th>क्रियाएं -ERE</th><th>क्रियाएं -IRE</th></tr>
+                                <tr><td>मैं</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                <tr><td>तुम</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                <tr><td>वह</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                <tr><td>हम</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                <tr><td>आप</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                <tr><td>वे</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                            </table>
+
+                            <h4>मुख्य अनियमित क्रियाएं:</h4>
+                            <ul>
+                                <li><strong>ESSERE</strong> (होना): ero, eri, era, eravamo, eravate, erano</li>
+                                <li><strong>AVERE</strong> (रखना): avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                <li><strong>FARE</strong> (करना): facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                <li><strong>DIRE</strong> (कहना): dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                <li><strong>BERE</strong> (पीना): bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                            </ul>
+
+                            <h4>अपूर्ण भूतकाल बनाम पूर्ण भूतकाल:</h4>
+                            <ul>
+                                <li><strong>अपूर्ण भूतकाल</strong> का उपयोग करें: आदतों, वर्णन, जारी क्रियाओं, मानसिक अवस्थाओं के लिए</li>
+                                <li><strong>पूर्ण भूतकाल</strong> का उपयोग करें: पूर्ण एकल क्रियाओं, विशिष्ट घटनाओं के लिए</li>
+                            </ul>
+                            <p><em>उदाहरण: "जब मैं <strong>खा रहा था</strong> (अपूर्ण भूतकाल - जारी क्रिया), फोन <strong>बजा</strong> (पूर्ण भूतकाल - बाधा)."</em></p>
+                        </div>
+                    </div>
+
+                    <!-- 中文 (Chinese) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇨🇳</span> <strong>中文</strong> - 意大利语过去未完成时</span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <div class="chinese-text">
+                                <h4>什么是过去未完成时 (Imperfetto)？</h4>
+                                <p><strong>过去未完成时</strong>是一种过去时态，用于描述：</p>
+                                <ul>
+                                    <li><strong>过去的习惯</strong>（"小时候我每天都吃冰淇淋"）</li>
+                                    <li><strong>地点、人物、情景的描述</strong>（"天空是蓝色的"）</li>
+                                    <li><strong>被其他动作打断的持续动作</strong>（"当我正在读书时，电话响了"）</li>
+                                    <li><strong>心理状态</strong>或身体状况（"我很累"）</li>
+                                    <li><strong>过去的年龄</strong>（"当我10岁的时候..."）</li>
+                                    <li><strong>过去的时间</strong>（"当时是晚上8点"）</li>
+                                </ul>
+
+                                <h4>如何构成：</h4>
+                                <p>去掉动词不定式词尾 (-are, -ere, -ire)，然后加上：</p>
+                                <table class="conjugation-table">
+                                    <tr><th>人称</th><th>-ARE 动词</th><th>-ERE 动词</th><th>-IRE 动词</th></tr>
+                                    <tr><td>我</td><td>-avo (parlavo)</td><td>-evo (vedevo)</td><td>-ivo (dormivo)</td></tr>
+                                    <tr><td>你</td><td>-avi (parlavi)</td><td>-evi (vedevi)</td><td>-ivi (dormivi)</td></tr>
+                                    <tr><td>他/她</td><td>-ava (parlava)</td><td>-eva (vedeva)</td><td>-iva (dormiva)</td></tr>
+                                    <tr><td>我们</td><td>-avamo (parlavamo)</td><td>-evamo (vedevamo)</td><td>-ivamo (dormivamo)</td></tr>
+                                    <tr><td>你们</td><td>-avate (parlavate)</td><td>-evate (vedevate)</td><td>-ivate (dormivate)</td></tr>
+                                    <tr><td>他们</td><td>-avano (parlavano)</td><td>-evano (vedevano)</td><td>-ivano (dormivano)</td></tr>
+                                </table>
+
+                                <h4>主要不规则动词：</h4>
+                                <ul>
+                                    <li><strong>ESSERE</strong>（是/在）：ero, eri, era, eravamo, eravate, erano</li>
+                                    <li><strong>AVERE</strong>（有）：avevo, avevi, aveva, avevamo, avevate, avevano</li>
+                                    <li><strong>FARE</strong>（做）：facevo, facevi, faceva, facevamo, facevate, facevano</li>
+                                    <li><strong>DIRE</strong>（说）：dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</li>
+                                    <li><strong>BERE</strong>（喝）：bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</li>
+                                </ul>
+
+                                <h4>过去未完成时 vs. 近过去时：</h4>
+                                <ul>
+                                    <li>使用<strong>过去未完成时</strong>：习惯、描述、持续动作、心理状态</li>
+                                    <li>使用<strong>近过去时</strong>：已完成的单一动作、特定事件</li>
+                                </ul>
+                                <p><em>例句："当我正在<strong>吃饭</strong>（过去未完成时 - 持续动作）时，电话<strong>响了</strong>（近过去时 - 打断）。"</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- SEZIONE REGOLARI -->
         <section id="regolari" class="section">
             <div class="card">
-                <div class="card-header imperfetto">Verbi Regolari</div>
+                <div class="card-header imperfetto">Verbi Regolari - Completo</div>
                 <div class="card-body">
                     <div class="instruction-box">
                         <strong>Regola generale:</strong> Togli l'infinito e aggiungi le desinenze in -v- (tranne che per i verbi in -ire in -isco).
                     </div>
 
-                    <h3 style="color: var(--are); margin-top: 1.5rem;">Verbi in -ARE</h3>
-                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                        <li>Io <strong>mangiavo</strong> sempre la pizza il sabato</li>
-                        <li>Tu <strong>giocavi</strong> a calcio da bambino</li>
-                        <li>Lui <strong>lavorava</strong> in quell'ufficio</li>
-                        <li>Noi <strong>parlavamo</strong> italiano a casa</li>
-                    </ul>
+                    <h3 style="color: var(--are); margin-top: 1.5rem;">🟦 Verbi in -ARE</h3>
+                    <p>Desinenze: <span class="ending-are">-avo, -avi, -ava, -avamo, -avate, -avano</span></p>
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Infinito</th>
+                                <th>Io</th>
+                                <th>Tu</th>
+                                <th>Lui/Lei</th>
+                                <th>Noi</th>
+                                <th>Voi</th>
+                                <th>Loro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="person">parlare</td><td>parlavo</td><td>parlavi</td><td>parlava</td><td>parlavamo</td><td>parlavate</td><td>parlavano</td></tr>
+                            <tr><td class="person">mangiare</td><td>mangiavo</td><td>mangiavi</td><td>mangiava</td><td>mangiavamo</td><td>mangiavate</td><td>mangiavano</td></tr>
+                            <tr><td class="person">giocare</td><td>giocavo</td><td>giocavi</td><td>giocava</td><td>giocavamo</td><td>giocavate</td><td>giocavano</td></tr>
+                            <tr><td class="person">lavorare</td><td>lavoravo</td><td>lavoravi</td><td>lavorava</td><td>lavoravamo</td><td>lavoravate</td><td>lavoravano</td></tr>
+                            <tr><td class="person">studiare</td><td>studiavo</td><td>studiavi</td><td>studiava</td><td>studiavamo</td><td>studiavate</td><td>studiavano</td></tr>
+                            <tr><td class="person">abitare</td><td>abitavo</td><td>abitavi</td><td>abitava</td><td>abitavamo</td><td>abitavate</td><td>abitavano</td></tr>
+                            <tr><td class="person">ascoltare</td><td>ascoltavo</td><td>ascoltavi</td><td>ascoltava</td><td>ascoltavamo</td><td>ascoltavate</td><td>ascoltavano</td></tr>
+                            <tr><td class="person">cantare</td><td>cantavo</td><td>cantavi</td><td>cantava</td><td>cantavamo</td><td>cantavate</td><td>cantavano</td></tr>
+                            <tr><td class="person">ballare</td><td>ballavo</td><td>ballavi</td><td>ballava</td><td>ballavamo</td><td>ballavate</td><td>ballavano</td></tr>
+                            <tr><td class="person">cucinare</td><td>cucinavo</td><td>cucinavi</td><td>cucinava</td><td>cucinavamo</td><td>cucinavate</td><td>cucinavano</td></tr>
+                        </tbody>
+                    </table>
 
-                    <h3 style="color: var(--ere); margin-top: 1.5rem;">Verbi in -ERE</h3>
-                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                        <li>Io <strong>vedevo</strong> spesso mia nonna</li>
-                        <li>Tu <strong>vendevi</strong> frutta al mercato</li>
-                        <li>Lei <strong>leggeva</strong> molti libri</li>
-                        <li>Noi <strong>scrivevamo</strong> lettere ogni settimana</li>
-                    </ul>
+                    <h3 style="color: var(--ere); margin-top: 2rem;">🟪 Verbi in -ERE</h3>
+                    <p>Desinenze: <span class="ending-ere">-evo, -evi, -eva, -evamo, -evate, -evano</span></p>
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Infinito</th>
+                                <th>Io</th>
+                                <th>Tu</th>
+                                <th>Lui/Lei</th>
+                                <th>Noi</th>
+                                <th>Voi</th>
+                                <th>Loro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="person">vedere</td><td>vedevo</td><td>vedevi</td><td>vedeva</td><td>vedevamo</td><td>vedevate</td><td>vedevano</td></tr>
+                            <tr><td class="person">leggere</td><td>leggevo</td><td>leggevi</td><td>leggeva</td><td>leggevamo</td><td>leggevate</td><td>leggevano</td></tr>
+                            <tr><td class="person">scrivere</td><td>scrivevo</td><td>scrivevi</td><td>scriveva</td><td>scrivevamo</td><td>scrivevate</td><td>scrivevano</td></tr>
+                            <tr><td class="person">vendere</td><td>vendevo</td><td>vendevi</td><td>vendeva</td><td>vendevamo</td><td>vendevate</td><td>vendevano</td></tr>
+                            <tr><td class="person">mettere</td><td>mettevo</td><td>mettevi</td><td>metteva</td><td>mettevamo</td><td>mettevate</td><td>mettevano</td></tr>
+                            <tr><td class="person">prendere</td><td>prendevo</td><td>prendevi</td><td>prendeva</td><td>prendevamo</td><td>prendevate</td><td>prendevano</td></tr>
+                            <tr><td class="person">credere</td><td>credevo</td><td>credevi</td><td>credeva</td><td>credevamo</td><td>credevate</td><td>credevano</td></tr>
+                            <tr><td class="person">ricevere</td><td>ricevevo</td><td>ricevevi</td><td>riceveva</td><td>ricevevamo</td><td>ricevevate</td><td>ricevevano</td></tr>
+                            <tr><td class="person">correre</td><td>correvo</td><td>correvi</td><td>correva</td><td>correvamo</td><td>correvate</td><td>correvano</td></tr>
+                            <tr><td class="person">rispondere</td><td>rispondevo</td><td>rispondevi</td><td>rispondeva</td><td>rispondevamo</td><td>rispondevate</td><td>rispondevano</td></tr>
+                        </tbody>
+                    </table>
 
-                    <h3 style="color: var(--ire); margin-top: 1.5rem;">Verbi in -IRE</h3>
-                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                        <li>Io <strong>dormivo</strong> fino a tardi</li>
-                        <li>Tu <strong>sentivi</strong> sempre quella canzone</li>
-                        <li>Lui <strong>partiva</strong> presto al mattino</li>
-                        <li>Noi <strong>seguivamo</strong> le lezioni online</li>
-                    </ul>
+                    <h3 style="color: var(--ire); margin-top: 2rem;">🟩 Verbi in -IRE (semplici)</h3>
+                    <p>Desinenze: <span class="ending-ire">-ivo, -ivi, -iva, -ivamo, -ivate, -ivano</span></p>
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Infinito</th>
+                                <th>Io</th>
+                                <th>Tu</th>
+                                <th>Lui/Lei</th>
+                                <th>Noi</th>
+                                <th>Voi</th>
+                                <th>Loro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="person">dormire</td><td>dormivo</td><td>dormivi</td><td>dormiva</td><td>dormivamo</td><td>dormivate</td><td>dormivano</td></tr>
+                            <tr><td class="person">sentire</td><td>sentivo</td><td>sentivi</td><td>sentiva</td><td>sentivamo</td><td>sentivate</td><td>sentivano</td></tr>
+                            <tr><td class="person">partire</td><td>partivo</td><td>partivi</td><td>partiva</td><td>partivamo</td><td>partivate</td><td>partivano</td></tr>
+                            <tr><td class="person">seguire</td><td>seguivo</td><td>seguivi</td><td>seguiva</td><td>seguivamo</td><td>seguivate</td><td>seguivano</td></tr>
+                            <tr><td class="person">aprire</td><td>aprivo</td><td>aprivi</td><td>apriva</td><td>aprivamo</td><td>aprivate</td><td>aprivano</td></tr>
+                            <tr><td class="person">offrire</td><td>offrivo</td><td>offrivi</td><td>offriva</td><td>offrivamo</td><td>offrivate</td><td>offrivano</td></tr>
+                            <tr><td class="person">morire</td><td>morivo</td><td>morivi</td><td>moriva</td><td>morivamo</td><td>morivate</td><td>morivano</td></tr>
+                            <tr><td class="person">salire</td><td>salivo</td><td>salivi</td><td>saliva</td><td>salivamo</td><td>salivate</td><td>salivano</td></tr>
+                            <tr><td class="person">uscire</td><td>uscivo</td><td>uscivi</td><td>usciva</td><td>uscivamo</td><td>uscivate</td><td>uscivano</td></tr>
+                            <tr><td class="person">venire*</td><td>venivo</td><td>venivi</td><td>veniva</td><td>venivamo</td><td>venivate</td><td>venivano</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size: 0.9rem; color: var(--secondary);">*Venire è leggermente irregolare ma segue lo schema -IRE</p>
+
+                    <h3 style="color: var(--ire); margin-top: 2rem;">🟩 Verbi in -IRE con -isco</h3>
+                    <p>Questi verbi mantengono la doppia consonante anche all'imperfetto!</p>
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Infinito</th>
+                                <th>Io</th>
+                                <th>Tu</th>
+                                <th>Lui/Lei</th>
+                                <th>Noi</th>
+                                <th>Voi</th>
+                                <th>Loro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="person">finire</td><td>finivo</td><td>finivi</td><td>finiva</td><td>finivamo</td><td>finivate</td><td>finivano</td></tr>
+                            <tr><td class="person">capire</td><td>capivo</td><td>capivi</td><td>capiva</td><td>capivamo</td><td>capivate</td><td>capivano</td></tr>
+                            <tr><td class="person">preferire</td><td>preferivo</td><td>preferivi</td><td>preferiva</td><td>preferivamo</td><td>preferivate</td><td>preferivano</td></tr>
+                            <tr><td class="person">pulire</td><td>pulivo</td><td>pulivi</td><td>puliva</td><td>pulivamo</td><td>pulivate</td><td>pulivano</td></tr>
+                            <tr><td class="person">costruire</td><td>costruivo</td><td>costruivi</td><td>costruiva</td><td>costruivamo</td><td>costruivate</td><td>costruivano</td></tr>
+                            <tr><td class="person">spedire</td><td>spedivo</td><td>spedivi</td><td>spediva</td><td>spedivamo</td><td>spedivate</td><td>spedivano</td></tr>
+                            <tr><td class="person">obbedire</td><td>obbedivo</td><td>obbedivi</td><td>obbediva</td><td>obbedivamo</td><td>obbedivate</td><td>obbedivano</td></tr>
+                            <tr><td class="person">restituire</td><td>restituivo</td><td>restituivi</td><td>restituiva</td><td>restituivamo</td><td>restituivate</td><td>restituivano</td></tr>
+                            <tr><td class="person">unire</td><td>univo</td><td>univi</td><td>univa</td><td>univamo</td><td>univate</td><td>univano</td></tr>
+                            <tr><td class="person">nutrire</td><td>nutrivo</td><td>nutrivi</td><td>nutriva</td><td>nutrivamo</td><td>nutrivate</td><td>nutrivano</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -664,51 +1691,144 @@
         <!-- SEZIONE IRREGOLARI -->
         <section id="irregolari" class="section">
             <div class="card">
-                <div class="card-header imperfetto">Verbi Irregolari Principali</div>
+                <div class="card-header imperfetto">Verbi Irregolari - Completo</div>
                 <div class="card-body">
                     <div class="instruction-box">
-                        <strong>Attenzione:</strong> Questi verbi sono irregolari ma molto frequenti. Da memorizzare!
+                        <strong>Attenzione:</strong> Questi verbi sono irregolari ma molto frequenti. Da memorizzare assolutamente!
                     </div>
 
+                    <h3 style="margin-top: 1.5rem;">🔴 Verbi completamente irregolari</h3>
+                    
                     <div class="irregular-box">
                         <div class="irregular-verb">ESSERE</div>
                         <div class="irregular-form">ero, eri, era, eravamo, eravate, erano</div>
                     </div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io ero felice" - "Tu eri a casa" - "Lei era bella" - "Noi eravamo stanchi" - "Voi eravate in ritardo" - "Loro erano amici"
+                    </div>
+
                     <div class="irregular-box">
                         <div class="irregular-verb">AVERE</div>
                         <div class="irregular-form">avevo, avevi, aveva, avevamo, avevate, avevano</div>
                     </div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io avevo fame" - "Tu avevi ragione" - "Lui aveva sonno" - "Noi avevamo fretta" - "Voi avevate caldo" - "Loro avevano paura"
+                    </div>
+
                     <div class="irregular-box">
                         <div class="irregular-verb">FARE</div>
                         <div class="irregular-form">facevo, facevi, faceva, facevamo, facevate, facevano</div>
                     </div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io facevo sport" - "Tu facevi colazione" - "Lei faceva la spesa" - "Noi facevamo una gita" - "Voi facevate i compiti" - "Loro facevano tardi"
+                    </div>
+
                     <div class="irregular-box">
                         <div class="irregular-verb">DIRE</div>
                         <div class="irregular-form">dicevo, dicevi, diceva, dicevamo, dicevate, dicevano</div>
                     </div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io dicevo la verità" - "Tu dicevi sempre sì" - "Lui diceva bugie" - "Noi dicevamo ciao" - "Voi dicevate addio" - "Loro dicevano niente"
+                    </div>
+
                     <div class="irregular-box">
                         <div class="irregular-verb">BERE</div>
                         <div class="irregular-form">bevevo, bevevi, beveva, bevevamo, bevevate, bevevano</div>
                     </div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io bevevo caffè" - "Tu bevevi latte" - "Lei beveva acqua" - "Noi bevevamo vino" - "Voi bevevate birra" - "Loro bevevano succo"
+                    </div>
+
+                    <h3 style="margin-top: 2rem;">🟡 Verbi semiregolari (cambio di radice)</h3>
+
                     <div class="irregular-box">
                         <div class="irregular-verb">ANDARE</div>
                         <div class="irregular-form">andavo, andavi, andava, andavamo, andavate, andavano</div>
                     </div>
-                    <div class="irregular-box">
-                        <div class="irregular-verb">VENIRE</div>
-                        <div class="irregular-form">venivo, venivi, veniva, venivamo, venivate, venivano</div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io andavo a scuola" - "Tu andavi al cinema" - "Lui andava al mare" - "Noi andavamo in centro" - "Voi andavate in vacanza" - "Loro andavano a casa"
                     </div>
+
+                    <div class="irregular-box">
+                        <div class="irregular-verb">STARE</div>
+                        <div class="irregular-form">stavo, stavi, stava, stavamo, stavate, stavano</div>
+                    </div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io stavo bene" - "Tu stavi male" - "Lei stava attenta" - "Noi stavamo insieme" - "Voi stavate zitti" - "Loro stavano seduti"
+                    </div>
+
+                    <div class="irregular-box">
+                        <div class="irregular-verb">DARE</div>
+                        <div class="irregular-form">davo, davi, dava, davamo, davate, davano</div>
+                    </div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io davo un regalo" - "Tu davi consigli" - "Lui dava lezioni" - "Noi davamo una mano" - "Voi davate fastidio" - "Loro davano da mangiare"
+                    </div>
+
+                    <h3 style="margin-top: 2rem;">🔵 Verbi modali (irregolari)</h3>
+
                     <div class="irregular-box">
                         <div class="irregular-verb">VOLERE</div>
                         <div class="irregular-form">volevo, volevi, voleva, volevamo, volevate, volevano</div>
                     </div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io volevo uscire" - "Tu volevi dormire" - "Lei voleva mangiare" - "Noi volevamo partire" - "Voi volevate ballare" - "Loro volevano studiare"
+                    </div>
+
                     <div class="irregular-box">
                         <div class="irregular-verb">POTERE</div>
                         <div class="irregular-form">potevo, potevi, poteva, potevamo, potevate, potevano</div>
                     </div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io potevo venire" - "Tu potevi andare" - "Lui poteva parlare" - "Noi potevamo vederci" - "Voi potevate uscire" - "Loro potevano entrare"
+                    </div>
+
                     <div class="irregular-box">
                         <div class="irregular-verb">DOVERE</div>
                         <div class="irregular-form">dovevo, dovevi, doveva, dovevamo, dovevate, dovevano</div>
+                    </div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io dovevo studiare" - "Tu dovevi lavorare" - "Lei doveva partire" - "Noi dovevamo finire" - "Voi dovevate aspettare" - "Loro dovevano pagare"
+                    </div>
+
+                    <div class="irregular-box">
+                        <div class="irregular-verb">SAPERE</div>
+                        <div class="irregular-form">sapevo, sapevi, sapeva, sapevamo, sapevate, sapevano</div>
+                    </div>
+                    <div class="example-box">
+                        <strong>Esempi:</strong> "Io sapevo tutto" - "Tu sapevi niente" - "Lui sapeva leggere" - "Noi sapevamo cantare" - "Voi sapevate ballare" - "Loro sapevano nuotare"
+                    </div>
+
+                    <h3 style="margin-top: 2rem;">🟢 Altri verbi irregolari comuni</h3>
+
+                    <div class="irregular-box">
+                        <div class="irregular-verb">VENIRE</div>
+                        <div class="irregular-form">venivo, venivi, veniva, venivamo, venivate, venivano</div>
+                    </div>
+
+                    <div class="irregular-box">
+                        <div class="irregular-verb">USCIRE</div>
+                        <div class="irregular-form">uscivo, uscivi, usciva, uscivamo, uscivate, uscivano</div>
+                    </div>
+
+                    <div class="irregular-box">
+                        <div class="irregular-verb">RIMANERE</div>
+                        <div class="irregular-form">rimanevo, rimanevi, rimaneva, rimanevamo, rimanevate, rimanevano</div>
+                    </div>
+
+                    <div class="irregular-box">
+                        <div class="irregular-verb">TRADURRE</div>
+                        <div class="irregular-form">traducevo, traducevi, traduceva, traducevamo, traducevate, traducevano</div>
+                    </div>
+
+                    <div class="irregular-box">
+                        <div class="irregular-verb">PRODURRE</div>
+                        <div class="irregular-form">producevo, producevi, produceva, producevamo, producevate, producevano</div>
+                    </div>
+
+                    <div class="irregular-box">
+                        <div class="irregular-verb">CONDURRE</div>
+                        <div class="irregular-form">conducevo, conducevi, conduceva, conducevamo, conducevate, conducevano</div>
                     </div>
                 </div>
             </div>
@@ -751,20 +1871,98 @@
                                 <td>🕐 <strong>Ora nel passato</strong><br>"Erano le 8 di sera"</td>
                                 <td>📅 <strong>Date specifiche</strong><br>"Il 15 maggio 2020..."</td>
                             </tr>
+                            <tr>
+                                <td>👤 <strong>Età nel passato</strong><br>"Quando avevo 10 anni..."</td>
+                                <td>📊 <strong>Numero di volte</strong><br>"Sono andato 3 volte"</td>
+                            </tr>
+                            <tr>
+                                <td>🌅 <strong>Background narrativo</strong><br>"Faceva freddo, nevicava"</td>
+                                <td>🎬 <strong>Azioni della storia</strong><br>"È arrivato un uomo"</td>
+                            </tr>
+                            <tr>
+                                <td>🏠 <strong>Situazioni abitative</strong><br>"Abitavo a Roma"</td>
+                                <td>🏃 <strong>Trasferimenti</strong><br>"Mi sono trasferito a Roma"</td>
+                            </tr>
                         </tbody>
                     </table>
 
                     <div class="example-box">
-                        <strong>Esempio di narrazione:</strong><br>
-                        "Era una giornata <strong>serena</strong> (descrizione = imperfetto). Il sole <strong>brillava</strong> (descrizione = imperfetto) e gli uccelli <strong>canticchiavano</strong> (descrizione = imperfetto). Improvvisamente <strong>è arrivata</strong> (azione singola = passato prossimo) una tempesta."
+                        <strong>Esempio di narrazione completa:</strong><br>
+                        "Era una giornata <strong>serena</strong> (descrizione = imperfetto). Il sole <strong>brillava</strong> (descrizione = imperfetto) e gli uccelli <strong>canticchiavano</strong> (descrizione = imperfetto) sugli alberi. Il vento <strong>soffiava</strong> (descrizione = imperfetto) dolcemente. Improvvisamente <strong>è arrivata</strong> (azione singola = passato prossimo) una tempesta. La pioggia <strong>scendeva</strong> (descrizione = imperfetto) a dirotto e io <strong>ero</strong> (stato = imperfetto) completamente bagnato. Allora <strong>sono corso</strong> (azione = passato prossimo) a casa."
                     </div>
 
                     <div class="error-box">
-                        <strong>❌ Errore comune:</strong><br>
-                        Non usare l'imperfetto per azioni singole completate nel passato!<br>
-                        Sbagliato: "Ieri andavo al cinema" (se è un'azione singola)<br>
-                        Corretto: "Ieri sono andato al cinema"
+                        <strong>❌ Errori comuni da evitare:</strong><br><br>
+                        <strong>1. Non usare l'imperfetto per azioni singole completate nel passato!</strong><br>
+                        ❌ Sbagliato: "Ieri andavo al cinema" (se è un'azione singola)<br>
+                        ✅ Corretto: "Ieri sono andato al cinema"<br><br>
+                        
+                        <strong>2. Non usare il passato prossimo per descrizioni nel passato!</strong><br>
+                        ❌ Sbagliato: "Mia nonna è stata alta e ha avuto i capelli bianchi"<br>
+                        ✅ Corretto: "Mia nonna era alta e aveva i capelli bianchi"<br><br>
+                        
+                        <strong>3. Non usare il passato prossimo per abitudini!</strong><br>
+                        ❌ Sbagliato: "Da bambino ho mangiato sempre la pasta"<br>
+                        ✅ Corretto: "Da bambino mangiavo sempre la pasta"
                     </div>
+
+                    <h3 style="margin-top: 2rem;">📋 Espressioni che richiedono l'imperfetto</h3>
+                    <table class="conjugation-table">
+                        <thead>
+                            <tr>
+                                <th>Espressione</th>
+                                <th>Significato</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Da bambino/a...</strong></td>
+                                <td>Abitudine infantile</td>
+                                <td>"Da bambino giocavo sempre con le macchinine"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Quando ero giovane...</strong></td>
+                                <td>Periodo giovanile</td>
+                                <td>"Quando ero giovane, ballavo ogni sabato"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ogni giorno/settimana/mese...</strong></td>
+                                <td>Frequenza abituale</td>
+                                <td>"Ogni giorno andavo a scuola in bici"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Di solito...</strong></td>
+                                <td>Azione abituale</td>
+                                <td>"Di solito mangiavo a casa di mia nonna"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spesso / Qualche volta</strong></td>
+                                <td>Frequenza</td>
+                                <td>"Spesso andavo al cinema"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mentre...</strong></td>
+                                <td>Azione in corso</td>
+                                <td>"Mentre dormivo, ha telefonato Marco"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Erano le...</strong></td>
+                                <td>Ora nel passato</td>
+                                <td>"Erano le 10 di sera quando è arrivato"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sembrava che...</strong></td>
+                                <td>Apparenza nel passato</td>
+                                <td>"Sembrava che fosse arrabbiato"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Volevo / Dovevo...</strong></td>
+                                <td>Intenzione/obbligo nel passato</td>
+                                <td>"Volevo chiederti una cosa"</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -775,7 +1973,7 @@
                 <div class="score-panel">
                     <div>
                         <div class="score-label">Esercizio</div>
-                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                        <div class="score-value" id="exerciseCounter">1 / 100</div>
                     </div>
                     <div>
                         <div class="score-label">Punteggio</div>
@@ -806,14 +2004,23 @@
 
     <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
         <div style="max-width: 1200px; margin: 0 auto;">
-            <p>© 2024 Corso di Italiano A2 - L'Imperfetto (50 Esercizi)</p>
+            <p>© 2024 Corso di Italiano A2/B1 - L'Imperfetto (100 Esercizi Multilingue)</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Teoria disponibile in: Italiano, English, Français, Español, Português, العربية, Wolof, Bambara, Shqip, اردو, ਪੰਜਾਬੀ, বাংলা, हिंदी, 中文</p>
         </div>
     </footer>
 
     <script>
-        // Database degli esercizi (50 totali)
+        // Toggle language sections
+        function toggleLang(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            content.classList.toggle('active');
+            icon.classList.toggle('rotated');
+        }
+
+        // Database degli esercizi (100 totali)
         const exercises = [
-            // ESERCIZI 1-10: Coniugazione base -ARE
+            // ESERCIZI 1-15: Coniugazione base -ARE
             {
                 id: 1,
                 type: 'choice',
@@ -894,10 +2101,51 @@
                 correct: ['ascoltavano'],
                 explanation: '✅ Corretto! "Ascoltavano" è la terza persona plurale.'
             },
-
-            // ESERCIZI 11-20: Coniugazione -ERE
             {
                 id: 11,
+                type: 'choice',
+                question: 'Completa: Tu _____ (ballare) molto bene da giovane.',
+                options: ['ballavi', 'ballavo', 'ballava', 'ballavamo'],
+                correct: 'ballavi',
+                explanation: '✅ Corretto! Per "tu" si usa -avi.',
+                errorExplanation: '❌ Per "tu" (seconda persona singolare) si usa -AVI'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Completa: Mia madre _____ (cucinare) la pasta ogni domenica.',
+                correct: ['cucinava'],
+                explanation: '✅ Corretto! "Cucinava" è la terza persona singolare.'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Completa: Noi _____ (cantare) nel coro della chiesa.',
+                options: ['cantavamo', 'cantavate', 'cantavano', 'cantava'],
+                correct: 'cantavamo',
+                explanation: '✅ Corretto! Per "noi" si usa -avamo.',
+                errorExplanation: '❌ Per "noi" si usa la desinenza -AVAMO'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Completa: Voi _____ (giocare) a carte ogni sera.',
+                correct: ['giocavate'],
+                explanation: '✅ Corretto! "Giocavate" è la seconda persona plurale.'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['Loro lavoravo molto', 'Loro lavorava molto', 'Loro lavoravano molto', 'Loro lavoravi molto'],
+                correct: 'Loro lavoravano molto',
+                explanation: '✅ Corretto! "Lavoravano" è la terza persona plurale.',
+                errorExplanation: '❌ Per "loro" si usa la desinenza -AVANO'
+            },
+
+            // ESERCIZI 16-30: Coniugazione -ERE
+            {
+                id: 16,
                 type: 'choice',
                 question: 'Completa: Io _____ (vedere) spesso mia nonna.',
                 options: ['vedevo', 'vedeva', 'vedevi', 'vedevamo'],
@@ -906,14 +2154,14 @@
                 errorExplanation: '❌ Per "io" e verbi in -ERE si usa -EVO'
             },
             {
-                id: 12,
+                id: 17,
                 type: 'fill',
                 question: 'Completa: Tu _____ (scrivere) lettere ai tuoi amici.',
                 correct: ['scrivevi'],
                 explanation: '✅ Corretto! "Scrivevi" è la seconda persona singolare.'
             },
             {
-                id: 13,
+                id: 18,
                 type: 'choice',
                 question: 'Completa: Lei _____ (leggere) molti libri.',
                 options: ['leggeva', 'leggevo', 'leggevi', 'leggevamo'],
@@ -922,14 +2170,14 @@
                 errorExplanation: '❌ Per "lei" (terza persona) si usa -EVA'
             },
             {
-                id: 14,
+                id: 19,
                 type: 'fill',
                 question: 'Completa: Noi _____ (vendere) frutta al mercato.',
                 correct: ['vendevamo'],
                 explanation: '✅ Corretto! "Vendevamo" è la prima persona plurale.'
             },
             {
-                id: 15,
+                id: 20,
                 type: 'choice',
                 question: 'Completa: Voi _____ (mettere) sempre il cappello.',
                 options: ['mettevate', 'mettevamo', 'mettevano', 'metteva'],
@@ -938,14 +2186,14 @@
                 errorExplanation: '❌ Per "voi" si usa la desinenza -EVATE'
             },
             {
-                id: 16,
+                id: 21,
                 type: 'fill',
                 question: 'Completa: Loro _____ (credere) a tutto.',
                 correct: ['credevano'],
                 explanation: '✅ Corretto! "Credevano" è la terza persona plurale.'
             },
             {
-                id: 17,
+                id: 22,
                 type: 'choice',
                 question: 'Quale frase è corretta?',
                 options: ['Io riceveva tanti regali', 'Io ricevevo tanti regali', 'Io ricevevi tanti regali', 'Io ricevevamo tanti regali'],
@@ -954,14 +2202,14 @@
                 errorExplanation: '❌ Per "io" si usa la desinenza -EVO'
             },
             {
-                id: 18,
+                id: 23,
                 type: 'fill',
                 question: 'Completa: Da bambino tu _____ (correre) molto veloce.',
                 correct: ['correvi'],
                 explanation: '✅ Corretto! "Correvi" è la seconda persona singolare.'
             },
             {
-                id: 19,
+                id: 24,
                 type: 'choice',
                 question: 'Completa: Il professore _____ (spiegare) bene la lezione.',
                 options: ['spiegava', 'spiegavo', 'spiegavi', 'spiegavamo'],
@@ -970,16 +2218,57 @@
                 errorExplanation: '❌ "Spiegare" è in -ARE, quindi per "lui" si usa -AVA'
             },
             {
-                id: 20,
+                id: 25,
                 type: 'fill',
                 question: 'Completa: Noi _____ (prendere) il treno ogni giorno.',
                 correct: ['prendevamo'],
                 explanation: '✅ Corretto! "Prendevamo" è la prima persona plurale.'
             },
-
-            // ESERCIZI 21-30: Coniugazione -IRE
             {
-                id: 21,
+                id: 26,
+                type: 'choice',
+                question: 'Completa: Voi _____ (rispondere) sempre gentilmente.',
+                options: ['rispondevate', 'rispondevamo', 'rispondevano', 'rispondeva'],
+                correct: 'rispondevate',
+                explanation: '✅ Corretto! Per "voi" si usa -evate.',
+                errorExplanation: '❌ Per "voi" si usa la desinenza -EVATE'
+            },
+            {
+                id: 27,
+                type: 'fill',
+                question: 'Completa: I bambini _____ (chiedere) sempre caramelle.',
+                correct: ['chiedevano'],
+                explanation: '✅ Corretto! "Chiedevano" è la terza persona plurale.'
+            },
+            {
+                id: 28,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['Tu scriveva poesie', 'Tu scrivevi poesie', 'Tu scrivevo poesie', 'Tu scrivevamo poesie'],
+                correct: 'Tu scrivevi poesie',
+                explanation: '✅ Corretto! "Scrivevi" è la seconda persona singolare.',
+                errorExplanation: '❌ Per "tu" si usa la desinenza -EVI'
+            },
+            {
+                id: 29,
+                type: 'fill',
+                question: 'Completa: Mia sorella _____ (leggere) fino a tardi.',
+                correct: ['leggeva'],
+                explanation: '✅ Corretto! "Leggeva" è la terza persona singolare.'
+            },
+            {
+                id: 30,
+                type: 'choice',
+                question: 'Completa: _____ (io, vivere) a Roma per molti anni.',
+                options: ['Vivevo', 'Viveva', 'Vivevi', 'Vivevamo'],
+                correct: 'Vivevo',
+                explanation: '✅ Corretto! Per "io" si usa -evo.',
+                errorExplanation: '❌ Per "io" si usa la desinenza -EVO'
+            },
+
+            // ESERCIZI 31-45: Coniugazione -IRE
+            {
+                id: 31,
                 type: 'choice',
                 question: 'Completa: Io _____ (dormire) fino a tardi la domenica.',
                 options: ['dormivo', 'dormiva', 'dormivi', 'dormivamo'],
@@ -988,14 +2277,14 @@
                 errorExplanation: '❌ Per "io" e verbi in -IRE si usa -IVO'
             },
             {
-                id: 22,
+                id: 32,
                 type: 'fill',
                 question: 'Completa: Tu _____ (sentire) sempre quella canzone.',
                 correct: ['sentivi'],
                 explanation: '✅ Corretto! "Sentivi" è la seconda persona singolare.'
             },
             {
-                id: 23,
+                id: 33,
                 type: 'choice',
                 question: 'Completa: Lui _____ (partire) presto al mattino.',
                 options: ['partiva', 'partivo', 'partivi', 'partivamo'],
@@ -1004,14 +2293,14 @@
                 errorExplanation: '❌ Per "lui" (terza persona) si usa -IVA'
             },
             {
-                id: 24,
+                id: 34,
                 type: 'fill',
                 question: 'Completa: Noi _____ (seguire) le lezioni online.',
                 correct: ['seguivamo'],
                 explanation: '✅ Corretto! "Seguivamo" è la prima persona plurale.'
             },
             {
-                id: 25,
+                id: 35,
                 type: 'choice',
                 question: 'Completa: Voi _____ (capire) subito tutto.',
                 options: ['capivate', 'capivamo', 'capivano', 'capiva'],
@@ -1020,14 +2309,14 @@
                 errorExplanation: '❌ Per "voi" si usa la desinenza -IVATE'
             },
             {
-                id: 26,
+                id: 36,
                 type: 'fill',
                 question: 'Completa: Loro _____ (aprire) il negozio alle 9.',
                 correct: ['aprivano'],
                 explanation: '✅ Corretto! "Aprivano" è la terza persona plurale.'
             },
             {
-                id: 27,
+                id: 37,
                 type: 'choice',
                 question: 'Quale frase è corretta? (finire, io)',
                 options: ['Io finiva sempre presto', 'Io finivo sempre presto', 'Io finivi sempre presto', 'Io finivamo sempre presto'],
@@ -1036,14 +2325,14 @@
                 errorExplanation: '❌ "Finire" è in -IRE con -isco, ma all\'imperfetto diventa FINIVO'
             },
             {
-                id: 28,
+                id: 38,
                 type: 'fill',
                 question: 'Completa: Tu _____ (preferire) il tè al caffè.',
                 correct: ['preferivi'],
                 explanation: '✅ Corretto! "Preferivi" è la seconda persona singolare.'
             },
             {
-                id: 29,
+                id: 39,
                 type: 'choice',
                 question: 'Completa: La bambina _____ (pulire) la sua camera.',
                 options: ['puliva', 'pulivo', 'pulivi', 'pulivamo'],
@@ -1052,16 +2341,57 @@
                 errorExplanation: '❌ Per "lei" (terza persona) si usa -IVA'
             },
             {
-                id: 30,
+                id: 40,
                 type: 'fill',
                 question: 'Completa: Noi _____ (costruire) case in campagna.',
                 correct: ['costruivamo'],
                 explanation: '✅ Corretto! "Costruivamo" è la prima persona plurale.'
             },
-
-            // ESERCIZI 31-40: Verbi irregolari (essere, avere, fare, dire)
             {
-                id: 31,
+                id: 41,
+                type: 'choice',
+                question: 'Completa: Voi _____ (capire) l\'italiano facilmente.',
+                options: ['capivate', 'capivamo', 'capivano', 'capiva'],
+                correct: 'capivate',
+                explanation: '✅ Corretto! Per "voi" si usa -ivate.',
+                errorExplanation: '❌ Per "voi" si usa la desinenza -IVATE'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Completa: Gli studenti _____ (seguire) il professore attentamente.',
+                correct: ['seguivano'],
+                explanation: '✅ Corretto! "Seguivano" è la terza persona plurale.'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['Io dormiva bene', 'Io dormivo bene', 'Io dormivi bene', 'Io dormivamo bene'],
+                correct: 'Io dormivo bene',
+                explanation: '✅ Corretto! "Dormivo" è la prima persona singolare.',
+                errorExplanation: '❌ Per "io" si usa la desinenza -IVO'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Completa: Tu _____ (sentire) il profumo dei fiori.',
+                correct: ['sentivi'],
+                explanation: '✅ Corretto! "Sentivi" è la seconda persona singolare.'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Completa: L\'autobus _____ (partire) alle 8 precise.',
+                options: ['partiva', 'partivo', 'partivi', 'partivamo'],
+                correct: 'partiva',
+                explanation: '✅ Corretto! "Partiva" è la terza persona singolare.',
+                errorExplanation: '❌ Per "lui" (terza persona) si usa -IVA'
+            },
+
+            // ESERCIZI 46-60: Verbi irregolari (essere, avere, fare, dire, bere)
+            {
+                id: 46,
                 type: 'choice',
                 question: 'Completa: Io _____ (essere) molto felice da bambino.',
                 options: ['ero', 'ero', 'ero', 'ero'],
@@ -1070,14 +2400,14 @@
                 errorExplanation: '❌ L\'imperfetto di ESSERE è irregolare: ERO'
             },
             {
-                id: 32,
+                id: 47,
                 type: 'fill',
                 question: 'Completa: Tu _____ (avere) molti amici.',
                 correct: ['avevi'],
                 explanation: '✅ Corretto! "Avevi" è la seconda persona singolare di avere.'
             },
             {
-                id: 33,
+                id: 48,
                 type: 'choice',
                 question: 'Completa: Lui _____ (fare) il medico.',
                 options: ['faceva', 'facevo', 'facevi', 'facevamo'],
@@ -1086,14 +2416,14 @@
                 errorExplanation: '❌ L\'imperfetto di FARE è irregolare: FACEVA'
             },
             {
-                id: 34,
+                id: 49,
                 type: 'fill',
                 question: 'Completa: Noi _____ (dire) sempre la verità.',
                 correct: ['dicevamo'],
                 explanation: '✅ Corretto! "Dicevamo" è la prima persona plurale di dire.'
             },
             {
-                id: 35,
+                id: 50,
                 type: 'choice',
                 question: 'Completa: Voi _____ (bere) molta acqua.',
                 options: ['bevevate', 'bevevamo', 'bevevano', 'beveva'],
@@ -1102,14 +2432,14 @@
                 errorExplanation: '❌ L\'imperfetto di BERE è BEVEVATE'
             },
             {
-                id: 36,
+                id: 51,
                 type: 'fill',
                 question: 'Completa: Loro _____ (volere) andare al cinema.',
                 correct: ['volevano'],
                 explanation: '✅ Corretto! "Volevano" è la terza persona plurale di volere.'
             },
             {
-                id: 37,
+                id: 52,
                 type: 'choice',
                 question: 'Quale frase è corretta?',
                 options: ['Io poteva venire', 'Io potevo venire', 'Io potevi venire', 'Io potevamo venire'],
@@ -1118,14 +2448,14 @@
                 errorExplanation: '❌ L\'imperfetto di POTERE è POTEVO'
             },
             {
-                id: 38,
+                id: 53,
                 type: 'fill',
                 question: 'Completa: Tu _____ (dovere) studiare molto.',
                 correct: ['dovevi'],
                 explanation: '✅ Corretto! "Dovevi" è la seconda persona singolare di dovere.'
             },
             {
-                id: 39,
+                id: 54,
                 type: 'choice',
                 question: 'Completa: Lei _____ (andare) spesso in vacanza.',
                 options: ['andava', 'andavo', 'andavi', 'andavamo'],
@@ -1134,16 +2464,57 @@
                 errorExplanation: '❌ Per "lei" e "andare" si usa ANDAVA'
             },
             {
-                id: 40,
+                id: 55,
                 type: 'fill',
                 question: 'Completa: Noi _____ (venire) sempre in ritardo.',
                 correct: ['venivamo'],
                 explanation: '✅ Corretto! "Venivamo" è la prima persona plurale di venire.'
             },
-
-            // ESERCIZI 41-50: Contesti e differenza con passato prossimo
             {
-                id: 41,
+                id: 56,
+                type: 'choice',
+                question: 'Completa: Io _____ (stare) bene con loro.',
+                options: ['stavo', 'stava', 'stavi', 'stavamo'],
+                correct: 'stavo',
+                explanation: '✅ Corretto! "Stavo" è la prima persona singolare di stare.',
+                errorExplanation: '❌ L\'imperfetto di STARE è STAVO'
+            },
+            {
+                id: 57,
+                type: 'fill',
+                question: 'Completa: Tu _____ (sapere) la risposta.',
+                correct: ['sapevi'],
+                explanation: '✅ Corretto! "Sapevi" è la seconda persona singolare di sapere.'
+            },
+            {
+                id: 58,
+                type: 'choice',
+                question: 'Completa: Lui _____ (dare) consigli a tutti.',
+                options: ['dava', 'davo', 'davi', 'davamo'],
+                correct: 'dava',
+                explanation: '✅ Corretto! "Dava" è la terza persona singolare di dare.',
+                errorExplanation: '❌ L\'imperfetto di DARE è DAVA'
+            },
+            {
+                id: 59,
+                type: 'fill',
+                question: 'Completa: Noi _____ (avere) sempre fame.',
+                correct: ['avevamo'],
+                explanation: '✅ Corretto! "Avevamo" è la prima persona plurale di avere.'
+            },
+            {
+                id: 60,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['Voi eravamo contenti', 'Voi eravate contenti', 'Voi erano contenti', 'Voi era contenti'],
+                correct: 'Voi eravate contenti',
+                explanation: '✅ Corretto! "Eravate" è la seconda persona plurale di essere.',
+                errorExplanation: '❌ L\'imperfetto di ESSERE per "voi" è ERAVATE'
+            },
+
+            // ESERCIZI 61-75: Contesti - Abitudini e descrizioni
+            {
+                id: 61,
                 type: 'choice',
                 question: 'Quale tempo usi per un\'abitudine nel passato? "Da bambino _____ (mangiare) la pasta tutti i giorni."',
                 options: ['mangiavo', 'ho mangiato', 'mangerò', 'mangi'],
@@ -1152,14 +2523,14 @@
                 errorExplanation: '❌ Le abitudini nel passato si esprimono con l\'IMPERFETTO'
             },
             {
-                id: 42,
+                id: 62,
                 type: 'fill',
                 question: 'Completa con l\'imperfetto (descrizione): Il cielo _____ (essere) azzurro e il sole _____ (brillare).',
                 correct: ['era', 'brillava'],
                 explanation: '✅ Corretto! Le descrizioni si fanno all\'imperfetto.'
             },
             {
-                id: 43,
+                id: 63,
                 type: 'choice',
                 question: 'Quale frase usa correttamente l\'imperfetto per un\'azione in corso?',
                 options: ['Mentre mangiavo, ha suonato il telefono', 'Mentre ho mangiato, suonava il telefono', 'Mentre mangio, suona il telefono', 'Mangio e il telefono suona'],
@@ -1168,14 +2539,14 @@
                 errorExplanation: '❌ L\'azione in corso si esprime con l\'IMPERFETTO, quella che interrompe con il PASSATO PROSSIMO'
             },
             {
-                id: 44,
+                id: 64,
                 type: 'fill',
                 question: 'Completa con l\'imperfetto (stato d\'animo): Ieri _____ (essere) molto stanco.',
                 correct: ['ero'],
                 explanation: '✅ Corretto! Gli stati d\'animo si esprimono con l\'imperfetto.'
             },
             {
-                id: 45,
+                id: 65,
                 type: 'choice',
                 question: 'Quale frase è corretta? (descrizione fisica nel passato)',
                 options: ['Mia nonna era alta e aveva i capelli bianchi', 'Mia nonna è stata alta e ha avuto i capelli bianchi', 'Mia nonna fu alta e ebbe i capelli bianchi', 'Mia nonna sarà alta e avrà i capelli bianchi'],
@@ -1184,14 +2555,14 @@
                 errorExplanation: '❌ Le descrizioni fisiche nel passato richiedono l\'IMPERFETTO'
             },
             {
-                id: 46,
+                id: 66,
                 type: 'fill',
                 question: 'Completa: _____ (essere) le 8 di sera quando _____ (arrivare) Marco. (prima azione = imperfetto, seconda = passato prossimo)',
                 correct: ['erano', 'è arrivato'],
                 explanation: '✅ Corretto! L\'ora si esprime con l\'imperfetto, l\'arrivo (azione) al passato prossimo.'
             },
             {
-                id: 47,
+                id: 67,
                 type: 'choice',
                 question: 'Quale tempo usi per: "Ieri _____ (andare) al cinema"? (azione singola completata)',
                 options: ['andavo', 'sono andato', 'andai', 'andrò'],
@@ -1200,14 +2571,14 @@
                 errorExplanation: '❌ Per un\'azione singola completata nel passato si usa il PASSATO PROSSIMO'
             },
             {
-                id: 48,
+                id: 68,
                 type: 'fill',
                 question: 'Completa con l\'imperfetto (background narrativo): Faceva freddo e _____ (nevicare).',
                 correct: ['nevicava'],
                 explanation: '✅ Corretto! Il background narrativo si descrive all\'imperfetto.'
             },
             {
-                id: 49,
+                id: 69,
                 type: 'choice',
                 question: 'Quale frase è corretta?',
                 options: ['Quando ero giovane, ho viaggiato molto', 'Quando sono stato giovane, viaggiavo molto', 'Quando ero giovane, viaggiavo molto', 'Quando fui giovane, ho viaggiato molto'],
@@ -1216,27 +2587,263 @@
                 errorExplanation: '❌ Entrambe le azioni richiedono l\'IMPERFETTO: stato + abitudine'
             },
             {
-                id: 50,
+                id: 70,
                 type: 'fill',
                 question: 'Completa: Mentre _____ (leggere) il giornale, _____ (sentire) un rumore. (prima azione = imperfetto, seconda = passato prossimo)',
                 correct: ['leggevo', 'ho sentito'],
-                explanation: '✅ Corretto! "Leggere" è l\'azione in corso (imperfetto), "sentire" è l\'interruzione (passato prossimo). Complimenti!',
+                explanation: '✅ Corretto! "Leggere" è l\'azione in corso (imperfetto), "sentire" è l\'interruzione (passato prossimo).'
+            },
+            {
+                id: 71,
+                type: 'choice',
+                question: 'Completa (età nel passato): Quando _____ (avere) 10 anni, _____ (giocare) sempre a calcio.',
+                options: ['avevo - giocavo', 'ho avuto - ho giocato', 'ebbi - giocai', 'avrò - giocherò'],
+                correct: 'avevo - giocavo',
+                explanation: '✅ Corretto! L\'età nel passato e le abitudini richiedono l\'imperfetto.',
+                errorExplanation: '❌ L\'età nel passato e le abitudini si esprimono con l\'IMPERFETTO'
+            },
+            {
+                id: 72,
+                type: 'fill',
+                question: 'Completa con l\'imperfetto: Da piccolo io _____ (andare) sempre al mare con i miei genitori.',
+                correct: ['andavo'],
+                explanation: '✅ Corretto! "Da piccolo" indica un\'abitudine nel passato.'
+            },
+            {
+                id: 73,
+                type: 'choice',
+                question: 'Quale frase è corretta? (situazione abitativa)',
+                options: ['Abitavo a Roma per 5 anni', 'Ho abitato a Roma per 5 anni', 'Abitai a Roma per 5 anni', 'Abito a Roma per 5 anni'],
+                correct: 'Abitavo a Roma per 5 anni',
+                explanation: '✅ Corretto! La situazione abitativa nel passato si esprime con l\'imperfetto.',
+                errorExplanation: '❌ La situazione abitativa nel passato richiede l\'IMPERFETTO'
+            },
+            {
+                id: 74,
+                type: 'fill',
+                question: 'Completa: Ogni estate noi _____ (fare) le vacanze in montagna.',
+                correct: ['facevamo'],
+                explanation: '✅ Corretto! "Ogni estate" indica un\'abitudine ripetuta nel passato.'
+            },
+            {
+                id: 75,
+                type: 'choice',
+                question: 'Quale frase è corretta? (stato d\'animo)',
+                options: ['Ero felice quando ho visto il regalo', 'Sono stato felice quando ho visto il regalo', 'Fui felice quando ho visto il regalo', 'Sarò felice quando ho visto il regalo'],
+                correct: 'Ero felice quando ho visto il regalo',
+                explanation: '✅ Corretto! Lo stato d\'animo nel passato si esprime con l\'imperfetto.',
+                errorExplanation: '❌ Gli stati d\'animo nel passato richiedono l\'IMPERFETTO'
+            },
+
+            // ESERCIZI 76-85: Narrazione e contesti complessi
+            {
+                id: 76,
+                type: 'fill',
+                question: 'Completa la narrazione: Era una bella giornata. Il sole _____ (splendere) e gli uccelli _____ (cantare).',
+                correct: ['splendeva', 'cantavano'],
+                explanation: '✅ Corretto! Le descrizioni nella narrazione usano l\'imperfetto.'
+            },
+            {
+                id: 77,
+                type: 'choice',
+                question: 'Completa: Mentre _____ (camminare) per strada, _____ (vedere) un incidente.',
+                options: ['camminavo - ho visto', 'ho camminato - vedevo', 'camminavo - vedevo', 'ho camminato - ho visto'],
+                correct: 'camminavo - ho visto',
+                explanation: '✅ Corretto! "Camminare" è l\'azione in corso (imperfetto), "vedere" è l\'evento (passato prossimo).',
+                errorExplanation: '❌ Azione in corso = IMPERFETTO, evento = PASSATO PROSSIMO'
+            },
+            {
+                id: 78,
+                type: 'fill',
+                question: 'Completa: _____ (essere) le 3 del pomeriggio quando _____ (iniziare) a piovere.',
+                correct: ['erano', 'ha iniziato'],
+                explanation: '✅ Corretto! L\'ora = imperfetto, l\'inizio dell\'azione = passato prossimo.'
+            },
+            {
+                id: 79,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['Di solito andavo al cinema il sabato', 'Di solito sono andato al cinema il sabato', 'Di solito andai al cinema il sabato', 'Di solito vado al cinema il sabato'],
+                correct: 'Di solito andavo al cinema il sabato',
+                explanation: '✅ Corretto! "Di solito" indica un\'abitudine nel passato.',
+                errorExplanation: '❌ "Di solito" + passato richiede l\'IMPERFETTO'
+            },
+            {
+                id: 80,
+                type: 'fill',
+                question: 'Completa: Mia madre _____ (essere) una donna molto gentile e _____ (avere) sempre un sorriso.',
+                correct: ['era', 'aveva'],
+                explanation: '✅ Corretto! Le descrizioni di carattere usano l\'imperfetto.'
+            },
+            {
+                id: 81,
+                type: 'choice',
+                question: 'Completa: Quando _____ (essere) piccolo, _____ (volere) diventare pilota.',
+                options: ['ero - volevo', 'sono stato - ho voluto', 'fui - volli', 'sarò - vorrò'],
+                correct: 'ero - volevo',
+                explanation: '✅ Corretto! L\'età e i desideri nel passato usano l\'imperfetto.',
+                errorExplanation: '❌ Età e desideri nel passato richiedono l\'IMPERFETTO'
+            },
+            {
+                id: 82,
+                type: 'fill',
+                question: 'Completa: La casa _____ (essere) grande e _____ (avere) un bel giardino.',
+                correct: ['era', 'aveva'],
+                explanation: '✅ Corretto! Le descrizioni di luoghi usano l\'imperfetto.'
+            },
+            {
+                id: 83,
+                type: 'choice',
+                question: 'Quale frase è corretta? (azione che interrompe)',
+                options: ['Mentre dormivo, qualcuno ha bussato', 'Mentre ho dormito, qualcuno bussava', 'Mentre dormivo, qualcuno bussava', 'Mentre ho dormito, qualcuno ha bussato'],
+                correct: 'Mentre dormivo, qualcuno ha bussato',
+                explanation: '✅ Corretto! Azione in corso = imperfetto, interruzione = passato prossimo.',
                 errorExplanation: '❌ Azione in corso = IMPERFETTO, interruzione = PASSATO PROSSIMO'
+            },
+            {
+                id: 84,
+                type: 'fill',
+                question: 'Completa: Sembrava che lui _____ (essere) arrabbiato, ma in realtà _____ (essere) solo stanco.',
+                correct: ['fosse', 'era'],
+                explanation: '✅ Corretto! "Sembrava che" richiede il congiuntivo, la realtà l\'indicativo.'
+            },
+            {
+                id: 85,
+                type: 'choice',
+                question: 'Completa: Non _____ (potere) uscire perché _____ (dovere) studiare.',
+                options: ['potevo - dovevo', 'ho potuto - ho dovuto', 'potei - dovei', 'potrò - dovrò'],
+                correct: 'potevo - dovevo',
+                explanation: '✅ Corretto! I verbi modali al passato descrivono la situazione con l\'imperfetto.',
+                errorExplanation: '❌ I verbi modali descrivono la situazione con l\'IMPERFETTO'
+            },
+
+            // ESERCIZI 86-95: Esercizi misti avanzati
+            {
+                id: 86,
+                type: 'fill',
+                question: 'Completa: Tu _____ (sapere) già nuotare quando _____ (avere) 5 anni.',
+                correct: ['sapevi', 'avevi'],
+                explanation: '✅ Corretto! La capacità e l\'età nel passato usano l\'imperfetto.'
+            },
+            {
+                id: 87,
+                type: 'choice',
+                question: 'Quale frase è corretta?',
+                options: ['Volevo chiederti una cosa', 'Ho voluto chiederti una cosa', 'Volli chiederti una cosa', 'Vorrò chiederti una cosa'],
+                correct: 'Volevo chiederti una cosa',
+                explanation: '✅ Corretto! "Volevo" esprime un\'intenzione educata nel passato.',
+                errorExplanation: '❌ Per esprimere intenzione educata nel passato si usa l\'IMPERFETTO di VOLERE'
+            },
+            {
+                id: 88,
+                type: 'fill',
+                question: 'Completa: Ieri sera _____ (fare) freddo e noi _____ (stare) a casa.',
+                correct: ['faceva', 'stavamo'],
+                explanation: '✅ Corretto! Il tempo atmosferico e lo stato usano l\'imperfetto.'
+            },
+            {
+                id: 89,
+                type: 'choice',
+                question: 'Completa: Mentre _____ (pranzare), _____ (ricevere) una telefonata importante.',
+                options: ['pranzavo - ho ricevuto', 'ho pranzato - ricevevo', 'pranzavo - ricevevo', 'ho pranzato - ho ricevuto'],
+                correct: 'pranzavo - ho ricevuto',
+                explanation: '✅ Corretto! Azione in corso = imperfetto, evento = passato prossimo.',
+                errorExplanation: '❌ Azione in corso = IMPERFETTO, evento = PASSATO PROSSIMO'
+            },
+            {
+                id: 90,
+                type: 'fill',
+                question: 'Completa: Da giovane, mio padre _____ (fumare) molte sigarette.',
+                correct: ['fumava'],
+                explanation: '✅ Corretto! "Da giovane" indica un\'abitudine nel passato.'
+            },
+            {
+                id: 91,
+                type: 'choice',
+                question: 'Quale frase è corretta? (data specifica vs ora)',
+                options: ['Erano il 15 maggio quando sono arrivato', 'Era il 15 maggio quando sono arrivato', 'Fu il 15 maggio quando sono arrivato', 'Sarà il 15 maggio quando sono arrivato'],
+                correct: 'Era il 15 maggio quando sono arrivato',
+                explanation: '✅ Corretto! Anche le date nel passato possono usare l\'imperfetto come background.',
+                errorExplanation: '❌ Le date nel passato come background usano l\'IMPERFETTO'
+            },
+            {
+                id: 92,
+                type: 'fill',
+                question: 'Completa: _____ (essere) tardi e tutti _____ (dovere) andare a casa.',
+                correct: ['era', 'dovevano'],
+                explanation: '✅ Corretto! L\'ora e l\'obbligo nel passato usano l\'imperfetto.'
+            },
+            {
+                id: 93,
+                type: 'choice',
+                question: 'Completa: Mi _____ (piacere) molto quel film perché _____ (essere) molto divertente.',
+                options: ['piaceva - era', 'è piaciuto - è stato', 'piacque - fu', 'piacerà - sarà'],
+                correct: 'piaceva - era',
+                explanation: '✅ Corretto! Le opinioni nel passato usano l\'imperfetto.',
+                errorExplanation: '❌ Le opinioni nel passato richiedono l\'IMPERFETTO'
+            },
+            {
+                id: 94,
+                type: 'fill',
+                question: 'Completa: Quando _____ (andare) a Parigi, _____ (visitare) la Torre Eiffel. (azione singola)',
+                correct: ['sono andato', 'ho visitato'],
+                explanation: '✅ Corretto! Azioni singole completate = passato prossimo.'
+            },
+            {
+                id: 95,
+                type: 'choice',
+                question: 'Quale frase è corretta? (narrazione completa)',
+                options: ['Faceva freddo, pioveva e ho deciso di uscire', 'Faceva freddo, pioveva e decidevo di uscire', 'Ho fatto freddo, ha piovuto e ho deciso di uscire', 'Faceva freddo, pioveva e decisi di uscire'],
+                correct: 'Faceva freddo, pioveva e ho deciso di uscire',
+                explanation: '✅ Corretto! Background = imperfetto, azione = passato prossimo.',
+                errorExplanation: '❌ Background = IMPERFETTO, azione = PASSATO PROSSIMO'
+            },
+
+            // ESERCIZI 96-100: Esercizi finali complessi
+            {
+                id: 96,
+                type: 'fill',
+                question: 'Completa: _____ (essere) le 7 di mattina. Io _____ (dormire) ancora quando _____ (suonare) la sveglia.',
+                correct: ['erano', 'dormivo', 'ha suonato'],
+                explanation: '✅ Corretto! Ora = imperfetto, azione in corso = imperfetto, interruzione = passato prossimo.'
+            },
+            {
+                id: 97,
+                type: 'choice',
+                question: 'Completa: Da bambino io _____ (non volere) mai _____ (mangiare) le verdure.',
+                options: ['non volevo - mangiare', 'non ho voluto - mangiare', 'non volli - mangiare', 'non vorrò - mangiare'],
+                correct: 'non volevo - mangiare',
+                explanation: '✅ Corretto! Abitudine nel passato con verbo modale = imperfetto.',
+                errorExplanation: '❌ Le abitudini con verbi modali richiedono l\'IMPERFETTO'
+            },
+            {
+                id: 98,
+                type: 'fill',
+                question: 'Completa: La festa _____ (essere) bellissima! Tutti _____ (ballare) e _____ (divertirsi).',
+                correct: ['era', 'ballavano', 'si divertivano'],
+                explanation: '✅ Corretto! Descrizione di una scena nel passato = imperfetto.'
+            },
+            {
+                id: 99,
+                type: 'choice',
+                question: 'Completa: Mentre _____ (aspettare) l\'autobus, _____ (incontrare) un vecchio amico.',
+                options: ['aspettavo - ho incontrato', 'ho aspettato - incontravo', 'aspettavo - incontravo', 'ho aspettato - ho incontrato'],
+                correct: 'aspettavo - ho incontrato',
+                explanation: '✅ Corretto! Azione in corso = imperfetto, evento = passato prossimo.',
+                errorExplanation: '❌ Azione in corso = IMPERFETTO, evento = PASSATO PROSSIMO'
+            },
+            {
+                id: 100,
+                type: 'fill',
+                question: 'Completa: Quando _____ (essere) piccola, mia nonna mi _____ (raccontare) sempre delle storie.',
+                correct: ['ero', 'raccontava'],
+                explanation: '✅ Corretto! Età nel passato e abitudine = imperfetto. Complimenti per aver completato tutti gli esercizi!'
             }
         ];
 
         let currentExercise = 0;
         let totalScore = 0;
         let answered = false;
-
-        function speak(text) {
-            if (!('speechSynthesis' in window)) return;
-            window.speechSynthesis.cancel();
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = 'it-IT';
-            u.rate = 0.8;
-            window.speechSynthesis.speak(u);
-        }
 
         function showSection(id, btn) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -1331,16 +2938,16 @@
             if (selected === ex.correct) {
                 feedback.className = 'feedback show correct';
                 feedback.textContent = ex.explanation;
-                totalScore += 2;
+                totalScore += 1;
             } else {
                 feedback.className = 'feedback show wrong';
                 let errorMsg = ex.errorExplanation;
                 
                 if (ex.question.includes('imperfetto') && ex.question.includes('passato prossimo')) {
-                    errorMsg += '<br><strong>💡 Ricorda: imperfetto per descrizioni/abitudini, passato prossimo per azioni singole!</strong>';
+                    errorMsg += ' 💡 Ricorda: imperfetto per descrizioni/abitudini, passato prossimo per azioni singole!';
                 }
                 if (ex.question.includes('essere') || ex.question.includes('avere') || ex.question.includes('fare') || ex.question.includes('dire')) {
-                    errorMsg += '<br><strong>💡 Questo è un verbo irregolare, memorizza le forme!</strong>';
+                    errorMsg += ' 💡 Questo è un verbo irregolare, memorizza le forme!';
                 }
                 
                 feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
@@ -1373,7 +2980,7 @@
                 feedback.textContent = ex.explanation;
                 input.style.borderColor = 'var(--success)';
                 input.style.background = '#f0fff4';
-                totalScore += 2;
+                totalScore += 1;
             } else {
                 feedback.className = 'feedback show wrong';
                 let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
@@ -1407,13 +3014,15 @@
             
             let message = '';
             if (totalScore >= 90) {
-                message = '🏆 Eccellente! Padroneggi perfettamente l\'imperfetto!';
-            } else if (totalScore >= 70) {
-                message = '👍 Ottimo lavoro! Conosci bene le regole dell\'imperfetto!';
-            } else if (totalScore >= 50) {
+                message = '🏆 Eccellente! Padroneggi perfettamente l\'imperfetto! Sei pronto per il livello B2!';
+            } else if (totalScore >= 75) {
+                message = '👍 Ottimo lavoro! Conosci molto bene le regole dell\'imperfetto!';
+            } else if (totalScore >= 60) {
                 message = '💪 Buon lavoro! Ricorda le desinenze: -avo, -evo, -ivo e i verbi irregolari!';
+            } else if (totalScore >= 40) {
+                message = '📚 Continua a studiare! Ripassa le regole base e i verbi irregolari.';
             } else {
-                message = '📚 Ripassa le regole! Ricorda: -ARE → -avo, -ERE → -evo, -IRE → -ivo!';
+                message = '📖 Ripassa la teoria! Ricorda: -ARE → -avo, -ERE → -evo, -IRE → -ivo!';
             }
             
             document.getElementById('finalMessage').textContent = message;
@@ -1440,3 +3049,4 @@
     </script>
 </body>
 </html>
+

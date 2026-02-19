@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo C2 - Linguaggio Filosofico-Letterario</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2c1810;
+            --secondary: #6c757d;
+            --accent: #8b4513;
+            --c2-color: #4a6741;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --philosophy: #4a3b32;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--c2-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--c2-color);
+            font-weight: bold;
+        }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--c2-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #f0f4ef;
+            border-left: 4px solid var(--philosophy);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .highlight { 
+            background: rgba(74, 103, 65, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .philosophy-term { color: var(--philosophy); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .transformation-box {
+            background: #f5f0eb;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .arrow {
+            font-size: 1.5rem;
+            color: var(--c2-color);
+            margin: 0 1rem;
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--c2-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c2-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #1a0f0a;
+        }
+        .btn-check { 
+            background: var(--c2-color); 
+            color: white; 
+        }
+        .btn-check:hover {
+            background: #3a5432;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c2-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a0f0a 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--c2-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--c2-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--c2-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--c2-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .philosophy-context {
+            background: #f8f6f3;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--philosophy);
+            font-style: italic;
+        }
+        .literary-box {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo C2 - Linguaggio Filosofico-Letterario</h1>
+            <p>Argomentazione complessa, stile elevato e strutture del pensiero speculativo</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano C2</a>
+            <span>›</span>
+            <strong>Linguaggio Filosofico-Letterario</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📚 Linguaggio Filosofico-Letterario</h1>
+            <p class="page-subtitle">Ermeneutica, critica testuale e registri stilistici della riflessione speculativa</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📖 Teoria</button>
+            <button class="nav-tab" onclick="showSection('terminology', this)">Terminologia</button>
+            <button class="nav-tab" onclick="showSection('syntax', this)">Sintassi</button>
+            <button class="nav-tab" onclick="showSection('genres', this)">Generi</button>
+            <button class="nav-tab" onclick="showSection('hermeneutics', this)">Ermeneutica</button>
+            <button class="nav-tab" onclick="showSection('rhetoric', this)">Retorica</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">🎭</div>
+                    <div class="avatar-name">Prof. Benedetti</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo C2! 📖</h3>
+                    <p>Oggi esploriamo il <strong>linguaggio filosofico-letterario</strong>, caratterizzato da astrazione concettuale, polisemia controllata e stratificazione ermeneutica.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="philosophy-term">L'essere si svela</span> nel <span class="philosophy-term">differire</span> dell'<span class="philosophy-term">entità</span>, in un <span class="philosophy-term">chiasmo</span> ontologico che <span class="philosophy-term">sottrae</span> l'origine alla <span class="philosophy-term">presenza</span>".</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Caratteristiche del Linguaggio Filosofico-Letterario</div>
+                <div class="card-body">
+                    <p>Il <strong>linguaggio filosofico-letterario</strong> è un registro specialistico finalizzato all'indagine speculativa, all'interpretazione testuale e alla comunicazione di concetti astratti attraverso strutture complesse. [^1^]</p>
+                    
+                    <div class="transformation-box">
+                        <strong>Caratteristiche distintive:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Polisemia controllata:</strong> Termini con molteplici stratificazioni semantiche (essere, altro, differenza)</li>
+                            <li><strong>Astrazione concettuale:</strong> Sostantivazione di verbi e aggettivi (il pensare, l'autentico)</li>
+                            <li><strong>Ipertestualità:</strong> Intertestualità, citazione, allusione, parafrasi</li>
+                            <li><strong>Negatività:</strong> Uso dell'apofatico, della sottrazione, dell'indiretto</li>
+                            <li><strong>Temporalità complessa:</strong> Tempi storici, modali, congiuntivi filosofici</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Figure retoriche tipiche:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Ossimoro:</strong> Silenzioso clamore, lucida follia</li>
+                            <li><strong>Chiasmo:</strong> Incrocio sintattico (vissi nell'arte, nell'arte vissi)</li>
+                            <li><strong>Paradosso:</strong> Il moto è quiete, il nulla è fondamento</li>
+                            <li><strong>Litote:</strong> Negazione dell'opposto per affermare (non è privo di = ha)</li>
+                            <li><strong>Analogia:</strong> Proporzione tra termini eterogenei</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Attenzione:</strong> Molti termini hanno significato tecnico diverso dal comune: "sostanza" (ousia vs materia), "soggetto" (sostanza pensante vs individuo), "spirito" (geist vs anima).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE TERMINOLOGIA -->
+        <section id="terminology" class="section">
+            <div class="card">
+                <div class="card-header">Terminologia Filosofica e Critica Letteraria</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La terminologia filosofica si articola in campi specifici: ontologia, gnoseologia, etica, estetica, logica.</strong> [^2^]
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Termine</th><th>Campo</th><th>Significato</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Ontologia</td>
+                                <td>Metafisica</td>
+                                <td>Studio dell'essere in quanto essere</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Ermeneutica</td>
+                                <td>Teoria</td>
+                                <td>Arte dell'interpretazione, comprensione del senso</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Dialettica</td>
+                                <td>Logica</td>
+                                <td>Discorso che procede per tesi, antitesi, sintesi</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Aporia</td>
+                                <td>Retorica</td>
+                                <td>Impasse logica, difficoltà insolubile apparente</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Eidos</td>
+                                <td>Estetica</td>
+                                <td>Forma essenziale, idea platonica</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Pathos</td>
+                                <td>Retorica</td>
+                                <td>Passione, emotività che muove l'uditorio</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Mimesis</td>
+                                <td>Estetica</td>
+                                <td>Imitazione, rappresentazione artistica della realtà</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Catharsis</td>
+                                <td>Estetica</td>
+                                <td>Purificazione emotiva attraverso l'arte</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="literary-box">
+                        <strong>Termini della critica letteraria:</strong><br>
+                        <em>Diegesi</em> = narrazione | <em>Mise en abyme</em> = specchio nel testo<br>
+                        <em>Prolepsi</em> = anticipazione | <em>Analessi</em> = flashback<br>
+                        <em>Focalizzazione</em> = punto di vista | <em>Isotopia</em> = coerenza tematica<br>
+                        <em>Intertestualità</em> = rapporto tra testi | <em>Palinsesto</em> = stratificazione di scritture
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE SINTASSI -->
+        <section id="syntax" class="section">
+            <div class="card">
+                <div class="card-header">Strutture Sintattiche</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La sintassi filosofica privilegia la complessità argomentativa e la subordinazione gerarchica.</strong> [^3^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Periodo ipotetico e modale</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Struttura</th><th>Esempio</th><th>Funzione</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Congiuntivo filosofico</td>
+                                <td>Se l'essere fosse...</td>
+                                <td>Ipotesi speculativa, possibilità logica</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Condizionale complesso</td>
+                                <td>Sarebbe necessario che...</td>
+                                <td>Necessità/deonticità filosofica</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Infinito sostantivato</td>
+                                <td>Il sapere, l'errare</td>
+                                <td>Oggettivazione dell'azione</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Participio assoluto</td>
+                                <td>Posto che..., Presupposto che...</td>
+                                <td>Condizione argomentativa</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Gerundio consecutivo</td>
+                                <td>Così argomentando...</td>
+                                <td>Procedimento dialettico</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Verbi e locuzioni speculative</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Verbo/Locuzione</th><th>Uso</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Postulare</td>
+                                <td>Assumere come principio</td>
+                                <td>Si postula l'esistenza di...</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Sottoporre a critica</td>
+                                <td>Esaminare criticamente</td>
+                                <td>Sottoporre a critica il concetto...</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Porsi come problema</td>
+                                <td>Interrogarsi su</td>
+                                <td>Si pone come problema il...</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Far luogo a</td>
+                                <td>Generare, produrre</td>
+                                <td>Il discorso fa luogo a...</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Mettere in questione</td>
+                                <td>Problematicizzare</td>
+                                <td>Mettere in questione l'evidenza</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Evitare:</strong> "Penso che..." → "Si <em>argomenta</em> che...", "Si <em>sostiene</em> che..."<br>
+                        Evitare: "Vedo che..." → "Si <em>osserva</em>", "Si <em>rileva</em>", "Appare evidente che...".
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE GENERI -->
+        <section id="genres" class="section">
+            <div class="card">
+                <div class="card-header">Generi della Comunicazione Filosofico-Letteraria</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Diversi tipi di testi richiedono registri e strutture argomentative diverse.</strong> [^4^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Genere</th><th>Destinatario</th><th>Caratteristiche</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Saggio filosofico</td>
+                                <td>Specialisti</td>
+                                <td>Argomentativo, citazionale, tecnico</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Trattato</td>
+                                <td>Comunità scientifica</td>
+                                <td>Sistematico, deduttivo, impersonalità</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Dialogo filosofico</td>
+                                <td>Lettori colti</td>
+                                <td>Dialettico, plurivoco, scenico</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Aforisma</td>
+                                <td>Pubblico generale</td>
+                                <td>Sintetico, paradossale, provocatorio</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Recensione critica</td>
+                                <td>Accademia</td>
+                                <td>Valutativa, comparativa, argomentata</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Commento filologico</td>
+                                <td>Filologi</td>
+                                <td>Analitico, testuale, ipertestuale</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="philosophy-context">
+                        <strong>Esempio di saggio filosofico (Heidegger):</strong><br>
+                        "L'essere si svela nell'apertura del Dasein, non come entità tra entità, ma come differenza ontologica che fonda ogni presentazione. Questo svelamento non è però immediato: richiede l'angoscia come stato d'animo fondamentale che sottrae il Dasein all'indifferenza dell'ente."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ERMENEUTICA -->
+        <section id="hermeneutics" class="section">
+            <div class="card">
+                <div class="card-header">Ermeneutica e Critica Testuale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>L'ermeneutica studia i principi e i metodi dell'interpretazione, dalla filologia alla decostruzione.</strong> [^5^]
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Cerchio ermeneutico e comprensione</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Concetto</th><th>Definizione</th><th>Autore</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Cerchio ermeneutico</td>
+                                <td>Comprensione del tutto attraverso le parti e viceversa</td>
+                                <td>Schleiermacher, Dilthey</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Fusione degli orizzonti</td>
+                                <td>Incontro tra orizzonte storico del testo e dell'interprete</td>
+                                <td>Gadamer</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Sovra-determinazione</td>
+                                <td>Eccesso di senso rispetto all'intenzione</td>
+                                <td>Freud, Lacan</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Différance</td>
+                                <td>Differire e differire, ritardo e distinzione</td>
+                                <td>Derrida</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Intenzionalità</td>
+                                <td>La coscienza è sempre coscienza-di...</td>
+                                <td>Husserl</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="transformation-box">
+                        <strong>Procedure interpretative:</strong><br><br>
+                        <em>Analisi strutturale:</em> studio delle opposizioni binarie<br>
+                        <em>Decostruzione:</em> svelamento delle gerarchie concettuali<br>
+                        <em>Lettura sintomatica:</em> ricerca del non-detto, della repressione<br>
+                        <em>Archeologia:</em> disvelamento delle condizioni di possibilità (Foucault)
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Attenzione:</strong> L'ermeneutica contemporanea distingue tra <em>significato</em> (intenzionale) e <em>senso</em> (effetto di lettura), tra <em>autore</em> (istanza biografica) e <em>scrittore</em> (istanza testuale).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE RETORICA -->
+        <section id="rhetoric" class="section">
+            <div class="card">
+                <div class="card-header">Retorica e Stile Elevato</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>La retorica classica e contemporanea fornisce gli strumenti per l'analisi del discorso letterario-filosofico.</strong> [^6^]
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Figura</th><th>Definizione</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Anacoluto</td>
+                                <td>Spezzamento della sintassi</td>
+                                <td>"Che fai tu, Terra, nell'aria?" (Leopardi)</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Zeugma</td>
+                                <td>Un verbo regge più oggetti diversi</td>
+                                <td>"Chiuse le porte e gli occhi"</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Syllepsi</td>
+                                <td>Accordo sintattico con senso, non grammatica</td>
+                                <td>"La folla gridò" (folla = molti)</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Hypallage</td>
+                                <td>Trasferimento di epiteto</td>
+                                <td>"L'alegrezza del mattino" (per l'alegre mattino)</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Praeteritio</td>
+                                <td>Pretesa omissione che rivela</td>
+                                <td>"Non dirò della sua corruzione..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: var(--primary); margin: 1.5rem 0 1rem;">Livelli stilistici</h3>
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Livello</th><th>Registro</th><th>Caratteristiche</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="philosophy-term">Allo</td>
+                                <td>Elevato</td>
+                                <td>Termini aulici, perifrasi, latineggianti</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Medio</td>
+                                <td>Neutro</td>
+                                <td>Corretto, chiaro, senza arcaismi</td>
+                            </tr>
+                            <tr>
+                                <td class="philosophy-term">Basso</td>
+                                <td>Popolare</td>
+                                <td> Dialetto, tecnicismi, gergo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="philosophy-context">
+                        <strong>Esempio di stile elevato (Manzoni):</strong><br>
+                        "Era quel che si chiama un bel pezzo d'uomo: averlo veduto una sola volta, era impossibile di scordarlo. Sotto una statura non comune, portava una persona massiccia e nerboruta; e la sua faccia, rozza e arrossata dal sole, era coronata da una folta capigliatura rossastra, e ornata da due basette che andavano fin sotto il naso, e da un paio di favoriti che gli scendevan sul petto."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano C2 - Linguaggio Filosofico-Letterario (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-10: Terminologia filosofica base
+            {
+                id: 1,
+                type: 'choice',
+                question: 'L\'"ontologia" è lo studio dell\'__________ in quanto essere.',
+                options: ['essere', 'conoscenza', 'bellezza', 'azione'],
+                correct: 'essere',
+                explanation: '✅ Corretto! Onto- (dal greco ontos) = essere; -logia = studio/discorso',
+                errorExplanation: '❌ Ontologia = studio dell\'essere (onto- = essere); Gnoseologia = studio della conoscenza'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'L\'"ermeneutica" è l\'arte dell\'__________ e della comprensione del senso.',
+                correct: ['interpretazione'],
+                explanation: '✅ Corretto! Dal greco hermeneuein = interpretare, tradurre'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'La "dialettica" procede per tesi, antitesi e __________.',
+                options: ['sintesi', 'analisi', 'tesi', 'protesi'],
+                correct: 'sintesi',
+                explanation: '✅ Corretto! Schema hegeliano: tesi → antitesi → sintesi (superamento)',
+                errorExplanation: '❌ La triade hegeliana è: tesi, antitesi, sintesi (Aufhebung = superamento)'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'L\'"aporia" è un\'impasse __________, una difficoltà apparentemente insolubile.',
+                correct: ['logica'],
+                explanation: '✅ Corretto! Dal greco aporia = senza via, impasse; usata da Platone e Derrida'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'L\'"eidos" platonico corrisponde al concetto di __________.',
+                options: ['forma essenziale', 'materia', 'sostanza', 'accidente'],
+                correct: 'forma essenziale',
+                explanation: '✅ Corretto! Eidos = forma visibile, idea, archetipo platonico',
+                errorExplanation: '❌ Eidos (greco) = forma, aspetto, idea; in Platone è la realtà vera vs le copie sensibili'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Il "pathos" in retorica indica la __________ che muove l\'uditorio.',
+                correct: ['passione', 'emotività', 'emozione'],
+                explanation: '✅ Corretto! Pathos = passione, sofferenza, emotività (vs ethos = carattere, logos = ragione)'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'La "mimesis" aristotelica è la __________ artistica della realtà.',
+                options: ['imitazione', 'negazione', 'superazione', 'distruzione'],
+                correct: 'imitazione',
+                explanation: '✅ Corretto! Mimesis = imitazione, rappresentazione; ma anche "produzione" secondo Aristotele',
+                errorExplanation: '❌ Mimesis = imitazione/rappresentazione; per Aristotele è naturale all\'uomo e produttiva'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'La "catharsis" è la __________ emotiva attraverso l\'arte.',
+                correct: ['purificazione', 'liberazione', 'pulizia'],
+                explanation: '✅ Corretto! Katharsis = purificazione, evacuazione delle passioni (Aristotele, Poetica)'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'La "gnoseologia" è la teoria della __________.',
+                options: ['conoscenza', 'essere', 'bellezza', 'azione'],
+                correct: 'conoscenza',
+                explanation: '✅ Corretto! Gnosi- (greco gnosis) = conoscenza; -logia = studio',
+                errorExplanation: '❌ Gnoseologia = teoria della conoscenza; Ontologia = teoria dell\'essere'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'L\'"epistemologia" studia i fondamenti e i metodi della __________.',
+                correct: ['scienza', 'conoscenza scientifica'],
+                explanation: '✅ Corretto! Episteme (greco) = scienza, conoscenza certa; logos = discorso'
+
+            },
+
+            // ESERCIZI 11-20: Figure retoriche e stile
+            {
+                id: 11,
+                type: 'choice',
+                question: 'L\'ossimoro unisce termini __________ tra loro.',
+                options: ['contraddittori', 'simili', 'sinonimi', 'tecnici'],
+                correct: 'contraddittori',
+                explanation: '✅ Corretto! Ossimoro = unione di contrari (silenzioso clamore, lucida follia)',
+                errorExplanation: '❌ Ossimoro (dal greco oxys = acuto, moros = stolto) = unione apparentemente contraddittoria'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Il __________ è l\'incrocio sintattico di due proposizioni (A:B = B:A).',
+                correct: ['chiasmo', 'chiasmus'],
+                explanation: '✅ Corretto! Chiasmo (dal greco chi = lettera X) = incrocio speculare sintattico'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'La litote afferma mediante la __________ dell\'opposto.',
+                options: ['negazione', 'affermazione', 'esagerazione', 'ripetizione'],
+                correct: 'negazione',
+                explanation: '✅ Corretto! Litote = negazione del contrario ("non è privo di" = ha)',
+                errorExplanation: '❌ Litote = affermazione per negazione del contrario; sottintende il significato opposto'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'L\'anacoluto è lo __________ della sintassi normale.',
+                correct: ['spezzamento', 'interruzione', 'rottura'],
+                explanation: '✅ Corretto! Anacoluto (greek anakoluthos) = senza seguito, sintassi spezzata'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Lo zeugma impiega un __________ per reggere oggetti diversi.',
+                options: ['solo verbo', 'solo soggetto', 'solo complemento', 'solo aggettivo'],
+                correct: 'solo verbo',
+                explanation: '✅ Corretto! Zeugma (greek zeugnymai) = agganciare; un verbo per più oggetti',
+                errorExplanation: '❌ Zeugma = un solo verbo che regge più oggetti con significati diversi'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'L\'ipallage è il __________ di un epiteto dal termine proprio a quello figurato.',
+                correct: ['trasferimento', 'spostamento'],
+                explanation: '✅ Corretto! Hypallage (greek) = scambio; "l\'alegrezza del mattino" per "l\'alegre mattino"'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'La praeteritio afferma __________ di omettere.',
+                options: ['fingendo', 'realmente', 'senza', 'dopo'],
+                correct: 'fingendo',
+                explanation: '✅ Corretto! Praeteritio = preterire fingendo di non dire ("non dirò che..." dicendolo)',
+                errorExplanation: '❌ Praeteritio = figura di attenuazione che afferma negando di volerlo fare'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Il __________ è l\'accordo sintattico con il senso anziché con la grammatica.',
+                correct: ['syllepsi'],
+                explanation: '✅ Corretto! Syllepsis = comprensione; accordo con il significato (la folla gridarono)'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Lo stile "alto" o "aulico" si caratterizza per __________.',
+                options: ['perifrasi e latinismi', 'semplicità', 'gergo', 'dialletto'],
+                correct: 'perifrasi e latinismi',
+                explanation: '✅ Corretto! Stile alto = aulico, perifrastico, latineggiante, arcaico',
+                errorExplanation: '❌ Stile alto/aulico = lessico elevato, perifrasi, arcaismi, latinismi'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'La __________ è la ripetizione di suoni in versi o prosa (es. "placida pace").',
+                correct: ['allitterazione'],
+                explanation: '✅ Corretto! Allitterazione = ripetizione di consonanti (paronomasia = ripetizione di parole simili)'
+
+            },
+
+            // ESERCIZI 21-30: Sintassi filosofica
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Il "congiuntivo filosofico" esprime __________.',
+                options: ['ipotesi speculativa', 'certezza', 'passato', 'comando'],
+                correct: 'ipotesi speculativa',
+                explanation: '✅ Corretto! Congiuntivo filosofico = possibilità logica, ipotesi ("se l\'essere fosse...")',
+                errorExplanation: '❌ Il congiuntivo filosofico esprime possibilità logiche, ipotesi speculative'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'L\'infinito __________ trasforma il verbo in sostantivo (es. "il sapere").',
+                correct: ['sostantivato'],
+                explanation: '✅ Corretto! Infinito sostantivato = oggettivazione dell\'azione (il pensare, l\'errare)'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: '"Posto che..." introduce un __________.',
+                options: ['participio assoluto', 'gerundio', 'infinito', 'indicativo'],
+                correct: 'participio assoluto',
+                explanation: '✅ Corretto! Participio assoluto = condizione argomentativa (posto che, presupposto che)',
+                errorExplanation: '❌ "Posto che" è un participio assoluto con valore condizionale/concessivo'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Il gerundio __________ ("così argomentando...") indica procedimento dialettico.',
+                correct: ['consecutivo', 'modale'],
+                explanation: '✅ Corretto! Gerundio consecutivo/modale = modo di procedere argomentativo'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: '"Si postula" significa si __________ come principio.',
+                options: ['assume', 'dimostra', 'nega', 'dimentica'],
+                correct: 'assume',
+                explanation: '✅ Corretto! Postulare = assumere come principio non dimostrato ma necessario',
+                errorExplanation: '❌ Postulare = assumere senza dimostrazione, porre come fondamento'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: '"Sottoporre a critica" significa __________ criticamente.',
+                correct: ['esaminare', 'analizzare'],
+                explanation: '✅ Corretto! Locuzione filosofica per l\'esame critico di concetti'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: '"Porsi come problema" significa __________ su qualcosa.',
+                options: ['interrogarsi', 'rispondere', 'ignorare', 'risolvere'],
+                correct: 'interrogarsi',
+                explanation: '✅ Corretto! Porsi come problema = problematizzare, rendere oggetto di questione',
+                errorExplanation: '❌ "Porsi come problema" = rendere problematico, interrogarsi, mettere in discussione'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: '"Far luogo a" significa __________, produrre.',
+                correct: ['generare', 'dare origine a'],
+                explanation: '✅ Corretto! Locuzione filosofica per indicare produzione di effetti/conseguenze'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: '"Mettere in questione" equivale a __________.',
+                options: ['problematizzare', 'affermare', 'ignorare', 'dimostrare'],
+                correct: 'problematizzare',
+                explanation: '✅ Corretto! Mettere in questione = rendere problematico, dubitare, criticare',
+                errorExplanation: '❌ Mettere in questione = problematizzare, mettere in dubbio, criticare'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'Il __________ complesso ("sarebbe necessario che") esprime necessità filosofica.',
+                correct: ['condizionale'],
+                explanation: '✅ Corretto! Condizionale filosofico = deonticità, necessità logica'
+
+            },
+
+            // ESERCIZI 31-40: Ermeneutica e critica
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Il "cerchio ermeneutico" implica comprendere il tutto attraverso le __________.',
+                options: ['parti', 'altri testi', 'fonti', 'note'],
+                correct: 'parti',
+                explanation: '✅ Corretto! Cerchio ermeneutico: parti ↔ tutto (comprensione circolare)',
+                errorExplanation: '❌ Cerchio ermeneutico: si comprende il tutto attraverso le parti e viceversa'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'La "fusione degli orizzonti" è il concetto chiave di __________.',
+                correct: ['Gadamer', 'Hans-Georg Gadamer'],
+                explanation: '✅ Corretto! Gadamer (Verità e metodo): incontro tra orizzonte storico del testo e dell\'interprete'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'La "différance" di Derrida indica __________ e differire.',
+                options: ['differire', 'uguagliare', 'identificare', 'presentare'],
+                correct: 'differire',
+                explanation: '✅ Corretto! Différance = gioco tra differire (spaziale) e differire (temporale, ritardo)',
+                errorExplanation: '❌ Différance (con "a") = differenza + deferimento (ritardo), neologismo derridiano'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'L\'"intenzionalità" husserliana significa che la coscienza è sempre __________.',
+                correct: ['coscienza-di', 'coscienza di qualcosa'],
+                explanation: '✅ Corretto! Intenzionalità = direzione della coscienza verso un oggetto (aboutness)'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'La "decostruzione" svela le __________ concettuali.',
+                options: ['gerarchie', 'unità', 'armonie', 'identità'],
+                correct: 'gerarchie',
+                explanation: '✅ Corretto! Decostruzione = smontaggio delle opposizioni binarie gerarchiche',
+                errorExplanation: '❌ Decostruzione (Derrida) = svelamento delle gerarchie nelle opposizioni concettuali'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'L\'"intertestualità" studia i __________ tra testi diversi.',
+                correct: ['rapporti', 'nodi', 'legami'],
+                explanation: '✅ Corretto! Intertestualità (Kristeva): ogni testo è assorbimento e trasformazione di altri testi'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'La "prolepsi" è una __________ narrativa.',
+                options: ['anticipazione', 'flashback', 'descrizione', 'pausa'],
+                correct: 'anticipazione',
+                explanation: '✅ Corretto! Prolepsi = anticipazione del futuro (vs analessi = flashback)',
+                errorExplanation: '❌ Prolepsi = anticipazione; Analessi = retrospezione (flashback)'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'La "focalizzazione" indica il __________ di vista narrativo.',
+                correct: ['punto', 'prospettiva'],
+                explanation: '✅ Corretto! Focalizzazione (Genette) = prospettiva percettiva/cognitiva dalla quale si racconta'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'L\'"isotopia" garantisce la __________ tematica del testo.',
+                options: ['coerenza', 'contraddizione', 'fragmentarietà', 'polisemia'],
+                correct: 'coerenza',
+                explanation: '✅ Corretto! Isotopia (Greimas) = coerenza semantica, ricorrenza di classemi',
+                errorExplanation: '❌ Isotopia = coerenza tematica; eterotopia = frammentazione tematica'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Il __________ è la stratificazione di scritture sovrapposte in un testo.',
+                correct: ['palinsesto'],
+                explanation: '✅ Corretto! Palinsesto (papiro riutilizzato) = stratificazione di livelli testuali (Genette)'
+
+            },
+
+            // ESERCIZI 41-50: Generi e concetti avanzati
+            {
+                id: 41,
+                type: 'choice',
+                question: 'L\'"aforisma" è caratterizzato da __________ e paradosso.',
+                options: ['sinteticità', 'ampiezza', 'sistematicità', 'deduzione'],
+                correct: 'sinteticità',
+                explanation: '✅ Corretto! Aforisma = breve, sintetico, paradossale, provocatorio (Nietzsche, Cioran)',
+                errorExplanation: '❌ Aforisma = forma breve, sintetica, spesso paradossale (vs trattato sistematico)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Il __________ filosofico è dialettico, plurivoco e scenico (es. Platone).',
+                correct: ['dialogo'],
+                explanation: '✅ Corretto! Dialogo platonico = forma drammatica, maieutica, plurivoca'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'La "diegesi" è la __________ in opposizione alla mimesi drammatica.',
+                options: ['narrazione', 'azione', 'poesia', 'musica'],
+                correct: 'narrazione',
+                explanation: '✅ Corretto! Diegesi = racconto (narratore che parla) vs Mimesi = rappresentazione (attori)',
+                errorExplanation: '❌ Diegesi (Platone, Repubblica) = narrazione pura; Mimesi = imitazione/rappresentazione'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'La "mise en abyme" è l\'inclusione di un __________ nel testo.',
+                correct: ['specchio', 'ritratto', 'testo nel testo'],
+                explanation: '✅ Corretto! Mise en abyme (Da Vinci) = specchio interno, testo che riflette se stesso'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: '"Sovra-determinazione" indica un __________ di senso rispetto all\'intenzione.',
+                options: ['eccesso', 'difetto', 'uguaglianza', 'assenza'],
+                correct: 'eccesso',
+                explanation: '✅ Corretto! Sovra-determinazione (Freud) = eccesso di significato, lettura sintomatica',
+                errorExplanation: '❌ Sovra-determinazione = eccesso di senso rispetto all\'intenzione manifesta'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'L\'"archeologia" (Foucault) disvela le __________ di possibilità del discorso.',
+                correct: ['condizioni'],
+                explanation: '✅ Corretto! Archeologia = analisi delle condizioni di emergenza dei saperi'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'L\'"idioletto" è il linguaggio __________ di un autore o personaggio.',
+                options: ['individuale', 'collettivo', 'nazionale', 'arcaico'],
+                correct: 'individuale',
+                explanation: '✅ Corretto! Idioletto = sistema linguistico individuale (vs dialetto = di una comunità)',
+                errorExplanation: '❌ Idioletto = uso linguistico individuale; Dialetto = di una regione; Socioletto = di un gruppo'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'La "polifonia" (Bachtin) indica la presenza di molteplici __________ nel testo.',
+                correct: ['voci'],
+                explanation: '✅ Corretto! Polifonia = pluralità di voci indipendenti (Dostoevskij vs monologia tolstojana)'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'L\'"eteroglossia" è la __________ di linguaggi sociali nel romanzo.',
+                options: ['mescolanza', 'purezza', 'assenza', 'gerarchia'],
+                correct: 'mescolanza',
+                explanation: '✅ Corretto! Eteroglossia (Bachtin) = molteplicità di linguaggi sociali, stratificazione',
+                errorExplanation: '❌ Eteroglossia = molteplicità di linguaggi sociali che si mescolano nel romanzo'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Il "sublime" (Longino, Burke, Kant) è ciò che provoca __________ e ammirazione.',
+                correct: ['terrore', 'soggezione', 'stupore'],
+                explanation: '✅ Corretto! Sublime = grandezza travolgente che genera terrore misto a piacere (vs bello). Complimenti!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il termine filosofico..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi il linguaggio filosofico-letterario come un accademico!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene la terminologia, ma approfondisci le sfumature ermeneutiche!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: ontologia vs gnoseologia, chiasmo vs ossimoro, prolepsi vs analessi!';
+            } else {
+                message = '📚 Ripassa le tabelle! Concentrati su figure retoriche, concetti ermeneutici e strutture sintattiche!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>
