@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numeri e Età - 50 Esercizi</title>
+    <title>Numeri e Età - Teoria Multilingue (13 Lingue)</title>
     <style>
         * {
             margin: 0;
@@ -25,6 +25,13 @@
             --parchment: #faf8f3;
             --b1-color: #c9a227;
             --numbers: #2e7d32;
+            --arabic: #1e3a8a;
+            --wolof: #7c3aed;
+            --bambara: #059669;
+            --urdu: #dc2626;
+            --bangla: #ea580c;
+            --hindi: #0891b2;
+            --chinese: #be123c;
         }
 
         body {
@@ -89,7 +96,7 @@
         }
 
         .main-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -119,19 +126,21 @@
             margin-bottom: 2rem;
             background: white;
             flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .nav-tab {
-            padding: 1rem 2rem;
+            padding: 0.75rem 1.5rem;
             background: none;
             border: none;
             border-bottom: 3px solid transparent;
             cursor: pointer;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--secondary);
             transition: all 0.3s;
             position: relative;
+            border-radius: 4px 4px 0 0;
         }
 
         .nav-tab:hover {
@@ -140,10 +149,25 @@
         }
 
         .nav-tab.active {
-            color: var(--primary);
+            color: white;
             border-bottom-color: var(--accent);
             font-weight: bold;
+            background: var(--primary);
         }
+
+        .nav-tab.wolof { background: var(--wolof); color: white; }
+        .nav-tab.arabic { background: var(--arabic); color: white; }
+        .nav-tab.english { background: #4b5563; color: white; }
+        .nav-tab.french { background: #1e40af; color: white; }
+        .nav-tab.bambara { background: var(--bambara); color: white; }
+        .nav-tab.urdu { background: var(--urdu); color: white; }
+        .nav-tab.punjabi { background: #7c2d12; color: white; }
+        .nav-tab.albanian { background: #991b1b; color: white; }
+        .nav-tab.spanish { background: #f59e0b; color: white; }
+        .nav-tab.portuguese { background: #059669; color: white; }
+        .nav-tab.bangla { background: var(--bangla); color: white; }
+        .nav-tab.hindi { background: var(--hindi); color: white; }
+        .nav-tab.chinese { background: var(--chinese); color: white; }
 
         .section {
             display: none;
@@ -183,6 +207,14 @@
             border-left-color: var(--numbers);
             color: var(--numbers);
         }
+
+        .card-header.wolof { border-left-color: var(--wolof); color: var(--wolof); }
+        .card-header.arabic { border-left-color: var(--arabic); color: var(--arabic); }
+        .card-header.bambara { border-left-color: var(--bambara); color: var(--bambara); }
+        .card-header.urdu { border-left-color: var(--urdu); color: var(--urdu); }
+        .card-header.bangla { border-left-color: var(--bangla); color: var(--bangla); }
+        .card-header.hindi { border-left-color: var(--hindi); color: var(--hindi); }
+        .card-header.chinese { border-left-color: var(--chinese); color: var(--chinese); }
 
         .card-body {
             padding: 1.5rem;
@@ -249,272 +281,138 @@
             background: var(--numbers);
         }
 
-        .game-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .score-panel {
-            background: var(--light);
-            border: 1px solid var(--border);
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .score-label {
-            font-weight: bold;
-            color: var(--secondary);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-        }
-
-        .score-value {
-            font-size: 1.5rem;
-            color: var(--primary);
-            font-weight: bold;
-            font-family: 'Courier New', monospace;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: var(--light);
-            border: 1px solid var(--border);
-            margin: 1rem 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--b1-color);
-            width: 0%;
-            transition: width 0.5s;
-        }
-
-        .question-box {
-            background: white;
-            border: 2px solid var(--primary);
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .question-text {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-
-        .blank {
-            display: inline-block;
-            min-width: 150px;
-            border-bottom: 2px solid var(--accent);
-            color: var(--accent);
-            font-weight: bold;
-            margin: 0 0.3rem;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .option-btn {
-            padding: 1rem;
-            background: white;
-            border: 2px solid var(--border);
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 1.1rem;
-            transition: all 0.2s;
-        }
-
-        .option-btn:hover:not(:disabled) {
-            border-color: var(--b1-color);
-            background: var(--light);
-        }
-
-        .option-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .option-btn.correct {
-            background: var(--success-bg);
-            border-color: var(--success);
-            color: var(--success);
-        }
-
-        .option-btn.wrong {
-            background: var(--error-bg);
-            border-color: var(--error);
-            color: var(--error);
-        }
-
-        .feedback {
-            padding: 1rem;
-            text-align: center;
-            font-weight: bold;
-            display: none;
-            margin-bottom: 1rem;
-            border: 1px solid;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct {
-            background: var(--success-bg);
-            color: var(--success);
-            border-color: var(--success);
-        }
-
-        .feedback.wrong {
-            background: var(--error-bg);
-            color: var(--error);
-            border-color: var(--error);
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            font-family: inherit;
-            font-size: 1rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: background 0.3s;
-        }
-
-        .btn-primary:hover {
-            background: #002147;
-        }
-
-        .btn-check {
-            background: var(--b1-color);
-            color: #000;
-        }
-
-        .btn-check:hover {
-            background: #b8941f;
-        }
-
-        .fill-blank {
-            display: inline-block;
-            width: 220px;
-            padding: 10px 15px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            margin: 0 5px;
-            font-size: 1rem;
-            font-family: inherit;
-        }
-
-        .fill-blank:focus {
-            outline: none;
-            border-color: var(--b1-color);
-        }
-
-        .final-score-section {
-            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
-            color: white;
-            padding: 3rem;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 2rem;
-            display: none;
-        }
-
-        .final-score-section.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .final-score-value {
-            font-size: 4rem;
-            font-weight: bold;
-            color: var(--b1-color);
-            margin: 20px 0;
-        }
-
-        .final-message {
-            font-size: 1.3rem;
+        .language-section {
             margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary);
+            background: #fafafa;
         }
 
-        .exercise-counter {
-            background: var(--b1-color);
-            color: #000;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+        .language-section.wolof { border-left-color: var(--wolof); }
+        .language-section.arabic { border-left-color: var(--arabic); direction: rtl; text-align: right; }
+        .language-section.english { border-left-color: #4b5563; }
+        .language-section.french { border-left-color: #1e40af; }
+        .language-section.bambara { border-left-color: var(--bambara); }
+        .language-section.urdu { border-left-color: var(--urdu); direction: rtl; text-align: right; }
+        .language-section.punjabi { border-left-color: #7c2d12; }
+        .language-section.albanian { border-left-color: #991b1b; }
+        .language-section.spanish { border-left-color: #f59e0b; }
+        .language-section.portuguese { border-left-color: #059669; }
+        .language-section.bangla { border-left-color: var(--bangla); }
+        .language-section.hindi { border-left-color: var(--hindi); }
+        .language-section.chinese { border-left-color: var(--chinese); }
+
+        .language-title {
+            font-size: 1.3rem;
             font-weight: bold;
-            display: inline-block;
             margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .text-center { text-align: center; }
-        .mt-2 { margin-top: 1rem; }
-        .mb-2 { margin-bottom: 1rem; }
+        .language-title.wolof { color: var(--wolof); }
+        .language-title.arabic { color: var(--arabic); }
+        .language-title.english { color: #4b5563; }
+        .language-title.french { color: #1e40af; }
+        .language-title.bambara { color: var(--bambara); }
+        .language-title.urdu { color: var(--urdu); }
+        .language-title.punjabi { color: #7c2d12; }
+        .language-title.albanian { color: #991b1b; }
+        .language-title.spanish { color: #f59e0b; }
+        .language-title.portuguese { color: #059669; }
+        .language-title.bangla { color: var(--bangla); }
+        .language-title.hindi { color: var(--hindi); }
+        .language-title.chinese { color: var(--chinese); }
 
-        .number-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
+        .flag-icon {
+            font-size: 1.5rem;
         }
 
-        .number-card {
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
             background: white;
-            border: 1px solid var(--border);
-            padding: 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .number-card:hover {
-            border-color: var(--numbers);
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .number-digit {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--numbers);
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: left;
         }
 
-        .number-text {
-            font-size: 0.9rem;
-            color: var(--secondary);
-            font-style: italic;
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .check-mark {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .cross-mark {
+            color: var(--error);
+            font-weight: bold;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 0.2rem 0.4rem;
+            font-weight: bold;
+        }
+
+        .rtl-text {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Traditional Arabic', 'Arial', sans-serif;
+        }
+
+        .urdu-text {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Jameel Noori Nastaleeq', 'Arial', sans-serif;
+        }
+
+        .bangla-text {
+            font-family: 'Kalpurush', 'Arial', sans-serif;
+        }
+
+        .hindi-text {
+            font-family: 'Mangal', 'Arial', sans-serif;
+        }
+
+        .chinese-text {
+            font-family: 'SimSun', 'Microsoft YaHei', sans-serif;
+        }
+
+        .punjabi-text {
+            font-family: 'Gurmukhi', 'Arial', sans-serif;
         }
 
         @media (max-width: 768px) {
             .nav-tabs { flex-wrap: wrap; }
-            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
-            .options-grid { grid-template-columns: 1fr; }
+            .nav-tab { padding: 0.5rem 1rem; font-size: 0.8rem; flex: 1 1 30%; }
             .header h1 { font-size: 1.5rem; }
             .page-title { font-size: 1.5rem; }
-            .final-score-value { font-size: 3rem; }
-            .fill-blank { width: 180px; }
-            .number-grid { grid-template-columns: repeat(3, 1fr); }
+            .language-section { padding: 1rem; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <header class="header">
         <div class="header-container">
-            <h1>Numeri e Età - Modulo A1</h1>
-            <p>Numeri cardinali (0-100) e strutture per esprimere l'età - 50 Esercizi</p>
+            <h1>Numeri e Età - Teoria Multilingue</h1>
+            <p>Spiegazione della grammatica italiana in 13 lingue diverse</p>
         </div>
     </header>
 
@@ -524,28 +422,37 @@
             <span>›</span>
             <a href="#">Italiano A1</a>
             <span>›</span>
-            <strong>Numeri e Età (50 Esercizi)</strong>
+            <strong>Teoria Multilingue (13 Lingue)</strong>
         </div>
     </nav>
 
     <main class="main-container">
         <div class="page-header">
-            <h1 class="page-title">📚 Numeri Cardinali ed Espressioni dell'Età</h1>
-            <p class="page-subtitle">Da zero a cento, e come dire "Ho 25 anni" in italiano</p>
+            <h1 class="page-title">📚 Teoria dei Numeri Cardinali in 13 Lingue</h1>
+            <p class="page-subtitle">Confronto grammaticale tra italiano e lingue africane, asiatiche ed europee</p>
         </div>
 
         <nav class="nav-tabs">
-            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
-            <button class="nav-tab" onclick="showSection('numbers', this)">Numeri 0-20</button>
-            <button class="nav-tab" onclick="showSection('decine', this)">Decine</button>
-            <button class="nav-tab" onclick="showSection('eta', this)">Età</button>
-            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+            <button class="nav-tab active" onclick="showSection('italian', this)">🇮🇹 Italiano</button>
+            <button class="nav-tab wolof" onclick="showSection('wolof', this)">🇸🇳 Wolof</button>
+            <button class="nav-tab arabic" onclick="showSection('arabic', this)">🇸🇦 العربية</button>
+            <button class="nav-tab english" onclick="showSection('english', this)">🇬🇧 English</button>
+            <button class="nav-tab french" onclick="showSection('french', this)">🇫🇷 Français</button>
+            <button class="nav-tab bambara" onclick="showSection('bambara', this)">🇲🇱 Bambara</button>
+            <button class="nav-tab urdu" onclick="showSection('urdu', this)">🇵🇰 اردو</button>
+            <button class="nav-tab punjabi" onclick="showSection('punjabi', this)">🇮🇳 ਪੰਜਾਬੀ</button>
+            <button class="nav-tab albanian" onclick="showSection('albanian', this)">🇦🇱 Shqip</button>
+            <button class="nav-tab spanish" onclick="showSection('spanish', this)">🇪🇸 Español</button>
+            <button class="nav-tab portuguese" onclick="showSection('portuguese', this)">🇵🇹 Português</button>
+            <button class="nav-tab bangla" onclick="showSection('bangla', this)">🇧🇩 বাংলা</button>
+            <button class="nav-tab hindi" onclick="showSection('hindi', this)">🇮🇳 हिन्दी</button>
+            <button class="nav-tab chinese" onclick="showSection('chinese', this)">🇨🇳 中文</button>
         </nav>
 
-        <!-- SEZIONE TEORIA -->
-        <section id="theory" class="section active">
+        <!-- SEZIONE ITALIANO -->
+        <section id="italian" class="section active">
             <div class="card">
-                <div class="card-header numbers">Il Sistema Numerico Italiano</div>
+                <div class="card-header numbers">Il Sistema Numerico Italiano (0-100)</div>
                 <div class="card-body">
                     <p>I numeri cardinali in italiano sono relativamente semplici fino a 100. Ecco le regole principali:</p>
                     
@@ -608,191 +515,633 @@
             </div>
         </section>
 
-        <!-- SEZIONE NUMERI 0-20 -->
-        <section id="numbers" class="section">
+        <!-- SEZIONE WOLOF -->
+        <section id="wolof" class="section">
             <div class="card">
-                <div class="card-header numbers">Numeri da 0 a 20</div>
+                <div class="card-header wolof">🇸🇳 Wolof - Téereb italiànk yi</div>
                 <div class="card-body">
-                    <div class="number-grid" id="numbersGrid">
-                        <!-- Generato via JavaScript -->
+                    <div class="language-section wolof">
+                        <div class="language-title wolof"><span class="flag-icon">🇸🇳</span> Wolof (Senegal/Gambia)</div>
+                        
+                        <p><strong>Nombre yi ak am naari at (Numeri ed età)</strong></p>
+                        
+                        <p>Italiànk yi am naari dund bu ñu xam ne dafa yomb. Luy jëkk, nombre 0-10 ñoo am solo luy xam ci wetu bopp:</p>
+                        
+                        <ul style="margin: 1rem 0; margin-left: 2rem;">
+                            <li><strong>0-10:</strong> zero, uno, due, tre, quattro, cinque, sei, sette, otto, nove, dieci</li>
+                            <li><strong>11-16:</strong> ñu ngi am suffix "-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                            <li><strong>17-19:</strong> ñu ngi tambali ak "dici-" (diciassette, diciotto, diciannove)</li>
+                        </ul>
+
+                        <div class="rule-box" style="background: #ede9fe; border-color: var(--wolof);">
+                            <strong>Duurubaa yi (Decine):</strong> venti (20), trenta (30), quaranta (40), cinquanta (50), sessanta (60), settanta (70), ottanta (80), novanta (90), cento (100)
+                        </div>
+
+                        <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                            <strong>Regle bu am solo (Regola importante):</strong> Bu ñu bokk "uno" walla "otto" ci nombre bu nekk ci diggante 20-99, vowel bu mujj bi ci nombre bu tàng di jaar (troncamento):<br>
+                            • 21 = <strong>ventuno</strong> (du ñu dindi "ventiuno")<br>
+                            • 28 = <strong>ventotto</strong> (du ñu dindi "ventiotto")
+                        </div>
+
+                        <div class="instruction-box" style="background: #ede9fe; border-left-color: var(--wolof);">
+                            <strong>At yi (L'età):</strong> Ci italiànk, ñu ngi jëfandikoo verb <strong>AVERE</strong> (am) bu ñu wax at:<br>
+                            • <em>Io ho 25 anni</em> = Am naa 25 at<br>
+                            • <em>Tu hai 20 anni</em> = Am nga 20 at<br><br>
+                            <strong>Bu ñu ko waxee ci Wolof:</strong> "Am naa 25 at" (moomu italiànk: "Ho 25 anni"), du "Déedéet 25" (moomu angale: "I am 25")
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE DECINE -->
-        <section id="decine" class="section">
+        <!-- SEZIONE ARABO -->
+        <section id="arabic" class="section">
             <div class="card">
-                <div class="card-header numbers">Le Decine (20-100)</div>
+                <div class="card-header arabic">🇸🇦 العربية - الأعداد الإيطالية</div>
                 <div class="card-body">
-                    <table class="number-table">
-                        <tr>
-                            <th>Numero</th>
-                            <th>Scrittura</th>
-                            <th>Note</th>
-                        </tr>
-                        <tr>
-                            <td class="number-display">20</td>
-                            <td>venti</td>
-                            <td>Attenzione: ventuno, ventidue... (perde la i)</td>
-                        </tr>
-                        <tr>
-                            <td class="number-display">30</td>
-                            <td>trenta</td>
-                            <td>trentuno, trentadue...</td>
-                        </tr>
-                        <tr>
-                            <td class="number-display">40</td>
-                            <td>quaranta</td>
-                            <td>quarantuno, quarantadue...</td>
-                        </tr>
-                        <tr>
-                            <td class="number-display">50</td>
-                            <td>cinquanta</td>
-                            <td>cinquantuno, cinquantadue...</td>
-                        </tr>
-                        <tr>
-                            <td class="number-display">60</td>
-                            <td>sessanta</td>
-                            <td>sessantuno, sessantadue...</td>
-                        </tr>
-                        <tr>
-                            <td class="number-display">70</td>
-                            <td>settanta</td>
-                            <td>settantuno, settantadue...</td>
-                        </tr>
-                        <tr>
-                            <td class="number-display">80</td>
-                            <td>ottanta</td>
-                            <td>ottantuno, ottantadue...</td>
-                        </tr>
-                        <tr>
-                            <td class="number-display">90</td>
-                            <td>novanta</td>
-                            <td>novantuno, novantadue...</td>
-                        </tr>
-                        <tr>
-                            <td class="number-display">100</td>
-                            <td>cento</td>
-                            <td><span class="number-tag">CENTINAIO</span></td>
-                        </tr>
-                    </table>
+                    <div class="language-section arabic">
+                        <div class="language-title arabic"><span class="flag-icon">🇸🇦</span> Arabo</div>
+                        
+                        <div class="rtl-text">
+                            <p><strong>الأعداد الإيطالية والتعبير عن العمر</strong></p>
+                            
+                            <p>النظام العددي الإيطالي (0-100) يتبع قواعد واضحة مع بعض الاستثناءات:</p>
+                            
+                            <ul style="margin: 1rem 0; margin-right: 2rem;">
+                                <li><strong>0-10:</strong> صفر (zero)، واحد (uno)، اثنان (due)، ثلاثة (tre)، أربعة (quattro)، خمسة (cinque)، ستة (sei)، سبعة (sette)، ثمانية (otto)، تسعة (nove)، عشرة (dieci)</li>
+                                <li><strong>11-16:</strong> تنتهي بـ "-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                                <li><strong>17-19:</strong> تبدأ بـ "dici-" (diciassette, diciotto, diciannove)</li>
+                            </ul>
 
-                    <div class="rule-box">
-                        <strong>⚠️ Regola del troncamento:</strong> Quando si aggiunge "uno" o "otto" a una decina, la decina perde la vocale finale:<br>
-                        venti + uno = <strong>ventuno</strong> (non "ventiuno")<br>
-                        trenta + otto = <strong>trentotto</strong> (non "trentaotto")
+                            <div class="rule-box" style="background: #dbeafe; border-color: var(--arabic); text-align: right;">
+                                <strong>العشرات (20-100):</strong> venti (20)، trenta (30)، quaranta (40)، cinquanta (50)، sessanta (60)، settanta (70)، ottanta (80)، novanta (90)، cento (100)
+                            </div>
+
+                            <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b; text-align: right;">
+                                <strong>قاعدة مهمة - الحذف (Troncamento):</strong> عند إضافة "uno" (1) أو "otto" (8) إلى العشرات، يسقط الحرف الأخير من العشرة:<br>
+                                • 21 = <strong>ventuno</strong> (وليس ventiuno)<br>
+                                • 28 = <strong>ventotto</strong> (وليس ventiotto)
+                            </div>
+
+                            <div class="instruction-box" style="background: #dbeafe; border-right-color: var(--arabic); border-left: none; text-align: right;">
+                                <strong>التعبير عن العمر:</strong> في الإيطالية، نستخدم فعل <strong>AVERE</strong> (لديه/تمتلك)، وليس فعل "essere" (يكون):<br>
+                                • <em>Io ho 20 anni</em> = أنا <strong>عندي</strong> 20 سنة (وليس "أنا 20")<br>
+                                • <em>Quanti anni hai؟</em> = كم <strong>عندك</strong> من السنين؟<br><br>
+                                <strong>ملاحظة ثقافية:</strong> على عكس الإنجليزية ("I am 20")، يجب استخدام "anni" (سنوات) بعد الرقم دائماً
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE ETÀ -->
-        <section id="eta" class="section">
+        <!-- SEZIONE INGLESE -->
+        <section id="english" class="section">
             <div class="card">
-                <div class="card-header numbers">Espressioni per l'Età</div>
+                <div class="card-header">🇬🇧 English - Italian Cardinal Numbers</div>
                 <div class="card-body">
-                    <div class="instruction-box" style="border-left-color: var(--numbers);">
-                        <strong>Domande:</strong>
-                    </div>
-                    
-                    <table class="number-table">
-                        <tr>
-                            <th>Forma</th>
-                            <th>Domanda</th>
-                            <th>Quando usarla</th>
-                        </tr>
-                        <tr>
-                            <td>Informale</td>
-                            <td class="number-display">Quanti anni hai?</td>
-                            <td>Con amici, familiari, persone conosciute</td>
-                        </tr>
-                        <tr>
-                            <td>Formale</td>
-                            <td class="number-display">Quanti anni ha (Lei)?</td>
-                            <td>Con sconosciuti, anziani, superiori</td>
-                        </tr>
-                    </table>
+                    <div class="language-section english">
+                        <div class="language-title english"><span class="flag-icon">🇬🇧</span> English</div>
+                        
+                        <p><strong>Italian Cardinal Numbers and Age Expressions</strong></p>
+                        
+                        <p>Italian numbers 0-100 follow a remarkably regular pattern with three crucial rules:</p>
+                        
+                        <ul style="margin: 1rem 0; margin-left: 2rem;">
+                            <li><strong>0-10:</strong> Irregular forms requiring memorization: zero, uno, due, tre, quattro, cinque, sei, sette, otto, nove, dieci</li>
+                            <li><strong>11-16:</strong> use suffix "-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                            <li><strong>17-19:</strong> use prefix "dici-" (diciassette, diciotto, diciannove)</li>
+                        </ul>
 
-                    <div class="instruction-box" style="border-left-color: var(--numbers); margin-top: 1.5rem;">
-                        <strong>Risposte:</strong>
-                    </div>
-                    
-                    <table class="number-table">
-                        <tr>
-                            <th>Soggetto</th>
-                            <th>Verbo</th>
-                            <th>Esempio</th>
-                        </tr>
-                        <tr>
-                            <td>Io</td>
-                            <td class="number-display">ho</td>
-                            <td>Ho venticinque anni</td>
-                        </tr>
-                        <tr>
-                            <td>Tu</td>
-                            <td class="number-display">hai</td>
-                            <td>Hai trenta anni?</td>
-                        </tr>
-                        <tr>
-                            <td>Lui/Lei</td>
-                            <td class="number-display">ha</td>
-                            <td>Ha diciotto anni</td>
-                        </tr>
-                        <tr>
-                            <td>Noi</td>
-                            <td class="number-display">abbiamo</td>
-                            <td>Abbiamo quaranta anni</td>
-                        </tr>
-                        <tr>
-                            <td>Voi</td>
-                            <td class="number-display">avete</td>
-                            <td>Avete venti anni?</td>
-                        </tr>
-                        <tr>
-                            <td>Loro</td>
-                            <td class="number-display">hanno</td>
-                            <td>Hanno quindici anni</td>
-                        </tr>
-                    </table>
+                        <div class="rule-box" style="background: #f3f4f6; border-color: #4b5563;">
+                            <strong>Tens (20-100):</strong> Regular forms ending in -a or -i: venti (20), trenta (30), quaranta (40), cinquanta (50), sessanta (60), settanta (70), ottanta (80), novanta (90), cento (100)
+                        </div>
 
-                    <div class="rule-box">
-                        <strong>⚠️ Errore comune:</strong> Non confondere "Ho 20 anni" (italiano) con "I am 20" (inglese)! In italiano si deve usare <strong>AVERE</strong> e specificare sempre <strong>anni</strong>.
+                        <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                            <strong>The Truncation Rule:</strong> When adding 1 or 8 to tens, drop the final vowel:<br>
+                            • 21 = <strong>ventuno</strong> (not "ventiuno")<br>
+                            • 28 = <strong>ventotto</strong> (not "ventiotto")<br>
+                            • 31 = <strong>trentuno</strong> (not "trentauno")
+                        </div>
+
+                        <div class="instruction-box" style="background: #f3f4f6; border-left-color: #4b5563;">
+                            <strong>Expressing Age:</strong> Unlike English "I <strong>am</strong> 25," Italian uses <strong>AVERE</strong> (to have):<br>
+                            • <em>Io <strong>ho</strong> 25 anni</em> = I <strong>have</strong> 25 years<br>
+                            • <em>Quanti anni <strong>hai</strong>؟</em> = How many years <strong>do you have</strong>؟<br><br>
+                            <strong>Common mistake:</strong> Never say "Io sono 25" (I am 25) — always include "anni" (years) and use "avere."
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE ESERCIZI -->
-        <section id="exercises" class="section">
-            <div class="game-container">
-                <div class="score-panel">
-                    <div>
-                        <div class="score-label">Esercizio</div>
-                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+        <!-- SEZIONE FRANCESE -->
+        <section id="french" class="section">
+            <div class="card">
+                <div class="card-header">🇫🇷 Français - Nombres Cardinaux Italiens</div>
+                <div class="card-body">
+                    <div class="language-section french">
+                        <div class="language-title french"><span class="flag-icon">🇫🇷</span> Français</div>
+                        
+                        <p><strong>Les Nombres Cardinaux Italiens et l'Expression de l'Âge</strong></p>
+                        
+                        <p>Le système numéral italien (0-100) est relativement simple avec des règles claires:</p>
+                        
+                        <ul style="margin: 1rem 0; margin-left: 2rem;">
+                            <li><strong>0-10:</strong> Formes irrégulières à mémoriser: zéro (zero), un (uno), deux (due), trois (tre), quatre (quattro), cinq (cinque), six (sei), sept (sette), huit (otto), neuf (nove), dix (dieci)</li>
+                            <li><strong>11-16:</strong> suffixe "-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                            <li><strong>17-19:</strong> préfixe "dici-" (diciassette, diciotto, diciannove)</li>
+                        </ul>
+
+                        <div class="rule-box" style="background: #dbeafe; border-color: #1e40af;">
+                            <strong>Les Dizaines (20-100):</strong> venti (20), trenta (30), quaranta (40), cinquanta (50), sessanta (60), settanta (70), ottanta (80), novanta (90), cento (100)
+                        </div>
+
+                        <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                            <strong>Règle de Troncamento:</strong> Quand on ajoute "uno" (1) ou "otto" (8) aux dizaines, on supprime la voyelle finale:<br>
+                            • 21 = <strong>ventuno</strong> (pas "ventiuno")<br>
+                            • 28 = <strong>ventotto</strong> (pas "ventiotto")
+                        </div>
+
+                        <div class="instruction-box" style="background: #dbeafe; border-left-color: #1e40af;">
+                            <strong>L'Âge:</strong> Contrairement au français "J'<strong>ai</strong> 25 ans" (similaire), l'italien utilise aussi <strong>AVERE</strong> (avoir):<br>
+                            • <em>Io <strong>ho</strong> 25 anni</em> = J'ai 25 ans<br>
+                            • <em>Quanti anni <strong>hai</strong>؟</em> = Quel âge as-tu؟<br><br>
+                            <strong>Attention:</strong> Ne jamais dire "Io sono 25" (Je suis 25) — c'est une erreur classique des anglophones.
+                        </div>
                     </div>
-                    <div>
-                        <div class="score-label">Punteggio</div>
-                        <div class="score-value" id="currentScore">0 / 100</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE BAMBARA -->
+        <section id="bambara" class="section">
+            <div class="card">
+                <div class="card-header bambara">🇲🇱 Bambara - Italiankan kalanni</div>
+                <div class="card-body">
+                    <div class="language-section bambara">
+                        <div class="language-title bambara"><span class="flag-icon">🇲🇱</span> Bambara (Mali)</div>
+                        
+                        <p><strong>Italiankan kalanni ni duuru (Numeri italiani ed età)</strong></p>
+                        
+                        <p>Italiankan kalanw ka ɲɛ janko nka a tɔgɔ bɛ yen dɔw la:</p>
+                        
+                        <ul style="margin: 1rem 0; margin-left: 2rem;">
+                            <li><strong>0-10:</strong> Kalanni kelen-kelen bɛɛ ka kan ka kalan: zero, uno, due, tre, quattro, cinque, sei, sette, otto, nove, dieci</li>
+                            <li><strong>11-16:</strong> "-dici" bɛ kɔnɔ (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                            <li><strong>17-19:</strong> "dici-" bɛ daminɛ (diciassette, diciotto, diciannove)</li>
+                        </ul>
+
+                        <div class="rule-box" style="background: #d1fae5; border-color: var(--bambara);">
+                            <strong>Duurubaa (Decine):</strong> venti (20), trenta (30), quaranta (40), cinquanta (50), sessanta (60), settanta (70), ottanta (80), novanta (90), cento (100)
+                        </div>
+
+                        <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                            <strong>Sariya gɛlɛn - Troncamento:</strong> Ni an bɛ "uno" walima "otto" fara duurubaa kan, vocali daminɛ bɛ bɔ:<br>
+                            • 21 = <strong>ventuno</strong> ("ventiuno" tɛ)<br>
+                            • 28 = <strong>ventotto</strong> ("ventiotto" tɛ)
+                        </div>
+
+                        <div class="instruction-box" style="background: #d1fae5; border-left-color: var(--bambara);">
+                            <strong>Duuru (L'età):</strong> Italiankan na <strong>AVERE</strong> (ka bɛn/ka sɔrɔ) sɔrɔ duuru fɔli la:<br>
+                            • <em>Io ho 25 anni</em> = Ne bɛ 25 san sɔrɔ<br>
+                            • <em>Tu hai 20 anni</em> = I bɛ 20 san sɔrɔ<br><br>
+                            <strong>Ni an bɛ o fɔ Bambarakan:</strong> "Ne bɛ 25 san sɔrɔ" (Italiankan: "Ho 25 anni"), "Ne ye 25 ye" tɛ (Angalekan: "I am 25")
+                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressBar"></div>
+        <!-- SEZIONE URDU -->
+        <section id="urdu" class="section">
+            <div class="card">
+                <div class="card-header urdu">🇵🇰 اردو - اطالوی اعداد</div>
+                <div class="card-body">
+                    <div class="language-section urdu">
+                        <div class="language-title urdu"><span class="flag-icon">🇵🇰</span> Urdu</div>
+                        
+                        <div class="urdu-text">
+                            <p><strong>اطالوی اعداد اور عمر کا اظہار</strong></p>
+                            
+                            <p>اطالوی عددی نظام (0-100) بہت واضح قواعد پر مبنی ہے:</p>
+                            
+                            <ul style="margin: 1rem 0; margin-right: 2rem;">
+                                <li><strong>0-10:</strong> یاد کرنے والے الفاظ: صفر (zero)، ایک (uno)، دو (due)، تین (tre)، چار (quattro)، پانچ (cinque)، چھ (sei)، سات (sette)، آٹھ (otto)، نو (nove)، دس (dieci)</li>
+                                <li><strong>11-16:</strong> لاحقہ "-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                                <li><strong>17-19:</strong> پیشوند "dici-" (diciassette, diciotto, diciannove)</li>
+                            </ul>
+
+                            <div class="rule-box" style="background: #fee2e2; border-color: var(--urdu); text-align: right;">
+                                <strong>دہائیاں (20-100):</strong> venti (20)، trenta (30)، quaranta (40)، cinquanta (50)، sessanta (60)، settanta (70)، ottanta (80)، novanta (90)، cento (100)
+                            </div>
+
+                            <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b; text-align: right;">
+                                <strong>حذف کا قاعدہ (Troncamento):</strong> جب "uno" (1) یا "otto" (8) دہائی میں شامل کریں، آخری حرف حذف کر دیں:<br>
+                                • 21 = <strong>ventuno</strong> (نہیں "ventiuno")<br>
+                                • 28 = <strong>ventotto</strong> (نہیں "ventiotto")
+                            </div>
+
+                            <div class="instruction-box" style="background: #fee2e2; border-right-color: var(--urdu); border-left: none; text-align: right;">
+                                <strong>عمر کا اظہار:</strong> انگریزی "I am 25" کے برعکس، اطالوی میں <strong>AVERE</strong> (رکھنا/ ہونا) استعمال ہوتا ہے:<br>
+                                • <em>Io <strong>ho</strong> 25 anni</em> = میرے <strong>پاس</strong> 25 سال ہیں (میں 25 سال کا ہوں)<br>
+                                • <em>Quanti anni <strong>hai</strong>؟</em> = تمہاری عمر کیا ہے؟ (تمہارے پاس کتنے سال ہیں؟)<br><br>
+                                <strong>عام غلطی:</strong> "Io sono 25" (میں 25 ہوں) کبھی نہ کہیں — ہمیشہ "anni" (سال) شامل کریں
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <div id="exerciseContainer">
-                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+        <!-- SEZIONE PANJABI -->
+        <section id="punjabi" class="section">
+            <div class="card">
+                <div class="card-header">🇮🇳 ਪੰਜਾਬੀ - ਇਤਾਲਵੀ ਨੰਬਰ</div>
+                <div class="card-body">
+                    <div class="language-section punjabi">
+                        <div class="language-title punjabi"><span class="flag-icon">🇮🇳</span> ਪੰਜਾਬੀ (Panjabi)</div>
+                        
+                        <div class="punjabi-text">
+                            <p><strong>ਇਤਾਲਵੀ ਨੰਬਰ ਅਤੇ ਉਮਰ ਦਾ ਪ੍ਰਗਟਾਵਾ</strong></p>
+                            
+                            <p>ਇਤਾਲਵੀ ਗਿਣਤੀ ਪ੍ਰਣਾਲੀ (0-100) ਬਹੁਤ ਸਪੱਸ਼ਟ ਨਿਯਮਾਂ 'ਤੇ ਅਧਾਰਿਤ ਹੈ:</p>
+                            
+                            <ul style="margin: 1rem 0; margin-left: 2rem;">
+                                <li><strong>0-10:</strong> ਯਾਦ ਕਰਨ ਵਾਲੇ ਸ਼ਬਦ: zero, uno, due, tre, quattro, cinque, sei, sette, otto, nove, dieci</li>
+                                <li><strong>11-16:</strong> ਪ੍ਰਤਿਆ "-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                                <li><strong>17-19:</strong> ਉਪਸਰਗ "dici-" (diciassette, diciotto, diciannove)</li>
+                            </ul>
+
+                            <div class="rule-box" style="background: #ffedd5; border-color: #7c2d12;">
+                                <strong>ਦਹਾਈ (20-100):</strong> venti (20), trenta (30), quaranta (40), cinquanta (50), sessanta (60), settanta (70), ottanta (80), novanta (90), cento (100)
+                            </div>
+
+                            <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                                <strong>ਹਟਾਉਣ ਦਾ ਨਿਯਮ (Troncamento):</strong> ਜਦੋਂ "uno" (1) ਜਾਂ "otto" (8) ਦਹਾਈ ਵਿੱਚ ਜੋੜੋ, ਆਖਰੀ ਵੋਵਲ ਹਟਾਓ:<br>
+                                • 21 = <strong>ventuno</strong> (ਨਹੀਂ "ventiuno")<br>
+                                • 28 = <strong>ventotto</strong> (ਨਹੀਂ "ventiotto")
+                            </div>
+
+                            <div class="instruction-box" style="background: #ffedd5; border-left-color: #7c2d12;">
+                                <strong>ਉਮਰ ਦਾ ਪ੍ਰਗਟਾਵਾ:</strong> ਅੰਗਰੇਜ਼ੀ "I am 25" ਦੇ ਉਲਟ, ਇਤਾਲਵੀ ਵਿੱਚ <strong>AVERE</strong> (ਰੱਖਣਾ/ਹੋਣਾ) ਵਰਤੋਂ ਹੁੰਦਾ ਹੈ:<br>
+                                • <em>Io <strong>ho</strong> 25 anni</em> = ਮੇਰੇ <strong>ਕੋਲ</strong> 25 ਸਾਲ ਹਨ (ਮੈਂ 25 ਸਾਲਾਂ ਦਾ ਹਾਂ)<br>
+                                • <em>Quanti anni <strong>hai</strong>؟</em> = ਤੁਹਾਡੀ ਉਮਰ ਕੀ ਹੈ؟<br><br>
+                                <strong>ਆਮ ਗਲਤੀ:</strong> "Io sono 25" (ਮੈਂ 25 ਹਾਂ) ਕਦੇ ਨਾ ਕਹੋ — ਹਮੇਸ਼ਾ "anni" (ਸਾਲ) ਸ਼ਾਮਲ ਕਰੋ
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- SEZIONE PUNTEGGIO FINALE -->
-                <div class="final-score-section" id="finalScoreSection">
-                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
-                    <div class="final-score-value" id="finalScore">0/100</div>
-                    <p class="final-message" id="finalMessage"></p>
-                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
-                        🔄 Riprova tutti gli esercizi
-                    </button>
+        <!-- SEZIONE ALBANESE -->
+        <section id="albanian" class="section">
+            <div class="card">
+                <div class="card-header">🇦🇱 Shqip - Numrat Italianë</div>
+                <div class="card-body">
+                    <div class="language-section albanian">
+                        <div class="language-title albanian"><span class="flag-icon">🇦🇱</span> Shqip (Albanian)</div>
+                        
+                        <p><strong>Numrat Kardinalë Italianë dhe Shprehja e Moshës</strong></p>
+                        
+                        <p>Sistemi numerik italian (0-100) ndjek rregulla të qarta me disa përjashtime:</p>
+                        
+                        <ul style="margin: 1rem 0; margin-left: 2rem;">
+                            <li><strong>0-10:</strong> Forma të parregullta që duhen memorizuar: zero, uno, due, tre, quattro, cinque, sei, sette, otto, nove, dieci</li>
+                            <li><strong>11-16:</strong> prapashtesa "-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                            <li><strong>17-19:</strong> parashtesa "dici-" (diciassette, diciotto, diciannove)</li>
+                        </ul>
+
+                        <div class="rule-box" style="background: #fee2e2; border-color: #991b1b;">
+                            <strong>Dhjetëshe (20-100):</strong> venti (20), trenta (30), quaranta (40), cinquanta (50), sessanta (60), settanta (70), ottanta (80), novanta (90), cento (100)
+                        </div>
+
+                        <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                            <strong>Rregulla e Shkurtimit (Troncamento):</strong> Kur shtoni "uno" (1) ose "otto" (8) në dhjetësha, hiqni zanoren e fundit:<br>
+                            • 21 = <strong>ventuno</strong> (jo "ventiuno")<br>
+                            • 28 = <strong>ventotto</strong> (jo "ventiotto")
+                        </div>
+
+                        <div class="instruction-box" style="background: #fee2e2; border-left-color: #991b1b;">
+                            <strong>Mosha:</strong> Ndryshe nga anglishtja "I <strong>am</strong> 25," italishtja përdor <strong>AVERE</strong> (pasur):<br>
+                            • <em>Io <strong>ho</strong> 25 anni</em> = Unë <strong>kam</strong> 25 vjet (moshë)<br>
+                            • <em>Quanti anni <strong>hai</strong>؟</em> = Sa vjeç je؟<br><br>
+                            <strong>Gabim i zakonshëm:</strong> Mos thoni kurrë "Io sono 25" (Unë jam 25) — gjithmonë përdorni "avere" dhe "anni"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE SPAGNOLO -->
+        <section id="spanish" class="section">
+            <div class="card">
+                <div class="card-header">🇪🇸 Español - Números Italianos</div>
+                <div class="card-body">
+                    <div class="language-section spanish">
+                        <div class="language-title spanish"><span class="flag-icon">🇪🇸</span> Español</div>
+                        
+                        <p><strong>Números Cardinales Italianos y Expresión de la Edad</strong></p>
+                        
+                        <p>El sistema numérico italiano (0-100) es relativamente sencillo con reglas claras:</p>
+                        
+                        <ul style="margin: 1rem 0; margin-left: 2rem;">
+                            <li><strong>0-10:</strong> Formas irregulares para memorizar: cero (zero), uno (uno), dos (due), tres (tre), cuatro (quattro), cinco (cinque), seis (sei), siete (sette), ocho (otto), nueve (nove), diez (dieci)</li>
+                            <li><strong>11-16:</strong> sufijo "-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                            <li><strong>17-19:</strong> prefijo "dici-" (diciassette, diciotto, diciannove)</li>
+                        </ul>
+
+                        <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                            <strong>Las Decenas (20-100):</strong> venti (20), trenta (30), quaranta (40), cinquanta (50), sessanta (60), settanta (70), ottanta (80), novanta (90), cento (100)
+                        </div>
+
+                        <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                            <strong>Regla del Truncamiento:</strong> Al añadir "uno" (1) u "otto" (8) a las decenas, se cae la vocal final:<br>
+                            • 21 = <strong>ventuno</strong> (no "ventiuno")<br>
+                            • 28 = <strong>ventotto</strong> (no "ventiotto")
+                        </div>
+
+                        <div class="instruction-box" style="background: #fef3c7; border-left-color: #f59e0b;">
+                            <strong>La Edad:</strong> Al igual que en español "Yo <strong>tengo</strong> 25 años," el italiano usa <strong>AVERE</strong> (tener):<br>
+                            • <em>Io <strong>ho</strong> 25 anni</em> = Yo <strong>tengo</strong> 25 años<br>
+                            • <em>Quanti anni <strong>hai</strong>؟</em> = ¿Cuántos años <strong>tienes</strong>؟<br><br>
+                            <strong>Error común:</strong> Nunca digas "Io sono 25" (Yo soy 25) — ¡es influencia del inglés! Siempre usa "avere" y "anni"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PORTOGHESE -->
+        <section id="portuguese" class="section">
+            <div class="card">
+                <div class="card-header">🇵🇹 Português - Números Italianos</div>
+                <div class="card-body">
+                    <div class="language-section portuguese">
+                        <div class="language-title portuguese"><span class="flag-icon">🇵🇹</span> Português</div>
+                        
+                        <p><strong>Números Cardinais Italianos e Expressão da Idade</strong></p>
+                        
+                        <p>O sistema numérico italiano (0-100) segue padrões regulares com regras importantes:</p>
+                        
+                        <ul style="margin: 1rem 0; margin-left: 2rem;">
+                            <li><strong>0-10:</strong> Formas irregulares para memorizar: zero, uno, due, tre, quattro, cinque, sei, sette, otto, nove, dieci</li>
+                            <li><strong>11-16:</strong> sufixo "-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                            <li><strong>17-19:</strong> prefixo "dici-" (diciassette, diciotto, diciannove)</li>
+                        </ul>
+
+                        <div class="rule-box" style="background: #d1fae5; border-color: #059669;">
+                            <strong>As Dezenas (20-100):</strong> venti (20), trenta (30), quaranta (40), cinquanta (50), sessanta (60), settanta (70), ottanta (80), novanta (90), cento (100)
+                        </div>
+
+                        <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                            <strong>Regra do Truncamento:</strong> Ao adicionar "uno" (1) ou "otto" (8) às dezenas, a vogal final cai:<br>
+                            • 21 = <strong>ventuno</strong> (não "ventiuno")<br>
+                            • 28 = <strong>ventotto</strong> (não "ventiotto")
+                        </div>
+
+                        <div class="instruction-box" style="background: #d1fae5; border-left-color: #059669;">
+                            <strong>A Idade:</strong> Assim como em português "Eu <strong>tenho</strong> 25 anos," o italiano usa <strong>AVERE</strong> (ter):<br>
+                            • <em>Io <strong>ho</strong> 25 anni</em> = Eu <strong>tenho</strong> 25 anos<br>
+                            • <em>Quanti anni <strong>hai</strong>؟</em> = Quantos anos <strong>você tem</strong>؟<br><br>
+                            <strong>Erro comum:</strong> Nunca diga "Io sono 25" (Eu sou 25) — é erro de quem fala inglês! Sempre use "avere" e "anni"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE BANGLA -->
+        <section id="bangla" class="section">
+            <div class="card">
+                <div class="card-header bangla">🇧🇩 বাংলা - ইতালীয় সংখ্যা</div>
+                <div class="card-body">
+                    <div class="language-section bangla">
+                        <div class="language-title bangla"><span class="flag-icon">🇧🇩</span> বাংলা (Bangla)</div>
+                        
+                        <div class="bangla-text">
+                            <p><strong>ইতালীয় সংখ্যা এবং বয়স প্রকাশ</strong></p>
+                            
+                            <p>ইতালীয় সংখ্যা পদ্ধতি (0-100) স্পষ্ট নিয়ম অনুসরণ করে:</p>
+                            
+                            <ul style="margin: 1rem 0; margin-left: 2rem;">
+                                <li><strong>0-10:</strong> মুখস্থ করতে হবে: zero, uno, due, tre, quattro, cinque, sei, sette, otto, nove, dieci</li>
+                                <li><strong>11-16:</strong> প্রত্যয় "-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                                <li><strong>17-19:</strong> উপসর্গ "dici-" (diciassette, diciotto, diciannove)</li>
+                            </ul>
+
+                            <div class="rule-box" style="background: #ffedd5; border-color: var(--bangla);">
+                                <strong>দশক (20-100):</strong> venti (20), trenta (30), quaranta (40), cinquanta (50), sessanta (60), settanta (70), ottanta (80), novanta (90), cento (100)
+                            </div>
+
+                            <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                                <strong>ছাঁটাই নিয়ম (Troncamento):</strong> যখন "uno" (1) বা "otto" (8) যোগ করবেন, শেষের স্বর বাদ দিন:<br>
+                                • 21 = <strong>ventuno</strong> (নয় "ventiuno")<br>
+                                • 28 = <strong>ventotto</strong> (নয় "ventiotto")
+                            </div>
+
+                            <div class="instruction-box" style="background: #ffedd5; border-left-color: var(--bangla);">
+                                <strong>বয়স প্রকাশ:</strong> ইংরেজি "I am 25"-এর বিপরীতে, ইতালীয়তে <strong>AVERE</strong> (থাকা/রাখা) ব্যবহার হয়:<br>
+                                • <em>Io <strong>ho</strong> 25 anni</em> = আমার <strong>আছে</strong> 25 বছর (আমি ২৫ বছরের)<br>
+                                • <em>Quanti anni <strong>hai</strong>؟</em> = তোমার বয়স কত؟ (তোমার কত বছর আছে؟)<br><br>
+                                <strong>সাধারণ ভুল:</strong> "Io sono 25" (আমি ২৫) কখনও বলবেন না — সর্বদা "avere" এবং "anni" ব্যবহার করুন
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE HINDI -->
+        <section id="hindi" class="section">
+            <div class="card">
+                <div class="card-header hindi">🇮🇳 हिन्दी - इतालवी संख्याएँ</div>
+                <div class="card-body">
+                    <div class="language-section hindi">
+                        <div class="language-title hindi"><span class="flag-icon">🇮🇳</span> हिन्दी (Hindi)</div>
+                        
+                        <div class="hindi-text">
+                            <p><strong>इतालवी संख्याएँ और उम्र का व्यंजन</strong></p>
+                            
+                            <p>इतालवी संख्या प्रणाली (0-100) स्पष्ट नियमों का पालन करती है:</p>
+                            
+                            <ul style="margin: 1rem 0; margin-left: 2rem;">
+                                <li><strong>0-10:</strong> याद करने योग्य शब्द: zero, uno, due, tre, quattro, cinque, sei, sette, otto, nove, dieci</li>
+                                <li><strong>11-16:</strong> प्रत्यय "-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                                <li><strong>17-19:</strong> उपसर्ग "dici-" (diciassette, diciotto, diciannove)</li>
+                            </ul>
+
+                            <div class="rule-box" style="background: #cffafe; border-color: var(--hindi);">
+                                <strong>दहाई (20-100):</strong> venti (20), trenta (30), quaranta (40), cinquanta (50), sessanta (60), settanta (70), ottanta (80), novanta (90), cento (100)
+                            </div>
+
+                            <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                                <strong>छोटने का नियम (Troncamento):</strong> जब "uno" (1) या "otto" (8) जोड़ें, अंतिम स्वर हटा दें:<br>
+                                • 21 = <strong>ventuno</strong> (नहीं "ventiuno")<br>
+                                • 28 = <strong>ventotto</strong> (नहीं "ventiotto")
+                            </div>
+
+                            <div class="instruction-box" style="background: #cffafe; border-left-color: var(--hindi);">
+                                <strong>उम्र का व्यंजन:</strong> अंग्रेजी "I am 25" के विपरीत, इतालवी में <strong>AVERE</strong> (रखना/होना) का प्रयोग होता है:<br>
+                                • <em>Io <strong>ho</strong> 25 anni</em> = मेरे <strong>पास</strong> 25 साल हैं (मैं 25 साल का हूँ)<br>
+                                • <em>Quanti anni <strong>hai</strong>؟</em> = आपकी उम्र क्या है؟ (आपके पास कितने साल हैं؟)<br><br>
+                                <strong>आम गलती:</strong> "Io sono 25" (मैं 25 हूँ) कभी न कहें — हमेशा "avere" और "anni" का प्रयोग करें
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CINESE -->
+        <section id="chinese" class="section">
+            <div class="card">
+                <div class="card-header chinese">🇨🇳 中文 - 意大利语数字</div>
+                <div class="card-body">
+                    <div class="language-section chinese">
+                        <div class="language-title chinese"><span class="flag-icon">🇨🇳</span> 中文 (Chinese)</div>
+                        
+                        <div class="chinese-text">
+                            <p><strong>意大利语基数词与年龄表达</strong></p>
+                            
+                            <p>意大利语数字系统（0-100）遵循清晰的规则：</p>
+                            
+                            <ul style="margin: 1rem 0; margin-left: 2rem;">
+                                <li><strong>0-10:</strong> 需要记忆的不规则形式：零(zero)、一(uno)、二(due)、三(tre)、四(quattro)、五(cinque)、六(sei)、七(sette)、八(otto)、九(nove)、十(dieci)</li>
+                                <li><strong>11-16:</strong> 后缀"-dici" (undici, dodici, tredici, quattordici, quindici, sedici)</li>
+                                <li><strong>17-19:</strong> 前缀"dici-" (diciassette, diciotto, diciannove)</li>
+                            </ul>
+
+                            <div class="rule-box" style="background: #ffe4e6; border-color: var(--chinese);">
+                                <strong>整十数 (20-100):</strong> venti (20)、trenta (30)、quaranta (40)、cinquanta (50)、sessanta (60)、settanta (70)、ottanta (80)、novanta (90)、cento (100)
+                            </div>
+
+                            <div class="rule-box" style="background: #fef3c7; border-color: #f59e0b;">
+                                <strong>截断规则 (Troncamento):</strong> 当十位加上"uno"(1)或"otto"(8)时，去掉十位的最后一个元音：<br>
+                                • 21 = <strong>ventuno</strong> (不是"ventiuno")<br>
+                                • 28 = <strong>ventotto</strong> (不是"ventiotto")
+                            </div>
+
+                            <div class="instruction-box" style="background: #ffe4e6; border-left-color: var(--chinese);">
+                                <strong>年龄表达:</strong> 与英语"I <strong>am</strong> 25"不同，意大利语使用<strong>AVERE</strong>（有/拥有）：<br>
+                                • <em>Io <strong>ho</strong> 25 anni</em> = 我<strong>有</strong>25岁（我25岁）<br>
+                                • <em>Quanti anni <strong>hai</strong>؟</em> = 你<strong>有</strong>多少岁？（你几岁？）<br><br>
+                                <strong>常见错误:</strong> 绝不要说"Io sono 25"（我是25）——这是受英语影响！必须使用"avere"和"anni"（年/岁）<br><br>
+                                <strong>文化注释:</strong> 与中文类似，意大利语年龄表达强调"拥有"岁月，而非"是"某个数字
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TABELLA COMPARATIVA -->
+        <section id="comparison" class="section">
+            <div class="card">
+                <div class="card-header">📊 Tabella Comparativa delle Strutture</div>
+                <div class="card-body">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Lingua</th>
+                                <th>Struttura per l'età</th>
+                                <th>Verbo usato</th>
+                                <th>Confronto con Italiano</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>🇮🇹 Italiano</td>
+                                <td><em>Io ho 25 anni</em></td>
+                                <td>AVERE</td>
+                                <td class="check-mark">✅ Base</td>
+                            </tr>
+                            <tr>
+                                <td>🇸🇳 Wolof</td>
+                                <td>Am naa 25 at</td>
+                                <td>am (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                            <tr>
+                                <td>🇸🇦 Arabo</td>
+                                <td class="rtl-text">عندي 25 سنة</td>
+                                <td>عند (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                            <tr>
+                                <td>🇬🇧 Inglese</td>
+                                <td>I <strong>am</strong> 25</td>
+                                <td>to be (essere)</td>
+                                <td class="cross-mark">❌ Diverso</td>
+                            </tr>
+                            <tr>
+                                <td>🇫🇷 Francese</td>
+                                <td>J'<strong>ai</strong> 25 ans</td>
+                                <td>avoir (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                            <tr>
+                                <td>🇲🇱 Bambara</td>
+                                <td>Ne bɛ 25 san sɔrɔ</td>
+                                <td>ka sɔrɔ (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                            <tr>
+                                <td>🇵🇰 Urdu</td>
+                                <td class="urdu-text">میرے پاس 25 سال ہیں</td>
+                                <td>پاس ہونا (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                            <tr>
+                                <td>🇮🇳 Panjabi</td>
+                                <td class="punjabi-text">ਮੇਰੇ ਕੋਲ 25 ਸਾਲ ਹਨ</td>
+                                <td>ਕੋਲ ਹੋਣਾ (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                            <tr>
+                                <td>🇦🇱 Albanese</td>
+                                <td>Unë <strong>kam</strong> 25 vjet</td>
+                                <td>kam (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                            <tr>
+                                <td>🇪🇸 Spagnolo</td>
+                                <td>Yo <strong>tengo</strong> 25 años</td>
+                                <td>tener (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                            <tr>
+                                <td>🇵🇹 Portoghese</td>
+                                <td>Eu <strong>tenho</strong> 25 anos</td>
+                                <td>ter (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                            <tr>
+                                <td>🇧🇩 Bangla</td>
+                                <td class="bangla-text">আমার ২৫ বছর আছে</td>
+                                <td>আছে (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                            <tr>
+                                <td>🇮🇳 Hindi</td>
+                                <td class="hindi-text">मेरे पास 25 साल हैं</td>
+                                <td>पास होना (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                            <tr>
+                                <td>🇨🇳 Cinese</td>
+                                <td class="chinese-text">我<strong>有</strong>25岁</td>
+                                <td>有 (avere)</td>
+                                <td class="check-mark">✅ Simile</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box" style="margin-top: 2rem; background: #e8f5e9; border-color: var(--numbers);">
+                        <strong>Conclusione:</strong> L'italiano si allinea con la <span class="highlight">maggior parte delle lingue del mondo</span> (arabo, cinese, spagnolo, francese, hindi, etc.) nell'usare il verbo <strong>AVERE</strong> per l'età. <br><br>
+                        L'inglese è un'<span class="highlight">eccezione</span> nell'usare "to be" (essere), il che crea confusione per gli studenti anglofoni che devono ricordare: <em>In italiano si "hanno" gli anni, non si "sono"!</em>
+                    </div>
                 </div>
             </div>
         </section>
@@ -800,671 +1149,40 @@
 
     <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
         <div style="max-width: 1200px; margin: 0 auto;">
-            <p>© 2024 Corso di Italiano A1 - Numeri e Età (50 Esercizi)</p>
+            <p>© 2024 Corso di Italiano A1 - Teoria Multilingue (13 Lingue)</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Wolof • العربية • English • Français • Bambara • اردو • ਪੰਜਾਬੀ • Shqip • Español • Português • বাংলা • हिन्दी • 中文</p>
         </div>
     </footer>
 
     <script>
-        // Database dei numeri
-        const numbersData = {
-            0: 'zero', 1: 'uno', 2: 'due', 3: 'tre', 4: 'quattro', 5: 'cinque',
-            6: 'sei', 7: 'sette', 8: 'otto', 9: 'nove', 10: 'dieci',
-            11: 'undici', 12: 'dodici', 13: 'tredici', 14: 'quattordici',
-            15: 'quindici', 16: 'sedici', 17: 'diciassette', 18: 'diciotto',
-            19: 'diciannove', 20: 'venti', 30: 'trenta', 40: 'quaranta',
-            50: 'cinquanta', 60: 'sessanta', 70: 'settanta', 80: 'ottanta',
-            90: 'novanta', 100: 'cento'
-        };
-
-        // Database degli esercizi (50 totali)
-        const exercises = [
-            // ESERCIZI 1-10: Numeri base 0-10
-            {
-                id: 1,
-                type: 'choice',
-                question: 'Come si scrive il numero 0?',
-                options: ['zero', 'uno', 'dieci', 'cento'],
-                correct: 'zero',
-                explanation: '✅ Corretto! 0 = zero.',
-                errorExplanation: '❌ 0 si scrive ZERO'
-            },
-            {
-                id: 2,
-                type: 'fill',
-                question: 'Completa: Il numero 3 si scrive _____',
-                correct: ['tre'],
-                explanation: '✅ Corretto! 3 = tre.'
-            },
-            {
-                id: 3,
-                type: 'choice',
-                question: 'Come si scrive il numero 7?',
-                options: ['sei', 'sette', 'otto', 'nove'],
-                correct: 'sette',
-                explanation: '✅ Corretto! 7 = sette.',
-                errorExplanation: '❌ 7 si scrive SETTE'
-            },
-            {
-                id: 4,
-                type: 'fill',
-                question: 'Completa: 5 = _____',
-                correct: ['cinque'],
-                explanation: '✅ Corretto! 5 = cinque.'
-            },
-            {
-                id: 5,
-                type: 'choice',
-                question: 'Quale numero corrisponde a "otto"?',
-                options: ['6', '7', '8', '9'],
-                correct: '8',
-                explanation: '✅ Corretto! otto = 8.',
-                errorExplanation: '❌ "Otto" corrisponde a 8'
-            },
-            {
-                id: 6,
-                type: 'fill',
-                question: 'Completa: nove = _____ (in cifre)',
-                correct: ['9'],
-                explanation: '✅ Corretto! nove = 9.'
-            },
-            {
-                id: 7,
-                type: 'choice',
-                question: 'Come si scrive il numero 10?',
-                options: ['dieci', 'undici', 'dodici', 'venti'],
-                correct: 'dieci',
-                explanation: '✅ Corretto! 10 = dieci.',
-                errorExplanation: '❌ 10 si scrive DIECI'
-            },
-            {
-                id: 8,
-                type: 'fill',
-                question: 'Completa: 1 = _____',
-                correct: ['uno'],
-                explanation: '✅ Corretto! 1 = uno.'
-            },
-            {
-                id: 9,
-                type: 'choice',
-                question: 'Quale numero corrisponde a "quattro"?',
-                options: ['3', '4', '5', '6'],
-                correct: '4',
-                explanation: '✅ Corretto! quattro = 4.',
-                errorExplanation: '❌ "Quattro" corrisponde a 4'
-            },
-            {
-                id: 10,
-                type: 'fill',
-                question: 'Completa: sei = _____ (in cifre)',
-                correct: ['6'],
-                explanation: '✅ Corretto! sei = 6.'
-
-            },
-
-            // ESERCIZI 11-20: Numeri 11-20
-            {
-                id: 11,
-                type: 'choice',
-                question: 'Come si scrive il numero 11?',
-                options: ['dieci', 'undici', 'dodici', 'tredici'],
-                correct: 'undici',
-                explanation: '✅ Corretto! 11 = undici.',
-                errorExplanation: '❌ 11 si scrive UNDICI'
-            },
-            {
-                id: 12,
-                type: 'fill',
-                question: 'Completa: 15 = _____',
-                correct: ['quindici'],
-                explanation: '✅ Corretto! 15 = quindici.'
-            },
-            {
-                id: 13,
-                type: 'choice',
-                question: 'Quale numero corrisponde a "diciotto"?',
-                options: ['16', '17', '18', '19'],
-                correct: '18',
-                explanation: '✅ Corretto! diciotto = 18.',
-                errorExplanation: '❌ "Diciotto" corrisponde a 18'
-            },
-            {
-                id: 14,
-                type: 'fill',
-                question: 'Completa: 12 si scrive _____',
-                correct: ['dodici'],
-                explanation: '✅ Corretto! 12 = dodici.'
-            },
-            {
-                id: 15,
-                type: 'choice',
-                question: 'Come si scrive il numero 14?',
-                options: ['tredici', 'quattordici', 'quindici', 'sedici'],
-                correct: 'quattordici',
-                explanation: '✅ Corretto! 14 = quattordici.',
-                errorExplanation: '❌ 14 si scrive QUATTORDICI'
-            },
-            {
-                id: 16,
-                type: 'fill',
-                question: 'Completa: 17 = _____',
-                correct: ['diciassette'],
-                explanation: '✅ Corretto! 17 = diciassette.'
-            },
-            {
-                id: 17,
-                type: 'choice',
-                question: 'Quale numero corrisponde a "diciannove"?',
-                options: ['17', '18', '19', '20'],
-                correct: '19',
-                explanation: '✅ Corretto! diciannove = 19.',
-                errorExplanation: '❌ "Diciannove" corrisponde a 19'
-            },
-            {
-                id: 18,
-                type: 'fill',
-                question: 'Completa: tredici = _____ (in cifre)',
-                correct: ['13'],
-                explanation: '✅ Corretto! tredici = 13.'
-            },
-            {
-                id: 19,
-                type: 'choice',
-                question: 'Come si scrive il numero 16?',
-                options: ['quindici', 'sedici', 'diciassette', 'diciotto'],
-                correct: 'sedici',
-                explanation: '✅ Corretto! 16 = sedici.',
-                errorExplanation: '❌ 16 si scrive SEDICI'
-            },
-            {
-                id: 20,
-                type: 'fill',
-                question: 'Completa: 20 = _____',
-                correct: ['venti'],
-                explanation: '✅ Corretto! 20 = venti.'
-
-            },
-
-            // ESERCIZI 21-30: Decine
-            {
-                id: 21,
-                type: 'choice',
-                question: 'Come si scrive il numero 30?',
-                options: ['venti', 'trenta', 'quaranta', 'cinquanta'],
-                correct: 'trenta',
-                explanation: '✅ Corretto! 30 = trenta.',
-                errorExplanation: '❌ 30 si scrive TRENTA'
-            },
-            {
-                id: 22,
-                type: 'fill',
-                question: 'Completa: 50 = _____',
-                correct: ['cinquanta'],
-                explanation: '✅ Corretto! 50 = cinquanta.'
-            },
-            {
-                id: 23,
-                type: 'choice',
-                question: 'Quale numero corrisponde a "ottanta"?',
-                options: ['60', '70', '80', '90'],
-                correct: '80',
-                explanation: '✅ Corretto! ottanta = 80.',
-                errorExplanation: '❌ "Ottanta" corrisponde a 80'
-            },
-            {
-                id: 24,
-                type: 'fill',
-                question: 'Completa: 40 si scrive _____',
-                correct: ['quaranta'],
-                explanation: '✅ Corretto! 40 = quaranta.'
-            },
-            {
-                id: 25,
-                type: 'choice',
-                question: 'Come si scrive il numero 100?',
-                options: ['novanta', 'cento', 'centouno', 'mille'],
-                correct: 'cento',
-                explanation: '✅ Corretto! 100 = cento.',
-                errorExplanation: '❌ 100 si scrive CENTO'
-            },
-            {
-                id: 26,
-                type: 'fill',
-                question: 'Completa: 70 = _____',
-                correct: ['settanta'],
-                explanation: '✅ Corretto! 70 = settanta.'
-            },
-            {
-                id: 27,
-                type: 'choice',
-                question: 'Quale numero corrisponde a "sessanta"?',
-                options: ['50', '60', '70', '80'],
-                correct: '60',
-                explanation: '✅ Corretto! sessanta = 60.',
-                errorExplanation: '❌ "Sessanta" corrisponde a 60'
-            },
-            {
-                id: 28,
-                type: 'fill',
-                question: 'Completa: 90 = _____',
-                correct: ['novanta'],
-                explanation: '✅ Corretto! 90 = novanta.'
-            },
-            {
-                id: 29,
-                type: 'choice',
-                question: 'Come si scrive 21? (attenzione alla regola del troncamento)',
-                options: ['ventiuno', 'ventuno', 'venti', 'ventidue'],
-                correct: 'ventuno',
-                explanation: '✅ Corretto! 21 = ventuno (la i di venti cade prima di uno).',
-                errorExplanation: '❌ 21 = ventuno (senza la i di venti)'
-            },
-            {
-                id: 30,
-                type: 'fill',
-                question: 'Completa: 28 = _____ (attenzione al troncamento)',
-                correct: ['ventotto'],
-                explanation: '✅ Corretto! 28 = ventotto (la i di venti cade prima di otto).'
-
-            },
-
-            // ESERCIZI 31-40: Numeri composti
-            {
-                id: 31,
-                type: 'choice',
-                question: 'Come si scrive il numero 35?',
-                options: ['trentacinque', 'trenta cinque', 'trentuno', 'quarantacinque'],
-                correct: 'trentacinque',
-                explanation: '✅ Corretto! 35 = trentacinque (tutto attaccato).',
-                errorExplanation: '❌ 35 = trentacinque (tutto attaccato, senza spazi)'
-            },
-            {
-                id: 32,
-                type: 'fill',
-                question: 'Completa: 42 = _____',
-                correct: ['quarantadue'],
-                explanation: '✅ Corretto! 42 = quarantadue.'
-            },
-            {
-                id: 33,
-                type: 'choice',
-                question: 'Quale numero corrisponde a "cinquantatré"?',
-                options: ['52', '53', '54', '63'],
-                correct: '53',
-                explanation: '✅ Corretto! cinquantatré = 53.',
-                errorExplanation: '❌ "Cinquantatré" corrisponde a 53'
-            },
-            {
-                id: 34,
-                type: 'fill',
-                question: 'Completa: 67 = _____',
-                correct: ['sessantasette'],
-                explanation: '✅ Corretto! 67 = sessantasette.'
-            },
-            {
-                id: 35,
-                type: 'choice',
-                question: 'Come si scrive il numero 99?',
-                options: ['novantanove', 'novanta nove', 'centonove', 'ottantanove'],
-                correct: 'novantanove',
-                explanation: '✅ Corretto! 99 = novantanove.',
-                errorExplanation: '❌ 99 = novantanove (tutto attaccato)'
-            },
-            {
-                id: 36,
-                type: 'fill',
-                question: 'Completa: 31 = _____ (attenzione al troncamento)',
-                correct: ['trentuno'],
-                explanation: '✅ Corretto! 31 = trentuno (senza la a di trenta).'
-            },
-            {
-                id: 37,
-                type: 'choice',
-                question: 'Quale numero corrisponde a "settantotto"?',
-                options: ['68', '70', '78', '88'],
-                correct: '78',
-                explanation: '✅ Corretto! settantotto = 78 (settanta senza a + otto).',
-                errorExplanation: '❌ "Settantotto" = 78 (settanta perde la a prima di otto)'
-            },
-            {
-                id: 38,
-                type: 'fill',
-                question: 'Completa: 46 = _____',
-                correct: ['quarantasei'],
-                explanation: '✅ Corretto! 46 = quarantasei.'
-            },
-            {
-                id: 39,
-                type: 'choice',
-                question: 'Come si scrive il numero 88?',
-                options: ['ottantotto', 'ottantaotto', 'ottantotto', 'novantotto'],
-                correct: 'ottantotto',
-                explanation: '✅ Corretto! 88 = ottantotto (ottanta senza a + otto).',
-                errorExplanation: '❌ 88 = ottantotto (senza la a di ottanta)'
-            },
-            {
-                id: 40,
-                type: 'fill',
-                question: 'Completa: 74 = _____',
-                correct: ['settantaquattro'],
-                explanation: '✅ Corretto! 74 = settantaquattro.'
-
-            },
-
-            // ESERCIZI 41-50: Età con il verbo AVERE
-            {
-                id: 41,
-                type: 'choice',
-                question: 'Completa: Io _____ 20 anni. (esprimere età)',
-                options: ['sono', 'ho', 'ha', 'abbiamo'],
-                correct: 'ho',
-                explanation: '✅ Corretto! In italiano si "hanno" gli anni: io HO 20 anni.',
-                errorExplanation: '❌ ERRORE CLASSICO: In italiano si usa AVERE per l\'età, non ESSERE!'
-            },
-            {
-                id: 42,
-                type: 'fill',
-                question: 'Completa: Tu _____ 15 anni?',
-                correct: ['hai'],
-                explanation: '✅ Corretto! "Tu hai 15 anni?" (avere per l\'età).'
-            },
-            {
-                id: 43,
-                type: 'choice',
-                question: 'Completa: Lei _____ 30 anni. (formale)',
-                options: ['sono', 'ho', 'hai', 'ha'],
-                correct: 'ha',
-                explanation: '✅ Corretto! "Lei ha 30 anni" (avere alla terza persona).',
-                errorExplanation: '❌ Per lei si usa HA (avere)'
-            },
-            {
-                id: 44,
-                type: 'fill',
-                question: 'Completa: Noi _____ 25 anni.',
-                correct: ['abbiamo'],
-                explanation: '✅ Corretto! "Noi abbiamo 25 anni".'
-            },
-            {
-                id: 45,
-                type: 'choice',
-                question: 'Completa: Voi _____ 40 anni?',
-                options: ['siete', 'avete', 'hanno', 'abbiamo'],
-                correct: 'avete',
-                explanation: '✅ Corretto! "Voi avete 40 anni?" (avere).',
-                errorExplanation: '❌ Per voi si usa AVETE (avere)'
-            },
-            {
-                id: 46,
-                type: 'fill',
-                question: 'Completa: Loro _____ 18 anni.',
-                correct: ['hanno'],
-                explanation: '✅ Corretto! "Loro hanno 18 anni".'
-            },
-            {
-                id: 47,
-                type: 'choice',
-                question: 'Come si chiede l\'età in modo informale?',
-                options: ['Quanti anni sei?', 'Quanti anni hai?', 'Quanti anni ha?', 'Quanti anni abbiamo?'],
-                correct: 'Quanti anni hai?',
-                explanation: '✅ Corretto! "Quanti anni hai?" (informale, tu).',
-                errorExplanation: '❌ La forma informale è "Quanti anni HAI?" (tu)'
-            },
-            {
-                id: 48,
-                type: 'fill',
-                question: 'Come si chiede l\'età in modo formale? (Lei)',
-                correct: ['Quanti anni ha?', 'Quanti anni ha lei?'],
-                explanation: '✅ Corretto! "Quanti anni ha (Lei)?" (formale).'
-            },
-            {
-                id: 49,
-                type: 'choice',
-                question: 'Traduci: "I am 22 years old" (italiano corretto)',
-                options: ['Io sono 22', 'Io ho 22 anni', 'Io sono 22 anni', 'Io ho 22'],
-                correct: 'Io ho 22 anni',
-                explanation: '✅ Corretto! "Io ho 22 anni" (avere + anni).',
-                errorExplanation: '❌ In italiano si dice "ho 22 anni", non "sono 22" e non si omette "anni"'
-            },
-            {
-                id: 50,
-                type: 'fill',
-                question: 'Completa la frase: Marco ha 35 anni. La sua sorella _____ 32 anni e i suoi genitori _____ 60 anni.',
-                correct: ['ha... hanno', 'ha hanno'],
-                explanation: '✅ Corretto! "Sua sorella HA 32 anni" (lei) e "i genitori HANNO 60 anni" (loro). Complimenti!',
-                errorExplanation: '❌ Attenzione: lei HA, loro HANNO (avere)'
-            }
-        ];
-
-        let currentExercise = 0;
-        let totalScore = 0;
-        let answered = false;
-
-        // Popola la griglia dei numeri 0-20
-        function populateNumbersGrid() {
-            const grid = document.getElementById('numbersGrid');
-            let html = '';
-            for (let i = 0; i <= 20; i++) {
-                html += `
-                    <div class="number-card" onclick="speak('${numbersData[i]}')">
-                        <div class="number-digit">${i}</div>
-                        <div class="number-text">${numbersData[i]}</div>
-                    </div>
-                `;
-            }
-            grid.innerHTML = html;
-        }
-
-        function speak(text) {
-            if (!('speechSynthesis' in window)) return;
-            window.speechSynthesis.cancel();
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = 'it-IT';
-            u.rate = 0.8;
-            window.speechSynthesis.speak(u);
-        }
-
         function showSection(id, btn) {
+            // Nascondi tutte le sezioni
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            
+            // Mostra la sezione selezionata
             document.getElementById(id).classList.add('active');
-            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-            if(btn) btn.classList.add('active');
-
-            if(id === 'exercises' && currentExercise === 0) {
-                loadExercise();
-            }
-            if(id === 'numbers') {
-                populateNumbersGrid();
-            }
-        }
-
-        function loadExercise() {
-            if (currentExercise >= exercises.length) {
-                showFinalScore();
-                return;
-            }
-
-            const ex = exercises[currentExercise];
-            const container = document.getElementById('exerciseContainer');
             
-            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
-            
-            answered = false;
-
-            let html = `
-                <div class="card" style="animation: fadeIn 0.4s ease;">
-                    <div class="card-header numbers">Esercizio ${ex.id}</div>
-                    <div class="card-body">
-                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
-                        <div class="question-box">
-                            <div class="question-text">${ex.question}</div>
-                        </div>
-            `;
-
-            if (ex.type === 'choice') {
-                html += `<div class="options-grid" id="optionsGrid">`;
-                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
-                shuffledOptions.forEach(opt => {
-                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
-                });
-                html += `</div>`;
-            } else if (ex.type === 'fill') {
-                html += `
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
-                    </div>
-                    <div class="text-center">
-                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
-                    </div>
-                `;
-            }
-
-            html += `
-                        <div class="feedback" id="feedback"></div>
-                        <div class="text-center" id="nextBtnContainer" style="display: none;">
-                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            container.innerHTML = html;
-            
-            if (ex.type === 'fill') {
-                setTimeout(() => document.getElementById('fillInput').focus(), 100);
-            }
-        }
-
-        function checkChoice(selected) {
-            if (answered) return;
-            answered = true;
-
-            const ex = exercises[currentExercise];
-            const btns = document.querySelectorAll('#optionsGrid .option-btn');
-            const feedback = document.getElementById('feedback');
-            const nextContainer = document.getElementById('nextBtnContainer');
-
-            btns.forEach(btn => {
-                btn.disabled = true;
-                if (btn.dataset.value === ex.correct) {
-                    btn.classList.add('correct');
-                } else if (btn.dataset.value === selected && selected !== ex.correct) {
-                    btn.classList.add('wrong');
-                }
+            // Aggiorna i tab attivi
+            document.querySelectorAll('.nav-tab').forEach(b => {
+                b.classList.remove('active');
             });
-
-            feedback.classList.add('show');
-
-            if (selected === ex.correct) {
-                feedback.className = 'feedback show correct';
-                feedback.textContent = ex.explanation;
-                totalScore += 2;
-            } else {
-                feedback.className = 'feedback show wrong';
-                let errorMsg = ex.errorExplanation;
-                
-                // Messaggi specifici per errori comuni
-                if (ex.question.includes('età') && selected === 'sono') {
-                    errorMsg += '<br><strong>⚠️ ERRORE CLASSICO: In italiano si "hanno" gli anni, non si "sono"!</strong>';
-                }
-                if (ex.question.includes('troncamento') && selected.includes('auno') || selected.includes('iuno')) {
-                    errorMsg += '<br><strong>💡 Ricorda: la vocale finale della decina cade prima di uno e otto!</strong>';
-                }
-                
-                feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
-            }
-
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            nextContainer.style.display = 'block';
+            
+            if(btn) btn.classList.add('active');
         }
 
-        function checkFill() {
-            if (answered) return;
-            
-            const input = document.getElementById('fillInput');
-            const value = input.value.trim().toLowerCase();
-            if (!value) return;
-
-            answered = true;
-
-            const ex = exercises[currentExercise];
-            const feedback = document.getElementById('feedback');
-            const nextContainer = document.getElementById('nextBtnContainer');
-
-            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
-
-            feedback.classList.add('show');
-            input.disabled = true;
-
-            if (isCorrect) {
-                feedback.className = 'feedback show correct';
-                feedback.textContent = ex.explanation;
-                input.style.borderColor = 'var(--success)';
-                input.style.background = '#f0fff4';
-                totalScore += 2;
-            } else {
-                feedback.className = 'feedback show wrong';
-                let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
-                
-                // Messaggi specifici per errori comuni
-                if (ex.question.includes('età') && value === 'sono') {
-                    errorMsg += '<br><strong>⚠️ ERRORE CLASSICO: In italiano si "hanno" gli anni, non si "sono"!</strong>';
-                }
-                if (ex.question.includes('troncamento')) {
-                    errorMsg += '<br><strong>💡 Ricorda la regola del troncamento: venti + uno = ventuno (senza i)!</strong>';
-                }
-                
-                feedback.innerHTML = errorMsg;
-                input.style.borderColor = 'var(--error)';
-                input.style.background = '#fff5f5';
-                input.value = ex.correct[0];
-            }
-
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            nextContainer.style.display = 'block';
-        }
-
-        function nextExercise() {
-            currentExercise++;
-            loadExercise();
-        }
-
-        function showFinalScore() {
-            document.getElementById('exerciseContainer').style.display = 'none';
-            document.getElementById('finalScoreSection').classList.add('show');
-            document.getElementById('finalScore').textContent = `${totalScore}/100`;
-            
-            let message = '';
-            if (totalScore >= 90) {
-                message = '🏆 Eccellente! Padroneggi perfettamente i numeri e le espressioni dell\'età!';
-            } else if (totalScore >= 70) {
-                message = '👍 Ottimo lavoro! Conosci bene i numeri da 0 a 100 e le strutture per l\'età!';
-            } else if (totalScore >= 50) {
-                message = '💪 Buon lavoro! Ricorda: i numeri si scrivono attaccati, e per l\'età si usa AVERE (ho 20 anni)!';
-            } else {
-                message = '📚 Ripassa le regole! Ricorda: ventuno (non ventiuno), e "ho 20 anni" (non "sono 20")!';
-            }
-            
-            document.getElementById('finalMessage').textContent = message;
-            document.getElementById('progressBar').style.width = '100%';
-        }
-
-        function restartExercises() {
-            currentExercise = 0;
-            totalScore = 0;
-            answered = false;
-            
-            exercises.sort(() => Math.random() - 0.5);
-            
-            document.getElementById('exerciseContainer').style.display = 'block';
-            document.getElementById('finalScoreSection').classList.remove('show');
-            document.getElementById('progressBar').style.width = '0%';
-            
-            loadExercise();
-        }
-
+        // Mostra la tabella comparativa come sezione aggiuntiva
         document.addEventListener('DOMContentLoaded', function() {
-            exercises.sort(() => Math.random() - 0.5);
+            // Aggiungi un pulsante per la tabella comparativa
+            const navTabs = document.querySelector('.nav-tabs');
+            const compareBtn = document.createElement('button');
+            compareBtn.className = 'nav-tab';
+            compareBtn.style.background = '#6b7280';
+            compareBtn.style.color = 'white';
+            compareBtn.innerHTML = '📊 Comparazione';
+            compareBtn.onclick = function() {
+                showSection('comparison', this);
+            };
+            navTabs.appendChild(compareBtn);
         });
     </script>
 </body>

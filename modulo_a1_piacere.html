@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Verbo Piacere - 50 Esercizi</title>
+    <title>Il Verbo Piacere - 70 Esercizi Multilingue</title>
     <style>
         * {
             margin: 0;
@@ -25,6 +25,8 @@
             --parchment: #faf8f3;
             --b1-color: #c9a227;
             --piacere: #9b59b6;
+            --lang-bg: #e3f2fd;
+            --lang-border: #2196f3;
         }
 
         body {
@@ -184,6 +186,12 @@
             color: var(--piacere);
         }
 
+        .card-header.lang {
+            border-left-color: var(--lang-border);
+            color: var(--primary);
+            background: var(--lang-bg);
+        }
+
         .card-body {
             padding: 1.5rem;
         }
@@ -239,6 +247,56 @@
             font-weight: bold;
             color: var(--piacere);
             font-size: 1.2rem;
+        }
+
+        .lang-section {
+            margin-bottom: 2rem;
+            border: 1px solid var(--lang-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .lang-header {
+            background: var(--lang-bg);
+            padding: 0.75rem 1rem;
+            font-weight: bold;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lang-header:hover {
+            background: #bbdefb;
+        }
+
+        .lang-content {
+            padding: 1rem;
+            display: none;
+            background: white;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        .lang-flag {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s;
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
         }
 
         .game-container {
@@ -299,15 +357,6 @@
             font-size: 1.3rem;
             margin-bottom: 1rem;
             line-height: 1.8;
-        }
-
-        .blank {
-            display: inline-block;
-            min-width: 150px;
-            border-bottom: 2px solid var(--accent);
-            color: var(--accent);
-            font-weight: bold;
-            margin: 0 0.3rem;
         }
 
         .options-grid {
@@ -396,10 +445,6 @@
             color: #000;
         }
 
-        .btn-check:hover {
-            background: #b8941f;
-        }
-
         .fill-blank {
             display: inline-block;
             width: 220px;
@@ -454,8 +499,6 @@
         }
 
         .text-center { text-align: center; }
-        .mt-2 { margin-top: 1rem; }
-        .mb-2 { margin-bottom: 1rem; }
 
         .example-box {
             background: #e8f5e9;
@@ -481,13 +524,12 @@
             .fill-blank { width: 180px; }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
     <header class="header">
         <div class="header-container">
             <h1>Il Verbo Piacere - Modulo A1/A2</h1>
-            <p>Struttura invertita, presente e passato prossimo - 50 Esercizi</p>
+            <p>Struttura invertita, presente e passato prossimo - 70 Esercizi Interattivi Multilingue</p>
         </div>
     </header>
 
@@ -497,7 +539,7 @@
             <span>›</span>
             <a href="#">Italiano A1/A2</a>
             <span>›</span>
-            <strong>Il Verbo Piacere (50 Esercizi)</strong>
+            <strong>Il Verbo Piacere (70 Esercizi Multilingue)</strong>
         </div>
     </nav>
 
@@ -509,10 +551,11 @@
 
         <nav class="nav-tabs">
             <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab" onclick="showSection('languages', this)">🌍 Lingue</button>
             <button class="nav-tab" onclick="showSection('presente', this)">Presente</button>
             <button class="nav-tab" onclick="showSection('passato', this)">Passato</button>
-            <button class="nav-tab" onclick="showSection('errori', this)">⚠️ Errori Comuni</button>
-            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+            <button class="nav-tab" onclick="showSection('errori', this)">⚠️ Errori</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (70)</button>
         </nav>
 
         <!-- SEZIONE TEORIA -->
@@ -520,7 +563,7 @@
             <div class="card">
                 <div class="card-header piacere">Il Concetto di Piacere</div>
                 <div class="card-body">
-                    <p>Il verbo <strong>piacere</strong> è un verbo servile con una struttura sintattica particolare rispetto all'italiano standard. È fondamentale capire che in italiano "mi piace" equivale logicamente a "è piacevole a me".</p>
+                    <p>Il verbo <strong>piacere</strong> è un verbo servile con una struttura sintattica particolare. "Mi piace" equivale logicamente a "è piacevole a me".</p>
                     
                     <div class="instruction-box">
                         <strong>⚠️ Struttura Invertita:</strong><br>
@@ -530,14 +573,13 @@
                     <div class="example-box">
                         <strong>Esempio chiave:</strong><br>
                         "Mi piace <strong>la pizza</strong>" = La pizza è piacevole a me<br>
-                        • Soggetto grammaticale: <strong>la pizza</strong> (singolare)<br>
-                        • Complemento di termine: <strong>mi</strong> (a me)<br>
+                        • Soggetto: <strong>la pizza</strong> (singolare)<br>
+                        • Complemento: <strong>mi</strong> (a me)<br>
                         • Verbo: <strong>piace</strong> (3ª persona singolare)
                     </div>
 
                     <div class="rule-box">
-                        <strong>📌 Formula base:</strong><br>
-                        Pronome indiretto (mi/ti/gli/le/ci/vi/loro) + <strong>piacere</strong> + Soggetto (cosa che piace)
+                        <strong>📌 Formula:</strong> Pronome indiretto + <strong>piacere</strong> + Soggetto (cosa)
                     </div>
                 </div>
             </div>
@@ -546,13 +588,13 @@
                 <div class="card-header piacere">La Regola del Numero</div>
                 <div class="card-body">
                     <div class="instruction-box">
-                        <strong>Regola fondamentale:</strong> Il verbo si accorda con il <strong>soggetto</strong> (la cosa che piace), non con la persona!
+                        <strong>Regola:</strong> Il verbo si accorda con la <strong>cosa</strong>, non con la persona!
                     </div>
 
                     <table class="conjugation-table">
                         <tr>
                             <th>Soggetto</th>
-                            <th>Forma del verbo</th>
+                            <th>Forma</th>
                             <th>Esempio</th>
                         </tr>
                         <tr>
@@ -566,11 +608,64 @@
                             <td>Mi piacciono <strong>i gelati</strong></td>
                         </tr>
                     </table>
+                </div>
+            </div>
+        </section>
 
-                    <div class="error-box">
-                        <strong>❌ Errore comune:</strong><br>
-                        Non dire "Mi piacciono il gelato"! Il verbo deve accordarsi con il soggetto (il gelato = singolare → piace).
+        <!-- SEZIONE LINGUE (simplified - English example) -->
+        <section id="languages" class="section">
+            <div class="card">
+                <div class="card-header lang">🌍 Spiegazioni Multilingue</div>
+                <div class="card-body">
+                    <p>Clicca su una lingua per leggere la spiegazione:</p>
+
+                    <!-- English -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇬🇧</span> <strong>English</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>The Inverted Structure</h4>
+                            <p>Italian <strong>piacere</strong> literally means "to be pleasing to someone."</p>
+                            <p><strong>Key:</strong> The grammatical subject is the THING being liked, not the person!</p>
+                            <p>• "Mi piace la pizza" = Pizza is pleasing to me<br>
+                               • "I like pizza" → "Mi piace la pizza"</p>
+                            <p><strong>Piace</strong> (singular) vs <strong>Piacciono</strong> (plural)</p>
+                        </div>
                     </div>
+
+                    <!-- Français -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇫🇷</span> <strong>Français</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Structure Inversée</h4>
+                            <p>Le verbe <strong>piacere</strong> signifie littéralement "être agréable à quelqu'un".</p>
+                            <p>Le sujet grammatical est la CHOSE qui plaît, pas la personne!</p>
+                            <p>• "Mi piace" = Ça plaît à moi<br>
+                               • <strong>Piace</strong> (singulier) vs <strong>Piacciono</strong> (pluriel)</p>
+                        </div>
+                    </div>
+
+                    <!-- Español -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇪🇸</span> <strong>Español</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Estructura Invertida</h4>
+                            <p><strong>Piacere</strong> significa literalmente "ser agradable a alguien".</p>
+                            <p>¡El sujeto gramatical es la COSA que agrada, no la persona!</p>
+                            <p>• "Me gusta" → "Mi piace"<br>
+                               • <strong>Piace</strong> (singular) vs <strong>Piacciono</strong> (plural)</p>
+                        </div>
+                    </div>
+
+                    <!-- Add more languages as needed... -->
                 </div>
             </div>
         </section>
@@ -578,28 +673,24 @@
         <!-- SEZIONE PRESENTE -->
         <section id="presente" class="section">
             <div class="card">
-                <div class="card-header piacere">Presente Indicativo - Coniugazione Completa</div>
+                <div class="card-header piacere">Presente Indicativo</div>
                 <div class="card-body">
-                    <div class="instruction-box">
-                        <strong>Nota:</strong> Clicca sulle righe per ascoltare la pronuncia.
-                    </div>
-
                     <table class="conjugation-table">
                         <thead>
                             <tr>
                                 <th>Persona</th>
-                                <th>Soggetto Singolare<br><small>(la pizza, il libro)</small></th>
-                                <th>Soggetto Plurale<br><small>(le pizze, i libri)</small></th>
+                                <th>Singolare</th>
+                                <th>Plurale</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr onclick="speak('Mi piace, mi piacciono')">
-                                <td class="person">A me (io)</td>
+                                <td class="person">A me</td>
                                 <td class="verb-form">mi piace</td>
                                 <td class="verb-form">mi piacciono</td>
                             </tr>
                             <tr onclick="speak('Ti piace, ti piacciono')">
-                                <td class="person">A te (tu)</td>
+                                <td class="person">A te</td>
                                 <td class="verb-form">ti piace</td>
                                 <td class="verb-form">ti piacciono</td>
                             </tr>
@@ -630,13 +721,6 @@
                             </tr>
                         </tbody>
                     </table>
-
-                    <div class="rule-box">
-                        <strong>⚠️ Attenzione a "loro":</strong><br>
-                        Con "loro" si usa spesso la forma esplicita con la preposizione:<br>
-                        • "A loro piace il cinema" (più comune)<br>
-                        • "Loro piace il cinema" (meno comune, formale)
-                    </div>
                 </div>
             </div>
         </section>
@@ -644,100 +728,63 @@
         <!-- SEZIONE PASSATO -->
         <section id="passato" class="section">
             <div class="card">
-                <div class="card-header piacere">Passato Prossimo</div>
+                <div class="card-header piacere">Passato Prossimo (ESSERE!)</div>
                 <div class="card-body">
                     <div class="instruction-box">
-                        <strong>Ausiliare:</strong> ESSERE (sempre!)<br>
-                        <strong>Participio passato:</strong> piaciuto (invariabile nel maschile singolare, poi si accorda)
+                        <strong>Ausiliare: ESSERE (sempre!)</strong>
                     </div>
 
                     <table class="conjugation-table">
-                        <thead>
-                            <tr>
-                                <th>Persona</th>
-                                <th>Maschile Singolare<br><small>(il film)</small></th>
-                                <th>Femminile Singolare<br><small>(la canzone)</small></th>
-                                <th>Plurale<br><small>(i film/le canzoni)</small></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr onclick="speak('Mi è piaciuto, mi è piaciuta, mi sono piaciuti')">
-                                <td class="person">A me</td>
-                                <td class="verb-form">mi è piaciuto</td>
-                                <td class="verb-form">mi è piaciuta</td>
-                                <td class="verb-form">mi sono piaciuti/e</td>
-                            </tr>
-                            <tr onclick="speak('Ti è piaciuto, ti è piaciuta')">
-                                <td class="person">A te</td>
-                                <td class="verb-form">ti è piaciuto</td>
-                                <td class="verb-form">ti è piaciuta</td>
-                                <td class="verb-form">ti sono piaciuti/e</td>
-                            </tr>
-                            <tr onclick="speak('Gli è piaciuto, gli è piaciuta')">
-                                <td class="person">A lui</td>
-                                <td class="verb-form">gli è piaciuto</td>
-                                <td class="verb-form">gli è piaciuta</td>
-                                <td class="verb-form">gli sono piaciuti/e</td>
-                            </tr>
-                            <tr onclick="speak('Le è piaciuto, le è piaciuta')">
-                                <td class="person">A lei</td>
-                                <td class="verb-form">le è piaciuto</td>
-                                <td class="verb-form">le è piaciuta</td>
-                                <td class="verb-form">le sono piaciuti/e</td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <th>Genere/Numero</th>
+                            <th>Forma</th>
+                            <th>Esempio</th>
+                        </tr>
+                        <tr>
+                            <td>Maschile singolare</td>
+                            <td class="verb-form">è piaciuto</td>
+                            <td>Mi è piaciuto il film</td>
+                        </tr>
+                        <tr>
+                            <td>Femminile singolare</td>
+                            <td class="verb-form">è piaciuta</td>
+                            <td>Mi è piaciuta la cena</td>
+                        </tr>
+                        <tr>
+                            <td>Maschile plurale</td>
+                            <td class="verb-form">sono piaciuti</td>
+                            <td>Mi sono piaciuti i libri</td>
+                        </tr>
+                        <tr>
+                            <td>Femminile plurale</td>
+                            <td class="verb-form">sono piaciute</td>
+                            <td>Mi sono piaciute le città</td>
+                        </tr>
                     </table>
-
-                    <div class="example-box">
-                        <strong>Esempi:</strong><br>
-                        • Mi è piaciuto <strong>il film</strong> (m. sing.)<br>
-                        • Mi è piaciuta <strong>la cena</strong> (f. sing.)<br>
-                        • Mi sono piaciuti <strong>i libri</strong> (m. plur.)<br>
-                        • Mi sono piaciute <strong>le città</strong> (f. plur.)
-                    </div>
-
-                    <div class="rule-box">
-                        <strong>💡 Regola dell'accordo:</strong><br>
-                        Con l'ausiliare ESSERE, il participio passato si accorda in genere e numero con il soggetto (la cosa che è piaciuta).
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE ERRORI COMUNI -->
+        <!-- SEZIONE ERRORI -->
         <section id="errori" class="section">
             <div class="card">
                 <div class="card-header piacere">Errori da Evitare</div>
                 <div class="card-body">
                     <div class="error-box">
-                        <strong>❌ Errore 1: Concordare con la persona invece che con la cosa</strong><br>
-                        Sbagliato: "Mi piaccio" o "Ti piaci"<br>
-                        Corretto: "Mi piace" / "Ti piace" (il verbo si accorda con la cosa, non con la persona)
+                        <strong>❌ Errore 1:</strong> Concordare con la persona<br>
+                        Sbagliato: "Mi piaccio" → Corretto: "Mi piace"
                     </div>
-
                     <div class="error-box">
-                        <strong>❌ Errore 2: Usare l'ausiliare AVERE al passato</strong><br>
-                        Sbagliato: "Ho piaciuto" o "Mi ha piaciuto"<br>
-                        Corretto: "Mi è piaciuto" (si usa sempre ESSERE)
+                        <strong>❌ Errore 2:</strong> Usare AVERE al passato<br>
+                        Sbagliato: "Ho piaciuto" → Corretto: "Mi è piaciuto"
                     </div>
-
                     <div class="error-box">
-                        <strong>❌ Errore 3: Confondere gli e le</strong><br>
-                        Sbagliato: "Le piace il calcio" (riferito a un uomo)<br>
-                        Corretto: "Gli piace il calcio" (a lui = gli, a lei = le)
+                        <strong>❌ Errore 3:</strong> Confondere gli/le<br>
+                        A lui = gli, A lei = le
                     </div>
-
                     <div class="error-box">
-                        <strong>❌ Errore 4: Non accordare il participio al passato</strong><br>
-                        Sbagliato: "Mi è piaciuto la pizza"<br>
-                        Corretto: "Mi è piaciuta la pizza" (femminile)
-                    </div>
-
-                    <div class="example-box">
-                        <strong>✅ Ricorda sempre:</strong><br>
-                        • Il verbo piacere si comporta come "essere piacevole"<br>
-                        • La cosa che piace è il soggetto reale<br>
-                        • La persona è solo il destinatario del piacere (complemento di termine)
+                        <strong>❌ Errore 4:</strong> Non accordare il participio<br>
+                        Sbagliato: "Mi è piaciuto la pizza" → Corretto: "Mi è piaciuta la pizza"
                     </div>
                 </div>
             </div>
@@ -749,11 +796,11 @@
                 <div class="score-panel">
                     <div>
                         <div class="score-label">Esercizio</div>
-                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                        <div class="score-value" id="exerciseCounter">1 / 70</div>
                     </div>
                     <div>
                         <div class="score-label">Punteggio</div>
-                        <div class="score-value" id="currentScore">0 / 100</div>
+                        <div class="score-value" id="currentScore">0 / 140</div>
                     </div>
                 </div>
 
@@ -761,17 +808,14 @@
                     <div class="progress-fill" id="progressBar"></div>
                 </div>
 
-                <div id="exerciseContainer">
-                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
-                </div>
+                <div id="exerciseContainer"></div>
 
-                <!-- SEZIONE PUNTEGGIO FINALE -->
                 <div class="final-score-section" id="finalScoreSection">
-                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
-                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <h2>🎉 Complimenti!</h2>
+                    <div class="final-score-value" id="finalScore">0/140</div>
                     <p class="final-message" id="finalMessage"></p>
-                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
-                        🔄 Riprova tutti gli esercizi
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px;">
+                        🔄 Riprova
                     </button>
                 </div>
             </div>
@@ -779,424 +823,93 @@
     </main>
 
     <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <p>© 2024 Corso di Italiano A1/A2 - Il Verbo Piacere (50 Esercizi)</p>
-        </div>
+        <p>© 2024 Corso di Italiano A1/A2 - Il Verbo Piacere (70 Esercizi Multilingue)</p>
     </footer>
 
     <script>
-        // Database degli esercizi (50 totali)
+        // 70 ESERCIZI COMPLETI
         const exercises = [
-            // ESERCIZI 1-10: Pronomi indiretti base (mi/ti)
-            {
-                id: 1,
-                type: 'choice',
-                question: 'Completa: _____ piace il gelato. (a me)',
-                options: ['Mi', 'Ti', 'Gli', 'Le'],
-                correct: 'Mi',
-                explanation: '✅ Corretto! "Mi piace" = a me piace.',
-                errorExplanation: '❌ Per "a me" si usa MI'
-            },
-            {
-                id: 2,
-                type: 'fill',
-                question: 'Completa: A te _____ piace il cioccolato?',
-                correct: ['ti'],
-                explanation: '✅ Corretto! "Ti piace" = a te piace.'
-            },
-            {
-                id: 3,
-                type: 'choice',
-                question: 'Quale pronome si usa per "a lui"?',
-                options: ['Mi', 'Ti', 'Gli', 'Le'],
-                correct: 'Gli',
-                explanation: '✅ Corretto! "Gli" = a lui.',
-                errorExplanation: '❌ Per "a lui" si usa GLI'
-            },
-            {
-                id: 4,
-                type: 'fill',
-                question: 'Completa: _____ piace la musica classica. (a lei)',
-                correct: ['le'],
-                explanation: '✅ Corretto! "Le piace" = a lei piace.'
-            },
-            {
-                id: 5,
-                type: 'choice',
-                question: 'Quale pronome si usa per "a noi"?',
-                options: ['Ci', 'Vi', 'Loro', 'Gli'],
-                correct: 'Ci',
-                explanation: '✅ Corretto! "Ci" = a noi.',
-                errorExplanation: '❌ Per "a noi" si usa CI'
-            },
-            {
-                id: 6,
-                type: 'fill',
-                question: 'Completa: A voi _____ piace viaggiare?',
-                correct: ['vi'],
-                explanation: '✅ Corretto! "Vi piace" = a voi piace.'
-            },
-            {
-                id: 7,
-                type: 'choice',
-                question: 'Come si dice "a loro piace" (forma completa)?',
-                options: ['Loro piace', 'A loro piace', 'Gli piace', 'Le piace'],
-                correct: 'A loro piace',
-                explanation: '✅ Corretto! Con "loro" si usa spesso la forma completa.',
-                errorExplanation: '❌ La forma completa è "A loro piace"'
-            },
-            {
-                id: 8,
-                type: 'fill',
-                question: 'Completa: _____ piace leggere. (a me e a te = a noi)',
-                correct: ['ci'],
-                explanation: '✅ Corretto! "Ci piace" = a noi piace.'
-            },
-            {
-                id: 9,
-                type: 'choice',
-                question: 'Quale pronome è corretto? "_____ piace il calcio" (parlando di Marco)',
-                options: ['Mi', 'Ti', 'Gli', 'Le'],
-                correct: 'Gli',
-                explanation: '✅ Corretto! Marco è "lui", quindi si usa "gli".',
-                errorExplanation: '❌ Marco = lui, quindi si usa GLI'
-            },
-            {
-                id: 10,
-                type: 'fill',
-                question: 'Completa: Maria? _____ piace ballare. (a lei)',
-                correct: ['le'],
-                explanation: '✅ Corretto! Per Maria (lei) si usa LE.'
-            },
-
-            // ESERCIZI 11-20: Piace vs Piacciono (singolare vs plurale)
-            {
-                id: 11,
-                type: 'choice',
-                question: 'Completa: Mi _____ il libro.',
-                options: ['piace', 'piacciono', 'piaci', 'piaciono'],
-                correct: 'piace',
-                explanation: '✅ Corretto! "Il libro" è singolare → piace.',
-                errorExplanation: '❌ "Il libro" è singolare, quindi si usa PIACE'
-            },
-            {
-                id: 12,
-                type: 'fill',
-                question: 'Completa: Ti _____ i libri?',
-                correct: ['piacciono'],
-                explanation: '✅ Corretto! "I libri" è plurale → piacciono.'
-            },
-            {
-                id: 13,
-                type: 'choice',
-                question: 'Completa: Gli _____ la pizza.',
-                options: ['piace', 'piacciono', 'piaci', 'piaciono'],
-                correct: 'piace',
-                explanation: '✅ Corretto! "La pizza" è singolare → piace.',
-                errorExplanation: '❌ "La pizza" è singolare, quindi si usa PIACE'
-            },
-            {
-                id: 14,
-                type: 'fill',
-                question: 'Completa: Le _____ le paste.',
-                correct: ['piacciono'],
-                explanation: '✅ Corretto! "Le paste" è plurale → piacciono.'
-            },
-            {
-                id: 15,
-                type: 'choice',
-                question: 'Completa: Ci _____ il mare.',
-                options: ['piace', 'piacciono'],
-                correct: 'piace',
-                explanation: '✅ Corretto! "Il mare" è singolare → piace.',
-                errorExplanation: '❌ "Il mare" è singolare → PIACE'
-            },
-            {
-                id: 16,
-                type: 'fill',
-                question: 'Completa: Vi _____ le montagne?',
-                correct: ['piacciono'],
-                explanation: '✅ Corretto! "Le montagne" è plurale → piacciono.'
-            },
-            {
-                id: 17,
-                type: 'choice',
-                question: 'Completa: A loro _____ il cinema.',
-                options: ['piace', 'piacciono'],
-                correct: 'piace',
-                explanation: '✅ Corretto! "Il cinema" è singolare → piace.',
-                errorExplanation: '❌ "Il cinema" è singolare → PIACE'
-            },
-            {
-                id: 18,
-                type: 'fill',
-                question: 'Completa: Mi _____ i film horror.',
-                correct: ['piacciono'],
-                explanation: '✅ Corretto! "I film" è plurale → piacciono.'
-            },
-            {
-                id: 19,
-                type: 'choice',
-                question: 'Completa: Ti _____ la musica jazz?',
-                options: ['piace', 'piacciono'],
-                correct: 'piace',
-                explanation: '✅ Corretto! "La musica" è singolare → piace.',
-                errorExplanation: '❌ "La musica" è singolare → PIACE'
-            },
-            {
-                id: 20,
-                type: 'fill',
-                question: 'Completa: Gli _____ gli animali.',
-                correct: ['piacciono'],
-                explanation: '✅ Corretto! "Gli animali" è plurale → piacciono.'
-            },
-
-            // ESERCIZI 21-30: Frasi complete e contestuali
-            {
-                id: 21,
-                type: 'choice',
-                question: 'Quale frase è corretta?',
-                options: ['Mi piace i gatti', 'Mi piacciono i gatti', 'Mi piaci i gatti', 'Mi piaciono i gatti'],
-                correct: 'Mi piacciono i gatti',
-                explanation: '✅ Corretto! "I gatti" è plurale → piacciono.',
-                errorExplanation: '❌ "I gatti" è plurale → MI PIACCIONO (con doppia C!)'
-            },
-            {
-                id: 22,
-                type: 'fill',
-                question: 'Completa: A mio fratello _____ molto il calcio.',
-                correct: ['piace'],
-                explanation: '✅ Corretto! "Il calcio" è singolare maschile → piace.'
-            },
-            {
-                id: 23,
-                type: 'choice',
-                question: 'Quale frase è corretta?',
-                options: ['Le piace il gelato', 'Le piacciono il gelato', 'Le piace i gelati', 'Le piacciono i gelati'],
-                correct: 'Le piace il gelato',
-                explanation: '✅ Corretto! "Il gelato" (singolare) → piace.',
-                errorExplanation: '❌ Con "il gelato" (singolare) si usa PIACE'
-            },
-            {
-                id: 24,
-                type: 'fill',
-                question: 'Completa: Non _____ piace la pioggia. (a me)',
-                correct: ['mi'],
-                explanation: '✅ Corretto! "Non mi piace" = a me non piace.'
-            },
-            {
-                id: 25,
-                type: 'choice',
-                question: 'Quale frase è corretta?',
-                options: ['Ti piace queste scarpe?', 'Ti piacciono queste scarpe?', 'Ti piace questa scarpe?', 'Ti piacciono questa scarpa?'],
-                correct: 'Ti piacciono queste scarpe?',
-                explanation: '✅ Corretto! "Scarpe" è plurale femminile → piacciono.',
-                errorExplanation: '❌ "Scarpe" è plurale → TI PIACCIONO'
-            },
-            {
-                id: 26,
-                type: 'fill',
-                question: 'Completa: _____ piace molto cucinare. (a noi)',
-                correct: ['ci'],
-                explanation: '✅ Corretto! "Ci piace" = a noi piace.'
-            },
-            {
-                id: 27,
-                type: 'choice',
-                question: 'Quale frase è corretta?',
-                options: ['Vi piace viaggiare?', 'Vi piacciono viaggiare?', 'Vi piace viaggi?', 'Vi piacciono viaggi?'],
-                correct: 'Vi piace viaggiare?',
-                explanation: '✅ Corretto! "Viaggiare" è un infinito (considerato singolare) → piace.',
-                errorExplanation: '❌ Gli infiniti (viaggiare) si trattano come singolari → PIACE'
-            },
-            {
-                id: 28,
-                type: 'fill',
-                question: 'Completa: A loro non _____ le verdure.',
-                correct: ['piacciono'],
-                explanation: '✅ Corretto! "Le verdure" è plurale → piacciono.'
-            },
-            {
-                id: 29,
-                type: 'choice',
-                question: 'Quale frase è corretta?',
-                options: ['Gli piace le macchine', 'Gli piacciono le macchine', 'Gli piace la macchine', 'Gli piacciono la macchina'],
-                correct: 'Gli piacciono le macchine',
-                explanation: '✅ Corretto! "Le macchine" è plurale → piacciono.',
-                errorExplanation: '❌ "Le macchine" è plurale → GLI PIACCIONO'
-            },
-            {
-                id: 30,
-                type: 'fill',
-                question: 'Completa: _____ piace studiare italiano? (a te)',
-                correct: ['ti'],
-                explanation: '✅ Corretto! "Ti piace" = a te piace.'
-            },
-
-            // ESERCIZI 31-40: Passato prossimo
-            {
-                id: 31,
-                type: 'choice',
-                question: 'Completa al passato: Mi _____ piaciuto il film. (ausiliare)',
-                options: ['è', 'ho', 'ha', 'sono'],
-                correct: 'è',
-                explanation: '✅ Corretto! Con piacere si usa sempre ESSERE.',
-                errorExplanation: '❌ Con piacere si usa sempre l\'ausiliare ESSERE'
-            },
-            {
-                id: 32,
-                type: 'fill',
-                question: 'Completa: Ti _____ piaciuta la cena? (ausiliare)',
-                correct: ['è'],
-                explanation: '✅ Corretto! Ausiliare essere → "ti è piaciuta".'
-            },
-            {
-                id: 33,
-                type: 'choice',
-                question: 'Completa: Gli _____ piaciuto il concerto.',
-                options: ['è', 'ho', 'ha', 'sono'],
-                correct: 'è',
-                explanation: '✅ Corretto! Si usa sempre essere: "gli è piaciuto".',
-                errorExplanation: '❌ Si usa sempre ESSERE con piacere'
-            },
-            {
-                id: 34,
-                type: 'fill',
-                question: 'Completa con il participio: Mi è _____ la pasta. (femminile)',
-                correct: ['piaciuta'],
-                explanation: '✅ Corretto! "La pasta" è femminile singolare → piaciuta.'
-            },
-            {
-                id: 35,
-                type: 'choice',
-                question: 'Quale forma è corretta? (il libro, maschile singolare)',
-                options: ['Mi è piaciuto', 'Mi è piaciuta', 'Mi sono piaciuto', 'Mi ha piaciuto'],
-                correct: 'Mi è piaciuto',
-                explanation: '✅ Corretto! "Il libro" è maschile singolare → piaciuto.',
-                errorExplanation: '❌ "Il libro" è maschile singolare → MI È PIACIUTO'
-            },
-            {
-                id: 36,
-                type: 'fill',
-                question: 'Completa: Le sono _____ le città italiane. (femminile plurale)',
-                correct: ['piaciute'],
-                explanation: '✅ Corretto! "Le città" è femminile plurale → piaciute.'
-            },
-            {
-                id: 37,
-                type: 'choice',
-                question: 'Quale forma è corretta? (i ristoranti, maschile plurale)',
-                options: ['Mi è piaciuto', 'Mi sono piaciuti', 'Mi è piaciuti', 'Mi ha piaciuti'],
-                correct: 'Mi sono piaciuti',
-                explanation: '✅ Corretto! "I ristoranti" è maschile plurale → piaciuti.',
-                errorExplanation: '❌ "I ristoranti" è plurale maschile → MI SONO PIACIUTI'
-            },
-            {
-                id: 38,
-                type: 'fill',
-                question: 'Completa: Ci è _____ molto quel museo. (maschile)',
-                correct: ['piaciuto'],
-                explanation: '✅ Corretto! "Il museo" è maschile singolare → piaciuto.'
-            },
-            {
-                id: 39,
-                type: 'choice',
-                question: 'Quale frase è corretta?',
-                options: ['Vi è piaciute le spiagge?', 'Vi sono piaciute le spiagge?', 'Vi è piaciuta le spiagge?', 'Vi sono piaciuto le spiagge?'],
-                correct: 'Vi sono piaciute le spiagge?',
-                explanation: '✅ Corretto! "Le spiagge" è femminile plurale → sono piaciute.',
-                errorExplanation: '❌ "Le spiagge" è femminile plurale → VI SONO PIACIUTE'
-            },
-            {
-                id: 40,
-                type: 'fill',
-                question: 'Completa: A loro non è _____ quel ristorante.',
-                correct: ['piaciuto'],
-                explanation: '✅ Corretto! "Il ristorante" è maschile singolare → piaciuto.'
-            },
-
-            // ESERCIZI 41-50: Difficili - contesti complessi
-            {
-                id: 41,
-                type: 'choice',
-                question: 'Completa: A Marco _____ piace il vino rosso, ma non _____ piace il vino bianco.',
-                options: ['gli... gli', 'le... le', 'mi... mi', 'ti... ti'],
-                correct: 'gli... gli',
-                explanation: '✅ Corretto! Marco = lui → gli.',
-                errorExplanation: '❌ Marco è maschile (lui) → si usa GLI'
-            },
-            {
-                id: 42,
-                type: 'fill',
-                question: 'Completa: A me e a te _____ piace andare al cinema, vero?',
-                correct: ['ci'],
-                explanation: '✅ Corretto! "A me e a te" = a noi → ci.'
-            },
-            {
-                id: 43,
-                type: 'choice',
-                question: 'Quale frase è corretta?',
-                options: ['Maria e Luca? Le piace il gelato.', 'Maria e Luca? Gli piace il gelato.', 'Maria e Luca? Loro piace il gelato.', 'Maria e Luca? Vi piace il gelato.'],
-                correct: 'Maria e Luca? Gli piace il gelato.',
-                explanation: '✅ Corretto! In italiano colloquiale, "gli" può essere usato anche per "a loro".',
-                errorExplanation: '❌ Per "a loro" (colloquiale) si può usare GLI'
-            },
-            {
-                id: 44,
-                type: 'fill',
-                question: 'Completa: Non _____ piacciono né il teatro né il cinema. (a me)',
-                correct: ['mi'],
-                explanation: '✅ Corretto! "Non mi piacciono" = a me non piacciono.'
-            },
-            {
-                id: 45,
-                type: 'choice',
-                question: 'Quale frase è corretta?',
-                options: ['A Lucia le piace i fiori', 'A Lucia le piacciono i fiori', 'A Lucia gli piace i fiori', 'A Lucia gli piacciono i fiori'],
-                correct: 'A Lucia le piacciono i fiori',
-                explanation: '✅ Corretto! Lucia = lei → le; fiori = plurale → piacciono.',
-                errorExplanation: '❌ Lucia = lei (LE) e fiori è plurale (PIACCIONO)'
-            },
-            {
-                id: 46,
-                type: 'fill',
-                question: 'Completa al passato: Ieri a Paolo _____ sono piaciuti molto quei libri.',
-                correct: ['gli'],
-                explanation: '✅ Corretto! Paolo = lui → gli; libri = plurale maschile → sono piaciuti.'
-            },
-            {
-                id: 47,
-                type: 'choice',
-                question: 'Quale frase è corretta?',
-                options: ['Mi piace molto queste canzoni', 'Mi piacciono molto queste canzoni', 'Mi piace molto questa canzoni', 'Mi piacciono molto questa canzone'],
-                correct: 'Mi piacciono molto queste canzoni',
-                explanation: '✅ Corretto! "Canzoni" è plurale femminile → piacciono.',
-                errorExplanation: '❌ "Canzoni" è plurale → MI PIACCIONO'
-            },
-            {
-                id: 48,
-                type: 'fill',
-                question: 'Completa: A voi ragazzi _____ piace lo sport?',
-                correct: ['vi'],
-                explanation: '✅ Corretto! "A voi" → vi.'
-            },
-            {
-                id: 49,
-                type: 'choice',
-                question: 'Quale frase è corretta al passato? (la partita, femminile)',
-                options: ['Gli è piaciuto la partita', 'Gli è piaciuta la partita', 'Gli sono piaciuta la partita', 'Gli ha piaciuta la partita'],
-                correct: 'Gli è piaciuta la partita',
-                explanation: '✅ Corretto! "La partita" è femminile singolare → è piaciuta.',
-                errorExplanation: '❌ "La partita" è femminile singolare → È PIACIUTA'
-            },
-            {
-                id: 50,
-                type: 'fill',
-                question: 'Completa la frase: A me _____ piace il caffè, ma non _____ piace il tè. A te invece _____ piacciono entrambi?',
-                correct: ['mi... mi... ti', 'mi mi ti'],
-                explanation: '✅ Corretto! A me = mi (2 volte), a te = ti. Complimenti!',
-                errorExplanation: '❌ A me = MI, a te = TI'
-            }
+            // PRONOMI (1-15)
+            {id: 1, type: 'choice', question: '_____ piace il gelato. (a me)', options: ['Mi','Ti','Gli','Le'], correct: 'Mi', explanation: '✅ "Mi piace" = a me piace', errorExplanation: '❌ Per "a me" si usa MI'},
+            {id: 2, type: 'fill', question: 'A te _____ piace il cioccolato?', correct: ['ti'], explanation: '✅ "Ti piace" = a te piace'},
+            {id: 3, type: 'choice', question: 'Pronome per "a lui"?', options: ['Mi','Ti','Gli','Le'], correct: 'Gli', explanation: '✅ "Gli" = a lui', errorExplanation: '❌ Per "a lui" si usa GLI'},
+            {id: 4, type: 'fill', question: '_____ piace la musica. (a lei)', correct: ['le'], explanation: '✅ "Le piace" = a lei piace'},
+            {id: 5, type: 'choice', question: 'Pronome per "a noi"?', options: ['Ci','Vi','Loro','Gli'], correct: 'Ci', explanation: '✅ "Ci" = a noi', errorExplanation: '❌ Per "a noi" si usa CI'},
+            {id: 6, type: 'fill', question: 'A voi _____ piace viaggiare?', correct: ['vi'], explanation: '✅ "Vi piace" = a voi piace'},
+            {id: 7, type: 'choice', question: '"A loro piace" forma completa?', options: ['Loro piace','A loro piace','Gli piace','Le piace'], correct: 'A loro piace', explanation: '✅ Forma completa con "loro"', errorExplanation: '❌ La forma completa è "A loro piace"'},
+            {id: 8, type: 'fill', question: '_____ piace leggere. (a noi)', correct: ['ci'], explanation: '✅ "Ci piace" = a noi piace'},
+            {id: 9, type: 'choice', question: 'Marco (lui) _____ piace il calcio', options: ['Mi','Ti','Gli','Le'], correct: 'Gli', explanation: '✅ Marco = lui → gli', errorExplanation: '❌ Marco = lui, quindi GLI'},
+            {id: 10, type: 'fill', question: 'Maria? _____ piace ballare.', correct: ['le'], explanation: '✅ Maria = lei → le'},
+            {id: 11, type: 'choice', question: 'A Paolo e me (noi) _____ piace', options: ['mi','ti','ci','vi'], correct: 'ci', explanation: '✅ Paolo e me = noi → ci', errorExplanation: '❌ Paolo e me = noi, quindi CI'},
+            {id: 12, type: 'fill', question: 'A te e Marco (voi) _____ piace?', correct: ['vi'], explanation: '✅ Te e Marco = voi → vi'},
+            {id: 13, type: 'choice', question: 'Alle mie amiche (loro) _____ piace', options: ['gli','le','a loro','vi'], correct: 'a loro', explanation: '✅ Per loro femminile: a loro', errorExplanation: '❌ Per "loro" si usa A LORO'},
+            {id: 14, type: 'fill', question: 'A mio padre (lui) _____ piace leggere.', correct: ['gli'], explanation: '✅ Mio padre = lui → gli'},
+            {id: 15, type: 'choice', question: 'A mia madre (lei) _____ piace', options: ['gli','le','la','mi'], correct: 'le', explanation: '✅ Mia madre = lei → le', errorExplanation: '❌ Mia madre = lei, quindi LE'},
+            
+            // PIACE VS PIACCIONO (16-30)
+            {id: 16, type: 'choice', question: 'Mi _____ il libro.', options: ['piace','piacciono','piaci'], correct: 'piace', explanation: '✅ "Il libro" è singolare → piace', errorExplanation: '❌ "Il libro" è singolare → PIACE'},
+            {id: 17, type: 'fill', question: 'Ti _____ i libri?', correct: ['piacciono'], explanation: '✅ "I libri" è plurale → piacciono'},
+            {id: 18, type: 'choice', question: 'Gli _____ la pizza.', options: ['piace','piacciono'], correct: 'piace', explanation: '✅ "La pizza" è singolare → piace', errorExplanation: '❌ "La pizza" è singolare → PIACE'},
+            {id: 19, type: 'fill', question: 'Le _____ le paste.', correct: ['piacciono'], explanation: '✅ "Le paste" è plurale → piacciono'},
+            {id: 20, type: 'choice', question: 'Ci _____ il mare.', options: ['piace','piacciono'], correct: 'piace', explanation: '✅ "Il mare" è singolare → piace', errorExplanation: '❌ "Il mare" è singolare → PIACE'},
+            {id: 21, type: 'fill', question: 'Vi _____ le montagne?', correct: ['piacciono'], explanation: '✅ "Le montagne" è plurale → piacciono'},
+            {id: 22, type: 'choice', question: 'A loro _____ il cinema.', options: ['piace','piacciono'], correct: 'piace', explanation: '✅ "Il cinema" è singolare → piace', errorExplanation: '❌ "Il cinema" è singolare → PIACE'},
+            {id: 23, type: 'fill', question: 'Mi _____ i film horror.', correct: ['piacciono'], explanation: '✅ "I film" è plurale → piacciono'},
+            {id: 24, type: 'choice', question: 'Ti _____ la musica jazz?', options: ['piace','piacciono'], correct: 'piace', explanation: '✅ "La musica" è singolare → piace', errorExplanation: '❌ "La musica" è singolare → PIACE'},
+            {id: 25, type: 'fill', question: 'Gli _____ gli animali.', correct: ['piacciono'], explanation: '✅ "Gli animali" è plurale → piacciono'},
+            {id: 26, type: 'choice', question: 'A Lucia _____ i fiori.', options: ['piace','piacciono'], correct: 'piacciono', explanation: '✅ "I fiori" è plurale → piacciono', errorExplanation: '❌ "I fiori" è plurale → PIACCIONO'},
+            {id: 27, type: 'fill', question: 'A mio fratello non _____ il teatro.', correct: ['piace'], explanation: '✅ "Il teatro" è singolare → piace'},
+            {id: 28, type: 'choice', question: 'A noi _____ le città italiane.', options: ['piace','piacciono'], correct: 'piacciono', explanation: '✅ "Le città" è plurale → piacciono', errorExplanation: '❌ "Le città" è plurale → PIACCIONO'},
+            {id: 29, type: 'fill', question: 'A voi _____ il mare o la montagna?', correct: ['piace'], explanation: '✅ "Il mare" è singolare → piace'},
+            {id: 30, type: 'choice', question: 'A loro _____ i gelati.', options: ['piace','piacciono'], correct: 'piacciono', explanation: '✅ "I gelati" è plurale → piacciono', errorExplanation: '❌ "I gelati" è plurale → PIACCIONO'},
+            
+            // FRASI COMPLETE (31-45)
+            {id: 31, type: 'choice', question: 'Frase corretta:', options: ['Mi piace i gatti','Mi piacciono i gatti','Mi piaci i gatti'], correct: 'Mi piacciono i gatti', explanation: '✅ "I gatti" è plurale → piacciono', errorExplanation: '❌ "I gatti" è plurale → MI PIACCIONO'},
+            {id: 32, type: 'fill', question: 'A mio fratello _____ molto il calcio.', correct: ['piace'], explanation: '✅ "Il calcio" è singolare → piace'},
+            {id: 33, type: 'choice', question: 'Frase corretta:', options: ['Le piace il gelato','Le piacciono il gelato','Le piace i gelati'], correct: 'Le piace il gelato', explanation: '✅ "Il gelato" (singolare) → piace', errorExplanation: '❌ Con "il gelato" (singolare) si usa PIACE'},
+            {id: 34, type: 'fill', question: 'Non _____ piace la pioggia. (a me)', correct: ['mi'], explanation: '✅ "Non mi piace" = a me non piace'},
+            {id: 35, type: 'choice', question: 'Frase corretta:', options: ['Ti piace queste scarpe?','Ti piacciono queste scarpe?'], correct: 'Ti piacciono queste scarpe?', explanation: '✅ "Scarpe" è plurale → piacciono', errorExplanation: '❌ "Scarpe" è plurale → TI PIACCIONO'},
+            {id: 36, type: 'fill', question: '_____ piace molto cucinare. (a noi)', correct: ['ci'], explanation: '✅ "Ci piace" = a noi piace'},
+            {id: 37, type: 'choice', question: 'Frase corretta:', options: ['Vi piace viaggiare?','Vi piacciono viaggiare?'], correct: 'Vi piace viaggiare?', explanation: '✅ Infinito = singolare → piace', errorExplanation: '❌ Gli infiniti si trattano come singolari → PIACE'},
+            {id: 38, type: 'fill', question: 'A loro non _____ le verdure.', correct: ['piacciono'], explanation: '✅ "Le verdure" è plurale → piacciono'},
+            {id: 39, type: 'choice', question: 'Frase corretta:', options: ['Gli piace le macchine','Gli piacciono le macchine'], correct: 'Gli piacciono le macchine', explanation: '✅ "Le macchine" è plurale → piacciono', errorExplanation: '❌ "Le macchine" è plurale → GLI PIACCIONO'},
+            {id: 40, type: 'fill', question: '_____ piace studiare? (a te)', correct: ['ti'], explanation: '✅ "Ti piace" = a te piace'},
+            {id: 41, type: 'choice', question: 'A Lucia _____ i dolci, ma non _____ il cioccolato.', options: ['piace...piace','piacciono...piace','piace...piacciono'], correct: 'piacciono...piace', explanation: '✅ I dolci (plurale) → piacciono, il cioccolato (singolare) → piace', errorExplanation: '❌ I dolci = plurale (piacciono), il cioccolato = singolare (piace)'},
+            {id: 42, type: 'fill', question: 'A voi ragazzi _____ il calcio?', correct: ['piace'], explanation: '✅ Il calcio è singolare → piace'},
+            {id: 43, type: 'choice', question: 'Frase corretta:', options: ['Mi piace questi ristoranti','Mi piacciono questi ristoranti'], correct: 'Mi piacciono questi ristoranti', explanation: '✅ "Ristoranti" è plurale → piacciono', errorExplanation: '❌ "Ristoranti" è plurale → MI PIACCIONO'},
+            {id: 44, type: 'fill', question: '_____ piace la pizza? (a voi)', correct: ['vi'], explanation: '✅ A voi → vi'},
+            {id: 45, type: 'choice', question: 'A Marco e me _____ i film di Fellini.', options: ['piace','piacciono'], correct: 'piacciono', explanation: '✅ I film = plurale → piacciono', errorExplanation: '❌ I film è plurale → PIACCIONO'},
+            
+            // PASSATO (46-55)
+            {id: 46, type: 'choice', question: 'Mi _____ piaciuto il film.', options: ['è','ho','ha'], correct: 'è', explanation: '✅ Con piacere si usa ESSERE', errorExplanation: '❌ Con piacere si usa sempre ESSERE'},
+            {id: 47, type: 'fill', question: 'Ti _____ piaciuta la cena?', correct: ['è'], explanation: '✅ Ausiliare essere → "ti è piaciuta"'},
+            {id: 48, type: 'choice', question: 'Gli _____ piaciuto il concerto.', options: ['è','ho','ha'], correct: 'è', explanation: '✅ Si usa sempre ESSERE', errorExplanation: '❌ Si usa sempre ESSERE con piacere'},
+            {id: 49, type: 'fill', question: 'Mi è _____ la pasta. (femminile)', correct: ['piaciuta'], explanation: '✅ "La pasta" è femminile → piaciuta'},
+            {id: 50, type: 'choice', question: 'Forma corretta? (il libro, maschile)', options: ['Mi è piaciuto','Mi è piaciuta','Mi sono piaciuto'], correct: 'Mi è piaciuto', explanation: '✅ "Il libro" è maschile → piaciuto', errorExplanation: '❌ "Il libro" è maschile singolare → MI È PIACIUTO'},
+            {id: 51, type: 'fill', question: 'Le sono _____ le città. (femminile plurale)', correct: ['piaciute'], explanation: '✅ "Le città" è femminile plurale → piaciute'},
+            {id: 52, type: 'choice', question: 'Forma corretta? (i ristoranti, maschile plurale)', options: ['Mi è piaciuto','Mi sono piaciuti'], correct: 'Mi sono piaciuti', explanation: '✅ "I ristoranti" è plurale maschile → piaciuti', errorExplanation: '❌ "I ristoranti" è plurale maschile → MI SONO PIACIUTI'},
+            {id: 53, type: 'fill', question: 'Ci è _____ quel museo.', correct: ['piaciuto'], explanation: '✅ "Il museo" è maschile → piaciuto'},
+            {id: 54, type: 'choice', question: 'Frase corretta?', options: ['Vi è piaciute le spiagge?','Vi sono piaciute le spiagge?'], correct: 'Vi sono piaciute le spiagge?', explanation: '✅ "Le spiagge" è femminile plurale → sono piaciute', errorExplanation: '❌ "Le spiagge" è femminile plurale → VI SONO PIACIUTE'},
+            {id: 55, type: 'fill', question: 'A loro non è _____ quel ristorante.', correct: ['piaciuto'], explanation: '✅ "Il ristorante" è maschile → piaciuto'},
+            
+            // DIFFICILI (56-63)
+            {id: 56, type: 'choice', question: 'A Marco _____ piace il vino, ma non _____ piace il tè.', options: ['gli...gli','le...le','mi...mi'], correct: 'gli...gli', explanation: '✅ Marco = lui → gli', errorExplanation: '❌ Marco è maschile (lui) → GLI'},
+            {id: 57, type: 'fill', question: 'A me e a te (noi) _____ piace andare al cinema?', correct: ['ci'], explanation: '✅ "A me e a te" = noi → ci'},
+            {id: 58, type: 'choice', question: 'Maria e Luca?', options: ['Le piace','Gli piace','Loro piace'], correct: 'Gli piace', explanation: '✅ Colloquiale: "gli" per "a loro"', errorExplanation: '❌ Per "a loro" (colloquiale) si può usare GLI'},
+            {id: 59, type: 'fill', question: 'Non _____ piacciono né il teatro né il cinema.', correct: ['mi'], explanation: '✅ "Non mi piacciono"'},
+            {id: 60, type: 'choice', question: 'A Lucia _____ i fiori.', options: ['le piace','le piacciono','gli piace'], correct: 'le piacciono', explanation: '✅ Lucia = lei → le; fiori = plurale → piacciono', errorExplanation: '❌ Lucia = lei (LE) e fiori è plurale (PIACCIONO)'},
+            {id: 61, type: 'fill', question: 'Ieri a Paolo _____ sono piaciuti i libri.', correct: ['gli'], explanation: '✅ Paolo = lui → gli'},
+            {id: 62, type: 'choice', question: 'Frase corretta?', options: ['Mi piace queste canzoni','Mi piacciono queste canzoni'], correct: 'Mi piacciono queste canzoni', explanation: '✅ "Canzoni" è plurale → piacciono', errorExplanation: '❌ "Canzoni" è plurale → MI PIACCIONO'},
+            {id: 63, type: 'fill', question: 'A voi ragazzi _____ piace lo sport?', correct: ['vi'], explanation: '✅ A voi → vi'},
+            
+            // AVANZATI (64-70)
+            {id: 64, type: 'choice', question: 'Forma corretta? (la partita, femminile)', options: ['Gli è piaciuto','Gli è piaciuta'], correct: 'Gli è piaciuta', explanation: '✅ "La partita" è femminile → è piaciuta', errorExplanation: '❌ "La partita" è femminile singolare → È PIACIUTA'},
+            {id: 65, type: 'fill', question: 'A mia nonna (lei) _____ piace cucinare.', correct: ['le'], explanation: '✅ Mia nonna = lei → le'},
+            {id: 66, type: 'choice', question: 'A tutti noi _____ le vacanze.', options: ['piace','piacciono'], correct: 'piacciono', explanation: '✅ "Le vacanze" è plurale → piacciono', errorExplanation: '❌ "Le vacanze" è plurale → PIACCIONO'},
+            {id: 67, type: 'fill', question: 'Ieri _____ è piaciuto quel film.', correct: ['mi'], explanation: '✅ A me → mi'},
+            {id: 68, type: 'choice', question: 'A te e a tua sorella (voi) _____ piacciono?', options: ['mi','ti','vi','ci'], correct: 'vi', explanation: '✅ Te e tua sorella = voi → vi', errorExplanation: '❌ Te e tua sorella = voi → VI'},
+            {id: 69, type: 'fill', question: 'Non so se a loro _____ piaciuta quella cena.', correct: ['è'], explanation: '✅ Ausiliare essere → è'},
+            {id: 70, type: 'choice', question: 'Completa: "_____ piace l\'Italia. Ieri _____ è piaciuta la cena."', options: ['Mi...mi','Ti...ti','Mi...ti'], correct: 'Mi...mi', explanation: '✅ A me = mi (2 volte). Complimenti!', errorExplanation: '❌ A me = MI'}
         ];
 
         let currentExercise = 0;
@@ -1217,10 +930,14 @@
             document.getElementById(id).classList.add('active');
             document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
             if(btn) btn.classList.add('active');
+            if(id === 'exercises' && currentExercise === 0) loadExercise();
+        }
 
-            if(id === 'exercises' && currentExercise === 0) {
-                loadExercise();
-            }
+        function toggleLang(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            content.classList.toggle('active');
+            icon.classList.toggle('rotated');
         }
 
         function loadExercise() {
@@ -1233,7 +950,7 @@
             const container = document.getElementById('exerciseContainer');
             
             document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 140`;
             document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
             
             answered = false;
@@ -1250,12 +967,12 @@
 
             if (ex.type === 'choice') {
                 html += `<div class="options-grid" id="optionsGrid">`;
-                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
                 shuffledOptions.forEach(opt => {
                     html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
                 });
                 html += `</div>`;
-            } else if (ex.type === 'fill') {
+            } else {
                 html += `
                     <div style="text-align: center; margin-bottom: 1.5rem;">
                         <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
@@ -1276,10 +993,7 @@
             `;
 
             container.innerHTML = html;
-            
-            if (ex.type === 'fill') {
-                setTimeout(() => document.getElementById('fillInput').focus(), 100);
-            }
+            if (ex.type === 'fill') setTimeout(() => document.getElementById('fillInput').focus(), 100);
         }
 
         function checkChoice(selected) {
@@ -1293,11 +1007,8 @@
 
             btns.forEach(btn => {
                 btn.disabled = true;
-                if (btn.dataset.value === ex.correct) {
-                    btn.classList.add('correct');
-                } else if (btn.dataset.value === selected && selected !== ex.correct) {
-                    btn.classList.add('wrong');
-                }
+                if (btn.dataset.value === ex.correct) btn.classList.add('correct');
+                else if (btn.dataset.value === selected && selected !== ex.correct) btn.classList.add('wrong');
             });
 
             feedback.classList.add('show');
@@ -1309,18 +1020,16 @@
             } else {
                 feedback.className = 'feedback show wrong';
                 let errorMsg = ex.errorExplanation;
-                
                 if (ex.question.includes('piace') && ex.question.includes('plurale')) {
-                    errorMsg += '<br><strong>💡 Ricorda: il verbo si accorda con la cosa che piace, non con la persona!</strong>';
+                    errorMsg += '<br><strong>💡 Ricorda: il verbo si accorda con la cosa!</strong>';
                 }
                 if (ex.question.includes('passato')) {
-                    errorMsg += '<br><strong>💡 Al passato si usa sempre l\'ausiliare ESSERE!</strong>';
+                    errorMsg += '<br><strong>💡 Al passato si usa ESSERE!</strong>';
                 }
-                
                 feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
             }
 
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 140`;
             nextContainer.style.display = 'block';
         }
 
@@ -1351,21 +1060,19 @@
             } else {
                 feedback.className = 'feedback show wrong';
                 let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
-                
                 if (ex.question.includes('piace') && ex.question.includes('plurale')) {
-                    errorMsg += '<br><strong>💡 Ricorda: il verbo si accorda con la cosa che piace!</strong>';
+                    errorMsg += '<br><strong>💡 Ricorda: il verbo si accorda con la cosa!</strong>';
                 }
                 if (ex.question.includes('passato')) {
-                    errorMsg += '<br><strong>💡 Al passato prossimo di piacere si usa ESSERE!</strong>';
+                    errorMsg += '<br><strong>💡 Al passato si usa ESSERE!</strong>';
                 }
-                
                 feedback.innerHTML = errorMsg;
                 input.style.borderColor = 'var(--error)';
                 input.style.background = '#fff5f5';
                 input.value = ex.correct[0];
             }
 
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 140`;
             nextContainer.style.display = 'block';
         }
 
@@ -1377,18 +1084,13 @@
         function showFinalScore() {
             document.getElementById('exerciseContainer').style.display = 'none';
             document.getElementById('finalScoreSection').classList.add('show');
-            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            document.getElementById('finalScore').textContent = `${totalScore}/140`;
             
             let message = '';
-            if (totalScore >= 90) {
-                message = '🏆 Eccellente! Padroneggi perfettamente il verbo piacere!';
-            } else if (totalScore >= 70) {
-                message = '👍 Ottimo lavoro! Conosci bene la struttura di piacere!';
-            } else if (totalScore >= 50) {
-                message = '💪 Buon lavoro! Ricorda: il verbo si accorda con la cosa che piace, non con la persona!';
-            } else {
-                message = '📚 Ripassa le regole! Ricorda: "mi piace il libro" (singolare) vs "mi piacciono i libri" (plurale)!';
-            }
+            if (totalScore >= 126) message = '🏆 Eccellente! Padroneggi perfettamente il verbo piacere!';
+            else if (totalScore >= 98) message = '👍 Ottimo lavoro! Conosci bene la struttura!';
+            else if (totalScore >= 70) message = '💪 Buon lavoro! Ricorda: mi piace vs mi piacciono!';
+            else message = '📚 Ripassa le regole! Ricorda: il verbo si accorda con la COSA!';
             
             document.getElementById('finalMessage').textContent = message;
             document.getElementById('progressBar').style.width = '100%';
@@ -1398,13 +1100,10 @@
             currentExercise = 0;
             totalScore = 0;
             answered = false;
-            
             exercises.sort(() => Math.random() - 0.5);
-            
             document.getElementById('exerciseContainer').style.display = 'block';
             document.getElementById('finalScoreSection').classList.remove('show');
             document.getElementById('progressBar').style.width = '0%';
-            
             loadExercise();
         }
 
