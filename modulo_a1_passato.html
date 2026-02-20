@@ -531,6 +531,44 @@
             background: var(--avere);
         }
 
+        .lang-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .lang-tab {
+            padding: 0.5rem 1rem;
+            background: var(--light);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .lang-tab:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .lang-tab.active {
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+        }
+
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
         @media (max-width: 768px) {
             .nav-tabs { flex-wrap: wrap; }
             .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
@@ -540,8 +578,11 @@
             .final-score-value { font-size: 3rem; }
             .fill-blank { width: 180px; }
             .verb-grid { grid-template-columns: 1fr; }
+            .lang-tabs { justify-content: center; }
+            .lang-tab { font-size: 0.75rem; padding: 0.4rem 0.6rem; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <header class="header">
@@ -575,58 +616,827 @@
             <button class="nav-tab" onclick="showSection('exercises', this); return false;">🎯 Esercizi (100)</button>
         </nav>
 
-        <!-- SEZIONE TEORIA -->
+        <!-- SEZIONE TEORIA MULTILINGUE -->
         <section id="theory" class="section active">
             <div class="card">
-                <div class="card-header">Struttura del Passato Prossimo</div>
+                <div class="card-header">Struttura del Passato Prossimo - Structure of the Past Tense</div>
                 <div class="card-body">
-                    <p>Il passato prossimo si forma con:</p>
-
-                    <div class="instruction-box">
-                        <strong>Ausiliare</strong> (essere o avere coniugato al presente) + <strong>Participio Passato</strong> del verbo principale
+                    <!-- Tab per le lingue -->
+                    <div class="lang-tabs">
+                        <button class="lang-tab active" onclick="showLang('it', this)">🇮🇹 IT</button>
+                        <button class="lang-tab" onclick="showLang('en', this)">🇬🇧 EN</button>
+                        <button class="lang-tab" onclick="showLang('fr', this)">🇫🇷 FR</button>
+                        <button class="lang-tab" onclick="showLang('es', this)">🇪🇸 ES</button>
+                        <button class="lang-tab" onclick="showLang('de', this)">🇩🇪 DE</button>
+                        <button class="lang-tab" onclick="showLang('ur', this)">🇵🇰 UR</button>
+                        <button class="lang-tab" onclick="showLang('pa', this)">🇮🇳 PA</button>
+                        <button class="lang-tab" onclick="showLang('sq', this)">🇦🇱 SQ</button>
+                        <button class="lang-tab" onclick="showLang('ar', this)">🇸🇦 AR</button>
+                        <button class="lang-tab" onclick="showLang('zh', this)">🇨🇳 ZH</button>
+                        <button class="lang-tab" onclick="showLang('bm', this)">🇲🇱 BM</button>
+                        <button class="lang-tab" onclick="showLang('sn', this)">🇸🇳 SN</button>
+                        <button class="lang-tab" onclick="showLang('hi', this)">🇮🇳 HI</button>
+                        <button class="lang-tab" onclick="showLang('bn', this)">🇧🇩 BN</button>
+                        <button class="lang-tab" onclick="showLang('si', this)">🇱🇰 SI</button>
+                        <button class="lang-tab" onclick="showLang('wo', this)">🇸🇳 WO</button>
+                        <button class="lang-tab" onclick="showLang('man', this)">🇬🇲 MAN</button>
                     </div>
 
-                    <div class="rule-box essere">
-                        <h3 style="color: var(--essere);">🔵 Verbi con ESSERE</h3>
-                        <p>Verbi di <strong>movimento</strong> (andare, venire, partire...), <strong>cambiamento di stato</strong> (nascere, morire...), e <strong>riflessivi</strong>.</p>
-                        <p><strong>⚠️ Attenzione:</strong> Il participio concorda con il soggetto in genere e numero.</p>
-                        <p>Esempi: <em>Sono andato/a/i/e, È nato/a/i/e, Ci siamo divertiti/e</em></p>
+                    <!-- ITALIANO -->
+                    <div id="lang-it" class="lang-content active">
+                        <p>Il passato prossimo si forma con:</p>
+                        <div class="instruction-box">
+                            <strong>Ausiliare</strong> (essere o avere coniugato al presente) + <strong>Participio Passato</strong> del verbo principale
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 Verbi con ESSERE</h3>
+                            <p>Verbi di <strong>movimento</strong> (andare, venire, partire...), <strong>cambiamento di stato</strong> (nascere, morire...), e <strong>riflessivi</strong>.</p>
+                            <p><strong>⚠️ Attenzione:</strong> Il participio concorda con il soggetto in genere e numero.</p>
+                            <p>Esempi: <em>Sono andato/a/i/e, È nato/a/i/e, Ci siamo divertiti/e</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 Verbi con AVERE</h3>
+                            <p>La maggior parte dei verbi <strong>transitivi</strong> (che reggono oggetto diretto). Il participio è <strong>invariabile</strong>.</p>
+                            <p>Esempi: <em>Ho mangiato, Hai letto, Hanno scritto</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 Regola mnemonica: Casa di ESSERE</h3>
+                            <p>I verbi che usano ESSERE sono quelli della <strong>CASA</strong>:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong>ambiamento di stato (nascere, morire, diventare)</li>
+                                <li><strong>A</strong>ndare e movimento (andare, venire, arrivare, partire, entrare, uscire)</li>
+                                <li><strong>S</strong>tare (stare, rimanere, restare)</li>
+                                <li><strong>A</strong>uxiliare (essere stesso: sono stato)</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="rule-box avere">
-                        <h3 style="color: var(--avere);">🟠 Verbi con AVERE</h3>
-                        <p>La maggior parte dei verbi <strong>transitivi</strong> (che reggono oggetto diretto). Il participio è <strong>invariabile</strong>.</p>
-                        <p>Esempi: <em>Ho mangiato, Hai letto, Hanno scritto</em></p>
+                    <!-- ENGLISH -->
+                    <div id="lang-en" class="lang-content">
+                        <p>The past tense (passato prossimo) is formed with:</p>
+                        <div class="instruction-box">
+                            <strong>Auxiliary verb</strong> (to be or to have conjugated in the present) + <strong>Past participle</strong> of the main verb
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 Verbs with TO BE (ESSERE)</h3>
+                            <p><strong>Movement</strong> verbs (go, come, leave...), <strong>state change</strong> verbs (be born, die...), and <strong>reflexive</strong> verbs.</p>
+                            <p><strong>⚠️ Attention:</strong> The past participle agrees with the subject in gender and number.</p>
+                            <p>Examples: <em>I went (M/F/pl), He/She was born, We had fun</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 Verbs with TO HAVE (AVERE)</h3>
+                            <p>Most <strong>transitive</strong> verbs (taking a direct object). The participle is <strong>invariable</strong>.</p>
+                            <p>Examples: <em>I ate, You read, They wrote</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 Mnemonic Rule: HOUSE of TO BE</h3>
+                            <p>Verbs using TO BE are those of the <strong>HOUSE</strong>:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>H</strong>ome/State change (be born, die, become)</li>
+                                <li><strong>O</strong>ngoing movement (go, come, arrive, leave, enter, exit)</li>
+                                <li><strong>U</strong>nicorn/Staying (stay, remain)</li>
+                                <li><strong>S</strong>econdary auxiliary (to be itself: I have been)</li>
+                                <li><strong>E</strong>nding (Note: Italian uses C-A-S-A: Cambiamento, Andare, Stare, Auxiliare)</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
-                        <h3>💡 Regola mnemonica: Casa di ESSERE</h3>
-                        <p>I verbi che usano ESSERE sono quelli della <strong>CASA</strong>:</p>
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li><strong>C</strong>ambiamento di stato (nascere, morire, diventare)</li>
-                            <li><strong>A</strong>ndare e movimento (andare, venire, arrivare, partire, entrare, uscire)</li>
-                            <li><strong>S</strong>tare (stare, rimanere, restare)</li>
-                            <li><strong>A</strong>uxiliare (essere stesso: sono stato)</li>
-                        </ul>
+                    <!-- FRANÇAIS -->
+                    <div id="lang-fr" class="lang-content">
+                        <p>Le passé composé se forme avec :</p>
+                        <div class="instruction-box">
+                            <strong>Auxiliaire</strong> (être ou avoir conjugué au présent) + <strong>Participe passé</strong> du verbe principal
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 Verbes avec ÊTRE</h3>
+                            <p>Verbes de <strong>mouvement</strong> (aller, venir, partir...), de <strong>changement d'état</strong> (naître, mourir...), et <strong>pronominaux</strong>.</p>
+                            <p><strong>⚠️ Attention :</strong> Le participe passé s'accorde avec le sujet en genre et nombre.</p>
+                            <p>Exemples : <em>Je suis allé(e), Il/Elle est né(e), Nous nous sommes amusé(e)s</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 Verbes avec AVOIR</h3>
+                            <p>La plupart des verbes <strong>transitifs</strong> (prenant un complément d'objet direct). Le participe est <strong>invariable</strong>.</p>
+                            <p>Exemples : <em>J'ai mangé, Tu as lu, Ils ont écrit</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 Règle mnémotechnique : MAISON de ÊTRE</h3>
+                            <p>Les verbes utilisant ÊTRE sont ceux de la <strong>MAISON</strong> :</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>M</strong>étamorphose/Changement d'état (naître, mourir, devenir)</li>
+                                <li><strong>A</strong>ller et mouvement (aller, venir, arriver, partir, entrer, sortir)</li>
+                                <li><strong>I</strong>mmobile/Rester (rester, demeurer)</li>
+                                <li><strong>S</strong>econde auxiliaire (être lui-même : je suis été)</li>
+                                <li><strong>O</strong>rigine (Note : Italien utilise C-A-S-A)</li>
+                                <li><strong>N</strong>aissance</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- ESPAÑOL -->
+                    <div id="lang-es" class="lang-content">
+                        <p>El pretérito perfecto compuesto se forma con:</p>
+                        <div class="instruction-box">
+                            <strong>Auxiliar</strong> (ser o haber conjugado en presente) + <strong>Participio pasado</strong> del verbo principal
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 Verbos con SER (ESSERE)</h3>
+                            <p>Verbos de <strong>movimiento</strong> (ir, venir, partir...), <strong>cambio de estado</strong> (nacer, morir...), y <strong>reflexivos</strong>.</p>
+                            <p><strong>⚠️ Atención:</strong> El participio concuerda con el sujeto en género y número.</p>
+                            <p>Ejemplos: <em>He ido (M/F/pl), Ha nacido, Nos hemos divertido</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 Verbos con HABER (AVERE)</h3>
+                            <p>La mayoría de los verbos <strong>transitivos</strong> (con objeto directo). El participio es <strong>invariable</strong>.</p>
+                            <p>Ejemplos: <em>He comido, Has leído, Han escrito</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 Regla mnemotécnica: CASA de SER</h3>
+                            <p>Los verbos que usan SER son los de la <strong>CASA</strong>:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong>ambio de estado (nacer, morir, convertirse)</li>
+                                <li><strong>A</strong>ndar y movimiento (ir, venir, llegar, partir, entrar, salir)</li>
+                                <li><strong>S</strong>tar/Permanecer (estar, quedarse, permanecer)</li>
+                                <li><strong>A</strong>uxiliar (ser mismo: he sido)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- DEUTSCH -->
+                    <div id="lang-de" class="lang-content">
+                        <p>Das Perfekt bildet man mit:</p>
+                        <div class="instruction-box">
+                            <strong>Hilfsverb</strong> (sein oder haben im Präsens konjugiert) + <strong>Partizip Perfekt</strong> des Hauptverbs
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 Verben mit SEIN</h3>
+                            <p><strong>Bewegungs</strong>verben (gehen, kommen, abfahren...), <strong>Zustandsänderung</strong> (geboren werden, sterben...), und <strong>reflexive</strong> Verben.</p>
+                            <p><strong>⚠️ Achtung:</strong> Das Partizip stimmt mit dem Subjekt in Geschlecht und Zahl überein.</p>
+                            <p>Beispiele: <em>Ich bin gegangen, Er/Sie ist geboren, Wir haben uns amüsiert</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 Verben mit HABEN</h3>
+                            <p>Die meisten <strong>transitiven</strong> Verben (mit direktem Objekt). Das Partizip ist <strong>unveränderlich</strong>.</p>
+                            <p>Beispiele: <em>Ich habe gegessen, Du hast gelesen, Sie haben geschrieben</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 Merkregel: HAUS von SEIN</h3>
+                            <p>Verben mit SEIN sind die des <strong>HAUS</strong>:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>H</strong>erkunft/Zustandsänderung (geboren werden, sterben, werden)</li>
+                                <li><strong>A</strong>ufgang/Bewegung (gehen, kommen, ankommen, abfahren, eintreten, ausgehen)</li>
+                                <li><strong>U</strong>nterkunft/Bleiben (bleiben, verweilen)</li>
+                                <li><strong>S</strong>ein selbst (ich bin gewesen)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- URDU -->
+                    <div id="lang-ur" class="lang-content" dir="rtl">
+                        <p>ماضی قریب اس طرح بنتا ہے:</p>
+                        <div class="instruction-box">
+                            <strong>مددگار فعل</strong> (ہونا یا رکھنا حال میں تصریف شدہ) + <strong>ماضی کا صفت فعل</strong> بنیادی فعل کا
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 ہونا (ESSERE) والے افعال</h3>
+                            <p><strong>حرکت</strong> والے افعال (جانا، آنا، روانہ ہونا...)، <strong>حالت میں تبدیلی</strong> (پیدا ہونا، مرنا...)، اور <strong>انعکاسی</strong> افعال۔</p>
+                            <p><strong>⚠️ توجہ:</strong> صفت فعل فاعل کے جنس اور عدد سے مطابقت رکھتا ہے۔</p>
+                            <p>مثالیں: <em>میں گیا (م/ف/ج)، وہ پیدا ہوا، ہم نے لطف اٹھایا</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 رکھنا (AVERE) والے افعال</h3>
+                            <p>زیادہ تر <strong>متعدی</strong> افعال (براہ راست مفعول لینے والے)۔ صفت فعل <strong>غیر متغیر</strong> ہے۔</p>
+                            <p>مثالیں: <em>میں نے کھایا، تم نے پڑھا، انہوں نے لکھا</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 یادداشت کا اصول: ہونا کا گھر (CASA)</h3>
+                            <p>وہ افعال جو ہونا استعمال کرتے ہیں <strong>CASA</strong> کے ہیں:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong> حالت میں تبدیلی (پیدا ہونا، مرنا، بننا)</li>
+                                <li><strong>A</strong> جانا اور حرکت (جانا، آنا، پہنچنا، روانہ ہونا، داخل ہونا، نکلنا)</li>
+                                <li><strong>S</strong> ٹھہرنا (رہنا، ٹھہرنا)</li>
+                                <li><strong>A</strong> مددگار (خود ہونا: میں رہا ہوں)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- PANJABI -->
+                    <div id="lang-pa" class="lang-content">
+                        <p>ਪਾਸਾਤੋ ਪ੍ਰੋਸੀਮੋ ਇਸ ਤਰ੍ਹਾਂ ਬਣਦਾ ਹੈ:</p>
+                        <div class="instruction-box">
+                            <strong>ਸਹਾਇਕ ਕਿਰਿਆ</strong> (ਹੋਣਾ ਜਾਂ ਰੱਖਣਾ ਵਰਤਮਾਨ ਵਿੱਚ ਕੰਜੁਗੇਟ) + <strong>ਭੂਤ ਕਾਲ ਦਾ ਪਾਰਟਿਸਿਪਲ</strong> ਮੁੱਖ ਕਿਰਿਆ ਦਾ
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 ਹੋਣਾ (ESSERE) ਨਾਲ ਕਿਰਿਆਵਾਂ</h3>
+                            <p><strong>ਚਲਣ</strong> ਵਾਲੀਆਂ ਕਿਰਿਆਵਾਂ (ਜਾਣਾ, ਆਉਣਾ, ਰਵਾਨਾ ਹੋਣਾ...), <strong>ਹਾਲਤ ਬਦਲਣ</strong> (ਜਨਮ ਲੈਣਾ, ਮਰਨਾ...), ਅਤੇ <strong>ਰਿਫਲੈਕਸਿਵ</strong> ਕਿਰਿਆਵਾਂ।</p>
+                            <p><strong>⚠️ ਧਿਆਨ:</strong> ਪਾਰਟਿਸਿਪਲ ਕਰਤਾ ਦੇ ਲਿੰਗ ਅਤੇ ਵਚਨ ਨਾਲ ਮੇਲ ਖਾਂਦਾ ਹੈ।</p>
+                            <p>ਉਦਾਹਰਨਾਂ: <em>ਮੈਂ ਗਿਆ (ਮ/ਫ/ਬ), ਉਹ ਜਨਮਿਆ, ਅਸੀਂ ਮਜ਼ੇ ਕੀਤੇ</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 ਰੱਖਣਾ (AVERE) ਨਾਲ ਕਿਰਿਆਵਾਂ</h3>
+                            <p>ਜ਼ਿਆਦਾਤਰ <strong>ਟ੍ਰਾਂਜ਼ੀਟਿਵ</strong> ਕਿਰਿਆਵਾਂ (ਸਿੱਧਾ ਔਬਜੈਕਟ ਲੈਣ ਵਾਲੀਆਂ)। ਪਾਰਟਿਸਿਪਲ <strong>ਅਚਲ</strong> ਹੈ।</p>
+                            <p>ਉਦਾਹਰਨਾਂ: <em>ਮੈਂ ਖਾਧਾ, ਤੂੰ ਪੜ੍ਹਿਆ, ਉਨ੍ਹਾਂ ਨੇ ਲਿਖਿਆ</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 ਯਾਦ ਰੱਖਣ ਦਾ ਨਿਯਮ: ਹੋਣਾ ਦਾ ਘਰ (CASA)</h3>
+                            <p>ਹੋਣਾ ਵਰਤਣ ਵਾਲੀਆਂ ਕਿਰਿਆਵਾਂ <strong>CASA</strong> ਦੀਆਂ ਹਨ:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong> ਹਾਲਤ ਬਦਲਣਾ (ਜਨਮ ਲੈਣਾ, ਮਰਨਾ, ਬਣਨਾ)</li>
+                                <li><strong>A</strong> ਜਾਣਾ ਅਤੇ ਚਲਣ (ਜਾਣਾ, ਆਉਣਾ, ਪਹੁੰਚਣਾ, ਰਵਾਨਾ ਹੋਣਾ, ਅੰਦਰ ਜਾਣਾ, ਬਾਹਰ ਨਿਕਲਣਾ)</li>
+                                <li><strong>S</strong> ਠਹਿਰਨਾ (ਰਹਿਣਾ, ਠਹਿਰਨਾ)</li>
+                                <li><strong>A</strong> ਸਹਾਇਕ (ਖੁਦ ਹੋਣਾ: ਮੈਂ ਰਿਹਾ ਹਾਂ)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SHQIP -->
+                    <div id="lang-sq" class="lang-content">
+                        <p>Koha e kryer formohet me:</p>
+                        <div class="instruction-box">
+                            <strong>Auxiliar</strong> (të qenit ose të pasurit e konjuguar në të tashmen) + <strong>Pjesorja</strong> e foljes kryesore
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 Foljet me ESSERE (të qenit)</h3>
+                            <p>Foljet e <strong>lëvizjes</strong> (shkoj, vij, nisem...), <strong>ndryshimit të gjendjes</strong> (lind, vdes...), dhe <strong>refleksive</strong>.</p>
+                            <p><strong>⚠️ Kujdes:</strong> Pjesorja pajtohet me subjektin në gjini dhe numër.</p>
+                            <p>Shembuj: <em>Kam shkuar (M/F/shumës), Ka lindur, Jemi argëtuar</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 Foljet me AVERE (të pasurit)</h3>
+                            <p>Shumica e foljeve <strong>tranzitive</strong> (që marrin objekt të drejtpërdrejtë). Pjesorja është <strong>e pandryshueshme</strong>.</p>
+                            <p>Shembuj: <em>Kam ngrënë, Ke lexuar, Kanë shkruar</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 Rregull mnemonik: SHTËPIA e ESSERE</h3>
+                            <p>Foljet që përdorin ESSERE janë ato të <strong>SHTËPIA</strong>:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>S</strong> hndërrim gjendjeje (lind, vdes, bëhem)</li>
+                                <li><strong>H</strong> ende/levizje (shkoj, vij, mbërrij, nisem, hyj, dal)</li>
+                                <li><strong>T</strong> ë ndejtur (rri, mbetem)</li>
+                                <li><strong>Ë</strong> ssere vetë (kam qenë)</li>
+                                <li><strong>P</strong> shtëpia (Note: Italiane përdor C-A-S-A)</li>
+                                <li><strong>I</strong> taliane</li>
+                                <li><strong>A</strong> uxiliare</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- ARABIC -->
+                    <div id="lang-ar" class="lang-content" dir="rtl">
+                        <p>تُشكّل الماضي القريب بـ:</p>
+                        <div class="instruction-box">
+                            <strong>الفعل المساعد</strong> (يكون أو يملك مُصرف في المضارع) + <strong>اسم الفاعل الماضي</strong> للفعل الرئيسي
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 الأفعال مع يكون (ESSERE)</h3>
+                            <p>أفعال <strong>الحركة</strong> (يذهب، يأتي، يغادر...)، <strong>تغيّر الحالة</strong> (يولد، يموت...)، والأفعال <strong>الانعكاسية</strong>.</p>
+                            <p><strong>⚠️ انتباه:</strong> اسم الفاعل يتطابق مع الفاعل في الجنس والعدد.</p>
+                            <p>أمثلة: <em>ذهبت (م/ف/ج)، وُلِد، استمتعنا</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 الأفعال مع يملك (AVERE)</h3>
+                            <p>معظم الأفعال <strong>المتعدية</strong> (التي تأخذ مفعولاً به مباشراً). اسم الفاعل <strong>ثابت</strong>.</p>
+                            <p>أمثلة: <em>أكلت، قرأت، كتبوا</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 قاعدة تذكيرية: بيت يكون (CASA)</h3>
+                            <p>الأفعال التي تستخدم يكون هي أفعال <strong>CASA</strong>:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong> تغيّر الحالة (يولد، يموت، يصبح)</li>
+                                <li><strong>A</strong> الذهاب والحركة (يذهب، يأتي، يصل، يغادر، يدخل، يخرج)</li>
+                                <li><strong>S</strong> البقاء (يبقى، يظل)</li>
+                                <li><strong>A</strong> المساعد (يكون نفسه: كنت)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- CHINESE -->
+                    <div id="lang-zh" class="lang-content">
+                        <p>近过去时（Passato Prossimo）的构成：</p>
+                        <div class="instruction-box">
+                            <strong>助动词</strong>（essere"是"或avere"有"的现在时变位）+ 主要动词的<strong>过去分词</strong>
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 使用ESSERE（是）的动词</h3>
+                            <p><strong>移动</strong>动词（去、来、离开...）、<strong>状态变化</strong>动词（出生、死亡...）和<strong>自反</strong>动词。</p>
+                            <p><strong>⚠️ 注意：</strong>过去分词要与主语的性和数保持一致。</p>
+                            <p>例句：<em>我去了（男/女/复数）、他/她出生了、我们玩得很开心</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 使用AVERE（有）的动词</h3>
+                            <p>大多数<strong>及物</strong>动词（带直接宾语）。过去分词<strong>不变化</strong>。</p>
+                            <p>例句：<em>我吃了、你读了、他们写了</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 记忆口诀：ESSERE的"CASA"房子</h3>
+                            <p>使用ESSERE的动词属于<strong>CASA</strong>：</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong> 状态变化（出生、死亡、变成）</li>
+                                <li><strong>A</strong> 去和移动（去、来、到达、离开、进入、出去）</li>
+                                <li><strong>S</strong> 停留（停留、保持）</li>
+                                <li><strong>A</strong> 助动词（essere本身：我是）</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- BAMBARA -->
+                    <div id="lang-bm" class="lang-content">
+                        <p>Passato Prossimo bɛ se ka kɛ:</p>
+                        <div class="instruction-box">
+                            <strong>Verbe auxiliaire</strong> (ka kɛ walima ka bɛn present) + <strong>Participe passé</strong> ka kɛnɛ verbe kunna
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 Verbe ni ESSERE (ka kɛ)</h3>
+                            <p><strong>Taama</strong> verbew (ka taa, ka na, ka bɔ...), <strong>ko yɛlɛma</strong> (ka bɔ, ka sa...), ani <strong>reflexif</strong> verbew.</p>
+                            <p><strong>⚠️ LAKANA:</strong> Participe bɛ kelenya ni subject ye cɛya ni jama.</p>
+                            <p>Sɛbɛnw: <em>N taa (cɛ/muso/jama), A bɔ, An kɛ ni ɲagami ye</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 Verbe ni AVERE (ka bɛn)</h3>
+                            <p>Verbe <strong>transitif</strong> caman (minnu bɛ fɛn dɔ ɲɛ). Participe <strong>taa ɲɛ</strong>.</p>
+                            <p>Sɛbɛnw: <em>N domi, I kalan, U sɛbɛn</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 Fanga la: SO (CASA) ka kɛ</h3>
+                            <p>Verbe minnu bɛ ka kɛ ɲɛ, o ye <strong>CASA</strong> ye:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong> ko yɛlɛma (ka bɔ, ka sa, ka kɛ)</li>
+                                <li><strong>A</strong> taa ani taama (ka taa, ka na, ka se, ka bɔ, ka don, ka jɔ)</li>
+                                <li><strong>S</strong> bɛn (ka bɛn, ka to)</li>
+                                <li><strong>A</strong> auxiliaire (ka kɛ yɛrɛ: n bɛ kɛ)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SONINKE -->
+                    <div id="lang-sn" class="lang-content">
+                        <p>Passato Prossimo bɛ se ka kɛ:</p>
+                        <div class="instruction-box">
+                            <strong>Verbe auxiliaire</strong> (ka kɛ wala ka bɛn present) + <strong>Participe passé</strong> ka kɛnɛ verbe kunna
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 Verbe ni ESSERE (ka kɛ)</h3>
+                            <p><strong>Taama</strong> verbew (ka taa, ka na, ka bɔ...), <strong>ko yɛlɛma</strong> (ka bɔ, ka sa...), ani <strong>reflexif</strong> verbew.</p>
+                            <p><strong>⚠️ LAKANA:</strong> Participe bɛ kelenya ni subject ye cɛya ni jama.</p>
+                            <p>Sɛbɛnw: <em>N taa (cɛ/muso/jama), A bɔ, An kɛ ni ɲagami ye</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 Verbe ni AVERE (ka bɛn)</h3>
+                            <p>Verbe <strong>transitif</strong> caman (minnu bɛ fɛn dɔ ɲɛ). Participe <strong>taa ɲɛ</strong>.</p>
+                            <p>Sɛbɛnw: <em>N domi, I kalan, U sɛbɛn</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 Fanga la: SO (CASA) ka kɛ</h3>
+                            <p>Verbe minnu bɛ ka kɛ ɲɛ, o ye <strong>CASA</strong> ye:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong> ko yɛlɛma (ka bɔ, ka sa, ka kɛ)</li>
+                                <li><strong>A</strong> taa ani taama (ka taa, ka na, ka se, ka bɔ, ka don, ka jɔ)</li>
+                                <li><strong>S</strong> bɛn (ka bɛn, ka to)</li>
+                                <li><strong>A</strong> auxiliaire (ka kɛ yɛrɛ: n bɛ kɛ)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- HINDI -->
+                    <div id="lang-hi" class="lang-content">
+                        <p>पासातो प्रोस्सिमो इस प्रकार बनता है:</p>
+                        <div class="instruction-box">
+                            <strong>सहायक क्रिया</strong> (होना या रखना वर्तमान में कंजुगेट) + मुख्य क्रिया का <strong>भूतकालिक पार्टिसिपल</strong>
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 होना (ESSERE) वाली क्रियाएं</h3>
+                            <p><strong>गति</strong> वाली क्रियाएं (जाना, आना, प्रस्थान करना...), <strong>स्थिति परिवर्तन</strong> (जन्म लेना, मरना...), और <strong>प्रतिवर्ती</strong> क्रियाएं।</p>
+                            <p><strong>⚠️ ध्यान:</strong> पार्टिसिपल कर्ता के लिंग और वचन से मेल खाता है।</p>
+                            <p>उदाहरण: <em>मैं गया (पु/स्त्री/बहु), वह जन्मा, हमने मज़े किए</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 रखना (AVERE) वाली क्रियाएं</h3>
+                            <p>अधिकांश <strong>सकर्मक</strong> क्रियाएं (सीधा कर्म लेने वाली)। पार्टिसिपल <strong>अपरिवर्तनीय</strong> है।</p>
+                            <p>उदाहरण: <em>मैंने खाया, तुमने पढ़ा, उन्होंने लिखा</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 स्मरण नियम: होना का घर (CASA)</h3>
+                            <p>होना का प्रयोग करने वाली क्रियाएं <strong>CASA</strong> की हैं:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong> स्थिति परिवर्तन (जन्म लेना, मरना, बनना)</li>
+                                <li><strong>A</strong> जाना और गति (जाना, आना, पहुंचना, प्रस्थान करना, अंदर जाना, बाहर निकलना)</li>
+                                <li><strong>S</strong> ठहरना (रहना, ठहरना)</li>
+                                <li><strong>A</strong> सहायक (स्वयं होना: मैं रहा हूं)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- BANGLA -->
+                    <div id="lang-bn" class="lang-content">
+                        <p>পাসাতো প্রোসিমো এইভাবে গঠিত হয়:</p>
+                        <div class="instruction-box">
+                            <strong>সহায়ক ক্রিয়া</strong> (হওয়া বা থাকা বর্তমানে ক্রিয়াপদ) + মূল ক্রিয়ার <strong>অতীত বিশেষণ</strong>
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 হওয়া (ESSERE) সহ ক্রিয়া</h3>
+                            <p><strong>চলাচল</strong> ক্রিয়া (যাওয়া, আসা, প্রস্থান...), <strong>অবস্থার পরিবর্তন</strong> (জন্ম নেওয়া, মরা...), এবং <strong>প্রতিবর্তী</strong> ক্রিয়া।</p>
+                            <p><strong>⚠️ মনোযোগ:</strong> অতীত বিশেষণ বিষয়ের লিঙ্গ এবং সংখ্যার সাথে মিলে যায়।</p>
+                            <p>উদাহরণ: <em>আমি গেলাম (পু/স্ত্রী/বহু), সে জন্মেছিল, আমরা আনন্দ করেছিলাম</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 থাকা (AVERE) সহ ক্রিয়া</h3>
+                            <p>বেশিরভাগ <strong>সকর্মক</strong> ক্রিয়া (সরাসরি বস্তু গ্রহণকারী)। অতীত বিশেষণ <strong>অপরিবর্তনীয়</strong>।</p>
+                            <p>উদাহরণ: <em>আমি খেয়েছি, তুমি পড়েছ, তারা লিখেছে</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 মনে রাখার নিয়ম: হওয়ার বাড়ি (CASA)</h3>
+                            <p>হওয়া ব্যবহারকারী ক্রিয়াগুলি <strong>CASA</strong> এর:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong> অবস্থার পরিবর্তন (জন্ম নেওয়া, মরা, হয়ে ওঠা)</li>
+                                <li><strong>A</strong> যাওয়া এবং চলাচল (যাওয়া, আসা, পৌঁছানো, প্রস্থান, প্রবেশ, বের হওয়া)</li>
+                                <li><strong>S</strong> থাকা (থাকা, অবস্থান করা)</li>
+                                <li><strong>A</strong> সহায়ক (নিজেই হওয়া: আমি ছিলাম)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SINHALA -->
+                    <div id="lang-si" class="lang-content">
+                        <p>පාසාටෝ ප්‍රොසිමෝ මෙසේ සාදනු ලැබේ:</p>
+                        <div class="instruction-box">
+                            <strong>උපකාරක ක්‍රියාව</strong> (essere හෝ avere වර්තමාන කාලයේ හැඩවේ) + ප්‍රධාන ක්‍රියාවේ <strong>අතීත කෘදන්තය</strong>
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 ESSERE සමඟ ක්‍රියාවන්</h3>
+                            <p><strong>චලන</strong> ක්‍රියාවන් (යාම, පැමිණීම, පිටත්ව යාම...), <strong>තත්ත්ව වෙනස</strong> (උපත, මරණය...), සහ <strong>නිවර්තන</strong> ක්‍රියාවන්.</p>
+                            <p><strong>⚠️ අවධානය:</strong> අතීත කෘදන්තය විෂය සමඟ ලිංගය සහ බහුවචනය අනුව ගැළපේ.</p>
+                            <p>උදාහරණ: <em>මම ගියෙමි (පු/ස්ත්‍රී/බහු), උපත ලැබීය, අපි සතුටු වූයෙමු</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 AVERE සමඟ ක්‍රියාවන්</h3>
+                            <p>බොහෝ <strong>සංක්‍රමණක</strong> ක්‍රියාවන් (සෘජු වස්තුවක් ගන්නා) අතීත කෘදන්තය <strong>වෙනස් නොවේ</strong>.</p>
+                            <p>උදාහරණ: <em>මම කෑවෙමි, ඔබ කියවුවා, ඔවුන් ලිවුවා</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 මතක තබාගැනීමේ නීතිය: ESSERE ගේ ගෙදර (CASA)</h3>
+                            <p>ESSERE භාවිතා කරන ක්‍රියාවන් <strong>CASA</strong> වේ:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong> තත්ත්ව වෙනස (උපත, මරණය, බවට පත්වීම)</li>
+                                <li><strong>A</strong> යාම සහ චලනය (යාම, පැමිණීම, පැමිණීම, පිටත්ව යාම, ඇතුළුවීම, පිටවීම)</li>
+                                <li><strong>S</strong> රැඳී සිටීම (සිටීම, රැඳී සිටීම)</li>
+                                <li><strong>A</strong> උපකාරක (essereම: මම වී ඇත)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- WOLOF -->
+                    <div id="lang-wo" class="lang-content">
+                        <p>Passato Prossimo dafay am:</p>
+                        <div class="instruction-box">
+                            <strong>Verbe auxiliaire</strong> (essere walla avere ci présent) + <strong>Participe passé</strong> bu verbe bi
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 Verbe yi ak ESSERE</h3>
+                            <p><strong>Dox</strong> (dëgg, ñëw, gëna...), <strong>ciy ciy</strong> (juddu, dee...), ak <strong>reflexif</strong> yi.</p>
+                            <p><strong>⚠️ ATTENTION:</strong> Participe dafay am ci mbirum subject bi.</p>
+                            <p>Yene: <em>Dama dëgg (xay/jigéen/ñi), Mu juddu, Ñu ame solo</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 Verbe yi ak AVERE</h3>
+                            <p>Verbe <strong>transitif</strong> yi (ñi ame object bu ñu ko xool). Participe <strong>du ciy ciy</strong>.</p>
+                            <p>Yene: <em>Dama lekki, Danga jàng, Ñu bind</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 Xelal: Kër ESSERE (CASA)</h3>
+                            <p>Verbe yi di jëfandikoo ESSERE ñi ngi <strong>CASA</strong>:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong> ciy ciy (juddu, dee, nekk)</li>
+                                <li><strong>A</strong> dëgg ak dox (dëgg, ñëw, ñëw, gëna, dugg, génn)</li>
+                                <li><strong>S</strong> nekk (nekk, toog)</li>
+                                <li><strong>A</strong> auxiliaire (essere boppam: danga nekk)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MANDINKA -->
+                    <div id="lang-man" class="lang-content">
+                        <p>Passato Prossimo bɛna kɛ:</p>
+                        <div class="instruction-box">
+                            <strong>Verbe auxiliaire</strong> (ka kɛ walima ka bɛn present) + <strong>Participe passé</strong> ka kɛnɛ verbe kunna
+                        </div>
+                        <div class="rule-box essere">
+                            <h3 style="color: var(--essere);">🔵 Verbe ni ESSERE (ka kɛ)</h3>
+                            <p><strong>Taama</strong> verbew (ka taa, ka na, ka bɔ...), <strong>ko yɛlɛma</strong> (ka bɔ, ka sa...), ani <strong>reflexif</strong> verbew.</p>
+                            <p><strong>⚠️ LAKANA:</strong> Participe bɛ kelenya ni subject ye cɛya ni jama.</p>
+                            <p>Sɛbɛnw: <em>N taa (cɛ/muso/jama), A bɔ, An kɛ ni ɲagami ye</em></p>
+                        </div>
+                        <div class="rule-box avere">
+                            <h3 style="color: var(--avere);">🟠 Verbe ni AVERE (ka bɛn)</h3>
+                            <p>Verbe <strong>transitif</strong> caman (minnu bɛ fɛn dɔ ɲɛ). Participe <strong>taa ɲɛ</strong>.</p>
+                            <p>Sɛbɛnw: <em>N domi, I kalan, U sɛbɛn</em></p>
+                        </div>
+                        <div class="rule-box" style="background: #fff3cd; border-color: #ffc107;">
+                            <h3>💡 Fanga la: SO (CASA) ka kɛ</h3>
+                            <p>Verbe minnu bɛ ka kɛ ɲɛ, o ye <strong>CASA</strong> ye:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>C</strong> ko yɛlɛma (ka bɔ, ka sa, ka kɛ)</li>
+                                <li><strong>A</strong> taa ani taama (ka taa, ka na, ka se, ka bɔ, ka don, ka jɔ)</li>
+                                <li><strong>S</strong> bɛn (ka bɛn, ka to)</li>
+                                <li><strong>A</strong> auxiliaire (ka kɛ yɛrɛ: n bɛ kɛ)</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header">Regole di Accordi del Participio</div>
+                <div class="card-header">Regole di Accordi del Participio - Past Participle Agreement Rules</div>
                 <div class="card-body">
-                    <div class="instruction-box" style="border-left-color: var(--essere);">
-                        <strong>Con ESSERE:</strong> Il participio cambia sempre!
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>Maschile singolare: <strong>-o</strong> (andato, arrivato)</li>
-                            <li>Femminile singolare: <strong>-a</strong> (andata, arrivata)</li>
-                            <li>Maschile plurale: <strong>-i</strong> (andati, arrivati)</li>
-                            <li>Femminile plurale: <strong>-e</strong> (andate, arrivate)</li>
-                        </ul>
+                    <!-- Tab per le lingue -->
+                    <div class="lang-tabs">
+                        <button class="lang-tab active" onclick="showLang2('it2', this)">🇮🇹 IT</button>
+                        <button class="lang-tab" onclick="showLang2('en2', this)">🇬🇧 EN</button>
+                        <button class="lang-tab" onclick="showLang2('fr2', this)">🇫🇷 FR</button>
+                        <button class="lang-tab" onclick="showLang2('es2', this)">🇪🇸 ES</button>
+                        <button class="lang-tab" onclick="showLang2('de2', this)">🇩🇪 DE</button>
+                        <button class="lang-tab" onclick="showLang2('ur2', this)">🇵🇰 UR</button>
+                        <button class="lang-tab" onclick="showLang2('pa2', this)">🇮🇳 PA</button>
+                        <button class="lang-tab" onclick="showLang2('sq2', this)">🇦🇱 SQ</button>
+                        <button class="lang-tab" onclick="showLang2('ar2', this)">🇸🇦 AR</button>
+                        <button class="lang-tab" onclick="showLang2('zh2', this)">🇨🇳 ZH</button>
+                        <button class="lang-tab" onclick="showLang2('bm2', this)">🇲🇱 BM</button>
+                        <button class="lang-tab" onclick="showLang2('sn2', this)">🇸🇳 SN</button>
+                        <button class="lang-tab" onclick="showLang2('hi2', this)">🇮🇳 HI</button>
+                        <button class="lang-tab" onclick="showLang2('bn2', this)">🇧🇩 BN</button>
+                        <button class="lang-tab" onclick="showLang2('si2', this)">🇱🇰 SI</button>
+                        <button class="lang-tab" onclick="showLang2('wo2', this)">🇸🇳 WO</button>
+                        <button class="lang-tab" onclick="showLang2('man2', this)">🇬🇲 MAN</button>
                     </div>
 
-                    <div class="instruction-box" style="border-left-color: var(--avere);">
-                        <strong>Con AVERE:</strong> Il participio è fisso (termina in -o), tranne quando c'è pronome oggetto precedente (lo, la, li, le).
+                    <!-- ITALIANO -->
+                    <div id="lang-it2" class="lang-content active">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>Con ESSERE:</strong> Il participio cambia sempre!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Maschile singolare: <strong>-o</strong> (andato, arrivato)</li>
+                                <li>Femminile singolare: <strong>-a</strong> (andata, arrivata)</li>
+                                <li>Maschile plurale: <strong>-i</strong> (andati, arrivati)</li>
+                                <li>Femminile plurale: <strong>-e</strong> (andate, arrivate)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>Con AVERE:</strong> Il participio è fisso (termina in -o), tranne quando c'è pronome oggetto precedente (lo, la, li, le).
+                        </div>
+                    </div>
+
+                    <!-- ENGLISH -->
+                    <div id="lang-en2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>With TO BE (ESSERE):</strong> The participle always changes!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Masculine singular: <strong>-o</strong> (gone, arrived)</li>
+                                <li>Feminine singular: <strong>-a</strong> (gone, arrived)</li>
+                                <li>Masculine plural: <strong>-i</strong> (gone, arrived)</li>
+                                <li>Feminine plural: <strong>-e</strong> (gone, arrived)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>With TO HAVE (AVERE):</strong> The participle is fixed (ends in -o), except when there is a preceding object pronoun (it, her, them).
+                        </div>
+                    </div>
+
+                    <!-- FRANÇAIS -->
+                    <div id="lang-fr2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>Avec ÊTRE :</strong> Le participe passe change toujours !
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Masculin singulier : <strong>-o</strong> (allé, arrivé)</li>
+                                <li>Féminin singulier : <strong>-a</strong> (allée, arrivée)</li>
+                                <li>Masculin pluriel : <strong>-i</strong> (allés, arrivés)</li>
+                                <li>Féminin pluriel : <strong>-e</strong> (allées, arrivées)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>Avec AVOIR :</strong> Le participe est fixe (finit en -o), sauf quand il y a un pronom objet précédent (le, la, les).
+                        </div>
+                    </div>
+
+                    <!-- ESPAÑOL -->
+                    <div id="lang-es2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>Con SER:</strong> ¡El participio siempre cambia!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Masculino singular: <strong>-o</strong> (ido, llegado)</li>
+                                <li>Femenino singular: <strong>-a</strong> (ida, llegada)</li>
+                                <li>Masculino plural: <strong>-i</strong> (idos, llegados)</li>
+                                <li>Femenino plural: <strong>-e</strong> (idas, llegadas)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>Con HABER:</strong> El participio es fijo (termina en -o), excepto cuando hay un pronombre objeto precedente (lo, la, los, las).
+                        </div>
+                    </div>
+
+                    <!-- DEUTSCH -->
+                    <div id="lang-de2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>Mit SEIN:</strong> Das Partizip ändert sich immer!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Männlich Singular: <strong>-o</strong> (gegangen, angekommen)</li>
+                                <li>Weiblich Singular: <strong>-a</strong> (gegangen, angekommen)</li>
+                                <li>Männlich Plural: <strong>-i</strong> (gegangen, angekommen)</li>
+                                <li>Weiblich Plural: <strong>-e</strong> (gegangen, angekommen)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>Mit HABEN:</strong> Das Partizip ist unveränderlich (endet auf -o), außer wenn ein Objektpronomen davor steht (es, sie, sie).
+                        </div>
+                    </div>
+
+                    <!-- URDU -->
+                    <div id="lang-ur2" class="lang-content" dir="rtl">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>ہونا کے ساتھ:</strong> صفت فعل ہمیشہ بدلتا ہے!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>مذکر واحد: <strong>-o</strong> (گیا، پہنچا)</li>
+                                <li>مؤنث واحد: <strong>-a</strong> (گئی، پہنچی)</li>
+                                <li>مذکر جمع: <strong>-i</strong> (گئے، پہنچے)</li>
+                                <li>مؤنث جمع: <strong>-e</strong> (گئیں، پہنچیں)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>رکھنا کے ساتھ:</strong> صفت فعل ثابت ہے (-o پر ختم ہوتا ہے)، سوائے جب پہلے سے ضمیر مفعول ہو (اسے، اسے، انہیں)۔
+                        </div>
+                    </div>
+
+                    <!-- PANJABI -->
+                    <div id="lang-pa2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>ਹੋਣਾ ਨਾਲ:</strong> ਪਾਰਟਿਸਿਪਲ ਹਮੇਸ਼ਾ ਬਦਲਦਾ ਹੈ!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>ਪੁਲਿੰਗ ਇਕਵਚਨ: <strong>-o</strong> (ਗਿਆ, ਪਹੁੰਚਿਆ)</li>
+                                <li>ਇਸਤਰੀ ਲਿੰਗ ਇਕਵਚਨ: <strong>-a</strong> (ਗਈ, ਪਹੁੰਚੀ)</li>
+                                <li>ਪੁਲਿੰਗ ਬਹੁਵਚਨ: <strong>-i</strong> (ਗਏ, ਪਹੁੰਚੇ)</li>
+                                <li>ਇਸਤਰੀ ਲਿੰਗ ਬਹੁਵਚਨ: <strong>-e</strong> (ਗਈਆਂ, ਪਹੁੰਚੀਆਂ)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>ਰੱਖਣਾ ਨਾਲ:</strong> ਪਾਰਟਿਸਿਪਲ ਅਚਲ ਹੈ (-o ਨਾਲ ਖਤਮ ਹੁੰਦਾ ਹੈ), ਸਿਵਾਏ ਜਦੋਂ ਪਹਿਲਾਂ ਸਰਨਾਮਾ ਵਸਤੂ ਹੋਵੇ (ਉਸਨੂੰ, ਉਸਨੂੰ, ਉਨ੍ਹਾਂ ਨੂੰ)।
+                        </div>
+                    </div>
+
+                    <!-- SHQIP -->
+                    <div id="lang-sq2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>Me ESSERE:</strong> Pjesorja ndryshon gjithmonë!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Mashkullore njëjës: <strong>-o</strong> (shkuar, arritur)</li>
+                                <li>Femërore njëjës: <strong>-a</strong> (shkuar, arritur)</li>
+                                <li>Mashkullore shumës: <strong>-i</strong> (shkuar, arritur)</li>
+                                <li>Femërore shumës: <strong>-e</strong> (shkuar, arritur)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>Me AVERE:</strong> Pjesorja është e pandryshueshme (mbaron me -o), përveç kur ka një përemër objekti përpara (atë, atë, ata).
+                        </div>
+                    </div>
+
+                    <!-- ARABIC -->
+                    <div id="lang-ar2" class="lang-content" dir="rtl">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>مع يكون:</strong> اسم الفاعل يتغير دائماً!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>مذكر مفرد: <strong>-o</strong> (ذهب، وصل)</li>
+                                <li>مؤنث مفرد: <strong>-a</strong> (ذهبت، وصلت)</li>
+                                <li>مذكر جمع: <strong>-i</strong> (ذهبوا، وصلوا)</li>
+                                <li>مؤنث جمع: <strong>-e</strong> (ذهبن، وصلن)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>مع يملك:</strong> اسم الفاعل ثابت (ينتهي بـ -o)، إلا عندما يكون هناك ضمير مفعول به سابق (هو، هي، هم).
+                        </div>
+                    </div>
+
+                    <!-- CHINESE -->
+                    <div id="lang-zh2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>使用ESSERE（是）：</strong>过去分词总是变化！
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>阳性单数：<strong>-o</strong>（去了，到达了）</li>
+                                <li>阴性单数：<strong>-a</strong>（去了，到达了）</li>
+                                <li>阳性复数：<strong>-i</strong>（去了，到达了）</li>
+                                <li>阴性复数：<strong>-e</strong>（去了，到达了）</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>使用AVERE（有）：</strong>过去分词是固定的（以-o结尾），除非有前置的宾语代词（它，她，它们）。
+                        </div>
+                    </div>
+
+                    <!-- BAMBARA -->
+                    <div id="lang-bm2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>Ni ESSERE ye:</strong> Participe bɛ yɛlɛma dɛ!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Cɛ kelen: <strong>-o</strong> (taa, se)</li>
+                                <li>Muso kelen: <strong>-a</strong> (taa, se)</li>
+                                <li>Cɛ caman: <strong>-i</strong> (taa, se)</li>
+                                <li>Muso caman: <strong>-e</strong> (taa, se)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>Ni AVERE ye:</strong> Participe tɛ yɛlɛma (bɛ ben ni -o), fo n'pronon objet bɛ kɔfɛ (a, a, u).
+                        </div>
+                    </div>
+
+                    <!-- SONINKE -->
+                    <div id="lang-sn2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>Ni ESSERE ye:</strong> Participe bɛ yɛlɛma dɛ!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Cɛ kelen: <strong>-o</strong> (taa, se)</li>
+                                <li>Muso kelen: <strong>-a</strong> (taa, se)</li>
+                                <li>Cɛ caman: <strong>-i</strong> (taa, se)</li>
+                                <li>Muso caman: <strong>-e</strong> (taa, se)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>Ni AVERE ye:</strong> Participe tɛ yɛlɛma (bɛ ben ni -o), fo n'pronon objet bɛ kɔfɛ (a, a, u).
+                        </div>
+                    </div>
+
+                    <!-- HINDI -->
+                    <div id="lang-hi2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>होना के साथ:</strong> पार्टिसिपल हमेशा बदलता है!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>पुलिंग एकवचन: <strong>-o</strong> (गया, पहुंचा)</li>
+                                <li>स्त्री लिंग एकवचन: <strong>-a</strong> (गई, पहुंची)</li>
+                                <li>पुलिंग बहुवचन: <strong>-i</strong> (गए, पहुंचे)</li>
+                                <li>स्त्री लिंग बहुवचन: <strong>-e</strong> (गईं, पहुंचीं)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>रखना के साथ:</strong> पार्टिसिपल अपरिवर्तनीय है (-o पर समाप्त होता है), सिवाय जब पूर्ववर्ती वस्तु सर्वनाम हो (इसे, उसे, उन्हें)।
+                        </div>
+                    </div>
+
+                    <!-- BANGLA -->
+                    <div id="lang-bn2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>হওয়া সহ:</strong> অতীত বিশেষণ সর্বদা পরিবর্তন হয়!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>পুংলিঙ্গ একবচন: <strong>-o</strong> (গিয়েছিল, পৌঁছেছিল)</li>
+                                <li>স্ত্রীলিঙ্গ একবচন: <strong>-a</strong> (গিয়েছিল, পৌঁছেছিল)</li>
+                                <li>পুংলিঙ্গ বহুবচন: <strong>-i</strong> (গিয়েছিল, পৌঁছেছিল)</li>
+                                <li>স্ত্রীলিঙ্গ বহুবচন: <strong>-e</strong> (গিয়েছিল, পৌঁছেছিল)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>থাকা সহ:</strong> অতীত বিশেষণ অপরিবর্তনীয় (-o দিয়ে শেষ হয়), পূর্ববর্তী বস্তু সর্বনাম থাকলে ব্যতীত (এটা, ওটা, ওগুলো)।
+                        </div>
+                    </div>
+
+                    <!-- SINHALA -->
+                    <div id="lang-si2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>ESSERE සමඟ:</strong> අතීත කෘදන්තය සැමවිටම වෙනස් වේ!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>පුරුෂ ඒක වචන: <strong>-o</strong> (ගියා, පැමිණියා)</li>
+                                <li>ස්ත්‍රී ඒක වචන: <strong>-a</strong> (ගියා, පැමිණියා)</li>
+                                <li>පුරුෂ බහු වචන: <strong>-i</strong> (ගියා, පැමිණියා)</li>
+                                <li>ස්ත්‍රී බහු වචන: <strong>-e</strong> (ගියා, පැමිණියා)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>AVERE සමඟ:</strong> අතීත කෘදන්තය ස්ථිරයි (-o වලින් අවසන් වේ), පූර්ව වස්තු සර්වනාමයක් ඇති විත්තිය හැර (එය, ඇය, ඒවා)।
+                        </div>
+                    </div>
+
+                    <!-- WOLOF -->
+                    <div id="lang-wo2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>Ak ESSERE:</strong> Participe dafay ciy ciy dɛ!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Xay bu nekk: <strong>-o</strong> (dëgg, ñëw)</li>
+                                <li>Jigéen bu nekk: <strong>-a</strong> (dëgg, ñëw)</li>
+                                <li>Xay yi: <strong>-i</strong> (dëgg, ñëw)</li>
+                                <li>Jigéen yi: <strong>-e</strong> (dëgg, ñëw)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>Ak AVERE:</strong> Participe dafa teg (jeex ci -o), fo pronon objet bëgg (ko, ko, ñi).
+                        </div>
+                    </div>
+
+                    <!-- MANDINKA -->
+                    <div id="lang-man2" class="lang-content">
+                        <div class="instruction-box" style="border-left-color: var(--essere);">
+                            <strong>Ni ESSERE ye:</strong> Participe bɛ yɛlɛma dɛ!
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Cɛ kelen: <strong>-o</strong> (taa, se)</li>
+                                <li>Muso kelen: <strong>-a</strong> (taa, se)</li>
+                                <li>Cɛ caman: <strong>-i</strong> (taa, se)</li>
+                                <li>Muso caman: <strong>-e</strong> (taa, se)</li>
+                            </ul>
+                        </div>
+                        <div class="instruction-box" style="border-left-color: var(--avere);">
+                            <strong>Ni AVERE ye:</strong> Participe tɛ yɛlɛma (bɛ ben ni -o), fo n'pronon objet bɛ kɔfɛ (a, a, u).
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1872,6 +2682,25 @@
             }
         }
 
+        function showLang(langId, btn) {
+            // Trova il contenitore padre
+            const parent = btn.closest('.card-body');
+            parent.querySelectorAll('.lang-content').forEach(l => l.classList.remove('active'));
+            parent.querySelectorAll('.lang-tab').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById('lang-' + langId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function showLang2(langId, btn) {
+            const parent = btn.closest('.card-body');
+            parent.querySelectorAll('.lang-content').forEach(l => l.classList.remove('active'));
+            parent.querySelectorAll('.lang-tab').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById('lang-' + langId).classList.add('active');
+            btn.classList.add('active');
+        }
+
         function shuffleArray(array) {
             const newArray = [...array];
             for (let i = newArray.length - 1; i > 0; i--) {
@@ -1908,7 +2737,6 @@
 
             if (ex.type === 'choice') {
                 html += `<div class="options-grid" id="optionsGrid">`;
-                // Mescola le opzioni in modo casuale per ogni esercizio
                 const shuffledOptions = shuffleArray(ex.options);
                 shuffledOptions.forEach(opt => {
                     html += `<button class="option-btn" onclick="checkChoice('${opt.replace(/'/g, "\\'")}')" data-value="${opt.replace(/"/g, '&quot;')}">${opt}</button>`;
@@ -1964,7 +2792,7 @@
             if (selected === ex.correct) {
                 feedback.className = 'feedback show correct';
                 feedback.textContent = ex.explanation;
-                totalScore += 1; // 1 punto per esercizio (totale 100)
+                totalScore += 1;
             } else {
                 feedback.className = 'feedback show wrong';
                 feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
@@ -2040,7 +2868,6 @@
             totalScore = 0;
             answered = false;
 
-            // Mescola l'ordine degli esercizi ad ogni restart
             exercises.sort(() => Math.random() - 0.5);
 
             document.getElementById('exerciseContainer').style.display = 'block';
@@ -2051,7 +2878,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Mescola gli esercizi all'avvio
             exercises.sort(() => Math.random() - 0.5);
         });
     </script>
