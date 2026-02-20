@@ -25,6 +25,7 @@
             --parchment: #faf8f3;
             --b1-color: #c9a227;
             --reflexive: #9b59b6;
+            --essere: #3498db;
         }
 
         body {
@@ -495,6 +496,94 @@
             font-weight: bold;
         }
 
+        /* STILI MULTILINGUE AGGIUNTI */
+        .lang-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .lang-tab {
+            padding: 0.5rem 1rem;
+            background: var(--light);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .lang-tab:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .lang-tab.active {
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+        }
+
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .multilang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .lang-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .lang-box.arabic, .lang-box.urdu {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Traditional Arabic', 'Arial', sans-serif;
+        }
+
+        .lang-box.punjabi {
+            font-family: 'Noto Sans Gurmukhi', 'Arial', sans-serif;
+        }
+
+        .lang-box.bengali {
+            font-family: 'Noto Sans Bengali', 'Arial', sans-serif;
+        }
+
+        .lang-box.hindi {
+            font-family: 'Noto Sans Devanagari', 'Arial', sans-serif;
+        }
+
+        .lang-box.chinese {
+            font-family: 'Noto Sans SC', 'Arial', sans-serif;
+        }
+
+        .lang-label {
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 768px) {
             .nav-tabs { flex-wrap: wrap; }
             .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
@@ -503,6 +592,9 @@
             .page-title { font-size: 1.5rem; }
             .final-score-value { font-size: 3rem; }
             .fill-blank { width: 180px; }
+            .multilang-grid { grid-template-columns: 1fr; }
+            .lang-tabs { justify-content: center; }
+            .lang-tab { font-size: 0.75rem; padding: 0.4rem 0.6rem; }
         }
     </style>
 <base target="_blank">
@@ -538,29 +630,407 @@
             <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
         </nav>
 
-        <!-- SEZIONE TEORIA -->
+        <!-- SEZIONE TEORIA MULTILINGUE -->
         <section id="theory" class="section active">
             <div class="card">
-                <div class="card-header reflexive">Che cosa sono i Verbi Riflessivi?</div>
+                <div class="card-header reflexive">🌍 Che cosa sono i Verbi Riflessivi? - Teoria Multilingue</div>
                 <div class="card-body">
-                    <p>I verbi riflessivi indicano un'azione che il soggetto compie <strong>su se stesso</strong>. Si riconoscono dalla desinenza <strong>-SI</strong> all'infinito.</p>
-
-                    <div class="structure-formula">
-                        <span class="pronoun-highlight">PRONOME RIFLESSIVO</span> + VERBO CONIUGATO
+                    
+                    <!-- Tab per le lingue -->
+                    <div class="lang-tabs">
+                        <button class="lang-tab active" onclick="showLang('it', this)">🇮🇹 IT</button>
+                        <button class="lang-tab" onclick="showLang('en', this)">🇬🇧 EN</button>
+                        <button class="lang-tab" onclick="showLang('fr', this)">🇫🇷 FR</button>
+                        <button class="lang-tab" onclick="showLang('es', this)">🇪🇸 ES</button>
+                        <button class="lang-tab" onclick="showLang('pt', this)">🇵🇹 PT</button>
+                        <button class="lang-tab" onclick="showLang('de', this)">🇩🇪 DE</button>
+                        <button class="lang-tab" onclick="showLang('ar', this)">🇸🇦 AR</button>
+                        <button class="lang-tab" onclick="showLang('ur', this)">🇵🇰 UR</button>
+                        <button class="lang-tab" onclick="showLang('pa', this)">🇮🇳 PA</button>
+                        <button class="lang-tab" onclick="showLang('sq', this)">🇦🇱 SQ</button>
+                        <button class="lang-tab" onclick="showLang('wo', this)">🇸🇳 WO</button>
+                        <button class="lang-tab" onclick="showLang('bm', this)">🇲🇱 BM</button>
+                        <button class="lang-tab" onclick="showLang('bn', this)">🇧🇩 BN</button>
+                        <button class="lang-tab" onclick="showLang('hi', this)">🇮🇳 HI</button>
+                        <button class="lang-tab" onclick="showLang('zh', this)">🇨🇳 ZH</button>
+                        <button class="lang-tab" onclick="showLang('sn', this)">🇸🇳 SN</button>
+                        <button class="lang-tab" onclick="showLang('man', this)">🇬🇲 MAN</button>
                     </div>
 
-                    <div class="rule-box">
-                        <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Pronomi Riflessivi</h3>
-                        <p style="font-size: 1.1rem;"><strong>mi</strong> (io) - <strong>ti</strong> (tu) - <strong>si</strong> (lui/lei) - <strong>ci</strong> (noi) - <strong>vi</strong> (voi) - <strong>si</strong> (loro)</p>
+                    <!-- ITALIANO -->
+                    <div id="lang-it" class="lang-content active">
+                        <p>I <strong>verbi riflessivi</strong> indicano un'azione che il soggetto compie <strong>su se stesso</strong>. Si riconoscono dalla desinenza <strong>-SI</strong> all'infinito.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">PRONOME RIFLESSIVO</span> + VERBO CONIUGATO
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Pronomi Riflessivi</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (io) - <strong>ti</strong> (tu) - <strong>si</strong> (lui/lei) - <strong>ci</strong> (noi) - <strong>vi</strong> (voi) - <strong>si</strong> (loro)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>Regola fondamentale:</strong> Il pronome si posiziona sempre <strong>prima</strong> del verbo coniugato.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Errore comune:</strong> Non dimenticare il pronome riflessivo! Si dice <strong>"Mi alzo"</strong>, non "Alzo"!
+                        </div>
                     </div>
 
-                    <div class="instruction-box">
-                        <strong>Regola fondamentale:</strong> Il pronome si posiziona sempre <strong>prima</strong> del verbo coniugato.
+                    <!-- ENGLISH -->
+                    <div id="lang-en" class="lang-content">
+                        <p><strong>Reflexive verbs</strong> indicate an action that the subject performs <strong>on itself</strong>. They are recognized by the ending <strong>-SI</strong> in the infinitive form.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">REFLEXIVE PRONOUN</span> + CONJUGATED VERB
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Reflexive Pronouns</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (I) - <strong>ti</strong> (you) - <strong>si</strong> (he/she) - <strong>ci</strong> (we) - <strong>vi</strong> (you pl.) - <strong>si</strong> (they)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>Fundamental rule:</strong> The pronoun always comes <strong>before</strong> the conjugated verb.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Common mistake:</strong> Don't forget the reflexive pronoun! Say <strong>"Mi alzo"</strong> (I get up), not "Alzo"!
+                        </div>
                     </div>
 
-                    <div class="rule-box">
-                        <strong>⚠️ Errore comune:</strong> Non dimenticare il pronome riflessivo! Si dice <strong>"Mi alzo"</strong>, non "Alzo"!
+                    <!-- FRANÇAIS -->
+                    <div id="lang-fr" class="lang-content">
+                        <p>Les <strong>verbes pronominaux/réfléchis</strong> indiquent une action que le sujet effectue <strong>sur lui-même</strong>. On les reconnaît à la terminaison <strong>-SI</strong> à l'infinitif.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">PRONOM RÉFLÉCHI</span> + VERBE CONJUGUÉ
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Pronoms Réfléchis</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (je) - <strong>ti</strong> (tu) - <strong>si</strong> (il/elle) - <strong>ci</strong> (nous) - <strong>vi</strong> (vous) - <strong>si</strong> (ils/elles)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>Règle fondamentale :</strong> Le pronom se place toujours <strong>avant</strong> le verbe conjugué.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Erreur courante :</strong> N'oubliez pas le pronom réfléchi ! On dit <strong>"Mi alzo"</strong>, pas "Alzo" !
+                        </div>
                     </div>
+
+                    <!-- ESPAÑOL -->
+                    <div id="lang-es" class="lang-content">
+                        <p>Los <strong>verbos reflexivos</strong> indican una acción que el sujeto realiza <strong>sobre sí mismo</strong>. Se reconocen por la terminación <strong>-SI</strong> en el infinitivo.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">PRONOMBRE REFLEJO</span> + VERBO CONJUGADO
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Pronombres Reflejos</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (yo) - <strong>ti</strong> (tú) - <strong>si</strong> (él/ella) - <strong>ci</strong> (nosotros) - <strong>vi</strong> (vosotros) - <strong>si</strong> (ellos)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>Regla fundamental:</strong> El pronombre siempre va <strong>antes</strong> del verbo conjugado.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Error común:</strong> ¡No olvides el pronombre reflejo! Se dice <strong>"Mi alzo"</strong>, ¡no "Alzo"!
+                        </div>
+                    </div>
+
+                    <!-- PORTUGUÊS -->
+                    <div id="lang-pt" class="lang-content">
+                        <p>Os <strong>verbos reflexivos</strong> indicam uma ação que o sujeito realiza <strong>sobre si mesmo</strong>. Reconhecem-se pela terminação <strong>-SI</strong> no infinitivo.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">PRONOME REFLEXIVO</span> + VERBO CONJUGADO
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Pronomes Reflexivos</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (eu) - <strong>ti</strong> (tu) - <strong>si</strong> (ele/ela) - <strong>ci</strong> (nós) - <strong>vi</strong> (vós) - <strong>si</strong> (eles)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>Regra fundamental:</strong> O pronome posiciona-se sempre <strong>antes</strong> do verbo conjugado.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Erro comum:</strong> Não esqueça o pronome reflexivo! Diz-se <strong>"Mi alzo"</strong>, não "Alzo"!
+                        </div>
+                    </div>
+
+                    <!-- DEUTSCH -->
+                    <div id="lang-de" class="lang-content">
+                        <p><strong>Reflexive Verben</strong> zeigen eine Handlung, die das Subjekt <strong>an sich selbst</strong> ausführt. Sie erkennt man an der Endung <strong>-SI</strong> im Infinitiv.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">REFLEXIVPRONOMEN</span> + KONJUGIERTES VERB
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Reflexivpronomen</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (ich) - <strong>ti</strong> (du) - <strong>si</strong> (er/sie) - <strong>ci</strong> (wir) - <strong>vi</strong> (ihr) - <strong>si</strong> (sie)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>Grundregel:</strong> Das Pronomen steht immer <strong>vor</strong> dem konjugierten Verb.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Häufiger Fehler:</strong> Vergiss das Reflexivpronomen nicht! Man sagt <strong>"Mi alzo"</strong>, nicht "Alzo"!
+                        </div>
+                    </div>
+
+                    <!-- ARABIC -->
+                    <div id="lang-ar" class="lang-content" dir="rtl">
+                        <p><strong>الأفعال الانعكاسية</strong> تشير إلى فعل يقوم به الفاعل <strong>على نفسه</strong>. يتم التعرف عليها من خلال اللاحقة <strong>-سي</strong> في المصدر.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">الضمير الانعكاسي</span> + الفعل المُصرف
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">الضمائر الانعكاسية</h3>
+                            <p style="font-size: 1.1rem;"><strong>مي</strong> (أنا) - <strong>تي</strong> (أنت) - <strong>سي</strong> (هو/هي) - <strong>تشي</strong> (نحن) - <strong>في</strong> (أنتم) - <strong>سي</strong> (هم)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>القاعدة الأساسية:</strong> الضمير يأتي دائماً <strong>قبل</strong> الفعل المُصرف.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ خطأ شائع:</strong> لا تنسَ الضمير الانعكاسي! نقول <strong>"مي ألتسو"</strong>، وليس "ألتسو"!
+                        </div>
+                    </div>
+
+                    <!-- URDU -->
+                    <div id="lang-ur" class="lang-content" dir="rtl">
+                        <p><strong>انعکاسی افعال</strong> وہ عمل ظاہر کرتے ہیں جو فاعل <strong>اپنے آپ پر</strong> انجام دیتا ہے۔ ان کو مصدر میں <strong>-سی</strong> کے لاحقے سے پہچانا جاتا ہے۔</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">ضمیر انعکاسی</span> + فعل متصرف
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">ضمائر انعکاسی</h3>
+                            <p style="font-size: 1.1rem;"><strong>می</strong> (میں) - <strong>تی</strong> (تم) - <strong>سی</strong> (وہ) - <strong>چی</strong> (ہم) - <strong>وی</strong> (آپ) - <strong>سی</strong> (وہ لوگ)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>بنیادی اصول:</strong> ضمیر ہمیشہ متصرف فعل سے <strong>پہلے</strong> آتا ہے۔
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ عام غلطی:</strong> ضمیر انعکاسی مت بھولیں! ہم کہتے ہیں <strong>"می التزو"</strong>، نہ کہ "التزو"!
+                        </div>
+                    </div>
+
+                    <!-- PANJABI -->
+                    <div id="lang-pa" class="lang-content">
+                        <p><strong>ਪਰਤੀਕਰਮੀ ਕਿਰਿਆਵਾਂ</strong> ਉਹ ਕਿਰਿਆਵਾਂ ਹਨ ਜੋ ਕਰਤਾ <strong>ਆਪਣੇ ਆਪ ਤੇ</strong> ਕਰਦਾ ਹੈ। ਇਨ੍ਹਾਂ ਨੂੰ ਅਨੰਤ ਰੂਪ ਵਿੱਚ <strong>-ਸੀ</strong> ਪ੍ਰਤੱਖਕ ਨਾਲ ਪਛਾਣਿਆ ਜਾਂਦਾ ਹੈ।</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">ਪਰਤੀਕਰਮੀ ਸਰਨਾਮਾ</span> + ਕਿਰਿਆ ਰੂਪ
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">ਪਰਤੀਕਰਮੀ ਸਰਨਾਮੇ</h3>
+                            <p style="font-size: 1.1rem;"><strong>ਮੀ</strong> (ਮੈਂ) - <strong>ਤੀ</strong> (ਤੂੰ) - <strong>ਸੀ</strong> (ਉਹ) - <strong>ਚੀ</strong> (ਅਸੀਂ) - <strong>ਵੀ</strong> (ਤੁਸੀਂ) - <strong>ਸੀ</strong> (ਉਹ)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>ਮੂਲ ਨਿਯਮ:</strong> ਸਰਨਾਮਾ ਹਮੇਸ਼ਾ ਕਿਰਿਆ ਰੂਪ ਤੋਂ <strong>ਪਹਿਲਾਂ</strong> ਆਉਂਦਾ ਹੈ।
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ ਆਮ ਗਲਤੀ:</strong> ਪਰਤੀਕਰਮੀ ਸਰਨਾਮਾ ਨਾ ਭੁੱਲੋ! ਅਸੀਂ ਕਹਿੰਦੇ ਹਾਂ <strong>"ਮੀ ਅਲਤਜ਼ੋ"</strong>, ਨਾ ਕਿ "ਅਲਤਜ਼ੋ"!
+                        </div>
+                    </div>
+
+                    <!-- SHQIP -->
+                    <div id="lang-sq" class="lang-content">
+                        <p><strong>Foljet refleksive</strong> tregojnë një veprim që subjekti kryen <strong>mbi veten e tij</strong>. Ato njihen nga prapashtesa <strong>-SI</strong> në paskajoren.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">PRONOMI REFLEKSIV</span> + FOLJA E KONJUGUAR
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Pronomat Refleksive</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (unë) - <strong>ti</strong> (ti) - <strong>si</strong> (ai/ajo) - <strong>ci</strong> (ne) - <strong>vi</strong> (ju) - <strong>si</strong> (ata)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>Rregulla themelore:</strong> Pronomi vendoset gjithmonë <strong>para</strong> foljes së konjugarë.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Gabim i zakonshëm:</strong> Mos harroni pareshtesën refleksive! Thuhet <strong>"Mi alzo"</strong>, jo "Alzo"!
+                        </div>
+                    </div>
+
+                    <!-- WOLOF -->
+                    <div id="lang-wo" class="lang-content">
+                        <p><strong>Verbes réfléchis yi</strong> ñu wone dëgg-dëggu bi dëkk-bi def <strong>ci boppam</strong>. Ñuy gëna xam ci mujj wi <strong>-SI</strong> ci tàmbalewaay wi.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">PRONOM RÉFLÉCHI</span> + VERBE CONJUGUÉ
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Pronoms Réfléchis</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (man) - <strong>ti</strong> (yaw) - <strong>si</strong> (moom) - <strong>ci</strong> (ñun) - <strong>vi</strong> (yéen) - <strong>si</strong> (ñoom)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>Fundamental rule:</strong> Pronome bi dafay teg <strong>ji</strong> verbe bi ñu conjugué.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Fiawu yu am:</strong> Bul fatte pronom réfléchi bi! Nuy wax <strong>"Mi alzo"</strong>, du "Alzo"!
+                        </div>
+                    </div>
+
+                    <!-- BAMBARA -->
+                    <div id="lang-bm" class="lang-content">
+                        <p><strong>Verbes réfléchis</strong> (Fɔlɔw kɛrɛnkɛrɛnnenw) ye kuma min bɛ kɛ <strong>ale yɛrɛ kan</strong>. A bɛ dɔn ka tɛmɛn <strong>-SI</strong> kan infinitif kɔnɔ.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">PRƆNƆM RÉFLÉCHI</span> + VERBE CONJUGUÉ
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Pronoms Réfléchis</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (ne) - <strong>ti</strong> (i) - <strong>si</strong> (a) - <strong>ci</strong> (an) - <strong>vi</strong> (aw) - <strong>si</strong> (u)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>Regle fondamentale:</strong> Pronɔm bɛ taa <strong>kan</strong> verbe conjugué kɔnɔ.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Faute courante:</strong> I kana pronom réfléchi ɲin! An bɛ <strong>"Mi alzo"</strong> fɔ, a tɛ "Alzo" ye!
+                        </div>
+                    </div>
+
+                    <!-- BANGLA -->
+                    <div id="lang-bn" class="lang-content">
+                        <p><strong>প্রতিবর্তী ক্রিয়া</strong> এমন একটি ক্রিয়া নির্দেশ করে যা কর্তা <strong>নিজের উপর</strong> সম্পাদন করে। এগুলি অসীম রূপে <strong>-সি</strong> প্রত্যয় দ্বারা চিহ্নিত করা হয়।</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">প্রতিবর্তী সর্বনাম</span> + ক্রিয়া রূপ
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">প্রতিবর্তী সর্বনাম</h3>
+                            <p style="font-size: 1.1rem;"><strong>মি</strong> (আমি) - <strong>তি</strong> (তুমি) - <strong>সি</strong> (সে) - <strong>চি</strong> (আমরা) - <strong>ভি</strong> (তোমরা) - <strong>সি</strong> (তারা)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>মৌলিক নিয়ম:</strong> সর্বনাম সর্বদা ক্রিয়া রূপের <strong>আগে</strong> আসে।
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ সাধারণ ভুল:</strong> প্রতিবর্তী সর্বনাম ভুলবেন না! আমরা বলি <strong>"মি আলতজো"</strong>, না "আলতজো"!
+                        </div>
+                    </div>
+
+                    <!-- HINDI -->
+                    <div id="lang-hi" class="lang-content">
+                        <p><strong>कर्मवाचक क्रियाएँ</strong> वह क्रिया दर्शाती हैं जो कर्ता <strong>स्वयं पर</strong> करता है। इन्हें अनंत रूप में <strong>-सी</strong> प्रत्यय से पहचाना जाता है।</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">कर्मवाचक सर्वनाम</span> + क्रिया रूप
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">कर्मवाचक सर्वनाम</h3>
+                            <p style="font-size: 1.1rem;"><strong>मी</strong> (मैं) - <strong>ती</strong> (तुम) - <strong>सी</strong> (वह) - <strong>ची</strong> (हम) - <strong>वी</strong> (आप) - <strong>सी</strong> (वे)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>मूल नियम:</strong> सर्वनाम हमेशा क्रिया रूप से <strong>पहले</strong> आता है।
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ सामान्य गलती:</strong> कर्मवाचक सर्वनाम मत भूलो! हम कहते हैं <strong>"मी अलत्ज़ो"</strong>, नहीं "अलत्ज़ो"!
+                        </div>
+                    </div>
+
+                    <!-- CHINESE -->
+                    <div id="lang-zh" class="lang-content">
+                        <p><strong>自反动词</strong>表示主语<strong>对自己</strong>进行的动作。它们以不定式中的<strong>-SI</strong>结尾为特征。</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">自反代词</span> + 动词变位
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">自反代词</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (我) - <strong>ti</strong> (你) - <strong>si</strong> (他/她) - <strong>ci</strong> (我们) - <strong>vi</strong> (你们) - <strong>si</strong> (他们)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>基本规则：</strong>代词总是位于变位动词的<strong>前面</strong>。
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ 常见错误：</strong>不要忘记自反代词！我们说<strong>"Mi alzo"</strong>（我起床），而不是"Alzo"！
+                        </div>
+                    </div>
+
+                    <!-- SONINKE -->
+                    <div id="lang-sn" class="lang-content">
+                        <p><strong>Verbes réfléchis</strong> ye kuma min bɛ kɛ <strong>ale yɛrɛ kan</strong>. A bɛ dɔn ka tɛmɛn <strong>-SI</strong> kan infinitif kɔnɔ.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">PRƆNƆM RÉFLÉCHI</span> + VERBE CONJUGUÉ
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Pronoms Réfléchis</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (ne) - <strong>ti</strong> (i) - <strong>si</strong> (a) - <strong>ci</strong> (an) - <strong>vi</strong> (aw) - <strong>si</strong> (u)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>Regle fondamentale:</strong> Pronɔm bɛ taa <strong>kan</strong> verbe conjugué kɔnɔ.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Faute courante:</strong> I kana pronom réfléchi ɲin! An bɛ <strong>"Mi alzo"</strong> fɔ, a tɛ "Alzo" ye!
+                        </div>
+                    </div>
+
+                    <!-- MANDINKA -->
+                    <div id="lang-man" class="lang-content">
+                        <p><strong>Verbes réfléchis</strong> ye kuma min bɛ kɛ <strong>ale yɛrɛ kan</strong>. A bɛ dɔn ka tɛmɛn <strong>-SI</strong> kan infinitif kɔnɔ.</p>
+                        
+                        <div class="structure-formula">
+                            <span class="pronoun-highlight">PRƆNƆM RÉFLÉCHI</span> + VERBE CONJUGUÉ
+                        </div>
+
+                        <div class="rule-box">
+                            <h3 style="color: var(--reflexive); margin-bottom: 0.5rem;">Pronoms Réfléchis</h3>
+                            <p style="font-size: 1.1rem;"><strong>mi</strong> (ne) - <strong>ti</strong> (i) - <strong>si</strong> (a) - <strong>ci</strong> (an) - <strong>vi</strong> (aw) - <strong>si</strong> (u)</p>
+                        </div>
+
+                        <div class="instruction-box">
+                            <strong>Regle fondamentale:</strong> Pronɔm bɛ taa <strong>kan</strong> verbe conjugué kɔnɔ.
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Faute courante:</strong> I kana pronom réfléchi ɲin! An bɛ <strong>"Mi alzo"</strong> fɔ, a tɛ "Alzo" ye!
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -1222,6 +1692,15 @@
             }
         }
 
+        function showLang(langId, btn) {
+            const parent = btn.closest('.card-body');
+            parent.querySelectorAll('.lang-content').forEach(l => l.classList.remove('active'));
+            parent.querySelectorAll('.lang-tab').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById('lang-' + langId).classList.add('active');
+            btn.classList.add('active');
+        }
+
         function loadExercise() {
             if (currentExercise >= exercises.length) {
                 showFinalScore();
@@ -1309,14 +1788,8 @@
                 feedback.className = 'feedback show wrong';
                 let errorMsg = ex.errorExplanation;
                 
-                // Messaggi specifici per errori comuni
                 if (!selected.includes('mi ') && !selected.includes('ti ') && !selected.includes('si ') && !selected.includes('ci ') && !selected.includes('vi ') && !selected.includes('si ')) {
                     errorMsg += '<br><strong>💡 Ricorda: i verbi riflessivi richiedono sempre il pronome (mi, ti, si, ci, vi, si)!</strong>';
-                }
-                
-                // Controllo specifico per confusione tra si (lui/lei) e si (loro)
-                if (ex.question.includes('loro') && selected.includes('si ') && !selected.includes('si ') + selected.split(' ').length > 2) {
-                    // Già gestito dalla risposta corretta
                 }
                 
                 feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
@@ -1354,7 +1827,6 @@
                 feedback.className = 'feedback show wrong';
                 let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
                 
-                // Messaggi specifici per errori comuni
                 if (!value.includes('mi ') && !value.includes('ti ') && !value.includes('si ') && !value.includes('ci ') && !value.includes('vi ')) {
                     errorMsg += '<br><strong>💡 Manca il pronome riflessivo! Ricorda: mi, ti, si, ci, vi, si</strong>';
                 }
