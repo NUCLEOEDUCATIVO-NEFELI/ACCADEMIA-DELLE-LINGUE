@@ -74,6 +74,9 @@
         .breadcrumbs-container {
             max-width: 1200px;
             margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .breadcrumbs a {
@@ -88,6 +91,33 @@
         .breadcrumbs span {
             color: var(--secondary);
             margin: 0 0.5rem;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .lang-btn {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid var(--border);
+            background: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
         }
 
         .main-container {
@@ -500,6 +530,14 @@
         .mt-2 { margin-top: 1rem; }
         .mb-2 { margin-bottom: 1rem; }
 
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .nav-tabs { flex-wrap: wrap; }
             .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
@@ -508,8 +546,11 @@
             .page-title { font-size: 1.5rem; }
             .final-score-value { font-size: 3rem; }
             .fill-blank { width: 150px; }
+            .breadcrumbs-container { flex-direction: column; gap: 1rem; }
+            .language-selector { flex-wrap: wrap; justify-content: center; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <header class="header">
@@ -521,11 +562,31 @@
 
     <nav class="breadcrumbs">
         <div class="breadcrumbs-container">
-            <a href="#">Home</a>
-            <span>›</span>
-            <a href="#">Italiano A1</a>
-            <span>›</span>
-            <strong>Verbi Regolari: ARE, ERE, IRE</strong>
+            <div>
+                <a href="#">Home</a>
+                <span>›</span>
+                <a href="#">Italiano A1</a>
+                <span>›</span>
+                <strong>Verbi Regolari: ARE, ERE, IRE</strong>
+            </div>
+            <div class="language-selector">
+                <span style="font-size: 0.8rem; color: var(--secondary);">Lingua/语言/Language:</span>
+                <button class="lang-btn active" onclick="changeLanguage('it')" data-lang="it">IT</button>
+                <button class="lang-btn" onclick="changeLanguage('en')" data-lang="en">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('fr')" data-lang="fr">FR</button>
+                <button class="lang-btn" onclick="changeLanguage('es')" data-lang="es">ES</button>
+                <button class="lang-btn" onclick="changeLanguage('de')" data-lang="de">DE</button>
+                <button class="lang-btn" onclick="changeLanguage('ur')" data-lang="ur">UR</button>
+                <button class="lang-btn" onclick="changeLanguage('pa')" data-lang="pa">PA</button>
+                <button class="lang-btn" onclick="changeLanguage('sq')" data-lang="sq">SQ</button>
+                <button class="lang-btn" onclick="changeLanguage('ar')" data-lang="ar">AR</button>
+                <button class="lang-btn" onclick="changeLanguage('zh')" data-lang="zh">ZH</button>
+                <button class="lang-btn" onclick="changeLanguage('bm')" data-lang="bm">BM</button>
+                <button class="lang-btn" onclick="changeLanguage('sn')" data-lang="sn">SN</button>
+                <button class="lang-btn" onclick="changeLanguage('hi')" data-lang="hi">HI</button>
+                <button class="lang-btn" onclick="changeLanguage('bn')" data-lang="bn">BN</button>
+                <button class="lang-btn" onclick="changeLanguage('si')" data-lang="si">SI</button>
+            </div>
         </div>
     </nav>
 
@@ -545,37 +606,489 @@
 
         <!-- SEZIONE STUDIO GENERALE -->
         <section id="learn" class="section active">
-            <div class="card">
-                <div class="card-header">Cenni Teorici sul Sistema Verbale</div>
-                <div class="card-body">
-                    <p style="margin-bottom: 1rem;">L'italiano distingue tre coniugazioni verbali, identificate dalla desinenza dell'infinito presente:</p>
-                    
-                    <div class="rule-box are">
-                        <strong>Prima Coniugazione (-ARE):</strong> La più numerosa e produttiva. Comprende verbi come <em>parlare, mangiare, lavorare</em>.
-                        <br>Vocale tematica: <strong>A</strong>
-                    </div>
-                    
-                    <div class="rule-box ere">
-                        <strong>Seconda Coniugazione (-ERE):</strong> Meno numerosa ma con alta frequenza d'uso. Comprende verbi come <em>vedere, prendere, scrivere</em>.
-                        <br>Vocale tematica: <strong>E</strong>
-                    </div>
-                    
-                    <div class="rule-box ire">
-                        <strong>Terza Coniugazione (-IRE):</strong> Suddivisa in due sottogruppi: regolari (dormire) e inchoativi (-isc-: capire, finire).
-                        <br>Vocale tematica: <strong>I</strong>
-                    </div>
+            <!-- ITALIANO -->
+            <div class="lang-content active" data-lang-content="it">
+                <div class="card">
+                    <div class="card-header">Cenni Teorici sul Sistema Verbale</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">L'italiano distingue tre coniugazioni verbali, identificate dalla desinenza dell'infinito presente:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>Prima Coniugazione (-ARE):</strong> La più numerosa e produttiva. Comprende verbi come <em>parlare, mangiare, lavorare</em>.
+                            <br>Vocale tematica: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>Seconda Coniugazione (-ERE):</strong> Meno numerosa ma con alta frequenza d'uso. Comprende verbi come <em>vedere, prendere, scrivere</em>.
+                            <br>Vocale tematica: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>Terza Coniugazione (-IRE):</strong> Suddivisa in due sottogruppi: regolari (dormire) e inchoativi (-isc-: capire, finire).
+                            <br>Vocale tematica: <strong>I</strong>
+                        </div>
 
-                    <p style="margin-top: 1.5rem;"><strong>Metodo di coniugazione:</strong></p>
-                    <ol style="margin-left: 2rem; line-height: 2;">
-                        <li>Identificare la coniugazione dall'infinito</li>
-                        <li>Rimuovere la desinenza (-are, -ere, -ire) per ottenere la radice</li>
-                        <li>Aggiungere le desinenze flesse specifiche della persona e del numero</li>
-                    </ol>
+                        <p style="margin-top: 1.5rem;"><strong>Metodo di coniugazione:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>Identificare la coniugazione dall'infinito</li>
+                            <li>Rimuovere la desinenza (-are, -ere, -ire) per ottenere la radice</li>
+                            <li>Aggiungere le desinenze flesse specifiche della persona e del numero</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
 
+            <!-- ENGLISH -->
+            <div class="lang-content" data-lang-content="en">
+                <div class="card">
+                    <div class="card-header">Theoretical Notes on the Verbal System</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">Italian distinguishes three verb conjugations, identified by the ending of the present infinitive:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>First Conjugation (-ARE):</strong> The largest and most productive. Includes verbs like <em>parlare (to speak), mangiare (to eat), lavorare (to work)</em>.
+                            <br>Theme vowel: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>Second Conjugation (-ERE):</strong> Less numerous but with high frequency of use. Includes verbs like <em>vedere (to see), prendere (to take), scrivere (to write)</em>.
+                            <br>Theme vowel: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>Third Conjugation (-IRE):</strong> Divided into two subgroups: regular (dormire) and inchoative (-isc-: capire, finire).
+                            <br>Theme vowel: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Conjugation method:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>Identify the conjugation from the infinitive</li>
+                            <li>Remove the ending (-are, -ere, -ire) to obtain the stem</li>
+                            <li>Add the specific inflectional endings for person and number</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FRANÇAIS -->
+            <div class="lang-content" data-lang-content="fr">
+                <div class="card">
+                    <div class="card-header">Notes Théoriques sur le Système Verbal</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">L'italien distingue trois conjugaisons verbales, identifiées par la terminaison de l'infinitif présent:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>Première Conjugaison (-ARE):</strong> La plus nombreuse et productive. Comprend des verbes comme <em>parlare (parler), mangiare (manger), lavorare (travailler)</em>.
+                            <br>Voyelle thématique: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>Deuxième Conjugaison (-ERE):</strong> Moins nombreuse mais avec une haute fréquence d'utilisation. Comprend des verbes comme <em>vedere (voir), prendere (prendre), scrivere (écrire)</em>.
+                            <br>Voyelle thématique: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>Troisième Conjugaison (-IRE):</strong> Divisée en deux sous-groupes: réguliers (dormire) et inchoatifs (-isc-: capire, finire).
+                            <br>Voyelle thématique: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Méthode de conjugaison:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>Identifier la conjugaison à partir de l'infinitif</li>
+                            <li>Retirer la terminaison (-are, -ere, -ire) pour obtenir le radical</li>
+                            <li>Ajouter les désinences fléchies spécifiques à la personne et au nombre</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESPAÑOL -->
+            <div class="lang-content" data-lang-content="es">
+                <div class="card">
+                    <div class="card-header">Notas Teóricas sobre el Sistema Verbal</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">El italiano distingue tres conjugaciones verbales, identificadas por la desinencia del infinitivo presente:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>Primera Conjugación (-ARE):</strong> La más numerosa y productiva. Incluye verbos como <em>parlare (hablar), mangiare (comer), lavorare (trabajar)</em>.
+                            <br>Vocal temática: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>Segunda Conjugación (-ERE):</strong> Menos numerosa pero con alta frecuencia de uso. Incluye verbos como <em>vedere (ver), prendere (tomar), scrivere (escribir)</em>.
+                            <br>Vocal temática: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>Tercera Conjugación (-IRE):</strong> Dividida en dos subgrupos: regulares (dormire) y incoativos (-isc-: capire, finire).
+                            <br>Vocal temática: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Método de conjugación:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>Identificar la conjugación a partir del infinitivo</li>
+                            <li>Quitar la desinencia (-are, -ere, -ire) para obtener la raíz</li>
+                            <li>Añadir las desinencias flexivas específicas de persona y número</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DEUTSCH -->
+            <div class="lang-content" data-lang-content="de">
+                <div class="card">
+                    <div class="card-header">Theoretische Anmerkungen zum Verbsystem</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">Das Italienische unterscheidet drei Verbkonjugationen, die durch die Endung des Präsensinfinitivs identifiziert werden:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>Erste Konjugation (-ARE):</strong> Die zahlreichste und produktivste. Umfasst Verben wie <em>parlare (sprechen), mangiare (essen), lavorare (arbeiten)</em>.
+                            <br>Thematischer Vokal: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>Zweite Konjugation (-ERE):</strong> Weniger zahlreich, aber mit hoher Gebrauchshäufigkeit. Umfasst Verben wie <em>vedere (sehen), prendere (nehmen), scrivere (schreiben)</em>.
+                            <br>Thematischer Vokal: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>Dritte Konjugation (-IRE):</strong> Unterteilt in zwei Untergruppen: reguläre (dormire) und Inchoativ-Verben (-isc-: capire, finire).
+                            <br>Thematischer Vokal: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Konjugationsmethode:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>Die Konjugation am Infinitiv erkennen</li>
+                            <li>Die Endung (-are, -ere, -ire) entfernen, um den Stamm zu erhalten</li>
+                            <li>Die spezifischen flektierten Endungen für Person und Numerus hinzufügen</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- URDU -->
+            <div class="lang-content" data-lang-content="ur" dir="rtl">
+                <div class="card">
+                    <div class="card-header">فعل کے نظام کے نظریاتی نوٹس</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">اطالوی زبان میں تین فعل تصریفات (conjugations) ہیں، جو حال مصدر (present infinitive) کے لاحقے سے پہچانی جاتی ہیں:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>پہلی تصریف (-ARE):</strong> سب سے زیادہ تعداد والی اور پیداواری۔ اس میں <em>parlare (بولنا), mangiare (کھانا), lavorare (کام کرنا)</em> جیسے افعال شامل ہیں۔
+                            <br>موضوعاتی حرف: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>دوسری تصریف (-ERE):</strong> کم تعداد لیکن زیادہ استعمال ہونے والی۔ اس میں <em>vedere (دیکھنا), prendere (لینا), scrivere (لکھنا)</em> جیسے افعال شامل ہیں۔
+                            <br>موضوعاتی حرف: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>تیسری تصریف (-IRE):</strong> دو ذیلی گروہوں میں تقسیم: باقاعدہ (dormire) اور inkhawati (-isc-: capire, finire)۔
+                            <br>موضوعاتی حرف: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>تصریف کا طریقہ:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>مصدر سے تصریف کی نشاندہی کریں</li>
+                            <li>جڑ (stem) حاصل کرنے کے لیے لاحقہ (-are, -ere, -ire) ہٹائیں</li>
+                            <li>شخص اور عدد کے لیے مخصوص تصریفی لاحقے شامل کریں</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANJABI/PUNJABI -->
+            <div class="lang-content" data-lang-content="pa">
+                <div class="card">
+                    <div class="card-header">ਕਿਰਿਆ ਪ੍ਰਣਾਲੀ ਬਾਰੇ ਸਿਧਾਂਤਕ ਨੋਟਸ</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">ਇਟਾਲਵੀ ਭਾਸ਼ਾ ਵਿੱਚ ਤਿੰਨ ਕਿਰਿਆ ਰੂਪ (conjugations) ਹਨ, ਜੋ ਵਰਤਮਾਨ ਅਨੰਤ (present infinitive) ਦੇ ਅੰਤ ਤੋਂ ਪਛਾਣੇ ਜਾਂਦੇ ਹਨ:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>ਪਹਿਲੀ ਰੂਪ (-ARE):</strong> ਸਭ ਤੋਂ ਵੱਧ ਗਿਣਤੀ ਅਤੇ ਉਤਪਾਦਕ। ਇਸ ਵਿੱਚ <em>parlare (ਬੋਲਣਾ), mangiare (ਖਾਣਾ), lavorare (ਕੰਮ ਕਰਨਾ)</em> ਵਰਗੀਆਂ ਕਿਰਿਆਵਾਂ ਸ਼ਾਮਲ ਹਨ।
+                            <br>ਵਿਸ਼ਾ ਵੋਕਲ: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>ਦੂਜੀ ਰੂਪ (-ERE):</strong> ਘੱਟ ਗਿਣਤੀ ਪਰ ਵੱਧ ਵਰਤੋਂ ਵਾਲੀ। ਇਸ ਵਿੱਚ <em>vedere (ਵੇਖਣਾ), prendere (ਲੈਣਾ), scrivere (ਲਿਖਣਾ)</em> ਵਰਗੀਆਂ ਕਿਰਿਆਵਾਂ ਸ਼ਾਮਲ ਹਨ।
+                            <br>ਵਿਸ਼ਾ ਵੋਕਲ: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>ਤੀਜੀ ਰੂਪ (-IRE):</strong> ਦੋ ਉਪ-ਸਮੂਹਾਂ ਵਿੱਚ ਵੰਡਿਆ ਹੋਇਆ: ਨਿਯਮਿਤ (dormire) ਅਤੇ inkhawati (-isc-: capire, finire)।
+                            <br>ਵਿਸ਼ਾ ਵੋਕਲ: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>ਰੂਪ ਬਣਾਉਣ ਦਾ ਤਰੀਕਾ:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>ਅਨੰਤ ਤੋਂ ਰੂਪ ਦੀ ਪਛਾਣ ਕਰੋ</li>
+                            <li>ਜੜ (stem) ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਅੰਤ (-are, -ere, -ire) ਹਟਾਓ</li>
+                            <li>ਵਿਅਕਤੀ ਅਤੇ ਗਿਣਤੀ ਲਈ ਖਾਸ ਰੂਪਾਤਮਕ ਅੰਤ ਸ਼ਾਮਲ ਕਰੋ</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHQIP (ALBANIAN) -->
+            <div class="lang-content" data-lang-content="sq">
+                <div class="card">
+                    <div class="card-header">Shënime Teorike mbi Sistemin Foljor</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">Gjuha italiane dallon tre konjugime foljore, të identifikuara nga mbaresa e paskajores së tashme:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>Konjugimi i Parë (-ARE):</strong> Më i numërtshmi dhe produktivi. Përfshin folje si <em>parlare (të flasësh), mangiare (të hash), lavorare (të punosh)</em>.
+                            <br>Zanore tematike: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>Konjugimi i Dytë (-ERE):</strong> Më pak i numërtshëm por me frekuencë të lartë përdorimi. Përfshin folje si <em>vedere (të shikosh), prendere (të marrësh), scrivere (të shkruash)</em>.
+                            <br>Zanore tematike: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>Konjugimi i Tretë (-IRE):</strong> I ndarë në dy nëngrupe: të rregullt (dormire) dhe inkhoativë (-isc-: capire, finire).
+                            <br>Zanore tematike: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Metoda e konjugimit:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>Identifikoni konjugimin nga paskajorja</li>
+                            <li>Hiqni mbarësën (-are, -ere, -ire) për të marrë rrënjën</li>
+                            <li>Shtoni mbarësat e flektuara specifike për personin dhe numrin</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARABIC -->
+            <div class="lang-content" data-lang-content="ar" dir="rtl">
+                <div class="card">
+                    <div class="card-header">ملاحظات نظرية حول النظام الفعلي</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">يميز الإيطالي ثلاث تصريفات فعلية، تحدد من خلال نهاية المصدر المضارع:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>التصريف الأول (-ARE):</strong> الأكثر عدداً والأكثر إنتاجية. يتضمن أفعالاً مثل <em>parlare (يتحدث), mangiare (يأكل), lavorare (يعمل)</em>.
+                            <br>الحرف الموضوعي: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>التصريف الثاني (-ERE):</strong> أقل عدداً لكنه الأكثر استخداماً. يتضمن أفعالاً مثل <em>vedere (يرى), prendere (يأخذ), scrivere (يكتب)</em>.
+                            <br>الحرف الموضوعي: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>التصريف الثالث (-IRE):</strong> مقسم إلى مجموعتين فرعيتين: النظامية (dormire) والمتدرجة (-isc-: capire, finire).
+                            <br>الحرف الموضوعي: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>طريقة التصريف:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>تحديد التصريف من المصدر</li>
+                            <li>إزالة النهاية (-are, -ere, -ire) للحصول على الجذر</li>
+                            <li>إضافة النهايات الصرفية المحددة للشخص والعدد</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHINESE (SIMPLIFIED) -->
+            <div class="lang-content" data-lang-content="zh">
+                <div class="card">
+                    <div class="card-header">动词系统理论说明</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">意大利语有三种动词变位，通过现在不定式的词尾来识别：</p>
+                        
+                        <div class="rule-box are">
+                            <strong>第一变位 (-ARE):</strong> 数量最多、能产性最强。包括 <em>parlare (说话), mangiare (吃), lavorare (工作)</em> 等动词。
+                            <br>主题元音: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>第二变位 (-ERE):</strong> 数量较少但使用频率高。包括 <em>vedere (看见), prendere (拿), scrivere (写)</em> 等动词。
+                            <br>主题元音: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>第三变位 (-IRE):</strong> 分为两个子类：规则动词 (dormire) 和渐进动词 (-isc-: capire, finire)。
+                            <br>主题元音: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>变位方法：</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>从不定式识别变位类别</li>
+                            <li>去掉词尾 (-are, -ere, -ire) 获得词干</li>
+                            <li>添加特定的人称和数词尾</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BAMBARA -->
+            <div class="lang-content" data-lang-content="bm">
+                <div class="card">
+                    <div class="card-header">Kalenw Ka Sariyasow Kali</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">Italien kan bɛɛ kelenw sariya dama, minnu bɛ jira don sariyaminɛnw labɛn (present infinitive) fɔlɔ:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>Sariya Fɔlɔ (-ARE):</strong> Sariya min bɛ caaman, ani min bɛ baara kɛ cɛ. A bɛ kɛ <em>parlare (kuma), mangiare (dumuni), lavorare (baara kɛ)</em> i n'a fɔ.
+                            <br>Jɛli fɔlɔ: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>Sariya Fili (-ERE):</strong> Sariya min tɛ caaman nka min bɛ baara kɛ kosɛbɛ. A bɛ kɛ <em>vedere (yɛlɛma), prendere (fɔ), scrivere (sɛbɛn)</em> i n'a fɔ.
+                            <br>Jɛli fili: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>Sariya Sabaa (-IRE):</strong> A bɛ labɛn fila kɔnɔ: minnu bɛ sariya kɛ (dormire) ani inkɔwatiw (-isc-: capire, finire).
+                            <br>Jɛli sabaa: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Sariya kɛcogo:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>Sariya jira sariyaminɛn fɛ</li>
+                            <li>Labɛnw bɔ (-are, -ere, -ire) jɛli (stem) sɔrɔ</li>
+                            <li>Mɔgɔ ani jɔnjɔnw ye sariyaminɛnw fara</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SONINKE -->
+            <div class="lang-content" data-lang-content="sn">
+                <div class="card">
+                    <div class="card-header">Sariya Ka Xarani Xanne</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">Italien xarani sariya xanne gi, min gi be jira xabbane ka xarani gi fɔlɔ (present infinitive):</p>
+                        
+                        <div class="rule-box are">
+                            <strong>Sariya Xanne Fɔlɔ (-ARE):</strong> Sariya min be gana, ani min be gana xu. A be kira <em>parlare (xan), mangiare (xan), lavorare (gana)</em> i n'a fɔ.
+                            <br>Jɛli fɔlɔ: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>Sariya Xanne Fili (-ERE):</strong> Sariya min tɛ gana nka min be gana xu. A be kira <em>vedere (yɛlɛ), prendere (fɔ), scrivere (sɛbɛn)</em> i n'a fɔ.
+                            <br>Jɛli fili: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>Sariya Xanne Sabaa (-IRE):</strong> A be labɛn fila kɔnɔ: minnu be sariya kɛ (dormire) ani inkɔwatiw (-isc-: capire, finire).
+                            <br>Jɛli sabaa: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Sariya kɛcogo:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>Sariya jira xabbane ka xarani gi fɛ</li>
+                            <li>Labɛnw bɔ (-are, -ere, -ire) jɛli (stem) sɔrɔ</li>
+                            <li>Mɔgɔ ani jɔnjɔnw ye sariyaminɛnw fara</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HINDI -->
+            <div class="lang-content" data-lang-content="hi">
+                <div class="card">
+                    <div class="card-header">क्रिया प्रणाली के सैद्धांतिक नोट्स</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">इतालवी भाषा में तीन क्रिया रूप (conjugations) हैं, जो वर्तमान अनंत (present infinitive) के प्रत्यय से पहचाने जाते हैं:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>पहला रूप (-ARE):</strong> सबसे अधिक संख्या और उत्पादक। इसमें <em>parlare (बोलना), mangiare (खाना), lavorare (काम करना)</em> जैसी क्रियाएं शामिल हैं।
+                            <br>विषय स्वर: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>दूसरा रूप (-ERE):</strong> कम संख्या लेकिन अधिक उपयोग वाला। इसमें <em>vedere (देखना), prendere (लेना), scrivere (लिखना)</em> जैसी क्रियाएं शामिल हैं।
+                            <br>विषय स्वर: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>तीसरा रूप (-IRE):</strong> दो उप-समूहों में विभाजित: नियमित (dormire) और इन्कोएटिव (-isc-: capire, finire)।
+                            <br>विषय स्वर: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>रूप बनाने की विधि:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>अनंत से रूप की पहचान करें</li>
+                            <li>धातु (stem) प्राप्त करने के लिए प्रत्यय (-are, -ere, -ire) हटाएं</li>
+                            <li>व्यक्ति और वचन के लिए विशिष्ट रूपात्मक प्रत्यय जोड़ें</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BANGLA/BENGALI -->
+            <div class="lang-content" data-lang-content="bn">
+                <div class="card">
+                    <div class="card-header">ক্রিয়া পদ্ধতির তাত্ত্বিক নোট</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">ইতালীয় ভাষায় তিনটি ক্রিয়া সংযোজন (conjugations) রয়েছে, যা বর্তমান অসীম (present infinitive) এর প্রত্যয় দ্বারা চিহ্নিত:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>প্রথম সংযোজন (-ARE):</strong> সবচেয়ে বেশি সংখ্যক এবং উৎপাদনশীল। এতে <em>parlare (কথা বলা), mangiare (খাওয়া), lavorare (কাজ করা)</em> এর মতো ক্রিয়া অন্তর্ভুক্ত।
+                            <br>থিম ভোকাল: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>দ্বিতীয় সংযোজন (-ERE):</strong> কম সংখ্যক কিন্তু বেশি ব্যবহৃত। এতে <em>vedere (দেখা), prendere (নেওয়া), scrivere (লেখা)</em> এর মতো ক্রিয়া অন্তর্ভুক্ত।
+                            <br>থিম ভোকাল: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>তৃতীয় সংযোজন (-IRE):</strong> দুটি উপ-দলে বিভক্ত: নিয়মিত (dormire) এবং ইনকোয়েটিভ (-isc-: capire, finire)।
+                            <br>থিম ভোকাল: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>সংযোজন পদ্ধতি:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>অসীম থেকে সংযোজন চিহ্নিত করুন</li>
+                            <li>মূল (stem) পেতে প্রত্যয় (-are, -ere, -ire) সরান</li>
+                            <li>ব্যক্তি এবং সংখ্যার জন্য নির্দিষ্ট বিভক্তিমূলক প্রত্যযোগ করুন</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SINHALA/SINGALESE -->
+            <div class="lang-content" data-lang-content="si">
+                <div class="card">
+                    <div class="card-header">ක්‍රියා පද පද්ධතිය පිළිබඳ න්‍යායාත්මක සටහන්</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 1rem;">ඉතාලි භාෂාවේ ක්‍රියා රූප (conjugations) තුනක් ඇත, වර්තමාන අනන්තයේ (present infinitive) අගට එකතුවෙන කොටසින් හඳුනාගනී:</p>
+                        
+                        <div class="rule-box are">
+                            <strong>පළමු රූපය (-ARE):</strong> වඩාත්ම සංඛ්‍යාත්මක සහ නිෂ්පාදනශීලී. <em>parlare (කතා කිරීම), mangiare (කෑම), lavorare (වැඩ කිරීම)</em> වැනි ක්‍රියා ඇතුළත්.
+                            <br>මූලික ස්වරය: <strong>A</strong>
+                        </div>
+                        
+                        <div class="rule-box ere">
+                            <strong>දෙවන රූපය (-ERE):</strong> අඩු සංඛ්‍යාත්මක නමුත් ඉහළ භාවිතා වන. <em>vedere (බැලීම), prendere (ගැනීම), scrivere (ලිවීම)</em> වැනි ක්‍රියා ඇතුළත්.
+                            <br>මූලික ස්වරය: <strong>E</strong>
+                        </div>
+                        
+                        <div class="rule-box ire">
+                            <strong>තෙවන රූපය (-IRE):</strong> දෙකක උප කාණ්ඩවලට බෙදා ඇත: නිතිගත (dormire) සහ inkhawati (-isc-: capire, finire).
+                            <br>මූලික ස්වරය: <strong>I</strong>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>රූප බවට පත් කිරීමේ ක්‍රමය:</strong></p>
+                        <ol style="margin-left: 2rem; line-height: 2;">
+                            <li>අනන්තයෙන් රූපය හඳුනාගන්න</li>
+                            <li>මූලය (stem) ලබා ගැනීමට අගට එකතුවෙන කොටස (-are, -ere, -ire) ඉවත් කරන්න</li>
+                            <li>පුද්ගලයා සහ සංඛ්‍යාව සඳහා විශේෂිත විභක්තිමය අගට එකතුවෙන කොටස් එකතු කරන්න</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schema Riassuntivo (comune a tutte le lingue) -->
             <div class="card">
-                <div class="card-header">Schema Riassuntivo delle Desinenze</div>
+                <div class="card-header">Schema Riassuntivo delle Desinenze / Endings Overview / Tableau récapitulatif / Cuadro resumen / Übersicht der Endungen / خاتموں کا جائزہ / ਅੰਤਾਂ ਦੀ ਸੰਖੇਪ ਜਾਣਕਾਰੀ / Përmbledhje e Desinencave / ملخص المبادرات / 词尾总览 / Labɛnw Ka Jira / Xabbane Ka Jira / प्रत्यय अवलोकन / প্রত্যয়ের সংক্ষিপ্তসার / අගට එකතුවෙන කොටස් සාරාංශය</div>
                 <div class="card-body">
                     <table class="conjugation-table">
                         <thead>
@@ -1330,6 +1843,20 @@
             if(id === 'exercises' && currentExercise === 0) {
                 loadExercise();
             }
+        }
+
+        function changeLanguage(lang) {
+            // Aggiorna i bottoni
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.dataset.lang === lang) btn.classList.add('active');
+            });
+
+            // Mostra il contenuto della lingua selezionata
+            document.querySelectorAll('.lang-content').forEach(content => {
+                content.classList.remove('active');
+                if(content.dataset.langContent === lang) content.classList.add('active');
+            });
         }
 
         function loadExercise() {
