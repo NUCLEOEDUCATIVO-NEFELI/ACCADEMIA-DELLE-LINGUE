@@ -227,130 +227,11 @@
             font-weight: 500;
         }
         
-        /* === DASHBOARD STYLES (da index.html) === */
+        /* === DASHBOARD STYLES === */
         .dashboard-container {
             display: none;
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            overflow: hidden;
             min-height: 100vh;
-        }
-        
-        .dashboard-header {
-            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        
-        .dashboard-header h1 {
-            margin: 0;
-            font-size: 1.25rem;
-        }
-        
-        .dashboard-header p {
-            margin: 0.5rem 0 0 0;
-            opacity: 0.9;
-            font-size: 0.875rem;
-        }
-        
-        .dashboard-body {
-            padding: 1.5rem;
-        }
-        
-        .info-box {
-            background: #f0f9ff;
-            border-left: 4px solid #3b82f6;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .info-box h3 {
-            margin: 0 0 0.75rem 0;
-            color: #1e40af;
-            font-size: 1rem;
-        }
-        
-        .info-row {
-            display: flex;
-            margin: 0.5rem 0;
-            color: #475569;
-            font-size: 0.9rem;
-            flex-wrap: wrap;
-        }
-        
-        .info-label {
-            font-weight: 600;
-            width: 80px;
-            color: #64748b;
-            flex-shrink: 0;
-        }
-        
-        .info-value {
-            flex: 1;
-            color: #1e293b;
-            word-break: break-word;
-        }
-        
-        .password-section {
-            background: #f0fdf4;
-            border: 2px solid #10b981;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            text-align: center;
-        }
-        
-        .password-label {
-            color: #065f46;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-        
-        .password-generated {
-            font-family: 'Courier New', monospace;
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #059669;
-            background: white;
-            padding: 0.75rem;
-            border-radius: 6px;
-            border: 2px dashed #10b981;
-            margin: 0.5rem 0;
-            letter-spacing: 1px;
-            word-break: break-all;
-            line-height: 1.4;
-        }
-        
-        .password-note {
-            color: #64748b;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-        }
-        
-        .form-input[readonly] {
-            background: #f3f4f6;
-            color: #6b7280;
-        }
-        
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+            background: #f1f5f9;
         }
         
         .user-bar {
@@ -360,6 +241,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
         .user-info {
@@ -380,73 +264,101 @@
             background: #dc2626;
         }
         
-        /* Responsive: Tablet */
+        .dashboard-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .welcome-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .welcome-card h2 {
+            color: #1e3a5f;
+            margin-bottom: 0.5rem;
+        }
+        
+        .welcome-card p {
+            color: #64748b;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .course-card h3 {
+            color: #1e3a5f;
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-card .corso-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-box {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e3a5f;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+        
+        /* Responsive */
         @media (min-width: 640px) {
-            .login-body, .dashboard-body {
+            .login-body {
                 padding: 2rem;
             }
             
-            .login-header, .dashboard-header {
+            .login-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .dashboard-content {
                 padding: 2rem;
             }
             
-            .login-header h1, .dashboard-header h1 {
-                font-size: 1.5rem;
-            }
-            
-            .info-box {
-                padding: 1.5rem;
-            }
-            
-            .info-row {
-                font-size: 1rem;
-            }
-            
-            .info-label {
-                width: 100px;
-            }
-            
-            .password-section {
-                padding: 1.5rem;
-            }
-            
-            .password-generated {
-                font-size: 1.5rem;
-                padding: 1rem;
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
         }
         
-        /* Responsive: Desktop */
-        @media (min-width: 1024px) {
-            .dashboard-container {
-                max-width: 700px;
-                margin: 2rem auto;
-                min-height: auto;
-            }
-            
-            .dashboard-header h1 {
-                font-size: 1.75rem;
-            }
-        }
-        
-        /* Fix per iPhone notch */
-        @supports (padding-top: env(safe-area-inset-top)) {
-            .login-container, .dashboard-container {
-                padding-top: max(1rem, env(safe-area-inset-top));
-                padding-bottom: max(1rem, env(safe-area-inset-bottom));
-                padding-left: max(1rem, env(safe-area-inset-left));
-                padding-right: max(1rem, env(safe-area-inset-right));
-            }
-        }
-        
-        /* Fix per input su iOS */
+        /* Fix iOS */
         @supports (-webkit-touch-callout: none) {
             .form-input {
                 font-size: 16px;
             }
         }
     </style>
-<base target="_blank">
 </head>
 <body>
 
@@ -536,13 +448,13 @@
             <div class="login-footer">
                 <p>© 2024 Accademia delle Lingue</p>
                 <p style="margin-top: 0.5rem;">
-                    <a href="admin.html" class="link-admin">Accesso Amministratore →</a>
+                    <a href="admin.html" class="link-admin">⚙️ Accesso Amministratore</a>
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- === SEZIONE DASHBOARD (ex index.html) === -->
+    <!-- === SEZIONE DASHBOARD STUDENTE === -->
     <div id="dashboardSection" class="dashboard-container">
         <div class="user-bar">
             <div class="user-info">
@@ -551,90 +463,71 @@
             <button class="logout-btn" onclick="logout()">🚪 Esci</button>
         </div>
         
-        <div class="dashboard-header">
-            <h1>✅ Approva Richiesta</h1>
-            <p>Genera credenziali e invia email allo studente</p>
-        </div>
-        
-        <div class="dashboard-body">
-            <div id="alertBoxDashboard" class="alert alert-error hidden"></div>
+        <div class="dashboard-content">
+            <div class="welcome-card">
+                <h2>Benvenuto, <span id="welcomeName">Studente</span>! 👋</h2>
+                <p>Questa è la tua area personale dell'Accademia delle Lingue.</p>
+            </div>
             
-            <!-- Info Studente -->
-            <div class="info-box">
-                <h3>📋 Dati Richiesta</h3>
-                <div class="info-row">
-                    <span class="info-label">Nome:</span>
-                    <span class="info-value" id="infoNome">-</span>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number" id="statLezioni">0</div>
+                    <div class="stat-label">Lezioni</div>
                 </div>
-                <div class="info-row">
-                    <span class="info-label">Email:</span>
-                    <span class="info-value" id="infoEmail">-</span>
+                <div class="stat-box">
+                    <div class="stat-number" id="statProgresso">0%</div>
+                    <div class="stat-label">Progresso</div>
                 </div>
-                <div class="info-row">
-                    <span class="info-label">Corso:</span>
-                    <span class="info-value" id="infoCorso">-</span>
+                <div class="stat-box">
+                    <div class="stat-number" id="statEsami">0</div>
+                    <div class="stat-label">Esami</div>
                 </div>
-                <div class="info-row">
-                    <span class="info-label">Data:</span>
-                    <span class="info-value" id="infoData">-</span>
+                <div class="stat-box">
+                    <div class="stat-number" id="statCertificati">0</div>
+                    <div class="stat-label">Certificati</div>
                 </div>
             </div>
             
-            <!-- Password Generata -->
-            <div class="password-section">
-                <div class="password-label">🔐 Password Temporanea Generata</div>
-                <div class="password-generated" id="passwordDisplay">-</div>
-                <p class="password-note">
-                    Questa password verrà inviata allo studente via email.<br>
-                    Al primo accesso dovrà obbligatoriamente cambiarla.
+            <div class="course-card">
+                <h3>📚 Corso Iscritto</h3>
+                <p class="corso-name" id="corsoDisplay">Nessun corso</p>
+                <p style="color: #64748b; margin-top: 0.5rem;">Stato: <span style="color: #10b981; font-weight: 600;">Attivo</span></p>
+            </div>
+            
+            <div class="welcome-card">
+                <h3 style="color: #1e3a5f; margin-bottom: 1rem;">📋 Prossime Attività</h3>
+                <p style="color: #64748b; text-align: center; padding: 2rem 0;">
+                    Nessuna attività programmata.<br>
+                    <small>Contatta l'amministrazione per maggiori informazioni.</small>
                 </p>
             </div>
-            
-            <!-- Form per FormSubmit.co -->
-            <!-- ⚠️ MODIFICA QUI: Inserisci la tua email al posto di TUA_EMAIL@DOMINIO.COM -->
-            <form action="https://formsubmit.co/TUA_EMAIL@DOMINIO.COM" method="POST" id="approvaForm">
-                <!-- Configurazione FormSubmit -->
-                <input type="hidden" name="_subject" value="🏛️ Accademia delle Lingue - Credenziali di Accesso">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" id="nextUrl" value="">
-                <input type="hidden" name="_autoresponse" value="Grazie per la tua richiesta. Ti contatteremo presto.">
-                
-                <!-- Email destinatario (studente) - IMPORTANTE: usa name="email" -->
-                <input type="hidden" name="email" id="emailField">
-                
-                <!-- Dati visibili nell'email -->
-                <input type="hidden" name="Studente" id="nomeCompletoField">
-                <input type="hidden" name="Email" id="emailRipetutoField">
-                <input type="hidden" name="Password" id="passwordRipetutoField">
-                <input type="hidden" name="Corso" id="corsoRipetutoField">
-                
-                <!-- Messaggio completo per l'email -->
-                <input type="hidden" name="message" id="messageField">
-                
-                <!-- Campi visibili per admin -->
-                <div class="form-group">
-                    <label class="form-label">Email Studente (conferma)</label>
-                    <input type="email" id="emailVisible" class="form-input" readonly>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Messaggio personalizzato (opzionale)</label>
-                    <textarea name="Messaggio_Admin" class="form-input" placeholder="Aggiungi un messaggio personale per lo studente..."></textarea>
-                </div>
-                
-                <button type="submit" class="btn btn-success" id="btnInvia">
-                    📧 Approva e Invia Credenziali
-                </button>
-            </form>
-            
-            <button class="btn btn-secondary" onclick="logout()" style="margin-top: 0.75rem;">
-                ← Esci
-            </button>
         </div>
     </div>
 
     <script>
+        // === INIZIALIZZAZIONE ===
+        
+        // Auto-crea admin se non esiste
+        (function initAdmin() {
+            const users = JSON.parse(localStorage.getItem('accademia_users') || '[]');
+            const adminExists = users.find(u => u.email === 'admin@accademia.it');
+            
+            if (!adminExists) {
+                users.push({
+                    email: 'admin@accademia.it',
+                    password: 'admin2024',
+                    nome: 'Amministratore',
+                    cognome: 'Sistema',
+                    role: 'admin',
+                    active: true,
+                    firstLoginDone: true,
+                    createdAt: new Date().toISOString()
+                });
+                localStorage.setItem('accademia_users', JSON.stringify(users));
+                console.log('✅ Admin creato: admin@accademia.it / admin2024');
+            }
+        })();
+        
         // === GESTIONE LOGIN ===
         let currentUser = null;
         
@@ -660,13 +553,6 @@
             document.getElementById('alertBox').classList.add('hidden');
         }
         
-        function showDashboardAlert(type, message) {
-            const box = document.getElementById('alertBoxDashboard');
-            box.className = 'alert alert-' + type;
-            box.textContent = message;
-            box.classList.remove('hidden');
-        }
-        
         // LOGIN
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -684,6 +570,13 @@
                 return;
             }
             
+            // Se è admin, reindirizza ad admin.html
+            if (user.role === 'admin') {
+                sessionStorage.setItem('adminLogged', 'true');
+                window.location.href = 'admin.html';
+                return;
+            }
+            
             // Primo accesso?
             if (!user.firstLoginDone) {
                 currentUser = user;
@@ -693,7 +586,7 @@
                 return;
             }
             
-            // Login normale
+            // Login normale studente
             doLogin(user);
         });
         
@@ -740,11 +633,11 @@
             document.getElementById('dashboardSection').style.display = 'block';
             
             // Mostra info utente
-            document.getElementById('userNameDisplay').textContent = user.nome || user.name || 'Utente';
+            const nomeCompleto = user.nome + (user.cognome ? ' ' + user.cognome : '');
+            document.getElementById('userNameDisplay').textContent = nomeCompleto;
             document.getElementById('userEmailDisplay').textContent = user.email;
-            
-            // Carica dati dashboard (logica da index.html)
-            loadDashboardData();
+            document.getElementById('welcomeName').textContent = user.nome;
+            document.getElementById('corsoDisplay').textContent = user.corso || 'Nessun corso assegnato';
         }
         
         function logout() {
@@ -800,126 +693,6 @@
             
             setTimeout(() => showTab('login'), 3000);
         });
-        
-        // === LOGICA DASHBOARD (da index.html) ===
-        function loadDashboardData() {
-            // Recupera ID dalla URL
-            const params = new URLSearchParams(window.location.search);
-            const index = params.get('id');
-            
-            if (index === null) {
-                // Modalità semplice: mostra solo info utente
-                document.getElementById('infoNome').textContent = currentUser?.nome || currentUser?.name || '-';
-                document.getElementById('infoEmail').textContent = currentUser?.email || '-';
-                document.getElementById('infoCorso').textContent = currentUser?.corso || '-';
-                document.getElementById('infoData').textContent = new Date().toLocaleString('it-IT');
-                document.getElementById('passwordDisplay').textContent = '********';
-                document.getElementById('emailVisible').value = currentUser?.email || '';
-                document.getElementById('approvaForm').style.display = 'none';
-                return;
-            }
-            
-            // Recupera dati richiesta
-            const richieste = JSON.parse(localStorage.getItem('richiesteAccesso') || '[]');
-            const richiesta = richieste[index];
-            
-            // Validazioni
-            if (!richiesta) {
-                showDashboardAlert('error', 'Richiesta non trovata');
-                return;
-            }
-            
-            if (richiesta.stato !== 'in_attesa') {
-                showDashboardAlert('warning', 'Questa richiesta è già stata processata');
-            }
-            
-            // Genera password sicura
-            function generaPassword() {
-                const maiuscole = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                const minuscole = 'abcdefghijklmnopqrstuvwxyz';
-                const numeri = '0123456789';
-                const simboli = '!@#$%^&*';
-                
-                let password = '';
-                password += maiuscole[Math.floor(Math.random() * maiuscole.length)];
-                password += minuscole[Math.floor(Math.random() * minuscole.length)];
-                password += numeri[Math.floor(Math.random() * numeri.length)];
-                password += simboli[Math.floor(Math.random() * simboli.length)];
-                
-                const tutti = maiuscole + minuscole + numeri + simboli;
-                for (let i = 4; i < 12; i++) {
-                    password += tutti[Math.floor(Math.random() * tutti.length)];
-                }
-                
-                return password.split('').sort(() => 0.5 - Math.random()).join('');
-            }
-            
-            const password = generaPassword();
-            const loginUrl = window.location.origin + window.location.pathname;
-            const nextUrl = `${window.location.origin}/admin-conferma.html?id=${index}&pwd=${encodeURIComponent(password)}`;
-            
-            // Popola campi visualizzazione
-            document.getElementById('infoNome').textContent = `${richiesta.nome} ${richiesta.cognome}`;
-            document.getElementById('infoEmail').textContent = richiesta.email;
-            document.getElementById('infoCorso').textContent = richiesta.corso;
-            document.getElementById('infoData').textContent = new Date(richiesta.dataRichiesta).toLocaleString('it-IT');
-            document.getElementById('passwordDisplay').textContent = password;
-            
-            // Popola campi form nascosti
-            document.getElementById('emailField').value = richiesta.email;
-            document.getElementById('emailVisible').value = richiesta.email;
-            document.getElementById('nomeCompletoField').value = `${richiesta.nome} ${richiesta.cognome}`;
-            document.getElementById('emailRipetutoField').value = richiesta.email;
-            document.getElementById('passwordRipetutoField').value = password;
-            document.getElementById('corsoRipetutoField').value = richiesta.corso;
-            document.getElementById('nextUrl').value = nextUrl;
-            
-            // Prepara messaggio completo per l'email
-            const messaggioEmail = `
-🏛️ ACCADEMIA DELLE LINGUE - CREDENZIALI DI ACCESSO
-
-Ciao ${richiesta.nome},
-
-La tua richiesta di accesso è stata APPROVATA! Benvenuto all'Accademia delle Lingue.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🔐 LE TUE CREDENZIALI DI ACCESSO
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Nome: ${richiesta.nome} ${richiesta.cognome}
-Email: ${richiesta.email}
-Password temporanea: ${password}
-
-📚 Corso iscritto: ${richiesta.corso}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-🔗 ACCEDI ALLA PIATTAFORMA:
-${loginUrl}
-
-⚠️ IMPORTANTE - SICUREZZA:
-Al primo accesso dovrai OBBLIGATORIAMENTE cambiare la password temporanea con una tua password personale.
-
-Se hai problemi di accesso, contatta l'amministrazione.
-
----
-Accademia delle Lingue
-Nucleo educativo per la formazione europea al lavoro internazionale
-            `;
-            
-            document.getElementById('messageField').value = messaggioEmail;
-            
-            // Salva in sessionStorage come backup
-            sessionStorage.setItem('tempPassword', password);
-            sessionStorage.setItem('tempIndex', index);
-            
-            // Gestione submit
-            document.getElementById('approvaForm').addEventListener('submit', function(e) {
-                const btn = document.getElementById('btnInvia');
-                btn.disabled = true;
-                btn.innerHTML = '<span class="loading"></span> Invio in corso...';
-            });
-        }
         
         // Verifica sessione all'avvio
         window.addEventListener('load', function() {
