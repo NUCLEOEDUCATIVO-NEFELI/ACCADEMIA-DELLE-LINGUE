@@ -3,1318 +3,1428 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verbi Modali - 50 Esercizi</title>
+    <title>Verbi Modali - Teoria Multilingue</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #003366; --secondary: #6c757d; --accent: #8b0000;
             --light: #f8f9fa; --dark: #212529; --border: #dee2e6;
-            --success: #155724; --success-bg: #d4edda;
-            --error: #721c24; --error-bg: #f8d7da;
-            --parchment: #faf8f3; --b1-color: #c9a227; --modals: #c62828;
+            --parchment: #faf8f3; --b1-color: #c9a227;
+            --italian: #008C45; --french: #0055A4; --spanish: #AA151B;
+            --arabic: #1B5E20; --chinese: #C62828; --russian: #1565C0;
         }
         body {
             font-family: 'Georgia', 'Times New Roman', serif;
             background-color: var(--parchment);
             color: var(--dark);
             line-height: 1.6;
-            min-height: 100vh;
         }
         .header {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
             color: white;
-            padding: 1.5rem 0;
+            padding: 2rem 0;
             border-bottom: 4px solid var(--accent);
-        }
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
             text-align: center;
         }
         .header h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: normal;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             margin-bottom: 0.5rem;
         }
         .header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.9;
             font-style: italic;
         }
-        .breadcrumbs {
-            background: var(--light);
-            border-bottom: 1px solid var(--border);
-            padding: 0.75rem 2rem;
-            font-size: 0.9rem;
+        .language-nav {
+            background: white;
+            border-bottom: 2px solid var(--border);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .breadcrumbs-container {
-            max-width: 1200px;
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+            max-width: 1400px;
             margin: 0 auto;
         }
-        .breadcrumbs a {
-            color: var(--primary);
-            text-decoration: none;
+        .lang-btn {
+            padding: 0.6rem 0.8rem;
+            border: 2px solid var(--border);
+            background: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            text-align: center;
+            border-radius: 4px;
         }
-        .breadcrumbs a:hover {
-            text-decoration: underline;
+        .lang-btn:hover {
+            border-color: var(--primary);
+            background: var(--light);
         }
-        .breadcrumbs span {
-            color: var(--secondary);
-            margin: 0 0.5rem;
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
         .main-container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
         }
-        .page-header {
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--primary);
-        }
-        .page-title {
-            font-size: 2rem;
-            color: var(--primary);
-            font-weight: normal;
-            margin-bottom: 0.5rem;
-        }
-        .page-subtitle {
-            color: var(--secondary);
-            font-size: 1.1rem;
-            font-style: italic;
-        }
-        .nav-tabs {
-            display: flex;
-            border-bottom: 2px solid var(--border);
-            margin-bottom: 2rem;
-            background: white;
-            flex-wrap: wrap;
-        }
-        .nav-tab {
-            padding: 1rem 2rem;
-            background: none;
-            border: none;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 1rem;
-            color: var(--secondary);
-            transition: all 0.3s;
-            position: relative;
-        }
-        .nav-tab:hover {
-            color: var(--primary);
-            background: var(--light);
-        }
-        .nav-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--accent);
-            font-weight: bold;
-        }
-        .section {
+        .lang-section {
             display: none;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.5s ease;
         }
-        .section.active {
+        .lang-section.active {
             display: block;
         }
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .card {
             background: white;
             border: 1px solid var(--border);
-            border-radius: 0;
             margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
         }
         .card-header {
-            background: var(--light);
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border);
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem 1.5rem;
+            font-size: 1.3rem;
             font-weight: bold;
-            color: var(--primary);
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-left: 4px solid var(--accent);
-        }
-        .card-header.modals {
-            border-left-color: var(--modals);
-            color: var(--modals);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .card-body {
             padding: 1.5rem;
         }
-        .instruction-box {
+        .verb-box {
+            background: #f8f9fa;
+            border-left: 5px solid;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .potere { border-left-color: #c62828; }
+        .dovere { border-left-color: #ef6c00; }
+        .volere { border-left-color: #6a1b9a; }
+        .verb-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        .conjugation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .conjugation-table th {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        .conjugation-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .conjugation-table tr:hover {
+            background: #f8f9fa;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .example-box {
             background: #e7f3ff;
             border-left: 4px solid var(--primary);
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
         }
-        .rule-box {
+        .note-box {
             background: #fff3cd;
             border: 1px solid #ffc107;
             padding: 1rem;
             margin: 1rem 0;
-            border-radius: 0;
+            border-radius: 4px;
         }
-        .verb-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        .rtl {
+            direction: rtl;
+            text-align: right;
         }
-        .verb-table th {
-            background: var(--primary);
-            color: white;
-            padding: 15px;
-            text-align: left;
-        }
-        .verb-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-        }
-        .verb-table tr:hover {
-            background: #f8f9fa;
-        }
-        .verb-display {
-            font-size: 1.5rem;
-            font-weight: bold;
-            font-family: 'Times New Roman', serif;
-            color: var(--modals);
-        }
-        .game-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .score-panel {
-            background: var(--light);
-            border: 1px solid var(--border);
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .score-label {
-            font-weight: bold;
-            color: var(--secondary);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-        }
-        .score-value {
-            font-size: 1.5rem;
-            color: var(--primary);
-            font-weight: bold;
-            font-family: 'Courier New', monospace;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: var(--light);
-            border: 1px solid var(--border);
-            margin: 1rem 0;
-        }
-        .progress-fill {
-            height: 100%;
-            background: var(--b1-color);
-            width: 0%;
-            transition: width 0.5s;
-        }
-        .question-box {
-            background: white;
-            border: 2px solid var(--primary);
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .question-text {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        .option-btn {
-            padding: 1rem;
-            background: white;
-            border: 2px solid var(--border);
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 1.1rem;
-            transition: all 0.2s;
-        }
-        .option-btn:hover:not(:disabled) {
-            border-color: var(--b1-color);
-            background: var(--light);
-        }
-        .option-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-        .option-btn.correct {
-            background: var(--success-bg);
-            border-color: var(--success);
-            color: var(--success);
-        }
-        .option-btn.wrong {
-            background: var(--error-bg);
-            border-color: var(--error);
-            color: var(--error);
-        }
-        .feedback {
-            padding: 1rem;
-            text-align: center;
-            font-weight: bold;
-            display: none;
-            margin-bottom: 1rem;
-            border: 1px solid;
-        }
-        .feedback.show {
-            display: block;
-        }
-        .feedback.correct {
-            background: var(--success-bg);
-            color: var(--success);
-            border-color: var(--success);
-        }
-        .feedback.wrong {
-            background: var(--error-bg);
-            color: var(--error);
-            border-color: var(--error);
-        }
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            font-family: inherit;
-            font-size: 1rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: background 0.3s;
-        }
-        .btn-primary:hover {
-            background: #002147;
-        }
-        .btn-check {
-            background: var(--b1-color);
-            color: #000;
-        }
-        .btn-check:hover {
-            background: #b8941f;
-        }
-        .fill-blank {
+        .back-link {
             display: inline-block;
-            width: 220px;
-            padding: 10px 15px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            margin: 0 5px;
-            font-size: 1rem;
-            font-family: inherit;
-        }
-        .fill-blank:focus {
-            outline: none;
-            border-color: var(--b1-color);
-        }
-        .final-score-section {
-            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
-            color: white;
-            padding: 3rem;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 2rem;
-            display: none;
-        }
-        .final-score-section.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        .final-score-value {
-            font-size: 4rem;
-            font-weight: bold;
-            color: var(--b1-color);
-            margin: 20px 0;
-        }
-        .final-message {
-            font-size: 1.3rem;
             margin-bottom: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
         }
-        .exercise-counter {
-            background: var(--b1-color);
-            color: #000;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-        .text-center { text-align: center; }
-        .mt-2 { margin-top: 1rem; }
-        .mb-2 { margin-bottom: 1rem; }
-        .usage-box {
-            background: #e8f5e9;
-            border-left: 4px solid #4caf50;
-            padding: 1rem 1.5rem;
-            margin: 1rem 0;
+        .back-link:hover {
+            text-decoration: underline;
         }
         @media (max-width: 768px) {
-            .nav-tabs { flex-wrap: wrap; }
-            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
-            .options-grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.5rem; }
-            .page-title { font-size: 1.5rem; }
-            .final-score-value { font-size: 3rem; }
-            .fill-blank { width: 180px; }
+            .header h1 { font-size: 1.8rem; }
+            .lang-grid { grid-template-columns: repeat(3, 1fr); }
+            .lang-btn { font-size: 0.75rem; padding: 0.5rem; }
+            .main-container { padding: 1rem; }
+            .card-header { font-size: 1.1rem; }
         }
     </style>
 <base target="_blank">
 </head>
 <body>
     <header class="header">
-        <div class="header-container">
-            <h1>Verbi Modali - Modulo A2</h1>
-            <p>Potere, Dovere, Volere - Coniugazione, uso e significato - 50 Esercizi</p>
-        </div>
+        <h1>🌍 Verbi Modali Italiani</h1>
+        <p>Teoria completa in 24 lingue - POTERE / DOVERE / VOLERE</p>
     </header>
 
-    <nav class="breadcrumbs">
-        <div class="breadcrumbs-container">
-            <a href="#">Home</a>
-            <span>›</span>
-            <a href="#">Italiano A2</a>
-            <span>›</span>
-            <strong>Verbi Modali (50 Esercizi)</strong>
+    <nav class="language-nav">
+        <div class="lang-grid">
+            <button class="lang-btn active" onclick="showLang('it')">🇮🇹 Italiano</button>
+            <button class="lang-btn" onclick="showLang('fr')">🇫🇷 Français</button>
+            <button class="lang-btn" onclick="showLang('es')">🇪🇸 Español</button>
+            <button class="lang-btn" onclick="showLang('en')">🇬🇧 English</button>
+            <button class="lang-btn" onclick="showLang('pt')">🇵🇹 Português</button>
+            <button class="lang-btn" onclick="showLang('de')">🇩🇪 Deutsch</button>
+            <button class="lang-btn" onclick="showLang('ru')">🇷🇺 Русский</button>
+            <button class="lang-btn" onclick="showLang('uk')">🇺🇦 Українська</button>
+            <button class="lang-btn" onclick="showLang('ar')">🇸🇦 العربية</button>
+            <button class="lang-btn" onclick="showLang('ber')">ⵣ Tamaziɣt</button>
+            <button class="lang-btn" onclick="showLang('fa')">🇮🇷 فارسی</button>
+            <button class="lang-btn" onclick="showLang('ps')">🇦🇫 پښتو</button>
+            <button class="lang-btn" onclick="showLang('tr')">🇹🇷 Türkçe</button>
+            <button class="lang-btn" onclick="showLang('zh')">🇨🇳 中文</button>
+            <button class="lang-btn" onclick="showLang('hi')">🇮🇳 हिन्दी</button>
+            <button class="lang-btn" onclick="showLang('ur')">🇵🇰 اردو</button>
+            <button class="lang-btn" onclick="showLang('pa')">🇮🇳 ਪੰਜਾਬੀ</button>
+            <button class="lang-btn" onclick="showLang('sq')">🇦🇱 Shqip</button>
+            <button class="lang-btn" onclick="showLang('bm')">🇲🇱 Bambara</button>
+            <button class="lang-btn" onclick="showLang('wo')">🇸🇳 Wolof</button>
+            <button class="lang-btn" onclick="showLang('man')">🇬🇲 Mandinka</button>
+            <button class="lang-btn" onclick="showLang('snk')">🇸🇳 Soninke</button>
+            <button class="lang-btn" onclick="showLang('sw')">🇹🇿 Kiswahili</button>
+            <button class="lang-btn" onclick="showLang('ha')">🇳🇬 Hausa</button>
         </div>
     </nav>
 
     <main class="main-container">
-        <div class="page-header">
-            <h1 class="page-title">📚 I Verbi Modali: Potere, Dovere, Volere</h1>
-            <p class="page-subtitle">Coniugazione, valori semantici e uso corretto nel contesto comunicativo</p>
-        </div>
+        <a href="index.html" class="back-link">← Torna alla Dashboard</a>
 
-        <nav class="nav-tabs">
-            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
-            <button class="nav-tab" onclick="showSection('potere', this)">POTERE</button>
-            <button class="nav-tab" onclick="showSection('dovere', this)">DOVERE</button>
-            <button class="nav-tab" onclick="showSection('volere', this)">VOLERE</button>
-            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
-        </nav>
-
-        <!-- SEZIONE TEORIA -->
-        <section id="theory" class="section active">
+        <!-- ITALIANO -->
+        <section id="it" class="lang-section active">
             <div class="card">
-                <div class="card-header modals">Che cosa sono i Verbi Modali?</div>
+                <div class="card-header">🇮🇹 Verbi Modali in Italiano</div>
                 <div class="card-body">
-                    <p>I <strong>verbi modali</strong> (o verbi servili) esprimono il <em>modo</em> in cui si realizza un'azione: possibilità, necessità, volizione. Sintatticamente, reggono sempre un infinito senza preposizione.</p>
+                    <p>I <strong>verbi modali</strong> (o verbi servili) sono verbi che esprimono il <em>modo</em> in cui si realizza un'azione: possibilità, necessità, volizione. In italiano i principali sono: <strong>POTERE</strong>, <strong>DOVERE</strong> e <strong>VOLERE</strong>.</p>
 
-                    <div class="instruction-box" style="border-left-color: var(--modals);">
-                        <strong>Struttura base:</strong> Soggetto + Verbo modale coniugato + Infinito
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>"Io <strong>posso</strong> cantare" (abilità/permesso)</li>
-                            <li>"Tu <strong>devi</strong> studiare" (obbligo)</li>
-                            <li>"Loro <strong>vogliono</strong> mangiare" (desiderio)</li>
-                        </ul>
+                    <div class="verb-box potere">
+                        <div class="verb-title">POTERE (Possibilità/Permesso)</div>
+                        <p>Esprime capacità, possibilità oggettiva o permesso.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Soggetto</th><th>Forma</th><th>Esempio</th></tr>
+                            <tr><td>io</td><td><span class="highlight">posso</span></td><td>Posso nuotare (so nuotare)</td></tr>
+                            <tr><td>tu</td><td><span class="highlight">puoi</span></td><td>Puoi aiutarmi? (permesso)</td></tr>
+                            <tr><td>lui/lei</td><td><span class="highlight">può</span></td><td>Può entrare (possibilità)</td></tr>
+                            <tr><td>noi</td><td>possiamo</td><td>Possiamo partire</td></tr>
+                            <tr><td>voi</td><td>potete</td><td>Potete ripetere?</td></tr>
+                            <tr><td>loro</td><td>possono</td><td>Possono arrivare tardi</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Valori:</strong><br>
+                            1. Abilità: "Marco può nuotare 100 metri"<br>
+                            2. Permesso: "Posso entrare?"<br>
+                            3. Possibilità: "Può piovere domani"
+                        </div>
                     </div>
 
-                    <div class="rule-box">
-                        <strong>⚠️ Attenzione:</strong> I verbi modali sono <strong>irregolari</strong> e presentano cambiamenti nella radice durante la coniugazione!
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">Caratteristiche Morfologiche</div>
-                <div class="card-body">
-                    <div class="instruction-box" style="border-left-color: #c62828;">
-                        <strong style="color: #c62828;">POTERE:</strong> Alternanza vocalica /o/ → /u/
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>posso, <strong>puoi</strong>, <strong>può</strong>, possiamo, potete, possono</li>
-                        </ul>
-                    </div>
-
-                    <div class="instruction-box" style="border-left-color: #ef6c00;">
-                        <strong style="color: #ef6c00;">DOVERE:</strong> Variazione della radice in /dev-/
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li><strong>devo</strong>, <strong>devi</strong>, <strong>deve</strong>, dobbiamo, dovete, devono</li>
-                        </ul>
+                    <div class="verb-box dovere">
+                        <div class="verb-title">DOVERE (Necessità/Obbligo)</div>
+                        <p>Indica obbligo, necessità o forte consiglio.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Soggetto</th><th>Forma</th><th>Esempio</th></tr>
+                            <tr><td>io</td><td><span class="highlight">devo</span></td><td>Devo studiare</td></tr>
+                            <tr><td>tu</td><td><span class="highlight">devi</span></td><td>Devi fare attenzione!</td></tr>
+                            <tr><td>lui/lei</td><td><span class="highlight">deve</span></td><td>Deve essere tardi</td></tr>
+                            <tr><td>noi</td><td>dobbiamo</td><td>Dobbiamo partire</td></tr>
+                            <tr><td>voi</td><td>dovete</td><td>Dovete finire</td></tr>
+                            <tr><td>loro</td><td>devono</td><td>Devono rispettare le regole</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Valori:</strong><br>
+                            1. Obbligo: "I bambini devono andare a scuola"<br>
+                            2. Necessità: "Dobbiamo comprare il pane"<br>
+                            3. Probabilità: "Deve essere tardi"
+                        </div>
                     </div>
 
-                    <div class="instruction-box" style="border-left-color: #6a1b9a;">
-                        <strong style="color: #6a1b9a;">VOLERE:</strong> Inserzione della consonante /g/
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li><strong>voglio</strong>, vuoi, vuole, vogliamo, volete, <strong>vogliono</strong></li>
-                        </ul>
-                    </div>
-
-                    <div class="rule-box" style="background: #e8f5e9; border-color: #4caf50;">
-                        <strong>💡 Forma condizionale (cortesia):</strong><br>
-                        <strong>vorrei</strong> (vorrei un caffè), <strong>potrei</strong> (potrei entrare?), <strong>dovrei</strong> (dovrei studiare)<br>
-                        <em>Serve per attenuare la richiesta e mostrare maggiore educazione.</em>
+                    <div class="verb-box volere">
+                        <div class="verb-title">VOLERE (Desiderio/Volontà)</div>
+                        <p>Esprime desiderio, volontà o intenzione.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Soggetto</th><th>Forma</th><th>Esempio</th></tr>
+                            <tr><td>io</td><td><span class="highlight">voglio</span></td><td>Voglio andare in Italia</td></tr>
+                            <tr><td>tu</td><td>vuoi</td><td>Vuoi un caffè?</td></tr>
+                            <tr><td>lui/lei</td><td>vuole</td><td>Vuole imparare</td></tr>
+                            <tr><td>noi</td><td><span class="highlight">vogliamo</span></td><td>Vogliamo mangiare fuori</td></tr>
+                            <tr><td>voi</td><td>volete</td><td>Volete ballare?</td></tr>
+                            <tr><td>loro</td><td><span class="highlight">vogliono</span></td><td>Vogliono partire domani</td></tr>
+                        </table>
+                        <div class="note-box">
+                            <strong>⚠️ Nota di cortesia:</strong> Usare il condizionale "vorrei" invece di "voglio" per essere più educati!
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE POTERE -->
-        <section id="potere" class="section">
+        <!-- FRANCESE -->
+        <section id="fr" class="lang-section">
             <div class="card">
-                <div class="card-header modals">POTERE - Significati e Uso</div>
+                <div class="card-header">🇫🇷 Verbes Modaux en Français</div>
                 <div class="card-body">
-                    <div class="instruction-box" style="border-left-color: #c62828;">
-                        <strong>Significato base:</strong> "essere in grado di", "avere il permesso di", "essere possibile"
+                    <p>Les <strong>verbes modaux</strong> italiens correspondent aux verbes français <em>pouvoir</em>, <em>devoir</em> et <em>vouloir</em>. Ils expriment la modalité de l'action.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">POUVOIR = POTERE (Possibilité)</div>
+                        <p>Exprime la capacité, la permission ou la possibilité.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujet</th><th>Italien</th><th>Français</th></tr>
+                            <tr><td>je</td><td>posso</td><td>je peux</td></tr>
+                            <tr><td>tu</td><td>puoi</td><td>tu peux</td></tr>
+                            <tr><td>il/elle</td><td>può</td><td>il/elle peut</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Exemples:</strong><br>
+                            "Posso nuotare" = Je peux nager (capacité)<br>
+                            "Posso entrare?" = Puis-je entrer? (permission)
+                        </div>
                     </div>
 
-                    <table class="verb-table">
-                        <tr>
-                            <th>Soggetto</th>
-                            <th>Forma</th>
-                            <th>Esempio</th>
-                        </tr>
-                        <tr>
-                            <td>io</td>
-                            <td class="verb-display">posso</td>
-                            <td>Io posso nuotare (so nuotare)</td>
-                        </tr>
-                        <tr>
-                            <td>tu</td>
-                            <td class="verb-display">puoi</td>
-                            <td>Puoi aiutarmi? (permesso/capacità)</td>
-                        </tr>
-                        <tr>
-                            <td>lui/lei</td>
-                            <td class="verb-display">può</td>
-                            <td>Lei può entrare (permesso formale)</td>
-                        </tr>
-                        <tr>
-                            <td>noi</td>
-                            <td class="verb-display">possiamo</td>
-                            <td>Possiamo partire? (possibilità)</td>
-                        </tr>
-                        <tr>
-                            <td>voi</td>
-                            <td class="verb-display">potete</td>
-                            <td>Potete ripetere? (abilità)</td>
-                        </tr>
-                        <tr>
-                            <td>loro</td>
-                            <td class="verb-display">possono</td>
-                            <td>Possono arrivare tardi (possibilità)</td>
-                        </tr>
-                    </table>
+                    <div class="verb-box dovere">
+                        <div class="verb-title">DEVOIR = DOVERE (Obligation)</div>
+                        <p>Indique l'obligation, la nécessité ou le devoir.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujet</th><th>Italien</th><th>Français</th></tr>
+                            <tr><td>je</td><td>devo</td><td>je dois</td></tr>
+                            <tr><td>tu</td><td>devi</td><td>tu dois</td></tr>
+                            <tr><td>il/elle</td><td>deve</td><td>il/elle doit</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Exemples:</strong><br>
+                            "Devo studiare" = Je dois étudier<br>
+                            "Deve essere tardi" = Il doit être tard
+                        </div>
+                    </div>
 
-                    <div class="usage-box" style="border-left-color: #c62828;">
-                        <strong>Valori semantici di POTERE:</strong><br><br>
-                        1. <strong>Abilità/capacità:</strong> "Marco può nuotare 100 metri" (sa nuotare)<br>
-                        2. <strong>Permesso:</strong> "Posso entrare?" (mi è consentito?)<br>
-                        3. <strong>Possibilità oggettiva:</strong> "Può piovere domani" (è possibile)<br>
-                        4. <strong>Richiesta educata:</strong> "Potrei avere un caffè?" (condizionale)
+                    <div class="verb-box volere">
+                        <div class="verb-title">VOULOIR = VOLERE (Volonté)</div>
+                        <p>Exprime le désir, la volonté ou l'intention.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujet</th><th>Italien</th><th>Français</th></tr>
+                            <tr><td>je</td><td>voglio</td><td>je veux</td></tr>
+                            <tr><td>tu</td><td>vuoi</td><td>tu veux</td></tr>
+                            <tr><td>il/elle</td><td>vuole</td><td>il/elle veut</td></tr>
+                        </table>
+                        <div class="note-box">
+                            <strong>Politesse:</strong> En italien, "vorrei" (je voudrais) est plus poli que "voglio" (je veux).
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE DOVERE -->
-        <section id="dovere" class="section">
+        <!-- SPAGNOLO -->
+        <section id="es" class="lang-section">
             <div class="card">
-                <div class="card-header modals">DOVERE - Significati e Uso</div>
+                <div class="card-header">🇪🇸 Verbos Modales en Español</div>
                 <div class="card-body">
-                    <div class="instruction-box" style="border-left-color: #ef6c00;">
-                        <strong>Significato base:</strong> "essere obbligati a", "essere necessario", "dovere fare qualcosa"
+                    <p>Los <strong>verbos modales</strong> italianos se corresponden con los verbos españoles <em>poder</em>, <em>deber</em> y <em>querer</em>.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">PODER = POTERE (Posibilidad)</div>
+                        <p>Expresa capacidad, permiso o posibilidad.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujeto</th><th>Italiano</th><th>Español</th></tr>
+                            <tr><td>yo</td><td>posso</td><td>puedo</td></tr>
+                            <tr><td>tú</td><td>puoi</td><td>puedes</td></tr>
+                            <tr><td>él/ella</td><td>può</td><td>puede</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Ejemplos:</strong><br>
+                            "Posso nuotare" = Puedo nadar<br>
+                            "Posso entrare?" = ¿Puedo entrar?
+                        </div>
                     </div>
 
-                    <table class="verb-table">
-                        <tr>
-                            <th>Soggetto</th>
-                            <th>Forma</th>
-                            <th>Esempio</th>
-                        </tr>
-                        <tr>
-                            <td>io</td>
-                            <td class="verb-display">devo</td>
-                            <td>Devo studiare (obbligo personale)</td>
-                        </tr>
-                        <tr>
-                            <td>tu</td>
-                            <td class="verb-display">devi</td>
-                            <td>Devi fare attenzione! (consiglio forte)</td>
-                        </tr>
-                        <tr>
-                            <td>lui/lei</td>
-                            <td class="verb-display">deve</td>
-                            <td>Deve essere tardi (probabilità)</td>
-                        </tr>
-                        <tr>
-                            <td>noi</td>
-                            <td class="verb-display">dobbiamo</td>
-                            <td>Dobbiamo partire (necessità)</td>
-                        </tr>
-                        <tr>
-                            <td>voi</td>
-                            <td class="verb-display">dovete</td>
-                            <td>Dovete finire il lavoro (obbligo)</td>
-                        </tr>
-                        <tr>
-                            <td>loro</td>
-                            <td class="verb-display">devono</td>
-                            <td>Devono rispettare le regole (legge)</td>
-                        </tr>
-                    </table>
+                    <div class="verb-box dovere">
+                        <div class="verb-title">DEBER = DOVERE (Obligación)</div>
+                        <p>Indica obligación, necesidad o consejo fuerte.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujeto</th><th>Italiano</th><th>Español</th></tr>
+                            <tr><td>yo</td><td>devo</td><td>debo</td></tr>
+                            <tr><td>tú</td><td>devi</td><td>debes</td></tr>
+                            <tr><td>él/ella</td><td>deve</td><td>debe</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Ejemplos:</strong><br>
+                            "Devo studiare" = Debo estudiar<br>
+                            "Devi fare attenzione" = Debes tener cuidado
+                        </div>
+                    </div>
 
-                    <div class="usage-box" style="border-left-color: #ef6c00;">
-                        <strong>Valori semantici di DOVERE:</strong><br><br>
-                        1. <strong>Obbligo morale/legale:</strong> "I bambini devono andare a scuola"<br>
-                        2. <strong>Necessità:</strong> "Dobbiamo comprare il pane" (serve farlo)<br>
-                        3. <strong>Consiglio forte:</strong> "Devi vedere questo film!" (ti consiglio vivamente)<br>
-                        4. <strong>Probabilità:</strong> "Deve essere tardi" (suppongo, deduco)<br>
-                        5. <strong>Dovere morale:</strong> "Dovremmo aiutare gli altri"
+                    <div class="verb-box volere">
+                        <div class="verb-title">QUERER = VOLERE (Deseo)</div>
+                        <p>Expresa deseo, voluntad o intención.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujeto</th><th>Italiano</th><th>Español</th></tr>
+                            <tr><td>yo</td><td>voglio</td><td>quiero</td></tr>
+                            <tr><td>tú</td><td>vuoi</td><td>quieres</td></tr>
+                            <tr><td>él/ella</td><td>vuole</td><td>quiere</td></tr>
+                        </table>
+                        <div class="note-box">
+                            <strong>Cortesía:</strong> "Vorrei" (querría) es más educado que "voglio" (quiero).
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE VOLERE -->
-        <section id="volere" class="section">
+        <!-- INGLESE -->
+        <section id="en" class="lang-section">
             <div class="card">
-                <div class="card-header modals">VOLERE - Significati e Uso</div>
+                <div class="card-header">🇬🇧 Modal Verbs in English</div>
                 <div class="card-body">
-                    <div class="instruction-box" style="border-left-color: #6a1b9a;">
-                        <strong>Significato base:</strong> "desiderare", "avere voglia di", "volere qualcosa"
+                    <p>Italian <strong>modal verbs</strong> correspond to English modal verbs <em>can/may</em>, <em>must/have to</em>, and <em>want/would like</em>.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">CAN/MAY = POTERE (Ability/Permission)</div>
+                        <p>Expresses ability, permission, or possibility.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>English</th></tr>
+                            <tr><td>I</td><td>posso</td><td>I can</td></tr>
+                            <tr><td>you</td><td>puoi</td><td>you can</td></tr>
+                            <tr><td>he/she</td><td>può</td><td>he/she can</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Examples:</strong><br>
+                            "Posso nuotare" = I can swim<br>
+                            "Posso entrare?" = May I come in?
+                        </div>
                     </div>
 
-                    <table class="verb-table">
-                        <tr>
-                            <th>Soggetto</th>
-                            <th>Forma</th>
-                            <th>Esempio</th>
-                        </tr>
-                        <tr>
-                            <td>io</td>
-                            <td class="verb-display">voglio</td>
-                            <td>Voglio andare in Italia (desiderio)</td>
-                        </tr>
-                        <tr>
-                            <td>tu</td>
-                            <td class="verb-display">vuoi</td>
-                            <td>Vuoi un caffè? (offerta)</td>
-                        </tr>
-                        <tr>
-                            <td>lui/lei</td>
-                            <td class="verb-display">vuole</td>
-                            <td>Vuole imparare l'italiano (intenzione)</td>
-                        </tr>
-                        <tr>
-                            <td>noi</td>
-                            <td class="verb-display">vogliamo</td>
-                            <td>Vogliamo mangiare fuori (proposta)</td>
-                        </tr>
-                        <tr>
-                            <td>voi</td>
-                            <td class="verb-display">volete</td>
-                            <td>Volete ballare? (invito)</td>
-                        </tr>
-                        <tr>
-                            <td>loro</td>
-                            <td class="verb-display">vogliono</td>
-                            <td>Vogliono partire domani (decisione)</td>
-                        </tr>
-                    </table>
-
-                    <div class="usage-box" style="border-left-color: #6a1b9a;">
-                        <strong>Valori semantici di VOLERE:</strong><br><br>
-                        1. <strong>Desiderio:</strong> "Voglio un caffè" (ho voglia di...)<br>
-                        2. <strong>Richiesta educata:</strong> "Vorrei un tavolo per due" (condizionale)<br>
-                        3. <strong>Rifiuto:</strong> "Non voglio uscire" (rifiuto fare qualcosa)<br>
-                        4. <strong>Intenzione:</strong> "Voglio imparare il tedesco" (ho l'intenzione di...)<br>
-                        5. <strong>Offerta/Invito:</strong> "Vuoi mangiare qualcosa?"
+                    <div class="verb-box dovere">
+                        <div class="verb-title">MUST/HAVE TO = DOVERE (Necessity)</div>
+                        <p>Indicates obligation, necessity, or strong advice.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>English</th></tr>
+                            <tr><td>I</td><td>devo</td><td>I must/have to</td></tr>
+                            <tr><td>you</td><td>devi</td><td>you must</td></tr>
+                            <tr><td>he/she</td><td>deve</td><td>he/she must</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Examples:</strong><br>
+                            "Devo studiare" = I must study<br>
+                            "Deve essere tardi" = It must be late
+                        </div>
                     </div>
 
-                    <div class="rule-box">
-                        <strong>⚠️ Attenzione:</strong> "Voglio" è diretto e può sembrare scortese in alcuni contesti. Usa il condizionale "<strong>vorrei</strong>" per essere più educato!
+                    <div class="verb-box volere">
+                        <div class="verb-title">WANT/WOULD LIKE = VOLERE (Desire)</div>
+                        <p>Expresses desire, will, or intention.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>English</th></tr>
+                            <tr><td>I</td><td>voglio</td><td>I want</td></tr>
+                            <tr><td>you</td><td>vuoi</td><td>you want</td></tr>
+                            <tr><td>he/she</td><td>vuole</td><td>he/she wants</td></tr>
+                        </table>
+                        <div class="note-box">
+                            <strong>Politeness:</strong> Use "vorrei" (I would like) instead of "voglio" (I want) to be more polite!
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE ESERCIZI -->
-        <section id="exercises" class="section">
-            <div class="game-container">
-                <div class="score-panel">
-                    <div>
-                        <div class="score-label">Esercizio</div>
-                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+        <!-- TEDESCO -->
+        <section id="de" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇩🇪 Modalverben auf Deutsch</div>
+                <div class="card-body">
+                    <p>Die italienischen <strong>Modalverben</strong> entsprechen den deutschen Verben <em>können</em>, <em>müssen</em> und <em>wollen</em>.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">KÖNNEN = POTERE (Möglichkeit)</div>
+                        <p>Drückt Fähigkeit, Erlaubnis oder Möglichkeit aus.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subjekt</th><th>Italienisch</th><th>Deutsch</th></tr>
+                            <tr><td>ich</td><td>posso</td><td>ich kann</td></tr>
+                            <tr><td>du</td><td>puoi</td><td>du kannst</td></tr>
+                            <tr><td>er/sie</td><td>può</td><td>er/sie kann</td></tr>
+                        </table>
                     </div>
-                    <div>
-                        <div class="score-label">Punteggio</div>
-                        <div class="score-value" id="currentScore">0 / 100</div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">MÜSSEN = DOVERE (Notwendigkeit)</div>
+                        <p>Zeigt Verpflichtung, Notwendigkeit oder starken Rat an.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subjekt</th><th>Italienisch</th><th>Deutsch</th></tr>
+                            <tr><td>ich</td><td>devo</td><td>ich muss</td></tr>
+                            <tr><td>du</td><td>devi</td><td>du musst</td></tr>
+                            <tr><td>er/sie</td><td>deve</td><td>er/sie muss</td></tr>
+                        </table>
                     </div>
-                </div>
 
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressBar"></div>
-                </div>
-
-                <div id="exerciseContainer">
-                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
-                </div>
-
-                <!-- SEZIONE PUNTEGGIO FINALE -->
-                <div class="final-score-section" id="finalScoreSection">
-                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
-                    <div class="final-score-value" id="finalScore">0/100</div>
-                    <p class="final-message" id="finalMessage"></p>
-                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
-                        🔄 Riprova tutti gli esercizi
-                    </button>
+                    <div class="verb-box volere">
+                        <div class="verb-title">WOLLEN = VOLERE (Wunsch)</div>
+                        <p>Drückt Wunsch, Wille oder Absicht aus.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subjekt</th><th>Italienisch</th><th>Deutsch</th></tr>
+                            <tr><td>ich</td><td>voglio</td><td>ich will</td></tr>
+                            <tr><td>du</td><td>vuoi</td><td>du willst</td></tr>
+                            <tr><td>er/sie</td><td>vuole</td><td>er/sie will</td></tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- RUSSO -->
+        <section id="ru" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇷🇺 Модальные глаголы по-русски</div>
+                <div class="card-body">
+                    <p>Итальянские <strong>модальные глаголы</strong> соответствуют русским глаголам <em>мочь/уметь</em>, <em>должен</em> и <em>хотеть</em>.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">МОЧЬ/УМЕТЬ = POTERE (Возможность)</div>
+                        <p>Выражает способность, разрешение или возможность.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Лицо</th><th>Итальянский</th><th>Русский</th></tr>
+                            <tr><td>я</td><td>posso</td><td>я могу/умею</td></tr>
+                            <tr><td>ты</td><td>puoi</td><td>ты можешь</td></tr>
+                            <tr><td>он/она</td><td>può</td><td>он/она может</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Примеры:</strong><br>
+                            "Posso nuotare" = Я умею плавать<br>
+                            "Posso entrare?" = Можно войти?
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">ДОЛЖЕН = DOVERE (Необходимость)</div>
+                        <p>Указывает на обязанность, необходимость или сильный совет.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Лицо</th><th>Итальянский</th><th>Русский</th></tr>
+                            <tr><td>я</td><td>devo</td><td>я должен</td></tr>
+                            <tr><td>ты</td><td>devi</td><td>ты должен</td></tr>
+                            <tr><td>он/она</td><td>deve</td><td>он/она должен</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">ХОТЕТЬ = VOLERE (Желание)</div>
+                        <p>Выражает желание, волю или намерение.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Лицо</th><th>Итальянский</th><th>Русский</th></tr>
+                            <tr><td>я</td><td>voglio</td><td>я хочу</td></tr>
+                            <tr><td>ты</td><td>vuoi</td><td>ты хочешь</td></tr>
+                            <tr><td>он/она</td><td>vuole</td><td>он/она хочет</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UCRAINO -->
+        <section id="uk" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇺🇦 Модальні дієслова українською</div>
+                <div class="card-body">
+                    <p>Італійські <strong>модальні дієслова</strong> відповідають українським дієсловам <em>могти/вміти</em>, <em>мусити/повинен</em> та <em>хотіти</em>.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">МОГТИ/ВМІТИ = POTERE (Можливість)</div>
+                        <p>Виражає здатність, дозвіл або можливість.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Особа</th><th>Італійська</th><th>Українська</th></tr>
+                            <tr><td>я</td><td>posso</td><td>я можу/вмію</td></tr>
+                            <tr><td>ти</td><td>puoi</td><td>ти можеш</td></tr>
+                            <tr><td>він/вона</td><td>può</td><td>він/вона може</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">МУСИТИ/ПОВИНЕН = DOVERE (Необхідність)</div>
+                        <p>Вказує на обов'язок, необхідність або сильну пораду.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Особа</th><th>Італійська</th><th>Українська</th></tr>
+                            <tr><td>я</td><td>devo</td><td>я мушу/повинен</td></tr>
+                            <tr><td>ти</td><td>devi</td><td>ти мусиш</td></tr>
+                            <tr><td>він/вона</td><td>deve</td><td>він/вона мусить</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">ХОТІТИ = VOLERE (Бажання)</div>
+                        <p>Виражає бажання, волю або намір.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Особа</th><th>Італійська</th><th>Українська</th></tr>
+                            <tr><td>я</td><td>voglio</td><td>я хочу</td></tr>
+                            <tr><td>ти</td><td>vuoi</td><td>ти хочеш</td></tr>
+                            <tr><td>він/вона</td><td>vuole</td><td>він/вона хоче</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ARABO -->
+        <section id="ar" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇸🇦 الأفعال ال modalية بالعربية</div>
+                <div class="card-body rtl">
+                    <p>الأفعال ال<strong>modalية</strong> الإيطالية تتوافق مع الأفعال العربية <em>يستطيع/يمكن</em>، <em>يجب</em>، و <em>يريد</em>.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">يستطيع/يمكن = POTERE (القدرة/الإمكانية)</div>
+                        <p>يعبر عن القدرة، الإذن أو الإمكانية.</p>
+                        <table class="conjugation-table">
+                            <tr><th>الضمير</th><th>الإيطالية</th><th>العربية</th></tr>
+                            <tr><td>أنا</td><td>posso</td><td>أستطيع / أقدر</td></tr>
+                            <tr><td>أنت</td><td>puoi</td><td>تستطيع</td></tr>
+                            <tr><td>هو/هي</td><td>può</td><td>يستطيع / تستطيع</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>أمثلة:</strong><br>
+                            "Posso nuotare" = أستطيع السباحة<br>
+                            "Posso entrare?" = هل يمكنني الدخول؟
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">يجب = DOVERE (الضرورة/الواجب)</div>
+                        <p>يشير إلى الالتزام، الضرورة أو النصيحة القوية.</p>
+                        <table class="conjugation-table">
+                            <tr><th>الضمير</th><th>الإيطالية</th><th>العربية</th></tr>
+                            <tr><td>أنا</td><td>devo</td><td>يجب أن / عليّ أن</td></tr>
+                            <tr><td>أنت</td><td>devi</td><td>يجب أن</td></tr>
+                            <tr><td>هو/هي</td><td>deve</td><td>يجب أن</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">يريد = VOLERE (الرغبة)</div>
+                        <p>يعبر عن الرغبة، الإرادة أو النية.</p>
+                        <table class="conjugation-table">
+                            <tr><th>الضمير</th><th>الإيطالية</th><th>العربية</th></tr>
+                            <tr><td>أنا</td><td>voglio</td><td>أريد / أحب أن</td></tr>
+                            <tr><td>أنت</td><td>vuoi</td><td>تريد</td></tr>
+                            <tr><td>هو/هي</td><td>vuole</td><td>يريد / تريد</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BERBERO (Tamazight) -->
+        <section id="ber" class="lang-section">
+            <div class="card">
+                <div class="card-header">ⵣ Tameṛṛaḍin Timudalit s Tamaziɣt</div>
+                <div class="card-body">
+                    <p><strong>Tameṛṛaḍin</strong> timudalit n Tṭalyan ttwaqqnen d tamiḍalit <em>izmer</em>, <em>ilaq</em>, <em>yebɣa</em>.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">IZMER = POTERE (Tizemmar/Tisirag)</div>
+                        <p>Ad d-yesken tazmert, tasiregt neɣ tizemmar.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Anaɣ</th><th>Taṭalyanit</th><th>Tamaziɣt</th></tr>
+                            <tr><td>nekk</td><td>posso</td><td>izmer</td></tr>
+                            <tr><td>kečč</td><td>puoi</td><td>tizmer</td></tr>
+                            <tr><td>netta/nettat</td><td>può</td><td>izmer</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">ILAQ = DOVERE (Tilas/Talast)</div>
+                        <p>Ad d-yesken tilas neɣ talast.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Anaɣ</th><th>Taṭalyanit</th><th>Tamaziɣt</th></tr>
+                            <tr><td>nekk</td><td>devo</td><td>ilaq</td></tr>
+                            <tr><td>kečč</td><td>devi</td><td>tilaq</td></tr>
+                            <tr><td>netta/nettat</td><td>deve</td><td>ilaq</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">YEBƔA = VOLERE (Tayri)</div>
+                        <p>Ad d-yesken tayri neɣ tagnit.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Anaɣ</th><th>Taṭalyanit</th><th>Tamaziɣt</th></tr>
+                            <tr><td>nekk</td><td>voglio</td><td>bɣiɣ</td></tr>
+                            <tr><td>kečč</td><td>vuoi</td><td>tebɣiḍ</td></tr>
+                            <tr><td>netta/nettat</td><td>vuole</td><td>yebɣa/tebɣa</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FARSI -->
+        <section id="fa" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇮🇷 فعل‌های modal به فارسی</div>
+                <div class="card-body rtl">
+                    <p>افعال <strong>modal</strong> ایتالیایی با افعال فارسی <em>توانستن/می‌توان</em>، <em>باید</em> و <em>خواستن</em> مطابقت دارند.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">توانستن/می‌توان = POTERE (توانایی/اجازه)</div>
+                        <p>بیانگر توانایی، اجازه یا امکان است.</p>
+                        <table class="conjugation-table">
+                            <tr><th>ضمیر</th><th>ایتالیایی</th><th>فارسی</th></tr>
+                            <tr><td>من</td><td>posso</td><td>می‌توانم / توانایی دارم</td></tr>
+                            <tr><td>تو</td><td>puoi</td><td>می‌توانی</td></tr>
+                            <tr><td>او</td><td>può</td><td>می‌تواند</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>مثال‌ها:</strong><br>
+                            "Posso nuotare" = می‌توانم شنا کنم<br>
+                            "Posso entrare?" = می‌توانم وارد شوم؟
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">باید = DOVERE (ضرورت/وظیفه)</div>
+                        <p>نشان‌دهنده تکلیف، ضرورت یا توصیه قوی است.</p>
+                        <table class="conjugation-table">
+                            <tr><th>ضمیر</th><th>ایتالیایی</th><th>فارسی</th></tr>
+                            <tr><td>من</td><td>devo</td><td>باید / می‌باید</td></tr>
+                            <tr><td>تو</td><td>devi</td><td>باید</td></tr>
+                            <tr><td>او</td><td>deve</td><td>باید</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">خواستن = VOLERE (میل/اراده)</div>
+                        <p>بیانگر میل، اراده یا نیت است.</p>
+                        <table class="conjugation-table">
+                            <tr><th>ضمیر</th><th>ایتالیایی</th><th>فارسی</th></tr>
+                            <tr><td>من</td><td>voglio</td><td>می‌خواهم</td></tr>
+                            <tr><td>تو</td><td>vuoi</td><td>می‌خواهی</td></tr>
+                            <tr><td>او</td><td>vuole</td><td>می‌خواهد</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASHTO -->
+        <section id="ps" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇦🇫 د modal فعلونه پښتو کې</div>
+                <div class="card-body rtl">
+                    <p>ایټالوي <strong>modal</strong> فعلونه د پښتو فعلونو <em>شل/توانول</em>، <em>باید</em> او <em>غوښتل</em> سره سمون خوري.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">شل/توانول = POTERE (توانایی/اجازه)</div>
+                        <p>د توانایی، اجازې یا امکان څرګندونه کوي.</p>
+                        <table class="conjugation-table">
+                            <tr><th>ضمیر</th><th>ایټالوي</th><th>پښتو</th></tr>
+                            <tr><td>زه</td><td>posso</td><td>زه شم / توان لرم</td></tr>
+                            <tr><td>ته</td><td>puoi</td><td>ته شې</td></tr>
+                            <tr><td>هغه/هغې</td><td>può</td><td>هغه شي</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">باید = DOVERE (اړتیا/وظیفه)</div>
+                        <p>د اړتیا، وظیفې یا کلکې سپارښتنې څرګندونه کوي.</p>
+                        <table class="conjugation-table">
+                            <tr><th>ضمیر</th><th>ایټالوي</th><th>پښتو</th></tr>
+                            <tr><td>زه</td><td>devo</td><td>زه باید</td></tr>
+                            <tr><td>ته</td><td>devi</td><td>ته باید</td></tr>
+                            <tr><td>هغه/هغې</td><td>deve</td><td>هغه باید</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">غوښتل = VOLERE (غوښتنه/اراده)</div>
+                        <p>د غوښتنې، ارادې یا نیت څرګندونه کوي.</p>
+                        <table class="conjugation-table">
+                            <tr><th>ضمیر</th><th>ایټالوي</th><th>پښتو</th></tr>
+                            <tr><td>زه</td><td>voglio</td><td>زه غواړم</td></tr>
+                            <tr><td>ته</td><td>vuoi</td><td>ته غواړې</td></tr>
+                            <tr><td>هغه/هغې</td><td>vuole</td><td>هغه غواړي</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TURCO -->
+        <section id="tr" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇹🇷 Kip Fiiller Türkçe</div>
+                <div class="card-body">
+                    <p>İtalyan <strong>kip fiilleri</strong> (modal fiiller) Türkçe'deki <em>-ebilmek</em>, <em>zorunda olmak/gerekmek</em> ve <em>istemek</em> yapılarına karşılık gelir.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">-EBİLMEK = POTERE (Yetenek/İzin)</div>
+                        <p>Yetenek, izin veya olasılığı ifade eder.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Şahıs</th><th>İtalyanca</th><th>Türkçe</th></tr>
+                            <tr><td>ben</td><td>posso</td><td>yapabilirim</td></tr>
+                            <tr><td>sen</td><td>puoi</td><td>yapabilirsin</td></tr>
+                            <tr><td>o</td><td>può</td><td>yapabilir</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Örnekler:</strong><br>
+                            "Posso nuotare" = Yüzebilirim<br>
+                            "Posso entrare?" = Girebilir miyim?
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">ZORUNDA OLMAK/GEREKMEK = DOVERE (Zorunluluk)</div>
+                        <p>Zorunluluk, gereklilik veya kuvvetli tavsiyeyi belirtir.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Şahıs</th><th>İtalyanca</th><th>Türkçe</th></tr>
+                            <tr><td>ben</td><td>devo</td><td>yapmalıyım / yapmam gerek</td></tr>
+                            <tr><td>sen</td><td>devi</td><td>yapmalısın</td></tr>
+                            <tr><td>o</td><td>deve</td><td>yapmalı</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">İSTEMEK = VOLERE (İstek)</div>
+                        <p>İstek, arzu veya niyeti ifade eder.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Şahıs</th><th>İtalyanca</th><th>Türkçe</th></tr>
+                            <tr><td>ben</td><td>voglio</td><td>yapmak istiyorum</td></tr>
+                            <tr><td>sen</td><td>vuoi</td><td>yapmak istiyorsun</td></tr>
+                            <tr><td>o</td><td>vuole</td><td>yapmak istiyor</td></tr>
+                        </table>
+                        <div class="note-box">
+                            <strong>Kibarlık:</strong> "Vorrei" (yapmak isterdim) "voglio" (istiyorum) yerine daha kibar bir ifadedir.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CINESE -->
+        <section id="zh" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇨🇳 情态动词中文解释</div>
+                <div class="card-body">
+                    <p>意大利语<strong>情态动词</strong>对应中文的<em>能/可以</em>、<em>必须/应该</em>和<em>想要</em>。</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">能/可以 = POTERE (能力/许可)</div>
+                        <p>表示能力、许可或可能性。</p>
+                        <table class="conjugation-table">
+                            <tr><th>人称</th><th>意大利语</th><th>中文</th></tr>
+                            <tr><td>我</td><td>posso</td><td>我能 / 我可以</td></tr>
+                            <tr><td>你</td><td>puoi</td><td>你能</td></tr>
+                            <tr><td>他/她</td><td>può</td><td>他能 / 她可以</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>例句：</strong><br>
+                            "Posso nuotare" = 我会游泳<br>
+                            "Posso entrare?" = 我可以进来吗？
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">必须/应该 = DOVERE (必要/义务)</div>
+                        <p>表示义务、必要性或强烈建议。</p>
+                        <table class="conjugation-table">
+                            <tr><th>人称</th><th>意大利语</th><th>中文</th></tr>
+                            <tr><td>我</td><td>devo</td><td>我必须 / 我应该</td></tr>
+                            <tr><td>你</td><td>devi</td><td>你必须</td></tr>
+                            <tr><td>他/她</td><td>deve</td><td>他必须</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">想要 = VOLERE (愿望)</div>
+                        <p>表示愿望、意愿或意图。</p>
+                        <table class="conjugation-table">
+                            <tr><th>人称</th><th>意大利语</th><th>中文</th></tr>
+                            <tr><td>我</td><td>voglio</td><td>我想要</td></tr>
+                            <tr><td>你</td><td>vuoi</td><td>你想要</td></tr>
+                            <tr><td>他/她</td><td>vuole</td><td>他想要</td></tr>
+                        </table>
+                        <div class="note-box">
+                            <strong>礼貌用语：</strong> 用"vorrei"（我想要，更礼貌）代替"voglio"（我想要）会更礼貌！
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HINDI -->
+        <section id="hi" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇮🇳 मोडल क्रियाएँ हिंदी में</div>
+                <div class="card-body">
+                    <p>इतालवी <strong>मोडल क्रियाएँ</strong> (modal verbs) हिंदी की क्रियाओं <em>सकना/पाना</em>، <em>चाहिए/होना</em> और <em>चाहना</em> से मेल खाती हैं।</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">सकना/पाना = POTERE (क्षमता/अनुमति)</div>
+                        <p>क्षमता, अनुमति या संभावना व्यक्त करता है।</p>
+                        <table class="conjugation-table">
+                            <tr><th>व्यक्ति</th><th>इतालवी</th><th>हिंदी</th></tr>
+                            <tr><td>मैं</td><td>posso</td><td>मैं कर सकता हूँ</td></tr>
+                            <tr><td>तुम</td><td>puoi</td><td>तुम कर सकते हो</td></tr>
+                            <tr><td>वह</td><td>può</td><td>वह कर सकता है</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>उदाहरण:</strong><br>
+                            "Posso nuotare" = मैं तैराकी कर सकता हूँ<br>
+                            "Posso entrare?" = क्या मैं अंदर आ सकता हूँ?
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">चाहिए/होना = DOVERE (आवश्यकता/कर्तव्य)</div>
+                        <p>कर्तव्य, आवश्यकता या दृढ़ सलाह का संकेत देता है।</p>
+                        <table class="conjugation-table">
+                            <tr><th>व्यक्ति</th><th>इतालवी</th><th>हिंदी</th></tr>
+                            <tr><td>मैं</td><td>devo</td><td>मुझे करना चाहिए</td></tr>
+                            <tr><td>तुम</td><td>devi</td><td>तुम्हें करना चाहिए</td></tr>
+                            <tr><td>वह</td><td>deve</td><td>उसे करना चाहिए</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">चाहना = VOLERE (इच्छा)</div>
+                        <p>इच्छा, इच्छाशक्ति या इरादा व्यक्त करता है।</p>
+                        <table class="conjugation-table">
+                            <tr><th>व्यक्ति</th><th>इतालवी</th><th>हिंदी</th></tr>
+                            <tr><td>मैं</td><td>voglio</td><td>मैं चाहता हूँ</td></tr>
+                            <tr><td>तुम</td><td>vuoi</td><td>तुम चाहते हो</td></tr>
+                            <tr><td>वह</td><td>vuole</td><td>वह चाहता है</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- URDU -->
+        <section id="ur" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇵🇰 ماڈل افعال اردو میں</div>
+                <div class="card-body rtl">
+                    <p>اطالوی <strong>ماڈل افعال</strong> اردو کے افعال <em>سکنا</em>، <em>چاہیے</em> اور <em>چاہنا</em> سے مطابقت رکھتے ہیں۔</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">سکنا = POTERE (صلاحیت/اجازت)</div>
+                        <p>صلاحیت، اجازت یا امکان کا اظہار کرتا ہے۔</p>
+                        <table class="conjugation-table">
+                            <tr><th>ضمیر</th><th>اطالوی</th><th>اردو</th></tr>
+                            <tr><td>میں</td><td>posso</td><td>میں کر سکتا ہوں</td></tr>
+                            <tr><td>تم</td><td>puoi</td><td>تم کر سکتے ہو</td></tr>
+                            <tr><td>وہ</td><td>può</td><td>وہ کر سکتا ہے</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>مثالیں:</strong><br>
+                            "Posso nuotare" = میں تیراکی کر سکتا ہوں<br>
+                            "Posso entrare?" = کیا میں اندر آسکتا ہوں؟
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">چاہیے = DOVERE (ضرورت/فرض)</div>
+                        <p>فرض، ضرورت یا سخت مشورے کی نشاندہی کرتا ہے۔</p>
+                        <table class="conjugation-table">
+                            <tr><th>ضمیر</th><th>اطالوی</th><th>اردو</th></tr>
+                            <tr><td>میں</td><td>devo</td><td>مجھے کرنا چاہیے</td></tr>
+                            <tr><td>تم</td><td>devi</td><td>تمہیں کرنا چاہیے</td></tr>
+                            <tr><td>وہ</td><td>deve</td><td>اسے کرنا چاہیے</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">چاہنا = VOLERE (خواہش)</div>
+                        <p>خواہش، مرضی یا ارادہ ظاہر کرتا ہے۔</p>
+                        <table class="conjugation-table">
+                            <tr><th>ضمیر</th><th>اطالوی</th><th>اردو</th></tr>
+                            <tr><td>میں</td><td>voglio</td><td>میں چاہتا ہوں</td></tr>
+                            <tr><td>تم</td><td>vuoi</td><td>تم چاہتے ہو</td></tr>
+                            <tr><td>وہ</td><td>vuole</td><td>وہ چاہتا ہے</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANJABI -->
+        <section id="pa" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇮🇳 ਮੋਡਲ ਕਿਰਿਆਵਾਂ ਪੰਜਾਬੀ ਵਿੱਚ</div>
+                <div class="card-body">
+                    <p>ਇਤਾਲਵੀ <strong>ਮੋਡਲ ਕਿਰਿਆਵਾਂ</strong> ਪੰਜਾਬੀ ਦੀਆਂ ਕਿਰਿਆਵਾਂ <em>ਸਕਣਾ</em>، <em>ਚਾਹੀਦਾ</em> ਅਤੇ <em>ਚਾਹੁਣਾ</em> ਨਾਲ ਮੇਲ ਖਾਂਦੀਆਂ ਹਨ।</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">ਸਕਣਾ = POTERE (ਸਮਰੱਥਾ/ਇਜਾਜ਼ਤ)</div>
+                        <p>ਸਮਰੱਥਾ، ਇਜਾਜ਼ਤ ਜਾਂ ਸੰਭਾਵਨਾ ਪ੍ਰਗਟ ਕਰਦਾ ਹੈ।</p>
+                        <table class="conjugation-table">
+                            <tr><th>ਪੁਰਖ</th><th>ਇਤਾਲਵੀ</th><th>ਪੰਜਾਬੀ</th></tr>
+                            <tr><td>ਮੈਂ</td><td>posso</td><td>ਮੈਂ ਕਰ ਸਕਦਾ ਹਾਂ</td></tr>
+                            <tr><td>ਤੂੰ</td><td>puoi</td><td>ਤੂੰ ਕਰ ਸਕਦਾ ਏਂ</td></tr>
+                            <tr><td>ਉਹ</td><td>può</td><td>ਉਹ ਕਰ ਸਕਦਾ ਏ</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">ਚਾਹੀਦਾ = DOVERE (ਲੋੜ/ਫਰਜ਼)</div>
+                        <p>ਫਰਜ਼، ਲੋੜ ਜਾਂ ਸਖਤ ਸਲਾਹ ਦਾ ਸੰਕੇਤ ਦਿੰਦਾ ਹੈ।</p>
+                        <table class="conjugation-table">
+                            <tr><th>ਪੁਰਖ</th><th>ਇਤਾਲਵੀ</th><th>ਪੰਜਾਬੀ</th></tr>
+                            <tr><td>ਮੈਂ</td><td>devo</td><td>ਮੈਨੂੰ ਕਰਨਾ ਚਾਹੀਦਾ ਏ</td></tr>
+                            <tr><td>ਤੂੰ</td><td>devi</td><td>ਤੈਨੂੰ ਕਰਨਾ ਚਾਹੀਦਾ ਏ</td></tr>
+                            <tr><td>ਉਹ</td><td>deve</td><td>ਉਸਨੂੰ ਕਰਨਾ ਚਾਹੀਦਾ ਏ</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">ਚਾਹੁਣਾ = VOLERE (ਇੱਛਾ)</div>
+                        <p>ਇੱਛਾ، ਮਰਜ਼ੀ ਜਾਂ ਇਰਾਦਾ ਪ੍ਰਗਟ ਕਰਦਾ ਹੈ।</p>
+                        <table class="conjugation-table">
+                            <tr><th>ਪੁਰਖ</th><th>ਇਤਾਲਵੀ</th><th>ਪੰਜਾਬੀ</th></tr>
+                            <tr><td>ਮੈਂ</td><td>voglio</td><td>ਮੈਂ ਚਾਹੁੰਦਾ ਹਾਂ</td></tr>
+                            <tr><td>ਤੂੰ</td><td>vuoi</td><td>ਤੂੰ ਚਾਹੁੰਦਾ ਏਂ</td></tr>
+                            <tr><td>ਉਹ</td><td>vuole</td><td>ਉਹ ਚਾਹੁੰਦਾ ਏ</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ALBANESE -->
+        <section id="sq" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇦🇱 Foljet Modale në Shqip</div>
+                <div class="card-body">
+                    <p><strong>Foljet modale</strong> italiane korrespondojnë me foljet shqipe <em>mund</em>، <em>duhet</em> dhe <em>dua</em>.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">MUND = POTERE (Aftësi/Leje)</div>
+                        <p>Shpreh aftësinë, lejen ose mundësinë.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Personi</th><th>Italisht</th><th>Shqip</th></tr>
+                            <tr><td>unë</td><td>posso</td><td>unë mund</td></tr>
+                            <tr><td>ti</td><td>puoi</td><td>ti mund</td></tr>
+                            <tr><td>ai/ajo</td><td>può</td><td>ai/ajo mund</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Shembuj:</strong><br>
+                            "Posso nuotare" = Unë mund të notoj<br>
+                            "Posso entrare?" = A mund të hyj?
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">DUHET = DOVERE (Detyrim/Nevojë)</div>
+                        <p>Tregon detyrimin, nevojën ose këshillën e fortë.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Personi</th><th>Italisht</th><th>Shqip</th></tr>
+                            <tr><td>unë</td><td>devo</td><td>më duhet</td></tr>
+                            <tr><td>ti</td><td>devi</td><td>te duhet</td></tr>
+                            <tr><td>ai/ajo</td><td>deve</td><td>i/e duhet</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">DUA = VOLERE (Dëshirë)</div>
+                        <p>Shpreh dëshirën, vullnetin ose qëllimin.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Personi</th><th>Italisht</th><th>Shqip</th></tr>
+                            <tr><td>unë</td><td>voglio</td><td>unë dua</td></tr>
+                            <tr><td>ti</td><td>vuoi</td><td>ti do</td></tr>
+                            <tr><td>ai/ajo</td><td>vuole</td><td>ai/ajo do</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTOGHESE -->
+        <section id="pt" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇵🇹 Verbos Modais em Português</div>
+                <div class="card-body">
+                    <p>Os <strong>verbos modais</strong> italianos correspondem aos verbos portugueses <em>poder</em>، <em>dever</em> e <em>querer</em>.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">PODER = POTERE (Possibilidade)</div>
+                        <p>Expressa capacidade, permissão ou possibilidade.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujeito</th><th>Italiano</th><th>Português</th></tr>
+                            <tr><td>eu</td><td>posso</td><td>eu posso</td></tr>
+                            <tr><td>tu</td><td>puoi</td><td>tu podes</td></tr>
+                            <tr><td>ele/ela</td><td>può</td><td>ele/ela pode</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Exemplos:</strong><br>
+                            "Posso nuotare" = Eu posso nadar<br>
+                            "Posso entrare?" = Posso entrar?
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">DEVER = DOVERE (Obrigação)</div>
+                        <p>Indica obrigação, necessidade ou conselho forte.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujeito</th><th>Italiano</th><th>Português</th></tr>
+                            <tr><td>eu</td><td>devo</td><td>eu devo</td></tr>
+                            <tr><td>tu</td><td>devi</td><td>tu deves</td></tr>
+                            <tr><td>ele/ela</td><td>deve</td><td>ele/ela deve</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">QUERER = VOLERE (Desejo)</div>
+                        <p>Expressa desejo, vontade ou intenção.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujeito</th><th>Italiano</th><th>Português</th></tr>
+                            <tr><td>eu</td><td>voglio</td><td>eu quero</td></tr>
+                            <tr><td>tu</td><td>vuoi</td><td>tu queres</td></tr>
+                            <tr><td>ele/ela</td><td>vuole</td><td>ele/ela quer</td></tr>
+                        </table>
+                        <div class="note-box">
+                            <strong>Cortesia:</strong> "Vorrei" (eu gostaria) é mais educado que "voglio" (eu quero).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAMBARA -->
+        <section id="bm" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇲🇱 Modal Verbs Bambara</div>
+                <div class="card-body">
+                    <p><strong>Modal verbs</strong> Italian ka kan Bambara verbs <em>bɛ se</em>، <em>ka kan</em> ni <em>fɛ</em> ye.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">BƐ SE = POTERE (Capacity/Permission)</div>
+                        <p>Bɛ se ka jira capacity, permission walima possibility.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>Bambara</th></tr>
+                            <tr><td>ne</td><td>posso</td><td>bɛ se</td></tr>
+                            <tr><td>i</td><td>puoi</td><td>bɛ se</td></tr>
+                            <tr><td>a</td><td>può</td><td>bɛ se</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Examples:</strong><br>
+                            "Posso nuotare" = Bɛ se ka sin (I can swim)<br>
+                            "Posso entrare?" = Bɛ se ka don wa?
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">KA KAN = DOVERE (Necessity/Duty)</div>
+                        <p>Jira obligation walima necessity.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>Bambara</th></tr>
+                            <tr><td>ne</td><td>devo</td><td>ka kan</td></tr>
+                            <tr><td>i</td><td>devi</td><td>ka kan</td></tr>
+                            <tr><td>a</td><td>deve</td><td>ka kan</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">FƐ = VOLERE (Desire)</div>
+                        <p>Jira desire walima will.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>Bambara</th></tr>
+                            <tr><td>ne</td><td>voglio</td><td>fɛ</td></tr>
+                            <tr><td>i</td><td>vuoi</td><td>fɛ</td></tr>
+                            <tr><td>a</td><td>vuole</td><td>fɛ</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WOLOF -->
+        <section id="wo" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇸🇳 Verbes Modaux Wolof</div>
+                <div class="card-body">
+                    <p><strong>Verbes modaux</strong> yi Italië ñu mel ni <em>mën</em>، <em>war</em> ak <em>bëgg</em> ci Wolof.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">MËN = POTERE (Capacité/Permission)</div>
+                        <p>Dafay wone capacité, permission walla possibilité.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujet</th><th>Italien</th><th>Wolof</th></tr>
+                            <tr><td>man</td><td>posso</td><td>maa mën</td></tr>
+                            <tr><td>yaw</td><td>puoi</td><td>yaa mën</td></tr>
+                            <tr><td>mu</td><td>può</td><td>mu mën</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Exemples:</strong><br>
+                            "Posso nuotare" = Maa mën ubb<br>
+                            "Posso entrare?" = Maa mën dugg?
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">WAR = DOVERE (Obligation)</div>
+                        <p>Dafay wone obligation walla nécessité.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujet</th><th>Italien</th><th>Wolof</th></tr>
+                            <tr><td>man</td><td>devo</td><td>dama war</td></tr>
+                            <tr><td>yaw</td><td>devi</td><td>dangay war</td></tr>
+                            <tr><td>mu</td><td>deve</td><td>mu war</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">BËGG = VOLERE (Désir)</div>
+                        <p>Dafay wone désir walla volonté.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Sujet</th><th>Italien</th><th>Wolof</th></tr>
+                            <tr><td>man</td><td>voglio</td><td>dama bëgg</td></tr>
+                            <tr><td>yaw</td><td>vuoi</td><td>dangay bëgg</td></tr>
+                            <tr><td>mu</td><td>vuole</td><td>mu bëgg</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MANDINKA -->
+        <section id="man" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇬🇲 Modal Verbs Mandinka</div>
+                <div class="card-body">
+                    <p><strong>Modal verbs</strong> Italian ka kan Mandinka verbs <em>ka men</em>، <em>ka tilandi</em> ni <em>ka fengo</em> ye.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">KA MEN = POTERE (Ability)</div>
+                        <p>Bɛ ability, permission walima possibility jira.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>Mandinka</th></tr>
+                            <tr><td>n</td><td>posso</td><td>n be men</td></tr>
+                            <tr><td>i</td><td>puoi</td><td>i be men</td></tr>
+                            <tr><td>a</td><td>può</td><td>a be men</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">KA TILANDI = DOVERE (Obligation)</div>
+                        <p>Bɛ obligation walima necessity jira.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>Mandinka</th></tr>
+                            <tr><td>n</td><td>devo</td><td>n tilandi</td></tr>
+                            <tr><td>i</td><td>devi</td><td>i tilandi</td></tr>
+                            <tr><td>a</td><td>deve</td><td>a tilandi</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">KA FENGO = VOLERE (Desire)</div>
+                        <p>Bɛ desire walima will jira.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>Mandinka</th></tr>
+                            <tr><td>n</td><td>voglio</td><td>n fengo</td></tr>
+                            <tr><td>i</td><td>vuoi</td><td>i fengo</td></tr>
+                            <tr><td>a</td><td>vuole</td><td>a fengo</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SONINKE -->
+        <section id="snk" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇸🇳 Modal Verbs Soninke</div>
+                <div class="card-body">
+                    <p><strong>Modal verbs</strong> Italian ka kan Soninke verbs <em>ga hin</em>، <em>ga hima</em> ni <em>ga ba</em> ye.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">GA HIN = POTERE (Ability)</div>
+                        <p>Bɛ ability walima permission jira.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>Soninke</th></tr>
+                            <tr><td>an</td><td>posso</td><td>ga hin</td></tr>
+                            <tr><td>i</td><td>puoi</td><td>ga hin</td></tr>
+                            <tr><td>a</td><td>può</td><td>ga hin</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">GA HIMA = DOVERE (Obligation)</div>
+                        <p>Bɛ obligation walima necessity jira.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>Soninke</th></tr>
+                            <tr><td>an</td><td>devo</td><td>ga hima</td></tr>
+                            <tr><td>i</td><td>devi</td><td>ga hima</td></tr>
+                            <tr><td>a</td><td>deve</td><td>ga hima</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">GA BA = VOLERE (Desire)</div>
+                        <p>Bɛ desire walima will jira.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Subject</th><th>Italian</th><th>Soninke</th></tr>
+                            <tr><td>an</td><td>voglio</td><td>ga ba</td></tr>
+                            <tr><td>i</td><td>vuoi</td><td>ga ba</td></tr>
+                            <tr><td>a</td><td>vuole</td><td>ga ba</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SWAHILI -->
+        <section id="sw" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇹🇿 Vitenzi vya Modal Kiswahili</div>
+                <div class="card-body">
+                    <p><strong>Vitenzi vya modal</strong> vya Kiitaliano vinalingana na vitenzi vya Kiswahili <em>kuweza</em>، <em>lazima</em> na <em>kutaka</em>.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">KUWEZA = POTERE (Uwezo/Ruhusa)</div>
+                        <p>Vinaonyesha uwezo, ruhusa au uwezekano.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Kitu</th><th>Kiitaliano</th><th>Kiswahili</th></tr>
+                            <tr><td>mimi</td><td>posso</td><td>ninaweza</td></tr>
+                            <tr><td>wewe</td><td>puoi</td><td>unaweza</td></tr>
+                            <tr><td>yeye</td><td>può</td><td>anaweza</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Mifano:</strong><br>
+                            "Posso nuotare" = Ninaweza kuogelea<br>
+                            "Posso entrare?" = Ninaweza kuingia?
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">LAZIMA = DOVERE (Lazima/Wajibu)</div>
+                        <p>Vinaonyesha wajibu, lazima au ushauri mkali.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Kitu</th><th>Kiitaliano</th><th>Kiswahili</th></tr>
+                            <tr><td>mimi</td><td>devo</td><td>lazima nisome</td></tr>
+                            <tr><td>wewe</td><td>devi</td><td>lazima usome</td></tr>
+                            <tr><td>yeye</td><td>deve</td><td>lazima asome</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">KUTAKA = VOLERE (Kutaka)</div>
+                        <p>Vinaonyesha kutaka, nia au mpango.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Kitu</th><th>Kiitaliano</th><th>Kiswahili</th></tr>
+                            <tr><td>mimi</td><td>voglio</td><td>ninataka</td></tr>
+                            <tr><td>wewe</td><td>vuoi</td><td>unataka</td></tr>
+                            <tr><td>yeye</td><td>vuole</td><td>anataka</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HAUSA -->
+        <section id="ha" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇳🇬 Modal Verbs Hausa</div>
+                <div class="card-body">
+                    <p><strong>Modal verbs</strong> na Italiyanci suna daidaita da <em>iya</em>، <em>dole</em> da <em>so</em> a Hausa.</p>
+
+                    <div class="verb-box potere">
+                        <div class="verb-title">IYA = POTERE (Iyawa/Permission)</div>
+                        <p>Yana nuna iyawa, izini ko yiwuwa.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Mutum</th><th>Italiyanci</th><th>Hausa</th></tr>
+                            <tr><td>ni</td><td>posso</td><td>ina iya</td></tr>
+                            <tr><td>kai</td><td>puoi</td><td>kana iya</td></tr>
+                            <tr><td>shi/it</td><td>può</td><td>yana iya/tana iya</td></tr>
+                        </table>
+                        <div class="example-box">
+                            <strong>Misalai:</strong><br>
+                            "Posso nuotare" = Ina iya iyo<br>
+                            "Posso entrare?" = Ina iya shigewa?
+                        </div>
+                    </div>
+
+                    <div class="verb-box dovere">
+                        <div class="verb-title">DOLE = DOVERE (Dole/Wajibi)</div>
+                        <p>Yana nuna wajibi, dole ko shawara mai karfi.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Mutum</th><th>Italiyanci</th><th>Hausa</th></tr>
+                            <tr><td>ni</td><td>devo</td><td>dole in</td></tr>
+                            <tr><td>kai</td><td>devi</td><td>dole ka</td></tr>
+                            <tr><td>shi/it</td><td>deve</td><td>dole ya/ta</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="verb-box volere">
+                        <div class="verb-title">SO = VOLERE (So)</div>
+                        <p>Yana nuna so, nufi ko burin.</p>
+                        <table class="conjugation-table">
+                            <tr><th>Mutum</th><th>Italiyanci</th><th>Hausa</th></tr>
+                            <tr><td>ni</td><td>voglio</td><td>ina so</td></tr>
+                            <tr><td>kai</td><td>vuoi</td><td>kana so</td></tr>
+                            <tr><td>shi/it</td><td>vuole</td><td>yana so/tana so</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; text-align: center; color: var(--secondary);">
         <div style="max-width: 1200px; margin: 0 auto;">
-            <p>© 2024 Corso di Italiano A2 - Verbi Modali (50 Esercizi)</p>
+            <p>© 2024 Accademia delle Lingue - Teoria Verbi Modali in 24 Lingue</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">POTERE / DOVERE / VOLERE - Spiegato in Italiano, Francese, Spagnolo, Inglese, Tedesco, Russo, Ucraino, Arabo, Berbero, Farsi, Pashto, Turco, Cinese, Hindi, Urdu, Panjabi, Albanese, Portoghese, Bambara, Wolof, Mandinka, Soninke, Swahili, Hausa</p>
         </div>
     </footer>
 
     <script>
-
-        // Database degli esercizi (50 totali)
-        const exercises = [
-            // ESERCIZI 1-10: Coniugazione POTERE
-            {
-                id: 1,
-                type: 'choice',
-                question: 'Come si coniuga POTERE alla prima persona singolare (io)?',
-                options: ['posso', 'puoi', 'può', 'potere'],
-                correct: 'posso',
-                explanation: '✅ Corretto! Io POSSO (radice poss- + o).',
-                errorExplanation: '❌ La forma corretta è POSSO'
-            },
-            {
-                id: 2,
-                type: 'fill',
-                question: 'Completa: Tu _____ aiutarmi? (potere)',
-                correct: ['puoi'],
-                explanation: '✅ Corretto! Tu PUOI (cambio di vocale: o → uoi).'
-            },
-            {
-                id: 3,
-                type: 'choice',
-                question: 'Quale forma è corretta per "lui" con il verbo POTERE?',
-                options: ['puoi', 'può', 'possono', 'potete'],
-                correct: 'può',
-                explanation: '✅ Corretto! Lui/lei PUÒ (con l\'accento sulla o).',
-                errorExplanation: '❌ Per lui/lei si usa PUÒ (con accento)'
-            },
-            {
-                id: 4,
-                type: 'fill',
-                question: 'Completa: Noi _____ partire domani. (potere)',
-                correct: ['possiamo'],
-                explanation: '✅ Corretto! Noi POSSIAMO (torniamo alla radice poss-).'
-            },
-            {
-                id: 5,
-                type: 'choice',
-                question: 'Come si coniuga POTERE alla seconda persona plurale (voi)?',
-                options: ['potete', 'possiamo', 'possono', 'puoi'],
-                correct: 'potete',
-                explanation: '✅ Corretto! Voi POTETE (radice pot- + ete).',
-                errorExplanation: '❌ Per voi si usa POTETE'
-            },
-            {
-                id: 6,
-                type: 'fill',
-                question: 'Completa: Loro _____ venire stasera. (potere)',
-                correct: ['possono'],
-                explanation: '✅ Corretto! Loro POSSONO (radice poss- + ono).'
-            },
-            {
-                id: 7,
-                type: 'choice',
-                question: 'Quale frase usa correttamente POTERE per chiedere permesso?',
-                options: ['Posso entrare?', 'Devo entrare?', 'Voglio entrare?', 'Entro?'],
-                correct: 'Posso entrare?',
-                explanation: '✅ Corretto! POSSO indica permesso o possibilità.',
-                errorExplanation: '❌ Per chiedere permesso si usa POTERE (posso)'
-            },
-            {
-                id: 8,
-                type: 'fill',
-                question: 'Completa: Marco nuota molto bene. Lui _____ nuotare 100 metri. (potere)',
-                correct: ['può'],
-                explanation: '✅ Corretto! Lui PUÒ (abilità/capacità).'
-            },
-            {
-                id: 9,
-                type: 'choice',
-                question: 'Quale forma condizionale di POTERE esprime maggiore cortesia?',
-                options: ['posso', 'puoi', 'potrei', 'potessi'],
-                correct: 'potrei',
-                explanation: '✅ Corretto! POTREI è il condizionale (potrei avere un caffè?).',
-                errorExplanation: '❌ Il condizionale di cortesia è POTREI'
-            },
-            {
-                id: 10,
-                type: 'fill',
-                question: 'Completa: _____ piovere domani, porta l\'ombrello! (potere, 3a persona)',
-                correct: ['può'],
-                explanation: '✅ Corretto! Può piovere = possibilità oggettiva.'
-            },
-
-            // ESERCIZI 11-20: Coniugazione DOVERE
-            {
-                id: 11,
-                type: 'choice',
-                question: 'Come si coniuga DOVERE alla prima persona singolare (io)?',
-                options: ['devo', 'devi', 'deve', 'dovere'],
-                correct: 'devo',
-                explanation: '✅ Corretto! Io DEVO (radice dev- + o).',
-                errorExplanation: '❌ La forma corretta è DEVO'
-            },
-            {
-                id: 12,
-                type: 'fill',
-                question: 'Completa: Tu _____ studiare di più per l\'esame. (dovere)',
-                correct: ['devi'],
-                explanation: '✅ Corretto! Tu DEVI (obbligo/consiglio forte).'
-            },
-            {
-                id: 13,
-                type: 'choice',
-                question: 'Quale forma è corretta per "lei" con il verbo DOVERE?',
-                options: ['devo', 'devi', 'deve', 'devono'],
-                correct: 'deve',
-                explanation: '✅ Corretto! Lei DEVE (radice dev- + e).',
-                errorExplanation: '❌ Per lei si usa DEVE'
-            },
-            {
-                id: 14,
-                type: 'fill',
-                question: 'Completa: Noi _____ rispettare le regole. (dovere)',
-                correct: ['dobbiamo'],
-                explanation: '✅ Corretto! Noi DOBBIAMO (radice dobb- + iamo).'
-            },
-            {
-                id: 15,
-                type: 'choice',
-                question: 'Come si coniuga DOVERE alla seconda persona plurale (voi)?',
-                options: ['dovete', 'dobbiamo', 'devono', 'devi'],
-                correct: 'dovete',
-                explanation: '✅ Corretto! Voi DOVETE (radice dov- + ete).',
-                errorExplanation: '❌ Per voi si usa DOVETE'
-            },
-            {
-                id: 16,
-                type: 'fill',
-                question: 'Completa: I bambini _____ andare a scuola per legge. (dovere)',
-                correct: ['devono'],
-                explanation: '✅ Corretto! Loro DEVONO (obbligo legale).'
-            },
-            {
-                id: 17,
-                type: 'choice',
-                question: 'Quale frase usa DOVERE per esprimere probabilità?',
-                options: ['Devo andare', 'Deve essere tardi', 'Devi studiare', 'Dobbiamo mangiare'],
-                correct: 'Deve essere tardi',
-                explanation: '✅ Corretto! DEVE + essere = probabilità/supposizione.',
-                errorExplanation: '❌ Per la probabilità si usa "deve essere"'
-            },
-            {
-                id: 18,
-                type: 'fill',
-                question: 'Completa: _____ fare attenzione quando attraversi la strada! (dovere, tu)',
-                correct: ['devi'],
-                explanation: '✅ Corretto! Devi = consiglio forte/avvertimento.'
-            },
-            {
-                id: 19,
-                type: 'choice',
-                question: 'Quale forma condizionale di DOVERE esprime un consiglio attenuato?',
-                options: ['devo', 'devi', 'dovrei', 'dovessi'],
-                correct: 'dovrei',
-                explanation: '✅ Corretto! DOVREI = consiglio più delicato (dovrei studiare).',
-                errorExplanation: '❌ Il condizionale per consiglio è DOVREI'
-            },
-            {
-                id: 20,
-                type: 'fill',
-                question: 'Completa: Non _____ fumare in questo locale. (dovere, si impersonale)',
-                correct: ['si deve', 'devono'],
-                explanation: '✅ Corretto! Si deve = obbligo generale/divieto.'
-            },
-
-            // ESERCIZI 21-30: Coniugazione VOLERE
-            {
-                id: 21,
-                type: 'choice',
-                question: 'Come si coniuga VOLERE alla prima persona singolare (io)?',
-                options: ['voglio', 'vuoi', 'vuole', 'volere'],
-                correct: 'voglio',
-                explanation: '✅ Corretto! Io VOGLIO (inserimento della g: vol- → vog-).',
-                errorExplanation: '❌ La forma corretta è VOGLIO (con la g)'
-            },
-            {
-                id: 22,
-                type: 'fill',
-                question: 'Completa: Tu _____ un caffè? (volere)',
-                correct: ['vuoi'],
-                explanation: '✅ Corretto! Tu VUOI (offerta).'
-            },
-            {
-                id: 23,
-                type: 'choice',
-                question: 'Quale forma è corretta per "lei" con il verbo VOLERE?',
-                options: ['vuoi', 'vuole', 'vogliono', 'volete'],
-                correct: 'vuole',
-                explanation: '✅ Corretto! Lei VUOLE (senza la g).',
-                errorExplanation: '❌ Per lei si usa VUOLE (senza g)'
-            },
-            {
-                id: 24,
-                type: 'fill',
-                question: 'Completa: Noi _____ mangiare fuori stasera. (volere)',
-                correct: ['vogliamo'],
-                explanation: '✅ Corretto! Noi VOGLIAMO (con la g).'
-            },
-            {
-                id: 25,
-                type: 'choice',
-                question: 'Come si coniuga VOLERE alla seconda persona plurale (voi)?',
-                options: ['volete', 'vogliamo', 'vogliono', 'vuoi'],
-                correct: 'volete',
-                explanation: '✅ Corretto! Voi VOLETE (radice vol- + ete).',
-                errorExplanation: '❌ Per voi si usa VOLETE'
-            },
-            {
-                id: 26,
-                type: 'fill',
-                question: 'Completa: Loro _____ imparare l\'italiano. (volere)',
-                correct: ['vogliono'],
-                explanation: '✅ Corretto! Loro VOGLIONO (con la g: vol- → vogl-).'
-            },
-            {
-                id: 27,
-                type: 'choice',
-                question: 'Quale forma è più educata per ordinare al bar?',
-                options: ['Voglio un caffè', 'Vorrei un caffè', 'Vuoi un caffè', 'Vogliamo un caffè'],
-                correct: 'Vorrei un caffè',
-                explanation: '✅ Corretto! VORREI (condizionale) è più cortese di VOGLIO.',
-                errorExplanation: '❌ Al bar si usa VORREI (condizionale di cortesia)'
-            },
-            {
-                id: 28,
-                type: 'fill',
-                question: 'Completa: Non _____ uscire perché sono stanco. (volere, io)',
-                correct: ['voglio'],
-                explanation: '✅ Corretto! Non voglio = rifiuto.'
-            },
-            {
-                id: 29,
-                type: 'choice',
-                question: 'Quale frase usa correttamente VOLERE per un invito?',
-                options: ['Voglio ballare', 'Vuoi ballare?', 'Devi ballare', 'Puoi ballare'],
-                correct: 'Vuoi ballare?',
-                explanation: '✅ Corretto! VUOI + infinito = invito/offerta.',
-                errorExplanation: '❌ Per invitare si usa "Vuoi...?"'
-            },
-            {
-                id: 30,
-                type: 'fill',
-                question: 'Completa: _____ un tavolo per due persone, per favore. (volere, condizionale)',
-                correct: ['vorrei'],
-                explanation: '✅ Corretto! VORREI = richiesta educata.'
-            },
-
-            // ESERCIZI 31-40: Differenziazione semantica
-            {
-                id: 31,
-                type: 'choice',
-                question: 'Scegli il verbo corretto: "_____ nuotare perché ho preso lezioni" (capacità)',
-                options: ['Posso', 'Devo', 'Voglio', 'So'],
-                correct: 'Posso',
-                explanation: '✅ Corretto! POSSO = abilità/capacità (so nuotare).',
-                errorExplanation: '❌ Per l\'abilità si usa POTERE (posso)'
-            },
-            {
-                id: 32,
-                type: 'fill',
-                question: 'Completa: "_____ andare al bagno?" (chiedere permesso)',
-                correct: ['posso', 'Posso'],
-                explanation: '✅ Corretto! POSSO = permesso.'
-            },
-            {
-                id: 33,
-                type: 'choice',
-                question: 'Scegli il verbo corretto: "I cittadini _____ pagare le tasse" (obbligo legale)',
-                options: ['possono', 'devono', 'vogliono', 'sanno'],
-                correct: 'devono',
-                explanation: '✅ Corretto! DEVONO = obbligo di legge.',
-                errorExplanation: '❌ Per l\'obbligo legale si usa DOVERE (devono)'
-            },
-            {
-                id: 34,
-                type: 'fill',
-                question: 'Completa: "_____ essere malato, non è venuto a lavoro" (probabilità)',
-                correct: ['deve', 'Deve'],
-                explanation: '✅ Corretto! DEVE = probabilità/supposizione.'
-            },
-            {
-                id: 35,
-                type: 'choice',
-                question: 'Scegli il verbo corretto: "_____ un bicchiere d\'acqua" (desiderio)',
-                options: ['Posso', 'Devo', 'Voglio', 'So'],
-                correct: 'Voglio',
-                explanation: '✅ Corretto! VOGLIO = desiderio.',
-                errorExplanation: '❌ Per il desiderio si usa VOLERE (voglio)'
-            },
-            {
-                id: 36,
-                type: 'fill',
-                question: 'Completa: "_____ vedere quel film, è bellissimo!" (consiglio forte)',
-                correct: ['devi', 'Devi'],
-                explanation: '✅ Corretto! DEVI = consiglio forte.'
-            },
-            {
-                id: 37,
-                type: 'choice',
-                question: 'Quale frase esprime necessità oggettiva?',
-                options: ['Posso uscire', 'Devo uscire', 'Voglio uscire', 'Esco'],
-                correct: 'Devo uscire',
-                explanation: '✅ Corretto! DEVO = necessità/obbligo.',
-                errorExplanation: '❌ Per la necessità si usa DOVERE (devo)'
-            },
-            {
-                id: 38,
-                type: 'fill',
-                question: 'Completa: "Non _____ fumare qui" (divieto/impossibilità)',
-                correct: ['si può', 'possiamo', 'puoi'],
-                explanation: '✅ Corretto! Non si può = divieto/impossibilità.'
-            },
-            {
-                id: 39,
-                type: 'choice',
-                question: 'Scegli il verbo corretto: "_____ andare in vacanza in Italia" (intenzione)',
-                options: ['Posso', 'Devo', 'Voglio', 'So'],
-                correct: 'Voglio',
-                explanation: '✅ Corretto! VOGLIO = intenzione/progetto futuro.',
-                errorExplanation: '❌ Per l\'intenzione si usa VOLERE (voglio)'
-            },
-            {
-                id: 40,
-                type: 'fill',
-                question: 'Completa: "_____ finire questo lavoro entro domani" (necessità/obbligo)',
-                correct: ['devo', 'Devo'],
-                explanation: '✅ Corretto! DEVO = necessità/obbligo personale.'
-            },
-
-            // ESERCIZI 41-50: Contesti comunicativi misti
-            {
-                id: 41,
-                type: 'choice',
-                question: 'Al ristorante, come chiedi educatamente il conto?',
-                options: ['Voglio il conto', 'Posso avere il conto?', 'Vorrei il conto', 'Devo il conto'],
-                correct: 'Vorrei il conto',
-                explanation: '✅ Corretto! VORREI è la forma più educata al ristorante.',
-                errorExplanation: '❌ Al ristorante si usa VORREI (condizionale)'
-            },
-            {
-                id: 42,
-                type: 'fill',
-                question: 'Completa: "Mi scusi, _____ sapere che ore sono?" (chiedere gentilmente)',
-                correct: ['potrei', 'Posso', 'vorrei'],
-                explanation: '✅ Corretto! POTREI/VORREI sapere = cortesia.'
-            },
-            {
-                id: 43,
-                type: 'choice',
-                question: 'Quale risposta è corretta a "Puoi aiutarmi?" se non hai tempo?',
-                options: ['Non posso', 'Non devo', 'Non voglio', 'Non so'],
-                correct: 'Non posso',
-                explanation: '✅ Corretto! NON POSSO = impossibilità oggettiva (non ho tempo).',
-                errorExplanation: '❌ Per rifiutare educatamente si usa "non posso"'
-            },
-            {
-                id: 44,
-                type: 'fill',
-                question: 'Completa: "_____ proprio andare ora, altrimenti perdo il treno" (necessità urgente)',
-                correct: ['devo', 'Devo'],
-                explanation: '✅ Corretto! DEVO = necessità/obbligo urgente.'
-            },
-            {
-                id: 45,
-                type: 'choice',
-                question: 'Cosa dici a un amico che deve smettere di fumare per salute?',
-                options: ['Puoi smettere', 'Devi smettere', 'Vuoi smettere', 'Smetti'],
-                correct: 'Devi smettere',
-                explanation: '✅ Corretto! DEVI = consiglio forte per salute.',
-                errorExplanation: '❌ Per un consiglio importante si usa DOVERE (devi)'
-            },
-            {
-                id: 46,
-                type: 'fill',
-                question: 'Completa: "_____ telefonarti più tardi?" (chiedere permesso educatamente)',
-                correct: ['posso', 'Posso', 'potrei', 'Potrei'],
-                explanation: '✅ Corretto! POSSO/POTREI = permesso.'
-            },
-            {
-                id: 47,
-                type: 'choice',
-                question: 'Quale frase esprime un progetto futuro?',
-                options: ['Posso andare in Francia', 'Devo andare in Francia', 'Voglio andare in Francia', 'So andare in Francia'],
-                correct: 'Voglio andare in Francia',
-                explanation: '✅ Corretto! VOGLIO = intenzione/progetto futuro.',
-                errorExplanation: '❌ Per i progetti futuri si usa VOLERE (voglio)'
-            },
-            {
-                id: 48,
-                type: 'fill',
-                question: 'Completa: "Non _____ ancora guidare, non ho la patente" (impossibilità legale)',
-                correct: ['posso', 'Posso'],
-                explanation: '✅ Corretto! NON POSSO = impossibilità (manca la patente).'
-            },
-            {
-                id: 49,
-                type: 'choice',
-                question: 'Come rispondi a "Perché non sei venuto alla festa?" se eri malato?',
-                options: ['Non potevo', 'Non dovevo', 'Non volevo', 'Non sapevo'],
-                correct: 'Non potevo',
-                explanation: '✅ Corretto! NON POTEVO = impossibilità passata (ero malato).',
-                errorExplanation: '❌ Per l\'impossibilità si usa POTERE (non potevo)'
-            },
-            {
-                id: 50,
-                type: 'fill',
-                question: 'Completa: "_____ proprio dire che questo è il miglior ristorante della città!" (consiglio forte)',
-                correct: ['devo', 'Devo', 'dovrei', 'Dovrei'],
-                explanation: '✅ Corretto! DEVO/DOVREI dire = consiglio forte. Complimenti!'
-            }
-        ];
-
-        let currentExercise = 0;
-        let totalScore = 0;
-        let answered = false;
-
-        function showSection(id, btn) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-            if(btn) btn.classList.add('active');
-
-            if(id === 'exercises' && currentExercise === 0) {
-                loadExercise();
-            }
-        }
-
-        function loadExercise() {
-            if (currentExercise >= exercises.length) {
-                showFinalScore();
-                return;
-            }
-
-            const ex = exercises[currentExercise];
-            const container = document.getElementById('exerciseContainer');
-
-            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
-
-            answered = false;
-
-            let html = `
-                <div class="card" style="animation: fadeIn 0.4s ease;">
-                    <div class="card-header modals">Esercizio ${ex.id}</div>
-                    <div class="card-body">
-                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
-                        <div class="question-box">
-                            <div class="question-text">${ex.question}</div>
-                        </div>
-            `;
-
-            if (ex.type === 'choice') {
-                html += `<div class="options-grid" id="optionsGrid">`;
-                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
-                shuffledOptions.forEach(opt => {
-                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
-                });
-                html += `</div>`;
-            } else if (ex.type === 'fill') {
-                html += `
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la risposta..." onkeypress="if(event.key==='Enter') checkFill()">
-                    </div>
-                    <div class="text-center">
-                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
-                    </div>
-                `;
-            }
-
-            html += `
-                        <div class="feedback" id="feedback"></div>
-                        <div class="text-center" id="nextBtnContainer" style="display: none;">
-                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            container.innerHTML = html;
-
-            if (ex.type === 'fill') {
-                setTimeout(() => document.getElementById('fillInput').focus(), 100);
-            }
-        }
-
-        function checkChoice(selected) {
-            if (answered) return;
-            answered = true;
-
-            const ex = exercises[currentExercise];
-            const btns = document.querySelectorAll('#optionsGrid .option-btn');
-            const feedback = document.getElementById('feedback');
-            const nextContainer = document.getElementById('nextBtnContainer');
-
-            btns.forEach(btn => {
-                btn.disabled = true;
-                if (btn.dataset.value === ex.correct) {
-                    btn.classList.add('correct');
-                } else if (btn.dataset.value === selected && selected !== ex.correct) {
-                    btn.classList.add('wrong');
-                }
+        function showLang(langCode) {
+            // Nascondi tutte le sezioni
+            document.querySelectorAll('.lang-section').forEach(section => {
+                section.classList.remove('active');
             });
 
-            feedback.classList.add('show');
+            // Mostra la sezione selezionata
+            document.getElementById(langCode).classList.add('active');
 
-            if (selected === ex.correct) {
-                feedback.className = 'feedback show correct';
-                feedback.textContent = ex.explanation;
-                totalScore += 2;
-            } else {
-                feedback.className = 'feedback show wrong';
-                let errorMsg = ex.errorExplanation;
+            // Aggiorna i bottoni
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
 
-                if (ex.question.includes('condizionale') && !selected.includes('rei')) {
-                    errorMsg += '<br><strong>💡 Ricorda: il condizionale termina in -REI (vorrei, potrei, dovrei)!</strong>';
-                }
-                if (ex.question.includes('cortesia') && selected === 'Voglio') {
-                    errorMsg += '<br><strong>⚠️ ATTENZIONE: "Voglio" è troppo diretto! Usa "VORREI" per essere educato!</strong>';
-                }
-
-                feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
-            }
-
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            nextContainer.style.display = 'block';
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        function checkFill() {
-            if (answered) return;
-
-            const input = document.getElementById('fillInput');
-            const value = input.value.trim().toLowerCase();
-            if (!value) return;
-
-            answered = true;
-
-            const ex = exercises[currentExercise];
-            const feedback = document.getElementById('feedback');
-            const nextContainer = document.getElementById('nextBtnContainer');
-
-            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
-
-            feedback.classList.add('show');
-            input.disabled = true;
-
-            if (isCorrect) {
-                feedback.className = 'feedback show correct';
-                feedback.textContent = ex.explanation;
-                input.style.borderColor = 'var(--success)';
-                input.style.background = '#f0fff4';
-                totalScore += 2;
-            } else {
-                feedback.className = 'feedback show wrong';
-                let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
-
-                if (ex.question.includes('potere') && value.includes('voglio')) {
-                    errorMsg += '<br><strong>⚠️ ATTENZIONE: Non confondere POTERE con VOLERE!</strong>';
-                }
-                if (ex.question.includes('volere') && value.includes('posso')) {
-                    errorMsg += '<br><strong>⚠️ ATTENZIONE: Non confondere VOLERE con POTERE!</strong>';
-                }
-                if (ex.question.includes('dovere') && value.includes('devo') && ex.correct[0] === 'devi') {
-                    errorMsg += '<br><strong>💡 Ricorda: IO devo, TU devi!</strong>';
-                }
-
-                feedback.innerHTML = errorMsg;
-                input.style.borderColor = 'var(--error)';
-                input.style.background = '#fff5f5';
-                input.value = ex.correct[0];
-            }
-
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            nextContainer.style.display = 'block';
-        }
-
-        function nextExercise() {
-            currentExercise++;
-            loadExercise();
-        }
-
-        function showFinalScore() {
-            document.getElementById('exerciseContainer').style.display = 'none';
-            document.getElementById('finalScoreSection').classList.add('show');
-            document.getElementById('finalScore').textContent = `${totalScore}/100`;
-
-            let message = '';
-            if (totalScore >= 90) {
-                message = '🏆 Eccellente! Padroneggi perfettamente i verbi modali e le loro sfumature!';
-            } else if (totalScore >= 70) {
-                message = '👍 Ottimo lavoro! Conosci bene potere, dovere e volere!';
-            } else if (totalScore >= 50) {
-                message = '💪 Buon lavoro! Ricorda: posso = permesso/capacità, devo = obbligo, voglio = desiderio!';
-            } else {
-                message = '📚 Ripassa le regole! Ricorda le coniugazioni irregolari e i valori semantici dei verbi modali!';
-            }
-
-            document.getElementById('finalMessage').textContent = message;
-            document.getElementById('progressBar').style.width = '100%';
-        }
-
-        function restartExercises() {
-            currentExercise = 0;
-            totalScore = 0;
-            answered = false;
-
-            exercises.sort(() => Math.random() - 0.5);
-
-            document.getElementById('exerciseContainer').style.display = 'block';
-            document.getElementById('finalScoreSection').classList.remove('show');
-            document.getElementById('progressBar').style.width = '0%';
-
-            loadExercise();
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            exercises.sort(() => Math.random() - 0.5);
-        });
     </script>
 </body>
 </html>
