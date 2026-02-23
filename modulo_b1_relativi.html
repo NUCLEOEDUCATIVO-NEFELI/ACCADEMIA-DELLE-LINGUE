@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B1 - Pronomi Relativi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --che: #1e40af;
+            --cui: #059669;
+            --ilquale: #7c3aed;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .nav-tab.che:hover, .nav-tab.che.active { color: var(--che); border-bottom-color: var(--che); }
+        .nav-tab.cui:hover, .nav-tab.cui.active { color: var(--cui); border-bottom-color: var(--cui); }
+        .nav-tab.ilquale:hover, .nav-tab.ilquale.active { color: var(--ilquale); border-bottom-color: var(--ilquale); }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-header.che { border-left-color: var(--che); color: var(--che); }
+        .card-header.cui { border-left-color: var(--cui); color: var(--cui); }
+        .card-header.ilquale { border-left-color: var(--ilquale); color: var(--ilquale); }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .rule-box.che { background: #dbeafe; border-color: var(--che); }
+        .rule-box.cui { background: #d1fae5; border-color: var(--cui); }
+        .rule-box.ilquale { background: #ede9fe; border-color: var(--ilquale); }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .pronome-che { color: var(--che); font-weight: bold; }
+        .pronome-cui { color: var(--cui); font-weight: bold; }
+        .pronome-ilquale { color: var(--ilquale); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        .sentence-analysis {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-left: 4px solid var(--b1-color);
+        }
+        .antecedente { color: var(--accent); font-weight: bold; }
+        .relativa { color: var(--primary); font-weight: bold; }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 120px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--b1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--b1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .pronome-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .pronome-badge.che { background: #dbeafe; color: var(--che); border: 1px solid var(--che); }
+        .pronome-badge.cui { background: #d1fae5; color: var(--cui); border: 1px solid var(--cui); }
+        .pronome-badge.ilquale { background: #ede9fe; color: var(--ilquale); border: 1px solid var(--ilquale); }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 100px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B1 - Pronomi Relativi</h1>
+            <p>Collegare le frasi: che, cui, il quale/la quale/i quali/le quali</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B1</a>
+            <span>›</span>
+            <strong>Pronomi Relativi</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🔗 Pronomi Relativi</h1>
+            <p class="page-subtitle">Unire proposizioni e dare più informazioni sul nome</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab che" onclick="showSection('che', this)">CHE</button>
+            <button class="nav-tab cui" onclick="showSection('cui', this)">CUI</button>
+            <button class="nav-tab ilquale" onclick="showSection('ilquale', this)">IL QUALE</button>
+            <button class="nav-tab" onclick="showSection('preposizioni', this)">Preposizioni</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍🏫</div>
+                    <div class="avatar-name">Prof. Marco</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B1! 🔗</h3>
+                    <p>Oggi studiamo i <strong>Pronomi Relativi</strong>, che servono per collegare due frasi e dare informazioni su un nome.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "Il libro <span class="pronome-che">che</span> hai comprato è bellissimo."</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cosa sono i Pronomi Relativi?</div>
+                <div class="card-body">
+                    <p>I pronomi relativi collegano una <strong>proposizione principale</strong> a una <strong>proposizione subordinata relativa</strong>, riferendosi a un nome (l'<span class="antecedente">antecedente</span>) già menzionato.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>I principali pronomi relativi:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><span class="pronome-che">CHE</span> - soggetto o complemento oggetto (invariabile)</li>
+                            <li><span class="pronome-cui">CUI</span> - complemento indiretto (invariabile, sempre preceduto da preposizione)</li>
+                            <li><span class="pronome-ilquale">IL QUALE / LA QUALE / I QUALI / LE QUALI</span> - tutte le funzioni (variabile in genere e numero)</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="sentence-analysis">
+                            <span class="antecedente">Il ragazzo</span> <span class="pronome-che">che</span> <span class="relativa">hai visto</span> è mio fratello.
+                            <br><em>"Che" è soggetto della relativa (hai visto che? → il ragazzo)</em>
+                        </div>
+                        <div class="sentence-analysis">
+                            <span class="antecedente">La casa</span> <span class="pronome-cui">in cui</span> <span class="relativa">vivo</span> è grande.
+                            <br><em>"Cui" con preposizione = complemento di luogo (in cui = dove)</em>
+                        </div>
+                        <div class="sentence-analysis">
+                            <span class="antecedente">Lo studente</span> <span class="pronome-ilquale">del quale</span> <span class="relativa">ti ho parlato</span> è bravo.
+                            <br><em>"Il quale" con preposizione articolata = alternativa più formale a "cui"</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CHE -->
+        <section id="che" class="section">
+            <div class="card">
+                <div class="card-header che">Il Pronome Relativo CHE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Uso:</strong> 
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Soggetto della proposizione relativa</li>
+                            <li>Complemento oggetto (diretto) della proposizione relativa</li>
+                        </ul>
+                        <strong>Caratteristica:</strong> Invariabile (non cambia per genere o numero)
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Funzione</th><th>Esempio</th><th>Analisi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Soggetto</strong></td>
+                                <td>Il cane <span class="pronome-che">che</span> abbaia è nervoso.</td>
+                                <td>Che = soggetto (chi abbaia? il cane)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Complemento oggetto</strong></td>
+                                <td>Il libro <span class="pronome-che">che</span> leggi è interessante.</td>
+                                <td>Che = oggetto (che cosa leggi? il libro)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Soggetto (plurale)</strong></td>
+                                <td>I bambini <span class="pronome-che">che</span> giocano sono felici.</td>
+                                <td>Che non cambia (invariabile)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Oggetto (plurale)</strong></td>
+                                <td>Le foto <span class="pronome-che">che</span> hai scattato sono belle.</td>
+                                <td>Che non cambia (invariabile)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box che">
+                        <strong>⚠️ Attenzione:</strong> Non si può mai usare "che" con le preposizioni! 
+                        <br>❌ "Il libro di che ti ho parlato" → ✅ "Il libro <span class="pronome-cui">di cui</span> ti ho parlato"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CUI -->
+        <section id="cui" class="section">
+            <div class="card">
+                <div class="card-header cui">Il Pronome Relativo CUI</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Uso:</strong> Complemento indiretto (sempre preceduto da preposizione)
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Complemento di termine (a cui)</li>
+                            <li>Complemento di luogo (in cui, su cui)</li>
+                            <li>Complemento di causa (per cui)</li>
+                            <li>Complemento di possesso (di cui)</li>
+                            <li>Complemento di specificazione (di cui)</li>
+                        </ul>
+                        <strong>Caratteristica:</strong> Invariabile, ma sempre con preposizione!
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Preposizione</th><th>Uso</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>di cui</strong></td>
+                                <td>possesso, specificazione</td>
+                                <td>L'uomo <span class="pronome-cui">di cui</span> ho parlato...</td>
+                            </tr>
+                            <tr>
+                                <td><strong>a cui</strong></td>
+                                <td>complemento di termine</td>
+                                <td>La persona <span class="pronome-cui">a cui</span> ho scritto...</td>
+                            </tr>
+                            <tr>
+                                <td><strong>in cui</strong></td>
+                                <td>luogo, tempo (= dove, quando)</td>
+                                <td>La città <span class="pronome-cui">in cui</span> vivo...</td>
+                            </tr>
+                            <tr>
+                                <td><strong>con cui</strong></td>
+                                <td>compagnia, strumento</td>
+                                <td>Il collega <span class="pronome-cui">con cui</span> lavoro...</td>
+                            </tr>
+                            <tr>
+                                <td><strong>per cui</strong></td>
+                                <td>causa, fine</td>
+                                <td>Il motivo <span class="pronome-cui">per cui</span> sono qui...</td>
+                            </tr>
+                            <tr>
+                                <td><strong>su cui</strong></td>
+                                <td>luogo, argomento</td>
+                                <td>Il tavolo <span class="pronome-cui">su cui</span> ho messo...</td>
+                            </tr>
+                            <tr>
+                                <td><strong>da cui</strong></td>
+                                <td>provenienza, agente</td>
+                                <td>Il paese <span class="pronome-cui">da cui</span> vengo...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box cui">
+                        <strong>⚠️ Nota:</strong> "Cui" da solo (senza preposizione) si usa solo in alcune espressioni fisse come "al cui cospetto", "in cui" (come avverbio).
+                        <br>Normalmente: <strong>preposizione + cui</strong>!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE IL QUALE -->
+        <section id="ilquale" class="section">
+            <div class="card">
+                <div class="card-header ilquale">Il Pronome Relativo IL QUALE</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Uso:</strong> Tutte le funzioni (soggetto, oggetto, complementi), ma più formale di "che" e "cui".
+                        <br><strong>Variazione:</strong> Cambia in genere e numero: il quale, la quale, i quali, le quali
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Forma</th><th>Genere/Numero</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>il quale</strong></td>
+                                <td>maschile singolare</td>
+                                <td>Il libro <span class="pronome-ilquale">il quale</span> ho comprato...</td>
+                            </tr>
+                            <tr>
+                                <td><strong>la quale</strong></td>
+                                <td>femminile singolare</td>
+                                <td>La casa <span class="pronome-ilquale">la quale</span> vediamo...</td>
+                            </tr>
+                            <tr>
+                                <td><strong>i quali</strong></td>
+                                <td>maschile plurale</td>
+                                <td>Gli studenti <span class="pronome-ilquale">i quali</span> studiano...</td>
+                            </tr>
+                            <tr>
+                                <td><strong>le quali</strong></td>
+                                <td>femminile plurale</td>
+                                <td>Le idee <span class="pronome-ilquale">le quali</span> proponi...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box ilquale">
+                        <strong>Vantaggi di "il quale":</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Chiarezza quando l'antecedente è lontano</li>
+                            <li>Può essere usato con tutte le preposizioni articolate (del quale, al quale, nel quale...)</li>
+                            <li>Più elegante in contesti formali</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Esempi con preposizioni articolate:</strong><br>
+                        • Il ragazzo <span class="pronome-ilquale">del quale</span> ti ho parlato (= di cui)<br>
+                        • La donna <span class="pronome-ilquale">alla quale</span> ho scritto (= a cui)<br>
+                        • Il paese <span class="pronome-ilquale">nel quale</span> vivo (= in cui)<br>
+                        • Gli amici <span class="pronome-ilquale">con i quali</span> esco (= con cui)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PREPOSIZIONI -->
+        <section id="preposizioni" class="section">
+            <div class="card">
+                <div class="card-header">Pronomi Relativi e Preposizioni</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Schema riassuntivo:</strong> Quale pronome usare con le preposizioni?
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Preposizione</th><th>Con CUI</th><th>Con IL QUALE</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>di</td>
+                                <td class="pronome-cui">di cui</td>
+                                <td class="pronome-ilquale">del quale/della quale</td>
+                                <td>Il libro di cui/del quale...</td>
+                            </tr>
+                            <tr>
+                                <td>a</td>
+                                <td class="pronome-cui">a cui</td>
+                                <td class="pronome-ilquale">al quale/alla quale</td>
+                                <td>La persona a cui/alla quale...</td>
+                            </tr>
+                            <tr>
+                                <td>in</td>
+                                <td class="pronome-cui">in cui</td>
+                                <td class="pronome-ilquale">nel quale/nella quale</td>
+                                <td>La città in cui/nella quale...</td>
+                            </tr>
+                            <tr>
+                                <td>con</td>
+                                <td class="pronome-cui">con cui</td>
+                                <td class="pronome-ilquale">con il quale/con la quale</td>
+                                <td>Il collega con cui/con il quale...</td>
+                            </tr>
+                            <tr>
+                                <td>su</td>
+                                <td class="pronome-cui">su cui</td>
+                                <td class="pronome-ilquale">sul quale/sulla quale</td>
+                                <td>Il tavolo su cui/sul quale...</td>
+                            </tr>
+                            <tr>
+                                <td>per</td>
+                                <td class="pronome-cui">per cui</td>
+                                <td class="pronome-ilquale">per il quale/per la quale</td>
+                                <td>Il motivo per cui/per il quale...</td>
+                            </tr>
+                            <tr>
+                                <td>da</td>
+                                <td class="pronome-cui">da cui</td>
+                                <td class="pronome-ilquale">dal quale/dalla quale</td>
+                                <td>Il paese da cui/dal quale...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Errore comune:</strong> Non si può mai usare "che" con le preposizioni!
+                        <br>❌ "Il libro su che ho scritto" → ✅ "Il libro <span class="pronome-cui">su cui</span> ho scritto"
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B1 - Pronomi Relativi (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-15: CHE (soggetto e oggetto)
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Il ragazzo __________ studia è molto intelligente.',
+                options: ['che', 'cui', 'il quale', 'che'],
+                correct: 'che',
+                explanation: '✅ Corretto! "Che" è soggetto della relativa (chi studia? il ragazzo)',
+                errorExplanation: '❌ Qui serve il soggetto della relativa: che',
+                tipo: 'che'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Il libro __________ (tu) leggi è molto interessante.',
+                correct: ['che'],
+                explanation: '✅ Corretto! "Che" è complemento oggetto (che cosa leggi? il libro)',
+                tipo: 'che'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'La casa __________ vediamo è molto grande.',
+                options: ['che', 'cui', 'la quale', 'che'],
+                correct: 'che',
+                explanation: '✅ Corretto! "Che" funge da oggetto (che cosa vediamo? la casa)',
+                errorExplanation: '❌ Oggetto della relativa: che (invariabile)',
+                tipo: 'che'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'I bambini __________ giocano nel parco sono felici.',
+                correct: ['che'],
+                explanation: '✅ Corretto! "Che" soggetto plurale (invariabile)',
+                tipo: 'che'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Le foto __________ hai scattato sono bellissime.',
+                options: ['che', 'cui', 'le quali', 'che'],
+                correct: 'che',
+                explanation: '✅ Corretto! "Che" oggetto femminile plurale (invariabile)',
+                errorExplanation: '❌ "Che" non cambia: è sempre che',
+                tipo: 'che'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'L\'uomo __________ (noi) abbiamo incontrato è gentile.',
+                correct: ['che'],
+                explanation: '✅ Corretto! "Che" complemento oggetto',
+                tipo: 'che'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Il cane __________ abbaia è nervoso.',
+                options: ['che', 'cui', 'il quale', 'che'],
+                correct: 'che',
+                explanation: '✅ Corretto! "Che" soggetto (chi abbaia? il cane)',
+                errorExplanation: '❌ Soggetto della relativa: che',
+                tipo: 'che'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'La canzone __________ (io) ascolto è famosa.',
+                correct: ['che'],
+                explanation: '✅ Corretto! "Che" oggetto',
+                tipo: 'che'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Gli studenti __________ studiano seriamente passeranno l\'esame.',
+                options: ['che', 'cui', 'i quali', 'che'],
+                correct: 'che',
+                explanation: '✅ Corretto! "Che" soggetto plurale',
+                errorExplanation: '❌ Soggetto plurale: sempre che',
+                tipo: 'che'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Il film __________ (voi) avete visto ieri è americano.',
+                correct: ['che'],
+                explanation: '✅ Corretto! "Che" oggetto',
+                tipo: 'che'
+            },
+            {
+                id: 11,
+                type: 'choice',
+                question: 'La professoressa __________ spiega bene è molto simpatica.',
+                options: ['che', 'cui', 'la quale', 'che'],
+                correct: 'che',
+                explanation: '✅ Corretto! "Che" soggetto (chi spiega? la professoressa)',
+                errorExplanation: '❌ Soggetto: che',
+                tipo: 'che'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Il ristorante __________ (loro) hanno scelto è caro.',
+                correct: ['che'],
+                explanation: '✅ Corretto! "Che" oggetto',
+                tipo: 'che'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Le persone __________ lavorano qui sono gentili.',
+                options: ['che', 'cui', 'le quali', 'che'],
+                correct: 'che',
+                explanation: '✅ Corretto! "Che" soggetto plurale',
+                errorExplanation: '❌ Soggetto plurale: che',
+                tipo: 'che'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'L\'esame __________ (tu) devi fare è difficile.',
+                correct: ['che'],
+                explanation: '✅ Corretto! "Che" oggetto',
+                tipo: 'che'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Il bambino __________ ride è mio nipote.',
+                options: ['che', 'cui', 'il quale', 'che'],
+                correct: 'che',
+                explanation: '✅ Corretto! "Che" soggetto',
+                errorExplanation: '❌ Soggetto: che',
+                tipo: 'che'
+            },
+
+            // ESERCIZI 16-30: CUI (con preposizioni)
+            {
+                id: 16,
+                type: 'choice',
+                question: 'L\'uomo __________ ti ho parlato è medico.',
+                options: ['di cui', 'che', 'il quale', 'di cui'],
+                correct: 'di cui',
+                explanation: '✅ Corretto! "Di cui" = complemento di specificazione (parlare di)',
+                errorExplanation: '❌ Con "parlare di" serve: di cui',
+                tipo: 'cui'
+            },
+            {
+                id: 17,
+                type: 'fill',
+                question: 'La città __________ (in) vivo è bella.',
+                correct: ['in cui'],
+                explanation: '✅ Corretto! "In cui" = complemento di luogo',
+                tipo: 'cui'
+            },
+            {
+                id: 18,
+                type: 'choice',
+                question: 'La persona __________ ho scritto non ha risposto.',
+                options: ['a cui', 'che', 'il quale', 'a cui'],
+                correct: 'a cui',
+                explanation: '✅ Corretto! "A cui" = complemento di termine (scrivere a)',
+                errorExplanation: '❌ Con "scrivere a" serve: a cui',
+                tipo: 'cui'
+            },
+            {
+                id: 19,
+                type: 'fill',
+                question: 'Il motivo __________ (per) sono qui è importante.',
+                correct: ['per cui'],
+                explanation: '✅ Corretto! "Per cui" = complemento di causa',
+                tipo: 'cui'
+            },
+            {
+                id: 20,
+                type: 'choice',
+                question: 'Il collega __________ lavoro è molto competente.',
+                options: ['con cui', 'che', 'il quale', 'con cui'],
+                correct: 'con cui',
+                explanation: '✅ Corretto! "Con cui" = compagnia (lavorare con)',
+                errorExplanation: '❌ Con "lavorare con" serve: con cui',
+                tipo: 'cui'
+            },
+            {
+                id: 21,
+                type: 'fill',
+                question: 'Il paese __________ (da) vengo è piccolo.',
+                correct: ['da cui'],
+                explanation: '✅ Corretto! "Da cui" = provenienza (venire da)',
+                tipo: 'cui'
+            },
+            {
+                id: 22,
+                type: 'choice',
+                question: 'Il tavolo __________ ho messo i libri è vecchio.',
+                options: ['su cui', 'che', 'il quale', 'su cui'],
+                correct: 'su cui',
+                explanation: '✅ Corretto! "Su cui" = complemento di luogo (mettere su)',
+                errorExplanation: '❌ Con "mettere su" serve: su cui',
+                tipo: 'cui'
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: 'L\'argomento __________ (di) ti ho parlato è complesso.',
+                correct: ['di cui'],
+                explanation: '✅ Corretto! "Di cui" = parlare di',
+                tipo: 'cui'
+            },
+            {
+                id: 24,
+                type: 'choice',
+                question: 'La donna __________ ho dato il documento è la segretaria.',
+                options: ['a cui', 'che', 'la quale', 'a cui'],
+                correct: 'a cui',
+                explanation: '✅ Corretto! "A cui" = dare a',
+                errorExplanation: '❌ Con "dare a" serve: a cui',
+                tipo: 'cui'
+            },
+            {
+                id: 25,
+                type: 'fill',
+                question: 'L\'albergo __________ (in) abbiamo soggiornato era caro.',
+                correct: ['in cui'],
+                explanation: '✅ Corretto! "In cui" = soggiornare in',
+                tipo: 'cui'
+            },
+            {
+                id: 26,
+                type: 'choice',
+                question: 'Il problema __________ dobbiamo pensare è serio.',
+                options: ['a cui', 'che', 'il quale', 'a cui'],
+                correct: 'a cui',
+                explanation: '✅ Corretto! "A cui" = pensare a',
+                errorExplanation: '❌ Con "pensare a" serve: a cui',
+                tipo: 'cui'
+            },
+            {
+                id: 27,
+                type: 'fill',
+                question: 'Gli strumenti __________ (con) lavoro sono nuovi.',
+                correct: ['con cui'],
+                explanation: '✅ Corretto! "Con cui" = strumento',
+                tipo: 'cui'
+            },
+            {
+                id: 28,
+                type: 'choice',
+                question: 'La strada __________ siamo passati è stretta.',
+                options: ['da cui', 'che', 'il quale', 'da cui'],
+                correct: 'da cui',
+                explanation: '✅ Corretto! "Da cui" = passare da',
+                errorExplanation: '❌ Con "passare da" serve: da cui',
+                tipo: 'cui'
+            },
+            {
+                id: 29,
+                type: 'fill',
+                question: 'Il periodo __________ (in) siamo nati era difficile.',
+                correct: ['in cui'],
+                explanation: '✅ Corretto! "In cui" = tempo (quando)',
+                tipo: 'cui'
+            },
+            {
+                id: 30,
+                type: 'choice',
+                question: 'L\'azienda __________ lavoro da dieci anni chiuderà.',
+                options: ['per cui', 'che', 'la quale', 'per cui'],
+                correct: 'per cui',
+                explanation: '✅ Corretto! "Per cui" = lavorare per',
+                errorExplanation: '❌ Con "lavorare per" serve: per cui',
+                tipo: 'cui'
+            },
+
+            // ESERCIZI 31-40: IL QUALE (formale e con preposizioni articolate)
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Il libro, __________ ho già finito di leggere, è bellissimo.',
+                options: ['il quale', 'che', 'cui', 'il quale'],
+                correct: 'il quale',
+                explanation: '✅ Corretto! "Il quale" per maggiore chiarezza con antecedente lontano',
+                errorExplanation: '❌ Con l\'antecedente lontano è meglio "il quale"',
+                tipo: 'ilquale'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'La studentessa, __________ ti ho già parlato, è bravissima.',
+                correct: ['della quale', 'di cui'],
+                explanation: '✅ Corretto! "Della quale" = forma formale di "di cui"',
+                tipo: 'ilquale'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Gli artisti, __________ opere sono esposte, sono famosi.',
+                options: ['le cui', 'che', 'i quali', 'le cui'],
+                correct: 'le cui',
+                explanation: '✅ Corretto! "Le cui" = possessivo (le opere degli artisti)',
+                errorExplanation: '❌ "Il quale" al possessivo diventa: il/la/i/le cui',
+                tipo: 'ilquale'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Il professore, __________ (a) ho chiesto aiuto, è gentile.',
+                correct: ['al quale', 'a cui'],
+                explanation: '✅ Corretto! "Al quale" = forma formale di "a cui"',
+                tipo: 'ilquale'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'La città, __________ sono nato, è cambiata molto.',
+                options: ['nella quale', 'che', 'in cui', 'nella quale'],
+                correct: 'nella quale',
+                explanation: '✅ Corretto! "Nella quale" = forma formale di "in cui"',
+                errorExplanation: '❌ Preposizione articolata + quale: nella quale',
+                tipo: 'ilquale'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'I colleghi, __________ (con) lavoro, sono simpatici.',
+                correct: ['con i quali', 'con cui'],
+                explanation: '✅ Corretto! "Con i quali" = forma formale',
+                tipo: 'ilquale'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'L\'edificio, __________ si trova il mio ufficio, è moderno.',
+                options: ['nel quale', 'che', 'in cui', 'nel quale'],
+                correct: 'nel quale',
+                explanation: '✅ Corretto! "Nel quale" = in + il quale',
+                errorExplanation: '❌ Preposizione articolata: nel quale',
+                tipo: 'ilquale'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'La signora, __________ (di) ho apprezzato la gentilezza, è partita.',
+                correct: ['della quale', 'di cui'],
+                explanation: '✅ Corretto! "Della quale" = forma formale',
+                tipo: 'ilquale'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Gli studenti, __________ ho corretto i compiti, hanno migliorato.',
+                options: ['dei quali', 'che', 'i quali', 'dei quali'],
+                correct: 'dei quali',
+                explanation: '✅ Corretto! "Dei quali" = possessivo (i compiti degli studenti)',
+                errorExplanation: '❌ "Di cui" o "dei quali" per il possesso',
+                tipo: 'ilquale'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Il medico, __________ (da) sono stato visitato, è bravo.',
+                correct: ['dal quale', 'da cui'],
+                explanation: '✅ Corretto! "Dal quale" = forma formale di "da cui"',
+                tipo: 'ilquale'
+            },
+
+            // ESERCIZI 41-50: Mix e contesti complessi
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Completa: "Il ragazzo __________ studia con me è italiano"',
+                options: ['che', 'cui', 'il quale', 'che'],
+                correct: 'che',
+                explanation: '✅ Corretto! Soggetto: che',
+                errorExplanation: '❌ Soggetto della relativa: che',
+                tipo: 'mix'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Completa: "La persona __________ (di) dipende tutto è lui"',
+                correct: ['da cui', 'dalla quale'],
+                explanation: '✅ Corretto! "Dipendere da" → da cui/dalla quale',
+                tipo: 'mix'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Quale è corretto? "Il libro __________ ho letto"',
+                options: ['che', 'di cui', 'il quale', 'che'],
+                correct: 'che',
+                explanation: '✅ Corretto! Oggetto: che (leggere qualcosa)',
+                errorExplanation: '❌ Oggetto diretto: che',
+                tipo: 'mix'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Completa: "Il paese __________ (a) appartengo è lontano"',
+                correct: ['a cui', 'al quale'],
+                explanation: '✅ Corretto! "Appartenere a" → a cui',
+                tipo: 'mix'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Scegli l\'alternativa formale: "La casa in cui vivo"',
+                options: ['nella quale', 'che', 'cui', 'nella quale'],
+                correct: 'nella quale',
+                explanation: '✅ Corretto! Forma formale: nella quale',
+                errorExplanation: '❌ Forma formale di "in cui": nella quale',
+                tipo: 'mix'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Completa: "L\'amico __________ (con) esci stasera è simpatico?"',
+                correct: ['con cui', 'con il quale'],
+                explanation: '✅ Corretto! "Uscire con" → con cui',
+                tipo: 'mix'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Correggi: "Il libro su che ho scritto"',
+                options: ['su cui', 'che', 'il quale', 'su cui'],
+                correct: 'su cui',
+                explanation: '✅ Corretto! "Su cui" (mai "su che"!)',
+                errorExplanation: '❌ Non si può mai usare "che" con le preposizioni!',
+                tipo: 'mix'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Completa: "Il motivo __________ (per) sono triste lo sai"',
+                correct: ['per cui', 'per il quale'],
+                explanation: '✅ Corretto! "Per cui" = causa',
+                tipo: 'mix'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Trova l\'errore: "La persona a che ho parlato"',
+                options: ['a cui', 'che', 'cui', 'a cui'],
+                correct: 'a cui',
+                explanation: '✅ Corretto! "A cui" non "a che"',
+                errorExplanation: '❌ Mai "preposizione + che"! Solo "a cui"',
+                tipo: 'mix'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Completa: "I ragazzi, __________ (di) ho conosciuto i genitori, sono educati"',
+                correct: ['dei quali', 'di cui'],
+                explanation: '✅ Corretto! "Dei quali" = possessivo formale. Complimenti!',
+                tipo: 'mix'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let pronomeBadge = '';
+            if (ex.tipo) {
+                const tipoClass = ex.tipo === 'ilquale' ? 'ilquale' : ex.tipo;
+                const tipoText = ex.tipo === 'ilquale' ? 'IL QUALE' : ex.tipo.toUpperCase();
+                pronomeBadge = `<div class="pronome-badge ${tipoClass}">${tipoText}</div>`;
+            }
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        ${pronomeBadge}
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi il pronome..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente i pronomi relativi! Sei pronto per il C1!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene che, cui e il quale!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: CHE (soggetto/oggetto), CUI (sempre con preposizione), IL QUALE (formale)!';
+            } else {
+                message = '📚 Ripassa le regole: mai "preposizione + che", CUI sempre con preposizione, IL QUALE cambia in genere e numero!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

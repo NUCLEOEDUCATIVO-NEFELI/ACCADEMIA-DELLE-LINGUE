@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Simulazioni Esami CECOL - Accademia delle Lingue</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1e3a5f;
+            --primary-dark: #152a45;
+            --secondary: #8b0000;
+            --success: #276749;
+            --bg-primary: #f5f5f0;
+            --bg-card: #ffffff;
+            --border: #d4d4c8;
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --level-a1: #276749;
+            --level-a2: #2563eb;
+            --level-b1: #c9a227;
+            --level-b2: #dc2626;
+        }
+
+        body { 
+            font-family: 'Georgia', 'Times New Roman', serif; 
+            background: var(--bg-primary); 
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #8b0000 0%, #dc2626 100%);
+            color: white;
+            margin-bottom: 40px;
+            border: 3px solid #8b0000;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .level-section {
+            margin-bottom: 40px;
+        }
+
+        .level-header {
+            padding: 20px;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            border-left: 5px solid;
+        }
+
+        .level-a1 { background: var(--level-a1); border-color: var(--level-a1); }
+        .level-a2 { background: var(--level-a2); border-color: var(--level-a2); }
+        .level-b1 { background: var(--level-b1); color: #000; border-color: var(--level-b1); }
+        .level-b2 { background: var(--level-b2); border-color: var(--level-b2); }
+        .level-c1 { background: #6b21a8; border-color: #6b21a8; }
+        .level-c2 { background: #0f172a; border-color: #0f172a; }
+
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .exam-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            padding: 30px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s;
+            cursor: pointer;
+            display: block;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+
+        .exam-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .exam-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .exam-desc {
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 15px;
+            color: white;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 0;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 30px 15px;
+                margin-bottom: 30px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+
+            .header p {
+                font-size: 0.9rem;
+            }
+
+            .level-header {
+                padding: 15px;
+                font-size: 1.2rem;
+            }
+
+            .exam-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .exam-card {
+                padding: 20px;
+            }
+
+            .exam-icon {
+                font-size: 2.5rem;
+            }
+
+            .exam-title {
+                font-size: 1.1rem;
+            }
+
+            .exam-desc {
+                font-size: 0.85rem;
+            }
+
+            .back-link {
+                margin-bottom: 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .level-header {
+                font-size: 1rem;
+                padding: 12px;
+            }
+
+            .exam-card {
+                padding: 15px;
+            }
+
+            .exam-icon {
+                font-size: 2rem;
+            }
+
+            .level-badge {
+                font-size: 0.75rem;
+                padding: 4px 12px;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Torna alla Dashboard</a>
+
+        <div class="header">
+            <h1>🎓 Simulazioni Esami CECOL</h1>
+            <p>Prove d'esame complete per la certificazione QCER - Livelli A1-C2</p>
+        </div>
+
+        <!-- A1 -->
+        <div class="level-section">
+            <div class="level-header level-a1">
+                Livello A1 - Principiante
+            </div>
+            <div class="exam-grid">
+                <a href="esame_finale_a1.html" class="exam-card">
+                    <div class="exam-icon">📝</div>
+                    <div class="exam-title">Esame Completo A1</div>
+                    <div class="exam-desc">Simulazione completa con esercizi di lettura, scrittura e comprensione orale</div>
+                    <span class="level-badge" style="background: var(--level-a1);">A1</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- A2 -->
+        <div class="level-section">
+            <div class="level-header level-a2">
+                Livello A2 - Elementare
+            </div>
+            <div class="exam-grid">
+                <a href="esame_finale_a2.html" class="exam-card">
+                    <div class="exam-icon">📝</div>
+                    <div class="exam-title">Esame Completo A2</div>
+                    <div class="exam-desc">Simulazione completa A2 - Tutte le competenze linguistiche</div>
+                    <span class="level-badge" style="background: var(--level-a2);">A2</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- B1 -->
+        <div class="level-section">
+            <div class="level-header level-b1">
+                Livello B1 - Intermedio
+            </div>
+            <div class="exam-grid">
+                <a href="esame_finale_b1.html" class="exam-card">
+                    <div class="exam-icon">📝</div>
+                    <div class="exam-title">Esame CECOL B1 - B1 Cittadinanza</div>
+                    <div class="exam-desc">Simulazione certificazione intermedia CECOL e test specifico per la cittadinanza italiana</div>
+                    <span class="level-badge" style="background: var(--level-b1); color: #000;">B1</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- B2 -->
+        <div class="level-section">
+            <div class="level-header level-b2">
+                Livello B2 - Avanzato
+            </div>
+            <div class="exam-grid">
+                <a href="esame_finale_b2.html" class="exam-card">
+                    <div class="exam-icon">📝</div>
+                    <div class="exam-title">Esame Completo B2</div>
+                    <div class="exam-desc">Simulazione livello avanzato - Competenze complesse</div>
+                    <span class="level-badge" style="background: var(--level-b2);">B2</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- C1 -->
+        <div class="level-section">
+            <div class="level-header level-c1">
+                Livello C1 - Autonomo
+            </div>
+            <div class="exam-grid">
+                <a href="esame_finale_c1.html" class="exam-card">
+                    <div class="exam-icon">📝</div>
+                    <div class="exam-title">Esame Completo C1</div>
+                    <div class="exam-desc">Simulazione livello autonomo - Competenza avanzata</div>
+                    <span class="level-badge" style="background: #6b21a8;">C1</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- C2 -->
+        <div class="level-section">
+            <div class="level-header level-c2">
+                Livello C2 - Maestria
+            </div>
+            <div class="exam-grid">
+                <a href="esame_finale_c2.html" class="exam-card">
+                    <div class="exam-icon">📝</div>
+                    <div class="exam-title">Esame Completo C2</div>
+                    <div class="exam-desc">Simulazione livello maestria - Padronanza completa della lingua</div>
+                    <span class="level-badge" style="background: #0f172a;">C2</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -622,7 +622,224 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-    </style>
+    @media (max-width: 1024px) {
+            .sidebar {
+                width: 280px;
+            }
+            .level-selector {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                height: auto;
+                min-height: 64px;
+                padding: 12px 16px;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .top-nav > div:first-child {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .top-nav > div:last-child {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .main-container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: 50vh;
+                overflow-y: auto;
+                border-right: none;
+                border-bottom: 3px solid var(--secondary);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                order: 2;
+            }
+
+            .content {
+                order: 1;
+                height: auto;
+                min-height: calc(100vh - 200px);
+            }
+
+            .section {
+                padding: 16px;
+            }
+
+            .breadcrumbs {
+                margin: -16px -16px 16px -16px;
+                padding: 10px 16px;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .level-selector {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .level-card {
+                padding: 16px;
+            }
+
+            .level-icon {
+                font-size: 2rem;
+            }
+
+            .level-name {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .card-header {
+                padding: 16px;
+                font-size: 0.9rem;
+            }
+
+            .card-body {
+                padding: 16px;
+            }
+
+            .game-image {
+                height: 120px;
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .stat-value {
+                font-size: 1.8rem;
+            }
+
+            .login-header {
+                padding: 30px 20px;
+            }
+
+            .login-logo {
+                font-size: 2.5rem;
+            }
+
+            .login-body {
+                padding: 24px;
+            }
+
+            .nav-item {
+                padding: 14px 16px;
+                font-size: 1rem;
+            }
+
+            .iframe-container {
+                height: 60vh;
+            }
+
+            .data-table {
+                font-size: 0.85rem;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .level-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .top-nav h1 {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+        }
+        .mobile-menu-toggle {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .sidebar.mobile-open {
+            display: block !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            z-index: 1000;
+            box-shadow: 4px 0 12px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 280px;
+                height: 100vh;
+                z-index: 1000;
+                max-height: 100vh;
+            }
+
+            .sidebar.mobile-open {
+                display: block;
+            }
+        }
+</style>
 <base target="_blank">
 <base target="_blank">
 </head>
@@ -736,7 +953,7 @@
 <!-- ==================== STUDENT DASHBOARD ==================== -->
 <div id="dashboard" class="dashboard">
     <nav class="top-nav">
-        <div style="display:flex;align-items:center;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px; flex: 1;">
             <span style="font-size:1.5rem;">🎓</span>
             <div>
                 <div style="font-weight:600; letter-spacing: 0.5px;">ACCADEMIA DELLE LINGUE</div>
@@ -744,6 +961,9 @@
                 <div style="font-size:0.65rem; opacity:0.7;">Livello A1 - C2 QCER</div>
             </div>
         </div>
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()" style="display: none;">
+            ☰
+        </button>
         <div style="display:flex;align-items:center;gap:20px;">
             <div style="text-align:right;">
                 <div id="userNameDisplay" style="font-weight:600; font-family: Georgia, serif;">Studente</div>
@@ -761,6 +981,11 @@
             </div>
             <div class="nav-item" onclick="showSection('results')" id="nav-results">
                 <span>📊</span><span>Registro Valutazioni</span>
+            </div>
+
+            <div class="menu-category" style="color: #8b0000; border-bottom-color: #8b0000;">🎓 Simulazioni Esami</div>
+            <div class="nav-item" onclick="showSection('simulazioni-cecol')" id="nav-simulazioni">
+                <span>📝</span><span>Simulazioni CECOL</span><span class="nav-level" style="background: #8b0000; color: white;">ALL</span>
             </div>
 
             <div class="menu-category">Livello A1 - Principiante</div>
@@ -840,18 +1065,10 @@
             <div class="nav-item" onclick="loadModule('modulo_b1_discorso_indiretto.html', 'Discorso Indiretto')" id="nav-b1-discorso">
                 <span>💬</span><span>Discorso Indiretto</span><span class="nav-level level-b1">B1</span>
             </div>
-            <div class="nav-item" onclick="loadModule('periodo_ipotetico1.html', 'Periodo Ipotetico - Variante')" id="nav-b1-ipotetico1">
-                <span>🌳</span><span>Periodo Ipotetico (Alt)</span><span class="nav-level level-b1">B1</span>
-            </div>
-            <div class="nav-item" onclick="loadModule('preposizioni_articolate.html', 'Preposizioni Articolate - Variante')" id="nav-b1-prep-art">
-                <span>🔗</span><span>Preposizioni (Alt)</span><span class="nav-level level-b1">B1</span>
-            </div>
-            <div class="nav-item" onclick="loadModule('pronomi_combinati1.html', 'Pronomi Combinati - Variante')" id="nav-b1-pronomi1">
-                <span>🔗</span><span>Pronomi Combinati (Alt)</span><span class="nav-level level-b1">B1</span>
-            </div>
-            <div class="nav-item" onclick="loadModule('pronomi_relativi1.html', 'Pronomi Relativi - Variante')" id="nav-b1-relativi1">
-                <span>📎</span><span>Pronomi Relativi (Alt)</span><span class="nav-level level-b1">B1</span>
-            </div>
+            
+            
+            
+            
 
             <div class="menu-category">Livello B2 - Avanzato</div>
             <div class="nav-item" onclick="loadModule('modulo_b2_congiuntivo_passato.html', 'Congiuntivo Passato')" id="nav-b2-congiuntivo-passato">
@@ -1427,38 +1644,10 @@
                                         <p class="game-desc">Ha detto che... Trasformazione dei tempi e modi verbali</p>
                                     </div>
                                 </a>
-                                <a href="periodo_ipotetico1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-ipotetico1')">
-                                    <span class="game-level-badge level-b1">B1</span>
-                                    <div class="game-image bg-b1">🌿</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 9: Periodo Ipotetico (Alternativo)</div>
-                                        <p class="game-desc">Versione alternativa del periodo ipotetico - Esercizi aggiuntivi</p>
-                                    </div>
-                                </a>
-                                <a href="preposizioni_articolate.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-prep-art')">
-                                    <span class="game-level-badge level-b1">B1</span>
-                                    <div class="game-image bg-b1">📎</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 10: Preposizioni Articolate (Alt)</div>
-                                        <p class="game-desc">Versione alternativa delle preposizioni articolate</p>
-                                    </div>
-                                </a>
-                                <a href="pronomi_combinati1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-pronomi1')">
-                                    <span class="game-level-badge level-b1">B1</span>
-                                    <div class="game-image bg-b1">🧩</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 11: Pronomi Combinati (Alt)</div>
-                                        <p class="game-desc">Versione alternativa dei pronomi combinati</p>
-                                    </div>
-                                </a>
-                                <a href="pronomi_relativi1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-relativi1')">
-                                    <span class="game-level-badge level-b1">B1</span>
-                                    <div class="game-image bg-b1">📌</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 12: Pronomi Relativi (Alt)</div>
-                                        <p class="game-desc">Versione alternativa dei pronomi relativi</p>
-                                    </div>
-                                </a>
+                                
+                                
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -1631,6 +1820,139 @@
                             </thead>
                             <tbody id="resultsTableBody"></tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIMULAZIONI ESAMI CECOL -->
+            <div id="simulazioni-cecol" class="section">
+                <div class="breadcrumbs">
+                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span> / <strong>Simulazioni Esami CECOL</strong>
+                </div>
+                <div style="margin:24px 0;">
+                    <h1 class="section-title" style="border-color: #8b0000;">🎓 Simulazioni Esami CECOL</h1>
+                    <p class="section-subtitle">Prova simulazioni complete per la certificazione QCER - Tutti i livelli A1-C2</p>
+                </div>
+
+                <!-- Livello A1 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--level-a1); color: white; border-color: var(--level-a1);">
+                        Simulazione Livello A1 - Principiante
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_a1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-a1')">
+                                <span class="game-level-badge level-a1">A1</span>
+                                <div class="game-image bg-a1">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo A1</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello A1 - Lettura, scrittura, ascolto</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livello A2 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--level-a2); color: white; border-color: var(--level-a2);">
+                        Simulazione Livello A2 - Elementare
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_a2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-a2')">
+                                <span class="game-level-badge level-a2">A2</span>
+                                <div class="game-image bg-a2">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo A2</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello A2 - Tutte le competenze</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livello B1 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--level-b1); color: #000; border-color: var(--level-b1);">
+                        Simulazione Livello B1 - Intermedio
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_b1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b1')">
+                                <span class="game-level-badge level-b1">B1</span>
+                                <div class="game-image bg-b1">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo B1</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello B1 - Certificazione intermedia</p>
+                                </div>
+                            </a>
+                            <a href="esame_finale_b1_cittadinanza.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b1-citt')">
+                                <span class="game-level-badge level-b1">B1</span>
+                                <div class="game-image bg-b1">🇮🇹</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame B1 Cittadinanza</div>
+                                    <p class="game-desc">Simulazione specifica per il test di cittadinanza italiana</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livello B2 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--level-b2); color: white; border-color: var(--level-b2);">
+                        Simulazione Livello B2 - Avanzato
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_b2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b2')">
+                                <span class="game-level-badge level-b2">B2</span>
+                                <div class="game-image bg-b2">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo B2</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello B2 - Avanzato</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livello C1 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: #6b21a8; color: white; border-color: #6b21a8;">
+                        Simulazione Livello C1 - Autonomo
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_c1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-c1')">
+                                <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
+                                <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo C1</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello C1 - Competenza autonoma</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livello C2 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: #0f172a; color: white; border-color: #0f172a;">
+                        Simulazione Livello C2 - Maestria
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_c2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-c2')">
+                                <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
+                                <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo C2</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello C2 - Maestria linguistica</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1833,6 +2155,139 @@
                             <div class="password-display" id="generated-password">...</div>
                             <button class="btn" onclick="generatePassword()" style="width: auto; display: inline-block; margin-right: 1rem;">🔄 Genera Password</button>
                             <button class="btn btn-success" onclick="copyPassword()" style="width: auto; display: inline-block;">📋 Copia</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIMULAZIONI ESAMI CECOL -->
+            <div id="simulazioni-cecol" class="section">
+                <div class="breadcrumbs">
+                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span> / <strong>Simulazioni Esami CECOL</strong>
+                </div>
+                <div style="margin:24px 0;">
+                    <h1 class="section-title" style="border-color: #8b0000;">🎓 Simulazioni Esami CECOL</h1>
+                    <p class="section-subtitle">Prova simulazioni complete per la certificazione QCER - Tutti i livelli A1-C2</p>
+                </div>
+
+                <!-- Livello A1 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--level-a1); color: white; border-color: var(--level-a1);">
+                        Simulazione Livello A1 - Principiante
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_a1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-a1')">
+                                <span class="game-level-badge level-a1">A1</span>
+                                <div class="game-image bg-a1">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo A1</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello A1 - Lettura, scrittura, ascolto</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livello A2 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--level-a2); color: white; border-color: var(--level-a2);">
+                        Simulazione Livello A2 - Elementare
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_a2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-a2')">
+                                <span class="game-level-badge level-a2">A2</span>
+                                <div class="game-image bg-a2">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo A2</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello A2 - Tutte le competenze</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livello B1 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--level-b1); color: #000; border-color: var(--level-b1);">
+                        Simulazione Livello B1 - Intermedio
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_b1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b1')">
+                                <span class="game-level-badge level-b1">B1</span>
+                                <div class="game-image bg-b1">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo B1</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello B1 - Certificazione intermedia</p>
+                                </div>
+                            </a>
+                            <a href="esame_finale_b1_cittadinanza.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b1-citt')">
+                                <span class="game-level-badge level-b1">B1</span>
+                                <div class="game-image bg-b1">🇮🇹</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame B1 Cittadinanza</div>
+                                    <p class="game-desc">Simulazione specifica per il test di cittadinanza italiana</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livello B2 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--level-b2); color: white; border-color: var(--level-b2);">
+                        Simulazione Livello B2 - Avanzato
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_b2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b2')">
+                                <span class="game-level-badge level-b2">B2</span>
+                                <div class="game-image bg-b2">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo B2</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello B2 - Avanzato</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livello C1 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: #6b21a8; color: white; border-color: #6b21a8;">
+                        Simulazione Livello C1 - Autonomo
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_c1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-c1')">
+                                <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
+                                <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo C1</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello C1 - Competenza autonoma</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Livello C2 -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: #0f172a; color: white; border-color: #0f172a;">
+                        Simulazione Livello C2 - Maestria
+                    </div>
+                    <div class="card-body">
+                        <div class="games-grid">
+                            <a href="esame_finale_c2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-c2')">
+                                <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
+                                <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">📝</div>
+                                <div class="game-content">
+                                    <div class="game-title">Esame Completo C2</div>
+                                    <p class="game-desc">Simulazione completa esame CECOL livello C2 - Maestria linguistica</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -2121,6 +2576,13 @@ function loadModule(url, moduleName) {
         'modulo_a2_modali.html': 'nav-a2-modali',
         'modulo_a2_futuro.html': 'nav-a2-futuro',
         'modulo_a2_personalita.html': 'nav-a2-personalita',
+        'esame_finale_a1.html': 'nav-sim-a1',
+        'esame_finale_a2.html': 'nav-sim-a2',
+        'esame_finale_b1.html': 'nav-sim-b1',
+        'esame_finale_b1_cittadinanza.html': 'nav-sim-b1-citt',
+        'esame_finale_b2.html': 'nav-sim-b2',
+        'esame_finale_c1.html': 'nav-sim-c1',
+        'esame_finale_c2.html': 'nav-sim-c2',
         'modulo_b1_trapassato.html': 'nav-b1-trapassato',
         'modulo_b1_congiuntivo.html': 'nav-b1-congiuntivo',
         'modulo_b1_condizionale.html': 'nav-b1-condizionale',
@@ -2510,6 +2972,39 @@ window.onload = function() {
     initDB();
     checkPasswordStrength();
 };
+
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+
+    if (!overlay) {
+        const newOverlay = document.createElement('div');
+        newOverlay.className = 'sidebar-overlay';
+        newOverlay.onclick = toggleSidebar;
+        document.body.appendChild(newOverlay);
+    }
+
+    sidebar.classList.toggle('mobile-open');
+    document.querySelector('.sidebar-overlay').classList.toggle('active');
+}
+
+// Chiudi sidebar quando si clicca su un link (mobile)
+document.addEventListener('DOMContentLoaded', function() {
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                const sidebar = document.querySelector('.sidebar');
+                const overlay = document.querySelector('.sidebar-overlay');
+                if (sidebar && sidebar.classList.contains('mobile-open')) {
+                    sidebar.classList.remove('mobile-open');
+                    if (overlay) overlay.classList.remove('active');
+                }
+            }
+        });
+    });
+});
+
 </script>
 
 </body>

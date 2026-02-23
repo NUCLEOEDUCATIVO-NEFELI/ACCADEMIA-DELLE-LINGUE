@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Richiesta Accesso - Accademia delle Lingue</title>
+    <link rel="stylesheet" href="../css/academic.css">
+    <style>
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>🏛️ Accademia delle Lingue</h1>
+                <p>Richiesta di Accesso</p>
+            </div>
+
+            <div class="login-body">
+                <div id="alertBox" class="alert alert-error" style="display: none;"></div>
+                <div id="successBox" class="alert alert-success" style="display: none;"></div>
+
+                <form id="richiestaForm">
+                    <div class="form-group">
+                        <label class="form-label">Nome *</label>
+                        <input type="text" id="nome" class="form-input" placeholder="Mario" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Cognome *</label>
+                        <input type="text" id="cognome" class="form-input" placeholder="Rossi" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" id="email" class="form-input" placeholder="mario.rossi@email.it" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Corso di interesse *</label>
+                        <select id="corso" class="form-input" required>
+                            <option value="">Seleziona...</option>
+                            <option value="Inglese">Inglese</option>
+                            <option value="Francese">Francese</option>
+                            <option value="Tedesco">Tedesco</option>
+                            <option value="Spagnolo">Spagnolo</option>
+                            <option value="Cinese">Cinese</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Messaggio (opzionale)</label>
+                        <textarea id="messaggio" class="form-input" rows="3" placeholder="Motivazione della richiesta, note particolari..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        📨 Invia richiesta
+                    </button>
+                </form>
+
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <a href="login.html" style="color: #3b82f6; text-decoration: none; font-weight: 600;">
+                        ← Torna al login
+                    </a>
+                </div>
+            </div>
+
+            <div class="login-footer">
+                <p style="font-size: 0.85rem; color: #64748b;">
+                    La tua richiesta sarà esaminata dall'amministratore.<br>
+                    Riceverai una email di conferma una volta approvata.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('richiestaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const alertBox = document.getElementById('alertBox');
+            const successBox = document.getElementById('successBox');
+            
+            // Recupera valori
+            const nome = document.getElementById('nome').value.trim();
+            const cognome = document.getElementById('cognome').value.trim();
+            const email = document.getElementById('email').value.trim().toLowerCase();
+            const corso = document.getElementById('corso').value;
+            const messaggio = document.getElementById('messaggio').value.trim();
+            
+            // Validazione email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alertBox.style.display = 'block';
+                alertBox.textContent = '❌ Inserisci un indirizzo email valido.';
+                return;
+            }
+            
+            // Recupera richieste esistenti
+            let richieste = JSON.parse(localStorage.getItem('richiesteAccesso') || '[]');
+            
+            // Controlla se email già in attesa
+            const esistente = richieste.find(r => r.email === email && r.stato === 'in_attesa');
+            if (esistente) {
+                alertBox.style.display = 'block';
+                alertBox.textContent = '⚠️ Esiste già una richiesta in attesa per questa email.';
+                return;
+            }
+            
+            // Controlla se utente già approvato
+            const utenti = JSON.parse(localStorage.getItem('utenti') || '[]');
+            const utenteEsistente = utenti.find(u => u.email === email);
+            if (utenteEsistente) {
+                alertBox.style.display = 'block';
+                alertBox.textContent = '⚠️ Questa email è già registrata. Prova ad accedere.';
+                return;
+            }
+            
+            // Crea nuova richiesta
+            const nuovaRichiesta = {
+                id: Date.now(),
+                nome: nome,
+                cognome: cognome,
+                email: email,
+                corso: corso,
+                messaggio: messaggio,
+                stato: 'in_attesa',
+                dataRichiesta: new Date().toISOString()
+            };
+            
+            // Salva
+            richieste.push(nuovaRichiesta);
+            localStorage.setItem('richiesteAccesso', JSON.stringify(richieste));
+            
+            // Mostra successo
+            document.getElementById('richiestaForm').style.display = 'none';
+            successBox.style.display = 'block';
+            successBox.innerHTML = `
+                <strong>✅ Richiesta inviata con successo!</strong><br><br>
+                <strong>Nome:</strong> ${nome} ${cognome}<br>
+                <strong>Email:</strong> ${email}<br>
+                <strong>Corso:</strong> ${corso}<br><br>
+                L'amministratore esaminerà la tua richiesta e riceverai un'email con le credenziali di accesso una volta approvata.
+            `;
+        });
+    </script>
+</body>
+</html>

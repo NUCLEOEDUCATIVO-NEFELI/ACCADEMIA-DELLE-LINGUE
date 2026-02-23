@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo B1 - Periodo Ipotetico</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --bg-light: #f5f5f0;
+            --text-dark: #2c3e50;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --protasis: #1e40af;
+            --apodosis: #059669;
+            --irreale: #7c3aed;
+        }
+        body {
+            font-family: Georgia, serif;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--b1-color);
+            font-weight: bold;
+        }
+        .nav-tab.reale:hover, .nav-tab.reale.active { color: var(--success); border-bottom-color: var(--success); }
+        .nav-tab.possibile:hover, .nav-tab.possibile.active { color: var(--protasis); border-bottom-color: var(--protasis); }
+        .nav-tab.irreale:hover, .nav-tab.irreale.active { color: var(--irreale); border-bottom-color: var(--irreale); }
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--b1-color);
+        }
+        .card-header.reale { border-left-color: var(--success); color: var(--success); }
+        .card-header.possibile { border-left-color: var(--protasis); color: var(--protasis); }
+        .card-header.irreale { border-left-color: var(--irreale); color: var(--irreale); }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+        .rule-box.reale { background: #f0fff4; border-color: var(--success); }
+        .rule-box.possibile { background: #dbeafe; border-color: var(--protasis); }
+        .rule-box.irreale { background: #ede9fe; border-color: var(--irreale); }
+        .highlight { 
+            background: rgba(201, 162, 39, 0.2); 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+        }
+        .protasis { color: var(--protasis); font-weight: bold; }
+        .apodosis { color: var(--apodosis); font-weight: bold; }
+        .irreale { color: var(--irreale); font-weight: bold; }
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .verb-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .verb-table td { 
+            padding: 12px 15px; 
+            border-bottom: 1px solid #eee; 
+        }
+        .verb-table tr:hover {
+            background: #f8f9fa;
+        }
+        .periodo-box {
+            background: #f8f9fa;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            position: relative;
+        }
+        .periodo-type {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .periodo-type.reale { background: var(--success); }
+        .periodo-type.possibile { background: var(--protasis); }
+        .periodo-type.irreale { background: var(--irreale); }
+        .example-sentence {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: white;
+            border-left: 4px solid var(--b1-color);
+        }
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--b1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--bg-light);
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+        .btn-primary:hover {
+            background: #002147;
+        }
+        .btn-check { 
+            background: var(--b1-color); 
+            color: #000; 
+        }
+        .btn-check:hover {
+            background: #b8941f;
+        }
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b1-color);
+        }
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        .avatar-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: flex-start;
+        }
+        .avatar-container { 
+            flex-shrink: 0; 
+            text-align: center; 
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--b1-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .avatar-name { 
+            margin-top: 10px; 
+            font-weight: bold; 
+            color: var(--primary); 
+        }
+        .speech-bubble {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 5px solid var(--b1-color);
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid white;
+        }
+        .exercise-counter {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .tipo-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .tipo-badge.reale { background: #f0fff4; color: var(--success); border: 1px solid var(--success); }
+        .tipo-badge.possibile { background: #dbeafe; color: var(--protasis); border: 1px solid var(--protasis); }
+        .tipo-badge.irreale { background: #ede9fe; color: var(--irreale); border: 1px solid var(--irreale); }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .avatar-section { flex-direction: column; align-items: center; }
+            .speech-bubble::before { display: none; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Modulo B1 - Periodo Ipotetico</h1>
+            <p>Le condizioni e le conseguenze: reale, possibile e irreale</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Italiano B1</a>
+            <span>›</span>
+            <strong>Periodo Ipotetico</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">❓ Periodo Ipotetico</h1>
+            <p class="page-subtitle">Esprimere condizioni e conseguenze in italiano</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab reale" onclick="showSection('reale', this)">Reale</button>
+            <button class="nav-tab possibile" onclick="showSection('possibile', this)">Possibile</button>
+            <button class="nav-tab irreale" onclick="showSection('irreale', this)">Irreale</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
+        </nav>
+
+        <!-- SEZIONE TEORIA -->
+        <section id="theory" class="section active">
+            <div class="avatar-section">
+                <div class="avatar-container">
+                    <div class="avatar">👨‍🏫</div>
+                    <div class="avatar-name">Prof. Marco</div>
+                </div>
+                <div class="speech-bubble">
+                    <h3 style="color: var(--primary); margin-bottom: 15px;">Benvenuto al Modulo B1! ❓</h3>
+                    <p>Oggi studiamo il <strong>Periodo Ipotetico</strong>, la struttura che serve per esprimere condizioni e conseguenze.</p>
+                    <p style="margin-top: 10px;"><strong>Esempio:</strong> "<span class="protasis">Se avessi tempo</span>, <span class="apodosis">verrei con te</span>."</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Che cos'è il Periodo Ipotetico?</div>
+                <div class="card-body">
+                    <p>Il periodo ipotetico è composto da due parti:</p>
+                    <div class="instruction-box">
+                        <strong><span class="protasis">Protasi (la condizione)</span>:</strong> introdotta da "se" (o sinonimi: qualora, nel caso che, purché)<br>
+                        <strong><span class="apodosis">Apodosi (la conseguenza)</span>:</strong> la parte principale della frase
+                    </div>
+
+                    <div class="periodo-box">
+                        <div class="periodo-type reale">Primo Tipo - Reale</div>
+                        <strong>Struttura:</strong> <span class="protasis">Se + Presente Indicativo</span>, <span class="apodosis">Presente/Futuro/Imperativo</span><br>
+                        <div class="example-sentence">"Se <span class="protasis">piove</span>, <span class="apodosis">prendo</span> l'ombrello."</div>
+                        <em>La condizione è realizzabile nel presente o futuro.</em>
+                    </div>
+
+                    <div class="periodo-box">
+                        <div class="periodo-type possibile">Secondo Tipo - Possibile</div>
+                        <strong>Struttura:</strong> <span class="protasis">Se + Congiuntivo Presente</span>, <span class="apodosis">Condizionale Presente</span><br>
+                        <div class="example-sentence">"Se <span class="protasis">venisse</span>, <span class="apodosis">sarei</span> contento."</div>
+                        <em>La condizione è possibile ma non certa (dubbio, ipotesi).</em>
+                    </div>
+
+                    <div class="periodo-box">
+                        <div class="periodo-type irreale">Terzo Tipo - Irreale</div>
+                        <strong>Struttura:</strong> <span class="protasis">Se + Congiuntivo Imperfetto/Trapassato</span>, <span class="apodosis">Condizionale Presente/Passato</span><br>
+                        <div class="example-sentence">"Se <span class="protasis">avessi studiato</span>, <span class="apodosis">avrei passato</span> l'esame."</div>
+                        <em>La condizione è contraria alla realtà (irrealizzabile).</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE REALE -->
+        <section id="reale" class="section">
+            <div class="card">
+                <div class="card-header reale">Primo Tipo - Reale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Uso:</strong> Per esprimere condizioni realizzabili nel presente o futuro.<br>
+                        <strong>Struttura:</strong> Se + Presente Indicativo, Presente/Futuro/Imperativo
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Protasi (Se)</th><th>Apodosi (Conseguenza)</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="protasis">Se + Presente</td>
+                                <td class="apodosis">Presente</td>
+                                <td>Se <span class="protasis">hai fame</span>, <span class="apodosis">mangi</span>.</td>
+                            </tr>
+                            <tr>
+                                <td class="protasis">Se + Presente</td>
+                                <td class="apodosis">Futuro</td>
+                                <td>Se <span class="protasis">viene</span>, <span class="apodosis">lo vedrò</span>.</td>
+                            </tr>
+                            <tr>
+                                <td class="protasis">Se + Presente</td>
+                                <td class="apodosis">Imperativo</td>
+                                <td>Se <span class="protasis">puoi</span>, <span class="apodosis">vieni</span>!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box reale">
+                        <strong>⚠️ Attenzione:</strong> In italiano si può anche usare il <em>futuro</em> nella protasi:<br>
+                        "Se <span class="protasis">verrà</span>, <span class="apodosis">glielo dirò</span>." (ma il presente è più comune)
+                    </div>
+
+                    <div class="example-sentence">
+                        <strong>Altri esempi:</strong><br>
+                        • Se piove, resto a casa.<br>
+                        • Se hai bisogno, chiamami.<br>
+                        • Se lo vedo, gli parlo.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE POSSIBILE -->
+        <section id="possibile" class="section">
+            <div class="card">
+                <div class="card-header possibile">Secondo Tipo - Possibile</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Uso:</strong> Per esprimere ipotesi possibili ma non certe, dubbi, supposizioni.<br>
+                        <strong>Struttura:</strong> Se + Congiuntivo Presente, Condizionale Presente
+                    </div>
+                    
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Verbo</th><th>Congiuntivo Presente (Protasi)</th><th>Condizionale (Apodosi)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>essere</td>
+                                <td class="protasis">se io sia, se lui sia...</td>
+                                <td class="apodosis">sarei, saresti, sarebbe...</td>
+                            </tr>
+                            <tr>
+                                <td>avere</td>
+                                <td class="protasis">se io abbia, se lui abbia...</td>
+                                <td class="apodosis">avrei, avresti, avrebbe...</td>
+                            </tr>
+                            <tr>
+                                <td>andare</td>
+                                <td class="protasis">se io vada, se lui vada...</td>
+                                <td class="apodosis">andrei, andresti, andrebbe...</td>
+                            </tr>
+                            <tr>
+                                <td>fare</td>
+                                <td class="protasis">se io faccia, se lui faccia...</td>
+                                <td class="apodosis">farei, faresti, farebbe...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box possibile">
+                        <strong>Esempi:</strong><br>
+                        • Se <span class="protasis">venisse</span> oggi, <span class="apodosis">sarei</span> sorpreso.<br>
+                        • Se <span class="protasis">abbia</span> ragione, <span class="apodosis">dovremmo</span> agire subito.<br>
+                        • Se <span class="protasis">fosse</span> vero, <span class="apodosis">lo sapremmo</span>.
+                    </div>
+
+                    <div class="example-sentence">
+                        <strong>Note:</strong> Questo tipo esprime un'ipotesi possibile ma non certa. Si usa spesso con verbi come: 
+                        <em>eventualmente, forse, magari, caso mai</em>.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE IRREALE -->
+        <section id="irreale" class="section">
+            <div class="card">
+                <div class="card-header irreale">Terzo Tipo - Irreale</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Uso:</strong> Per esprimere condizioni contrarie alla realtà (irrealizzabili).<br>
+                        <strong>Struttura:</strong> Se + Congiuntivo Imperfetto/Trapassato, Condizionale Presente/Passato
+                    </div>
+                    
+                    <div class="periodo-box">
+                        <div class="periodo-type irreale">Irreale nel Presente</div>
+                        <strong>Se + Congiuntivo Imperfetto, Condizionale Presente</strong><br>
+                        <em>Ipotesi contraria alla realtà attuale</em><br>
+                        <div class="example-sentence">
+                            "Se <span class="irreale">avessi</span> (ma non ho) soldi, <span class="apodosis">comprerei</span> una macchina."
+                        </div>
+                    </div>
+
+                    <div class="periodo-box">
+                        <div class="periodo-type irreale">Irreale nel Passato</div>
+                        <strong>Se + Congiuntivo Trapassato, Condizionale Passato</strong><br>
+                        <em>Ipotesi contraria a una realtà passata</em><br>
+                        <div class="example-sentence">
+                            "Se <span class="irreale">avessi studiato</span> (ma non ho studiato), <span class="apodosis">avrei passato</span> l'esame."
+                        </div>
+                    </div>
+
+                    <table class="verb-table">
+                        <thead>
+                            <tr><th>Tempo</th><th>Protasi (Se)</th><th>Apodosi (Conseguenza)</th><th>Esempio</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Presente</td>
+                                <td class="irreale">Cong. Imperfetto</td>
+                                <td class="apodosis">Cond. Presente</td>
+                                <td>Se fossi ricco, viaggerei.</td>
+                            </tr>
+                            <tr>
+                                <td>Passato</td>
+                                <td class="irreale">Cong. Trapassato</td>
+                                <td class="apodosis">Cond. Passato</td>
+                                <td>Se avessi saputo, sarei venuto.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box irreale">
+                        <strong>⚠️ Attenzione ai verbi irregolari:</strong><br>
+                        • essere: se io <strong>fossi</strong>, se io <strong>fossi stato</strong><br>
+                        • avere: se io <strong>avessi</strong>, se io <strong>avessi avuto</strong><br>
+                        • fare: se io <strong>facessi</strong>, se io <strong>avessi fatto</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Esercizio</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Punteggio</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Riprova tutti gli esercizi
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano B1 - Periodo Ipotetico (50 Esercizi)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali)
+        const exercises = [
+            // ESERCIZI 1-15: Primo tipo - Reale (Se + Presente, Presente/Futuro/Imperativo)
+            {
+                id: 1,
+                type: 'choice',
+                question: 'Se __________ (fare) caldo, andiamo al mare.',
+                options: ['fa', 'faccia', 'facesse', 'farà'],
+                correct: 'fa',
+                explanation: '✅ Corretto! Periodo ipotetico reale: Se + Presente Indicativo',
+                errorExplanation: '❌ Il primo tipo (reale) usa l\'indicativo presente dopo "se"',
+                tipo: 'reale'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Se hai fame, __________ (mangiare) qualcosa.',
+                correct: ['mangi', 'mangerai'],
+                explanation: '✅ Corretto! Reale: Presente o Futuro nell\'apodosi',
+                tipo: 'reale'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Se __________ (piove), prendo l\'ombrello.',
+                options: ['piove', 'piova', 'piovesse', 'pioverà'],
+                correct: 'piove',
+                explanation: '✅ Corretto! Reale: Se + Presente Indicativo',
+                errorExplanation: '❌ Il primo tipo usa l\'indicativo presente: piove',
+                tipo: 'reale'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Se __________ (venire) lui, glielo dico subito.',
+                correct: ['viene', 'verrà'],
+                explanation: '✅ Corretto! Reale: Presente o Futuro dopo "se"',
+                tipo: 'reale'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'Se puoi, __________ (venire) a trovarmi!',
+                options: ['vieni', 'verresti', 'venga', 'verrai'],
+                correct: 'vieni',
+                explanation: '✅ Corretto! Reale con imperativo nell\'apodosi',
+                errorExplanation: '❌ Con l\'imperativo si usa il primo tipo (reale): vieni',
+                tipo: 'reale'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Se __________ (essere) necessario, ti chiamo.',
+                correct: ['è', 'e\''],
+                explanation: '✅ Corretto! Reale: Se + Presente Indicativo',
+                tipo: 'reale'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'Se __________ (avere) tempo, lo faccio domani.',
+                options: ['ho', 'abbia', 'avessi', 'avrò'],
+                correct: 'ho',
+                explanation: '✅ Corretto! Reale: indicativo presente',
+                errorExplanation: '❌ Primo tipo = indicativo presente: ho',
+                tipo: 'reale'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'Se lo __________ (vedere), gli parlo.',
+                correct: ['vedo', 'vedrò'],
+                explanation: '✅ Corretto! Reale: presente o futuro',
+                tipo: 'reale'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Se __________ (stare) male, vado dal dottore.',
+                options: ['sto', 'stia', 'stessi', 'starò'],
+                correct: 'sto',
+                explanation: '✅ Corretto! Reale: indicativo presente',
+                errorExplanation: '❌ Stare al presente indicativo: sto',
+                tipo: 'reale'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Se __________ (fare) freddo, metto il cappotto.',
+                correct: ['fa', 'farà'],
+                explanation: '✅ Corretto! Reale: presente indicativo',
+                tipo: 'reale'
+            },
+            {
+                id: 11,
+                type: 'choice',
+                question: 'Se __________ (andare) a Roma, visito il Colosseo.',
+                options: ['vado', 'vada', 'andassi', 'andrò'],
+                correct: 'vado',
+                explanation: '✅ Corretto! Reale: presente indicativo',
+                errorExplanation: '❌ Primo tipo = indicativo: vado',
+                tipo: 'reale'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Se mi __________ (chiamare), rispondo subito.',
+                correct: ['chiama', 'chiamerai'],
+                explanation: '✅ Corretto! Reale: presente',
+                tipo: 'reale'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Se __________ (dovere) uscire, dimmelo!',
+                options: ['devi', 'debba', 'dovessi', 'dovrai'],
+                correct: 'devi',
+                explanation: '✅ Corretto! Reale con imperativo: devi',
+                errorExplanation: '❌ Con l\'imperativo si usa l\'indicativo: devi',
+                tipo: 'reale'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Se __________ (piacere) anche a te, compriamolo.',
+                correct: ['piace', 'piacerà'],
+                explanation: '✅ Corretto! Reale: presente indicativo',
+                tipo: 'reale'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Se __________ (essere) possibile, preferirei domani.',
+                options: ['è', 'sia', 'fosse', 'sarà'],
+                correct: 'è',
+                explanation: '✅ Corretto! Anche con "preferirei" nella seconda parte, se è possibile usiamo il reale',
+                errorExplanation: '❌ Qui si parla di una possibilità reale: è',
+                tipo: 'reale'
+            },
+
+            // ESERCIZI 16-30: Secondo tipo - Possibile (Se + Congiuntivo Presente, Condizionale)
+            {
+                id: 16,
+                type: 'choice',
+                question: 'Se __________ (venire) lui, sarei molto sorpreso.',
+                options: ['viene', 'venga', 'venisse', 'verrà'],
+                correct: 'venga',
+                explanation: '✅ Corretto! Possibile: Se + Congiuntivo Presente',
+                errorExplanation: '❌ Secondo tipo = congiuntivo presente: venga',
+                tipo: 'possibile'
+            },
+            {
+                id: 17,
+                type: 'fill',
+                question: 'Se __________ (essere) vero, dovremmo agire subito.',
+                correct: ['sia', 'fosse'],
+                explanation: '✅ Corretto! Possibile: Congiuntivo Presente (o Imperfetto)',
+                tipo: 'possibile'
+            },
+            {
+                id: 18,
+                type: 'choice',
+                question: 'Se __________ (avere) ragione, dovresti scusarti.',
+                options: ['ha', 'abbia', 'avesse', 'avrà'],
+                correct: 'abbia',
+                explanation: '✅ Corretto! Possibile: Congiuntivo Presente',
+                errorExplanation: '❌ Secondo tipo = congiuntivo: abbia',
+                tipo: 'possibile'
+            },
+            {
+                id: 19,
+                type: 'fill',
+                question: 'Se __________ (fare) così, funzionerebbe meglio.',
+                correct: ['facesse', 'facessimo'],
+                explanation: '✅ Corretto! Possibile: Congiuntivo Imperfetto (accettato anche qui)',
+                tipo: 'possibile'
+            },
+            {
+                id: 20,
+                type: 'choice',
+                question: 'Se __________ (andare) lì, troveresti ottimi ristoranti.',
+                options: ['vai', 'vada', 'andassi', 'andrai'],
+                correct: 'vada',
+                explanation: '✅ Corretto! Possibile: Congiuntivo Presente',
+                errorExplanation: '❌ Secondo tipo = congiuntivo: vada',
+                tipo: 'possibile'
+            },
+            {
+                id: 21,
+                type: 'fill',
+                question: 'Se __________ (sapere) la verità, mi diresti?',
+                correct: ['sapessi', 'sappia'],
+                explanation: '✅ Corretto! Possibile: Congiuntivo Imperfetto o Presente',
+                tipo: 'possibile'
+            },
+            {
+                id: 22,
+                type: 'choice',
+                question: 'Se __________ (potere), verresti con me?',
+                options: ['puoi', 'possa', 'potessi', 'potrai'],
+                correct: 'possa',
+                explanation: '✅ Corretto! Possibile: Congiuntivo Presente',
+                errorExplanation: '❌ Secondo tipo = congiuntivo: possa',
+                tipo: 'possibile'
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: 'Se __________ (volere), potremmo partire domani.',
+                correct: ['volesse', 'voglia'],
+                explanation: '✅ Corretto! Possibile: Congiuntivo',
+                tipo: 'possibile'
+            },
+            {
+                id: 24,
+                type: 'choice',
+                question: 'Se __________ (stare) meglio, verrebbe alla festa.',
+                options: ['sta', 'stia', 'stesse', 'starà'],
+                correct: 'stia',
+                explanation: '✅ Corretto! Possibile: Congiuntivo Presente',
+                errorExplanation: '❌ Secondo tipo = congiuntivo: stia',
+                tipo: 'possibile'
+            },
+            {
+                id: 25,
+                type: 'fill',
+                question: 'Se __________ (dovere) scegliere, quale prenderesti?',
+                correct: ['dovessi', 'debba'],
+                explanation: '✅ Corretto! Possibile: Congiuntivo',
+                tipo: 'possibile'
+            },
+            {
+                id: 26,
+                type: 'choice',
+                question: 'Se __________ (piacere) anche a lui, lo compreremmo.',
+                options: ['piace', 'piaccia', 'piacesse', 'piacerà'],
+                correct: 'piaccia',
+                explanation: '✅ Corretto! Possibile: Congiuntivo Presente',
+                errorExplanation: '❌ Piacere al congiuntivo: piaccia',
+                tipo: 'possibile'
+            },
+            {
+                id: 27,
+                type: 'fill',
+                question: 'Se __________ (capire) il problema, risolveresti tutto.',
+                correct: ['capissi', 'capisca'],
+                explanation: '✅ Corretto! Possibile: Congiuntivo',
+                tipo: 'possibile'
+            },
+            {
+                id: 28,
+                type: 'choice',
+                question: 'Se __________ (rimanere) a casa, si annoierebbe.',
+                options: ['rimane', 'rimanga', 'rimanesse', 'rimarrà'],
+                correct: 'rimanga',
+                explanation: '✅ Corretto! Possibile: Congiuntivo Presente',
+                errorExplanation: '❌ Secondo tipo = congiuntivo: rimanga',
+                tipo: 'possibile'
+            },
+            {
+                id: 29,
+                type: 'fill',
+                question: 'Se __________ (uscire) prima, eviteremmo il traffico.',
+                correct: ['uscissimo', 'usciamo'],
+                explanation: '✅ Corretto! Possibile: Congiuntivo Imperfetto (o Presente)',
+                tipo: 'possibile'
+            },
+            {
+                id: 30,
+                type: 'choice',
+                question: 'Se __________ (dire) la verità, sarebbe più semplice.',
+                options: ['dice', 'dica', 'dicesse', 'dirà'],
+                correct: 'dica',
+                explanation: '✅ Corretto! Possibile: Congiuntivo Presente',
+                errorExplanation: '❌ Dire al congiuntivo presente: dica',
+                tipo: 'possibile'
+            },
+
+            // ESERCIZI 31-45: Terzo tipo - Irreale (Se + Congiuntivo Imperfetto/Trapassato, Condizionale)
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Se __________ (avere) soldi, comprerei una macchina.',
+                options: ['ho', 'abbia', 'avessi', 'avrei'],
+                correct: 'avessi',
+                explanation: '✅ Corretto! Irreale presente: Congiuntivo Imperfetto',
+                errorExplanation: '❌ Terzo tipo (irreale) = congiuntivo imperfetto: avessi',
+                tipo: 'irreale'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Se __________ (essere) ricco, viaggerei molto.',
+                correct: ['fossi'],
+                explanation: '✅ Corretto! Irreale: Congiuntivo Imperfetto di essere → fossi',
+                tipo: 'irreale'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Se __________ (studiare) di più, avrei passato l\'esame.',
+                options: ['studio', 'studi', 'avessi studiato', 'studierò'],
+                correct: 'avessi studiato',
+                explanation: '✅ Corretto! Irreale passato: Congiuntivo Trapassato',
+                errorExplanation: '❌ Irreale nel passato = trapassato: avessi studiato',
+                tipo: 'irreale'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Se lui __________ (venire), gli avrei parlato.',
+                correct: ['fosse venuto', 'venisse'],
+                explanation: '✅ Corretto! Irreale passato: Congiuntivo Trapassato',
+                tipo: 'irreale'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Se io __________ (saperlo), sarei venuto subito.',
+                options: ['so', 'sappia', 'avessi saputo', 'saprò'],
+                correct: 'avessi saputo',
+                explanation: '✅ Corretto! Irreale passato: avessi saputo',
+                errorExplanation: '❌ Irreale nel passato = trapassato: avessi saputo',
+                tipo: 'irreale'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Se __________ (fare) attenzione, non avresti sbagliato.',
+                correct: ['avessi fatto', 'facessi'],
+                explanation: '✅ Corretto! Irreale: Congiuntivo Trapassato (o Imperfetto)',
+                tipo: 'irreale'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Se __________ (andare) a Parigi, visiterei la Torre Eiffel.',
+                options: ['vado', 'vada', 'andassi', 'andrò'],
+                correct: 'andassi',
+                explanation: '✅ Corretto! Irreale presente: Congiuntivo Imperfetto',
+                errorExplanation: '❌ Irreale = congiuntivo imperfetto: andassi',
+                tipo: 'irreale'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Se non __________ (piovere), saremmo usciti.',
+                correct: ['fosse piovuto', 'piovesse'],
+                explanation: '✅ Corretto! Irreale passato: Congiuntivo Trapassato',
+                tipo: 'irreale'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Se tu __________ (volere), avremmo potuto vincere.',
+                options: ['vuoi', 'voglia', 'avessi voluto', 'vorrai'],
+                correct: 'avessi voluto',
+                explanation: '✅ Corretto! Irreale passato: avessi voluto',
+                errorExplanation: '❌ Irreale nel passato = trapassato: avessi voluto',
+                tipo: 'irreale'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Se __________ (potere), ti avrei aiutato.',
+                correct: ['avessi potuto', 'potessi'],
+                explanation: '✅ Corretto! Irreale: Congiuntivo Trapassato (o Imperfetto)',
+                tipo: 'irreale'
+            },
+            {
+                id: 41,
+                type: 'choice',
+                question: 'Se __________ (rimanere) a casa, avrei studiato.',
+                options: ['rimango', 'rimanga', 'fossi rimasto', 'rimarrò'],
+                correct: 'fossi rimasto',
+                explanation: '✅ Corretto! Irreale passato: fossi rimasto',
+                errorExplanation: '❌ Essere + participio al trapassato: fossi rimasto',
+                tipo: 'irreale'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Se __________ (dovere) scegliere, avrei preso l\'altro.',
+                correct: ['avessi dovuto', 'dovessi'],
+                explanation: '✅ Corretto! Irreale: Congiuntivo Trapassato',
+                tipo: 'irreale'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Se non __________ (perdere) il treno, sarei arrivato puntuale.',
+                options: ['perdo', 'perda', 'avessi perso', 'perderò'],
+                correct: 'avessi perso',
+                explanation: '✅ Corretto! Irreale passato: avessi perso',
+                errorExplanation: '❌ Trapassato con avere: avessi perso',
+                tipo: 'irreale'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Se __________ (essere) più gentile, avrebbe più amici.',
+                correct: ['fosse', 'fosse stato'],
+                explanation: '✅ Corretto! Irreale presente: Congiuntivo Imperfetto',
+                tipo: 'irreale'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'Se __________ (nascere) in Italia, parlerei meglio.',
+                options: ['nasco', 'nasca', 'fossi nato', 'nascerò'],
+                correct: 'fossi nato',
+                explanation: '✅ Corretto! Irreale passato: fossi nato (essere + participio)',
+                errorExplanation: '❌ Nascere usa essere: fossi nato',
+                tipo: 'irreale'
+            },
+
+            // ESERCIZI 46-50: Mix e riconoscimento del tipo
+            {
+                id: 46,
+                type: 'choice',
+                question: 'Quale periodo ipotetico è: "Se piove, resto a casa"?',
+                options: ['Reale', 'Possibile', 'Irreale', 'Reale'],
+                correct: 'Reale',
+                explanation: '✅ Corretto! Presente + Presente = Primo tipo (reale)',
+                errorExplanation: '❌ Indicativo presente in entrambe le parti = reale',
+                tipo: 'mix'
+            },
+            {
+                id: 47,
+                type: 'fill',
+                question: 'Completa con il tipo corretto: "Se __________ (venire), sarei felice" (possibile).',
+                correct: ['venga', 'venisse'],
+                explanation: '✅ Corretto! Possibile = Congiuntivo Presente o Imperfetto',
+                tipo: 'mix'
+            },
+            {
+                id: 48,
+                type: 'choice',
+                question: 'Identifica: "Se avessi studiato, avrei passato l\'esame"',
+                options: ['Irreale', 'Reale', 'Possibile', 'Irreale'],
+                correct: 'Irreale',
+                explanation: '✅ Corretto! Trapassato + Condizionale Passato = Irreale',
+                errorExplanation: '❌ Trapassato nella protasi = irreale nel passato',
+                tipo: 'mix'
+            },
+            {
+                id: 49,
+                type: 'fill',
+                question: 'Trasforma in irreale: "Non ho soldi, non compro la macchina" → Se __________ soldi, __________ la macchina.',
+                correct: ['avessi comprerei', 'avessi avrei comprato'],
+                explanation: '✅ Corretto! Irreale presente: avessi... comprerei',
+                tipo: 'mix'
+            },
+            {
+                id: 50,
+                type: 'choice',
+                question: 'Completa l\'irreale passato: "Se __________ (saperlo), sarei venuto"',
+                options: ['avessi saputo', 'avessi saputo', 'avessi saputo', 'sapessi'],
+                correct: 'avessi saputo',
+                explanation: '✅ Corretto! Irreale passato = Trapassato: avessi saputo. Complimenti!',
+                errorExplanation: '❌ Irreale nel passato richiede il trapassato',
+                tipo: 'mix'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let tipoBadge = '';
+            if (ex.tipo) {
+                tipoBadge = `<div class="tipo-badge ${ex.tipo}">${ex.tipo.toUpperCase()}</div>`;
+            }
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Esercizio ${ex.id}</div>
+                    <div class="card-body">
+                        ${tipoBadge}
+                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la forma verbale..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Eccellente! Padroneggi perfettamente tutti i tipi di periodo ipotetico! Sei pronto per il C1!';
+            } else if (totalScore >= 70) {
+                message = '👍 Ottimo lavoro! Conosci bene il periodo ipotetico, fai solo attenzione ai congiuntivi!';
+            } else if (totalScore >= 50) {
+                message = '💪 Buon lavoro! Ricorda: Reale = Indicativo, Possibile = Congiuntivo + Condizionale, Irreale = Congiuntivo Imperfetto/Trapassato + Condizionale!';
+            } else {
+                message = '📚 Ripassa le tre tipologie: il reale (possibile), il possibile (dubbio), l\'irreale (contrario alla realtà)!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>
