@@ -2,988 +2,1056 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pannello Amministrazione - Accademia delle Lingue</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Admin - Accademia delle Lingue</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --primary: #1e3a5f;
-            --primary-dark: #152a45;
-            --secondary: #8b0000;
-            --success: #276749;
-            --error: #c53030;
-            --bg-primary: #f5f5f0;
-            --bg-card: #ffffff;
-            --border: #d4d4c8;
-            --text-primary: #2c3e50;
-            --text-secondary: #5a6c7d;
-            --accent: #c9a227;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
-
-        body { 
-            font-family: 'Georgia', 'Times New Roman', serif; 
-            background: var(--bg-primary); 
-            color: var(--text-primary);
-            line-height: 1.6;
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f1f5f9;
+            min-height: 100vh;
         }
-
-        /* Header Accademico */
-        .academic-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 2rem 0;
-            border-bottom: 4px solid var(--secondary);
-            text-align: center;
+        
+        /* Login Admin */
+        .login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1e3a5f 0%, #152a45 100%);
+            padding: 1rem;
         }
-
-        .academic-header h1 {
-            font-size: 1.8rem;
-            font-weight: normal;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .academic-header p {
-            font-size: 0.9rem;
-            font-style: italic;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Login Section */
-        .login-section { 
-            min-height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            background: var(--bg-primary);
-            padding: 20px; 
-        }
-
-        .login-container { 
-            width: 100%; 
-            max-width: 480px; 
-            background: var(--bg-card); 
-            border-radius: 0; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
-            overflow: hidden;
-            border: 1px solid var(--border);
-        }
-
-        .login-header { 
-            background: var(--primary); 
-            padding: 40px 30px; 
-            text-align: center; 
-            color: white;
-            border-bottom: 3px solid var(--secondary);
-        }
-
-        .login-logo { 
-            font-size: 3rem; 
-            margin-bottom: 16px; 
-        }
-
-        .login-body { 
-            padding: 32px; 
-        }
-
-        .form-group { 
-            margin-bottom: 20px; 
-        }
-
-        .form-label { 
-            display: block; 
-            font-size: 0.875rem; 
-            font-weight: 600; 
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-input { 
-            width: 100%; 
-            padding: 12px 16px; 
-            border: 1px solid var(--border); 
-            border-radius: 0; 
-            font-size: 1rem;
-            font-family: inherit;
-            background: #fafafa;
-        }
-
-        .form-input:focus { 
-            outline: none; 
-            border-color: var(--primary);
+        
+        .login-box {
+            width: 100%;
+            max-width: 400px;
             background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-
-        .btn { 
-            width: 100%; 
-            padding: 14px; 
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            border-radius: 0; 
-            font-size: 1rem; 
-            font-weight: 600; 
+        
+        .login-box h1 {
+            text-align: center;
+            color: #1e3a5f;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            display: none;
+        }
+        
+        .topbar {
+            background: linear-gradient(135deg, #1e3a5f 0%, #152a45 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .topbar h1 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .btn-logout {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s;
+            font-size: 0.875rem;
         }
-
-        .btn:hover { 
-            background: var(--primary-dark);
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
         }
-
-        .btn-secondary { 
-            background: transparent; 
-            color: var(--primary); 
-            border: 2px solid var(--primary); 
+        
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
-
-        .btn-secondary:hover {
-            background: var(--primary);
+        
+        @media (min-width: 640px) {
+            .stats {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e3a5f;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+        
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-weight: 600;
+            color: #1e3a5f;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .card-body {
+            padding: 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            .card-body {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* Form elements */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            -webkit-appearance: none;
+        }
+        
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: #1e3a5f;
+        }
+        
+        textarea.form-input {
+            min-height: 80px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a5f 0%, #152a45 100%);
             color: white;
         }
-
-        .btn-success { 
-            background: var(--success); 
+        
+        .btn-success {
+            background: #10b981;
+            color: white;
         }
-
+        
         .btn-danger {
-            background: var(--error);
+            background: #ef4444;
+            color: white;
         }
-
-        .form-footer { 
-            text-align: center; 
-            margin-top: 24px; 
-            padding-top: 24px; 
-            border-top: 1px solid var(--border); 
+        
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #1e3a5f;
         }
-
-        .form-footer a { 
-            color: var(--primary); 
-            font-weight: 600; 
-            text-decoration: none; 
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
-
-        .form-footer a:hover { 
-            text-decoration: underline; 
-        }
-
-        .alert { 
-            padding: 12px 16px; 
-            border-radius: 0; 
-            margin-bottom: 16px; 
-            display: none;
-            border-left: 4px solid;
-        }
-
-        .alert-error { 
-            background: #fed7d7; 
-            color: var(--error); 
-            display: block;
-            border-left-color: var(--error);
-        }
-
-        .alert-success { 
-            background: #c6f6d5; 
-            color: var(--success); 
-            display: block;
-            border-left-color: var(--success);
-        }
-
-        /* Dashboard */
-        .dashboard { 
-            display: none; 
-            min-height: 100vh; 
-        }
-
-        .top-nav { 
-            background: var(--primary); 
-            color: white; 
-            padding: 0 24px; 
-            height: 64px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between;
-            border-bottom: 3px solid var(--secondary);
-        }
-
-        .main-container { 
-            display: flex; 
-            min-height: calc(100vh - 64px); 
-        }
-
-        .sidebar { 
-            width: 300px; 
-            background: var(--bg-card); 
-            border-right: 1px solid var(--border); 
-            padding: 24px 0;
-            box-shadow: 2px 0 4px rgba(0,0,0,0.05);
-            overflow-y: auto;
-            max-height: calc(100vh - 64px);
-        }
-
-        .nav-item { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            padding: 12px 16px; 
-            margin: 0 12px 4px 12px;
-            border-radius: 0; 
-            cursor: pointer; 
-            color: var(--text-secondary);
-            border-left: 3px solid transparent;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .nav-item:hover { 
-            background: var(--bg-primary); 
-            color: var(--text-primary);
-            border-left-color: var(--border);
-        }
-
-        .nav-item.active { 
-            background: var(--bg-primary); 
-            color: var(--primary);
-            border-left-color: var(--secondary);
-            font-weight: 600;
-        }
-
-        .content { 
-            flex: 1; 
-            padding: 32px; 
-            background: var(--bg-primary);
-            overflow-y: auto;
-            max-height: calc(100vh - 64px);
-        }
-
-        .section { 
-            display: none; 
-        }
-
-        .section.active { 
-            display: block; 
-        }
-
-        .card { 
-            background: var(--bg-card); 
-            border-radius: 0; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08); 
-            border: 1px solid var(--border); 
-            margin-bottom: 24px; 
-        }
-
-        .card-header { 
-            padding: 20px 24px; 
-            border-bottom: 2px solid var(--border); 
-            font-weight: 600;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.95rem;
-        }
-
-        .card-body { 
-            padding: 24px; 
-        }
-
-        .stats-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 20px; 
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 24px;
-            text-align: center;
-            border-left: 4px solid var(--secondary);
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            font-family: 'Times New Roman', serif;
-        }
-
-        .section-title {
-            font-size: 1.75rem;
-            color: var(--primary);
-            font-weight: normal;
-            margin-bottom: 8px;
-            border-bottom: 2px solid var(--secondary);
-            padding-bottom: 12px;
-        }
-
-        .section-subtitle {
-            color: var(--text-secondary);
-            font-style: italic;
-            margin-bottom: 24px;
-        }
-
-        /* Menu Category */
-        .menu-category {
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-            margin: 16px 12px 8px 12px;
-            padding-left: 12px;
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 4px;
-        }
-
+        
         /* Tables */
-        .data-table {
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            border-radius: 0;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-            border: 1px solid var(--border);
+            font-size: 0.875rem;
         }
-        .data-table th {
-            background: var(--primary);
-            color: white;
-            padding: 1rem;
+        
+        th {
+            background: #f8fafc;
+            padding: 0.75rem;
             text-align: left;
             font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
+            color: #374151;
+            border-bottom: 2px solid #e5e7eb;
+            white-space: nowrap;
         }
-        .data-table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
+        
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+            color: #64748b;
         }
-        .data-table tr:hover {
-            background: var(--bg-primary);
+        
+        tr:hover {
+            background: #f8fafc;
         }
-
+        
         /* Badges */
         .badge {
+            display: inline-block;
             padding: 0.25rem 0.75rem;
-            border-radius: 0;
+            border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 600;
-            text-transform: uppercase;
         }
+        
         .badge-pending {
             background: #fef3c7;
             color: #92400e;
         }
+        
         .badge-approved {
-            background: #dcfce7;
-            color: #166534;
+            background: #d1fae5;
+            color: #065f46;
         }
-
-        /* Password Generator */
+        
+        .badge-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        /* Password display */
         .password-box {
             background: #f0fdf4;
-            border: 2px dashed var(--success);
-            padding: 2rem;
+            border: 2px dashed #10b981;
+            border-radius: 8px;
+            padding: 1rem;
             text-align: center;
+            margin: 1rem 0;
         }
+        
         .password-display {
             font-family: 'Courier New', monospace;
-            font-size: 2rem;
-            color: var(--primary);
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #059669;
             background: white;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+            word-break: break-all;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
             padding: 1rem;
-            margin: 1rem 0;
-            letter-spacing: 2px;
-            border: 2px solid var(--border);
         }
-
-        /* Breadcrumbs */
-        .breadcrumbs {
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border);
-            padding: 12px 24px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin: -32px -32px 24px -32px;
+        
+        .modal-overlay.active {
+            display: flex;
         }
-        .breadcrumbs strong {
-            color: var(--text-primary);
+        
+        .modal {
+            background: white;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                z-index: 100;
-                max-height: 60vh;
-                overflow-y: auto;
+        
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .modal-header h2 {
+            color: #1e3a5f;
+            font-size: 1.25rem;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+        
+        /* Empty state */
+        .empty {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #64748b;
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+        
+        .tab-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #64748b;
+            white-space: nowrap;
+        }
+        
+        .tab-btn.active {
+            border-color: #1e3a5f;
+            color: #1e3a5f;
+            background: #eff6ff;
+        }
+        
+        /* Grid */
+        .grid-2 {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Alert */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Hide on mobile */
+        @media (max-width: 640px) {
+            .hide-mobile {
                 display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- LOGIN -->
-    <div id="loginSection" class="login-section">
-        <div class="login-container">
-            <div class="login-header">
-                <div class="login-logo">⚙️</div>
-                <h1 style="font-size: 1.3rem; line-height: 1.3; font-weight: normal;">PANNELLO AMMINISTRAZIONE</h1>
-                <p style="font-size: 0.8rem; margin-top: 8px; font-style: italic;">Accademia delle Lingue</p>
-                <p style="font-size: 0.75rem; margin-top: 4px; opacity: 0.8;">Nucleo Educativo per la Formazione Europea al Lavoro Internazionale</p>
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <h1>⚙️ Admin Accesso</h1>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label class="form-label">Password Admin</label>
+                    <input type="password" id="adminPassword" class="form-input" placeholder="Inserisci password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Accedi</button>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <a href="login.html" style="color: #64748b; text-decoration: none; font-size: 0.875rem;">← Torna al Login Studenti</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="dashboard">
+        <div class="topbar">
+            <h1>📋 Gestione Accademia</h1>
+            <button class="btn-logout" onclick="adminLogout()">Logout</button>
+        </div>
+        
+        <div class="container">
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="statPending">0</div>
+                    <div class="stat-label">In Attesa</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statApproved">0</div>
+                    <div class="stat-label">Approvati</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statTotal">0</div>
+                    <div class="stat-label">Totali</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statUsers">0</div>
+                    <div class="stat-label">Utenti</div>
+                </div>
             </div>
-            <div class="login-body">
-                <div id="loginError" class="alert alert-error" style="display: none;"></div>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label class="form-label">Email Amministratore</label>
-                        <input type="email" id="loginEmail" class="form-input" required placeholder="admin@accademia.it"/>
+            
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('pending')" id="tab-pending">⏳ In Attesa</button>
+                <button class="tab-btn" onclick="showTab('approved')" id="tab-approved">✅ Approvati</button>
+                <button class="tab-btn" onclick="showTab('rejected')" id="tab-rejected">❌ Rifiutati</button>
+                <button class="tab-btn" onclick="showTab('users')" id="tab-users">👥 Utenti</button>
+            </div>
+            
+            <!-- Richieste in Attesa -->
+            <div id="view-pending" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <span>Richieste da Approvare</span>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Password</label>
-                        <input type="password" id="loginPassword" class="form-input" required placeholder="Inserire password"/>
+                    <div class="card-body" id="pendingList">
+                        <div class="empty">
+                            <div class="empty-icon">📭</div>
+                            <p>Nessuna richiesta in attesa</p>
+                        </div>
                     </div>
-                    <button type="submit" class="btn">Accedi all'Area Riservata</button>
-
-                    <div class="form-footer">
-                        <p><a href="../index.html">← Torna alla Piattaforma Studenti</a></p>
+                </div>
+            </div>
+            
+            <!-- Approvati -->
+            <div id="view-approved" class="tab-content hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <span>Richieste Approvate</span>
                     </div>
-                </form>
+                    <div class="card-body" id="approvedList">
+                        <div class="empty">
+                            <div class="empty-icon">✅</div>
+                            <p>Nessuna richiesta approvata</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rifiutati -->
+            <div id="view-rejected" class="tab-content hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <span>Richieste Rifiutate</span>
+                    </div>
+                    <div class="card-body" id="rejectedList">
+                        <div class="empty">
+                            <div class="empty-icon">❌</div>
+                            <p>Nessuna richiesta rifiutata</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Utenti -->
+            <div id="view-users" class="tab-content hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <span>Utenti Registrati</span>
+                        <button class="btn btn-primary" onclick="showAddUserModal()" style="padding: 0.5rem 1rem; font-size: 0.8rem;">➕ Aggiungi</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="usersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Corso</th>
+                                        <th>Stato</th>
+                                        <th>Azioni</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTableBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- DASHBOARD ADMIN -->
-    <div id="dashboard" class="dashboard">
-        <nav class="top-nav">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <span style="font-size:1.5rem;">⚙️</span>
-                <div>
-                    <div style="font-weight:600; letter-spacing: 0.5px;">PANNELLO AMMINISTRAZIONE</div>
-                    <div style="font-size:0.7rem; opacity:0.8; font-style:italic;">Accademia delle Lingue</div>
+    
+    <!-- MODAL APPROVA -->
+    <div id="approveModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>✅ Approva Richiesta</h2>
+            </div>
+            <div class="modal-body">
+                <div id="approveAlert"></div>
+                
+                <div class="form-group">
+                    <label class="form-label">Studente</label>
+                    <input type="text" id="appNome" class="form-input" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="appEmail" class="form-input" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Corso</label>
+                    <input type="text" id="appCorso" class="form-input" readonly>
+                </div>
+                
+                <div class="password-box">
+                    <div style="font-size: 0.875rem; color: #065f46; font-weight: 600;">Password Generata</div>
+                    <div class="password-display" id="appPassword">...</div>
+                    <button type="button" class="btn btn-secondary" onclick="regeneratePassword()" style="margin-top: 0.5rem; font-size: 0.8rem;">🔄 Rigenera</button>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Messaggio per lo studente (opzionale)</label>
+                    <textarea id="appMessaggio" class="form-input" placeholder="Aggiungi un messaggio personalizzato..."></textarea>
+                </div>
+                
+                <!-- Form nascosto per FormSubmit -->
+                <form id="emailForm" action="https://formsubmit.co/infonefelieducation@gmail.com" method="POST" style="display: none;">
+                    <input type="hidden" name="_subject" value="🏛️ Accademia delle Lingue - Credenziali di Accesso">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" id="formNextUrl">
+                    <input type="hidden" name="email" id="formEmail">
+                    <input type="hidden" name="Studente" id="formStudente">
+                    <input type="hidden" name="Email" id="formEmail2">
+                    <input type="hidden" name="Password" id="formPassword">
+                    <input type="hidden" name="Corso" id="formCorso">
+                    <input type="hidden" name="Messaggio" id="formMessaggio">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Annulla</button>
+                <button class="btn btn-success" onclick="confirmApprove()" id="btnConfirm">📧 Invia Email e Approva</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL AGGIUNGI UTENTE -->
+    <div id="addUserModal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>➕ Aggiungi Utente</h2>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Nome completo *</label>
+                    <input type="text" id="addNome" class="form-input" placeholder="Mario Rossi">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" id="addEmail" class="form-input" placeholder="mario@email.it">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Corso *</label>
+                    <select id="addCorso" class="form-select">
+                        <option value="">Seleziona...</option>
+                        <option value="Inglese A1">Inglese A1</option>
+                        <option value="Inglese A2">Inglese A2</option>
+                        <option value="Inglese B1">Inglese B1</option>
+                        <option value="Inglese B2">Inglese B2</option>
+                        <option value="Italiano L2">Italiano L2</option>
+                    </select>
                 </div>
             </div>
-            <div style="display:flex;align-items:center;gap:20px;">
-                <div style="text-align:right;">
-                    <div style="font-weight:600; font-family: Georgia, serif;">Amministratore</div>
-                    <div style="font-size:0.8rem;opacity:0.8;">Area Riservata</div>
-                </div>
-                <button onclick="logout()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;padding:8px 16px;cursor:pointer; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px;">Logout</button>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeAddModal()">Annulla</button>
+                <button class="btn btn-success" onclick="confirmAddUser()">💾 Salva</button>
             </div>
-        </nav>
-
-        <div class="main-container">
-            <aside class="sidebar">
-                <div class="menu-category">Generale</div>
-                <div class="nav-item active" onclick="showSection('home')" id="nav-home">
-                    <span>📊</span><span>Dashboard</span>
-                </div>
-
-                <div class="menu-category">Gestione Accessi</div>
-                <div class="nav-item" onclick="showSection('requests')" id="nav-requests">
-                    <span>📝</span><span>Richieste Accesso</span>
-                </div>
-                <div class="nav-item" onclick="showSection('users')" id="nav-users">
-                    <span>👥</span><span>Gestione Utenti</span>
-                </div>
-
-                <div class="menu-category">Dati e Report</div>
-                <div class="nav-item" onclick="showSection('scores')" id="nav-scores">
-                    <span>📈</span><span>Punteggi Studenti</span>
-                </div>
-                <div class="nav-item" onclick="showSection('passwords')" id="nav-passwords">
-                    <span>🔐</span><span>Generatore Password</span>
-                </div>
-
-                <div class="menu-category">Sistema</div>
-                <div class="nav-item" onclick="window.location.href='../index.html'">
-                    <span>🎓</span><span>Torna alla Piattaforma</span>
-                </div>
-            </aside>
-
-            <main class="content">
-                <!-- DASHBOARD HOME -->
-                <div id="home" class="section active">
-                    <div class="breadcrumbs">
-                        <strong>Dashboard Amministrativa</strong>
-                    </div>
-
-                    <div style="margin-bottom:32px;">
-                        <h1 class="section-title">Pannello di Controllo</h1>
-                        <p class="section-subtitle">Gestione completa della piattaforma e monitoraggio studenti</p>
-                    </div>
-
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-label">Utenti Totali</div>
-                            <div class="stat-value" id="stat-users">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Richieste in Attesa</div>
-                            <div class="stat-value" id="stat-pending">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Test Completati</div>
-                            <div class="stat-value" id="stat-scores">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Media Punteggi</div>
-                            <div class="stat-value" id="stat-avg">0%</div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">📤 Esportazione Dati</div>
-                        <div class="card-body">
-                            <p style="margin-bottom: 1rem; color: var(--text-secondary);">Scarica i dati della piattaforma in formato Excel (CSV)</p>
-                            <button class="btn btn-success" onclick="exportScores()" style="width: auto; display: inline-block; margin-right: 1rem;">
-                                📊 Esporta Punteggi
-                            </button>
-                            <button class="btn" onclick="exportUsers()" style="width: auto; display: inline-block;">
-                                👥 Esporta Utenti
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- RICHIESTE ACCESSO -->
-                <div id="requests" class="section">
-                    <div class="breadcrumbs">
-                        <span onclick="showSection('home')" style="cursor: pointer;">Dashboard</span> / <strong>Richieste Accesso</strong>
-                    </div>
-                    <div style="margin:24px 0;">
-                        <h1 class="section-title">Richieste di Accesso</h1>
-                        <p class="section-subtitle">Approva o rifiuta le richieste di registrazione degli studenti</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">Elenco Richieste in Attesa</div>
-                        <div class="card-body">
-                            <table class="data-table" id="requests-table">
-                                <thead>
-                                    <tr>
-                                        <th>Data</th>
-                                        <th>Nome</th>
-                                        <th>Email</th>
-                                        <th>Motivazione</th>
-                                        <th>Azioni</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GESTIONE UTENTI -->
-                <div id="users" class="section">
-                    <div class="breadcrumbs">
-                        <span onclick="showSection('home')" style="cursor: pointer;">Dashboard</span> / <strong>Gestione Utenti</strong>
-                    </div>
-                    <div style="margin:24px 0;">
-                        <h1 class="section-title">Utenti Registrati</h1>
-                        <p class="section-subtitle">Visualizza e gestisci gli account degli studenti</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>Elenco Studenti</span>
-                                <button class="btn btn-success" onclick="addUser()" style="width: auto; padding: 8px 16px; font-size: 0.85rem;">➕ Aggiungi Utente</button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="data-table" id="users-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nome</th>
-                                        <th>Email</th>
-                                        <th>Password</th>
-                                        <th>Azioni</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PUNTEGGI -->
-                <div id="scores" class="section">
-                    <div class="breadcrumbs">
-                        <span onclick="showSection('home')" style="cursor: pointer;">Dashboard</span> / <strong>Punteggi Studenti</strong>
-                    </div>
-                    <div style="margin:24px 0;">
-                        <h1 class="section-title">Registro Valutazioni</h1>
-                        <p class="section-subtitle">Monitora i progressi e i risultati degli studenti</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>Elenco Punteggi</span>
-                                <button class="btn btn-success" onclick="exportScores()" style="width: auto; padding: 8px 16px; font-size: 0.85rem;">📊 Esporta Excel</button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="data-table" id="scores-table">
-                                <thead>
-                                    <tr>
-                                        <th>Data</th>
-                                        <th>Studente</th>
-                                        <th>Email</th>
-                                        <th>Modulo</th>
-                                        <th>Punteggio</th>
-                                        <th>%</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- GENERATORE PASSWORD -->
-                <div id="passwords" class="section">
-                    <div class="breadcrumbs">
-                        <span onclick="showSection('home')" style="cursor: pointer;">Dashboard</span> / <strong>Generatore Password</strong>
-                    </div>
-                    <div style="margin:24px 0;">
-                        <h1 class="section-title">Generatore Password Sicure</h1>
-                        <p class="section-subtitle">Crea password robuste per gli account degli studenti</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">Genera Nuova Password</div>
-                        <div class="card-body">
-                            <div class="password-box">
-                                <p style="margin-bottom: 1rem;">Clicca il pulsante per generare una password sicura di 12 caratteri</p>
-                                <div class="password-display" id="generated-password">...</div>
-                                <button class="btn" onclick="generatePassword()" style="width: auto; display: inline-block; margin-right: 1rem;">🔄 Genera Password</button>
-                                <button class="btn btn-success" onclick="copyPassword()" style="width: auto; display: inline-block;">📋 Copia</button>
-                            </div>
-                            <div style="margin-top: 2rem; padding: 1rem; background: #fef3c7; border-left: 4px solid #c9a227;">
-                                <strong style="color: #92400e;">📋 Requisiti Password:</strong>
-                                <ul style="margin-top: 0.5rem; margin-left: 1.5rem; color: #92400e;">
-                                    <li>Minimo 12 caratteri</li>
-                                    <li>Lettere maiuscole e minuscole</li>
-                                    <li>Numeri e simboli speciali</li>
-                                    <li>Non utilizzare dati personali</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
         </div>
     </div>
 
     <script>
-        // Database
-        let db = { users: [], requests: [], scores: [] };
-
-        // Inizializzazione
+        // CONFIG
+        const ADMIN_PASSWORD = 'admin2024'; // Cambia questa password!
+        const EMAIL_DESTINATION = 'infonefelieducation@gmail.com'; // Email per FormSubmit
+        
+        // STATE
+        let currentRequest = null;
+        let generatedPassword = '';
+        
+        // INIT
         document.addEventListener('DOMContentLoaded', function() {
-            initDB();
-
             // Check if logged in
-            if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+            if (sessionStorage.getItem('adminLogged') === 'true') {
                 showDashboard();
             }
-
+            
             // Login form
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
+            document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
                 e.preventDefault();
-                const email = document.getElementById('loginEmail').value;
-                const password = document.getElementById('loginPassword').value;
-
-                if (email === 'admin@accademia.it' && password === 'Admin2024!') {
-                    sessionStorage.setItem('adminLoggedIn', 'true');
+                const pwd = document.getElementById('adminPassword').value;
+                if (pwd === ADMIN_PASSWORD) {
+                    sessionStorage.setItem('adminLogged', 'true');
                     showDashboard();
                 } else {
-                    document.getElementById('loginError').textContent = 'Credenziali non valide';
-                    document.getElementById('loginError').style.display = 'block';
+                    alert('❌ Password errata!');
                 }
             });
         });
-
-        function initDB() {
-            const stored = localStorage.getItem('accademia_data');
-            if (stored) {
-                db = JSON.parse(stored);
-            } else {
-                db.users.push({
-                    id: 'admin001',
-                    email: 'admin@accademia.it',
-                    password: 'Admin2024!',
-                    name: 'Amministratore',
-                    role: 'admin',
-                    created: new Date().toISOString()
-                });
-                saveDB();
-            }
-        }
-
-        function saveDB() {
-            localStorage.setItem('accademia_data', JSON.stringify(db));
-        }
-
+        
         function showDashboard() {
-            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
             updateStats();
-            loadRequests();
+            loadPending();
+            loadApproved();
+            loadRejected();
             loadUsers();
-            loadScores();
         }
-
-        function logout() {
-            sessionStorage.removeItem('adminLoggedIn');
+        
+        function adminLogout() {
+            sessionStorage.removeItem('adminLogged');
             window.location.reload();
         }
-
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
-            document.getElementById(sectionId).classList.add('active');
-            document.getElementById('nav-' + sectionId).classList.add('active');
-
-            if (sectionId === 'requests') loadRequests();
-            if (sectionId === 'users') loadUsers();
-            if (sectionId === 'scores') loadScores();
-        }
-
+        
+        // STATS
         function updateStats() {
-            document.getElementById('stat-users').textContent = db.users.filter(u => u.role !== 'admin').length;
-            document.getElementById('stat-pending').textContent = db.requests.filter(r => r.status === 'pending').length;
-            document.getElementById('stat-scores').textContent = db.scores.length;
-
-            const avg = db.scores.length > 0 
-                ? Math.round(db.scores.reduce((a, s) => a + s.percentage, 0) / db.scores.length)
-                : 0;
-            document.getElementById('stat-avg').textContent = avg + '%';
+            const requests = JSON.parse(localStorage.getItem('accademia_requests') || '[]');
+            const users = JSON.parse(localStorage.getItem('accademia_users') || '[]');
+            
+            document.getElementById('statPending').textContent = requests.filter(r => r.status === 'pending').length;
+            document.getElementById('statApproved').textContent = requests.filter(r => r.status === 'approved').length;
+            document.getElementById('statTotal').textContent = requests.length;
+            document.getElementById('statUsers').textContent = users.length;
         }
-
-        function loadRequests() {
-            const tbody = document.querySelector('#requests-table tbody');
-            const pending = db.requests.filter(r => r.status === 'pending');
-
+        
+        // TABS
+        function showTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+            
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.getElementById('view-' + tab).classList.remove('hidden');
+            
+            if (tab === 'pending') loadPending();
+            if (tab === 'approved') loadApproved();
+            if (tab === 'rejected') loadRejected();
+            if (tab === 'users') loadUsers();
+        }
+        
+        // LOAD PENDING
+        function loadPending() {
+            const requests = JSON.parse(localStorage.getItem('accademia_requests') || '[]');
+            const pending = requests.filter(r => r.status === 'pending').sort((a,b) => new Date(b.date) - new Date(a.date));
+            
+            const container = document.getElementById('pendingList');
+            
             if (pending.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuna richiesta in attesa</td></tr>';
+                container.innerHTML = `
+                    <div class="empty">
+                        <div class="empty-icon">📭</div>
+                        <p>Nessuna richiesta in attesa</p>
+                    </div>
+                `;
                 return;
             }
-
-            tbody.innerHTML = pending.map(r => `
-                <tr>
-                    <td>${new Date(r.created).toLocaleDateString('it-IT')}</td>
-                    <td>${r.name}</td>
-                    <td>${r.email}</td>
-                    <td>${r.motivation.substring(0, 50)}...</td>
-                    <td>
-                        <button class="btn btn-success" onclick="approveRequest('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem; margin-right: 0.5rem;">✓ Approva</button>
-                        <button class="btn btn-danger" onclick="rejectRequest('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem;">✗ Rifiuta</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function approveRequest(id) {
-            const req = db.requests.find(r => r.id === id);
-            if (!req) return;
-
-            const password = generateRandomPassword();
-
-            db.users.push({
-                id: 'user_' + Date.now(),
-                email: req.email,
-                password: password,
-                name: req.name,
-                role: 'student',
-                created: new Date().toISOString()
+            
+            let html = '<div class="grid-2">';
+            pending.forEach(req => {
+                html += `
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 style="color: #1e3a5f; margin-bottom: 0.5rem;">${req.nome}</h3>
+                            <p style="font-size: 0.875rem; color: #64748b; margin-bottom: 0.25rem;">📧 ${req.email}</p>
+                            <p style="font-size: 0.875rem; color: #64748b; margin-bottom: 0.25rem;">📚 ${req.corso}</p>
+                            <p style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 1rem;">${new Date(req.date).toLocaleString('it-IT')}</p>
+                            ${req.messaggio ? `<p style="font-size: 0.875rem; color: #64748b; margin-bottom: 1rem; font-style: italic;">"${req.messaggio}"</p>` : ''}
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-success" onclick="openApproveModal('${req.id}')" style="flex: 1; padding: 0.5rem;">✅ Approva</button>
+                                <button class="btn btn-danger" onclick="rejectRequest('${req.id}')" style="flex: 1; padding: 0.5rem;">❌ Rifiuta</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
             });
-
-            req.status = 'approved';
-            saveDB();
-
-            alert(`✅ RICHIESTA APPROVATA\n\nStudente: ${req.name}\nEmail: ${req.email}\nPassword: ${password}\n\nComunica queste credenziali allo studente.`);
-
-            loadRequests();
-            updateStats();
+            html += '</div>';
+            container.innerHTML = html;
         }
-
-        function rejectRequest(id) {
-            const req = db.requests.find(r => r.id === id);
-            if (req) {
-                req.status = 'rejected';
-                saveDB();
-                loadRequests();
+        
+        // LOAD APPROVED
+        function loadApproved() {
+            const requests = JSON.parse(localStorage.getItem('accademia_requests') || '[]');
+            const approved = requests.filter(r => r.status === 'approved').sort((a,b) => new Date(b.approvedDate) - new Date(a.approvedDate));
+            
+            const container = document.getElementById('approvedList');
+            
+            if (approved.length === 0) {
+                container.innerHTML = `
+                    <div class="empty">
+                        <div class="empty-icon">✅</div>
+                        <p>Nessuna richiesta approvata</p>
+                    </div>
+                `;
+                return;
             }
+            
+            let html = '<div class="table-responsive"><table><thead><tr><th>Data</th><th>Nome</th><th>Email</th><th>Corso</th><th class="hide-mobile">Password</th></tr></thead><tbody>';
+            approved.forEach(req => {
+                html += `
+                    <tr>
+                        <td>${new Date(req.approvedDate).toLocaleDateString('it-IT')}</td>
+                        <td>${req.nome}</td>
+                        <td>${req.email}</td>
+                        <td>${req.corso}</td>
+                        <td class="hide-mobile"><code style="background: #f1f5f9; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace;">${req.password || 'N/A'}</code></td>
+                    </tr>
+                `;
+            });
+            html += '</tbody></table></div>';
+            container.innerHTML = html;
         }
-
+        
+        // LOAD REJECTED
+        function loadRejected() {
+            const requests = JSON.parse(localStorage.getItem('accademia_requests') || '[]');
+            const rejected = requests.filter(r => r.status === 'rejected').sort((a,b) => new Date(b.rejectedDate) - new Date(a.rejectedDate));
+            
+            const container = document.getElementById('rejectedList');
+            
+            if (rejected.length === 0) {
+                container.innerHTML = `
+                    <div class="empty">
+                        <div class="empty-icon">❌</div>
+                        <p>Nessuna richiesta rifiutata</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '<div class="table-responsive"><table><thead><tr><th>Data</th><th>Nome</th><th>Email</th><th>Corso</th></tr></thead><tbody>';
+            rejected.forEach(req => {
+                html += `
+                    <tr>
+                        <td>${new Date(req.rejectedDate).toLocaleDateString('it-IT')}</td>
+                        <td>${req.nome}</td>
+                        <td>${req.email}</td>
+                        <td>${req.corso}</td>
+                    </tr>
+                `;
+            });
+            html += '</tbody></table></div>';
+            container.innerHTML = html;
+        }
+        
+        // LOAD USERS
         function loadUsers() {
-            const tbody = document.querySelector('#users-table tbody');
-            const students = db.users.filter(u => u.role !== 'admin');
-
-            if (students.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuno studente registrato</td></tr>';
+            const users = JSON.parse(localStorage.getItem('accademia_users') || '[]');
+            const tbody = document.getElementById('usersTableBody');
+            
+            if (users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Nessun utente registrato</td></tr>';
                 return;
             }
-
-            tbody.innerHTML = students.map(u => `
+            
+            tbody.innerHTML = users.map(u => `
                 <tr>
-                    <td>${u.id}</td>
-                    <td>${u.name}</td>
+                    <td>${u.nome}</td>
                     <td>${u.email}</td>
-                    <td><code style="background: var(--bg-primary); padding: 4px 8px; font-family: monospace;">${u.password}</code></td>
-                    <td><button class="btn btn-danger" onclick="deleteUser('${u.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem;">🗑️ Elimina</button></td>
+                    <td>${u.corso || '-'}</td>
+                    <td><span class="badge ${u.firstLoginDone ? 'badge-approved' : 'badge-pending'}">${u.firstLoginDone ? 'Attivo' : 'Primo accesso'}</span></td>
+                    <td><button class="btn btn-danger" onclick="deleteUser('${u.email}')" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">🗑️</button></td>
                 </tr>
             `).join('');
         }
-
-        function deleteUser(id) {
-            if (!confirm('Sei sicuro di voler eliminare questo utente?')) return;
-            db.users = db.users.filter(u => u.id !== id);
-            saveDB();
-            loadUsers();
-            updateStats();
+        
+        // APPROVE MODAL
+        function openApproveModal(id) {
+            const requests = JSON.parse(localStorage.getItem('accademia_requests') || '[]');
+            const req = requests.find(r => r.id === id);
+            
+            if (!req) return;
+            
+            currentRequest = req;
+            
+            document.getElementById('appNome').value = req.nome;
+            document.getElementById('appEmail').value = req.email;
+            document.getElementById('appCorso').value = req.corso;
+            
+            regeneratePassword();
+            
+            document.getElementById('approveModal').classList.add('active');
         }
+        
+        function regeneratePassword() {
+            const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+            let pwd = '';
+            pwd += 'A'; // maiuscola
+            pwd += 'a'; // minuscola
+            pwd += '1'; // numero
+            pwd += '!'; // simbolo
+            
+            for (let i = 4; i < 12; i++) {
+                pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            
+            // mischia
+            generatedPassword = pwd.split('').sort(() => 0.5 - Math.random()).join('');
+            document.getElementById('appPassword').textContent = generatedPassword;
+        }
+        
+        function closeModal() {
+            document.getElementById('approveModal').classList.remove('active');
+            currentRequest = null;
+        }
+        
+        function confirmApprove() {
+            if (!currentRequest) return;
+            
+            const btn = document.getElementById('btnConfirm');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> Invio...';
+            
+            // Prepara email
+            const messaggio = document.getElementById('appMessaggio').value;
+            const loginUrl = window.location.origin + '/login.html';
+            
+            const emailBody = `
+🏛️ ACCADEMIA DELLE LINGUE - CREDENZIALI DI ACCESSO
 
-        function addUser() {
-            const name = prompt('Nome completo:');
-            if (!name) return;
-            const email = prompt('Email:');
-            if (!email) return;
+Ciao ${currentRequest.nome},
 
-            const password = generateRandomPassword();
+La tua richiesta è stata APPROVATA!
 
-            db.users.push({
-                id: 'user_' + Date.now(),
-                email: email,
-                password: password,
-                name: name,
-                role: 'student',
+🔐 CREDENZIALI:
+Email: ${currentRequest.email}
+Password: ${generatedPassword}
+
+📚 Corso: ${currentRequest.corso}
+
+🔗 ACCEDI: ${loginUrl}
+
+⚠️ Al primo accesso dovrai cambiare la password!
+
+${messaggio ? '\n📝 Messaggio dall\'amministratore:\n' + messaggio : ''}
+
+---
+Accademia delle Lingue
+            `;
+            
+            // Compila form nascosto
+            document.getElementById('formEmail').value = currentRequest.email;
+            document.getElementById('formStudente').value = currentRequest.nome;
+            document.getElementById('formEmail2').value = currentRequest.email;
+            document.getElementById('formPassword').value = generatedPassword;
+            document.getElementById('formCorso').value = currentRequest.corso;
+            document.getElementById('formMessaggio').value = emailBody;
+            
+            // Salva utente
+            const users = JSON.parse(localStorage.getItem('accademia_users') || '[]');
+            users.push({
+                email: currentRequest.email,
+                password: generatedPassword,
+                nome: currentRequest.nome,
+                corso: currentRequest.corso,
+                active: true,
+                firstLoginDone: false,
                 created: new Date().toISOString()
             });
-
-            saveDB();
-            alert(`✅ Utente creato!\n\nEmail: ${email}\nPassword: ${password}`);
-            loadUsers();
-            updateStats();
+            localStorage.setItem('accademia_users', JSON.stringify(users));
+            
+            // Aggiorna richiesta
+            const requests = JSON.parse(localStorage.getItem('accademia_requests') || '[]');
+            const idx = requests.findIndex(r => r.id === currentRequest.id);
+            if (idx !== -1) {
+                requests[idx].status = 'approved';
+                requests[idx].approvedDate = new Date().toISOString();
+                requests[idx].password = generatedPassword;
+                localStorage.setItem('accademia_requests', JSON.stringify(requests));
+            }
+            
+            // Invia email (FormSubmit)
+            document.getElementById('emailForm').submit();
         }
-
-        function loadScores() {
-            const tbody = document.querySelector('#scores-table tbody');
-
-            if (db.scores.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessun punteggio registrato</td></tr>';
+        
+        // REJECT
+        function rejectRequest(id) {
+            if (!confirm('Sei sicuro di voler RIFIUTARE questa richiesta?')) return;
+            
+            const requests = JSON.parse(localStorage.getItem('accademia_requests') || '[]');
+            const idx = requests.findIndex(r => r.id === id);
+            
+            if (idx !== -1) {
+                requests[idx].status = 'rejected';
+                requests[idx].rejectedDate = new Date().toISOString();
+                localStorage.setItem('accademia_requests', JSON.stringify(requests));
+                updateStats();
+                loadPending();
+            }
+        }
+        
+        // ADD USER MODAL
+        function showAddUserModal() {
+            document.getElementById('addUserModal').classList.add('active');
+        }
+        
+        function closeAddModal() {
+            document.getElementById('addUserModal').classList.remove('active');
+            document.getElementById('addNome').value = '';
+            document.getElementById('addEmail').value = '';
+            document.getElementById('addCorso').value = '';
+        }
+        
+        function confirmAddUser() {
+            const nome = document.getElementById('addNome').value.trim();
+            const email = document.getElementById('addEmail').value.trim().toLowerCase();
+            const corso = document.getElementById('addCorso').value;
+            
+            if (!nome || !email || !corso) {
+                alert('Compila tutti i campi!');
                 return;
             }
-
-            tbody.innerHTML = db.scores.map(s => `
-                <tr>
-                    <td>${new Date(s.completedAt).toLocaleDateString('it-IT')}</td>
-                    <td>${s.userName}</td>
-                    <td>${s.userEmail}</td>
-                    <td>${s.moduleName}</td>
-                    <td>${s.score}/${s.maxScore}</td>
-                    <td><strong>${s.percentage}%</strong></td>
-                </tr>
-            `).join('');
-        }
-
-        function generatePassword() {
-            const pwd = generateRandomPassword();
-            document.getElementById('generated-password').textContent = pwd;
-        }
-
-        function generateRandomPassword() {
-            const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
-            let pwd = "";
+            
+            // Genera password
+            const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+            let pwd = '';
             for (let i = 0; i < 12; i++) {
                 pwd += chars.charAt(Math.floor(Math.random() * chars.length));
             }
-            return pwd;
-        }
-
-        function copyPassword() {
-            const pwd = document.getElementById('generated-password').textContent;
-            if (pwd && pwd !== '...') {
-                navigator.clipboard.writeText(pwd);
-                alert('Password copiata negli appunti!');
-            }
-        }
-
-        function exportScores() {
-            if (db.scores.length === 0) {
-                alert('Nessun punteggio da esportare');
+            
+            // Salva utente
+            const users = JSON.parse(localStorage.getItem('accademia_users') || '[]');
+            
+            if (users.find(u => u.email === email)) {
+                alert('Questa email esiste già!');
                 return;
             }
-
-            const data = db.scores.map(s => ({
-                Data: new Date(s.completedAt).toLocaleString('it-IT'),
-                Studente: s.userName,
-                Email: s.userEmail,
-                Modulo: s.moduleName,
-                Punteggio: s.score,
-                Max: s.maxScore,
-                Percentuale: s.percentage + '%'
-            }));
-
-            downloadCSV(data, 'punteggi_accademia');
-        }
-
-        function exportUsers() {
-            const students = db.users.filter(u => u.role !== 'admin');
-            if (students.length === 0) {
-                alert('Nessun utente da esportare');
-                return;
-            }
-
-            const data = students.map(u => ({
-                ID: u.id,
-                Nome: u.name,
-                Email: u.email,
-                Ruolo: u.role,
-                'Data Registrazione': new Date(u.created).toLocaleString('it-IT')
-            }));
-
-            downloadCSV(data, 'utenti_accademia');
-        }
-
-        function downloadCSV(data, filename) {
-            const headers = Object.keys(data[0]);
-            let csv = headers.join(';') + '\n';
-
-            data.forEach(row => {
-                csv += headers.map(h => row[h]).join(';') + '\n';
+            
+            users.push({
+                email: email,
+                password: pwd,
+                nome: nome,
+                corso: corso,
+                active: true,
+                firstLoginDone: false,
+                created: new Date().toISOString()
             });
-
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename + '_' + new Date().toISOString().split('T')[0] + '.csv';
-            a.click();
+            
+            localStorage.setItem('accademia_users', JSON.stringify(users));
+            
+            alert(`✅ Utente creato!\n\nEmail: ${email}\nPassword: ${pwd}\n\nComunica queste credenziali allo studente.`);
+            
+            closeAddModal();
+            updateStats();
+            loadUsers();
         }
+        
+        // DELETE USER
+        function deleteUser(email) {
+            if (!confirm('Eliminare questo utente?')) return;
+            
+            let users = JSON.parse(localStorage.getItem('accademia_users') || '[]');
+            users = users.filter(u => u.email !== email);
+            localStorage.setItem('accademia_users', JSON.stringify(users));
+            
+            updateStats();
+            loadUsers();
+        }
+        
+        // Auto refresh ogni 10 secondi per nuove richieste
+        setInterval(() => {
+            if (document.getElementById('dashboard').style.display === 'block') {
+                updateStats();
+                // Ricarica solo se siamo nella tab pending
+                if (!document.getElementById('view-pending').classList.contains('hidden')) {
+                    loadPending();
+                }
+            }
+        }, 10000);
     </script>
 </body>
 </html>
