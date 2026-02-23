@@ -3,50 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Approva Studente - Admin</title>
-    <link rel="stylesheet" href="../css/academic.css">
+    <title>Accademia delle Lingue - Piattaforma</title>
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
         
         body {
-            margin: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f1f5f9;
             min-height: 100vh;
+        }
+        
+        /* === LOGIN STYLES === */
+        .login-container {
+            background: linear-gradient(135deg, #1e3a5f 0%, #152a45 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 1rem;
         }
         
-        .approva-container {
+        .login-box {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #152a45 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .login-header-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .login-header p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        
+        .login-body {
+            padding: 1.5rem;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 4px;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 0.75rem;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            background: white;
+            color: #1e3a5f;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.2s;
+            -webkit-appearance: none;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #1e3a5f;
+        }
+        
+        textarea.form-input {
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #1e3a5f 0%, #152a45 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 58, 95, 0.4);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #1e3a5f;
+        }
+        
+        .btn-success {
+            background: #10b981;
+        }
+        
+        .btn-success:hover {
+            background: #059669;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+        
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+        
+        .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #f59e0b;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .form-section {
+            display: none;
+        }
+        
+        .form-section.active {
+            display: block;
+        }
+        
+        .password-change-box {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .password-change-box h3 {
+            color: #065f46;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-footer {
+            text-align: center;
+            padding: 1rem;
+            background: #f8fafc;
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+        
+        .link-admin {
+            color: #1e3a5f;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* === DASHBOARD STYLES (da index.html) === */
+        .dashboard-container {
+            display: none;
             max-width: 600px;
             margin: 0 auto;
             background: white;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             overflow: hidden;
+            min-height: 100vh;
         }
         
-        .approva-header {
+        .dashboard-header {
             background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
             color: white;
             padding: 1.5rem;
             text-align: center;
         }
         
-        .approva-header h1 {
+        .dashboard-header h1 {
             margin: 0;
             font-size: 1.25rem;
         }
         
-        .approva-header p {
+        .dashboard-header p {
             margin: 0.5rem 0 0 0;
             opacity: 0.9;
             font-size: 0.875rem;
         }
         
-        .approva-body {
+        .dashboard-body {
             padding: 1.5rem;
         }
         
@@ -123,90 +334,9 @@
             margin-top: 0.5rem;
         }
         
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #374151;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.2s;
-            -webkit-appearance: none;
-        }
-        
-        .form-input:focus {
-            outline: none;
-            border-color: #3b82f6;
-        }
-        
         .form-input[readonly] {
             background: #f3f4f6;
             color: #6b7280;
-        }
-        
-        textarea.form-input {
-            resize: vertical;
-            min-height: 80px;
-            font-family: inherit;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.875rem 1rem;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s;
-            width: 100%;
-            -webkit-appearance: none;
-        }
-        
-        .btn-primary {
-            background: #10b981;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #059669;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-        }
-        
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-        
-        .btn-secondary {
-            background: #e5e7eb;
-            color: #374151;
-            margin-top: 0.75rem;
-        }
-        
-        .btn-secondary:hover {
-            background: #d1d5db;
-        }
-        
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
         }
         
         .loading {
@@ -223,38 +353,45 @@
             to { transform: rotate(360deg); }
         }
         
-        .alert {
+        .user-bar {
+            background: #1e293b;
+            color: white;
             padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .user-info {
+            font-size: 0.9rem;
+        }
+        
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
             border-radius: 6px;
-            margin-bottom: 1rem;
+            cursor: pointer;
+            font-size: 0.875rem;
         }
         
-        .alert-error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #ef4444;
-        }
-        
-        .hidden {
-            display: none !important;
+        .logout-btn:hover {
+            background: #dc2626;
         }
         
         /* Responsive: Tablet */
         @media (min-width: 640px) {
-            body {
+            .login-body, .dashboard-body {
                 padding: 2rem;
             }
             
-            .approva-header {
+            .login-header, .dashboard-header {
                 padding: 2rem;
             }
             
-            .approva-header h1 {
+            .login-header h1, .dashboard-header h1 {
                 font-size: 1.5rem;
-            }
-            
-            .approva-body {
-                padding: 2rem;
             }
             
             .info-box {
@@ -277,26 +414,24 @@
                 font-size: 1.5rem;
                 padding: 1rem;
             }
-            
-            .btn {
-                padding: 1rem 1.5rem;
-            }
         }
         
         /* Responsive: Desktop */
         @media (min-width: 1024px) {
-            .approva-container {
+            .dashboard-container {
                 max-width: 700px;
+                margin: 2rem auto;
+                min-height: auto;
             }
             
-            .approva-header h1 {
+            .dashboard-header h1 {
                 font-size: 1.75rem;
             }
         }
         
         /* Fix per iPhone notch */
         @supports (padding-top: env(safe-area-inset-top)) {
-            body {
+            .login-container, .dashboard-container {
                 padding-top: max(1rem, env(safe-area-inset-top));
                 padding-bottom: max(1rem, env(safe-area-inset-bottom));
                 padding-left: max(1rem, env(safe-area-inset-left));
@@ -307,20 +442,122 @@
         /* Fix per input su iOS */
         @supports (-webkit-touch-callout: none) {
             .form-input {
-                font-size: 16px; /* Previene zoom su iOS */
+                font-size: 16px;
             }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
-    <div class="approva-container">
-        <div class="approva-header">
+
+    <!-- === SEZIONE LOGIN === -->
+    <div id="loginSection" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="login-header-icon">🏛️</div>
+                <h1>Accademia delle Lingue</h1>
+                <p>Nucleo educativo per la formazione europea</p>
+            </div>
+            
+            <div class="login-body">
+                <!-- Tabs -->
+                <div class="tabs">
+                    <div class="tab active" onclick="showTab('login')" id="tab-login">Accedi</div>
+                    <div class="tab" onclick="showTab('richiesta')" id="tab-richiesta">Richiedi Accesso</div>
+                </div>
+                
+                <div id="alertBox" class="alert hidden"></div>
+                
+                <!-- FORM LOGIN -->
+                <div id="section-login" class="form-section active">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" id="loginEmail" class="form-input" placeholder="nome@email.it" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="btn">🔐 Accedi</button>
+                    </form>
+                </div>
+                
+                <!-- FORM RICHIESTA ACCESSO -->
+                <div id="section-richiesta" class="form-section">
+                    <form id="richiestaForm">
+                        <div class="form-group">
+                            <label class="form-label">Nome completo *</label>
+                            <input type="text" id="reqNome" class="form-input" placeholder="Mario Rossi" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email *</label>
+                            <input type="email" id="reqEmail" class="form-input" placeholder="mario@email.it" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Corso di interesse *</label>
+                            <select id="reqCorso" class="form-input" required>
+                                <option value="">Seleziona...</option>
+                                <option value="Inglese A1">Inglese A1</option>
+                                <option value="Inglese A2">Inglese A2</option>
+                                <option value="Inglese B1">Inglese B1</option>
+                                <option value="Inglese B2">Inglese B2</option>
+                                <option value="Italiano L2">Italiano L2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Messaggio (opzionale)</label>
+                            <textarea id="reqMessaggio" class="form-input" placeholder="Motivazione della richiesta..."></textarea>
+                        </div>
+                        <button type="submit" class="btn">📨 Invia Richiesta</button>
+                    </form>
+                </div>
+                
+                <!-- FORM CAMBIO PASSWORD (primo accesso) -->
+                <div id="section-password" class="form-section">
+                    <div class="password-change-box">
+                        <h3>⚠️ Primo accesso rilevato!</h3>
+                        <p style="font-size: 0.85rem; color: #065f46;">Per sicurezza devi cambiare la password temporanea.</p>
+                    </div>
+                    <form id="passwordForm">
+                        <div class="form-group">
+                            <label class="form-label">Nuova Password (min 8 caratteri)</label>
+                            <input type="password" id="newPassword" class="form-input" placeholder="••••••••" required minlength="8">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Conferma Password</label>
+                            <input type="password" id="confirmPassword" class="form-input" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">🔄 Cambia e Accedi</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="login-footer">
+                <p>© 2024 Accademia delle Lingue</p>
+                <p style="margin-top: 0.5rem;">
+                    <a href="admin.html" class="link-admin">Accesso Amministratore →</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- === SEZIONE DASHBOARD (ex index.html) === -->
+    <div id="dashboardSection" class="dashboard-container">
+        <div class="user-bar">
+            <div class="user-info">
+                👤 <span id="userNameDisplay">Utente</span> | <span id="userEmailDisplay">email</span>
+            </div>
+            <button class="logout-btn" onclick="logout()">🚪 Esci</button>
+        </div>
+        
+        <div class="dashboard-header">
             <h1>✅ Approva Richiesta</h1>
             <p>Genera credenziali e invia email allo studente</p>
         </div>
         
-        <div class="approva-body">
-            <div id="alertBox" class="alert alert-error hidden"></div>
+        <div class="dashboard-body">
+            <div id="alertBoxDashboard" class="alert alert-error hidden"></div>
             
             <!-- Info Studente -->
             <div class="info-box">
@@ -386,86 +623,259 @@
                     <textarea name="Messaggio_Admin" class="form-input" placeholder="Aggiungi un messaggio personale per lo studente..."></textarea>
                 </div>
                 
-                <button type="submit" class="btn btn-primary" id="btnInvia">
+                <button type="submit" class="btn btn-success" id="btnInvia">
                     📧 Approva e Invia Credenziali
                 </button>
             </form>
             
-            <a href="admin-richieste.html" class="btn btn-secondary">
-                ← Annulla e Torna Indietro
-            </a>
+            <button class="btn btn-secondary" onclick="logout()" style="margin-top: 0.75rem;">
+                ← Esci
+            </button>
         </div>
     </div>
 
     <script>
-        // Recupera ID dalla URL
-        const params = new URLSearchParams(window.location.search);
-        const index = params.get('id');
+        // === GESTIONE LOGIN ===
+        let currentUser = null;
         
-        if (index === null) {
-            alert('Nessuna richiesta selezionata');
-            window.location.href = 'admin-richieste.html';
-        }
-        
-        // Recupera dati
-        const richieste = JSON.parse(localStorage.getItem('richiesteAccesso') || '[]');
-        const richiesta = richieste[index];
-        
-        // Validazioni
-        if (!richiesta) {
-            alert('Richiesta non trovata');
-            window.location.href = 'admin-richieste.html';
-        }
-        
-        if (richiesta.stato !== 'in_attesa') {
-            alert('Questa richiesta è già stata processata');
-            window.location.href = 'admin-richieste.html';
-        }
-        
-        // Genera password sicura
-        function generaPassword() {
-            const maiuscole = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            const minuscole = 'abcdefghijklmnopqrstuvwxyz';
-            const numeri = '0123456789';
-            const simboli = '!@#$%^&*';
+        // Mostra tab
+        function showTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
             
-            let password = '';
-            password += maiuscole[Math.floor(Math.random() * maiuscole.length)];
-            password += minuscole[Math.floor(Math.random() * minuscole.length)];
-            password += numeri[Math.floor(Math.random() * numeri.length)];
-            password += simboli[Math.floor(Math.random() * simboli.length)];
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.getElementById('section-' + tab).classList.add('active');
+            hideAlert();
+        }
+        
+        // Alert
+        function showAlert(type, message) {
+            const box = document.getElementById('alertBox');
+            box.className = 'alert alert-' + type;
+            box.textContent = message;
+            box.classList.remove('hidden');
+        }
+        
+        function hideAlert() {
+            document.getElementById('alertBox').classList.add('hidden');
+        }
+        
+        function showDashboardAlert(type, message) {
+            const box = document.getElementById('alertBoxDashboard');
+            box.className = 'alert alert-' + type;
+            box.textContent = message;
+            box.classList.remove('hidden');
+        }
+        
+        // LOGIN
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            hideAlert();
             
-            const tutti = maiuscole + minuscole + numeri + simboli;
-            for (let i = 4; i < 12; i++) {
-                password += tutti[Math.floor(Math.random() * tutti.length)];
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const password = document.getElementById('loginPassword').value;
+            
+            // Cerca utente
+            const users = JSON.parse(localStorage.getItem('accademia_users') || '[]');
+            const user = users.find(u => u.email === email && u.password === password && u.active);
+            
+            if (!user) {
+                showAlert('error', '❌ Email o password non validi');
+                return;
             }
             
-            // Mischia
-            return password.split('').sort(() => 0.5 - Math.random()).join('');
+            // Primo accesso?
+            if (!user.firstLoginDone) {
+                currentUser = user;
+                document.getElementById('section-login').classList.remove('active');
+                document.getElementById('section-password').classList.add('active');
+                document.querySelector('.tabs').style.display = 'none';
+                return;
+            }
+            
+            // Login normale
+            doLogin(user);
+        });
+        
+        // CAMBIO PASSWORD PRIMO ACCESSO
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            hideAlert();
+            
+            const newPwd = document.getElementById('newPassword').value;
+            const confirmPwd = document.getElementById('confirmPassword').value;
+            
+            if (newPwd !== confirmPwd) {
+                showAlert('error', '❌ Le password non coincidono');
+                return;
+            }
+            
+            if (newPwd.length < 8) {
+                showAlert('error', '❌ La password deve essere di almeno 8 caratteri');
+                return;
+            }
+            
+            // Aggiorna password
+            let users = JSON.parse(localStorage.getItem('accademia_users') || '[]');
+            const idx = users.findIndex(u => u.email === currentUser.email);
+            
+            if (idx !== -1) {
+                users[idx].password = newPwd;
+                users[idx].firstLoginDone = true;
+                users[idx].firstLoginDate = new Date().toISOString();
+                localStorage.setItem('accademia_users', JSON.stringify(users));
+                
+                showAlert('success', '✅ Password cambiata! Reindirizzamento...');
+                setTimeout(() => doLogin(users[idx]), 1500);
+            }
+        });
+        
+        function doLogin(user) {
+            sessionStorage.setItem('currentUser', JSON.stringify(user));
+            showDashboard(user);
         }
         
-        const password = generaPassword();
-        const loginUrl = window.location.origin + '/login.html';
-        const nextUrl = `${window.location.origin}/admin-conferma.html?id=${index}&pwd=${encodeURIComponent(password)}`;
+        function showDashboard(user) {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('dashboardSection').style.display = 'block';
+            
+            // Mostra info utente
+            document.getElementById('userNameDisplay').textContent = user.nome || user.name || 'Utente';
+            document.getElementById('userEmailDisplay').textContent = user.email;
+            
+            // Carica dati dashboard (logica da index.html)
+            loadDashboardData();
+        }
         
-        // Popola campi visualizzazione
-        document.getElementById('infoNome').textContent = `${richiesta.nome} ${richiesta.cognome}`;
-        document.getElementById('infoEmail').textContent = richiesta.email;
-        document.getElementById('infoCorso').textContent = richiesta.corso;
-        document.getElementById('infoData').textContent = new Date(richiesta.dataRichiesta).toLocaleString('it-IT');
-        document.getElementById('passwordDisplay').textContent = password;
+        function logout() {
+            sessionStorage.removeItem('currentUser');
+            currentUser = null;
+            document.getElementById('dashboardSection').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'flex';
+            document.getElementById('loginForm').reset();
+            document.querySelector('.tabs').style.display = 'flex';
+            showTab('login');
+        }
         
-        // Popola campi form nascosti
-        document.getElementById('emailField').value = richiesta.email;
-        document.getElementById('emailVisible').value = richiesta.email;
-        document.getElementById('nomeCompletoField').value = `${richiesta.nome} ${richiesta.cognome}`;
-        document.getElementById('emailRipetutoField').value = richiesta.email;
-        document.getElementById('passwordRipetutoField').value = password;
-        document.getElementById('corsoRipetutoField').value = richiesta.corso;
-        document.getElementById('nextUrl').value = nextUrl;
+        // RICHIESTA ACCESSO
+        document.getElementById('richiestaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            hideAlert();
+            
+            const nome = document.getElementById('reqNome').value.trim();
+            const email = document.getElementById('reqEmail').value.trim().toLowerCase();
+            const corso = document.getElementById('reqCorso').value;
+            const messaggio = document.getElementById('reqMessaggio').value.trim();
+            
+            // Controlla se esiste già
+            const users = JSON.parse(localStorage.getItem('accademia_users') || '[]');
+            const requests = JSON.parse(localStorage.getItem('accademia_requests') || '[]');
+            
+            if (users.find(u => u.email === email)) {
+                showAlert('error', '⚠️ Questa email è già registrata. Prova ad accedere.');
+                return;
+            }
+            
+            if (requests.find(r => r.email === email && r.status === 'pending')) {
+                showAlert('error', '⚠️ Esiste già una richiesta in attesa per questa email.');
+                return;
+            }
+            
+            // Salva richiesta
+            const newRequest = {
+                id: Date.now().toString(),
+                nome: nome,
+                email: email,
+                corso: corso,
+                messaggio: messaggio,
+                status: 'pending',
+                date: new Date().toISOString()
+            };
+            
+            requests.push(newRequest);
+            localStorage.setItem('accademia_requests', JSON.stringify(requests));
+            
+            showAlert('success', '✅ Richiesta inviata! L\'amministratore ti contatterà via email.');
+            document.getElementById('richiestaForm').reset();
+            
+            setTimeout(() => showTab('login'), 3000);
+        });
         
-        // Prepara messaggio completo per l'email
-        const messaggioEmail = `
+        // === LOGICA DASHBOARD (da index.html) ===
+        function loadDashboardData() {
+            // Recupera ID dalla URL
+            const params = new URLSearchParams(window.location.search);
+            const index = params.get('id');
+            
+            if (index === null) {
+                // Modalità semplice: mostra solo info utente
+                document.getElementById('infoNome').textContent = currentUser?.nome || currentUser?.name || '-';
+                document.getElementById('infoEmail').textContent = currentUser?.email || '-';
+                document.getElementById('infoCorso').textContent = currentUser?.corso || '-';
+                document.getElementById('infoData').textContent = new Date().toLocaleString('it-IT');
+                document.getElementById('passwordDisplay').textContent = '********';
+                document.getElementById('emailVisible').value = currentUser?.email || '';
+                document.getElementById('approvaForm').style.display = 'none';
+                return;
+            }
+            
+            // Recupera dati richiesta
+            const richieste = JSON.parse(localStorage.getItem('richiesteAccesso') || '[]');
+            const richiesta = richieste[index];
+            
+            // Validazioni
+            if (!richiesta) {
+                showDashboardAlert('error', 'Richiesta non trovata');
+                return;
+            }
+            
+            if (richiesta.stato !== 'in_attesa') {
+                showDashboardAlert('warning', 'Questa richiesta è già stata processata');
+            }
+            
+            // Genera password sicura
+            function generaPassword() {
+                const maiuscole = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const minuscole = 'abcdefghijklmnopqrstuvwxyz';
+                const numeri = '0123456789';
+                const simboli = '!@#$%^&*';
+                
+                let password = '';
+                password += maiuscole[Math.floor(Math.random() * maiuscole.length)];
+                password += minuscole[Math.floor(Math.random() * minuscole.length)];
+                password += numeri[Math.floor(Math.random() * numeri.length)];
+                password += simboli[Math.floor(Math.random() * simboli.length)];
+                
+                const tutti = maiuscole + minuscole + numeri + simboli;
+                for (let i = 4; i < 12; i++) {
+                    password += tutti[Math.floor(Math.random() * tutti.length)];
+                }
+                
+                return password.split('').sort(() => 0.5 - Math.random()).join('');
+            }
+            
+            const password = generaPassword();
+            const loginUrl = window.location.origin + window.location.pathname;
+            const nextUrl = `${window.location.origin}/admin-conferma.html?id=${index}&pwd=${encodeURIComponent(password)}`;
+            
+            // Popola campi visualizzazione
+            document.getElementById('infoNome').textContent = `${richiesta.nome} ${richiesta.cognome}`;
+            document.getElementById('infoEmail').textContent = richiesta.email;
+            document.getElementById('infoCorso').textContent = richiesta.corso;
+            document.getElementById('infoData').textContent = new Date(richiesta.dataRichiesta).toLocaleString('it-IT');
+            document.getElementById('passwordDisplay').textContent = password;
+            
+            // Popola campi form nascosti
+            document.getElementById('emailField').value = richiesta.email;
+            document.getElementById('emailVisible').value = richiesta.email;
+            document.getElementById('nomeCompletoField').value = `${richiesta.nome} ${richiesta.cognome}`;
+            document.getElementById('emailRipetutoField').value = richiesta.email;
+            document.getElementById('passwordRipetutoField').value = password;
+            document.getElementById('corsoRipetutoField').value = richiesta.corso;
+            document.getElementById('nextUrl').value = nextUrl;
+            
+            // Prepara messaggio completo per l'email
+            const messaggioEmail = `
 🏛️ ACCADEMIA DELLE LINGUE - CREDENZIALI DI ACCESSO
 
 Ciao ${richiesta.nome},
@@ -495,19 +905,29 @@ Se hai problemi di accesso, contatta l'amministrazione.
 ---
 Accademia delle Lingue
 Nucleo educativo per la formazione europea al lavoro internazionale
-        `;
+            `;
+            
+            document.getElementById('messageField').value = messaggioEmail;
+            
+            // Salva in sessionStorage come backup
+            sessionStorage.setItem('tempPassword', password);
+            sessionStorage.setItem('tempIndex', index);
+            
+            // Gestione submit
+            document.getElementById('approvaForm').addEventListener('submit', function(e) {
+                const btn = document.getElementById('btnInvia');
+                btn.disabled = true;
+                btn.innerHTML = '<span class="loading"></span> Invio in corso...';
+            });
+        }
         
-        document.getElementById('messageField').value = messaggioEmail;
-        
-        // Salva in sessionStorage come backup
-        sessionStorage.setItem('tempPassword', password);
-        sessionStorage.setItem('tempIndex', index);
-        
-        // Gestione submit
-        document.getElementById('approvaForm').addEventListener('submit', function(e) {
-            const btn = document.getElementById('btnInvia');
-            btn.disabled = true;
-            btn.innerHTML = '<span class="loading"></span> Invio in corso...';
+        // Verifica sessione all'avvio
+        window.addEventListener('load', function() {
+            const savedUser = sessionStorage.getItem('currentUser');
+            if (savedUser) {
+                const user = JSON.parse(savedUser);
+                showDashboard(user);
+            }
         });
     </script>
 </body>
