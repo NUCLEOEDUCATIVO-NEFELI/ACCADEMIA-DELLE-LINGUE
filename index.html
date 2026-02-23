@@ -530,6 +530,7 @@
         
         // === GESTIONE LOGIN ===
         let currentUser = null;
+        let tempUserForPasswordChange = null; // Memorizza l'utente durante il cambio password
         
         // Mostra tab
         function showTab(tab) {
@@ -577,12 +578,16 @@
                 return;
             }
             
-            // Primo accesso?
+            // Primo accesso? Mostra form cambio password
             if (!user.firstLoginDone) {
-                currentUser = user;
+                tempUserForPasswordChange = user; // Salva l'utente temporaneamente
                 document.getElementById('section-login').classList.remove('active');
                 document.getElementById('section-password').classList.add('active');
                 document.querySelector('.tabs').style.display = 'none';
+                
+                // Pulisci i campi password
+                document.getElementById('newPassword').value = '';
+                document.getElementById('confirmPassword').value = '';
                 return;
             }
             
@@ -608,22 +613,45 @@
                 return;
             }
             
-            // Aggiorna password
+            // Se non c'è un utente in attesa di cambio password, errore
+            if (!tempUserForPasswordChange) {
+                showAlert('error', '❌ Sessione scaduta. Riprova ad accedere.');
+                setTimeout(() => {
+                    document.getElementById('section-password').classList.remove('active');
+                    document.getElementById('section-login').classList.add('active');
+                    document.querySelector('.tabs').style.display = 'flex';
+                }, 2000);
+                return;
+            }
+            
+            // Aggiorna password nel localStorage
             let users = JSON.parse(localStorage.getItem('accademia_users') || '[]');
-            const idx = users.findIndex(u => u.email === currentUser.email);
+            const idx = users.findIndex(u => u.email === tempUserForPasswordChange.email);
             
             if (idx !== -1) {
+                // Aggiorna i dati utente
                 users[idx].password = newPwd;
                 users[idx].firstLoginDone = true;
                 users[idx].firstLoginDate = new Date().toISOString();
                 localStorage.setItem('accademia_users', JSON.stringify(users));
                 
-                showAlert('success', '✅ Password cambiata! Reindirizzamento...');
-                setTimeout(() => doLogin(users[idx]), 1500);
+                // Aggiorna l'utente corrente con i nuovi dati
+                const updatedUser = users[idx];
+                tempUserForPasswordChange = null; // Pulisci il temporaneo
+                
+                showAlert('success', '✅ Password cambiata con successo! Accesso in corso...');
+                
+                // Fai il login diretto con l'utente aggiornato
+                setTimeout(() => {
+                    doLogin(updatedUser);
+                }, 1500);
+            } else {
+                showAlert('error', '❌ Errore durante l\'aggiornamento. Riprova.');
             }
         });
         
         function doLogin(user) {
+            currentUser = user;
             sessionStorage.setItem('currentUser', JSON.stringify(user));
             showDashboard(user);
         }
@@ -643,9 +671,11 @@
         function logout() {
             sessionStorage.removeItem('currentUser');
             currentUser = null;
+            tempUserForPasswordChange = null;
             document.getElementById('dashboardSection').style.display = 'none';
             document.getElementById('loginSection').style.display = 'flex';
             document.getElementById('loginForm').reset();
+            document.getElementById('passwordForm').reset();
             document.querySelector('.tabs').style.display = 'flex';
             showTab('login');
         }
@@ -699,6 +729,7 @@
             const savedUser = sessionStorage.getItem('currentUser');
             if (savedUser) {
                 const user = JSON.parse(savedUser);
+                currentUser = user;
                 showDashboard(user);
             }
         });
