@@ -5,6 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Accademia delle Lingue</title>
     <link rel="stylesheet" href="../css/academic.css">
+    <style>
+        .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
@@ -18,6 +44,7 @@
             <div class="login-body">
                 <div id="alertBox" class="alert alert-error" style="display: none;"></div>
 
+                <!-- FORM LOGIN NORMALE -->
                 <form id="loginForm">
                     <div class="form-group">
                         <label class="form-label">Email istituzionale</label>
@@ -31,6 +58,29 @@
 
                     <button type="submit" class="btn btn-primary">
                         🔐 Accedi alla piattaforma
+                    </button>
+                </form>
+
+                <!-- FORM CAMBIO PASSWORD (primo accesso) -->
+                <form id="cambioPasswordForm" style="display: none;">
+                    <div class="alert alert-warning">
+                        ⚠️ <strong>Primo accesso rilevato!</strong><br>
+                        Per sicurezza devi cambiare la password temporanea.
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Nuova Password</label>
+                        <input type="password" id="nuovaPassword" class="form-input" placeholder="Minimo 8 caratteri" required minlength="8">
+                        <small style="color: #64748b;">Almeno 8 caratteri, maiuscole, numeri e simboli consigliati</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Conferma Nuova Password</label>
+                        <input type="password" id="confermaNuovaPassword" class="form-input" placeholder="Ripeti password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        🔄 Cambia Password e Accedi
                     </button>
                 </form>
 
@@ -53,6 +103,93 @@
         </div>
     </div>
 
-    <script src="../js/academic.js"></script>
+    <script>
+        let utenteCorrente = null;
+
+        // LOGIN NORMALE
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const alertBox = document.getElementById('alertBox');
+            
+            const utenti = JSON.parse(localStorage.getItem('utenti') || '[]');
+            const utente = utenti.find(u => u.email === email && u.password === password && u.attivo);
+            
+            if (!utente) {
+                alertBox.style.display = 'block';
+                alertBox.className = 'alert alert-error';
+                alertBox.textContent = '❌ Email o password non validi.';
+                return;
+            }
+            
+            // Controlla se è il primo accesso
+            if (!utente.primoAccessoCompletato) {
+                utenteCorrente = utente;
+                // Mostra form cambio password
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('cambioPasswordForm').style.display = 'block';
+                alertBox.style.display = 'none';
+            } else {
+                // Accesso normale
+                completaLogin(utente);
+            }
+        });
+
+        // CAMBIO PASSWORD PRIMO ACCESSO
+        document.getElementById('cambioPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nuova = document.getElementById('nuovaPassword').value;
+            const conferma = document.getElementById('confermaNuovaPassword').value;
+            const alertBox = document.getElementById('alertBox');
+            
+            if (nuova !== conferma) {
+                alertBox.style.display = 'block';
+                alertBox.className = 'alert alert-error';
+                alertBox.textContent = '❌ Le password non coincidono!';
+                return;
+            }
+            
+            if (nuova.length < 8) {
+                alertBox.style.display = 'block';
+                alertBox.className = 'alert alert-error';
+                alertBox.textContent = '❌ La password deve essere di almeno 8 caratteri!';
+                return;
+            }
+            
+            // Aggiorna password utente
+            let utenti = JSON.parse(localStorage.getItem('utenti') || '[]');
+            const index = utenti.findIndex(u => u.email === utenteCorrente.email);
+            
+            if (index !== -1) {
+                utenti[index].password = nuova;
+                utenti[index].primoAccessoCompletato = true;
+                utenti[index].dataPrimoAccesso = new Date().toISOString();
+                localStorage.setItem('utenti', JSON.stringify(utenti));
+                
+                // Mostra successo e reindirizza
+                alertBox.style.display = 'block';
+                alertBox.className = 'alert alert-success';
+                alertBox.textContent = '✅ Password cambiata con successo! Reindirizzamento...';
+                
+                setTimeout(() => {
+                    completaLogin(utenti[index]);
+                }, 1500);
+            }
+        });
+
+        function completaLogin(utente) {
+            sessionStorage.setItem('utenteCorrente', JSON.stringify(utente));
+            
+            // Reindirizza in base al ruolo
+            if (utente.ruolo === 'admin') {
+                window.location.href = 'admin-richieste.html';
+            } else {
+                window.location.href = 'dashboard-studente.html';
+            }
+        }
+    </script>
 </body>
 </html>

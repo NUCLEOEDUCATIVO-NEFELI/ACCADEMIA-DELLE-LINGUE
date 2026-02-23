@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestione Richieste - Admin</title>
+    <link rel="stylesheet" href="../css/academic.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f1f5f9;
+        }
+        
+        .admin-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .admin-header {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-header h1 {
+            margin: 0;
+            color: #1e293b;
+            font-size: 1.5rem;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex: 1;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+        
+        .stat-label {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .richiesta-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid #f59e0b;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .richiesta-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .richiesta-card.approvata { 
+            border-left-color: #10b981; 
+            opacity: 0.9;
+        }
+        
+        .richiesta-card.rifiutata { 
+            border-left-color: #ef4444; 
+            opacity: 0.8;
+        }
+        
+        .richiesta-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .richiesta-info h3 {
+            margin: 0 0 0.5rem 0;
+            color: #1e293b;
+            font-size: 1.2rem;
+        }
+        
+        .richiesta-info p {
+            margin: 0.25rem 0;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .badge-attesa { 
+            background: #fef3c7; 
+            color: #92400e; 
+        }
+        
+        .badge-approvata { 
+            background: #d1fae5; 
+            color: #065f46; 
+        }
+        
+        .badge-rifiutata { 
+            background: #fee2e2; 
+            color: #991b1b; 
+        }
+        
+        .richiesta-messaggio {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            color: #64748b;
+            font-style: italic;
+            border-left: 3px solid #cbd5e1;
+        }
+        
+        .richiesta-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn-approva { 
+            background: #10b981; 
+            color: white; 
+        }
+        
+        .btn-approva:hover {
+            background: #059669;
+        }
+        
+        .btn-rifiuta { 
+            background: #ef4444; 
+            color: white; 
+            border: none;
+            font-family: inherit;
+        }
+        
+        .btn-rifiuta:hover {
+            background: #dc2626;
+        }
+        
+        .btn-logout {
+            background: #e5e7eb;
+            color: #374151;
+        }
+        
+        .btn-logout:hover {
+            background: #d1d5db;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #64748b;
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stato-info {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .stato-approvata {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .stato-rifiutata {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .filtri {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filtro-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+        
+        .filtro-btn.active {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            background: #eff6ff;
+        }
+        
+        .filtro-btn:hover {
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>📋 Gestione Richieste di Accesso</h1>
+            <button onclick="logout()" class="btn btn-logout">
+                🚪 Logout
+            </button>
+        </div>
+        
+        <!-- Statistiche -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="statAttesa">0</div>
+                <div class="stat-label">In Attesa</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="statApprovate">0</div>
+                <div class="stat-label">Approvate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="statRifiutate">0</div>
+                <div class="stat-label">Rifiutate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="statTotali">0</div>
+                <div class="stat-label">Totali</div>
+            </div>
+        </div>
+        
+        <!-- Filtri -->
+        <div class="filtri">
+            <button class="filtro-btn active" onclick="filtra('tutte')">Tutte</button>
+            <button class="filtro-btn" onclick="filtra('in_attesa')">In Attesa</button>
+            <button class="filtro-btn" onclick="filtra('approvata')">Approvate</button>
+            <button class="filtro-btn" onclick="filtra('rifiutata')">Rifiutate</button>
+        </div>
+        
+        <!-- Lista richieste -->
+        <div id="listaRichieste"></div>
+    </div>
+
+    <script>
+        let filtroCorrente = 'tutte';
+        
+        function caricaRichieste() {
+            const richieste = JSON.parse(localStorage.getItem('richiesteAccesso') || '[]');
+            const container = document.getElementById('listaRichieste');
+            
+            // Aggiorna statistiche
+            document.getElementById('statAttesa').textContent = richieste.filter(r => r.stato === 'in_attesa').length;
+            document.getElementById('statApprovate').textContent = richieste.filter(r => r.stato === 'approvata').length;
+            document.getElementById('statRifiutate').textContent = richieste.filter(r => r.stato === 'rifiutata').length;
+            document.getElementById('statTotali').textContent = richieste.length;
+            
+            // Ordina: in attesa prima, poi per data (più recenti)
+            richieste.sort((a, b) => {
+                if (a.stato === 'in_attesa' && b.stato !== 'in_attesa') return -1;
+                if (a.stato !== 'in_attesa' && b.stato === 'in_attesa') return 1;
+                return new Date(b.dataRichiesta) - new Date(a.dataRichiesta);
+            });
+            
+            // Filtra
+            const richiesteFiltrate = filtroCorrente === 'tutte' 
+                ? richieste 
+                : richieste.filter(r => r.stato === filtroCorrente);
+            
+            if (richiesteFiltrate.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <h3>Nessuna richiesta trovata</h3>
+                        <p>Non ci sono richieste ${filtroCorrente !== 'tutte' ? 'in questo stato' : ''}.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = richiesteFiltrate.map((r, index) => {
+                // Trova l'indice reale nell'array completo
+                const indexReale = richieste.findIndex(req => req.id === r.id);
+                const dataFormatted = new Date(r.dataRichiesta).toLocaleString('it-IT', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                return `
+                    <div class="richiesta-card ${r.stato}">
+                        <div class="richiesta-header">
+                            <div class="richiesta-info">
+                                <h3>${r.nome} ${r.cognome}</h3>
+                                <p>📧 ${r.email}</p>
+                                <p>📚 Corso: <strong>${r.corso}</strong></p>
+                                <p>📅 Richiesta del ${dataFormatted}</p>
+                            </div>
+                            <span class="badge badge-${r.stato}">
+                                ${r.stato === 'in_attesa' ? '⏳ In Attesa' : 
+                                  r.stato === 'approvata' ? '✅ Approvata' : '❌ Rifiutata'}
+                            </span>
+                        </div>
+                        
+                        ${r.messaggio ? `
+                            <div class="richiesta-messaggio">
+                                "${r.messaggio}"
+                            </div>
+                        ` : ''}
+                        
+                        ${r.stato === 'in_attesa' ? `
+                            <div class="richiesta-actions">
+                                <a href="admin-approva.html?id=${indexReale}" class="btn btn-approva">
+                                    ✅ Approva & Invia Credenziali
+                                </a>
+                                <button onclick="rifiutaRichiesta(${indexReale})" class="btn btn-rifiuta">
+                                    ❌ Rifiuta
+                                </button>
+                            </div>
+                        ` : `
+                            <div class="stato-info ${r.stato === 'approvata' ? 'stato-approvata' : 'stato-rifiutata'}">
+                                ${r.stato === 'approvata' 
+                                    ? `✅ Approvata il ${new Date(r.dataApprovazione).toLocaleString('it-IT')} - Email con credenziali inviata allo studente`
+                                    : `❌ Rifiutata il ${new Date(r.dataRifiuto).toLocaleString('it-IT')}`
+                                }
+                            </div>
+                        `}
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function filtra(stato) {
+            filtroCorrente = stato;
+            
+            // Aggiorna bottoni attivi
+            document.querySelectorAll('.filtro-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(stato.replace('_', ' ')) || 
+                    (stato === 'tutte' && btn.textContent === 'Tutte')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            caricaRichieste();
+        }
+        
+        function rifiutaRichiesta(index) {
+            const richieste = JSON.parse(localStorage.getItem('richiesteAccesso') || '[]');
+            const richiesta = richieste[index];
+            
+            if (!confirm(`Sei sicuro di voler rifiutare la richiesta di ${richiesta.nome} ${richiesta.cognome}?\n\nQuesta azione non può essere annullata.`)) {
+                return;
+            }
+            
+            richieste[index].stato = 'rifiutata';
+            richieste[index].dataRifiuto = new Date().toISOString();
+            localStorage.setItem('richiesteAccesso', JSON.stringify(richieste));
+            
+            caricaRichieste();
+        }
+        
+        function logout() {
+            sessionStorage.removeItem('adminLogged');
+            window.location.href = 'login.html';
+        }
+        
+        // Protezione accesso admin
+        if (!sessionStorage.getItem('adminLogged')) {
+            const password = prompt('🔐 Inserisci password amministratore:');
+            if (password === 'admin2024') {
+                sessionStorage.setItem('adminLogged', 'true');
+            } else {
+                alert('❌ Password errata! Accesso negato.');
+                window.location.href = 'login.html';
+            }
+        }
+        
+        // Carica all'avvio
+        caricaRichieste();
+        
+        // Aggiorna ogni 5 secondi se ci sono richieste in attesa
+        setInterval(() => {
+            const richieste = JSON.parse(localStorage.getItem('richiesteAccesso') || '[]');
+            if (richieste.some(r => r.stato === 'in_attesa')) {
+                caricaRichieste();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

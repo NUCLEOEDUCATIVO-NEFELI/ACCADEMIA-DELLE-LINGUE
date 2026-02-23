@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferma Approvazione - Accademia delle Lingue</title>
+    <link rel="stylesheet" href="../css/academic.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f1f5f9;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .conferma-box {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .conferma-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 3rem 2rem;
+        }
+        
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .conferma-header h1 {
+            margin: 0;
+            font-size: 1.75rem;
+        }
+        
+        .conferma-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .conferma-body {
+            padding: 2rem;
+        }
+        
+        .riepilogo {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        
+        .riepilogo h3 {
+            margin: 0 0 1rem 0;
+            color: #065f46;
+            font-size: 1.1rem;
+        }
+        
+        .riepilogo-row {
+            display: flex;
+            margin: 0.75rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .riepilogo-label {
+            font-weight: 600;
+            color: #64748b;
+            width: 120px;
+        }
+        
+        .riepilogo-value {
+            color: #1e293b;
+            flex: 1;
+        }
+        
+        .password-display {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            border: 2px dashed #10b981;
+            font-size: 1.1rem;
+            color: #059669;
+            margin-top: 0.5rem;
+            word-break: break-all;
+        }
+        
+        .note {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+            text-align: left;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+            margin-top: 1rem;
+        }
+        
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+        
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+        
+        .errore-box {
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .errore-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="conferma-box" id="confermaBox">
+        <div class="conferma-header">
+            <div class="success-icon">✅</div>
+            <h1>Richiesta Approvata!</h1>
+            <p>L'email con le credenziali è stata inviata allo studente</p>
+        </div>
+        
+        <div class="conferma-body">
+            <div class="riepilogo">
+                <h3>📋 Riepilogo Studente</h3>
+                <div class="riepilogo-row">
+                    <span class="riepilogo-label">Nome:</span>
+                    <span class="riepilogo-value" id="nomeStudente">-</span>
+                </div>
+                <div class="riepilogo-row">
+                    <span class="riepilogo-label">Email:</span>
+                    <span class="riepilogo-value" id="emailStudente">-</span>
+                </div>
+                <div class="riepilogo-row">
+                    <span class="riepilogo-label">Corso:</span>
+                    <span class="riepilogo-value" id="corsoStudente">-</span>
+                </div>
+                <div class="riepilogo-row" style="flex-direction: column;">
+                    <span class="riepilogo-label">Password:</span>
+                    <div class="password-display" id="passwordStudente">-</div>
+                </div>
+            </div>
+            
+            <div class="note">
+                <strong>⚠️ Nota:</strong> Lo studente dovrà cambiare la password temporanea al primo accesso per motivi di sicurezza.
+            </div>
+            
+            <div class="actions">
+                <a href="admin-richieste.html" class="btn btn-primary">
+                    📋 Torna alle Richieste
+                </a>
+                <a href="admin-approva.html" class="btn btn-secondary">
+                    ➕ Approva Altro Studente
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Recupera parametri URL
+        const params = new URLSearchParams(window.location.search);
+        const index = params.get('id');
+        const password = params.get('pwd') || sessionStorage.getItem('tempPassword');
+        
+        // Recupera dati
+        const richieste = JSON.parse(localStorage.getItem('richiesteAccesso') || '[]');
+        const richiesta = richieste[index];
+        
+        const confermaBox = document.getElementById('confermaBox');
+        
+        // Validazione
+        if (!richiesta || !password) {
+            confermaBox.innerHTML = `
+                <div class="errore-box">
+                    <div class="errore-icon">⚠️</div>
+                    <h2>Errore</h2>
+                    <p>Dati mancanti o richiesta non valida.</p>
+                    <a href="admin-richieste.html" class="btn btn-primary" style="margin-top: 1rem;">
+                        Torna alle Richieste
+                    </a>
+                </div>
+            `;
+        } else if (richiesta.stato !== 'in_attesa') {
+            // Richiesta già processata
+            confermaBox.innerHTML = `
+                <div class="errore-box" style="background: #fef3c7; border-color: #f59e0b;">
+                    <div class="errore-icon">ℹ️</div>
+                    <h2>Richiesta Già Processata</h2>
+                    <p>Questa richiesta è stata già ${richiesta.stato === 'approvata' ? 'approvata' : 'rifiutata'}.</p>
+                    <a href="admin-richieste.html" class="btn btn-primary" style="margin-top: 1rem;">
+                        Torna alle Richieste
+                    </a>
+                </div>
+            `;
+        } else {
+            // Salva utente nel sistema
+            let utenti = JSON.parse(localStorage.getItem('utenti') || '[]');
+            
+            // Controlla se utente esiste già
+            const esistente = utenti.find(u => u.email === richiesta.email);
+            if (!esistente) {
+                utenti.push({
+                    email: richiesta.email,
+                    password: password,
+                    nome: richiesta.nome,
+                    cognome: richiesta.cognome,
+                    corso: richiesta.corso,
+                    ruolo: 'studente',
+                    attivo: true,
+                    primoAccessoCompletato: false, // Obbliga cambio password
+                    dataRegistrazione: new Date().toISOString()
+                });
+                localStorage.setItem('utenti', JSON.stringify(utenti));
+            }
+            
+            // Aggiorna stato richiesta
+            richieste[index].stato = 'approvata';
+            richieste[index].dataApprovazione = new Date().toISOString();
+            richieste[index].passwordTemporanea = password;
+            localStorage.setItem('richiesteAccesso', JSON.stringify(richieste));
+            
+            // Popola dati visualizzazione
+            document.getElementById('nomeStudente').textContent = `${richiesta.nome} ${richiesta.cognome}`;
+            document.getElementById('emailStudente').textContent = richiesta.email;
+            document.getElementById('corsoStudente').textContent = richiesta.corso;
+            document.getElementById('passwordStudente').textContent = password;
+        }
+        
+        // Pulisci sessione
+        sessionStorage.removeItem('tempPassword');
+        sessionStorage.removeItem('tempIndex');
+    </script>
+</body>
+</html>
