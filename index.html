@@ -596,33 +596,33 @@
             border: 2px solid var(--border);
         }
 
+        .mobile-menu-toggle {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
         @media (max-width: 1024px) {
-            .sidebar {
-                width: 260px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                z-index: 100;
-                max-height: 60vh;
-                overflow-y: auto;
-                display: none;
-            }
-            
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .level-selector {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    @media (max-width: 1024px) {
             .sidebar {
                 width: 280px;
             }
@@ -632,6 +632,25 @@
         }
 
         @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 280px;
+                height: 100vh;
+                z-index: 1000;
+                max-height: 100vh;
+            }
+
+            .sidebar.mobile-open {
+                display: block;
+            }
+
             .top-nav {
                 height: auto;
                 min-height: 64px;
@@ -782,66 +801,7 @@
                 font-size: 0.9rem;
             }
         }
-        .mobile-menu-toggle {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            padding: 8px 12px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            border-radius: 4px;
-            display: none;
-        }
-
-        .sidebar.mobile-open {
-            display: block !important;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 280px;
-            height: 100vh;
-            z-index: 1000;
-            box-shadow: 4px 0 12px rgba(0,0,0,0.3);
-        }
-
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-        }
-
-        .sidebar-overlay.active {
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .sidebar {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 280px;
-                height: 100vh;
-                z-index: 1000;
-                max-height: 100vh;
-            }
-
-            .sidebar.mobile-open {
-                display: block;
-            }
-        }
-</style>
-<base target="_blank">
-<base target="_blank">
+    </style>
 </head>
 <body>
 
@@ -961,7 +921,7 @@
                 <div style="font-size:0.65rem; opacity:0.7;">Livello A1 - C2 QCER</div>
             </div>
         </div>
-        <button class="mobile-menu-toggle" onclick="toggleSidebar()" style="display: none;">
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()">
             ☰
         </button>
         <div style="display:flex;align-items:center;gap:20px;">
@@ -1065,10 +1025,6 @@
             <div class="nav-item" onclick="loadModule('modulo_b1_discorso_indiretto.html', 'Discorso Indiretto')" id="nav-b1-discorso">
                 <span>💬</span><span>Discorso Indiretto</span><span class="nav-level level-b1">B1</span>
             </div>
-            
-            
-            
-            
 
             <div class="menu-category">Livello B2 - Avanzato</div>
             <div class="nav-item" onclick="loadModule('modulo_b2_congiuntivo_passato.html', 'Congiuntivo Passato')" id="nav-b2-congiuntivo-passato">
@@ -1215,7 +1171,7 @@
                         </div>
                         <div class="card-body">
                             <div class="games-grid">
-                                <a href="modulo_a1_alfabeto.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a1-alfabeto')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a1_alfabeto.html', 'Alfabeto e Fonologia'); return false;">
                                     <span class="game-level-badge level-a1">A1</span>
                                     <div class="game-image bg-a1">🔤</div>
                                     <div class="game-content">
@@ -1223,7 +1179,7 @@
                                         <p class="game-desc">Studio del sistema alfabetico italiano (21 lettere) e relative corrispondenze fonetiche</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a1_articoli_det.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a1-artdet')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a1_articoli_det.html', 'Articoli Determinativi'); return false;">
                                     <span class="game-level-badge level-a1">A1</span>
                                     <div class="game-image bg-a1">📰</div>
                                     <div class="game-content">
@@ -1231,7 +1187,7 @@
                                         <p class="game-desc">Il, lo, la, i, gli, le - Uso e regole morfosintattiche</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a1_articoli_indet.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a1-artind')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a1_articoli_indet.html', 'Articoli Indeterminativi'); return false;">
                                     <span class="game-level-badge level-a1">A1</span>
                                     <div class="game-image bg-a1">📄</div>
                                     <div class="game-content">
@@ -1239,7 +1195,7 @@
                                         <p class="game-desc">Un, uno, una - Concetti di indeterminatezza e specificità</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a1_essere_avere.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a1-essere')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a1_essere_avere.html', 'Verbi Essere e Avere'); return false;">
                                     <span class="game-level-badge level-a1">A1</span>
                                     <div class="game-image bg-a1">🎭</div>
                                     <div class="game-content">
@@ -1247,7 +1203,7 @@
                                         <p class="game-desc">Essere e Avere - Coniugazione e usi principali</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a1_presentarsi.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a1-presentarsi')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a1_presentarsi.html', 'Presentarsi'); return false;">
                                     <span class="game-level-badge level-a1">A1</span>
                                     <div class="game-image bg-a1">👋</div>
                                     <div class="game-content">
@@ -1255,7 +1211,7 @@
                                         <p class="game-desc">Chiamarsi, abitare, venire da - Espressioni di identità personale</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a1_numeri.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a1-numeri')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a1_numeri.html', 'Numeri ed Età'); return false;">
                                     <span class="game-level-badge level-a1">A1</span>
                                     <div class="game-image bg-a1">🔢</div>
                                     <div class="game-content">
@@ -1263,7 +1219,7 @@
                                         <p class="game-desc">Sistema numerico 0-100 e espressione dell'età</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a1_verbi.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a1-verbi')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a1_verbi.html', 'Verbi -ARE -ERE -IRE'); return false;">
                                     <span class="game-level-badge level-a1">A1</span>
                                     <div class="game-image bg-a1">✏️</div>
                                     <div class="game-content">
@@ -1271,7 +1227,7 @@
                                         <p class="game-desc">Verbi regolari in -ARE, -ERE, -IRE - Presente indicativo</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a1_piacere.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a1-piacere')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a1_piacere.html', 'Verbo Piacere'); return false;">
                                     <span class="game-level-badge level-a1">A1</span>
                                     <div class="game-image bg-a1">❤️</div>
                                     <div class="game-content">
@@ -1279,7 +1235,7 @@
                                         <p class="game-desc">Struttura sintattica e accordi - Mi piace / Ti piace</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a1_riflessivi.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a1-riflessivi')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a1_riflessivi.html', 'Verbi Riflessivi'); return false;">
                                     <span class="game-level-badge level-a1">A1</span>
                                     <div class="game-image bg-a1">🔄</div>
                                     <div class="game-content">
@@ -1287,7 +1243,7 @@
                                         <p class="game-desc">Mi alzo, ti lavi... - Azioni riflessive e reciproche</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a1_passato.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a1-passato')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a1_passato.html', 'Passato Prossimo'); return false;">
                                     <span class="game-level-badge level-a1">A1</span>
                                     <div class="game-image bg-a1">⏰</div>
                                     <div class="game-content">
@@ -1295,7 +1251,7 @@
                                         <p class="game-desc">Ho mangiato / Sono andato - Formazione e ausiliari</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a1_ascolto.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a1-ascolto')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a1_ascolto.html', 'Prova di Ascolto A1'); return false;">
                                     <span class="game-level-badge level-a1">A1</span>
                                     <div class="game-image bg-a1">🎧</div>
                                     <div class="game-content">
@@ -1330,7 +1286,7 @@
                         </div>
                         <div class="card-body">
                             <div class="games-grid">
-                                <a href="modulo_a2_imperfetto.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a2-imperfetto')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a2_imperfetto.html', 'L\\'Imperfetto'); return false;">
                                     <span class="game-level-badge level-a2">A2</span>
                                     <div class="game-image bg-a2">⏳</div>
                                     <div class="game-content">
@@ -1338,7 +1294,7 @@
                                         <p class="game-desc">Il tempo del passato per descrizioni, abitudini e azioni in corso</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a2_preposizioni.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a2-prep')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a2_preposizioni.html', 'Preposizioni Articolate'); return false;">
                                     <span class="game-level-badge level-a2">A2</span>
                                     <div class="game-image bg-a2">🔗</div>
                                     <div class="game-content">
@@ -1346,7 +1302,7 @@
                                         <p class="game-desc">Unione di preposizioni semplici e articoli determinativi</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a2_modali.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a2-modali')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a2_modali.html', 'Verbi Modali'); return false;">
                                     <span class="game-level-badge level-a2">A2</span>
                                     <div class="game-image bg-a2">🎪</div>
                                     <div class="game-content">
@@ -1354,7 +1310,7 @@
                                         <p class="game-desc">Potere, Dovere, Volere - Sintassi e semantica modale</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a2_futuro.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a2-futuro')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a2_futuro.html', 'Il Futuro'); return false;">
                                     <span class="game-level-badge level-a2">A2</span>
                                     <div class="game-image bg-a2">🔮</div>
                                     <div class="game-content">
@@ -1362,7 +1318,7 @@
                                         <p class="game-desc">Futuro semplice e prossimo: forme regolari e irregolari</p>
                                     </div>
                                 </a>
-                                <a href="modulo_a2_personalita.html" target="contentFrame" class="game-card" onclick="activateNav('nav-a2-personalita')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_a2_personalita.html', 'La Personalità'); return false;">
                                     <span class="game-level-badge level-a2">A2</span>
                                     <div class="game-image bg-a2">🎭</div>
                                     <div class="game-content">
@@ -1375,190 +1331,7 @@
                     </div>
                 </div>
 
-                
-
-                <!-- Dashboard C1 - Avanzato/Proficient -->
-                <div id="dashboard-c1" class="level-dashboard" style="display: none;">
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:32px;">
-                        <div class="stat-card">
-                            <div class="stat-label">Moduli C1 Completati</div>
-                            <div class="stat-value" id="statTotalC1">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Media C1</div>
-                            <div class="stat-value" id="statAvgC1">0%</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Progresso C1</div>
-                            <div class="stat-value" id="statProgressC1">0/8</div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" style="background: #6b21a8; color: white; border-color: #6b21a8;">
-                            Programma Formativo C1 - Avanzato/Autonomo (QCER)
-                        </div>
-                        <div class="card-body">
-                            <div class="games-grid">
-                                <a href="modulo_c1_sintassi_avanzata.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c1-sintassi')">
-                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">🧩</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 1: Sintassi Avanzata</div>
-                                        <p class="game-desc">Dislocazioni, frasi scisse, inversioni. Strutture complesse e marcate</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c1_testuale_avanzato.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c1-testuale')">
-                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">📑</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 2: Organizzazione Testuale Avanzata</div>
-                                        <p class="game-desc">Tesi, antitesi, synthesi. Articoli scientifici e saggi argomentativi</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c1_stilistica.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c1-stilistica')">
-                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">✨</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 3: Stilistica e Figure Retoriche</div>
-                                        <p class="game-desc">Metafore, metonimie, ironia. Analisi dello stile letterario e giornalistico</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c1_linguaggio_giuridico.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c1-giuridico')">
-                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">⚖️</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 4: Linguaggio Giuridico e Amministrativo</div>
-                                        <p class="game-desc">Terminologia giuridica, contratti, atti amministrativi. Precisione terminologica</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c1_economico_finanziario.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c1-economico')">
-                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">💹</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 5: Linguaggio Economico-Finanziario</div>
-                                        <p class="game-desc">Bilanci, report finanziari, analisi di mercato. Registro specialistico</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c1_medico_scientifico.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c1-medico')">
-                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">🔬</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 6: Linguaggio Medico-Scientifico</div>
-                                        <p class="game-desc">Articoli scientifici, referti medici, terminologia tecnica. Registro oggettivo</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c1_variazione_diastatica.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c1-diastatica')">
-                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">📊</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 7: Variazione Diastatica e Diastratica</div>
-                                        <p class="game-desc">Registri formali, informali, slang. Adattamento situazionale del linguaggio</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c1_intertestualita.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c1-intertestualita')">
-                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">🎭</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 8: Intertestualità e Citazione</div>
-                                        <p class="game-desc">Citazione, parafrasi, allusione. Dialogo tra testi e competenza intertestuale</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Dashboard C2 - Maestria/Proficient -->
-                <div id="dashboard-c2" class="level-dashboard" style="display: none;">
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:32px;">
-                        <div class="stat-card">
-                            <div class="stat-label">Moduli C2 Completati</div>
-                            <div class="stat-value" id="statTotalC2">0</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Media C2</div>
-                            <div class="stat-value" id="statAvgC2">0%</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-label">Progresso C2</div>
-                            <div class="stat-value" id="statProgressC2">0/8</div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header" style="background: #0f172a; color: white; border-color: #0f172a;">
-                            Programma Formativo C2 - Maestria/Proficient (QCER)
-                        </div>
-                        <div class="card-body">
-                            <div class="games-grid">
-                                <a href="modulo_c2_ermeneutica.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c2-ermeneutica')">
-                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🔮</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 1: Ermeneutica e Interpretazione</div>
-                                        <p class="game-desc">Analisi profonda di testi complessi. Inferenze implicite e sottintesi culturali</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c2_filosofico_letterario.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c2-filosofico')">
-                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">📚</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 2: Linguaggio Filosofico e Letterario</div>
-                                        <p class="game-desc">Concetti astratti, metalinguaggio, critica letteraria. Pensiero complesso</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c2_negotiation.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c2-negotiation')">
-                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🤝</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 3: Negoziazione e Mediazione Linguistica</div>
-                                        <p class="game-desc">Risoluzione conflitti, mediazione culturale. Competenza pragmatica avanzata</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c2_traduzione.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c2-traduzione')">
-                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🌐</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 4: Traduzione e Versione Avanzata</div>
-                                        <p class="game-desc">Equivalenza traduttiva, calchi, false friends. Competenza interlinguistica</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c2_politico_istituzionale.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c2-politico')">
-                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🏛️</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 5: Linguaggio Politico-Istituzionale</div>
-                                        <p class="game-desc">Discorsi politici, diplomatici, istituzionali. Eufemismi e manipolazione</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c2_giornalismo_investigativo.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c2-giornalismo')">
-                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">📰</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 6: Giornalismo Investigativo e Dossier</div>
-                                        <p class="game-desc">Reportage complessi, inchieste, documentazione. Fact-checking avanzato</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c2_creativita.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c2-creativita')">
-                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🎨</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 7: Creatività Linguistica e Neologia</div>
-                                        <p class="game-desc">Invenzione lessicale, giochi di parole, sperimentalismo. Libertà creativa</p>
-                                    </div>
-                                </a>
-                                <a href="modulo_c2_competenza_plurilingue.html" target="contentFrame" class="game-card" onclick="activateNav('nav-c2-plurilingue')">
-                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
-                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🌍</div>
-                                    <div class="game-content">
-                                        <div class="game-title">Modulo 8: Competenza Plurilingue e Interculturale</div>
-                                        <p class="game-desc">Transcodifica, code-switching, competenza comunicativa completa. Cittadinanza globale</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Dashboard B1/B2 Coming Soon -->
+                <!-- Dashboard B1 -->
                 <div id="dashboard-b1" class="level-dashboard" style="display: none;">
                     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:32px;">
                         <div class="stat-card">
@@ -1580,7 +1353,7 @@
                         </div>
                         <div class="card-body">
                             <div class="games-grid">
-                                <a href="modulo_b1_trapassato.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-trapassato')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b1_trapassato.html', 'Trapassato Prossimo'); return false;">
                                     <span class="game-level-badge level-b1">B1</span>
                                     <div class="game-image bg-b1">⏮️</div>
                                     <div class="game-content">
@@ -1588,7 +1361,7 @@
                                         <p class="game-desc">Il tempo dell'anteriorità: avevo fatto, ero andato. Uso nel discorso narrativo</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b1_congiuntivo.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-congiuntivo')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b1_congiuntivo.html', 'Congiuntivo Presente'); return false;">
                                     <span class="game-level-badge level-b1">B1</span>
                                     <div class="game-image bg-b1">🎯</div>
                                     <div class="game-content">
@@ -1596,7 +1369,7 @@
                                         <p class="game-desc">Modo verbale per esprimere opinione, dubbio, emozione. Forme regolari e irregolari</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b1_condizionale.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-condizionale')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b1_condizionale.html', 'Condizionale Presente e Passato'); return false;">
                                     <span class="game-level-badge level-b1">B1</span>
                                     <div class="game-image bg-b1">🎲</div>
                                     <div class="game-content">
@@ -1604,7 +1377,7 @@
                                         <p class="game-desc">Vorrei, avrei fatto. Ipotesi, cortesia, consigli nel presente e nel passato</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b1_pronomi_combinati.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-pronomi')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b1_pronomi_combinati.html', 'Pronomi Combinati'); return false;">
                                     <span class="game-level-badge level-b1">B1</span>
                                     <div class="game-image bg-b1">🔗</div>
                                     <div class="game-content">
@@ -1612,7 +1385,7 @@
                                         <p class="game-desc">Me lo, te la, glielo. Unione di pronomi diretti e indiretti</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b1_passivo.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-passivo')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b1_passivo.html', 'Passivo'); return false;">
                                     <span class="game-level-badge level-b1">B1</span>
                                     <div class="game-image bg-b1">🔄</div>
                                     <div class="game-content">
@@ -1620,7 +1393,7 @@
                                         <p class="game-desc">La casa è stata costruita. Formazione con essere e venire, uso dell'agente</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b1_ipotetico.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-ipotetico')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b1_ipotetico.html', 'Periodo Ipotetico'); return false;">
                                     <span class="game-level-badge level-b1">B1</span>
                                     <div class="game-image bg-b1">🌳</div>
                                     <div class="game-content">
@@ -1628,7 +1401,7 @@
                                         <p class="game-desc">Se fossi ricco, comprerei... Primo, secondo e terzo tipo</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b1_relativi.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-relativi')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b1_relativi.html', 'Pronomi Relativi'); return false;">
                                     <span class="game-level-badge level-b1">B1</span>
                                     <div class="game-image bg-b1">📎</div>
                                     <div class="game-content">
@@ -1636,7 +1409,7 @@
                                         <p class="game-desc">Che, cui, il quale. Collegamento di proposizioni e precisione lessicale</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b1_discorso_indiretto.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b1-discorso')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b1_discorso_indiretto.html', 'Discorso Indiretto'); return false;">
                                     <span class="game-level-badge level-b1">B1</span>
                                     <div class="game-image bg-b1">💬</div>
                                     <div class="game-content">
@@ -1644,15 +1417,12 @@
                                         <p class="game-desc">Ha detto che... Trasformazione dei tempi e modi verbali</p>
                                     </div>
                                 </a>
-                                
-                                
-                                
-                                
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Dashboard B2 -->
                 <div id="dashboard-b2" class="level-dashboard" style="display: none;">
                     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:32px;">
                         <div class="stat-card">
@@ -1674,7 +1444,7 @@
                         </div>
                         <div class="card-body">
                             <div class="games-grid">
-                                <a href="modulo_b2_congiuntivo_passato.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b2-congiuntivo-passato')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b2_congiuntivo_passato.html', 'Congiuntivo Passato'); return false;">
                                     <span class="game-level-badge level-b2">B2</span>
                                     <div class="game-image bg-b2">⏪</div>
                                     <div class="game-content">
@@ -1682,7 +1452,7 @@
                                         <p class="game-desc">Che io abbia fatto, che tu fossi andato. Uso nel passato e concordanze temporali</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b2_congiuntivo_imperfetto.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b2-congiuntivo-imperfetto')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b2_congiuntivo_imperfetto.html', 'Congiuntivo Imperfetto e Trapassato'); return false;">
                                     <span class="game-level-badge level-b2">B2</span>
                                     <div class="game-image bg-b2">🎭</div>
                                     <div class="game-content">
@@ -1690,7 +1460,7 @@
                                         <p class="game-desc">Che io facessi, che io avessi fatto. Irrealtà nel presente e nel passato</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b2_modi_indiretti.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b2-modi-indiretti')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b2_modi_indiretti.html', 'Modi Indiretti'); return false;">
                                     <span class="game-level-badge level-b2">B2</span>
                                     <div class="game-image bg-b2">🔄</div>
                                     <div class="game-content">
@@ -1698,7 +1468,7 @@
                                         <p class="game-desc">Forme nominali del verbo: infinito, gerundio, participio. Concordanza dei tempi</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b2_connettivi_avanzati.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b2-connettivi')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b2_connettivi_avanzati.html', 'Connettivi Avanzati'); return false;">
                                     <span class="game-level-badge level-b2">B2</span>
                                     <div class="game-image bg-b2">🔗</div>
                                     <div class="game-content">
@@ -1706,7 +1476,7 @@
                                         <p class="game-desc">Pur tuttavia, malgrado, in quanto. Coesione testuale avanzata</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b2_espressione_formale.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b2-formale')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b2_espressione_formale.html', 'Espressione Formale'); return false;">
                                     <span class="game-level-badge level-b2">B2</span>
                                     <div class="game-image bg-b2">📜</div>
                                     <div class="game-content">
@@ -1714,7 +1484,7 @@
                                         <p class="game-desc">Linguaggio formale, informale, burocratico. Lettere e documenti ufficiali</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b2_struttura_testuale.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b2-testuale')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b2_struttura_testuale.html', 'Struttura Testuale'); return false;">
                                     <span class="game-level-badge level-b2">B2</span>
                                     <div class="game-image bg-b2">📊</div>
                                     <div class="game-content">
@@ -1722,7 +1492,7 @@
                                         <p class="game-desc">Articoli di opinione, saggio breve, relazioni. Organizzazione argomentativa</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b2_italiano_lavoro.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b2-lavoro')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b2_italiano_lavoro.html', 'Italiano del Lavoro'); return false;">
                                     <span class="game-level-badge level-b2">B2</span>
                                     <div class="game-image bg-b2">💼</div>
                                     <div class="game-content">
@@ -1730,12 +1500,194 @@
                                         <p class="game-desc">CV, lettere di presentazione, colloqui. Linguaggio settoriale specialistico</p>
                                     </div>
                                 </a>
-                                <a href="modulo_b2_varieta_regionali.html" target="contentFrame" class="game-card" onclick="activateNav('nav-b2-regionali')">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_b2_varieta_regionali.html', 'Varietà Regionali'); return false;">
                                     <span class="game-level-badge level-b2">B2</span>
                                     <div class="game-image bg-b2">🗺️</div>
                                     <div class="game-content">
                                         <div class="game-title">Modulo 8: Varietà Regionali e Neoformazioni</div>
                                         <p class="game-desc">Dialetti, regionalismi, neologismi. Italiano contemporaneo e sociale</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard C1 -->
+                <div id="dashboard-c1" class="level-dashboard" style="display: none;">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:32px;">
+                        <div class="stat-card">
+                            <div class="stat-label">Moduli C1 Completati</div>
+                            <div class="stat-value" id="statTotalC1">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Media C1</div>
+                            <div class="stat-value" id="statAvgC1">0%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Progresso C1</div>
+                            <div class="stat-value" id="statProgressC1">0/8</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" style="background: #6b21a8; color: white; border-color: #6b21a8;">
+                            Programma Formativo C1 - Avanzato/Autonomo (QCER)
+                        </div>
+                        <div class="card-body">
+                            <div class="games-grid">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c1_sintassi_avanzata.html', 'Sintassi Avanzata'); return false;">
+                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">🧩</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 1: Sintassi Avanzata</div>
+                                        <p class="game-desc">Dislocazioni, frasi scisse, inversioni. Strutture complesse e marcate</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c1_testuale_avanzato.html', 'Organizzazione Testuale Avanzata'); return false;">
+                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">📑</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 2: Organizzazione Testuale Avanzata</div>
+                                        <p class="game-desc">Tesi, antitesi, synthesi. Articoli scientifici e saggi argomentativi</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c1_stilistica.html', 'Stilistica e Figure Retoriche'); return false;">
+                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">✨</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 3: Stilistica e Figure Retoriche</div>
+                                        <p class="game-desc">Metafore, metonimie, ironia. Analisi dello stile letterario e giornalistico</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c1_linguaggio_giuridico.html', 'Linguaggio Giuridico'); return false;">
+                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">⚖️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 4: Linguaggio Giuridico e Amministrativo</div>
+                                        <p class="game-desc">Terminologia giuridica, contratti, atti amministrativi. Precisione terminologica</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c1_economico_finanziario.html', 'Linguaggio Economico-Finanziario'); return false;">
+                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">💹</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 5: Linguaggio Economico-Finanziario</div>
+                                        <p class="game-desc">Bilanci, report finanziari, analisi di mercato. Registro specialistico</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c1_medico_scientifico.html', 'Linguaggio Medico-Scientifico'); return false;">
+                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">🔬</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 6: Linguaggio Medico-Scientifico</div>
+                                        <p class="game-desc">Articoli scientifici, referti medici, terminologia tecnica. Registro oggettivo</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c1_variazione_diastatica.html', 'Variazione Diastatica'); return false;">
+                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">📊</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 7: Variazione Diastatica e Diastratica</div>
+                                        <p class="game-desc">Registri formali, informali, slang. Adattamento situazionale del linguaggio</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c1_intertestualita.html', 'Intertestualità e Citazione'); return false;">
+                                    <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">🎭</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 8: Intertestualità e Citazione</div>
+                                        <p class="game-desc">Citazione, parafrasi, allusione. Dialogo tra testi e competenza intertestuale</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard C2 -->
+                <div id="dashboard-c2" class="level-dashboard" style="display: none;">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:32px;">
+                        <div class="stat-card">
+                            <div class="stat-label">Moduli C2 Completati</div>
+                            <div class="stat-value" id="statTotalC2">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Media C2</div>
+                            <div class="stat-value" id="statAvgC2">0%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Progresso C2</div>
+                            <div class="stat-value" id="statProgressC2">0/8</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" style="background: #0f172a; color: white; border-color: #0f172a;">
+                            Programma Formativo C2 - Maestria/Proficient (QCER)
+                        </div>
+                        <div class="card-body">
+                            <div class="games-grid">
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c2_ermeneutica.html', 'Ermeneutica e Interpretazione'); return false;">
+                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🔮</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 1: Ermeneutica e Interpretazione</div>
+                                        <p class="game-desc">Analisi profonda di testi complessi. Inferenze implicite e sottintesi culturali</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c2_filosofico_letterario.html', 'Linguaggio Filosofico e Letterario'); return false;">
+                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">📚</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 2: Linguaggio Filosofico e Letterario</div>
+                                        <p class="game-desc">Concetti astratti, metalinguaggio, critica letteraria. Pensiero complesso</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c2_negotiation.html', 'Negoziazione e Mediazione'); return false;">
+                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🤝</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 3: Negoziazione e Mediazione Linguistica</div>
+                                        <p class="game-desc">Risoluzione conflitti, mediazione culturale. Competenza pragmatica avanzata</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c2_traduzione.html', 'Traduzione e Versione Avanzata'); return false;">
+                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🌐</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 4: Traduzione e Versione Avanzata</div>
+                                        <p class="game-desc">Equivalenza traduttiva, calchi, false friends. Competenza interlinguistica</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c2_politico_istituzionale.html', 'Linguaggio Politico-Istituzionale'); return false;">
+                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🏛️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 5: Linguaggio Politico-Istituzionale</div>
+                                        <p class="game-desc">Discorsi politici, diplomatici, istituzionali. Eufemismi e manipolazione</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c2_giornalismo_investigativo.html', 'Giornalismo Investigativo'); return false;">
+                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">📰</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 6: Giornalismo Investigativo e Dossier</div>
+                                        <p class="game-desc">Reportage complessi, inchieste, documentazione. Fact-checking avanzato</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c2_creativita.html', 'Creatività Linguistica'); return false;">
+                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🎨</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 7: Creatività Linguistica e Neologia</div>
+                                        <p class="game-desc">Invenzione lessicale, giochi di parole, sperimentalismo. Libertà creativa</p>
+                                    </div>
+                                </a>
+                                <a href="#" class="game-card" onclick="loadModule('modulo_c2_competenza_plurilingue.html', 'Competenza Plurilingue'); return false;">
+                                    <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
+                                    <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">🌍</div>
+                                    <div class="game-content">
+                                        <div class="game-title">Modulo 8: Competenza Plurilingue e Interculturale</div>
+                                        <p class="game-desc">Transcodifica, code-switching, competenza comunicativa completa. Cittadinanza globale</p>
                                     </div>
                                 </a>
                             </div>
@@ -1752,39 +1704,6 @@
                 </div>
                 <div class="iframe-container">
                     <iframe name="contentFrame" class="content-iframe" src="about:blank"></iframe>
-                </div>
-            </div>
-
-            <!-- B1/B2 Coming Soon -->
-            <div id="b1-coming-soon" class="section">
-                <div class="breadcrumbs">
-                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span> / <strong>Livello B1</strong>
-                </div>
-                <div style="margin:24px 0;">
-                    <h1 class="section-title">Livello B1 - Intermedio</h1>
-                </div>
-                <div class="card">
-                    <div class="card-body" style="text-align: center; padding: 80px;">
-                        <div style="font-size: 5rem; margin-bottom: 24px;">🚧</div>
-                        <h2 style="color: var(--level-b1); margin-bottom: 16px;">Moduli in fase di sviluppo</h2>
-                        <button class="btn btn-b1" onclick="showSection('home')" style="margin-top: 32px; max-width: 300px; color: #000;">Torna al Cruscotto</button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="b2-coming-soon" class="section">
-                <div class="breadcrumbs">
-                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span> / <strong>Livello B2</strong>
-                </div>
-                <div style="margin:24px 0;">
-                    <h1 class="section-title">Livello B2 - Avanzato</h1>
-                </div>
-                <div class="card">
-                    <div class="card-body" style="text-align: center; padding: 80px;">
-                        <div style="font-size: 5rem; margin-bottom: 24px;">🚧</div>
-                        <h2 style="color: var(--level-b2); margin-bottom: 16px;">Moduli in fase di sviluppo</h2>
-                        <button class="btn btn-b2" onclick="showSection('home')" style="margin-top: 32px; max-width: 300px;">Torna al Cruscotto</button>
-                    </div>
                 </div>
             </div>
 
@@ -1841,7 +1760,7 @@
                     </div>
                     <div class="card-body">
                         <div class="games-grid">
-                            <a href="esame_finale_a1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-a1')">
+                            <a href="#" class="game-card" onclick="loadModule('esame_finale_a1.html', 'Esame Completo A1'); return false;">
                                 <span class="game-level-badge level-a1">A1</span>
                                 <div class="game-image bg-a1">📝</div>
                                 <div class="game-content">
@@ -1860,7 +1779,7 @@
                     </div>
                     <div class="card-body">
                         <div class="games-grid">
-                            <a href="esame_finale_a2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-a2')">
+                            <a href="#" class="game-card" onclick="loadModule('esame_finale_a2.html', 'Esame Completo A2'); return false;">
                                 <span class="game-level-badge level-a2">A2</span>
                                 <div class="game-image bg-a2">📝</div>
                                 <div class="game-content">
@@ -1879,7 +1798,7 @@
                     </div>
                     <div class="card-body">
                         <div class="games-grid">
-                            <a href="esame_finale_b1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b1')">
+                            <a href="#" class="game-card" onclick="loadModule('esame_finale_b1.html', 'Esame Completo B1'); return false;">
                                 <span class="game-level-badge level-b1">B1</span>
                                 <div class="game-image bg-b1">📝</div>
                                 <div class="game-content">
@@ -1887,7 +1806,7 @@
                                     <p class="game-desc">Simulazione completa esame CECOL livello B1 - Certificazione intermedia</p>
                                 </div>
                             </a>
-                            <a href="esame_finale_b1_cittadinanza.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b1-citt')">
+                            <a href="#" class="game-card" onclick="loadModule('esame_finale_b1_cittadinanza.html', 'Esame B1 Cittadinanza'); return false;">
                                 <span class="game-level-badge level-b1">B1</span>
                                 <div class="game-image bg-b1">🇮🇹</div>
                                 <div class="game-content">
@@ -1906,7 +1825,7 @@
                     </div>
                     <div class="card-body">
                         <div class="games-grid">
-                            <a href="esame_finale_b2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b2')">
+                            <a href="#" class="game-card" onclick="loadModule('esame_finale_b2.html', 'Esame Completo B2'); return false;">
                                 <span class="game-level-badge level-b2">B2</span>
                                 <div class="game-image bg-b2">📝</div>
                                 <div class="game-content">
@@ -1925,7 +1844,7 @@
                     </div>
                     <div class="card-body">
                         <div class="games-grid">
-                            <a href="esame_finale_c1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-c1')">
+                            <a href="#" class="game-card" onclick="loadModule('esame_finale_c1.html', 'Esame Completo C1'); return false;">
                                 <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
                                 <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">📝</div>
                                 <div class="game-content">
@@ -1944,7 +1863,7 @@
                     </div>
                     <div class="card-body">
                         <div class="games-grid">
-                            <a href="esame_finale_c2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-c2')">
+                            <a href="#" class="game-card" onclick="loadModule('esame_finale_c2.html', 'Esame Completo C2'); return false;">
                                 <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
                                 <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">📝</div>
                                 <div class="game-content">
@@ -2159,143 +2078,13 @@
                     </div>
                 </div>
             </div>
-
-            <!-- SIMULAZIONI ESAMI CECOL -->
-            <div id="simulazioni-cecol" class="section">
-                <div class="breadcrumbs">
-                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span> / <strong>Simulazioni Esami CECOL</strong>
-                </div>
-                <div style="margin:24px 0;">
-                    <h1 class="section-title" style="border-color: #8b0000;">🎓 Simulazioni Esami CECOL</h1>
-                    <p class="section-subtitle">Prova simulazioni complete per la certificazione QCER - Tutti i livelli A1-C2</p>
-                </div>
-
-                <!-- Livello A1 -->
-                <div class="card" style="margin-bottom: 24px;">
-                    <div class="card-header" style="background: var(--level-a1); color: white; border-color: var(--level-a1);">
-                        Simulazione Livello A1 - Principiante
-                    </div>
-                    <div class="card-body">
-                        <div class="games-grid">
-                            <a href="esame_finale_a1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-a1')">
-                                <span class="game-level-badge level-a1">A1</span>
-                                <div class="game-image bg-a1">📝</div>
-                                <div class="game-content">
-                                    <div class="game-title">Esame Completo A1</div>
-                                    <p class="game-desc">Simulazione completa esame CECOL livello A1 - Lettura, scrittura, ascolto</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Livello A2 -->
-                <div class="card" style="margin-bottom: 24px;">
-                    <div class="card-header" style="background: var(--level-a2); color: white; border-color: var(--level-a2);">
-                        Simulazione Livello A2 - Elementare
-                    </div>
-                    <div class="card-body">
-                        <div class="games-grid">
-                            <a href="esame_finale_a2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-a2')">
-                                <span class="game-level-badge level-a2">A2</span>
-                                <div class="game-image bg-a2">📝</div>
-                                <div class="game-content">
-                                    <div class="game-title">Esame Completo A2</div>
-                                    <p class="game-desc">Simulazione completa esame CECOL livello A2 - Tutte le competenze</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Livello B1 -->
-                <div class="card" style="margin-bottom: 24px;">
-                    <div class="card-header" style="background: var(--level-b1); color: #000; border-color: var(--level-b1);">
-                        Simulazione Livello B1 - Intermedio
-                    </div>
-                    <div class="card-body">
-                        <div class="games-grid">
-                            <a href="esame_finale_b1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b1')">
-                                <span class="game-level-badge level-b1">B1</span>
-                                <div class="game-image bg-b1">📝</div>
-                                <div class="game-content">
-                                    <div class="game-title">Esame Completo B1</div>
-                                    <p class="game-desc">Simulazione completa esame CECOL livello B1 - Certificazione intermedia</p>
-                                </div>
-                            </a>
-                            <a href="esame_finale_b1_cittadinanza.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b1-citt')">
-                                <span class="game-level-badge level-b1">B1</span>
-                                <div class="game-image bg-b1">🇮🇹</div>
-                                <div class="game-content">
-                                    <div class="game-title">Esame B1 Cittadinanza</div>
-                                    <p class="game-desc">Simulazione specifica per il test di cittadinanza italiana</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Livello B2 -->
-                <div class="card" style="margin-bottom: 24px;">
-                    <div class="card-header" style="background: var(--level-b2); color: white; border-color: var(--level-b2);">
-                        Simulazione Livello B2 - Avanzato
-                    </div>
-                    <div class="card-body">
-                        <div class="games-grid">
-                            <a href="esame_finale_b2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-b2')">
-                                <span class="game-level-badge level-b2">B2</span>
-                                <div class="game-image bg-b2">📝</div>
-                                <div class="game-content">
-                                    <div class="game-title">Esame Completo B2</div>
-                                    <p class="game-desc">Simulazione completa esame CECOL livello B2 - Avanzato</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Livello C1 -->
-                <div class="card" style="margin-bottom: 24px;">
-                    <div class="card-header" style="background: #6b21a8; color: white; border-color: #6b21a8;">
-                        Simulazione Livello C1 - Autonomo
-                    </div>
-                    <div class="card-body">
-                        <div class="games-grid">
-                            <a href="esame_finale_c1.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-c1')">
-                                <span class="game-level-badge" style="background: #6b21a8; color: white;">C1</span>
-                                <div class="game-image" style="background: linear-gradient(135deg, #6b21a8 0%, #4c1d95 100%); border-color: #6b21a8; color: white;">📝</div>
-                                <div class="game-content">
-                                    <div class="game-title">Esame Completo C1</div>
-                                    <p class="game-desc">Simulazione completa esame CECOL livello C1 - Competenza autonoma</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Livello C2 -->
-                <div class="card" style="margin-bottom: 24px;">
-                    <div class="card-header" style="background: #0f172a; color: white; border-color: #0f172a;">
-                        Simulazione Livello C2 - Maestria
-                    </div>
-                    <div class="card-body">
-                        <div class="games-grid">
-                            <a href="esame_finale_c2.html" target="contentFrame" class="game-card" onclick="activateNav('nav-sim-c2')">
-                                <span class="game-level-badge" style="background: #0f172a; color: white;">C2</span>
-                                <div class="game-image" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-color: #0f172a; color: white;">📝</div>
-                                <div class="game-content">
-                                    <div class="game-title">Esame Completo C2</div>
-                                    <p class="game-desc">Simulazione completa esame CECOL livello C2 - Maestria linguistica</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </main>
     </div>
 </div>
 
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- JAVASCRIPT -->
 <script>
 // ==================== DATABASE ====================
 let db = { users: [], requests: [], scores: [] };
@@ -2324,10 +2113,6 @@ function saveDB() {
 // Module info for tracking
 const moduleInfo = {
     'modulo_a1_alfabeto.html': { name: 'Alfabeto e Fonologia', level: 'A1' },
-    'periodo_ipotetico1.html': { name: 'Periodo Ipotetico - Alternativo', level: 'B1' },
-    'preposizioni_articolate.html': { name: 'Preposizioni Articolate - Alternativo', level: 'B1' },
-    'pronomi_combinati1.html': { name: 'Pronomi Combinati - Alternativo', level: 'B1' },
-    'pronomi_relativi1.html': { name: 'Pronomi Relativi - Alternativo', level: 'B1' },
     'modulo_a1_articoli_det.html': { name: 'Articoli Determinativi', level: 'A1' },
     'modulo_a1_articoli_indet.html': { name: 'Articoli Indeterminativi', level: 'A1' },
     'modulo_a1_essere_avere.html': { name: 'Verbi Essere e Avere', level: 'A1' },
@@ -2342,7 +2127,46 @@ const moduleInfo = {
     'modulo_a2_preposizioni.html': { name: 'Preposizioni Articolate', level: 'A2' },
     'modulo_a2_modali.html': { name: 'Verbi Modali', level: 'A2' },
     'modulo_a2_futuro.html': { name: 'Il Futuro', level: 'A2' },
-    'modulo_a2_personalita.html': { name: 'La Personalità', level: 'A2' }
+    'modulo_a2_personalita.html': { name: 'La Personalità', level: 'A2' },
+    'modulo_b1_trapassato.html': { name: 'Trapassato Prossimo', level: 'B1' },
+    'modulo_b1_congiuntivo.html': { name: 'Congiuntivo Presente', level: 'B1' },
+    'modulo_b1_condizionale.html': { name: 'Condizionale Presente e Passato', level: 'B1' },
+    'modulo_b1_pronomi_combinati.html': { name: 'Pronomi Combinati', level: 'B1' },
+    'modulo_b1_passivo.html': { name: 'Passivo', level: 'B1' },
+    'modulo_b1_ipotetico.html': { name: 'Periodo Ipotetico', level: 'B1' },
+    'modulo_b1_relativi.html': { name: 'Pronomi Relativi', level: 'B1' },
+    'modulo_b1_discorso_indiretto.html': { name: 'Discorso Indiretto', level: 'B1' },
+    'modulo_b2_congiuntivo_passato.html': { name: 'Congiuntivo Passato', level: 'B2' },
+    'modulo_b2_congiuntivo_imperfetto.html': { name: 'Congiuntivo Imperfetto e Trapassato', level: 'B2' },
+    'modulo_b2_modi_indiretti.html': { name: 'Modi Indiretti', level: 'B2' },
+    'modulo_b2_connettivi_avanzati.html': { name: 'Connettivi Avanzati', level: 'B2' },
+    'modulo_b2_espressione_formale.html': { name: 'Espressione Formale', level: 'B2' },
+    'modulo_b2_struttura_testuale.html': { name: 'Struttura Testuale', level: 'B2' },
+    'modulo_b2_italiano_lavoro.html': { name: 'Italiano del Lavoro', level: 'B2' },
+    'modulo_b2_varieta_regionali.html': { name: 'Varietà Regionali', level: 'B2' },
+    'modulo_c1_sintassi_avanzata.html': { name: 'Sintassi Avanzata', level: 'C1' },
+    'modulo_c1_testuale_avanzato.html': { name: 'Organizzazione Testuale Avanzata', level: 'C1' },
+    'modulo_c1_stilistica.html': { name: 'Stilistica e Figure Retoriche', level: 'C1' },
+    'modulo_c1_linguaggio_giuridico.html': { name: 'Linguaggio Giuridico', level: 'C1' },
+    'modulo_c1_economico_finanziario.html': { name: 'Linguaggio Economico-Finanziario', level: 'C1' },
+    'modulo_c1_medico_scientifico.html': { name: 'Linguaggio Medico-Scientifico', level: 'C1' },
+    'modulo_c1_variazione_diastatica.html': { name: 'Variazione Diastatica', level: 'C1' },
+    'modulo_c1_intertestualita.html': { name: 'Intertestualità e Citazione', level: 'C1' },
+    'modulo_c2_ermeneutica.html': { name: 'Ermeneutica e Interpretazione', level: 'C2' },
+    'modulo_c2_filosofico_letterario.html': { name: 'Linguaggio Filosofico e Letterario', level: 'C2' },
+    'modulo_c2_negotiation.html': { name: 'Negoziazione e Mediazione', level: 'C2' },
+    'modulo_c2_traduzione.html': { name: 'Traduzione e Versione Avanzata', level: 'C2' },
+    'modulo_c2_politico_istituzionale.html': { name: 'Linguaggio Politico-Istituzionale', level: 'C2' },
+    'modulo_c2_giornalismo_investigativo.html': { name: 'Giornalismo Investigativo', level: 'C2' },
+    'modulo_c2_creativita.html': { name: 'Creatività Linguistica', level: 'C2' },
+    'modulo_c2_competenza_plurilingue.html': { name: 'Competenza Plurilingue', level: 'C2' },
+    'esame_finale_a1.html': { name: 'Esame Completo A1', level: 'A1' },
+    'esame_finale_a2.html': { name: 'Esame Completo A2', level: 'A2' },
+    'esame_finale_b1.html': { name: 'Esame Completo B1', level: 'B1' },
+    'esame_finale_b1_cittadinanza.html': { name: 'Esame B1 Cittadinanza', level: 'B1' },
+    'esame_finale_b2.html': { name: 'Esame Completo B2', level: 'B2' },
+    'esame_finale_c1.html': { name: 'Esame Completo C1', level: 'C1' },
+    'esame_finale_c2.html': { name: 'Esame Completo C2', level: 'C2' }
 };
 
 // ==================== PASSWORD FUNCTIONS ====================
@@ -2515,7 +2339,7 @@ function adminLogout() {
 // ==================== NAVIGATION ====================
 function showSection(sectionId) {
     // Hide all sections
-    document.querySelectorAll('.section').forEach(section => {
+    document.querySelectorAll('#dashboard .section').forEach(section => {
         section.classList.remove('active');
     });
     
@@ -2576,13 +2400,13 @@ function loadModule(url, moduleName) {
         'modulo_a2_modali.html': 'nav-a2-modali',
         'modulo_a2_futuro.html': 'nav-a2-futuro',
         'modulo_a2_personalita.html': 'nav-a2-personalita',
-        'esame_finale_a1.html': 'nav-sim-a1',
-        'esame_finale_a2.html': 'nav-sim-a2',
-        'esame_finale_b1.html': 'nav-sim-b1',
-        'esame_finale_b1_cittadinanza.html': 'nav-sim-b1-citt',
-        'esame_finale_b2.html': 'nav-sim-b2',
-        'esame_finale_c1.html': 'nav-sim-c1',
-        'esame_finale_c2.html': 'nav-sim-c2',
+        'esame_finale_a1.html': 'nav-simulazioni',
+        'esame_finale_a2.html': 'nav-simulazioni',
+        'esame_finale_b1.html': 'nav-simulazioni',
+        'esame_finale_b1_cittadinanza.html': 'nav-simulazioni',
+        'esame_finale_b2.html': 'nav-simulazioni',
+        'esame_finale_c1.html': 'nav-simulazioni',
+        'esame_finale_c2.html': 'nav-simulazioni',
         'modulo_b1_trapassato.html': 'nav-b1-trapassato',
         'modulo_b1_congiuntivo.html': 'nav-b1-congiuntivo',
         'modulo_b1_condizionale.html': 'nav-b1-condizionale',
@@ -2591,10 +2415,6 @@ function loadModule(url, moduleName) {
         'modulo_b1_ipotetico.html': 'nav-b1-ipotetico',
         'modulo_b1_relativi.html': 'nav-b1-relativi',
         'modulo_b1_discorso_indiretto.html': 'nav-b1-discorso',
-        'periodo_ipotetico1.html': 'nav-b1-ipotetico1',
-        'preposizioni_articolate.html': 'nav-b1-prep-art',
-        'pronomi_combinati1.html': 'nav-b1-pronomi1',
-        'pronomi_relativi1.html': 'nav-b1-relativi1',
         'modulo_b2_congiuntivo_passato.html': 'nav-b2-congiuntivo-passato',
         'modulo_b2_congiuntivo_imperfetto.html': 'nav-b2-congiuntivo-imperfetto',
         'modulo_b2_modi_indiretti.html': 'nav-b2-modi-indiretti',
@@ -2639,13 +2459,6 @@ function showLevel(level) {
     
     document.querySelectorAll('.level-card').forEach(card => card.classList.remove('active'));
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
-}
-
-function backToHome() {
-    showSection('home');
-    // Clear iframe
-    const iframe = document.querySelector('iframe[name="contentFrame"]');
-    if (iframe) iframe.src = 'about:blank';
 }
 
 // ==================== RESULTS ====================
@@ -2716,29 +2529,48 @@ function filterResults(level) {
 function updateStats() {
     const a1Modules = Object.keys(moduleInfo).filter(k => moduleInfo[k].level === 'A1');
     const a2Modules = Object.keys(moduleInfo).filter(k => moduleInfo[k].level === 'A2');
+    const b1Modules = Object.keys(moduleInfo).filter(k => moduleInfo[k].level === 'B1');
+    const b2Modules = Object.keys(moduleInfo).filter(k => moduleInfo[k].level === 'B2');
+    const c1Modules = Object.keys(moduleInfo).filter(k => moduleInfo[k].level === 'C1');
+    const c2Modules = Object.keys(moduleInfo).filter(k => moduleInfo[k].level === 'C2');
     
     const a1Completed = userResults.filter(r => a1Modules.includes(r.moduleUrl) && r.completed);
     const a2Completed = userResults.filter(r => a2Modules.includes(r.moduleUrl) && r.completed);
+    const b1Completed = userResults.filter(r => b1Modules.includes(r.moduleUrl) && r.completed);
+    const b2Completed = userResults.filter(r => b2Modules.includes(r.moduleUrl) && r.completed);
+    const c1Completed = userResults.filter(r => c1Modules.includes(r.moduleUrl) && r.completed);
+    const c2Completed = userResults.filter(r => c2Modules.includes(r.moduleUrl) && r.completed);
     
     const a1Scores = a1Completed.map(r => r.score);
     const a2Scores = a2Completed.map(r => r.score);
+    const b1Scores = b1Completed.map(r => r.score);
+    const b2Scores = b2Completed.map(r => r.score);
+    const c1Scores = c1Completed.map(r => r.score);
+    const c2Scores = c2Completed.map(r => r.score);
     
     const a1Avg = a1Scores.length > 0 ? Math.round(a1Scores.reduce((a, b) => a + b, 0) / a1Scores.length) : 0;
     const a2Avg = a2Scores.length > 0 ? Math.round(a2Scores.reduce((a, b) => a + b, 0) / a2Scores.length) : 0;
+    const b1Avg = b1Scores.length > 0 ? Math.round(b1Scores.reduce((a, b) => a + b, 0) / b1Scores.length) : 0;
+    const b2Avg = b2Scores.length > 0 ? Math.round(b2Scores.reduce((a, b) => a + b, 0) / b2Scores.length) : 0;
+    const c1Avg = c1Scores.length > 0 ? Math.round(c1Scores.reduce((a, b) => a + b, 0) / c1Scores.length) : 0;
+    const c2Avg = c2Scores.length > 0 ? Math.round(c2Scores.reduce((a, b) => a + b, 0) / c2Scores.length) : 0;
     
-    const statTotalA1 = document.getElementById('statTotalA1');
-    const statAvgA1 = document.getElementById('statAvgA1');
-    const statProgressA1 = document.getElementById('statProgressA1');
-    const statTotalA2 = document.getElementById('statTotalA2');
-    const statAvgA2 = document.getElementById('statAvgA2');
-    const statProgressA2 = document.getElementById('statProgressA2');
+    updateStatDisplay('statTotalA1', 'statAvgA1', 'statProgressA1', a1Completed.length, a1Avg, a1Modules.length);
+    updateStatDisplay('statTotalA2', 'statAvgA2', 'statProgressA2', a2Completed.length, a2Avg, a2Modules.length);
+    updateStatDisplay('statTotalB1', 'statAvgB1', 'statProgressB1', b1Completed.length, b1Avg, b1Modules.length);
+    updateStatDisplay('statTotalB2', 'statAvgB2', 'statProgressB2', b2Completed.length, b2Avg, b2Modules.length);
+    updateStatDisplay('statTotalC1', 'statAvgC1', 'statProgressC1', c1Completed.length, c1Avg, c1Modules.length);
+    updateStatDisplay('statTotalC2', 'statAvgC2', 'statProgressC2', c2Completed.length, c2Avg, c2Modules.length);
+}
+
+function updateStatDisplay(totalId, avgId, progressId, completed, avg, total) {
+    const statTotal = document.getElementById(totalId);
+    const statAvg = document.getElementById(avgId);
+    const statProgress = document.getElementById(progressId);
     
-    if (statTotalA1) statTotalA1.textContent = a1Completed.length;
-    if (statAvgA1) statAvgA1.textContent = a1Avg + '%';
-    if (statProgressA1) statProgressA1.textContent = a1Completed.length + '/' + a1Modules.length;
-    if (statTotalA2) statTotalA2.textContent = a2Completed.length;
-    if (statAvgA2) statAvgA2.textContent = a2Avg + '%';
-    if (statProgressA2) statProgressA2.textContent = a2Completed.length + '/' + a2Modules.length;
+    if (statTotal) statTotal.textContent = completed;
+    if (statAvg) statAvg.textContent = avg + '%';
+    if (statProgress) statProgress.textContent = completed + '/' + total;
 }
 
 // ==================== ADMIN FUNCTIONS ====================
@@ -2967,12 +2799,7 @@ function downloadCSV(data, filename) {
     a.click();
 }
 
-// ==================== INIT ====================
-window.onload = function() {
-    initDB();
-    checkPasswordStrength();
-};
-
+// ==================== MOBILE MENU ====================
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
@@ -3005,6 +2832,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// ==================== INIT ====================
+window.onload = function() {
+    initDB();
+    checkPasswordStrength();
+};
 </script>
 
 </body>
