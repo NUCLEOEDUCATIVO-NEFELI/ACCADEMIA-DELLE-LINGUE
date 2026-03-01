@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articoli Determinativi Italiani - Teoria + 50 Esercizi con Email</title>
+    <title>Articoli Determinativi Italiani - Teoria Completa Multilingue</title>
     <style>
         * {
             margin: 0;
@@ -18,10 +18,6 @@
             --light: #f8f9fa;
             --dark: #212529;
             --border: #dee2e6;
-            --success: #155724;
-            --success-bg: #d4edda;
-            --error: #721c24;
-            --error-bg: #f8d7da;
             --parchment: #faf8f3;
             --b1-color: #c9a227;
             --maschile: #2c5282;
@@ -92,7 +88,7 @@
         }
 
         .main-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -268,6 +264,8 @@
         }
 
         .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
 
         /* Language section styles */
         .lang-section {
@@ -312,12 +310,38 @@
             text-align: right;
         }
 
+        .urdu-text, .arabic-text, .punjabi-text {
+            font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+            line-height: 2;
+        }
+
+        .chinese-text {
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        .hindi-text, .bangla-text {
+            font-family: 'Noto Sans Devanagari', 'Mangal', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.85rem; flex: 1 1 33%; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+
         .toggle-icon {
             transition: transform 0.3s;
         }
 
         .toggle-icon.rotated {
             transform: rotate(180deg);
+        }
+
+        .highlight {
+            background: #fff9c4;
+            padding: 0.2rem 0.4rem;
+            font-weight: bold;
         }
 
         .article-box {
@@ -336,334 +360,8 @@
         .box-i { background: #e3f2fd; color: #1565c0; }
         .box-gli { background: #e8f5e9; color: #2e7d32; }
         .box-le { background: #fce4ec; color: #c2185b; }
-
-        /* STILI ESERCIZI */
-        .game-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .score-panel {
-            background: var(--light);
-            border: 1px solid var(--border);
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .score-label {
-            font-weight: bold;
-            color: var(--secondary);
-            text-transform: uppercase;
-            font-size: 0.85rem;
-        }
-
-        .score-value {
-            font-size: 1.5rem;
-            color: var(--primary);
-            font-weight: bold;
-            font-family: 'Courier New', monospace;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background: var(--light);
-            border: 1px solid var(--border);
-            margin: 1rem 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--b1-color);
-            width: 0%;
-            transition: width 0.5s;
-        }
-
-        .question-box {
-            background: white;
-            border: 2px solid var(--primary);
-            padding: 2rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .question-text {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .option-btn {
-            padding: 1rem;
-            background: white;
-            border: 2px solid var(--border);
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 1.1rem;
-            transition: all 0.2s;
-        }
-
-        .option-btn:hover:not(:disabled) {
-            border-color: var(--b1-color);
-            background: var(--light);
-        }
-
-        .option-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .option-btn.correct {
-            background: var(--success-bg);
-            border-color: var(--success);
-            color: var(--success);
-        }
-
-        .option-btn.wrong {
-            background: var(--error-bg);
-            border-color: var(--error);
-            color: var(--error);
-        }
-
-        .feedback {
-            padding: 1rem;
-            text-align: center;
-            font-weight: bold;
-            display: none;
-            margin-bottom: 1rem;
-            border: 1px solid;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct {
-            background: var(--success-bg);
-            color: var(--success);
-            border-color: var(--success);
-        }
-
-        .feedback.wrong {
-            background: var(--error-bg);
-            color: var(--error);
-            border-color: var(--error);
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            font-family: inherit;
-            font-size: 1rem;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: background 0.3s;
-        }
-
-        .btn-primary:hover {
-            background: #002147;
-        }
-
-        .btn-check {
-            background: var(--b1-color);
-            color: #000;
-        }
-
-        .fill-blank {
-            display: inline-block;
-            width: 220px;
-            padding: 10px 15px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            margin: 0 5px;
-            font-size: 1rem;
-            font-family: inherit;
-        }
-
-        .fill-blank:focus {
-            outline: none;
-            border-color: var(--b1-color);
-        }
-
-        .exercise-counter {
-            background: var(--b1-color);
-            color: #000;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        .text-center { text-align: center; }
-
-        /* MODAL EMAIL */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-overlay.show {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-
-        .modal-header {
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin: 0;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: var(--dark);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .result-summary {
-            background: #f8f9fa;
-            border: 1px solid var(--border);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 4px;
-            font-family: monospace;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-
-        .success-message {
-            background: var(--success-bg);
-            color: var(--success);
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            border: 1px solid var(--success);
-        }
-
-        .error-message {
-            background: var(--error-bg);
-            color: var(--error);
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            border: 1px solid var(--error);
-        }
-
-        .final-score-section {
-            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
-            color: white;
-            padding: 3rem;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 2rem;
-            display: none;
-        }
-
-        .final-score-section.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .final-score-value {
-            font-size: 4rem;
-            font-weight: bold;
-            color: var(--b1-color);
-            margin: 20px 0;
-        }
-
-        .final-message {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .sufficiency-indicator {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-
-        .sufficiency-pass {
-            background: var(--success-bg);
-            color: var(--success);
-            border: 2px solid var(--success);
-        }
-
-        .sufficiency-fail {
-            background: var(--error-bg);
-            color: var(--error);
-            border: 2px solid var(--error);
-        }
-
-        @media (max-width: 768px) {
-            .nav-tabs { flex-wrap: wrap; }
-            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
-            .options-grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.5rem; }
-            .page-title { font-size: 1.5rem; }
-            .final-score-value { font-size: 3rem; }
-            .fill-blank { width: 180px; }
-        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=Noto+Sans+SC&display=swap" rel="stylesheet">
 <base target="_blank">
 <base target="_blank">
 </head>
@@ -671,7 +369,7 @@
     <header class="header">
         <div class="header-container">
             <h1>Articoli Determinativi Italiani</h1>
-            <p>Teoria completa multilingue + 50 Esercizi con sistema di valutazione</p>
+            <p>Teoria completa multilingue - Il, lo, la, l', i, gli, le</p>
         </div>
     </header>
 
@@ -681,33 +379,31 @@
             <span>›</span>
             <a href="#">Italiano A1</a>
             <span>›</span>
-            <strong>Articoli Determinativi - 50 Esercizi</strong>
+            <strong>Articoli Determinativi - Teoria Multilingue</strong>
         </div>
     </nav>
 
     <main class="main-container">
         <div class="page-header">
             <h1 class="page-title">📚 Gli Articoli Determinativi Italiani</h1>
-            <p class="page-subtitle">50 esercizi (2 punti ciascuno) - Sufficienza: 60/100</p>
+            <p class="page-subtitle">Il sistema completo degli articoli determinativi con spiegazioni in 18 lingue</p>
         </div>
 
         <nav class="nav-tabs">
-            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria Italiano</button>
             <button class="nav-tab" onclick="showSection('languages', this)">🌍 18 Lingue</button>
             <button class="nav-tab" onclick="showSection('maschile', this)">Maschile</button>
             <button class="nav-tab" onclick="showSection('femminile', this)">Femminile</button>
             <button class="nav-tab" onclick="showSection('plurale', this)">Plurale</button>
             <button class="nav-tab" onclick="showSection('eccezioni', this)">Eccezioni</button>
-            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 50 Esercizi</button>
         </nav>
 
-        <!-- SEZIONE TEORIA -->
+        <!-- SEZIONE TEORIA ITALIANO -->
         <section id="theory" class="section active">
-            <!-- ... (contenuto teoria invariato) ... -->
             <div class="card">
                 <div class="card-header">Che cosa sono gli Articoli Determinativi?</div>
                 <div class="card-body">
-                    <p>Gli <strong>articoli determinativi</strong> sono parole che accompagnano i nomi (sostantivi) per indicare persone, animali o cose <strong>specifiche e determinate</strong>.</p>
+                    <p>Gli <strong>articoli determinativi</strong> sono parole che accompagnano i nomi (sostantivi) per indicare persone, animali o cose <strong>specifiche e determinate</strong>. In italiano corrispondono all'articolo inglese "<strong>the</strong>".</p>
                     
                     <div class="instruction-box">
                         <strong>In italiano ci sono 7 forme:</strong>
@@ -718,39 +414,714 @@
                             <li><strong>Plurale femminile:</strong> <span class="article-box box-le">LE</span></li>
                         </ul>
                     </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola fondamentale:</strong> La scelta dell'articolo dipende da tre fattori:
+                        <ol style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Genere</strong> del nome (maschile o femminile)</li>
+                            <li><strong>Numero</strong> del nome (singolare o plurale)</li>
+                            <li><strong>Lettera iniziale</strong> del nome</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Schema Riassuntivo Completo</div>
+                <div class="card-body">
+                    <table class="article-table">
+                        <thead>
+                            <tr>
+                                <th>Genere</th>
+                                <th>Numero</th>
+                                <th>Articolo</th>
+                                <th>Quando si usa</th>
+                                <th>Esempi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3">Maschile</td>
+                                <td rowspan="3">Singolare</td>
+                                <td class="article-display maschile">IL</td>
+                                <td>Consonante semplice (non s+consonante)</td>
+                                <td>il libro, il cane, il tavolo, il computer</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display maschile">LO</td>
+                                <td>s+consonante, z, ps, gn, x, y, i semiconsonantica</td>
+                                <td>lo studente, lo zaino, lo psicologo, lo gnocco, lo xilofono, lo yogurt</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display maschile">L'</td>
+                                <td>Vocale (a, e, i, o, u)</td>
+                                <td>l'amico, l'orologio, l'ufficio, l'elefante</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Femminile</td>
+                                <td rowspan="2">Singolare</td>
+                                <td class="article-display femminile">LA</td>
+                                <td>Qualsiasi consonante</td>
+                                <td>la casa, la penna, la scuola, la studentessa</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display femminile">L'</td>
+                                <td>Vocale (a, e, i, o, u)</td>
+                                <td>l'amica, l'isola, l'acqua, l'edicola</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">Maschile</td>
+                                <td rowspan="2">Plurale</td>
+                                <td class="article-display maschile">I</td>
+                                <td>Plurale di IL</td>
+                                <td>i libri, i cani, i tavoli</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display maschile">GLI</td>
+                                <td>Plurale di LO e L'</td>
+                                <td>gli studenti, gli zaini, gli amici</td>
+                            </tr>
+                            <tr>
+                                <td>Femminile</td>
+                                <td>Plurale</td>
+                                <td class="article-display femminile">LE</td>
+                                <td>Unico plurale femminile</td>
+                                <td>le case, le penne, le amiche</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Quando si usano gli Articoli Determinativi?</div>
+                <div class="card-body">
+                    <p>Gli articoli determinativi si usano in italiano in molti contesti. Ecco i principali:</p>
+                    
+                    <h3 style="margin-top: 1rem; color: var(--primary);">1. Per indicare qualcosa di specifico</h3>
+                    <ul style="margin-left: 2rem;">
+                        <li>"<strong>Il</strong> libro che mi hai prestato è bellissimo" (un libro specifico)</li>
+                        <li>"<strong>La</strong> casa di Marco è grande" (una casa specifica)</li>
+                    </ul>
+
+                    <h3 style="margin-top: 1rem; color: var(--primary);">2. Per indicare qualcosa di unico</h3>
+                    <ul style="margin-left: 2rem;">
+                        <li>"<strong>Il</strong> sole splende" (c'è solo un sole)</li>
+                        <li>"<strong>La</strong> luna è piena" (c'è solo una luna)</li>
+                        <li>"<strong>Il</strong> Papa ha parlato" (c'è solo un Papa)</li>
+                    </ul>
+
+                    <h3 style="margin-top: 1rem; color: var(--primary);">3. Per indicare una categoria generale</h3>
+                    <ul style="margin-left: 2rem;">
+                        <li>"<strong>Il</strong> cane è un animale fedele" (tutti i cani in generale)</li>
+                        <li>"<strong>La</strong> musica rilassa" (la musica in generale)</li>
+                    </ul>
+
+                    <h3 style="margin-top: 1rem; color: var(--primary);">4. Con i nomi di parentela (con possessivo)</h3>
+                    <ul style="margin-left: 2rem;">
+                        <li>"<strong>Il</strong> mio fratello" (ma: "mio fratello" senza articolo)</li>
+                        <li>"<strong>La</strong> tua sorella" (ma: "tua sorella" senza articolo)</li>
+                    </ul>
+
+                    <h3 style="margin-top: 1rem; color: var(--primary);">5. Con i giorni della settimana</h3>
+                    <ul style="margin-left: 2rem;">
+                        <li>"<strong>Il</strong> lunedì vado in palestra" (ogni lunedì)</li>
+                        <li>"<strong>La</strong> domenica riposo" (ogni domenica)</li>
+                    </ul>
+
+                    <h3 style="margin-top: 1rem; color: var(--primary);">6. Con le parti del giorno</h3>
+                    <ul style="margin-left: 2rem;">
+                        <li>"<strong>Il</strong> mattino è freddo"</li>
+                        <li>"<strong>La</strong> sera ceno presto"</li>
+                    </ul>
+
+                    <h3 style="margin-top: 1rem; color: var(--primary);">7. Con i nomi di lingue (dopo la preposizione "in")</h3>
+                    <ul style="margin-left: 2rem;">
+                        <li>"Parlo in <strong>italiano</strong>" (senza articolo)</li>
+                        <li>"Studio <strong>l'</strong>italiano" (con articolo come oggetto)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Trucchi Mnemonici per Memorizzare</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>🧠 Ricorda la regola del MASCHILE SINGOLARE:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>IL</strong> → consonante semplice (il <strong>B</strong>ambino, il <strong>C</strong>ane, il <strong>D</strong>ottore)</li>
+                            <li><strong>LO</strong> → consonante "difficile" (s+consonante, z, ps, gn, x, y)</li>
+                            <li><strong>L'</strong> → vocale (l'<strong>A</strong>mico, l'<strong>E</strong>lefante, l'<strong>O</strong>rologio)</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>🧠 Ricorda la regola del FEMMINILE SINGOLARE:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>LA</strong> → sempre con consonante (qualsiasi consonante!)</li>
+                            <li><strong>L'</strong> → vocale</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>🧠 Ricorda la regola del PLURALE:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>I</strong> → plurale di IL (entrambi iniziano per I)</li>
+                            <li><strong>GLI</strong> → plurale di LO e L'</li>
+                            <li><strong>LE</strong> → unico plurale femminile</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>💡 Consiglio pratico:</strong> Se non sei sicuro del genere di un nome, cerca di ricordare l'articolo insieme al nome. Per esempio, non imparare solo "tavolo" ma "<strong>il</strong> tavolo".
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE LINGUE (18 lingue - abbreviato per spazio, mantenere tutte le 18 del file precedente) -->
+        <!-- SEZIONE LINGUE - 18 LINGUE COMPLETE -->
         <section id="languages" class="section">
             <div class="card">
                 <div class="card-header lang">🌍 Spiegazioni in 18 Lingue</div>
                 <div class="card-body">
-                    <p style="margin-bottom: 1.5rem;">Clicca su una lingua per leggere la spiegazione:</p>
-                    <!-- Inserire qui tutte le 18 lingue dal file precedente -->
+                    <p style="margin-bottom: 1.5rem;">Clicca su una lingua per leggere la spiegazione completa degli articoli determinativi italiani:</p>
+
+                    <!-- 1. Русский (Russo) -->
                     <div class="lang-section">
                         <div class="lang-header" onclick="toggleLang(this)">
-                            <span><span class="lang-flag">🇬🇧</span> <strong>English</strong></span>
+                            <span><span class="lang-flag">🇷🇺</span> <strong>Русский (Russo)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Определенные артикли в итальянском языке</h4>
+                            <p><strong>Определенные артикли</strong> - это слова, которые сопровождают существительные для указания на <strong>конкретные и определенные</strong> лица, животных или вещи.</p>
+                            
+                            <h4>7 форм в итальянском:</h4>
+                            <table class="article-table">
+                                <tr><th>Род</th><th>Число</th><th>Артикль</th><th>Когда используется</th><th>Примеры</th></tr>
+                                <tr><td rowspan="3">Мужской</td><td rowspan="3">Единственное</td><td><strong>IL</strong></td><td>Простая согласная</td><td>il libro (книга), il cane (собака)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+согласная, z, ps, gn, x, y</td><td>lo studente (студент), lo zaino (рюкзак)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Гласная</td><td>l'amico (друг), l'orologio (часы)</td></tr>
+                                <tr><td rowspan="2">Женский</td><td rowspan="2">Единственное</td><td><strong>LA</strong></td><td>Любая согласная</td><td>la casa (дом), la penna (ручка)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Гласная</td><td>l'amica (подруга), l'isola (остров)</td></tr>
+                                <tr><td rowspan="2">Мужской</td><td rowspan="2">Множественное</td><td><strong>I</strong></td><td>Множественное от IL</td><td>i libri (книги), i cani (собаки)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>Множественное от LO и L'</td><td>gli studenti (студенты), gli amici (друзья)</td></tr>
+                                <tr><td>Женский</td><td>Множественное</td><td><strong>LE</strong></td><td>Единственное женское множественное</td><td>le case (дома), le penne (ручки)</td></tr>
+                            </table>
+
+                            <p><strong>Мнемоника:</strong> IL → I (оба на I), LO/L' → GLI, LA/L' → LE</p>
+                        </div>
+                    </div>
+
+                    <!-- 2. Українська (Ucraino) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇺🇦</span> <strong>Українська (Ucraino)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Певні артиклі в італійській мові</h4>
+                            <p><strong>Певні артиклі</strong> - це слова, які супроводжують іменники для позначення <strong>конкретних і певних</strong> осіб, тварин або речей.</p>
+                            
+                            <h4>7 форм в італійській:</h4>
+                            <table class="article-table">
+                                <tr><th>Рід</th><th>Число</th><th>Артикль</th><th>Коли використовується</th><th>Приклади</th></tr>
+                                <tr><td rowspan="3">Чоловічий</td><td rowspan="3">Однина</td><td><strong>IL</strong></td><td>Проста приголосна</td><td>il libro (книга), il cane (собака)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+приголосна, z, ps, gn, x, y</td><td>lo studente (студент), lo zaino (рюкзак)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Голосна</td><td>l'amico (друг), l'orologio (годинник)</td></tr>
+                                <tr><td rowspan="2">Жіночий</td><td rowspan="2">Однина</td><td><strong>LA</strong></td><td>Будь-яка приголосна</td><td>la casa (дім), la penna (ручка)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Голосна</td><td>l'amica (подруга), l'isola (острів)</td></tr>
+                                <tr><td rowspan="2">Чоловічий</td><td rowspan="2">Множина</td><td><strong>I</strong></td><td>Множина від IL</td><td>i libri (книги), i cani (собаки)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>Множина від LO і L'</td><td>gli studenti (студенти), gli amici (друзі)</td></tr>
+                                <tr><td>Жіночий</td><td>Множина</td><td><strong>LE</strong></td><td>Єдиний жіночий множинний</td><td>le case (будинки), le penne (ручки)</td></tr>
+                            </table>
+
+                            <p><strong>Порада:</strong> Запам'ятовуйте артикль разом із словом: не "tavolo", а "il tavolo"!</p>
+                        </div>
+                    </div>
+
+                    <!-- 3. Español (Spagnolo) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇪🇸</span> <strong>Español (Spagnolo)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Los Artículos Definidos Italianos</h4>
+                            <p>Los <strong>artículos definidos</strong> son palabras que acompañan a los sustantivos para indicar <strong>personas, animales o cosas específicas y determinadas</strong>.</p>
+                            
+                            <h4>Las 7 Formas:</h4>
+                            <table class="article-table">
+                                <tr><th>Género</th><th>Número</th><th>Artículo</th><th>Cuándo usar</th><th>Ejemplos</th></tr>
+                                <tr><td rowspan="3">Masculino</td><td rowspan="3">Singular</td><td><strong>IL</strong></td><td>Consonante simple</td><td>il libro (el libro), il cane (el perro)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+consonante, z, ps, gn, x, y</td><td>lo studente (el estudiante), lo zaino (la mochila)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Vocal</td><td>l'amico (el amigo), l'orologio (el reloj)</td></tr>
+                                <tr><td rowspan="2">Femenino</td><td rowspan="2">Singular</td><td><strong>LA</strong></td><td>Cualquier consonante</td><td>la casa (la casa), la penna (el bolígrafo)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Vocal</td><td>l'amica (la amiga), l'isola (la isla)</td></tr>
+                                <tr><td rowspan="2">Masculino</td><td rowspan="2">Plural</td><td><strong>I</strong></td><td>Plural de IL</td><td>i libri (los libros), i cani (los perros)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>Plural de LO y L'</td><td>gli studenti (los estudiantes), gli amici (los amigos)</td></tr>
+                                <tr><td>Femenino</td><td>Plural</td><td><strong>LE</strong></td><td>Único plural femenino</td><td>le case (las casas), le penne (los bolígrafos)</td></tr>
+                            </table>
+
+                            <h4>Trucos Mnemotécnicos:</h4>
+                            <ul>
+                                <li><strong>I</strong> es el plural de <strong>IL</strong> (ambos empiezan con I)</li>
+                                <li><strong>GLI</strong> es el plural de <strong>LO</strong> y de <strong>L'</strong></li>
+                                <li><strong>LE</strong> es el único artículo plural femenino</li>
+                                <li>¡El femenino es más simple: solo LA (consonante) y L' (vocal)!</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 4. Français (Francese) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇫🇷</span> <strong>Français (Francese)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Les Articles Définis Italiens</h4>
+                            <p>Les <strong>articles définis</strong> sont des mots qui accompagnent les noms pour indiquer des personnes, animaux ou choses <strong>spécifiques et déterminées</strong>.</p>
+                            
+                            <h4>Les 7 Formes:</h4>
+                            <table class="article-table">
+                                <tr><th>Genre</th><th>Nombre</th><th>Article</th><th>Quand l'utiliser</th><th>Exemples</th></tr>
+                                <tr><td rowspan="3">Masculin</td><td rowspan="3">Singulier</td><td><strong>IL</strong></td><td>Consonne simple</td><td>il libro (le livre), il cane (le chien)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+consonne, z, ps, gn, x, y</td><td>lo studente (l'étudiant), lo zaino (le sac)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Voyelle</td><td>l'amico (l'ami), l'orologio (la montre)</td></tr>
+                                <tr><td rowspan="2">Féminin</td><td rowspan="2">Singulier</td><td><strong>LA</strong></td><td>Toute consonne</td><td>la casa (la maison), la penna (le stylo)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Voyelle</td><td>l'amica (l'amie), l'isola (l'île)</td></tr>
+                                <tr><td rowspan="2">Masculin</td><td rowspan="2">Pluriel</td><td><strong>I</strong></td><td>Pluriel de IL</td><td>i libri (les livres), i cani (les chiens)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>Pluriel de LO et L'</td><td>gli studenti (les étudiants), gli amici (les amis)</td></tr>
+                                <tr><td>Féminin</td><td>Pluriel</td><td><strong>LE</strong></td><td>Seul pluriel féminin</td><td>le case (les maisons), le penne (les stylos)</td></tr>
+                            </table>
+
+                            <h4>Astuces Mémotechniques:</h4>
+                            <ul>
+                                <li><strong>I</strong> est le pluriel de <strong>IL</strong> (tous deux commencent par I)</li>
+                                <li><strong>GLI</strong> est le pluriel de <strong>LO</strong> et de <strong>L'</strong></li>
+                                <li><strong>LE</strong> est le seul article pluriel féminin</li>
+                                <li>Le féminin est plus simple: seulement LA (consonne) et L' (voyelle)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 5. English (Inglese) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇬🇧</span> <strong>English (Inglese)</strong></span>
                             <span class="toggle-icon">▼</span>
                         </div>
                         <div class="lang-content">
                             <h4>Italian Definite Articles</h4>
-                            <p><strong>Definite articles</strong> are words that accompany nouns to indicate <strong>specific and determined</strong> people, animals, or things.</p>
+                            <p><strong>Definite articles</strong> are words that accompany nouns to indicate <strong>specific and determined</strong> people, animals, or things. In English, there is only one definite article: "<strong>the</strong>". In Italian, there are <strong>7 different forms</strong>!</p>
+
+                            <h4>The 7 Forms:</h4>
                             <table class="article-table">
-                                <tr><th>Gender</th><th>Number</th><th>Article</th><th>When to use</th></tr>
-                                <tr><td rowspan="3">Masculine</td><td rowspan="3">Singular</td><td><strong>IL</strong></td><td>Simple consonant</td></tr>
-                                <tr><td><strong>LO</strong></td><td>s+consonant, z, ps, gn, x, y</td></tr>
-                                <tr><td><strong>L'</strong></td><td>Vowel</td></tr>
-                                <tr><td rowspan="2">Feminine</td><td rowspan="2">Singular</td><td><strong>LA</strong></td><td>Any consonant</td></tr>
-                                <tr><td><strong>L'</strong></td><td>Vowel</td></tr>
-                                <tr><td rowspan="2">Masculine</td><td rowspan="2">Plural</td><td><strong>I</strong></td><td>Plural of IL</td></tr>
-                                <tr><td><strong>GLI</strong></td><td>Plural of LO and L'</td></tr>
-                                <tr><td>Feminine</td><td>Plural</td><td><strong>LE</strong></td><td>Only feminine plural</td></tr>
+                                <tr><th>Gender</th><th>Number</th><th>Article</th><th>When to use</th><th>Examples</th></tr>
+                                <tr><td rowspan="3">Masculine</td><td rowspan="3">Singular</td><td><strong>IL</strong></td><td>Simple consonant</td><td>il libro (the book), il cane (the dog)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+consonant, z, ps, gn, x, y</td><td>lo studente (the student), lo zaino (the backpack)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Vowel</td><td>l'amico (the friend), l'orologio (the watch)</td></tr>
+                                <tr><td rowspan="2">Feminine</td><td rowspan="2">Singular</td><td><strong>LA</strong></td><td>Any consonant</td><td>la casa (the house), la penna (the pen)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Vowel</td><td>l'amica (the friend), l'isola (the island)</td></tr>
+                                <tr><td rowspan="2">Masculine</td><td rowspan="2">Plural</td><td><strong>I</strong></td><td>Plural of IL</td><td>i libri (the books), i cani (the dogs)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>Plural of LO and L'</td><td>gli studenti (the students), gli amici (the friends)</td></tr>
+                                <tr><td>Feminine</td><td>Plural</td><td><strong>LE</strong></td><td>Only feminine plural</td><td>le case (the houses), le penne (the pens)</td></tr>
                             </table>
+
+                            <h4>Memory Tips:</h4>
+                            <ul>
+                                <li><strong>I</strong> is the plural of <strong>IL</strong> (both start with I)</li>
+                                <li><strong>GLI</strong> is the plural of <strong>LO</strong> and <strong>L'</strong></li>
+                                <li><strong>LE</strong> is the only feminine plural article</li>
+                                <li>Feminine is simpler: only LA (consonant) and L' (vowel)</li>
+                            </ul>
                         </div>
                     </div>
-                    <!-- Aggiungere altre 17 lingue... -->
+
+                    <!-- 6. Twi (Akan) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇬🇭</span> <strong>Twi (Akan)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Italia kasafua mu Artikul a wɔhu no yie</h4>
+                            <p><strong>Artikul a wɔhu no yie</strong> (Definite articles) yɛ nsɛm a wɔka abodin ho sɛnea ɛbɛkyerɛ <strong>nipa, mmoa anaa nneɛma a wɔhu wɔn yie</strong>.</p>
+                            
+                            <h4>7 Kwan:</h4>
+                            <table class="article-table">
+                                <tr><th>Ntɛ</th><th> dodow </th><th> Artikul </th><th> Berebɛyɛ </th><th> Nhwɛso </th></tr>
+                                <tr><td rowspan="3"> Ɔkasa </td><td rowspan="3"> Kor </td><td><strong>IL</strong></td><td>Nteɛ a ɛnyɛ den</td><td>il libro (nwoma), il cane (akwansene)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+nteɛ, z, ps, gn, x, y</td><td>lo studente (suafo), lo zaino (bɔkɔɔ)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Nteateɛ</td><td>l'amico (adamfo), l'orologio (agama)</td></tr>
+                                <tr><td rowspan="2">Ɔbea</td><td rowspan="2">Kor</td><td><strong>LA</strong></td><td>Nteɛ biara</td><td>la casa (dan), la penna (kyɛm)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Nteateɛ</td><td>l'amica (adamfo), l'isola (supɔ)</td></tr>
+                                <tr><td rowspan="2">Ɔkasa</td><td rowspan="2">Pii</td><td><strong>I</strong></td><td>IL pii</td><td>i libri (nwoma), i cani (akwansene)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>LO ne L' pii</td><td>gli studenti (suafo), gli amici (nnamfo)</td></tr>
+                                <tr><td>Ɔbea</td><td>Pii</td><td><strong>LE</strong></td><td>Ɔbea pii kor</td><td>le case (adan), le penne (kyɛm)</td></tr>
+                            </table>
+
+                            <p><strong>Nkaebɔ:</strong> IL → I (ɛfata), LO/L' → GLI, LA/L' → LE</p>
+                        </div>
+                    </div>
+
+                    <!-- 7. Bambara -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇲🇱</span> <strong>Bambara</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Italiɛ kan Artikulu minnu ka ca</h4>
+                            <p><strong>Artikulu minnu ka ca</strong> (Articoli determinativi) ye kumaw ye minnu bɛ taa kɛnɛ kɔnɔ ka mɔgɔ, bagan walasa ka minnu jira <strong>minnu ka ca</strong>.</p>
+                            
+                            <h4>7 Artikulu:</h4>
+                            <table class="article-table">
+                                <tr><th>Cɛya</th><th>Hakɛ</th><th>Artikul</th><th>Sugu min na</th><th>Misali</th></tr>
+                                <tr><td rowspan="3">Cɛ</td><td rowspan="3">Kelen</td><td><strong>IL</strong></td><td>Denmuso yɛrɛ</td><td>il libro (kalan), il cane (wulu)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+denmuso, z, ps, gn, x, y</td><td>lo studente (denkɛ), lo zaino (sac)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Dimi</td><td>l'amico (so), l'orologio (montre)</td></tr>
+                                <tr><td rowspan="2">Muso</td><td rowspan="2">Kelen</td><td><strong>LA</strong></td><td>Denmuso o bɛɛ</td><td>la casa (so), la penna (plume)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Dimi</td><td>l'amica (so), l'isola (dugu)</td></tr>
+                                <tr><td rowspan="2">Cɛ</td><td rowspan="2">Wɔɔrɔ</td><td><strong>I</strong></td><td>Wɔɔrɔ IL</td><td>i libri (kalanw), i cani (wuluw)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>Wɔɔrɔ LO ni L'</td><td>gli studenti (denkɛw), gli amici (sow)</td></tr>
+                                <tr><td>Muso</td><td>Wɔɔrɔ</td><td><strong>LE</strong></td><td>Wɔɔrɔ muso dɔrɔn</td><td>le case (sow), le penne (plumew)</td></tr>
+                            </table>
+
+                            <p><strong>Hakilina:</strong> IL ni I bɛ daminɛ ni I ye, LO ni L' bɛ taa GLI, LA ni L' bɛ taa LE.</p>
+                        </div>
+                    </div>
+
+                    <!-- 8. Wolof -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇸🇳</span> <strong>Wolof</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Artik yi ñu xam ci Itali</h4>
+                            <p><strong>Artik yi ñu xam yi</strong> (Articoli determinativi) ay baat lañu yi ñuy daje ak turu nit, xay walla mbir <strong>yi ñu xam</strong>.</p>
+                            
+                            <h4>7 Xel yi:</h4>
+                            <table class="article-table">
+                                <tr><th>Njort</th><th>Turu</th><th>Artik</th><th>Kan mu jëf</th><th>Yeneen</th></tr>
+                                <tr><td rowspan="3">Njort</td><td rowspan="3">Benn</td><td><strong>IL</strong></td><td>Xidma bu yomb</td><td>il libro (tëere), il cane (xaj)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+xidma, z, ps, gn, x, y</td><td>lo studente (xale), lo zaino (sàcc)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Buyum</td><td>l'amico (xarit), l'orologio (montar)</td></tr>
+                                <tr><td rowspan="2">Jigéen</td><td rowspan="2">Benn</td><td><strong>LA</strong></td><td>Xidma bu nekk</td><td>la casa (kër), la penna (bik)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Buyum</td><td>l'amica (xarit), l'isola (dunu)</td></tr>
+                                <tr><td rowspan="2">Njort</td><td rowspan="2">Ñaari</td><td><strong>I</strong></td><td>Ñaari IL</td><td>i libri (tëere yi), i cani (xaj yi)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>Ñaari LO ak L'</td><td>gli studenti (xale yi), gli amici (xarit yi)</td></tr>
+                                <tr><td>Jigéen</td><td>Ñaari</td><td><strong>LE</strong></td><td>Bennaari jigéen</td><td>le case (kër yi), le penne (bik yi)</td></tr>
+                            </table>
+
+                            <p><strong>Xel yi ngay xam:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                        </div>
+                    </div>
+
+                    <!-- 9. Hausa -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇳🇬</span> <strong>Hausa</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Ma'anar Artikullin da aka ƙayyade</h4>
+                            <p><strong>Artikullin da aka ƙayyade</strong> (Articoli determinativi) kalmomi ne da suka tare da sunaye don nuna <strong>mutane, dabbobi ko abubuwa masu ƙayyade</strong>.</p>
+                            
+                            <h4>7 Tsararraki:</h4>
+                            <table class="article-table">
+                                <tr><th>Jinsi</th><th>Yawan</th><th>Artikul</th><th>Yanayi</th><th>Misalai</th></tr>
+                                <tr><td rowspan="3">Namiji</td><td rowspan="3">Singular</td><td><strong>IL</strong></td><td>Tsabon baki</td><td>il libro (littafi), il cane (kare)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+baki, z, ps, gn, x, y</td><td>lo studente (dalibi), lo zaino (jaka)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Baƙi mai tsara</td><td>l'amico (aboki), l'orologio (agogo)</td></tr>
+                                <tr><td rowspan="2">Mace</td><td rowspan="2">Singular</td><td><strong>LA</strong></td><td>Kowane baki</td><td>la casa (gida), la penna (alƙalami)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Baƙi mai tsara</td><td>l'amica (abokiya), l'isola (tsibiri)</td></tr>
+                                <tr><td rowspan="2">Namiji</td><td rowspan="2">Plural</td><td><strong>I</strong></td><td>Plural na IL</td><td>i libri (littattafai), i cani (karnuka)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>Plural na LO da L'</td><td>gli studenti (dalibai), gli amici (abokanai)</td></tr>
+                                <tr><td>Mace</td><td>Plural</td><td><strong>LE</strong></td><td>Kawai mace plural</td><td>le case (gidaje), le penne (alƙalaman)</td></tr>
+                            </table>
+
+                            <p><strong>Tunawa:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                        </div>
+                    </div>
+
+                    <!-- 10. العربية (Arabo) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇸🇦</span> <strong>العربية (Arabo)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content rtl">
+                            <div class="arabic-text">
+                                <h4>الأدوات المعرفة في الإيطالية</h4>
+                                <p><strong>الأدوات المعرفة</strong> هي كلمات ترافق الأسماء لتشير إلى أشخاص أو حيوانات أو أشياء <strong>محددة ومعينة</strong>.</p>
+                                
+                                <h4>7 أشكال:</h4>
+                                <table class="article-table">
+                                    <tr><th>الجنس</th><th>العدد</th><th>الأداة</th><th>متى تستخدم</th><th>أمثلة</th></tr>
+                                    <tr><td rowspan="3">مذكر</td><td rowspan="3">مفرد</td><td><strong>IL</strong></td><td>حرف ساكن بسيط</td><td>il libro (الكتاب), il cane (الكلب)</td></tr>
+                                    <tr><td><strong>LO</strong></td><td>س+حرف ساكن, ز, پس, گن, كس, ي</td><td>lo studente (الطالب), lo zaino (الحقيبة)</td></tr>
+                                    <tr><td><strong>L'</strong></td><td>حرف علة</td><td>l'amico (الصديق), l'orologio (الساعة)</td></tr>
+                                    <tr><td rowspan="2">مؤنث</td><td rowspan="2">مفرد</td><td><strong>LA</strong></td><td>أي حرف ساكن</td><td>la casa (المنزل), la penna (القلم)</td></tr>
+                                    <tr><td><strong>L'</strong></td><td>حرف علة</td><td>l'amica (الصديقة), l'isola (الجزيرة)</td></tr>
+                                    <tr><td rowspan="2">مذكر</td><td rowspan="2">جمع</td><td><strong>I</strong></td><td>جمع IL</td><td>i libri (الكتب), i cani (الكلاب)</td></tr>
+                                    <tr><td><strong>GLI</strong></td><td>جمع LO و L'</td><td>gli studenti (الطلاب), gli amici (الأصدقاء)</td></tr>
+                                    <tr><td>مؤنث</td><td>جمع</td><td><strong>LE</strong></td><td>الجمع المؤنث الوحيد</td><td>le case (المنازل), le penne (الأقلام)</td></tr>
+                                </table>
+
+                                <p><strong>نصائح:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 11. Shqip (Albanese) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇦🇱</span> <strong>Shqip (Albanese)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Artikujt e Përcaktuar në Italisht</h4>
+                            <p><strong>Artikujt e përcaktuar</strong> janë fjalë që shoqërojnë emrat për të treguar persona, kafshë ose gjëra <strong>të caktuara dhe specifike</strong>.</p>
+                            
+                            <h4>7 Format:</h4>
+                            <table class="article-table">
+                                <tr><th>Gjinia</th><th>Numri</th><th>Artikulli</th><th>Kur përdoret</th><th>Shembuj</th></tr>
+                                <tr><td rowspan="3">Mashkullore</td><td rowspan="3">Njëjës</td><td><strong>IL</strong></td><td>Zanore e thjeshtë</td><td>il libro (libri), il cane (qeni)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+zanore, z, ps, gn, x, y</td><td>lo studente (studenti), lo zaino (çanta)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Zanore</td><td>l'amico (miku), l'orologio (ora)</td></tr>
+                                <tr><td rowspan="2">Femërore</td><td rowspan="2">Njëjës</td><td><strong>LA</strong></td><td>Cdo zanore</td><td>la casa (shtëpia), la penna (lapsi)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Zanore</td><td>l'amica (mikja), l'isola (ishulli)</td></tr>
+                                <tr><td rowspan="2">Mashkullore</td><td rowspan="2">Shumës</td><td><strong>I</strong></td><td>Shumësi i IL</td><td>i libri (librat), i cani (qentë)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>Shumësi i LO dhe L'</td><td>gli studenti (studentët), gli amici (miqtë)</td></tr>
+                                <tr><td>Femërore</td><td>Shumës</td><td><strong>LE</strong></td><td>I vetmi shumës femëror</td><td>le case (shtëpitë), le penne (lapsat)</td></tr>
+                            </table>
+
+                            <p><strong>Këshilla:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                        </div>
+                    </div>
+
+                    <!-- 12. Türkçe (Turco) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇹🇷</span> <strong>Türkçe (Turco)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>İtalyanca Belirli Artikeller</h4>
+                            <p><strong>Belirli artikeller</strong>, <strong>belirli ve tanımlanmış</strong> kişileri, hayvanları veya nesneleri ifade etmek için isimlere eşlik eden kelimelerdir.</p>
+                            
+                            <h4>7 Form:</h4>
+                            <table class="article-table">
+                                <tr><th>Cinsiyet</th><th>Sayı</th><th>Artikel</th><th>Ne Zaman Kullanılır</th><th>Örnekler</th></tr>
+                                <tr><td rowspan="3">Erkek</td><td rowspan="3">Tekil</td><td><strong>IL</strong></td><td>Basit ünsüz</td><td>il libro (kitap), il cane (köpek)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+ünsüz, z, ps, gn, x, y</td><td>lo studente (öğrenci), lo zaino (sırt çantası)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Sesli harf</td><td>l'amico (arkadaş), l'orologio (saat)</td></tr>
+                                <tr><td rowspan="2">Kadın</td><td rowspan="2">Tekil</td><td><strong>LA</strong></td><td>Herhangi bir ünsüz</td><td>la casa (ev), la penna (kalem)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Sesli harf</td><td>l'amica (arkadaş), l'isola (ada)</td></tr>
+                                <tr><td rowspan="2">Erkek</td><td rowspan="2">Çoğul</td><td><strong>I</strong></td><td>IL çoğulu</td><td>i libri (kitaplar), i cani (köpekler)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>LO ve L' çoğulu</td><td>gli studenti (öğrenciler), gli amici (arkadaşlar)</td></tr>
+                                <tr><td>Kadın</td><td>Çoğul</td><td><strong>LE</strong></td><td>Tek kadın çoğul</td><td>le case (evler), le penne (kalemler)</td></tr>
+                            </table>
+
+                            <p><strong>İpucu:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                        </div>
+                    </div>
+
+                    <!-- 13. اردو (Urdu) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇵🇰</span> <strong>اردو (Urdu)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content rtl">
+                            <div class="urdu-text">
+                                <h4>اطالوی معرفہ آرٹیکلز</h4>
+                                <p><strong>معرفہ آرٹیکلز</strong> وہ الفاظ ہیں جو اسموں کے ساتھ آتے ہیں تا کہ <strong>مخصوص اور معین</strong> اشخاص، جانوروں یا چیزوں کی نشاندہی کی جا سکے۔</p>
+                                
+                                <h4>7 شکلیں:</h4>
+                                <table class="article-table">
+                                    <tr><th>جنس</th><th>تعداد</th><th>آرٹیکل</th><th>کب استعمال کریں</th><th>مثالیں</th></tr>
+                                    <tr><td rowspan="3">مذکر</td><td rowspan="3">واحد</td><td><strong>IL</strong></td><td>سادہ حرف صحیح</td><td>il libro (کتاب), il cane (کتا)</td></tr>
+                                    <tr><td><strong>LO</strong></td><td>س+حرف صحیح, ز, پس, گن, كس, ی</td><td>lo studente (طالب علم), lo zaino (بیگ)</td></tr>
+                                    <tr><td><strong>L'</strong></td><td>حرف علت</td><td>l'amico (دوست), l'orologio (گھڑی)</td></tr>
+                                    <tr><td rowspan="2">مؤنث</td><td rowspan="2">واحد</td><td><strong>LA</strong></td><td>کوئی بھی حرف صحیح</td><td>la casa (گھر), la penna (قلم)</td></tr>
+                                    <tr><td><strong>L'</strong></td><td>حرف علت</td><td>l'amica (دوست), l'isola (جزیرہ)</td></tr>
+                                    <tr><td rowspan="2">مذکر</td><td rowspan="2">جمع</td><td><strong>I</strong></td><td>IL کی جمع</td><td>i libri (کتابیں), i cani (کتے)</td></tr>
+                                    <tr><td><strong>GLI</strong></td><td>LO اور L' کی جمع</td><td>gli studenti (طالب علم), gli amici (دوست)</td></tr>
+                                    <tr><td>مؤنث</td><td>جمع</td><td><strong>LE</strong></td><td>واحد مؤنث جمع</td><td>le case (گھر), le penne (قلم)</td></tr>
+                                </table>
+
+                                <p><strong>یادداشت:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 14. ਪੰਜਾਬੀ (Panjabi) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇮🇳</span> <strong>ਪੰਜਾਬੀ (Panjabi)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>ਇਤਾਲਵੀ ਨਿਸ਼ਚਿਤ ਲੇਖ</h4>
+                            <p><strong>ਨਿਸ਼ਚਿਤ ਲੇਖ</strong> ਉਹ ਸ਼ਬਦ ਹਨ ਜੋ ਨਾਵਾਂ ਦੇ ਨਾਲ ਆਉਂਦੇ ਹਨ ਤਾਂ ਜੋ <strong>ਖਾਸ ਅਤੇ ਨਿਸ਼ਚਿਤ</strong> ਲੋਕਾਂ, ਜਾਨਵਰਾਂ ਜਾਂ ਚੀਜ਼ਾਂ ਦਾ ਪਤਾ ਲੱਗ ਸਕੇ।</p>
+                            
+                            <h4>7 ਰੂਪ:</h4>
+                            <table class="article-table">
+                                <tr><th>ਲਿੰਗ</th><th>ਗਿਣਤੀ</th><th>ਲੇਖ</th><th>ਕਦੋਂ ਵਰਤੋ</th><th>ਉਦਾਹਰਨਾਂ</th></tr>
+                                <tr><td rowspan="3">ਪੁਲਿੰਗ</td><td rowspan="3">ਇਕ-ਵਚਨ</td><td><strong>IL</strong></td><td>ਸਧਾਰਨ ਵਿਅੰਜਨ</td><td>il libro (ਕਿਤਾਬ), il cane (ਕੁੱਤਾ)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>ਸ+ਵਿਅੰਜਨ, ਜ਼, ਪਸ, ਗਨ, ਕਸ, ਵਾਈ</td><td>lo studente (ਵਿਦਿਆਰਥੀ), lo zaino (ਥੈਲਾ)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>ਸਵਰ</td><td>l'amico (ਦੋਸਤ), l'orologio (ਘੜੀ)</td></tr>
+                                <tr><td rowspan="2">ਇਸਤਰੀ ਲਿੰਗ</td><td rowspan="2">ਇਕ-ਵਚਨ</td><td><strong>LA</strong></td><td>ਕੋਈ ਵੀ ਵਿਅੰਜਨ</td><td>la casa (ਘਰ), la penna (ਕਲਮ)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>ਸਵਰ</td><td>l'amica (ਦੋਸਤ), l'isola (ਟਾਪੂ)</td></tr>
+                                <tr><td rowspan="2">ਪੁਲਿੰਗ</td><td rowspan="2">ਬਹੁ-ਵਚਨ</td><td><strong>I</strong></td><td>IL ਦਾ ਬਹੁ-ਵਚਨ</td><td>i libri (ਕਿਤਾਬਾਂ), i cani (ਕੁੱਤੇ)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>LO ਅਤੇ L' ਦਾ ਬਹੁ-ਵਚਨ</td><td>gli studenti (ਵਿਦਿਆਰਥੀ), gli amici (ਦੋਸਤ)</td></tr>
+                                <tr><td>ਇਸਤਰੀ ਲਿੰਗ</td><td>ਬਹੁ-ਵਚਨ</td><td><strong>LE</strong></td><td>ਇਕਲੌਤਾ ਇਸਤਰੀ ਲਿੰਗ ਬਹੁ-ਵਚਨ</td><td>le case (ਘਰ), le penne (ਕਲਮਾਂ)</td></tr>
+                            </table>
+
+                            <p><strong>ਸੁਝਾਅ:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                        </div>
+                    </div>
+
+                    <!-- 15. বাংলা (Bangla/Bengali) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇧🇩</span> <strong>বাংলা (Bangla)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>ইতালীয় নির্দিষ্ট নিবন্ধ</h4>
+                            <p><strong>নির্দিষ্ট নিবন্ধ</strong> হল সেই শব্দ যা বিশেষ্যের সাথে থাকে যাতে <strong>নির্দিষ্ট এবং নির্ধারিত</strong> ব্যক্তি, প্রাণী বা জিনিস নির্দেশ করা যায়।</p>
+                            
+                            <h4>7টি রূপ:</h4>
+                            <table class="article-table">
+                                <tr><th>লিঙ্গ</th><th>সংখ্যা</th><th>নিবন্ধ</th><th>কখন ব্যবহার করবেন</th><th>উদাহরণ</th></tr>
+                                <tr><td rowspan="3">পুরুষ</td><td rowspan="3">একবচন</td><td><strong>IL</strong></td><td>সাধারণ ব্যঞ্জনবর্ণ</td><td>il libro (বই), il cane (কুকুর)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>স+ব্যঞ্জনবর্ণ, জ, পস, গন, এক্স, ওয়াই</td><td>lo studente (ছাত্র), lo zaino (ব্যাগ)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>স্বরবর্ণ</td><td>l'amico (বন্ধু), l'orologio (ঘড়ি)</td></tr>
+                                <tr><td rowspan="2">মহিলা</td><td rowspan="2">একবচন</td><td><strong>LA</strong></td><td>যেকোনো ব্যঞ্জনবর্ণ</td><td>la casa (বাড়ি), la penna (কলম)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>স্বরবর্ণ</td><td>l'amica (বান্ধবী), l'isola (দ্বীপ)</td></tr>
+                                <tr><td rowspan="2">পুরুষ</td><td rowspan="2">বহুবচন</td><td><strong>I</strong></td><td>IL এর বহুবচন</td><td>i libri (বইগুলো), i cani (কুকুরগুলো)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>LO এবং L' এর বহুবচন</td><td>gli studenti (ছাত্ররা), gli amici (বন্ধুরা)</td></tr>
+                                <tr><td>মহিলা</td><td>বহুবচন</td><td><strong>LE</strong></td><td>একমাত্র মহিলা বহুবচন</td><td>le case (বাড়িগুলো), le penne (কলমগুলো)</td></tr>
+                            </table>
+
+                            <p><strong>টিপস:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                        </div>
+                    </div>
+
+                    <!-- 16. हिंदी (Hindi) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇮🇳</span> <strong>हिन्दी (Hindi)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>इतालवी निश्चित लेख</h4>
+                            <p><strong>निश्चित लेख</strong> वे शब्द हैं जो संज्ञाओं के साथ आते हैं ताकि <strong>विशिष्ट और निर्धारित</strong> व्यक्तियों, जानवरों या वस्तुओं का संकेत मिल सके।</p>
+                            
+                            <h4>7 रूप:</h4>
+                            <table class="article-table">
+                                <tr><th>लिंग</th><th>संख्या</th><th>लेख</th><th>कब उपयोग करें</th><th>उदाहरण</th></tr>
+                                <tr><td rowspan="3">पुलिंग</td><td rowspan="3">एकवचन</td><td><strong>IL</strong></td><td>सरल व्यंजन</td><td>il libro (किताब), il cane (कुत्ता)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>स+व्यंजन, ज़, प्स, ग्न, एक्स, वाई</td><td>lo studente (छात्र), lo zaino (बैग)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>स्वर</td><td>l'amico (दोस्त), l'orologio (घड़ी)</td></tr>
+                                <tr><td rowspan="2">स्त्रीलिंग</td><td rowspan="2">एकवचन</td><td><strong>LA</strong></td><td>कोई भी व्यंजन</td><td>la casa (घर), la penna (कलम)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>स्वर</td><td>l'amica (दोस्त), l'isola (द्वीप)</td></tr>
+                                <tr><td rowspan="2">पुलिंग</td><td rowspan="2">बहुवचन</td><td><strong>I</strong></td><td>IL का बहुवचन</td><td>i libri (किताबें), i cani (कुत्ते)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>LO और L' का बहुवचन</td><td>gli studenti (छात्र), gli amici (दोस्त)</td></tr>
+                                <tr><td>स्त्रीलिंग</td><td>बहुवचन</td><td><strong>LE</strong></td><td>एकमात्र स्त्रीलिंग बहुवचन</td><td>le case (घर), le penne (कलमें)</td></tr>
+                            </table>
+
+                            <p><strong>सुझाव:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                        </div>
+                    </div>
+
+                    <!-- 17. 中文 (Cinese) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇨🇳</span> <strong>中文 (Cinese)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <div class="chinese-text">
+                                <h4>意大利语定冠词</h4>
+                                <p><strong>定冠词</strong>是伴随名词的词语，用来表示<strong>特定和确定</strong>的人、动物或事物。</p>
+                                
+                                <h4>7种形式:</h4>
+                                <table class="article-table">
+                                    <tr><th>性</th><th>数</th><th>冠词</th><th>何时使用</th><th>例子</th></tr>
+                                    <tr><td rowspan="3">阳性</td><td rowspan="3">单数</td><td><strong>IL</strong></td><td>简单辅音</td><td>il libro (书), il cane (狗)</td></tr>
+                                    <tr><td><strong>LO</strong></td><td>s+辅音, z, ps, gn, x, y</td><td>lo studente (学生), lo zaino (背包)</td></tr>
+                                    <tr><td><strong>L'</strong></td><td>元音</td><td>l'amico (朋友), l'orologio (手表)</td></tr>
+                                    <tr><td rowspan="2">阴性</td><td rowspan="2">单数</td><td><strong>LA</strong></td><td>任何辅音</td><td>la casa (房子), la penna (钢笔)</td></tr>
+                                    <tr><td><strong>L'</strong></td><td>元音</td><td>l'amica (朋友), l'isola (岛屿)</td></tr>
+                                    <tr><td rowspan="2">阳性</td><td rowspan="2">复数</td><td><strong>I</strong></td><td>IL的复数</td><td>i libri (书), i cani (狗)</td></tr>
+                                    <tr><td><strong>GLI</strong></td><td>LO和L'的复数</td><td>gli studenti (学生们), gli amici (朋友们)</td></tr>
+                                    <tr><td>阴性</td><td>复数</td><td><strong>LE</strong></td><td>唯一的阴性复数</td><td>le case (房子们), le penne (钢笔们)</td></tr>
+                                </table>
+
+                                <p><strong>记忆技巧:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 18. Filipino/Tagalog -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇵🇭</span> <strong>Filipino/Tagalog</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Ang mga Tiyak na Pang-ukol sa Italyano</h4>
+                            <p>Ang <strong>mga tiyak na pang-ukol</strong> (definite articles) ay mga salitang kasama ng mga pangngalan upang ipahiwatig ang <strong>mga tiyak at natukoy na</strong> tao, hayop, o bagay.</p>
+                            
+                            <h4>7 na Porma:</h4>
+                            <table class="article-table">
+                                <tr><th>Kasarian</th><th>Bilang</th><th>Pang-ukol</th><th>Kailan Ginagamit</th><th>Mga Halimbawa</th></tr>
+                                <tr><td rowspan="3">Lalaki</td><td rowspan="3">Isahan</td><td><strong>IL</strong></td><td>Simpleng katinig</td><td>il libro (aklat), il cane (aso)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+katinig, z, ps, gn, x, y</td><td>lo studente (estudyante), lo zaino (bag)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Patinig</td><td>l'amico (kaibigan), l'orologio (relo)</td></tr>
+                                <tr><td rowspan="2">Babae</td><td rowspan="2">Isahan</td><td><strong>LA</strong></td><td>Kahit anong katinig</td><td>la casa (bahay), la penna (bolpen)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>Patinig</td><td>l'amica (kaibigan), l'isola (isla)</td></tr>
+                                <tr><td rowspan="2">Lalaki</td><td rowspan="2">Maramihan</td><td><strong>I</strong></td><td>Maramihan ng IL</td><td>i libri (mga aklat), i cani (mga aso)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>Maramihan ng LO at L'</td><td>gli studenti (mga estudyante), gli amici (mga kaibigan)</td></tr>
+                                <tr><td>Babae</td><td>Maramihan</td><td><strong>LE</strong></td><td>Tanging maramihang babae</td><td>le case (mga bahay), le penne (mga bolpen)</td></tr>
+                            </table>
+
+                            <p><strong>Tip:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                        </div>
+                    </div>
+
+                    <!-- 19. 한국어 (Coreano) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇰🇷</span> <strong>한국어 (Coreano)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>이탈리아어 정관사</h4>
+                            <p><strong>정관사</strong>는 <strong>특정하고 확정된</strong> 사람, 동물 또는 사물을 나타내기 위해 명사와 함께 사용되는 단어입니다.</p>
+                            
+                            <h4>7가지 형태:</h4>
+                            <table class="article-table">
+                                <tr><th>성</th><th>수</th><th>관사</th><th>사용 시기</th><th>예시</th></tr>
+                                <tr><td rowspan="3">남성</td><td rowspan="3">단수</td><td><strong>IL</strong></td><td>간단한 자음</td><td>il libro (책), il cane (개)</td></tr>
+                                <tr><td><strong>LO</strong></td><td>s+자음, z, ps, gn, x, y</td><td>lo studente (학생), lo zaino (가방)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>모음</td><td>l'amico (친구), l'orologio (시계)</td></tr>
+                                <tr><td rowspan="2">여성</td><td rowspan="2">단수</td><td><strong>LA</strong></td><td>모든 자음</td><td>la casa (집), la penna (펜)</td></tr>
+                                <tr><td><strong>L'</strong></td><td>모음</td><td>l'amica (친구), l'isola (섬)</td></tr>
+                                <tr><td rowspan="2">남성</td><td rowspan="2">복수</td><td><strong>I</strong></td><td>IL의 복수</td><td>i libri (책들), i cani (개들)</td></tr>
+                                <tr><td><strong>GLI</strong></td><td>LO와 L'의 복수</td><td>gli studenti (학생들), gli amici (친구들)</td></tr>
+                                <tr><td>여성</td><td>복수</td><td><strong>LE</strong></td><td>유일한 여성 복수</td><td>le case (집들), le penne (펜들)</td></tr>
+                            </table>
+
+                            <p><strong>팁:</strong> IL → I, LO/L' → GLI, LA/L' → LE</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -760,17 +1131,47 @@
             <div class="card">
                 <div class="card-header">Articoli Maschili: IL, LO, L'</div>
                 <div class="card-body">
-                    <div class="instruction-box">
-                        <strong>IL</strong> → consonante semplice (b, c, d, f, g, l, m, n, p, q, r, t, v)<br>
-                        <strong>LO</strong> → s+consonante, z, ps, gn, x, y<br>
-                        <strong>L'</strong> → vocale (a, e, i, o, u)
+                    <div class="instruction-box" style="border-left-color: var(--maschile);">
+                        <strong>🇮🇹 Maschile Singolare</strong> - Tre forme a seconda dell'iniziale del nome
                     </div>
-                    <p><strong>Esempi:</strong></p>
-                    <ul>
-                        <li>il libro, il cane, il tavolo, il computer</li>
-                        <li>lo studente, lo zaino, lo psicologo, lo gnocco, lo xilofono, lo yogurt</li>
-                        <li>l'amico, l'orologio, l'ufficio, l'elefante</li>
-                    </ul>
+
+                    <div class="theory-section">
+                        <h3 style="color: var(--maschile); margin-bottom: 1rem;">1. IL - Regola Dettagliata</h3>
+                        <p>Si usa <strong>IL</strong> con i nomi maschili che iniziano con <strong>consonante semplice</strong> (non s+consonante):</p>
+                        
+                        <div class="example-box">
+                            <strong>🇮🇹 Esempi con IL:</strong><br>
+                            il <strong>l</strong>ibro <span class="gender-tag tag-m">M</span> | il <strong>c</strong>ane <span class="gender-tag tag-m">M</span> | il <strong>t</strong>avolo <span class="gender-tag tag-m">M</span><br>
+                            il <strong>b</strong>ambino <span class="gender-tag tag-m">M</span> | il <strong>g</strong>atto <span class="gender-tag tag-m">M</span> | il <strong>m</strong>edico <span class="gender-tag tag-m">M</span>
+                        </div>
+                    </div>
+
+                    <div class="theory-section">
+                        <h3 style="color: var(--maschile); margin-bottom: 1rem;">2. LO - Regola Dettagliata</h3>
+                        <p>Si usa <strong>LO</strong> con i nomi maschili che iniziano con:</p>
+                        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                            <li><strong>s + consonante</strong> (st-, sp-, sc-, sn-, sm-, sb-, sf-, sg-)</li>
+                            <li><strong>z</strong> (sia sonora che sorda)</li>
+                            <li><strong>ps</strong>, <strong>gn</strong>, <strong>x</strong>, <strong>y</strong></li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>🇮🇹 Esempi con LO:</strong><br>
+                            lo <strong>st</strong>udente <span class="gender-tag tag-m">M</span> | lo <strong>z</strong>aino <span class="gender-tag tag-m">M</span> | lo <strong>ps</strong>icologo <span class="gender-tag tag-m">M</span><br>
+                            lo <strong>gn</strong>occo <span class="gender-tag tag-m">M</span> | lo <strong>y</strong>ogurt <span class="gender-tag tag-m">M</span> | lo <strong>x</strong>ilofono <span class="gender-tag tag-m">M</span>
+                        </div>
+                    </div>
+
+                    <div class="theory-section">
+                        <h3 style="color: var(--maschile); margin-bottom: 1rem;">3. L' - Regola Dettagliata</h3>
+                        <p>Si usa <strong>L'</strong> (con apostrofo) con i nomi maschili che iniziano con <strong>vocale</strong> (a, e, i, o, u):</p>
+                        
+                        <div class="example-box">
+                            <strong>🇮🇹 Esempi con L' (maschile):</strong><br>
+                            l'<strong>a</strong>mico <span class="gender-tag tag-m">M</span> | l'<strong>o</strong>rologio <span class="gender-tag tag-m">M</span> | l'<strong>u</strong>fficio <span class="gender-tag tag-m">M</span><br>
+                            l'<strong>e</strong>lefante <span class="gender-tag tag-m">M</span> | l'<strong>i</strong>ndirizzo <span class="gender-tag tag-m">M</span> | l'<strong>a</strong>lbero <span class="gender-tag tag-m">M</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -778,19 +1179,40 @@
         <!-- SEZIONE FEMMINILE -->
         <section id="femminile" class="section">
             <div class="card">
-                <div class="card-header">Articoli Femminili: LA, L'</div>
+                <div class="card-header femminile">Articoli Femminili: LA e L'</div>
                 <div class="card-body">
-                    <div class="instruction-box">
-                        <strong>LA</strong> → qualsiasi consonante (anche s+consonante, z, ps, gn!)<br>
-                        <strong>L'</strong> → vocale (a, e, i, o, u)
+                    <div class="instruction-box" style="border-left-color: var(--femminile);">
+                        <strong>🇮🇹 Femminile Singolare</strong> - Solo due forme (più semplice del maschile!)
                     </div>
-                    <p><strong>Esempi:</strong></p>
-                    <ul>
-                        <li>la casa, la penna, la scuola, la studentessa, la zia, la psicologa</li>
-                        <li>l'amica, l'isola, l'acqua, l'edicola</li>
-                    </ul>
-                    <div class="rule-box">
-                        <strong>⚠️ Nota:</strong> Al femminile si usa <strong>LA</strong> anche con s+consonante, z, ps, gn (diversamente dal maschile!).
+
+                    <div class="theory-section">
+                        <h3 style="color: var(--femminile); margin-bottom: 1rem;">1. LA - Regola Dettagliata</h3>
+                        <p>Si usa <strong>LA</strong> con i nomi femminili che iniziano con <strong>qualsiasi consonante</strong>:</p>
+                        
+                        <div class="example-box">
+                            <strong>🇮🇹 Esempi con LA:</strong><br>
+                            la <strong>c</strong>asa <span class="gender-tag tag-f">F</span> | la <strong>p</strong>enna <span class="gender-tag tag-f">F</span> | la <strong>sc</strong>uola <span class="gender-tag tag-f">F</span><br>
+                            la <strong>st</strong>udentessa <span class="gender-tag tag-f">F</span> | la <strong>z</strong>ia <span class="gender-tag tag-f">F</span> | la <strong>ps</strong>icologa <span class="gender-tag tag-f">F</span>
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>⚠️ Nota importante:</strong> Al femminile NON c'è distinzione tra consonante semplice e s+consonante. Si usa sempre <strong>LA</strong> per tutte le consonanti!
+                        </div>
+                    </div>
+
+                    <div class="theory-section">
+                        <h3 style="color: var(--femminile); margin-bottom: 1rem;">2. L' - Regola Dettagliata (Elisione)</h3>
+                        <p>Si usa <strong>L'</strong> (con apostrofo) con i nomi femminili che iniziano con <strong>vocale</strong>:</p>
+                        
+                        <div class="example-box">
+                            <strong>🇮🇹 Esempi con L' (femminile):</strong><br>
+                            l'<strong>a</strong>mica <span class="gender-tag tag-f">F</span> | l'<strong>o</strong>ra <span class="gender-tag tag-f">F</span> | l'<strong>i</strong>sola <span class="gender-tag tag-f">F</span><br>
+                            l'<strong>a</strong>cqua <span class="gender-tag tag-f">F</span> | l'<strong>e</strong>dicola <span class="gender-tag tag-f">F</span> | l'<strong>u</strong>niversità <span class="gender-tag tag-f">F</span>
+                        </div>
+
+                        <div class="rule-box">
+                            <strong>💡 Ricorda:</strong> Il femminile è più semplice del maschile! Solo due articoli: <strong>LA</strong> (consonante) e <strong>L'</strong> (vocale).
+                        </div>
                     </div>
                 </div>
             </div>
@@ -799,21 +1221,69 @@
         <!-- SEZIONE PLURALE -->
         <section id="plurale" class="section">
             <div class="card">
-                <div class="card-header">Articoli Plurali: I, GLI, LE</div>
+                <div class="card-header plurale">Articoli Plurali: I, GLI, LE</div>
                 <div class="card-body">
-                    <div class="instruction-box">
-                        <strong>I</strong> → plurale di IL (i libri, i cani)<br>
-                        <strong>GLI</strong> → plurale di LO e L' (gli studenti, gli zaini, gli amici, gli orologi)<br>
-                        <strong>LE</strong> → unico plurale femminile (le case, le penne, le amiche)
+                    <div class="instruction-box" style="border-left-color: var(--plurale);">
+                        <strong>🇮🇹 Plurale</strong> - Forme partitive (derivano da DI + articolo determinativo)
                     </div>
+
+                    <h3 style="color: var(--maschile); margin-top: 1rem;">🟦 Maschile plurale</h3>
                     <table class="article-table">
-                        <tr><th>Singolare</th><th>Plurale</th><th>Esempio</th></tr>
-                        <tr><td>IL</td><td>I</td><td>il libro → i libri</td></tr>
-                        <tr><td>LO</td><td>GLI</td><td>lo zaino → gli zaini</td></tr>
-                        <tr><td>L' (m)</td><td>GLI</td><td>l'amico → gli amici</td></tr>
-                        <tr><td>LA</td><td>LE</td><td>la casa → le case</td></tr>
-                        <tr><td>L' (f)</td><td>LE</td><td>l'amica → le amiche</td></tr>
+                        <thead>
+                            <tr>
+                                <th>Singolare</th>
+                                <th>Plurale</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="article-display maschile">IL</td>
+                                <td class="article-display maschile">I</td>
+                                <td>il libro → i libri (il cane → i cani)</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display maschile">LO</td>
+                                <td class="article-display maschile">GLI</td>
+                                <td>lo zaino → gli zaini (lo studente → gli studenti)</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display maschile">L'</td>
+                                <td class="article-display maschile">GLI</td>
+                                <td>l'amico → gli amici (l'orologio → gli orologi)</td>
+                            </tr>
+                        </tbody>
                     </table>
+
+                    <h3 style="color: var(--femminile); margin-top: 2rem;">🟥 Femminile plurale</h3>
+                    <table class="article-table">
+                        <thead>
+                            <tr>
+                                <th>Singolare</th>
+                                <th>Plurale</th>
+                                <th>Esempio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="article-display femminile">LA</td>
+                                <td class="article-display femminile">LE</td>
+                                <td>la casa → le case (la penna → le penne)</td>
+                            </tr>
+                            <tr>
+                                <td class="article-display femminile">L'</td>
+                                <td class="article-display femminile">LE</td>
+                                <td>l'amica → le amiche (l'isola → le isole)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Regola mnemonica:</strong><br>
+                        <strong>I</strong> → plurale di <strong>IL</strong> (entrambi iniziano per I)<br>
+                        <strong>GLI</strong> → plurale di <strong>LO</strong> e <strong>L'</strong><br>
+                        <strong>LE</strong> → unico plurale femminile (semplice!)
+                    </div>
                 </div>
             </div>
         </section>
@@ -823,189 +1293,54 @@
             <div class="card">
                 <div class="card-header">Eccezioni e Casi Speciali</div>
                 <div class="card-body">
-                    <ul>
-                        <li><strong>Nomi con i semiconsonantica (j):</strong> lo ione, lo iato, lo ieri</li>
-                        <li><strong>Nomi stranieri con w:</strong> lo wurstel, lo web, lo whisky</li>
-                        <li><strong>Nomi con pn:</strong> lo pneumatico</li>
-                        <li><strong>Nomi abbreviati:</strong> la foto (fotografia), l'auto (automobile), la moto (motocicletta)</li>
-                        <li><strong>Nomi propri:</strong> NO articolo (Marco, Maria, Roma, Parigi)</li>
+                    <h3 style="color: var(--primary); margin-top: 1rem;">1. Nomi che iniziano con i semiconsonantica (j)</h3>
+                    <p>Alcuni nomi maschili iniziano con una "i" che suona come "j" (semiconsonantica). Questi prendono <strong>LO</strong>:</p>
+                    <ul style="margin-left: 2rem;">
+                        <li>lo <strong>i</strong>one (lo jone)</li>
+                        <li>lo <strong>i</strong>ato (lo jato)</li>
+                        <li>lo <strong>i</strong>eri (lo jeri)</li>
                     </ul>
-                </div>
-            </div>
-        </section>
 
-        <!-- SEZIONE ESERCIZI (50 esercizi) -->
-        <section id="exercises" class="section">
-            <div class="game-container">
-                <div class="score-panel">
-                    <div>
-                        <div class="score-label">Esercizio</div>
-                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    <h3 style="color: var(--primary); margin-top: 1.5rem;">2. Nomi stranieri che iniziano con w</h3>
+                    <p>I nomi stranieri maschili che iniziano con <strong>w</strong> prendono <strong>LO</strong>:</p>
+                    <ul style="margin-left: 2rem;">
+                        <li>lo <strong>w</strong>urstel</li>
+                        <li>lo <strong>w</strong>eb</li>
+                        <li>lo <strong>w</strong>hisky</li>
+                    </ul>
+
+                    <h3 style="color: var(--primary); margin-top: 1.5rem;">3. Nomi abbreviati</h3>
+                    <p>I nomi abbreviati mantengono l'articolo del nome completo:</p>
+                    <ul style="margin-left: 2rem;">
+                        <li>la <strong>foto</strong>grafia → la foto</li>
+                        <li>la <strong>auto</strong>mobile → l'auto</li>
+                        <li>la <strong>moto</strong>cicletta → la moto</li>
+                        <li>il <strong>cinema</strong>tografo → il cinema</li>
+                    </ul>
+
+                    <h3 style="color: var(--primary); margin-top: 1.5rem;">4. Nomi propri di persona</h3>
+                    <p>I nomi propri di persona <strong>non</strong> prendono l'articolo:</p>
+                    <ul style="margin-left: 2rem;">
+                        <li>✅ "Marco è italiano" (non: il Marco)</li>
+                        <li>✅ "Maria è simpatica" (non: la Maria)</li>
+                    </ul>
+
+                    <div class="rule-box">
+                        <strong>💡 Consiglio finale:</strong> Quando impari un nuovo nome in italiano, imparalo sempre con il suo articolo! Per esempio, non imparare solo "tavolo" ma "<strong>il</strong> tavolo".
                     </div>
-                    <div>
-                        <div class="score-label">Punteggio</div>
-                        <div class="score-value" id="currentScore">0 / 100</div>
-                    </div>
-                </div>
-
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressBar"></div>
-                </div>
-
-                <div id="exerciseContainer"></div>
-
-                <div class="final-score-section" id="finalScoreSection">
-                    <h2>🎉 Esercizi Completati!</h2>
-                    <div class="final-score-value" id="finalScore">0/100</div>
-                    <p class="final-message" id="finalMessage"></p>
-                    <div id="sufficiencyBox"></div>
-                    <button class="btn-primary" onclick="showEmailModal()" style="margin-top: 20px;">
-                        📧 Invia Risultati via Email
-                    </button>
-                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 10px; background: #6c757d;">
-                        🔄 Riprova
-                    </button>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- MODAL EMAIL -->
-    <div class="modal-overlay" id="emailModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">📧 Invia Risultati</h2>
-            </div>
-            
-            <div id="modalBody">
-                <div class="form-group">
-                    <label class="form-label">Nome e Cognome:</label>
-                    <input type="text" class="form-input" id="studentName" placeholder="Inserisci il tuo nome">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Email dello studente:</label>
-                    <input type="email" class="form-input" id="studentEmail" placeholder="tua@email.com">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Riepilogo risultati:</label>
-                    <div class="result-summary" id="resultSummary"></div>
-                </div>
-
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button class="btn-primary" onclick="sendViaEmail()">
-                        📤 Invia con Email Client
-                    </button>
-                    <button class="btn-primary" onclick="copyResults()" style="background: #28a745;">
-                        📋 Copia Dati
-                    </button>
-                    <button class="btn-primary" onclick="closeEmailModal()" style="background: #6c757d;">
-                        ✕ Chiudi
-                    </button>
-                </div>
-
-                <div id="copyFeedback" style="margin-top: 10px; display: none;" class="success-message">
-                    ✅ Dati copiati negli appunti!
-                </div>
-            </div>
-        </div>
-    </div>
-
     <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
-        <p>© 2024 Corso di Italiano A1 - Articoli Determinativi - 50 Esercizi con Valutazione</p>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Corso di Italiano A1 - Articoli Determinativi - Teoria Completa Multilingue</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Teoria disponibile in 18 lingue</p>
+        </div>
     </footer>
 
     <script>
-        // 50 ESERCIZI ARTICOLI DETERMINATIVI (2 punti ciascuno = 100 totali, sufficienza 60)
-        const exercises = [
-            // ESERCIZI 1-10: Maschile singolare IL
-            {id: 1, type: 'choice', question: '_____ libro', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'Il', explanation: '✅ "Libro" è maschile, inizia con consonante semplice (l) → IL'},
-            {id: 2, type: 'fill', question: '_____ cane (maschile, c-)', correct: ['il'], explanation: '✅ "Cane" è maschile, consonante semplice → il'},
-            {id: 3, type: 'choice', question: '_____ tavolo', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'Il', explanation: '✅ "Tavolo" è maschile, consonante semplice (t) → IL'},
-            {id: 4, type: 'fill', question: '_____ computer (maschile, c-)', correct: ['il'], explanation: '✅ "Computer" è maschile, consonante semplice → il'},
-            {id: 5, type: 'choice', question: '_____ professore', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'Il', explanation: '✅ "Professore" è maschile, consonante semplice (p) → IL'},
-            {id: 6, type: 'fill', question: '_____ medico (maschile, m-)', correct: ['il'], explanation: '✅ "Medico" è maschile, consonante semplice → il'},
-            {id: 7, type: 'choice', question: '_____ bambino', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'Il', explanation: '✅ "Bambino" è maschile, consonante semplice (b) → IL'},
-            {id: 8, type: 'fill', question: '_____ gatto (maschile, g-)', correct: ['il'], explanation: '✅ "Gatto" è maschile, consonante semplice → il'},
-            {id: 9, type: 'choice', question: '_____ telefono', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'Il', explanation: '✅ "Telefono" è maschile, consonante semplice (t) → IL'},
-            {id: 10, type: 'fill', question: '_____ quaderno (maschile, q-)', correct: ['il'], explanation: '✅ "Quaderno" è maschile, consonante semplice → il'},
-
-            // ESERCIZI 11-20: Maschile singolare LO
-            {id: 11, type: 'choice', question: '_____ studente (inizia con st-)', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'Lo', explanation: '✅ "Studente" è maschile, inizia con s+consonante (st) → LO'},
-            {id: 12, type: 'fill', question: '_____ zaino (maschile, inizia con z-)', correct: ['lo'], explanation: '✅ "Zaino" è maschile, inizia con z → lo'},
-            {id: 13, type: 'choice', question: '_____ psicologo (inizia con ps-)', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'Lo', explanation: '✅ "Psicologo" è maschile, inizia con ps → LO'},
-            {id: 14, type: 'fill', question: '_____ gnocco (maschile, inizia con gn-)', correct: ['lo'], explanation: '✅ "Gnocco" è maschile, inizia con gn → lo'},
-            {id: 15, type: 'choice', question: '_____ specchio (inizia con sp-)', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'Lo', explanation: '✅ "Specchio" è maschile, inizia con sp → LO'},
-            {id: 16, type: 'fill', question: '_____ yogurt (maschile, inizia con y-)', correct: ['lo'], explanation: '✅ "Yogurt" è maschile, inizia con y → lo'},
-            {id: 17, type: 'choice', question: '_____ xilofono (inizia con x-)', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'Lo', explanation: '✅ "Xilofono" è maschile, inizia con x → LO'},
-            {id: 18, type: 'fill', question: '_____ sceriffo (maschile, inizia con sc-)', correct: ['lo'], explanation: '✅ "Sceriffo" è maschile, inizia con sc → lo'},
-            {id: 19, type: 'choice', question: '_____ smalto (inizia con sm-)', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'Lo', explanation: '✅ "Smalto" è maschile, inizia con sm → LO'},
-            {id: 20, type: 'fill', question: '_____ sbaglio (maschile, inizia con sb-)', correct: ['lo'], explanation: '✅ "Sbaglio" è maschile, inizia con sb → lo'},
-
-            // ESERCIZI 21-25: Maschile singolare L'
-            {id: 21, type: 'choice', question: '_____ amico (inizia con a-)', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'L\'', explanation: '✅ "Amico" è maschile, inizia con vocale (a) → L\''},
-            {id: 22, type: 'fill', question: '_____ orologio (maschile, inizia con o-)', correct: ['l\''], explanation: '✅ "Orologio" è maschile, inizia con vocale → l\''},
-            {id: 23, type: 'choice', question: '_____ ufficio (inizia con u-)', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'L\'', explanation: '✅ "Ufficio" è maschile, inizia con vocale (u) → L\''},
-            {id: 24, type: 'fill', question: '_____ elefante (maschile, inizia con e-)', correct: ['l\''], explanation: '✅ "Elefante" è maschile, inizia con vocale → l\''},
-            {id: 25, type: 'choice', question: '_____ indirizzo (inizia con i-)', options: ['Il', 'Lo', 'L\'', 'La'], correct: 'L\'', explanation: '✅ "Indirizzo" è maschile, inizia con vocale (i) → L\''},
-
-            // ESERCIZI 26-35: Femminile singolare LA
-            {id: 26, type: 'choice', question: '_____ casa (femminile, c-)', options: ['Il', 'Lo', 'La', 'L\''], correct: 'La', explanation: '✅ "Casa" è femminile, consonante → LA'},
-            {id: 27, type: 'fill', question: '_____ penna (femminile, p-)', correct: ['la'], explanation: '✅ "Penna" è femminile, consonante → la'},
-            {id: 28, type: 'choice', question: '_____ scuola (femminile, inizia con sc-)', options: ['Il', 'Lo', 'La', 'L\''], correct: 'La', explanation: '✅ "Scuola" è femminile, anche con sc- si usa LA (diversamente dal maschile!)'},
-            {id: 29, type: 'fill', question: '_____ studentessa (femminile, st-)', correct: ['la'], explanation: '✅ "Studentessa" è femminile, anche con st- si usa la'},
-            {id: 30, type: 'choice', question: '_____ macchina (femminile, m-)', options: ['Il', 'Lo', 'La', 'L\''], correct: 'La', explanation: '✅ "Macchina" è femminile, consonante → LA'},
-            {id: 31, type: 'fill', question: '_____ zia (femminile, z-)', correct: ['la'], explanation: '✅ "Zia" è femminile, anche con z- si usa la (diversamente dal maschile!)'},
-            {id: 32, type: 'choice', question: '_____ psicologa (femminile, ps-)', options: ['Il', 'Lo', 'La', 'L\''], correct: 'La', explanation: '✅ "Psicologa" è femminile, anche con ps- si usa LA'},
-            {id: 33, type: 'fill', question: '_____ bambina (femminile, b-)', correct: ['la'], explanation: '✅ "Bambina" è femminile, consonante → la'},
-            {id: 34, type: 'choice', question: '_____ donna (femminile, d-)', options: ['Il', 'Lo', 'La', 'L\''], correct: 'La', explanation: '✅ "Donna" è femminile, consonante → LA'},
-            {id: 35, type: 'fill', question: '_____ finestra (femminile, f-)', correct: ['la'], explanation: '✅ "Finestra" è femminile, consonante → la'},
-
-            // ESERCIZI 36-40: Femminile singolare L'
-            {id: 36, type: 'choice', question: '_____ amica (femminile, a-)', options: ['Il', 'Lo', 'La', 'L\''], correct: 'L\'', explanation: '✅ "Amica" è femminile, vocale → L\''},
-            {id: 37, type: 'fill', question: '_____ isola (femminile, i-)', correct: ['l\''], explanation: '✅ "Isola" è femminile, vocale → l\''},
-            {id: 38, type: 'choice', question: '_____ ora (femminile, o-)', options: ['Il', 'Lo', 'La', 'L\''], correct: 'L\'', explanation: '✅ "Ora" è femminile, vocale → L\''},
-            {id: 39, type: 'fill', question: '_____ acqua (femminile, a-)', correct: ['l\''], explanation: '✅ "Acqua" è femminile, vocale → l\''},
-            {id: 40, type: 'choice', question: '_____ edicola (femminile, e-)', options: ['Il', 'Lo', 'La', 'L\''], correct: 'L\'', explanation: '✅ "Edicola" è femminile, vocale → L\''},
-
-            // ESERCIZI 41-45: Plurale maschile I e GLI
-            {id: 41, type: 'choice', question: 'Il plurale di "il libro" è:', options: ['i libri', 'gli libri', 'le libri', 'lo libri'], correct: 'i libri', explanation: '✅ IL → I (plurale maschile semplice)'},
-            {id: 42, type: 'fill', question: 'Il plurale di "il cane" è: _____ cani', correct: ['i'], explanation: '✅ IL → i al plurale'},
-            {id: 43, type: 'choice', question: 'Il plurale di "lo studente" è:', options: ['gli studenti', 'i studenti', 'le studenti', 'lo studenti'], correct: 'gli studenti', explanation: '✅ LO → GLI al plurale'},
-            {id: 44, type: 'fill', question: 'Il plurale di "lo zaino" è: _____ zaini', correct: ['gli'], explanation: '✅ LO → gli al plurale'},
-            {id: 45, type: 'choice', question: 'Il plurale di "l\'amico" (maschile) è:', options: ['gli amici', 'i amici', 'le amici', 'lo amici'], correct: 'gli amici', explanation: '✅ L\' (maschile) → GLI al plurale'},
-
-            // ESERCIZI 46-50: Plurale femminile LE
-            {id: 46, type: 'fill', question: 'Il plurale di "la casa" è: _____ case', correct: ['le'], explanation: '✅ LA → le al plurale'},
-            {id: 47, type: 'choice', question: 'Il plurale di "la penna" è:', options: ['le penne', 'gli penne', 'i penne', 'la penne'], correct: 'le penne', explanation: '✅ LA → LE al plurale'},
-            {id: 48, type: 'fill', question: 'Il plurale di "l\'amica" è: _____ amiche', correct: ['le'], explanation: '✅ L\' (femminile) → le al plurale (NO apostrofo!)'},
-            {id: 49, type: 'choice', question: 'Il plurale di "l\'isola" è:', options: ['le isole', 'gli isole', 'i isole', 'l\'isole'], correct: 'le isole', explanation: '✅ L\' (femminile) → LE al plurale'},
-            {id: 50, type: 'fill', question: 'Completa: _____ studenti (plurale di "lo studente")', correct: ['gli'], explanation: '✅ LO studente → GLI studenti al plurale'}
-        ];
-
-        let currentExercise = 0;
-        let totalScore = 0;
-        let answered = false;
-        let studentAnswers = [];
-
-        function speak(text) {
-            if (!('speechSynthesis' in window)) return;
-            window.speechSynthesis.cancel();
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = 'it-IT';
-            u.rate = 0.8;
-            window.speechSynthesis.speak(u);
-        }
-
-        function showSection(id, btn) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-            if(btn) btn.classList.add('active');
-            if(id === 'exercises' && currentExercise === 0) loadExercise();
-        }
-
         function toggleLang(header) {
             const content = header.nextElementSibling;
             const icon = header.querySelector('.toggle-icon');
@@ -1013,281 +1348,12 @@
             icon.classList.toggle('rotated');
         }
 
-        function loadExercise() {
-            if (currentExercise >= exercises.length) {
-                showFinalScore();
-                return;
-            }
-
-            const ex = exercises[currentExercise];
-            const container = document.getElementById('exerciseContainer');
-            
-            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
-            
-            answered = false;
-
-            let html = `
-                <div class="card" style="animation: fadeIn 0.4s ease;">
-                    <div class="card-header">Esercizio ${ex.id}</div>
-                    <div class="card-body">
-                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
-                        <div class="question-box">
-                            <div class="question-text">${ex.question}</div>
-                        </div>
-            `;
-
-            if (ex.type === 'choice') {
-                html += `<div class="options-grid" id="optionsGrid">`;
-                const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
-                shuffledOptions.forEach(opt => {
-                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
-                });
-                html += `</div>`;
-            } else {
-                html += `
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi l'articolo..." onkeypress="if(event.key==='Enter') checkFill()">
-                    </div>
-                    <div class="text-center">
-                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
-                    </div>
-                `;
-            }
-
-            html += `
-                        <div class="feedback" id="feedback"></div>
-                        <div class="text-center" id="nextBtnContainer" style="display: none;">
-                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            container.innerHTML = html;
-            if (ex.type === 'fill') setTimeout(() => document.getElementById('fillInput').focus(), 100);
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
         }
-
-        function checkChoice(selected) {
-            if (answered) return;
-            answered = true;
-
-            const ex = exercises[currentExercise];
-            const btns = document.querySelectorAll('#optionsGrid .option-btn');
-            const feedback = document.getElementById('feedback');
-            const nextContainer = document.getElementById('nextBtnContainer');
-
-            const isCorrect = selected === ex.correct;
-            
-            // Salva risposta
-            studentAnswers.push({
-                id: ex.id,
-                question: ex.question,
-                answer: selected,
-                correct: ex.correct,
-                isCorrect: isCorrect
-            });
-
-            btns.forEach(btn => {
-                btn.disabled = true;
-                if (btn.dataset.value === ex.correct) btn.classList.add('correct');
-                else if (btn.dataset.value === selected && !isCorrect) btn.classList.add('wrong');
-            });
-
-            feedback.classList.add('show');
-
-            if (isCorrect) {
-                feedback.className = 'feedback show correct';
-                feedback.textContent = ex.explanation;
-                totalScore += 2;
-            } else {
-                feedback.className = 'feedback show wrong';
-                let errorMsg = `❌ Sbagliato. ${ex.explanation.replace('✅', '')}`;
-                feedback.innerHTML = `${errorMsg}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
-            }
-
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            nextContainer.style.display = 'block';
-        }
-
-        function checkFill() {
-            if (answered) return;
-            
-            const input = document.getElementById('fillInput');
-            const value = input.value.trim().toLowerCase();
-            if (!value) return;
-
-            answered = true;
-
-            const ex = exercises[currentExercise];
-            const feedback = document.getElementById('feedback');
-            const nextContainer = document.getElementById('nextBtnContainer');
-
-            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
-            
-            // Salva risposta
-            studentAnswers.push({
-                id: ex.id,
-                question: ex.question,
-                answer: value,
-                correct: ex.correct[0],
-                isCorrect: isCorrect
-            });
-
-            feedback.classList.add('show');
-            input.disabled = true;
-
-            if (isCorrect) {
-                feedback.className = 'feedback show correct';
-                feedback.textContent = ex.explanation;
-                input.style.borderColor = 'var(--success)';
-                input.style.background = '#f0fff4';
-                totalScore += 2;
-            } else {
-                feedback.className = 'feedback show wrong';
-                let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
-                feedback.innerHTML = errorMsg;
-                input.style.borderColor = 'var(--error)';
-                input.style.background = '#fff5f5';
-                input.value = ex.correct[0];
-            }
-
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            nextContainer.style.display = 'block';
-        }
-
-        function nextExercise() {
-            currentExercise++;
-            loadExercise();
-        }
-
-        function showFinalScore() {
-            document.getElementById('exerciseContainer').style.display = 'none';
-            document.getElementById('finalScoreSection').classList.add('show');
-            document.getElementById('finalScore').textContent = `${totalScore}/100`;
-            
-            const sufficiencyBox = document.getElementById('sufficiencyBox');
-            const isPassing = totalScore >= 60;
-            
-            if (isPassing) {
-                sufficiencyBox.innerHTML = `<div class="sufficiency-indicator sufficiency-pass">✅ SUFFICIENZA RAGGIUNTA (60/100)</div>`;
-                document.getElementById('finalMessage').textContent = '🎉 Complimenti! Hai superato la prova!';
-            } else {
-                sufficiencyBox.innerHTML = `<div class="sufficiency-indicator sufficiency-fail">❌ SUFFICIENZA NON RAGGIUNTA (serve 60/100)</div>`;
-                document.getElementById('finalMessage').textContent = '📚 Ripassa la teoria e riprova!';
-            }
-            
-            document.getElementById('progressBar').style.width = '100%';
-        }
-
-        function showEmailModal() {
-            const modal = document.getElementById('emailModal');
-            const summary = document.getElementById('resultSummary');
-            
-            // Calcola statistiche
-            const correctCount = studentAnswers.filter(a => a.isCorrect).length;
-            const wrongCount = studentAnswers.length - correctCount;
-            
-            let summaryText = `RISULTATI ESERCIZI ARTICOLI DETERMINATIVI\n`;
-            summaryText += `=====================================\n\n`;
-            summaryText += `Punteggio: ${totalScore}/100\n`;
-            summaryText += `Sufficienza: ${totalScore >= 60 ? 'RAGGIUNTA ✅' : 'NON RAGGIUNTA ❌'}\n`;
-            summaryText += `Risposte corrette: ${correctCount}/${studentAnswers.length}\n`;
-            summaryText += `Risposte errate: ${wrongCount}/${studentAnswers.length}\n\n`;
-            summaryText += `DETTAGLIO RISPOSTE:\n`;
-            summaryText += `-------------------\n`;
-            
-            studentAnswers.forEach((ans, idx) => {
-                summaryText += `${idx + 1}. ${ans.question}\n`;
-                summaryText += `   Tua risposta: ${ans.answer} ${ans.isCorrect ? '✅' : '❌'}\n`;
-                if (!ans.isCorrect) {
-                    summaryText += `   Corretto: ${ans.correct}\n`;
-                }
-                summaryText += `\n`;
-            });
-            
-            summary.textContent = summaryText;
-            modal.classList.add('show');
-        }
-
-        function closeEmailModal() {
-            document.getElementById('emailModal').classList.remove('show');
-        }
-
-        function sendViaEmail() {
-            const name = document.getElementById('studentName').value.trim();
-            const email = document.getElementById('studentEmail').value.trim();
-            const summary = document.getElementById('resultSummary').textContent;
-            
-            if (!name) {
-                alert('Inserisci il tuo nome!');
-                return;
-            }
-            
-            // Prepara email
-            const subject = `Risultati Esercizi Articoli Determinativi - ${name}`;
-            const body = `Nome: ${name}\nEmail: ${email || 'Non fornita'}\n\n${summary}`;
-            
-            // Crea mailto link (invia a studente e admin)
-            const adminEmail = 'admin@scuola.it'; // Modifica con l'email reale dell'admin
-            const to = email ? `${email},${adminEmail}` : adminEmail;
-            const mailtoLink = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            window.location.href = mailtoLink;
-        }
-
-        function copyResults() {
-            const summary = document.getElementById('resultSummary').textContent;
-            const name = document.getElementById('studentName').value.trim() || 'Studente';
-            
-            const fullText = `Nome: ${name}\n\n${summary}`;
-            
-            navigator.clipboard.writeText(fullText).then(() => {
-                const feedback = document.getElementById('copyFeedback');
-                feedback.style.display = 'block';
-                setTimeout(() => {
-                    feedback.style.display = 'none';
-                }, 3000);
-            }).catch(err => {
-                // Fallback per browser che non supportano clipboard API
-                const textArea = document.createElement('textarea');
-                textArea.value = fullText;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                
-                const feedback = document.getElementById('copyFeedback');
-                feedback.style.display = 'block';
-                setTimeout(() => {
-                    feedback.style.display = 'none';
-                }, 3000);
-            });
-        }
-
-        function restartExercises() {
-            currentExercise = 0;
-            totalScore = 0;
-            answered = false;
-            studentAnswers = [];
-            exercises.sort(() => Math.random() - 0.5);
-            document.getElementById('exerciseContainer').style.display = 'block';
-            document.getElementById('finalScoreSection').classList.remove('show');
-            document.getElementById('progressBar').style.width = '0%';
-            loadExercise();
-        }
-
-        // Chiudi modal cliccando fuori
-        document.getElementById('emailModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeEmailModal();
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            exercises.sort(() => Math.random() - 0.5);
-        });
     </script>
 </body>
 </html>
