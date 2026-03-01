@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stare + Gerundio e Si Impersonale - Accademia delle Lingue</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #276749;
+            --bg-color: #f5f5f0;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #5a6c7d;
+            --border: #d4d4c8;
+            --accent: #e74c3c;
+            --success: #27ae60;
+            --secondary: #8b5cf6;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--bg-color);
+            color: var(--text);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #276749 0%, #1e5c3e 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin: 1rem;
+            padding: 0.8rem 1.2rem;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .section h3 {
+            color: var(--text);
+            margin: 1.5rem 0 0.8rem 0;
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .language-card {
+            background: var(--bg-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .language-name {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .flag {
+            font-size: 1.3rem;
+        }
+
+        .theory-content {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .theory-content ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .theory-content li {
+            margin-bottom: 0.3rem;
+        }
+
+        .example-box {
+            background: white;
+            border-left: 3px solid var(--accent);
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .exercise-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .exercise-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-text {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .option-btn {
+            padding: 0.8rem 1rem;
+            background: var(--bg-color);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: #e8f5e9;
+        }
+
+        .option-btn.correct {
+            background: #d4edda;
+            border-color: var(--success);
+            color: #155724;
+        }
+
+        .option-btn.wrong {
+            background: #f8d7da;
+            border-color: var(--accent);
+            color: #721c24;
+        }
+
+        .feedback {
+            margin-top: 0.5rem;
+            padding: 0.8rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .feedback.wrong {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .progress-bar {
+            background: var(--border);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: var(--primary);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .grammar-highlight {
+            background: #fff3cd;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #856404;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.5rem; }
+            .section h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>📚 Stare + Gerundio e Si Impersonale</h1>
+        <p>Teoria multilingue e esercizi interattivi - Livello A2</p>
+    </header>
+
+    <a href="index.html" class="back-btn">← Torna alla Dashboard</a>
+
+    <div class="container">
+
+        <!-- SEZIONE TEORIA -->
+        <div class="section">
+            <h2>🌍 Teoria in 17 Lingue</h2>
+
+            <!-- RUSSO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇷🇺</span> Русский (Russo)</div>
+                <div class="theory-content">
+                    <strong>Герундий с глаголом stare (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Образование: stare + герундий (-ando, -endo, -indo)</li>
+                        <li>Значение: действие в процессе в данный момент</li>
+                        <li>Примеры: sto mangiando (я ем), stai studiando (ты учишься)</li>
+                    </ul>
+                    <strong>Безличное местоимение si (Si impersonale):</strong>
+                    <ul>
+                        <li>Употребление: si + глагол в 3-м лице ед. числа</li>
+                        <li>Значение: обобщённое действие ("один", "люди", "все")</li>
+                        <li>Примеры: Si mangia bene qui (здесь хорошо едят), Si dice che... (говорят, что...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>Сейчас я читаю</strong> = Sto leggendo ora.<br>
+                        <strong>Здесь говорят по-итальянски</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- UCRAINO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇺🇦</span> Українська (Ucraino)</div>
+                <div class="theory-content">
+                    <strong>Дієприкметник із дієсловом stare (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Утворення: stare + дієприкметник (-ando, -endo, -indo)</li>
+                        <li>Значення: дія в процесі зараз</li>
+                        <li>Приклади: sto parlando (я говорю зараз), stai dormendo (ти спиш)</li>
+                    </ul>
+                    <strong>Безособове місцеименник si (Si impersonale):</strong>
+                    <ul>
+                        <li>Вживання: si + дієслово в 3-й особі однини</li>
+                        <li>Значення: узагальнена дія ("люди", "всі")</li>
+                        <li>Приклади: Si lavora molto qui (тут багато працюють), Si crede che... (вважають, що...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>Зараз я їм</strong> = Sto mangiando ora.<br>
+                        <strong>Тут добре живеться</strong> = Qui si vive bene.
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPAGNOLO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇪🇸</span> Español (Spagnolo)</div>
+                <div class="theory-content">
+                    <strong>Gerundio con el verbo stare (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Formación: stare + gerundio (-ando, -endo)</li>
+                        <li>Significado: acción en progreso en este momento</li>
+                        <li>Ejemplos: sto scrivendo (estoy escribiendo), stai cantando (estás cantando)</li>
+                    </ul>
+                    <strong>Pronombre impersonal se (Si impersonale):</strong>
+                    <ul>
+                        <li>Uso: se + verbo en 3ª persona singular</li>
+                        <li>Significado: acción generalizada ("uno", "la gente", "todos")</li>
+                        <li>Ejemplos: Se vive bien aquí (se vive bien aquí), Se dice que... (se dice que...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>Ahora estoy comiendo</strong> = Sto mangiando ora.<br>
+                        <strong>Aquí se habla italiano</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FRANCESE -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇫🇷</span> Français (Francese)</div>
+                <div class="theory-content">
+                    <strong>Gérondif avec le verbe stare (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Formation: stare + gérondif (-ando, -endo, -indo)</li>
+                        <li>Sens: action en cours en ce moment</li>
+                        <li>Exemples: sto leggendo (je suis en train de lire), stai mangiando (tu es en train de manger)</li>
+                    </ul>
+                    <strong>Pronom impersonnel si (Si impersonale):</strong>
+                    <ul>
+                        <li>Emploi: si + verbe à la 3ème personne du singulier</li>
+                        <li>Sens: action généralisée ("on", "les gens", "tout le monde")</li>
+                        <li>Exemples: Si mange bien ici (on mange bien ici), Si pense que... (on pense que...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>Je suis en train de manger</strong> = Sto mangiando.<br>
+                        <strong>On parle italien ici</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- INGLESE -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇬🇧</span> English (Inglese)</div>
+                <div class="theory-content">
+                    <strong>Progressive form with stare (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Formation: stare + gerund (-ing form equivalent)</li>
+                        <li>Meaning: action in progress right now</li>
+                        <li>Examples: sto lavorando (I am working), stai studiando (you are studying)</li>
+                    </ul>
+                    <strong>Impersonal pronoun si (Si impersonale):</strong>
+                    <ul>
+                        <li>Usage: si + verb in 3rd person singular</li>
+                        <li>Meaning: generalized action ("one", "people", "everyone")</li>
+                        <li>Examples: Si mangia bene qui (one eats well here), Si dice che... (it is said that...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>I am eating right now</strong> = Sto mangiando ora.<br>
+                        <strong>People speak Italian here</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- TWI -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇬🇭</span> Twi (Akan)</div>
+                <div class="theory-content">
+                    <strong>Gerund a wɔde "stare" ka ho (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Ɔkwan a wɔyɛ: stare + gerund (-ando, -endo, -indo)</li>
+                        <li>Nkyerɛase: adwuma a ɛrekɔ so sɛ ɛnnɛ yi</li>
+                        <li>Nhwɛsoɔ: sto mangiando (mere di), stai leggendo (warekenkan)</li>
+                    </ul>
+                    <strong>Si a ɛnni onipa biara (Si impersonale):</strong>
+                    <ul>
+                        <li>Ɔkwan a wɔde yɛ: si + ɔdasani a ɔto so abiɛsa a ɔyɛ korɔ</li>
+                        <li>Nkyerɛase: adwuma a ɛfa obiara ho ("obiara", "nnipa")</li>
+                        <li>Nhwɛsoɔ: Si parla italiano (wɔkasa Italiano wɔ ha), Si dice che... (wɔse...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>Mere di seisei ara</strong> = Sto mangiando ora.<br>
+                        <strong>Wɔkasa Italiano wɔ ha</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- BAMBARA -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇲🇱</span> Bambara</div>
+                <div class="theory-content">
+                    <strong>Gerund ni stare ye (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Cogoya: stare + gerund (-ando, -endo, -indo)</li>
+                        <li>Kɔrɔlen: baara min bɛ kɛ sisan</li>
+                    </ul>
+                    <strong>Si tɔgɔ ma dɔn (Si impersonale):</strong>
+                    <ul>
+                        <li>Cogoya: si + baara (mɔgɔ fila la)</li>
+                        <li>Kɔrɔlen: baara bɛɛ ye ("mɔgɔ o mɔgɔ", "mɔgɔw bɛɛ")</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>N bɛ dumuni sisan</strong> = Sto mangiando ora.<br>
+                        <strong>Italien bɛ kala yan</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- WOLOF -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇸🇳</span> Wolof</div>
+                <div class="theory-content">
+                    <strong>Gerund ak stare (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Dëgg: stare + gerund (-ando, -endo, -indo)</li>
+                        <li>Téere: ligéey bi dëgg-dëgg di des ci biir</li>
+                        <li>Paragraf: sto mangiando (dama lekk), stai leggendo (dangay jàng)</li>
+                    </ul>
+                    <strong>Si bu amul nit (Si impersonale):</strong>
+                    <ul>
+                        <li>Dëgg: si + wu (ñatteelu nit)</li>
+                        <li>Téere: ligéey bu ëmb ku nekk ("ku nekk", "ñi nekk")</li>
+                        <li>Paragraf: Si mangia bene qui (ñu lekk bu baax fii), Si dice che... (ni ngi wax ni...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>Dama lekk léegi</strong> = Sto mangiando ora.<br>
+                        <strong>Italiañ ngi wax fii</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- HAUSSA -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇳🇬</span> Hausa</div>
+                <div class="theory-content">
+                    <strong>Gerund tare da stare (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Gina: stare + gerund (-ando, -endo, -indo)</li>
+                        <li>Ma'ana: aiki da ke gudana yanzu</li>
+                        <li>Misalai: sto mangiando (ina cin), stai leggendo (kana karatu)</li>
+                    </ul>
+                    <strong>Si marar suna (Si impersonale):</strong>
+                    <ul>
+                        <li>Gina: si + aiki (na uku singular)</li>
+                        <li>Ma'ana: aiki na gama-gari ("kowa", "mutane")</li>
+                        <li>Misalai: Si mangia bene qui (ana cin abinci mai kyau a nan), Si dice che... (ana cewa...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>Ina cin yanzu</strong> = Sto mangiando ora.<br>
+                        <strong>Ana magana Italiyanci a nan</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARABO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇸🇦</span> العربية (Arabo)</div>
+                <div class="theory-content" dir="rtl">
+                    <strong>المصدر مع فعل stare (Stare + Gerundio):</strong>
+                    <ul style="margin-right: 1.5rem; margin-left: 0;">
+                        <li>التكوين: stare + المصدر (-ando, -endo, -indo)</li>
+                        <li>المعنى: فعل مستمر في اللحظة الحالية</li>
+                        <li>أمثلة: sto mangiando (أنا آكل الآن)، stai studiando (أنت تدرس)</li>
+                    </ul>
+                    <strong>الضمير المجهول si (Si impersonale):</strong>
+                    <ul style="margin-right: 1.5rem; margin-left: 0;">
+                        <li>الاستخدام: si + فعل في الثالث المفرد</li>
+                        <li>المعنى: فعل عام ("الناس"، "الجميع")</li>
+                        <li>أمثلة: Si mangia bene qui (يأكل الناس جيداً هنا)، Si dice che... (يقال أن...)</li>
+                    </ul>
+                    <div class="example-box" style="text-align: right;">
+                        Esempi: <strong>أنا آكل الآن</strong> = Sto mangiando ora.<br>
+                        <strong>يتحدث الإيطالية هنا</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALBANESE -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇦🇱</span> Shqip (Albanese)</div>
+                <div class="theory-content">
+                    <strong>Gerund me foljen stare (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Formimi: stare + gerund (-ando, -endo, -indo)</li>
+                        <li>Kuptimi: veprim në zhvillim në këtë moment</li>
+                        <li>Shembuj: sto mangiando (po ha), stai leggendo (po lexon)</li>
+                    </ul>
+                    <strong>Pronomi paemëror si (Si impersonale):</strong>
+                    <ul>
+                        <li>Përdorimi: si + folje në personin e tretë njëjës</li>
+                        <li>Kuptimi: veprim i përgjithësuar ("njeri", "të gjithë")</li>
+                        <li>Shembuj: Si mangia bene qui (hahet mirë këtu), Si dice che... (thuhet se...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>Po ha tani</strong> = Sto mangiando ora.<br>
+                        <strong>Fletet italisht këtu</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- TURCO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇹🇷</span> Türkçe (Turco)</div>
+                <div class="theory-content">
+                    <strong>Stare fiiliyle şimdiki zaman (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Yapı: stare + şimdiki zaman eki (-ando, -endo, -indo)</li>
+                        <li>Anlam: şu anda devam eden eylem</li>
+                        <li>Örnekler: sto mangiando (şu anda yiyorum), stai studiando (şu anda çalışıyorsun)</li>
+                    </ul>
+                    <strong>Kişisiz si zamiri (Si impersonale):</strong>
+                    <ul>
+                        <li>Kullanım: si + üçüncü tekil şahıs fiil</li>
+                        <li>Anlam: genelleme ("insanlar", "herkes")</li>
+                        <li>Örnekler: Si mangia bene qui (burada iyi yenir), Si dice che... (deniyor ki...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>Şu anda yiyorum</strong> = Sto mangiando ora.<br>
+                        <strong>Burada İtalyanca konuşulur</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- URDU -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇵🇰</span> اردو (Urdu)</div>
+                <div class="theory-content" dir="rtl">
+                    <strong>فعل stare کے ساتھ جاریہ صیغہ (Stare + Gerundio):</strong>
+                    <ul style="margin-right: 1.5rem; margin-left: 0;">
+                        <li>تشکیل: stare + جاریہ صیغہ (-ando, -endo, -indo)</li>
+                        <li>معنی: اسی لمحے جاری عمل</li>
+                        <li>مثالیں: sto mangiando (میں ابھی کھا رہا ہوں)، stai leggendo (تم ابھی پڑھ رہے ہو)</li>
+                    </ul>
+                    <strong>غیر شخصی ضمیر si (Si impersonale):</strong>
+                    <ul style="margin-right: 1.5rem; margin-left: 0;">
+                        <li>استعمال: si + تیسرے شخص واحد فعل</li>
+                        <li>معنی: عمومی عمل ("لوگ"، "ہر کوئی")</li>
+                        <li>مثالیں: Si mangia bene qui (یہاں اچھا کھایا جاتا ہے)، Si dice che... (کہا جاتا ہے کہ...)</li>
+                    </ul>
+                    <div class="example-box" style="text-align: right;">
+                        Esempi: <strong>میں ابھی کھا رہا ہوں</strong> = Sto mangiando ora.<br>
+                        <strong>یہاں اطالوی بولی جاتی ہے</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANJABI -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇮🇳</span> ਪੰਜਾਬੀ (Panjabi)</div>
+                <div class="theory-content">
+                    <strong>Stare ਨਾਲ ਗਰੁੰਡ (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>ਬਣਤਰ: stare + ਗਰੁੰਡ (-ando, -endo, -indo)</li>
+                        <li>ਅਰਥ: ਇਸ ਸਮੇਂ ਜਾਰੀ ਕਿਰਿਆ</li>
+                        <li>ਉਦਾਹਰਨਾਂ: sto mangiando (ਮੈਂ ਹੁਣ ਖਾ ਰਿਹਾ ਹਾਂ)، stai leggendo (ਤੂੰ ਹੁਣ ਪੜ੍ਹ ਰਿਹਾ ਹੈਂ)</li>
+                    </ul>
+                    <strong>ਅਵੈਯਕਤਿਕ ਸਰਵਨਾਮ si (Si impersonale):</strong>
+                    <ul>
+                        <li>ਵਰਤੋਂ: si + ਤੀਜੇ ਪੁਰਖ ਇਕ-ਵਚਨ ਕਿਰਿਆ</li>
+                        <li>ਅਰਥ: ਆਮ ਕਿਰਿਆ ("ਲੋਕ"، "ਹਰ ਕੋਈ")</li>
+                        <li>ਉਦਾਹਰਨਾਂ: Si mangia bene qui (ਇੱਥੇ ਚੰਗਾ ਖਾਧਾ ਜਾਂਦਾ ਹੈ)، Si dice che... (ਕਿਹਾ ਜਾਂਦਾ ਹੈ ਕਿ...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>ਮੈਂ ਹੁਣ ਖਾ ਰਿਹਾ ਹਾਂ</strong> = Sto mangiando ora.<br>
+                        <strong>ਇੱਥੇ ਇਤਾਲਵੀ ਬੋਲੀ ਜਾਂਦੀ ਹੈ</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- HINDI -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇮🇳</span> हिन्दी (Hindi)</div>
+                <div class="theory-content">
+                    <strong>Stare क्रिया के साथ कृदंत (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>रचना: stare + कृदंत (-ando, -endo, -indo)</li>
+                        <li>अर्थ: इसी समय जारी क्रिया</li>
+                        <li>उदाहरण: sto mangiando (मैं अभी खा रहा हूँ)، stai leggendo (तुम अभी पढ़ रहे हो)</li>
+                    </ul>
+                    <strong>अव्यक्तिपूर्ण सर्वनाम si (Si impersonale):</strong>
+                    <ul>
+                        <li>प्रयोग: si + तृतीय पुरुष एकवचन क्रिया</li>
+                        <li>अर्थ: सामान्य क्रिया ("लोग"، "हर कोई")</li>
+                        <li>उदाहरण: Si mangia bene qui (यहाँ अच्छा खाया जाता है)، Si dice che... (कहा जाता है कि...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>मैं अभी खा रहा हूँ</strong> = Sto mangiando ora.<br>
+                        <strong>यहाँ इतालवी बोली जाती है</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- CINESE -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇨🇳</span> 中文 (Cinese)</div>
+                <div class="theory-content">
+                    <strong>Stare动词加动名词 (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>构成: stare + 动名词 (-ando, -endo, -indo)</li>
+                        <li>意思: 此时此刻正在进行的动作</li>
+                        <li>例子: sto mangiando (我正在吃)، stai leggendo (你正在读)</li>
+                    </ul>
+                    <strong>无人称代词si (Si impersonale):</strong>
+                    <ul>
+                        <li>用法: si + 第三人称单数动词</li>
+                        <li>意思: 泛指动作 ("人们"، "大家")</li>
+                        <li>例子: Si mangia bene qui (这里吃得很好)، Si dice che... (据说...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>我正在吃</strong> = Sto mangiando ora.<br>
+                        <strong>这里说意大利语</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILIPPINO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇵🇭</span> Filipino/Tagalog</div>
+                <div class="theory-content">
+                    <strong>Gerundio kasama ang stare (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>Pormasyon: stare + gerund (-ando, -endo, -indo)</li>
+                        <li>Kahulugan: aksyon na nagaganap sa ngayon</li>
+                        <li>Halimbawa: sto mangiando (kumakain ako ngayon), stai leggendo (nagbabasa ka ngayon)</li>
+                    </ul>
+                    <strong>Di-tauhang panghalip si (Si impersonale):</strong>
+                    <ul>
+                        <li>Paggamit: si + pandiwa sa ikatlong persona (isahan)</li>
+                        <li>Kahulugan: pangkalahatang aksyon ("ang mga tao"، "lahat")</li>
+                        <li>Halimbawa: Si mangia bene qui (masarap kumain dito), Si dice che... (sabi nila na...)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>Kumakain ako ngayon</strong> = Sto mangiando ora.<br>
+                        <strong>Nagsasalita ng Italyano dito</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+
+            <!-- COREANO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇰🇷</span> 한국어 (Coreano)</div>
+                <div class="theory-content">
+                    <strong>Stare 동사와 동명사 (Stare + Gerundio):</strong>
+                    <ul>
+                        <li>구성: stare + 동명사 (-ando, -endo, -indo)</li>
+                        <li>의미: 지금 당장 진행 중인 동작</li>
+                        <li>예문: sto mangiando (나는 지금 먹고 있어요)، stai leggendo (너는 지금 읽고 있어요)</li>
+                    </ul>
+                    <strong>비인칭 대명사 si (Si impersonale):</strong>
+                    <ul>
+                        <li>용법: si + 3인칭 단수 동사</li>
+                        <li>의미: 일반화된 동작 ("사람들"، "모두")</li>
+                        <li>예문: Si mangia bene qui (여기서 잘 먹어요)، Si dice che... (...라고 해요)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: <strong>나는 지금 먹고 있어요</strong> = Sto mangiando ora.<br>
+                        <strong>여기서 이탈리아어를 해요</strong> = Qui si parla italiano.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE ESERCIZI -->
+        <div class="section">
+            <h2>📝 60 Esercizi Interattivi</h2>
+            <div class="score-display">Punteggio: <span id="score">0</span>/60</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+
+            <div id="exercises-container">
+                <!-- ESERCIZI GENERATI VIA JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const exercises = [
+            {num: 1, tipo: 'scelta', domanda: "Completa: 'Io ___ ___ (mangiare)'", opzioni: ["sto mangiando", "stai mangiando", "sta mangiando", "stiamo mangiando"], risposta: 0, spiegazione: "Con 'io' si usa 'sto' + gerundio (-ando, -endo, -indo)."},
+            {num: 2, tipo: 'scelta', domanda: "Completa: 'Tu ___ ___ (leggere)'", opzioni: ["sto leggendo", "stai leggendo", "sta leggendo", "state leggendo"], risposta: 1, spiegazione: "Con 'tu' si usa 'stai' + gerundio."},
+            {num: 3, tipo: 'scelta', domanda: "Completa: 'Lui ___ ___ (scrivere)'", opzioni: ["sto scrivendo", "stai scrivendo", "sta scrivendo", "stiamo scrivendo"], risposta: 2, spiegazione: "Con 'lui/lei' si usa 'sta' + gerundio."},
+            {num: 4, tipo: 'scelta', domanda: "Completa: 'Noi ___ ___ (parlare)'", opzioni: ["sto parlando", "stai parlando", "sta parlando", "stiamo parlando"], risposta: 3, spiegazione: "Con 'noi' si usa 'stiamo' + gerundio (-ando per -are)."},
+            {num: 5, tipo: 'scelta', domanda: "Completa: 'Voi ___ ___ (cantare)'", opzioni: ["sta cantando", "stiamo cantando", "state cantando", "stanno cantando"], risposta: 2, spiegazione: "Con 'voi' si usa 'state' + gerundio."},
+            {num: 6, tipo: 'scelta', domanda: "Completa: 'Loro ___ ___ (dormire)'", opzioni: ["sta dormendo", "stiamo dormendo", "state dormendo", "stanno dormendo"], risposta: 3, spiegazione: "Con 'loro' si usa 'stanno' + gerundio (-endo per -ere)."},
+            {num: 7, tipo: 'scelta', domanda: "Completa: 'Io ___ ___ (finire)'", opzioni: ["sto finendo", "stai finendo", "sta finendo", "stiamo finendo"], risposta: 0, spiegazione: "Con 'io' si usa 'sto' + gerundio (-endo per -ire)."},
+            {num: 8, tipo: 'scelta', domanda: "Completa: 'Tu ___ ___ (partire) domani'", opzioni: ["sto partendo", "stai partendo", "sta partendo", "stiamo partendo"], risposta: 1, spiegazione: "Con 'tu' si usa 'stai' + gerundio (-endo per -ire)."},
+            {num: 9, tipo: 'scelta', domanda: "Completa: 'Lei ___ ___ (lavorare) molto'", opzioni: ["sto lavorando", "stai lavorando", "sta lavorando", "stiamo lavorando"], risposta: 2, spiegazione: "Con 'lei' (3a persona singolare) si usa 'sta' + gerundio."},
+            {num: 10, tipo: 'scelta', domanda: "Completa: 'Noi ___ ___ (studiare) italiano'", opzioni: ["sto studiando", "stai studiando", "sta studiando", "stiamo studiando"], risposta: 3, spiegazione: "Con 'noi' si usa 'stiamo' + gerundio."},
+            {num: 11, tipo: 'scelta', domanda: "Completa: 'Voi ___ ___ (giocare) a calcio'", opzioni: ["sta giocando", "stiamo giocando", "state giocando", "stanno giocando"], risposta: 2, spiegazione: "Con 'voi' si usa 'state' + gerundio."},
+            {num: 12, tipo: 'scelta', domanda: "Completa: 'I bambini ___ ___ (correre)'", opzioni: ["sta correndo", "stiamo correndo", "state correndo", "stanno correndo"], risposta: 3, spiegazione: "Con soggetto plurale (loro) si usa 'stanno' + gerundio."},
+            {num: 13, tipo: 'scelta', domanda: "Completa: 'Io non ___ ___ (capire)'", opzioni: ["sto capendo", "stai capendo", "sta capendo", "stiamo capendo"], risposta: 0, spiegazione: "Con 'io' si usa 'sto' + gerundio, anche con la negazione."},
+            {num: 14, tipo: 'scelta', domanda: "Completa: 'Cosa ___ ___ (fare) tu?'", opzioni: ["sto facendo", "stai facendo", "sta facendo", "stiamo facendo"], risposta: 1, spiegazione: "Con 'tu' si usa 'stai' + gerundio (fare → facendo)."},
+            {num: 15, tipo: 'scelta', domanda: "Completa: 'Marco ___ ___ (bere) un caffè'", opzioni: ["sto bevendo", "stai bevendo", "sta bevendo", "stiamo bevendo"], risposta: 2, spiegazione: "Con 'Marco' (lui) si usa 'sta' + gerundio (bere → bevendo)."},
+            {num: 16, tipo: 'scelta', domanda: "Completa: 'Noi ___ ___ (venire) subito'", opzioni: ["sto venendo", "stai venendo", "sta venendo", "stiamo venendo"], risposta: 3, spiegazione: "Con 'noi' si usa 'stiamo' + gerundio (venire → venendo)."},
+            {num: 17, tipo: 'scelta', domanda: "Completa: 'Voi ___ ___ (andare) al cinema?'", opzioni: ["sta andando", "stiamo andando", "state andando", "stanno andando"], risposta: 2, spiegazione: "Con 'voi' si usa 'state' + gerundio (andare → andando)."},
+            {num: 18, tipo: 'scelta', domanda: "Completa: 'Le ragazze ___ ___ (ballare)'", opzioni: ["sta ballando", "stiamo ballando", "state ballando", "stanno ballando"], risposta: 3, spiegazione: "Con soggetto plurale femminile si usa 'stanno'."},
+            {num: 19, tipo: 'scelta', domanda: "Completa: 'Io ___ ___ (prendere) il treno'", opzioni: ["sto prendendo", "stai prendendo", "sta prendendo", "stiamo prendendo"], risposta: 0, spiegazione: "Con 'io' si usa 'sto' + gerundio (prendere → prendendo)."},
+            {num: 20, tipo: 'scelta', domanda: "Completa: 'Tu ___ ___ (mettere) la giacca'", opzioni: ["sto mettendo", "stai mettendo", "sta mettendo", "stiamo mettendo"], risposta: 1, spiegazione: "Con 'tu' si usa 'stai' + gerundio (mettere → mettendo)."},
+            {num: 21, tipo: 'scelta', domanda: "Completa: 'La nonna ___ ___ (cucinare)'", opzioni: ["sto cucinando", "stai cucinando", "sta cucinando", "stiamo cucinando"], risposta: 2, spiegazione: "Con 'la nonna' (lei) si usa 'sta' + gerundio."},
+            {num: 22, tipo: 'scelta', domanda: "Completa: 'Noi ___ ___ (riposare)'", opzioni: ["sto riposando", "stai riposando", "sta riposando", "stiamo riposando"], risposta: 3, spiegazione: "Con 'noi' si usa 'stiamo' + gerundio."},
+            {num: 23, tipo: 'scelta', domanda: "Completa: 'Voi ___ ___ (aspettare) il bus'", opzioni: ["sta aspettando", "stiamo aspettando", "state aspettando", "stanno aspettando"], risposta: 2, spiegazione: "Con 'voi' si usa 'state' + gerundio."},
+            {num: 24, tipo: 'scelta', domanda: "Completa: 'I cani ___ ___ (abbaiare)'", opzioni: ["sta abbaiando", "stiamo abbaiando", "state abbaiando", "stanno abbaiando"], risposta: 3, spiegazione: "Con soggetto plurale (i cani) si usa 'stanno'."},
+            {num: 25, tipo: 'scelta', domanda: "Completa: 'Io ___ ___ (uscire) adesso'", opzioni: ["sto uscendo", "stai uscendo", "sta uscendo", "stiamo uscendo"], risposta: 0, spiegazione: "Con 'io' si usa 'sto' + gerundio (uscire → uscendo)."},
+            {num: 26, tipo: 'scelta', domanda: "Completa: 'Tu ___ ___ (aprire) la porta'", opzioni: ["sto aprendo", "stai aprendo", "sta aprendo", "stiamo aprendo"], risposta: 1, spiegazione: "Con 'tu' si usa 'stai' + gerundio (aprire → aprendo)."},
+            {num: 27, tipo: 'scelta', domanda: "Completa: 'Il professore ___ ___ (spiegare)'", opzioni: ["sto spiegando", "stai spiegando", "sta spiegando", "stiamo spiegando"], risposta: 2, spiegazione: "Con 'il professore' (lui) si usa 'sta' + gerundio."},
+            {num: 28, tipo: 'scelta', domanda: "Completa: 'Noi ___ ___ (cercare) una casa'", opzioni: ["sto cercando", "stai cercando", "sta cercando", "stiamo cercando"], risposta: 3, spiegazione: "Con 'noi' si usa 'stiamo' + gerundio."},
+            {num: 29, tipo: 'scelta', domanda: "Completa: 'Voi ___ ___ (pensare) a me?'", opzioni: ["sta pensando", "stiamo pensando", "state pensando", "stanno pensando"], risposta: 2, spiegazione: "Con 'voi' si usa 'state' + gerundio."},
+            {num: 30, tipo: 'scelta', domanda: "Completa: 'Gli studenti ___ ___ (imparare)'", opzioni: ["sta imparando", "stiamo imparando", "state imparando", "stanno imparando"], risposta: 3, spiegazione: "Con soggetto plurale (gli studenti) si usa 'stanno'."},
+            {num: 31, tipo: 'scelta', domanda: "Completa: '___ mangia bene in questo ristorante'", opzioni: ["Io", "Tu", "Si", "Loro"], risposta: 2, spiegazione: "Il 'si impersonale' si usa per azioni generalizzate."},
+            {num: 32, tipo: 'scelta', domanda: "Completa: '___ parla italiano in questa città'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "'Si parla' = si parla in generale, non una persona specifica."},
+            {num: 33, tipo: 'scelta', domanda: "Completa: '___ lavora molto qui'", opzioni: ["Io", "Tu", "Si", "Lui"], risposta: 2, spiegazione: "'Si lavora' = si lavora in generale."},
+            {num: 34, tipo: 'scelta', domanda: "Completa: '___ vive bene in campagna'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "Il 'si impersonale' indica una situazione generale."},
+            {num: 35, tipo: 'scelta', domanda: "Completa: '___ dice che domani pioverà'", opzioni: ["Io", "Tu", "Si", "Loro"], risposta: 2, spiegazione: "'Si dice' = la gente dice, si dice in generale."},
+            {num: 36, tipo: 'scelta', domanda: "Completa: '___ crede che sia vero'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "'Si crede' = si crede in generale, la gente crede."},
+            {num: 37, tipo: 'scelta', domanda: "Completa: '___ studia meglio al mattino'", opzioni: ["Io", "Tu", "Si", "Lui"], risposta: 2, spiegazione: "'Si studia' = in generale si studia meglio al mattino."},
+            {num: 38, tipo: 'scelta', domanda: "Completa: '___ viaggia molto in estate'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "'Si viaggia' = si viaggia in generale durante l'estate."},
+            {num: 39, tipo: 'scelta', domanda: "Completa: '___ legge poco oggigiorno'", opzioni: ["Io", "Tu", "Si", "Loro"], risposta: 2, spiegazione: "'Si legge' = in generale si legge poco."},
+            {num: 40, tipo: 'scelta', domanda: "Completa: '___ compra online sempre di più'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "'Si compra' = si compra in generale, sempre più persone."},
+            {num: 41, tipo: 'scelta', domanda: "Completa: '___ capisce facilmente questa lezione'", opzioni: ["Io", "Tu", "Si", "Lui"], risposta: 2, spiegazione: "'Si capisce' = questa lezione si capisce facilmente (in generale)."},
+            {num: 42, tipo: 'scelta', domanda: "Completa: '___ paga troppo per l'affitto'", opzioni: ["Io", "Tu", "Si", "Loro"], risposta: 2, spiegazione: "'Si paga' = in generale si paga troppo."},
+            {num: 43, tipo: 'scelta', domanda: "Completa: '___ dorme poco durante la settimana'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "'Si dorme' = in generale si dorme poco."},
+            {num: 44, tipo: 'scelta', domanda: "Completa: '___ spende troppo a Natale'", opzioni: ["Io", "Tu", "Si", "Loro"], risposta: 2, spiegazione: "'Si spende' = si spende in generale."},
+            {num: 45, tipo: 'scelta', domanda: "Completa: '___ pensa che sia giusto'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "'Si pensa' = si pensa in generale, la gente pensa."},
+            {num: 46, tipo: 'scelta', domanda: "Completa: '___ trova tutto su internet'", opzioni: ["Io", "Tu", "Si", "Lui"], risposta: 2, spiegazione: "'Si trova' = si trova in generale, tutto si può trovare."},
+            {num: 47, tipo: 'scelta', domanda: "Completa: '___ impara con la pratica'", opzioni: ["Io", "Tu", "Si", "Loro"], risposta: 2, spiegazione: "'Si impara' = in generale si impara con la pratica."},
+            {num: 48, tipo: 'scelta', domanda: "Completa: '___ spera in un futuro migliore'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "'Si spera' = si spera in generale."},
+            {num: 49, tipo: 'scelta', domanda: "Completa: '___ ride meglio la mattina'", opzioni: ["Io", "Tu", "Si", "Lui"], risposta: 2, spiegazione: "'Si ride' = si ride in generale meglio la mattina."},
+            {num: 50, tipo: 'scelta', domanda: "Completa: '___ gioca a calcio ogni domenica'", opzioni: ["Io", "Tu", "Si", "Loro"], risposta: 2, spiegazione: "'Si gioca' = si gioca in generale ogni domenica."},
+            {num: 51, tipo: 'scelta', domanda: "Completa: '___ va al mare d'estate'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "'Si va' = si va in generale al mare d'estate."},
+            {num: 52, tipo: 'scelta', domanda: "Completa: '___ torna tardi il venerdì sera'", opzioni: ["Io", "Tu", "Si", "Loro"], risposta: 2, spiegazione: "'Si torna' = si torna in generale tardi il venerdì."},
+            {num: 53, tipo: 'scelta', domanda: "Completa: '___ sente spesso questa canzone'", opzioni: ["Io", "Tu", "Si", "Lui"], risposta: 2, spiegazione: "'Si sente' = questa canzone si sente spesso."},
+            {num: 54, tipo: 'scelta', domanda: "Completa: '___ sa che è difficile'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "'Si sa' = si sa in generale, tutti sanno."},
+            {num: 55, tipo: 'scelta', domanda: "Completa: '___ vede poco al buio'", opzioni: ["Io", "Tu", "Si", "Loro"], risposta: 2, spiegazione: "'Si vede' = al buio si vede poco (in generale)."},
+            {num: 56, tipo: 'scelta', domanda: "Completa: '___ entra dalla porta principale'", opzioni: ["Io", "Tu", "Si", "Lui"], risposta: 2, spiegazione: "'Si entra' = si entra in generale dalla porta principale."},
+            {num: 57, tipo: 'scelta', domanda: "Completa: '___ esce di casa presto'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "'Si esce' = si esce in generale presto di casa."},
+            {num: 58, tipo: 'scelta', domanda: "Completa: '___ rimane a casa il weekend'", opzioni: ["Io", "Tu", "Si", "Loro"], risposta: 2, spiegazione: "'Si rimane' = si rimane in generale a casa il weekend."},
+            {num: 59, tipo: 'scelta', domanda: "Completa: '___ diventa difficile con il caldo'", opzioni: ["Io", "Tu", "Si", "Lui"], risposta: 2, spiegazione: "'Si diventa' = con il caldo si diventa difficile (in generale)."},
+            {num: 60, tipo: 'scelta', domanda: "Completa: '___ comincia presto la giornata'", opzioni: ["Io", "Tu", "Si", "Noi"], risposta: 2, spiegazione: "'Si comincia' = si comincia in generale presto."}
+        ];
+
+        let score = 0;
+        let answered = new Set();
+
+        function renderExercises() {
+            const container = document.getElementById('exercises-container');
+            container.innerHTML = '';
+
+            exercises.forEach(ex => {
+                const div = document.createElement('div');
+                div.className = 'exercise-container';
+                div.innerHTML = `
+                    <div class="exercise-text"><span class="exercise-number">${ex.num}</span>${ex.domanda}</div>
+                    <div class="options" id="options-${ex.num}">
+                        ${ex.opzioni.map((opt, idx) => `
+                            <button class="option-btn" onclick="checkAnswer(${ex.num}, ${idx}, ${ex.risposta})">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="feedback-${ex.num}"></div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function checkAnswer(exNum, selected, correct) {
+            if (answered.has(exNum)) return;
+
+            const buttons = document.querySelectorAll(`#options-${exNum} .option-btn`);
+            const feedback = document.getElementById(`feedback-${exNum}`);
+            const exercise = exercises.find(e => e.num === exNum);
+
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === correct) {
+                    btn.classList.add('correct');
+                } else if (idx === selected && idx !== correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            if (selected === correct) {
+                score++;
+                feedback.className = 'feedback correct show';
+                feedback.textContent = '✓ Corretto! ' + exercise.spiegazione;
+            } else {
+                feedback.className = 'feedback wrong show';
+                feedback.textContent = '✗ Sbagliato. ' + exercise.spiegazione;
+            }
+
+            answered.add(exNum);
+            updateScore();
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            const progress = (answered.size / 60) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        renderExercises();
+    </script>
+</body>
+</html>

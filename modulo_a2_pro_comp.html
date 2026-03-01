@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronomi Diretti e Comparativi - Accademia delle Lingue</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #276749;
+            --bg-color: #f5f5f0;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #5a6c7d;
+            --border: #d4d4c8;
+            --accent: #e74c3c;
+            --success: #27ae60;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--bg-color);
+            color: var(--text);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #276749 0%, #1e5c3e 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin: 1rem;
+            padding: 0.8rem 1.2rem;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .section h3 {
+            color: var(--text);
+            margin: 1.5rem 0 0.8rem 0;
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .language-card {
+            background: var(--bg-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .language-name {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .flag {
+            font-size: 1.3rem;
+        }
+
+        .theory-content {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .theory-content ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .theory-content li {
+            margin-bottom: 0.3rem;
+        }
+
+        .example-box {
+            background: white;
+            border-left: 3px solid var(--accent);
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .exercise-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .exercise-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-text {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .option-btn {
+            padding: 0.8rem 1rem;
+            background: var(--bg-color);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: #e8f5e9;
+        }
+
+        .option-btn.correct {
+            background: #d4edda;
+            border-color: var(--success);
+            color: #155724;
+        }
+
+        .option-btn.wrong {
+            background: #f8d7da;
+            border-color: var(--accent);
+            color: #721c24;
+        }
+
+        .feedback {
+            margin-top: 0.5rem;
+            padding: 0.8rem;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .feedback.wrong {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .fill-blank {
+            border-bottom: 2px solid var(--primary);
+            padding: 0 0.5rem;
+            min-width: 80px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .input-answer {
+            padding: 0.5rem;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 200px;
+        }
+
+        .check-btn {
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+
+        .check-btn:hover {
+            background: #1e5c3e;
+        }
+
+        .progress-bar {
+            background: var(--border);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: var(--primary);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 1.5rem; }
+            .section h2 { font-size: 1.3rem; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <h1>📚 Pronomi Diretti e Comparativi</h1>
+        <p>Teoria multilingue e esercizi interattivi</p>
+    </header>
+
+    <a href="index.html" class="back-btn">← Torna alla Dashboard</a>
+
+    <div class="container">
+
+        <!-- SEZIONE TEORIA -->
+        <div class="section">
+            <h2>🌍 Teoria in 17 Lingue</h2>
+
+            <!-- RUSSO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇷🇺</span> Русский (Russo)</div>
+                <div class="theory-content">
+                    <strong>Прямые местоимения (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>меня (mi) - меня видят</li>
+                        <li>тебя (ti) - тебя любят</li>
+                        <li>его/её (lo/la) - его/её знают</li>
+                        <li>нас (ci) - нас приглашают</li>
+                        <li>вас (vi) - вас ждут</li>
+                        <li>их (li/le) - их понимают</li>
+                    </ul>
+                    <strong>Степени сравнения (Comparativi):</strong>
+                    <ul>
+                        <li>Превосходная степень: самый + прилагательное (il più)</li>
+                        <li>Сравнительная степень: больше чем (più di), меньше чем (meno di)</li>
+                        <li>Равная степень: такой же как (tanto quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: Он <strong>меня</strong> знает (Lui mi conosce). Она <strong>красивее</strong> меня (Lei è più bella di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- UCRAINO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇺🇦</span> Українська (Ucraino)</div>
+                <div class="theory-content">
+                    <strong>Прямі займенники (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>мене (mi) - вони бачать мене</li>
+                        <li>тебе (ti) - я люблю тебе</li>
+                        <li>його/її (lo/la) - ми знаємо його/її</li>
+                        <li>нас (ci) - ви запрошуєте нас</li>
+                        <li>вас (vi) - вони чекають вас</li>
+                        <li>їх (li/le) - я розумію їх</li>
+                    </ul>
+                    <strong>Ступені порівняння (Comparativi):</strong>
+                    <ul>
+                        <li>Перевершення: най- + прикметник (il più)</li>
+                        <li>Більше: більше ніж (più di)</li>
+                        <li>Менше: менше ніж (meno di)</li>
+                        <li>Рівність: такий самий як (tanto quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: Він бачить <strong>мене</strong> (Lui mi vede). Вона <strong>вища</strong> за мене (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPAGNOLO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇪🇸</span> Español (Spagnolo)</div>
+                <div class="theory-content">
+                    <strong>Pronombres Directos (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>me (mi) - me ven, me quieren</li>
+                        <li>te (ti) - te llaman, te aman</li>
+                        <li>lo/la (lo/la) - lo/la conocen, lo/la invitan</li>
+                        <li>nos (ci) - nos esperan, nos ayudan</li>
+                        <li>os (vi) - os entienden, os buscan</li>
+                        <li>los/las (li/le) - los/las encuentran</li>
+                    </ul>
+                    <strong>Grados de Comparación (Comparativi):</strong>
+                    <ul>
+                        <li>Superlativo: el/la más + aggettivo (il più)</li>
+                        <li>Comparativo mayoría: más... que (più... di)</li>
+                        <li>Comparativo minoría: menos... que (meno... di)</li>
+                        <li>Igualdad: tan... como (tanto... quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: Ellos <strong>me</strong> ven (Loro mi vedono). Ella es <strong>más alta</strong> que yo (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- FRANCESE -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇫🇷</span> Français (Francese)</div>
+                <div class="theory-content">
+                    <strong>Pronoms Directs (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>me (mi) - ils me voient, ils m'aiment</li>
+                        <li>te (ti) - je te connais, je t'aime</li>
+                        <li>le/la (lo/la) - nous le/la comprenons</li>
+                        <li>nous (ci) - vous nous invitez</li>
+                        <li>vous (vi) - ils vous attendent</li>
+                        <li>les (li/le) - je les comprends</li>
+                    </ul>
+                    <strong>Degrés de Comparaison (Comparativi):</strong>
+                    <ul>
+                        <li>Superlatif: le/la plus + adjectif (il più)</li>
+                        <li>Comparatif majorité: plus... que (più... di)</li>
+                        <li>Comparatif minorité: moins... que (meno... di)</li>
+                        <li>Égalité: aussi... que (tanto... quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: Ils <strong>me</strong> voient (Loro mi vedono). Elle est <strong>plus grande</strong> que moi (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- INGLESE -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇬🇧</span> English (Inglese)</div>
+                <div class="theory-content">
+                    <strong>Direct Object Pronouns (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>me (mi) - they see me, they love me</li>
+                        <li>you (ti) - I know you, I invite you</li>
+                        <li>him/her (lo/la) - we understand him/her</li>
+                        <li>us (ci) - you wait for us</li>
+                        <li>you (vi) - they help you</li>
+                        <li>them (li/le) - I find them</li>
+                    </ul>
+                    <strong>Degrees of Comparison (Comparativi):</strong>
+                    <ul>
+                        <li>Superlative: the most + adjective (il più)</li>
+                        <li>Comparative majority: more... than (più... di)</li>
+                        <li>Comparative minority: less... than (meno... di)</li>
+                        <li>Equality: as... as (tanto... quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: They see <strong>me</strong> (Loro mi vedono). She is <strong>taller than</strong> me (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- TWI -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇬🇭</span> Twi (Akan)</div>
+                <div class="theory-content">
+                    <strong>Nnipa Din a Wɔfa Nkɔmmɔbea Mu (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>me (mi) - wɔhu me, wɔdɔ me</li>
+                        <li>wo (ti) - mehu wo, medɔ wo</li>
+                        <li>no (lo/la) - yɛhu no, yɛdɔ no</li>
+                        <li>yɛn (ci) - wɔhu yɛn, wɔdɔ yɛn</li>
+                        <li>mo (vi) - mehu mo, medɔ mo</li>
+                        <li>wɔn (li/le) - yɛhu wɔn</li>
+                    </ul>
+                    <strong>Nsɛm a Wɔde Si Nsɛnsɛnne (Comparativi):</strong>
+                    <ul>
+                        <li>Kɛse paa: ɔkɛse paa (il più)</li>
+                        <li>Kɛse: kɛse sen (più di)</li>
+                        <li>Ketewa: ketewa sen (meno di)</li>
+                        <li>Pɛ: pɛ (tanto quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: Wɔhu <strong>me</strong> (Loro mi vedono). Ɔyɛ <strong>tenten</strong> sen me (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- BAMBARA -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇲🇱</span> Bambara</div>
+                <div class="theory-content">
+                    <strong>Pronoms Objets Directs (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>ne (mi) - u bɛ ne ye, u bɛ ne kanu</li>
+                        <li>i (ti) - n bɛ i ye, n bɛ i kanu</li>
+                        <li>a (lo/la) - an bɛ a ye, an bɛ a kanu</li>
+                        <li>an (ci) - aw bɛ an ye, u bɛ an kanu</li>
+                        <li>aw (vi) - n bɛ aw ye, u bɛ aw ye</li>
+                        <li>u (li/le) - n bɛ u ye, an bɛ u ye</li>
+                    </ul>
+                    <strong>Kɔrɔbɔyɔrɔ (Comparativi):</strong>
+                    <ul>
+                        <li>Ka tɛmɛn: ka tɛmɛn (il più)</li>
+                        <li>Ka caya: ka caya (più di)</li>
+                        <li>Ka dɔgɔya: ka dɔgɔya (meno di)</li>
+                        <li>Ka bɛn: ka bɛn (tanto quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: U bɛ <strong>ne</strong> ye (Loro mi vedono). A bɛ <strong>ka caya</strong> ne ye (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- WOLOF -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇸🇳</span> Wolof</div>
+                <div class="theory-content">
+                    <strong>Pronoms Objets Directs (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>ma (mi) - ñu gis ma, ñu bëgg ma</li>
+                        <li>la (ti) - danga gis la, danga bëgg la</li>
+                        <li>ko (lo/la) - ñu gis ko, ñu bëgg ko</li>
+                        <li>nu (ci) - ñu gis nu, ñu bëgg nu</li>
+                        <li>leen (vi) - ñu gis leen, ñu bëgg leen</li>
+                        <li>ñu (li/le) - ñu gis ñu, ñu bëgg ñu</li>
+                    </ul>
+                    <strong>Melokaan (Comparativi):</strong>
+                    <ul>
+                        <li>Lu ëpp: lu ëpp (il più)</li>
+                        <li>Ëpp: ëpp ci (più di)</li>
+                        <li>Tuuti: tuuti ci (meno di)</li>
+                        <li>Ni mel: ni mel (tanto quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: Ñu gis <strong>ma</strong> (Loro mi vedono). Dafa <strong>ëpp</strong> yaatu ci man (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- HAUSSA -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇳🇬</span> Hausa</div>
+                <div class="theory-content">
+                    <strong>Direct Object Pronouns (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>ni (mi) - sun gani, suna son ni</li>
+                        <li>ka/ki (ti) - na gan ka/ki, ina son ka/ki</li>
+                        <li>shi/ta (lo/la) - muna gan shi/ta, muna son shi/ta</li>
+                        <li>mu (ci) - kuna gan mu, suna son mu</li>
+                        <li>ku (vi) - na gan ku, suna son ku</li>
+                        <li>su (li/le) - muna gan su, ina gan su</li>
+                    </ul>
+                    <strong>Kwatanta (Comparativi):</strong>
+                    <ul>
+                        <li>Mafi: mafi (il più)</li>
+                        <li>Fiye: fiye da (più di)</li>
+                        <li>Kasa: kasa da (meno di)</li>
+                        <li>Daidai: daidai da (tanto quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: Sun gani <strong>ni</strong> (Loro mi vedono). Ta <strong>fi</strong> ni tsayi (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARABO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇸🇦</span> العربية (Arabo)</div>
+                <div class="theory-content" dir="rtl">
+                    <strong>الضمائر المفعول به المباشر (Pronomi Diretti):</strong>
+                    <ul style="margin-right: 1.5rem; margin-left: 0;">
+                        <li>ـنِي (mi) - يراني، يحبني</li>
+                        <li>ـكَ/ـكِ (ti) - أراكَ/أراكِ، أحبكَ/أحبكِ</li>
+                        <li>ـهُ/ـها (lo/la) - نراهُ/نراها، نحبهُ/نحبها</li>
+                        <li>ـنا (ci) - ترانا، يحبوننا</li>
+                        <li>ـكُمْ/ـكُنَّ (vi) - أراكم/أراكنَّ</li>
+                        <li>ـهُمْ/ـهُنَّ (li/le) - نراهم/نراهنَّ</li>
+                    </ul>
+                    <strong>درجات المقارنة (Comparativi):</strong>
+                    <ul style="margin-right: 1.5rem; margin-left: 0;">
+                        <li>الأعلى: الأفضل (il più)</li>
+                        <li>أكثر: أكثر من (più di)</li>
+                        <li>أقل: أقل من (meno di)</li>
+                        <li>مثل: مثل (tanto quanto)</li>
+                    </ul>
+                    <div class="example-box" style="text-align: right;">
+                        Esempi: يراني <strong>ـنِي</strong> (Loro mi vedono). هي <strong>أطول</strong> مني (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- ALBANESE -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇦🇱</span> Shqip (Albanese)</div>
+                <div class="theory-content">
+                    <strong>Pronometë Objektit të Drejtë (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>më (mi) - ata më shohin, ata më duan</li>
+                        <li>të (ti) - unë të shoh, unë të dua</li>
+                        <li>e (lo/la) - ne e shohim, ne e duam</li>
+                        <li>na (ci) - ju na shihni, ata na duan</li>
+                        <li>ju (vi) - unë ju shoh, ata ju duan</li>
+                        <li>i (li/le) - ne i shohim, unë i dua</li>
+                    </ul>
+                    <strong>Shkallët e Krahasimit (Comparativi):</strong>
+                    <ul>
+                        <li>Shkalla superlative: më + adjectiv (il più)</li>
+                        <li>Më shumë: më... se (più... di)</li>
+                        <li>Më pak: më pak... se (meno... di)</li>
+                        <li>Barazi: aq... sa (tanto... quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: Ata më <strong>shohin</strong> (Loro mi vedono). Ajo është <strong>më e gjatë</strong> se unë (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- TURCO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇹🇷</span> Türkçe (Turco)</div>
+                <div class="theory-content">
+                    <strong>Doğrudan Nesne Zamirleri (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>beni (mi) - onlar beni görüyor, onlar beni seviyor</li>
+                        <li>seni (ti) - ben seni görüyorum, ben seni seviyorum</li>
+                        <li>onu (lo/la) - biz onu görüyoruz, biz onu seviyoruz</li>
+                        <li>bizi (ci) - siz bizi görüyorsunuz, onlar bizi seviyor</li>
+                        <li>sizi (vi) - ben sizi görüyorum, onlar sizi seviyor</li>
+                        <li>onları (li/le) - biz onları görüyoruz, ben onları seviyorum</li>
+                    </ul>
+                    <strong>Karşılaştırma Dereceleri (Comparativi):</strong>
+                    <ul>
+                        <li>Üstünlük: en + sıfat (il più)</li>
+                        <li>Daha fazla: daha... -den/-dan (più... di)</li>
+                        <li>Daha az: daha az... -den/-dan (meno... di)</li>
+                        <li>Eşitlik: kadar... kadar (tanto... quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: Onlar <strong>beni</strong> görüyor (Loro mi vedono). O benden <strong>daha uzun</strong> (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- URDU -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇵🇰</span> اردو (Urdu)</div>
+                <div class="theory-content" dir="rtl">
+                    <strong>مفعولِ بلاحلہ ضمائر (Pronomi Diretti):</strong>
+                    <ul style="margin-right: 1.5rem; margin-left: 0;">
+                        <li>مجھے (mi) - وہ مجھے دیکھتے ہیں، وہ مجھے چاہتے ہیں</li>
+                        <li>تمہیں/آپ کو (ti) - میں تمہیں دیکھتا ہوں، میں تمہیں چاہتا ہوں</li>
+                        <li>اسے/انہیں (lo/la) - ہم اسے دیکھتے ہیں، ہم اسے چاہتے ہیں</li>
+                        <li>ہمیں (ci) - آپ ہمیں دیکھتے ہیں، وہ ہمیں چاہتے ہیں</li>
+                        <li>تمہیں/آپ کو (vi) - میں تمہیں دیکھتا ہوں، وہ تمہیں چاہتے ہیں</li>
+                        <li>انہیں (li/le) - ہم انہیں دیکھتے ہیں، میں انہیں چاہتا ہوں</li>
+                    </ul>
+                    <strong>درجاتِ تقابلی (Comparativi):</strong>
+                    <ul style="margin-right: 1.5rem; margin-left: 0;">
+                        <li>اعلیٰ ترین: سب سے زیادہ (il più)</li>
+                        <li>زیادہ: زیادہ سے (più di)</li>
+                        <li>کم: کم سے (meno di)</li>
+                        <li>برابر: اتنا ہی جتنا (tanto quanto)</li>
+                    </ul>
+                    <div class="example-box" style="text-align: right;">
+                        Esempi: وہ <strong>مجھے</strong> دیکھتے ہیں (Loro mi vedono). وہ <strong>زیادہ لمبی</strong> ہے مجھ سے (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANJABI -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇮🇳</span> ਪੰਜਾਬੀ (Panjabi)</div>
+                <div class="theory-content">
+                    <strong>ਸਿੱਧੇ ਵਸਤੂ ਸਰਵਨਾਮ (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>ਮੈਨੂੰ (mi) - ਉਹ ਮੈਨੂੰ ਵੇਖਦੇ ਹਨ، ਉਹ ਮੈਨੂੰ ਪਿਆਰ ਕਰਦੇ ਹਨ</li>
+                        <li>ਤੈਨੂੰ (ti) - ਮੈਂ ਤੈਨੂੰ ਵੇਖਦਾ ਹਾਂ، ਮੈਂ ਤੈਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ</li>
+                        <li>ਉਸਨੂੰ (lo/la) - ਅਸੀਂ ਉਸਨੂੰ ਵੇਖਦੇ ਹਾਂ، ਅਸੀਂ ਉਸਨੂੰ ਪਿਆਰ ਕਰਦੇ ਹਾਂ</li>
+                        <li>ਸਾਨੂੰ (ci) - ਤੁਸੀਂ ਸਾਨੂੰ ਵੇਖਦੇ ਹੋ، ਉਹ ਸਾਨੂੰ ਪਿਆਰ ਕਰਦੇ ਹਨ</li>
+                        <li>ਤੁਹਾਨੂੰ (vi) - ਮੈਂ ਤੁਹਾਨੂੰ ਵੇਖਦਾ ਹਾਂ، ਉਹ ਤੁਹਾਨੂੰ ਪਿਆਰ ਕਰਦੇ ਹਨ</li>
+                        <li>ਉਹਨਾਂ ਨੂੰ (li/le) - ਅਸੀਂ ਉਹਨਾਂ ਨੂੰ ਵੇਖਦੇ ਹਾਂ، ਮੈਂ ਉਹਨਾਂ ਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ</li>
+                    </ul>
+                    <strong>ਤੁਲਨਾ ਦੇ ਢੰਗ (Comparativi):</strong>
+                    <ul>
+                        <li>ਸਭ ਤੋਂ ਵੱਧ: ਸਭ ਤੋਂ ਵੱਧ (il più)</li>
+                        <li>ਵੱਧ: ਵੱਧ ਨਾਲੋਂ (più di)</li>
+                        <li>ਘੱਟ: ਘੱਟ ਨਾਲੋਂ (meno di)</li>
+                        <li>ਬਰਾਬਰ: ਉਨੇ ਹੀ ਜਿਨੇ (tanto quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: ਉਹ <strong>ਮੈਨੂੰ</strong> ਵੇਖਦੇ ਹਨ (Loro mi vedono). ਉਹ <strong>ਮੇਰੇ ਨਾਲੋਂ ਲੰਬੀ</strong> ਹੈ (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- HINDI -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇮🇳</span> हिन्दी (Hindi)</div>
+                <div class="theory-content">
+                    <strong>सीधे कर्म वाचक सर्वनाम (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>मुझे (mi) - वे मुझे देखते हैं، वे मुझे प्यार करते हैं</li>
+                        <li>तुम्हें/आपको (ti) - मैं तुम्हें देखता हूँ، मैं तुम्हें प्यार करता हूँ</li>
+                        <li>उसे/उन्हें (lo/la) - हम उसे देखते हैं، हम उसे प्यार करते हैं</li>
+                        <li>हमें (ci) - आप हमें देखते हैं، वे हमें प्यार करते हैं</li>
+                        <li>तुम्हें/आपको (vi) - मैं तुम्हें देखता हूँ، वे तुम्हें प्यार करते हैं</li>
+                        <li>उन्हें (li/le) - हम उन्हें देखते हैं، मैं उन्हें प्यार करता हूँ</li>
+                    </ul>
+                    <strong>तुलना के स्तर (Comparativi):</strong>
+                    <ul>
+                        <li>सर्वोच्च: सबसे अधिक (il più)</li>
+                        <li>अधिक: अधिक से (più di)</li>
+                        <li>कम: कम से (meno di)</li>
+                        <li>बराबर: उतना ही जितना (tanto quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: वे <strong>मुझे</strong> देखते हैं (Loro mi vedono). वह <strong>मुझसे लंबी</strong> है (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- CINESE -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇨🇳</span> 中文 (Cinese)</div>
+                <div class="theory-content">
+                    <strong>直接宾语代词 (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>我 (mi) - 他们看见我، 他们爱我</li>
+                        <li>你/您 (ti) - 我看见你، 我爱你</li>
+                        <li>他/她 (lo/la) - 我们看见他/她، 我们爱他/她</li>
+                        <li>我们 (ci) - 你们看见我们، 他们爱我们</li>
+                        <li>你们/您 (vi) - 我看见你们، 他们爱你们</li>
+                        <li>他们/她们 (li/le) - 我们看见他们، 我爱他们</li>
+                    </ul>
+                    <strong>比较级 (Comparativi):</strong>
+                    <ul>
+                        <li>最高级: 最 + 形容词 (il più)</li>
+                        <li>更多: 比...更 (più... di)</li>
+                        <li>更少: 不如... (meno... di)</li>
+                        <li>相等: 和...一样 (tanto... quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: 他们看见<strong>我</strong> (Loro mi vedono)۔她<strong>比我高</strong> (Lei è più alta di me)۔
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILIPPINO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇵🇭</span> Filipino/Tagalog</div>
+                <div class="theory-content">
+                    <strong>Mga Panghalip sa Direktang Objekto (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>ako (mi) - nakikita nila ako, mahal nila ako</li>
+                        <li>ka/ikaw (ti) - nakikita kita, mahal kita</li>
+                        <li>siya (lo/la) - nakikita namin siya, mahal namin siya</li>
+                        <li>tayo/kami (ci) - nakikita ninyo kami, mahal nila tayo</li>
+                        <li>kayo (vi) - nakikita ko kayo, mahal nila kayo</li>
+                        <li>sila (li/le) - nakikita namin sila, mahal ko sila</li>
+                    </ul>
+                    <strong>Mga Antas ng Paghahambing (Comparativi):</strong>
+                    <ul>
+                        <li>Superlatibo: pinaka- + pang-uri (il più)</li>
+                        <li>Mas marami: mas... kaysa sa (più... di)</li>
+                        <li>Mas kaunti: mas kaunting... kaysa sa (meno... di)</li>
+                        <li>Pantay: kasing... ng (tanto... quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: Nakikita nila <strong>ako</strong> (Loro mi vedono). Siya ay <strong>mas matangkad</strong> kaysa sa akin (Lei è più alta di me).
+                    </div>
+                </div>
+            </div>
+
+            <!-- COREANO -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇰🇷</span> 한국어 (Coreano)</div>
+                <div class="theory-content">
+                    <strong>직접 목적어 대명사 (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>나를/저를 (mi) - 그들은 나를/저를 봐요, 그들은 나를/저를 사랑해요</li>
+                        <li>너를/당신을 (ti) - 나는 너를/당신을 봐요, 나는 너를/당신을 사랑해요</li>
+                        <li>그를/그녀를 (lo/la) - 우리는 그를/그녀를 봐요, 우리는 그를/그녀를 사랑해요</li>
+                        <li>우리를/저희를 (ci) - 당신들은 우리를/저희를 봐요, 그들은 우리를/저희를 사랑해요</li>
+                        <li>너희를/당신들을 (vi) - 나는 너희를/당신들을 봐요, 그들은 너희를/당신들을 사랑해요</li>
+                        <li>그들을 (li/le) - 우리는 그들을 봐요, 나는 그들을 사랑해요</li>
+                    </ul>
+                    <strong>비교급 (Comparativi):</strong>
+                    <ul>
+                        <li>최상급: 가장 + 형용사 (il più)</li>
+                        <li>더 많음: 더... 보다 (più... di)</li>
+                        <li>더 적음: 덜... 보다 (meno... di)</li>
+                        <li>동등: 만큼... (tanto... quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: 그들은 <strong>나를</strong> 봐요 (Loro mi vedono)।그녀는 <strong>나보다 더 키가 커요</strong> (Lei è più alta di me)।
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE ESERCIZI -->
+        <div class="section">
+            <h2>📝 60 Esercizi Interattivi</h2>
+            <div class="score-display">Punteggio: <span id="score">0</span>/60</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+
+            <div id="exercises-container">
+                <!-- ESERCIZI GENERATI VIA JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        const exercises = [
+            {num: 1, tipo: 'scelta', domanda: "Completa: 'Marco ___ vede' (lui vede me)", opzioni: ['mi', 'ti', 'lo', 'ci'], risposta: 0, spiegazione: "'Mi' è il pronome diretto per la prima persona singolare."},
+            {num: 2, tipo: 'scelta', domanda: "Completa: 'Io ___ conosco' (io conosco te)", opzioni: ['mi', 'ti', 'lo', 'vi'], risposta: 1, spiegazione: "'Ti' è il pronome diretto per la seconda persona singolare."},
+            {num: 3, tipo: 'scelta', domanda: "Completa: 'Noi ___ vediamo' (noi vediamo lui)", opzioni: ['la', 'lo', 'li', 'le'], risposta: 1, spiegazione: "'Lo' è il pronome diretto maschile singolare."},
+            {num: 4, tipo: 'scelta', domanda: "Completa: 'Voi ___ ascoltate' (voi ascoltate lei)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 1, spiegazione: "'La' è il pronome diretto femminile singolare."},
+            {num: 5, tipo: 'scelta', domanda: "Completa: 'Loro ___ invitano' (loro invitano noi)", opzioni: ['mi', 'ti', 'ci', 'vi'], risposta: 2, spiegazione: "'Ci' è il pronome diretto per la prima persona plurale."},
+            {num: 6, tipo: 'scelta', domanda: "Completa: 'Io ___ capisco' (io capisco voi)", opzioni: ['ci', 'vi', 'li', 'le'], risposta: 1, spiegazione: "'Vi' è il pronome diretto per la seconda persona plurale."},
+            {num: 7, tipo: 'scelta', domanda: "Completa: 'Noi ___ vediamo' (noi vediamo loro maschi)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 2, spiegazione: "'Li' è il pronome diretto maschile plurale."},
+            {num: 8, tipo: 'scelta', domanda: "Completa: 'Io ___ incontro' (io incontro loro femmine)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 3, spiegazione: "'Le' è il pronome diretto femminile plurale."},
+            {num: 9, tipo: 'scelta', domanda: "Completa: '___ ami?' (ami me?)", opzioni: ['Mi', 'Ti', 'Lo', 'Ci'], risposta: 0, spiegazione: "'Mi' è il pronome oggetto diretto per 'me'."},
+            {num: 10, tipo: 'scelta', domanda: "Completa: '___ vedo domani' (vedo te domani)", opzioni: ['Mi', 'Ti', 'Lo', 'Vi'], risposta: 1, spiegazione: "'Ti' si riferisce a 'te'."},
+            {num: 11, tipo: 'scelta', domanda: "Completa: 'Maria ___ ama' (Maria ama lui)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 0, spiegazione: "'Lo' si riferisce a 'lui' (maschile)."},
+            {num: 12, tipo: 'scelta', domanda: "Completa: 'Paolo ___ cerca' (Paolo cerca lei)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 1, spiegazione: "'La' si riferisce a 'lei' (femminile)."},
+            {num: 13, tipo: 'scelta', domanda: "Completa: '___ chiamano sempre' (chiamano sempre noi)", opzioni: ['Mi', 'Ti', 'Ci', 'Vi'], risposta: 2, spiegazione: "'Ci' si riferisce a 'noi'."},
+            {num: 14, tipo: 'scelta', domanda: "Completa: 'Io ___ saluto' (io saluto voi tutti)", opzioni: ['ci', 'vi', 'li', 'le'], risposta: 1, spiegazione: "'Vi' si riferisce a 'voi' (plurale)."},
+            {num: 15, tipo: 'scelta', domanda: "Completa: '___ vedo al cinema' (vedo loro maschi al cinema)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 2, spiegazione: "'Li' si riferisce a 'loro' maschile."},
+            {num: 16, tipo: 'scelta', domanda: "Completa: '___ ascolto attentamente' (ascolto loro femmine attentamente)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 3, spiegazione: "'Le' si riferisce a 'loro' femminile."},
+            {num: 17, tipo: 'scelta', domanda: "Trasforma: 'Vedo Marco' → '___ vedo'", opzioni: ['Lo', 'La', 'Li', 'Le'], risposta: 0, spiegazione: "Marco è maschile singolare, quindi 'lo'."},
+            {num: 18, tipo: 'scelta', domanda: "Trasforma: 'Conosco Maria' → '___ conosco'", opzioni: ['Lo', 'La', 'Li', 'Le'], risposta: 1, spiegazione: "Maria è femminile singolare, quindi 'la'."},
+            {num: 19, tipo: 'scelta', domanda: "Trasforma: 'Invito i ragazzi' → '___ invito'", opzioni: ['Lo', 'La', 'Li', 'Le'], risposta: 2, spiegazione: "'I ragazzi' è maschile plurale, quindi 'li'."},
+            {num: 20, tipo: 'scelta', domanda: "Trasforma: 'Aspetto le amiche' → '___ aspetto'", opzioni: ['Lo', 'La', 'Li', 'Le'], risposta: 3, spiegazione: "'Le amiche' è femminile plurale, quindi 'le'."},
+            {num: 21, tipo: 'scelta', domanda: "Completa: 'Non ___ capisco' (non capisco te)", opzioni: ['mi', 'ti', 'lo', 'ci'], risposta: 1, spiegazione: "'Ti' si riferisce a 'te'."},
+            {num: 22, tipo: 'scelta', domanda: "Completa: 'Non ___ vedo' (non vedo lui)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 0, spiegazione: "'Lo' si riferisce a 'lui'."},
+            {num: 23, tipo: 'scelta', domanda: "Completa: 'Anche io ___ penso' (penso così anch'io)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 0, spiegazione: "'Lo' è usato anche per sostituire concetti/idee (maschile)."},
+            {num: 24, tipo: 'scelta', domanda: "Completa: '___ so' (lo so)", opzioni: ['Lo', 'La', 'Li', 'Le'], risposta: 0, spiegazione: "'Lo' si usa con verbi come sapere, pensare, credere."},
+            {num: 25, tipo: 'scelta', domanda: "Completa: '___ vedo bene' (vi vedo bene)", opzioni: ['Mi', 'Ti', 'Ci', 'Vi'], risposta: 3, spiegazione: "'Vi' si riferisce a 'voi'."},
+            {num: 26, tipo: 'scelta', domanda: "Completa: '___ sento spesso' (vi sento spesso)", opzioni: ['Mi', 'Ti', 'Ci', 'Vi'], risposta: 3, spiegazione: "'Vi' è il pronome per 'voi'."},
+            {num: 27, tipo: 'scelta', domanda: "Completa: '___ chiamo domani' (ti chiamo domani)", opzioni: ['Mi', 'Ti', 'Lo', 'Ci'], risposta: 1, spiegazione: "'Ti' si riferisce a 'te'."},
+            {num: 28, tipo: 'scelta', domanda: "Completa: '___ amo tanto' (ti amo tanto)", opzioni: ['Mi', 'Ti', 'Lo', 'La'], risposta: 1, spiegazione: "'Ti' è il pronome oggetto diretto per 'te'."},
+            {num: 29, tipo: 'scelta', domanda: "Completa: '___ odiano' (mi odiano)", opzioni: ['Mi', 'Ti', 'Lo', 'Ci'], risposta: 0, spiegazione: "'Mi' si riferisce a 'me'."},
+            {num: 30, tipo: 'scelta', domanda: "Completa: '___ rispettano' (ci rispettano)", opzioni: ['Mi', 'Ti', 'Ci', 'Vi'], risposta: 2, spiegazione: "'Ci' si riferisce a 'noi'."},
+            {num: 31, tipo: 'scelta', domanda: "Completa: 'Maria è ___ alta ___ Paolo'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "Per la maggioranza si usa 'più... di'."},
+            {num: 32, tipo: 'scelta', domanda: "Completa: 'Questo libro è ___ interessante ___ quell'altro'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più... di' indica maggioranza."},
+            {num: 33, tipo: 'scelta', domanda: "Completa: 'Sono ___ felice ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più felice di te' = maggioranza."},
+            {num: 34, tipo: 'scelta', domanda: "Completa: 'Luca è ___ veloce ___ Marco'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "Comparativo di maggioranza con 'più... di'."},
+            {num: 35, tipo: 'scelta', domanda: "Completa: 'Questa casa è ___ grande ___ la nostra'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più grande di' = maggioranza."},
+            {num: 36, tipo: 'scelta', domanda: "Completa: 'Io sono ___ intelligente ___ lui'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "Comparativo di maggioranza."},
+            {num: 37, tipo: 'scelta', domanda: "Completa: 'La pizza è ___ buona ___ la pasta'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più buona di' = maggioranza."},
+            {num: 38, tipo: 'scelta', domanda: "Completa: 'Questo esercizio è ___ difficile ___ quello di ieri'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "Comparativo di maggioranza."},
+            {num: 39, tipo: 'scelta', domanda: "Completa: 'Lei è ___ gentile ___ sua madre'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più gentile di' = maggioranza."},
+            {num: 40, tipo: 'scelta', domanda: "Completa: 'Oggi fa ___ caldo ___ ieri'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più caldo di' = maggioranza."},
+            {num: 41, tipo: 'scelta', domanda: "Completa: 'Io sono ___ alto ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "Per la minoranza si usa 'meno... di'."},
+            {num: 42, tipo: 'scelta', domanda: "Completa: 'Questo film è ___ bello ___ l'altro'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno bello di' = minoranza."},
+            {num: 43, tipo: 'scelta', domanda: "Completa: 'Studio ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno di te' = minoranza."},
+            {num: 44, tipo: 'scelta', domanda: "Completa: 'La mia macchina è ___ veloce ___ la tua'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "Comparativo di minoranza."},
+            {num: 45, tipo: 'scelta', domanda: "Completa: 'Questo problema è ___ complicato ___ quello precedente'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno complicato di' = minoranza."},
+            {num: 46, tipo: 'scelta', domanda: "Completa: 'Mangio ___ ___ mio fratello'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno di' = minoranza."},
+            {num: 47, tipo: 'scelta', domanda: "Completa: 'Questa strada è ___ larga ___ l'autostrada'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "Comparativo di minoranza."},
+            {num: 48, tipo: 'scelta', domanda: "Completa: 'Dormo ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno di te' = minoranza."},
+            {num: 49, tipo: 'scelta', domanda: "Completa: 'Questo esercizio è ___ facile ___ quello di ieri'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno facile di' = minoranza."},
+            {num: 50, tipo: 'scelta', domanda: "Completa: 'Parlo ___ ___ mio professore'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno di' = minoranza."},
+            {num: 51, tipo: 'scelta', domanda: "Completa: 'Sei ___ alto ___ me'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "Per l'uguaglianza si usa 'tanto... quanto'."},
+            {num: 52, tipo: 'scelta', domanda: "Completa: 'Lavoro ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto quanto' = uguaglianza."},
+            {num: 53, tipo: 'scelta', domanda: "Completa: 'Questo libro è ___ interessante ___ quell'altro'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto interessante quanto' = uguaglianza."},
+            {num: 54, tipo: 'scelta', domanda: "Completa: 'Studio ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "Comparativo di uguaglianza."},
+            {num: 55, tipo: 'scelta', domanda: "Completa: 'Siamo ___ felici ___ voi'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto felici quanto' = uguaglianza."},
+            {num: 56, tipo: 'scelta', domanda: "Completa: 'Mangio ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto quanto' = uguaglianza."},
+            {num: 57, tipo: 'scelta', domanda: "Completa: 'Questa casa è ___ bella ___ la vostra'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "Comparativo di uguaglianza."},
+            {num: 58, tipo: 'scelta', domanda: "Completa: 'Corro ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto quanto' = uguaglianza."},
+            {num: 59, tipo: 'scelta', domanda: "Completa: 'Parlo italiano ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto bene quanto te' = uguaglianza."},
+            {num: 60, tipo: 'scelta', domanda: "Completa: 'Sei ___ gentile ___ tua madre'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto gentile quanto' = uguaglianza."},
+        ];
+
+        let score = 0;
+        let answered = new Set();
+
+        function renderExercises() {
+            const container = document.getElementById('exercises-container');
+            container.innerHTML = '';
+
+            exercises.forEach(ex => {
+                const div = document.createElement('div');
+                div.className = 'exercise-container';
+                div.innerHTML = `
+                    <div class="exercise-text"><span class="exercise-number">${ex.num}</span>${ex.domanda}</div>
+                    <div class="options" id="options-${ex.num}">
+                        ${ex.opzioni.map((opt, idx) => `
+                            <button class="option-btn" onclick="checkAnswer(${ex.num}, ${idx}, ${ex.risposta})">${opt}</button>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="feedback-${ex.num}"></div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function checkAnswer(exNum, selected, correct) {
+            if (answered.has(exNum)) return;
+
+            const buttons = document.querySelectorAll(`#options-${exNum} .option-btn`);
+            const feedback = document.getElementById(`feedback-${exNum}`);
+            const exercise = exercises.find(e => e.num === exNum);
+
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === correct) {
+                    btn.classList.add('correct');
+                } else if (idx === selected && idx !== correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            if (selected === correct) {
+                score++;
+                feedback.className = 'feedback correct show';
+                feedback.textContent = '✓ Corretto! ' + exercise.spiegazione;
+            } else {
+                feedback.className = 'feedback wrong show';
+                feedback.textContent = '✗ Sbagliato. ' + exercise.spiegazione;
+            }
+
+            answered.add(exNum);
+            updateScore();
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            const progress = (answered.size / 60) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        renderExercises();
+    </script>
+</body>
+</html>
