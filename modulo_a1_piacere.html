@@ -514,6 +514,14 @@
             margin: 1rem 0;
         }
 
+        .lang-example {
+            background: #f5f5f5;
+            border-left: 3px solid var(--primary);
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            font-style: italic;
+        }
+
         @media (max-width: 768px) {
             .nav-tabs { flex-wrap: wrap; }
             .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
@@ -524,6 +532,7 @@
             .fill-blank { width: 180px; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <header class="header">
@@ -551,7 +560,7 @@
 
         <nav class="nav-tabs">
             <button class="nav-tab active" onclick="showSection('theory', this)">📚 Teoria</button>
-            <button class="nav-tab" onclick="showSection('languages', this)">🌍 Lingue</button>
+            <button class="nav-tab" onclick="showSection('languages', this)">🌍 17 Lingue</button>
             <button class="nav-tab" onclick="showSection('presente', this)">Presente</button>
             <button class="nav-tab" onclick="showSection('passato', this)">Passato</button>
             <button class="nav-tab" onclick="showSection('errori', this)">⚠️ Errori</button>
@@ -612,60 +621,480 @@
             </div>
         </section>
 
-        <!-- SEZIONE LINGUE (simplified - English example) -->
+        <!-- SEZIONE LINGUE - 17 LINGUE COMPLETE -->
         <section id="languages" class="section">
             <div class="card">
-                <div class="card-header lang">🌍 Spiegazioni Multilingue</div>
+                <div class="card-header lang">🌍 Spiegazioni in 17 Lingue</div>
                 <div class="card-body">
-                    <p>Clicca su una lingua per leggere la spiegazione:</p>
+                    <p>Clicca su una lingua per leggere la spiegazione completa con esempi:</p>
 
-                    <!-- English -->
+                    <!-- 1. Русский (Russo) -->
                     <div class="lang-section">
                         <div class="lang-header" onclick="toggleLang(this)">
-                            <span><span class="lang-flag">🇬🇧</span> <strong>English</strong></span>
+                            <span><span class="lang-flag">🇷🇺</span> <strong>Русский (Russo)</strong></span>
                             <span class="toggle-icon">▼</span>
                         </div>
                         <div class="lang-content">
-                            <h4>The Inverted Structure</h4>
-                            <p>Italian <strong>piacere</strong> literally means "to be pleasing to someone."</p>
-                            <p><strong>Key:</strong> The grammatical subject is the THING being liked, not the person!</p>
-                            <p>• "Mi piace la pizza" = Pizza is pleasing to me<br>
-                               • "I like pizza" → "Mi piace la pizza"</p>
-                            <p><strong>Piace</strong> (singular) vs <strong>Piacciono</strong> (plural)</p>
+                            <h4>Понятие "нравиться" (Il concetto di piacere)</h4>
+                            <p>Итальянский глагол <strong>piacere</strong> буквально означает "быть приятным кому-то".</p>
+                            <p><strong>Инвертированная структура:</strong> Грамматический субъект — это ВЕЩЬ, а не человек!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Примеры:</strong><br>
+                                • "Mi piace la pizza" = Пицца нравится мне (Пицца приятна мне)<br>
+                                • "Mi piace" (ед.ч.) = мне нравится [одна вещь]<br>
+                                • "Mi piacciono" (мн.ч.) = мне нравятся [много вещей]
+                            </div>
+                            
+                            <p><strong>Правило числа:</strong> Глагол согласуется с вещью, а не с человеком!</p>
+                            <div class="lang-example">
+                                • Il libro (книга, ед.ч.) → <strong>piace</strong><br>
+                                • I libri (книги, мн.ч.) → <strong>piacciono</strong>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Français -->
+                    <!-- 2. Українська (Ucraino) -->
                     <div class="lang-section">
                         <div class="lang-header" onclick="toggleLang(this)">
-                            <span><span class="lang-flag">🇫🇷</span> <strong>Français</strong></span>
+                            <span><span class="lang-flag">🇺🇦</span> <strong>Українська (Ucraino)</strong></span>
                             <span class="toggle-icon">▼</span>
                         </div>
                         <div class="lang-content">
-                            <h4>Structure Inversée</h4>
-                            <p>Le verbe <strong>piacere</strong> signifie littéralement "être agréable à quelqu'un".</p>
-                            <p>Le sujet grammatical est la CHOSE qui plaît, pas la personne!</p>
-                            <p>• "Mi piace" = Ça plaît à moi<br>
-                               • <strong>Piace</strong> (singulier) vs <strong>Piacciono</strong> (pluriel)</p>
+                            <h4>Поняття "подобатися" (Il concetto di piacere)</h4>
+                            <p>Італійське дієслово <strong>piacere</strong> буквально означає "бути приємним комусь".</p>
+                            <p><strong>Інвертована структура:</strong> Граматичний підмет — це РІЧ, а не людина!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Приклади:</strong><br>
+                                • "Mi piace la pizza" = Піца подобається мені<br>
+                                • "Mi piace" (однина) = мені подобається<br>
+                                • "Mi piacciono" (множина) = мені подобаються
+                            </div>
+                            
+                            <p><strong>Правило числа:</strong> Дієслово узгоджується з річчю!</p>
+                            <div class="lang-example">
+                                • Il gelato (морозиво, однина) → <strong>piace</strong><br>
+                                • I gelati (морозива, множина) → <strong>piacciono</strong>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Español -->
+                    <!-- 3. Español (Spagnolo) -->
                     <div class="lang-section">
                         <div class="lang-header" onclick="toggleLang(this)">
-                            <span><span class="lang-flag">🇪🇸</span> <strong>Español</strong></span>
+                            <span><span class="lang-flag">🇪🇸</span> <strong>Español (Spagnolo)</strong></span>
                             <span class="toggle-icon">▼</span>
                         </div>
                         <div class="lang-content">
-                            <h4>Estructura Invertida</h4>
-                            <p><strong>Piacere</strong> significa literalmente "ser agradable a alguien".</p>
-                            <p>¡El sujeto gramatical es la COSA que agrada, no la persona!</p>
-                            <p>• "Me gusta" → "Mi piace"<br>
-                               • <strong>Piace</strong> (singular) vs <strong>Piacciono</strong> (plural)</p>
+                            <h4>El verbo Piacere (Gustar)</h4>
+                            <p>El verbo italiano <strong>piacere</strong> equivale a "gustar" en español, pero con estructura diferente.</p>
+                            <p><strong>Estructura invertida:</strong> ¡El sujeto gramatical es la COSA, no la persona!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Ejemplos:</strong><br>
+                                • "Mi piace la pizza" = Me gusta la pizza<br>
+                                • "Mi piace" (singular) = me gusta [una cosa]<br>
+                                • "Mi piacciono" (plural) = me gustan [varias cosas]
+                            </div>
+                            
+                            <p><strong>Regla del número:</strong> ¡El verbo concuerda con la cosa!</p>
+                            <div class="lang-example">
+                                • Il gelato (helado, singular) → <strong>piace</strong><br>
+                                • I gelati (helados, plural) → <strong>piacciono</strong>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Add more languages as needed... -->
+                    <!-- 4. Français (Francese) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇫🇷</span> <strong>Français (Francese)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Le verbe Piacere (Plaire)</h4>
+                            <p>Le verbe italien <strong>piacere</strong> signifie littéralement "plaire à quelqu'un".</p>
+                            <p><strong>Structure inversée:</strong> Le sujet grammatical est la CHOSE, pas la personne!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Exemples:</strong><br>
+                                • "Mi piace la pizza" = La pizza me plaît<br>
+                                • "Mi piace" (singulier) = ça me plaît [une chose]<br>
+                                • "Mi piacciono" (pluriel) = ils/elles me plaisent
+                            </div>
+                            
+                            <p><strong>Règle du nombre:</strong> Le verbe s'accorde avec la chose!</p>
+                            <div class="lang-example">
+                                • Il gelato (la glace, singulier) → <strong>piace</strong><br>
+                                • I gelati (les glaces, pluriel) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. English (Inglese) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇬🇧</span> <strong>English (Inglese)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>The Verb Piacere (To Please/To Like)</h4>
+                            <p>The Italian verb <strong>piacere</strong> literally means "to be pleasing to someone".</p>
+                            <p><strong>Inverted Structure:</strong> The grammatical subject is the THING, not the person!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Examples:</strong><br>
+                                • "Mi piace la pizza" = The pizza is pleasing to me (I like pizza)<br>
+                                • "Mi piace" (singular) = It pleases me [one thing]<br>
+                                • "Mi piacciono" (plural) = They please me [multiple things]
+                            </div>
+                            
+                            <p><strong>Number Rule:</strong> The verb agrees with the THING!</p>
+                            <div class="lang-example">
+                                • Il gelato (ice cream, singular) → <strong>piace</strong><br>
+                                • I gelati (ice creams, plural) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Twi (Akan) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇬🇭</span> <strong>Twi (Akan)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Piacere - Sɛnea Wɔka wɔ Twi mu</h4>
+                            <p>Italia kasafua <strong>piacere</strong> kyerɛ sɛ "ɛyɛ obi dɛ anaa ɛsɔ obi ani".</p>
+                            <p><strong>Nhwehwɛmu a wɔasan akyerɛ:</strong> Asɛm a ɛdi kan ne NNEEMA, ɛnnyɛ onipa!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Nhwɛsoɔ:</strong><br>
+                                • "Mi piace la pizza" = Pizza no sɔ me ani<br>
+                                • "Mi piace" (biako) = Ɛsɔ me ani<br>
+                                • "Mi piacciono" (pii) = Wɔsɔ me ani
+                            </div>
+                            
+                            <p><strong>Nɔma ho mmara:</strong> Asɛm no bata nneema no ho!</p>
+                            <div class="lang-example">
+                                • Il gelato (asikyire, biako) → <strong>piace</strong><br>
+                                • I gelati (asikyire, pii) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Bambara -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇲🇱</span> <strong>Bambara</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Piacere - Bambara la</h4>
+                            <p>Italiɛ kan <strong>piacere</strong> bɛ kɔrɔ "ka ɲi i ye" walima "ka sɔn mɔgɔ ma".</p>
+                            <p><strong>Sariyalen cɛmɛ:</strong> Cɛmɛ suguya ye JININ ye, mɔgɔ tɛ!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Nkɔbɔ:</strong><br>
+                                • "Mi piace la pizza" = Pizza in sɔna n ye<br>
+                                • "Mi piace" (kelen) = N sɔna<br>
+                                • "Mi piacciono" (kɛnɛ) = W sɔna n ye
+                            </div>
+                            
+                            <p><strong>Hakɛ sariya:</strong> Kuma in bɛ jinin kan!</p>
+                            <div class="lang-example">
+                                • Il gelato (digikolo, kelen) → <strong>piace</strong><br>
+                                • I gelati (digikolo, kɛnɛ) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. Wolof -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇸🇳</span> <strong>Wolof</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Piacere - Wolof</h4>
+                            <p>Italia làkk <strong>piacere</strong> dafay wone "dëgg-dëgg am na ci wetu ku".</p>
+                            <p><strong>Njàngale bu jëmm:</strong> Bennub làkk mi mooy LII, du nit!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Ciy wax:</strong><br>
+                                • "Mi piace la pizza" = Pizza mi ngi ci wetu<br>
+                                • "Mi piace" (benn) = Dafa ci wetu<br>
+                                • "Mi piacciono" (bari) = Ñi ci wetu
+                            </div>
+                            
+                            <p><strong>Àttekaayu àdduna:</strong> Làkk mi dafay àtte ak lii!</p>
+                            <div class="lang-example">
+                                • Il gelato (galaas, benn) → <strong>piace</strong><br>
+                                • I gelati (galaas, bari) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 9. Hausa -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇳🇬</span> <strong>Hausa</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Piacere - Hausa</h4>
+                            <p>Italiyanci kalmar <strong>piacere</strong> tana nufin "ya fi kowa so" ko "ya yi wa kowa dadi".</p>
+                            <p><strong>Tsarin da aka juya:</strong> Magana ce ABU ne, ba mutum ba!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Misalai:</strong><br>
+                                • "Mi piace la pizza" = Pizza tana yi mini dadi<br>
+                                • "Mi piace" (singular) = Yana yi mini dadi<br>
+                                • "Mi piacciono" (plural) = Suna yi mini dadi
+                            </div>
+                            
+                            <p><strong>Doka:</strong> Kalmar tana haɗa da abun!</p>
+                            <div class="lang-example">
+                                • Il gelato (gelaɗi, singular) → <strong>piace</strong><br>
+                                • I gelati (gelaɗi, plural) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 10. العربية (Arabo) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇸🇦</span> <strong>العربية (Arabo)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content rtl">
+                            <h4>فعل Piacere (أعجبَ)</h4>
+                            <p>الفعل الإيطالي <strong>piacere</strong> يعني حرفياً "أن يكون محبوباً لشخص ما".</p>
+                            <p><strong>البنية المعكوسة:</strong> الفاعل النحوي هو الشيء، وليس الشخص!</p>
+                            
+                            <div class="lang-example" style="text-align: right;">
+                                <strong>أمثلة:</strong><br>
+                                • "Mi piace la pizza" = البيتزا تعجبني<br>
+                                • "Mi piace" (المفرد) = يعجبني<br>
+                                • "Mi piacciono" (الجمع) = يعجبونني
+                            </div>
+                            
+                            <p><strong>قاعدة العدد:</strong> الفعل يتفق مع الشيء!</p>
+                            <div class="lang-example" style="text-align: right;">
+                                • Il gelato (المثلجات، مفرد) → <strong>piace</strong><br>
+                                • I gelati (المثلجات، جمع) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 11. Shqip (Albanese) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇦🇱</span> <strong>Shqip (Albanese)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Folja Piacere (Pëlqen)</h4>
+                            <p>Folja italiane <strong>piacere</strong> do të thotë literalisht "t'i pëlqej dikujt".</p>
+                            <p><strong>Struktura e kthyer:</strong> Subjekti gramatikor është GJËJA, jo personi!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Shembuj:</strong><br>
+                                • "Mi piace la pizza" = Pica më pëlqen<br>
+                                • "Mi piace" (njëjës) = Më pëlqen<br>
+                                • "Mi piacciono" (shumës) = Më pëlqejnë
+                            </div>
+                            
+                            <p><strong>Rregulla e numrit:</strong> Folja pajtohet me gjënë!</p>
+                            <div class="lang-example">
+                                • Il gelato (akullore, njëjës) → <strong>piace</strong><br>
+                                • I gelati (akulloret, shumës) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 12. Türkçe (Turco) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇹🇷</span> <strong>Türkçe (Turco)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Piacere Fiili (Hoşlanmak/Sevmek)</h4>
+                            <p>İtalyanca <strong>piacere</strong> fiili kelimenin tam anlamıyla "birine hoş gelmek" demektir.</p>
+                            <p><strong>Ters Yapı:</strong> Gramer öznesi İNSAN değil, NESNE'dir!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Örnekler:</strong><br>
+                                • "Mi piace la pizza" = Pizza hoşuma gidiyor (Pizza severim)<br>
+                                • "Mi piace" (tekil) = Hoşuma gidiyor<br>
+                                • "Mi piacciono" (çoğul) = Hoşuma gidiyorlar
+                            </div>
+                            
+                            <p><strong>Sayı Kuralı:</strong> Fiil nesne ile uyum sağlar!</p>
+                            <div class="lang-example">
+                                • Il gelato (dondurma, tekil) → <strong>piace</strong><br>
+                                • I gelati (dondurmalar, çoğul) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 13. اردو (Urdu) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇵🇰</span> <strong>اردو (Urdu)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content rtl">
+                            <h4>فعل Piacere (پسند آنا)</h4>
+                            <p>اطالوی فعل <strong>piacere</strong> کا لفظی مطلب ہے "کسی کو پسند آنا"۔</p>
+                            <p><strong>الٹی ساخت:</strong> گرائمیر کا فاعل انسان نہیں، چیز ہے!</p>
+                            
+                            <div class="lang-example" style="text-align: right;">
+                                <strong>مثالیں:</strong><br>
+                                • "Mi piace la pizza" = پزا مجھے پسند ہے<br>
+                                • "Mi piace" (واحد) = مجھے پسند ہے<br>
+                                • "Mi piacciono" (جمع) = مجھے پسند ہیں
+                            </div>
+                            
+                            <p><strong>تعداد کا قاعدہ:</strong> فعل چیز کے ساتھ مطابقت رکھتا ہے!</p>
+                            <div class="lang-example" style="text-align: right;">
+                                • Il gelato (آئس کریم، واحد) → <strong>piace</strong><br>
+                                • I gelati (آئس کریمیں، جمع) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 14. ਪੰਜਾਬੀ (Panjabi) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇮🇳</span> <strong>ਪੰਜਾਬੀ (Panjabi)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Piacere - ਪੰਜਾਬੀ ਵਿਚ</h4>
+                            <p>ਇਤਾਲਵੀ ਕਿਰਿਆ <strong>piacere</strong> ਦਾ ਅਰਥ ਹੈ "ਕਿਸੇ ਨੂੰ ਚੰਗਾ ਲੱਗਣਾ"।</p>
+                            <p><strong>ਉਲਟੀ ਸੰਰਚਨਾ:</strong> ਵਿਆਕਰਨਿਕ ਕਰਤਾ ਵਿਅਕਤੀ ਨਹੀਂ, ਚੀਜ਼ ਹੈ!</p>
+                            
+                            <div class="lang-example">
+                                <strong>ਉਦਾਹਰਨਾਂ:</strong><br>
+                                • "Mi piace la pizza" = ਪੀਜ਼ਾ ਮੈਨੂੰ ਚੰਗਾ ਲੱਗਦਾ ਹੈ<br>
+                                • "Mi piace" (ਇਕ-ਵਚਨ) = ਮੈਨੂੰ ਚੰਗਾ ਲੱਗਦਾ ਹੈ<br>
+                                • "Mi piacciono" (ਬਹੁ-ਵਚਨ) = ਮੈਨੂੰ ਚੰਗੇ ਲੱਗਦੇ ਹਨ
+                            </div>
+                            
+                            <p><strong>ਗਿਣਤੀ ਦਾ ਨਿਯਮ:</strong> ਕਿਰਿਆ ਚੀਜ਼ ਨਾਲ ਮੇਲ ਖਾਂਦੀ ਹੈ!</p>
+                            <div class="lang-example">
+                                • Il gelato (ਆਈਸ ਕਰੀਮ, ਇਕ-ਵਚਨ) → <strong>piace</strong><br>
+                                • I gelati (ਆਈਸ ਕਰੀਮਾਂ, ਬਹੁ-ਵਚਨ) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 15. हिन्दी (Hindi) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇮🇳</span> <strong>हिन्दी (Hindi)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Piacere - हिंदी में</h4>
+                            <p>इतालवी क्रिया <strong>piacere</strong> का शाब्दिक अर्थ है "किसी को पसंद आना"।</p>
+                            <p><strong>उलटी संरचना:</strong> व्याकरणिक कर्ता व्यक्ति नहीं, वस्तु है!</p>
+                            
+                            <div class="lang-example">
+                                <strong>उदाहरण:</strong><br>
+                                • "Mi piace la pizza" = पिज्जा मुझे पसंद है<br>
+                                • "Mi piace" (एकवचन) = मुझे पसंद है<br>
+                                • "Mi piacciono" (बहुवचन) = मुझे पसंद हैं
+                            </div>
+                            
+                            <p><strong>संख्या का नियम:</strong> क्रिया वस्तु के साथ मेल खाती है!</p>
+                            <div class="lang-example">
+                                • Il gelato (आइसक्रीम, एकवचन) → <strong>piace</strong><br>
+                                • I gelati (आइसक्रीमें, बहुवचन) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 16. 中文 (Cinese) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇨🇳</span> <strong>中文 (Cinese)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Piacere 动词 (喜欢/使喜欢)</h4>
+                            <p>意大利语动词 <strong>piacere</strong> 字面意思是"使某人喜欢"或"讨某人喜欢"。</p>
+                            <p><strong>倒置结构：</strong> 语法主语是事物，不是人！</p>
+                            
+                            <div class="lang-example">
+                                <strong>例子：</strong><br>
+                                • "Mi piace la pizza" = 披萨使我喜欢（我喜欢披萨）<br>
+                                • "Mi piace" (单数) = 使我喜欢 [一件事物]<br>
+                                • "Mi piacciono" (复数) = 使我喜欢 [多件事物]
+                            </div>
+                            
+                            <p><strong>数规则：</strong> 动词与事物一致！</p>
+                            <div class="lang-example">
+                                • Il gelato (冰淇淋，单数) → <strong>piace</strong><br>
+                                • I gelati (冰淇淋们，复数) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 17. Filipino/Tagalog -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇵🇭</span> <strong>Filipino/Tagalog</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Piacere - Sa Filipino</h4>
+                            <p>Ang pandiwang Italyano na <strong>piacere</strong> ay literal na nangangahulugang "makapagbigay-kasiyahan sa isang tao".</p>
+                            <p><strong>Baliktad na Istruktura:</strong> Ang subject sa gramatika ay ang BAGAY, hindi ang tao!</p>
+                            
+                            <div class="lang-example">
+                                <strong>Mga Halimbawa:</strong><br>
+                                • "Mi piace la pizza" = Nasa akin ang pizza (Gusto ko ang pizza)<br>
+                                • "Mi piace" (isahan) = Nasa akin ito [isang bagay]<br>
+                                • "Mi piacciono" (maramihan) = Nasa akin sila [maraming bagay]
+                            </div>
+                            
+                            <p><strong>Tuntunin sa Bilang:</strong> Ang pandiwa ay sumasang-ayon sa bagay!</p>
+                            <div class="lang-example">
+                                • Il gelato (sorbetes, isahan) → <strong>piace</strong><br>
+                                • I gelati (mga sorbetes, maramihan) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 18. 한국어 (Coreano) -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇰🇷</span> <strong>한국어 (Coreano)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Piacere 동사 (마음에 들다/좋아하다)</h4>
+                            <p>이탈리아어 동사 <strong>piacere</strong>는 문자 그대로 "누군가에게 마음에 들다"는 뜻입니다.</p>
+                            <p><strong>반전 구조:</strong> 문법적 주어는 사람이 아닌 물건입니다!</p>
+                            
+                            <div class="lang-example">
+                                <strong>예시:</strong><br>
+                                • "Mi piace la pizza" = 피자가 내 마음에 들어요 (나는 피자를 좋아해요)<br>
+                                • "Mi piace" (단수) = 내 마음에 들어요 [한 가지 물건]<br>
+                                • "Mi piacciono" (복수) = 내 마음에 들어요 [여러 가지 물건]
+                            </div>
+                            
+                            <p><strong>수 규칙:</strong> 동사는 물건과 일치합니다!</p>
+                            <div class="lang-example">
+                                • Il gelato (아이스크림, 단수) → <strong>piace</strong><br>
+                                • I gelati (아이스크림들, 복수) → <strong>piacciono</strong>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
