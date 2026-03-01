@@ -1420,445 +1420,389 @@
     </footer>
 
     <script>
-        // Database degli esercizi (50 totali)
+        // Dati degli esercizi (50 esercizi totali)
         const exercises = [
-            // ESERCIZI 1-15: Riconoscimento della coniugazione
+            // ESERCIZI -ARE (1-17)
             {
-                id: 1,
-                type: 'choice',
-                question: 'A quale coniugazione appartiene il verbo "parlare"?',
-                options: ['Prima coniugazione (-ARE)', 'Seconda coniugazione (-ERE)', 'Terza coniugazione (-IRE)'],
-                correct: 'Prima coniugazione (-ARE)',
-                explanation: '✅ Corretto! Parlare termina in -ARE, quindi è della prima coniugazione.',
-                errorExplanation: '❌ Parlare termina in -ARE, quindi è della prima coniugazione.'
+                type: 'multiple',
+                question: 'Io _____ (parlare) italiano.',
+                options: ['parlo', 'parli', 'parla', 'parliamo'],
+                correct: 'parlo',
+                conjugation: 'are'
             },
             {
-                id: 2,
-                type: 'choice',
-                question: 'A quale coniugazione appartiene il verbo "vedere"?',
-                options: ['Prima coniugazione (-ARE)', 'Seconda coniugazione (-ERE)', 'Terza coniugazione (-IRE)'],
-                correct: 'Seconda coniugazione (-ERE)',
-                explanation: '✅ Corretto! Vedere termina in -ERE, quindi è della seconda coniugazione.',
-                errorExplanation: '❌ Vedere termina in -ERE, quindi è della seconda coniugazione.'
+                type: 'multiple',
+                question: 'Tu _____ (mangiare) la pizza.',
+                options: ['mangi', 'mangia', 'mangiamo', 'mangiano'],
+                correct: 'mangi',
+                conjugation: 'are'
             },
             {
-                id: 3,
-                type: 'choice',
-                question: 'A quale coniugazione appartiene il verbo "dormire"?',
-                options: ['Prima coniugazione (-ARE)', 'Seconda coniugazione (-ERE)', 'Terza coniugazione (-IRE)'],
-                correct: 'Terza coniugazione (-IRE)',
-                explanation: '✅ Corretto! Dormire termina in -IRE, quindi è della terza coniugazione.',
-                errorExplanation: '❌ Dormire termina in -IRE, quindi è della terza coniugazione.'
+                type: 'multiple',
+                question: 'Lui _____ (lavorare) in ufficio.',
+                options: ['lavoro', 'lavori', 'lavora', 'lavorano'],
+                correct: 'lavora',
+                conjugation: 'are'
             },
             {
-                id: 4,
-                type: 'choice',
-                question: '"Mangiare" è un verbo della:',
-                options: ['Prima coniugazione', 'Seconda coniugazione', 'Terza coniugazione'],
-                correct: 'Prima coniugazione',
-                explanation: '✅ Corretto! Mangiare è un verbo in -ARE.',
-                errorExplanation: '❌ Mangiare termina in -ARE, quindi è prima coniugazione.'
-            },
-            {
-                id: 5,
-                type: 'choice',
-                question: '"Scrivere" è un verbo della:',
-                options: ['Prima coniugazione', 'Seconda coniugazione', 'Terza coniugazione'],
-                correct: 'Seconda coniugazione',
-                explanation: '✅ Corretto! Scrivere è un verbo in -ERE.',
-                errorExplanation: '❌ Scrivere termina in -ERE, quindi è seconda coniugazione.'
-            },
-            {
-                id: 6,
-                type: 'choice',
-                question: '"Partire" è un verbo della:',
-                options: ['Prima coniugazione', 'Seconda coniugazione', 'Terza coniugazione'],
-                correct: 'Terza coniugazione',
-                explanation: '✅ Corretto! Partire è un verbo in -IRE.',
-                errorExplanation: '❌ Partire termina in -IRE, quindi è terza coniugazione.'
-            },
-            {
-                id: 7,
-                type: 'choice',
-                question: 'Quale di questi verbi è della prima coniugazione?',
-                options: ['Leggere', 'Lavorare', 'Dormire'],
-                correct: 'Lavorare',
-                explanation: '✅ Corretto! Lavorare termina in -ARE.',
-                errorExplanation: '❌ Lavorare è il solo verbo in -ARE tra le opzioni.'
-            },
-            {
-                id: 8,
-                type: 'choice',
-                question: 'Quale di questi verbi è della seconda coniugazione?',
-                options: ['Parlare', 'Prendere', 'Aprire'],
-                correct: 'Prendere',
-                explanation: '✅ Corretto! Prendere termina in -ERE.',
-                errorExplanation: '❌ Prendere è il solo verbo in -ERE tra le opzioni.'
-            },
-            {
-                id: 9,
-                type: 'choice',
-                question: 'Quale di questi verbi è della terza coniugazione?',
-                options: ['Studiare', 'Mettere', 'Sentire'],
-                correct: 'Sentire',
-                explanation: '✅ Corretto! Sentire termina in -IRE.',
-                errorExplanation: '❌ Sentire è il solo verbo in -IRE tra le opzioni.'
-            },
-            {
-                id: 10,
-                type: 'choice',
-                question: '"Capire" è un verbo:',
-                options: ['Regolare in -ARE', 'Regolare in -ERE', 'In -IRE con -isc-'],
-                correct: 'In -IRE con -isc-',
-                explanation: '✅ Corretto! Capire è un verbo in -IRE che aggiunge -isc- (capisco, capisci...).',
-                errorExplanation: '❌ Capire è un verbo in -IRE con l\'inserzione di -isc-.'
-            },
-            {
-                id: 11,
-                type: 'choice',
-                question: 'Tutti questi verbi sono della stessa coniugazione, tranne uno. Quale?',
-                options: ['Comprare', 'Cercare', 'Chiudere', 'Guardare'],
-                correct: 'Chiudere',
-                explanation: '✅ Corretto! Chiudere è in -ERE, gli altri sono in -ARE.',
-                errorExplanation: '❌ Chiudere è il solo verbo in -ERE, gli altri sono in -ARE.'
-            },
-            {
-                id: 12,
-                type: 'choice',
-                question: 'Tutti questi verbi sono della stessa coniugazione, tranne uno. Quale?',
-                options: ['Vedere', 'Credere', 'Vivere', 'Abilitare'],
-                correct: 'Abilitare',
-                explanation: '✅ Corretto! Abilitare (abilitare) è in -ARE, gli altri sono in -ERE.',
-                errorExplanation: '❌ Abilitare è in -ARE, gli altri sono in -ERE.'
-            },
-            {
-                id: 13,
-                type: 'choice',
-                question: 'La vocale tematica della prima coniugazione è:',
-                options: ['A', 'E', 'I'],
-                correct: 'A',
-                explanation: '✅ Corretto! La prima coniugazione ha vocale tematica A.',
-                errorExplanation: '❌ La prima coniugazione (-ARE) ha vocale tematica A.'
-            },
-            {
-                id: 14,
-                type: 'choice',
-                question: 'La vocale tematica della seconda coniugazione è:',
-                options: ['A', 'E', 'I'],
-                correct: 'E',
-                explanation: '✅ Corretto! La seconda coniugazione ha vocale tematica E.',
-                errorExplanation: '❌ La seconda coniugazione (-ERE) ha vocale tematica E.'
-            },
-            {
-                id: 15,
-                type: 'choice',
-                question: 'La vocale tematica della terza coniugazione è:',
-                options: ['A', 'E', 'I'],
-                correct: 'I',
-                explanation: '✅ Corretto! La terza coniugazione ha vocale tematica I.',
-                errorExplanation: '❌ La terza coniugazione (-IRE) ha vocale tematica I.'
-
-            },
-
-            // ESERCIZI 16-30: Coniugazione al presente (-ARE)
-            {
-                id: 16,
                 type: 'fill',
-                question: 'Io (parlare) ________ italiano.',
-                correct: ['parlo'],
-                explanation: '✅ Corretto! Io parl-o (prima coniugazione, desinenza -o).'
+                question: 'Noi _____ (studiare) italiano.',
+                correct: 'studiamo',
+                conjugation: 'are'
             },
             {
-                id: 17,
+                type: 'multiple',
+                question: 'Voi _____ (abitare) a Roma.',
+                options: ['abitate', 'abiti', 'abita', 'abitiamo'],
+                correct: 'abitate',
+                conjugation: 'are'
+            },
+            {
+                type: 'multiple',
+                question: 'Loro _____ (cercare) un lavoro.',
+                options: ['cercano', 'cerca', 'cerchi', 'cerchiamo'],
+                correct: 'cercano',
+                conjugation: 'are'
+            },
+            {
                 type: 'fill',
-                question: 'Tu (mangiare) ________ la pizza.',
-                correct: ['mangi'],
-                explanation: '✅ Corretto! Tu mangi (radice mangi- + desinenza -i).'
+                question: 'Io _____ (guardare) la televisione.',
+                correct: 'guardo',
+                conjugation: 'are'
             },
             {
-                id: 18,
-                type: 'fill',
-                question: 'Lui (lavorare) ________ in ufficio.',
-                correct: ['lavora'],
-                explanation: '✅ Corretto! Lui lavor-a (desinenza -a per lui/lei in -ARE).'
+                type: 'multiple',
+                question: 'Tu _____ (comprare) il pane.',
+                options: ['compri', 'compra', 'compriamo', 'comprano'],
+                correct: 'compri',
+                conjugation: 'are'
             },
             {
-                id: 19,
-                type: 'fill',
-                question: 'Noi (studiare) ________ italiano.',
-                correct: ['studiamo'],
-                explanation: '✅ Corretto! Noi studiamo (desinenza -iamo per tutte le coniugazioni).'
-            },
-            {
-                id: 20,
-                type: 'fill',
-                question: 'Voi (comprare) ________ il pane.',
-                correct: ['comprate'],
-                explanation: '✅ Corretto! Voi compr-ate (desinenza -ate in -ARE).'
-            },
-            {
-                id: 21,
-                type: 'fill',
-                question: 'Loro (abitare) ________ a Roma.',
-                correct: ['abitano'],
-                explanation: '✅ Corretto! Loro abit-ano (desinenza -ano in -ARE).'
-            },
-            {
-                id: 22,
-                type: 'choice',
-                question: 'Quale forma è corretta? "Io (cucinare)"',
-                options: ['cucino', 'cucine', 'cucina'],
-                correct: 'cucino',
-                explanation: '✅ Corretto! Io cucin-o (desinenza -o).',
-                errorExplanation: '❌ Con "io" la desinenza è -o: cucino.'
-            },
-            {
-                id: 23,
-                type: 'choice',
-                question: 'Quale forma è corretta? "Tu (pensare)"',
-                options: ['penso', 'pensi', 'pensa'],
-                correct: 'pensi',
-                explanation: '✅ Corretto! Tu pens-i (desinenza -i).',
-                errorExplanation: '❌ Con "tu" la desinenza è -i: pensi.'
-            },
-            {
-                id: 24,
-                type: 'choice',
-                question: 'Quale forma è corretta? "Lei (telefonare)"',
-                options: ['telefono', 'telefoni', 'telefona'],
+                type: 'multiple',
+                question: 'Lei _____ (telefonare) a Marco.',
+                options: ['telefona', 'telefono', 'telefoni', 'telefonano'],
                 correct: 'telefona',
-                explanation: '✅ Corretto! Lei telefon-a (desinenza -a).',
-                errorExplanation: '❌ Con "lei/lui" la desinenza è -a: telefona.'
+                conjugation: 'are'
             },
             {
-                id: 25,
                 type: 'fill',
-                question: 'Noi (ascoltare) ________ la musica.',
-                correct: ['ascoltiamo'],
-                explanation: '✅ Corretto! Noi ascoltiamo (desinenza -iamo).'
+                question: 'Noi _____ (pensare) a te.',
+                correct: 'pensiamo',
+                conjugation: 'are'
             },
             {
-                id: 26,
+                type: 'multiple',
+                question: 'Voi _____ (cucinare) bene.',
+                options: ['cucinate', 'cucina', 'cucini', 'cuciniamo'],
+                correct: 'cucinate',
+                conjugation: 'are'
+            },
+            {
+                type: 'multiple',
+                question: 'Loro _____ (amare) la musica.',
+                options: ['amano', 'ama', 'ami', 'amiamo'],
+                correct: 'amano',
+                conjugation: 'are'
+            },
+            {
                 type: 'fill',
-                question: 'Voi (trovare) ________ una soluzione.',
-                correct: ['trovate'],
-                explanation: '✅ Corretto! Voi trov-ate (desinenza -ate).'
+                question: 'Io _____ (pagare) il conto.',
+                correct: 'pago',
+                conjugation: 'are'
             },
             {
-                id: 27,
+                type: 'multiple',
+                question: 'Tu _____ (ascoltare) la radio.',
+                options: ['ascolti', 'ascolta', 'ascoltiamo', 'ascoltano'],
+                correct: 'ascolti',
+                conjugation: 'are'
+            },
+            {
+                type: 'multiple',
+                question: 'Marco _____ (giocare) a calcio.',
+                options: ['gioca', 'gioco', 'giochi', 'giocano'],
+                correct: 'gioca',
+                conjugation: 'are'
+            },
+            {
                 type: 'fill',
-                question: 'Loro (giocare) ________ a calcio.',
-                correct: ['giocano'],
-                explanation: '✅ Corretto! Loro gioc-ano (desinenza -ano).'
+                question: 'Noi _____ (imparare) l\'italiano.',
+                correct: 'impariamo',
+                conjugation: 'are'
             },
             {
-                id: 28,
-                type: 'choice',
-                question: 'Completa: "Io (amare) ________ il gelato."',
-                options: ['amo', 'ami', 'ama'],
-                correct: 'amo',
-                explanation: '✅ Corretto! Io am-o.',
-                errorExplanation: '❌ Io + verbo in -ARE = amo.'
-            },
-            {
-                id: 29,
-                type: 'choice',
-                question: 'Completa: "Tu (cercare) ________ il libro."',
-                options: ['cerco', 'cerchi', 'cerca'],
-                correct: 'cerchi',
-                explanation: '✅ Corretto! Tu cerchi (cerc- + -hi per mantenere il suono [k]).',
-                errorExplanation: '❌ Cercare mantiene la C dura: cerchi.'
-            },
-            {
-                id: 30,
-                type: 'fill',
-                question: 'Lui (pagare) ________ il conto.',
-                correct: ['paga'],
-                explanation: '✅ Corretto! Lui pag-a (attenzione: non "paga" con la h, è già corretto così).'
-
-            },
-
-            // ESERCIZI 31-40: Coniugazione -ERE e -IRE
-            {
-                id: 31,
-                type: 'fill',
-                question: 'Io (credere) ________ a te.',
-                correct: ['credo'],
-                explanation: '✅ Corretto! Io cred-o (seconda coniugazione, desinenza -o).'
-            },
-            {
-                id: 32,
-                type: 'fill',
-                question: 'Tu (leggere) ________ un libro.',
-                correct: ['leggi'],
-                explanation: '✅ Corretto! Tu legg-i (desinenza -i in -ERE).'
-            },
-            {
-                id: 33,
-                type: 'fill',
-                question: 'Lui (scrivere) ________ una lettera.',
-                correct: ['scrive'],
-                explanation: '✅ Corretto! Lui scriv-e (desinenza -e in -ERE).'
-            },
-            {
-                id: 34,
-                type: 'fill',
-                question: 'Noi (vedere) ________ il film.',
-                correct: ['vediamo'],
-                explanation: '✅ Corretto! Noi ved-iamo (desinenza -iamo).'
-            },
-            {
-                id: 35,
-                type: 'fill',
-                question: 'Voi (rispondere) ________ alla domanda.',
-                correct: ['rispondete'],
-                explanation: '✅ Corretto! Voi rispond-ete (desinenza -ete in -ERE).'
-            },
-            {
-                id: 36,
-                type: 'fill',
-                question: 'Loro (vivere) ________ felici.',
-                correct: ['vivono'],
-                explanation: '✅ Corretto! Loro viv-ono (desinenza -ono in -ERE).'
-            },
-            {
-                id: 37,
-                type: 'fill',
-                question: 'Io (dormire) ________ otto ore.',
-                correct: ['dormo'],
-                explanation: '✅ Corretto! Io dorm-o (terza coniugazione, desinenza -o).'
-            },
-            {
-                id: 38,
-                type: 'fill',
-                question: 'Tu (aprire) ________ la porta.',
-                correct: ['apri'],
-                explanation: '✅ Corretto! Tu apr-i (desinenza -i in -IRE).'
-            },
-            {
-                id: 39,
-                type: 'fill',
-                question: 'Lui (partire) ________ domani.',
-                correct: ['parte'],
-                explanation: '✅ Corretto! Lui part-e (desinenza -e in -IRE).'
-            },
-            {
-                id: 40,
-                type: 'fill',
-                question: 'Noi (sentire) ________ un rumore.',
-                correct: ['sentiamo'],
-                explanation: '✅ Corretto! Noi sent-iamo (desinenza -iamo).'
-
+                type: 'multiple',
+                question: 'Voi _____ (trovare) la soluzione.',
+                options: ['trovate', 'trova', 'trovi', 'troviamo'],
+                correct: 'trovate',
+                conjugation: 'are'
             },
 
-            // ESERCIZI 41-50: Verbi in -IRE con -isc- e mix
+            // ESERCIZI -ERE (18-34)
             {
-                id: 41,
-                type: 'fill',
-                question: 'Io (capire) ________ la lezione.',
-                correct: ['capisco'],
-                explanation: '✅ Corretto! Io cap-isco (verbo in -IRE con inserzione di -isc-).'
+                type: 'multiple',
+                question: 'Io _____ (credere) a Marco.',
+                options: ['credo', 'credi', 'crede', 'crediamo'],
+                correct: 'credo',
+                conjugation: 'ere'
             },
             {
-                id: 42,
-                type: 'fill',
-                question: 'Tu (finire) ________ il lavoro.',
-                correct: ['finisci'],
-                explanation: '✅ Corretto! Tu fin-isci (inserzione di -isc-).'
+                type: 'multiple',
+                question: 'Tu _____ (vedere) il film.',
+                options: ['vedi', 'vede', 'vediamo', 'vedono'],
+                correct: 'vedi',
+                conjugation: 'ere'
             },
             {
-                id: 43,
-                type: 'fill',
-                question: 'Lui (preferire) ________ il tè.',
-                correct: ['preferisce'],
-                explanation: '✅ Corretto! Lui prefer-isce (inserzione di -isc-).'
+                type: 'multiple',
+                question: 'Lei _____ (scrivere) una lettera.',
+                options: ['scrive', 'scrivo', 'scrivi', 'scrivono'],
+                correct: 'scrive',
+                conjugation: 'ere'
             },
             {
-                id: 44,
                 type: 'fill',
-                question: 'Loro (pulire) ________ la casa.',
-                correct: ['puliscono'],
-                explanation: '✅ Corretto! Loro pul-iscono (inserzione di -isc-).'
+                question: 'Noi _____ (leggere) il libro.',
+                correct: 'leggiamo',
+                conjugation: 'ere'
             },
             {
-                id: 45,
-                type: 'choice',
-                question: 'Quale forma è corretta? "Io (dormire)"',
-                options: ['dormo', 'dormisco', 'dormio'],
+                type: 'multiple',
+                question: 'Voi _____ (prendere) il caffè.',
+                options: ['prendete', 'prende', 'prendi', 'prendiamo'],
+                correct: 'prendete',
+                conjugation: 'ere'
+            },
+            {
+                type: 'multiple',
+                question: 'Loro _____ (vendere) la casa.',
+                options: ['vendono', 'vende', 'vendi', 'vendiamo'],
+                correct: 'vendono',
+                conjugation: 'ere'
+            },
+            {
+                type: 'fill',
+                question: 'Io _____ (ricevere) un regalo.',
+                correct: 'ricevo',
+                conjugation: 'ere'
+            },
+            {
+                type: 'multiple',
+                question: 'Tu _____ (chiudere) la porta.',
+                options: ['chiudi', 'chiude', 'chiudiamo', 'chiudono'],
+                correct: 'chiudi',
+                conjugation: 'ere'
+            },
+            {
+                type: 'multiple',
+                question: 'Lui _____ (mettere) la giacca.',
+                options: ['mette', 'metto', 'metti', 'mettono'],
+                correct: 'mette',
+                conjugation: 'ere'
+            },
+            {
+                type: 'fill',
+                question: 'Noi _____ (vivere) a Milano.',
+                correct: 'viviamo',
+                conjugation: 'ere'
+            },
+            {
+                type: 'multiple',
+                question: 'Voi _____ (rispondere) alla domanda.',
+                options: ['rispondete', 'risponde', 'rispondi', 'rispondiamo'],
+                correct: 'rispondete',
+                conjugation: 'ere'
+            },
+            {
+                type: 'multiple',
+                question: 'Loro _____ (chiedere) aiuto.',
+                options: ['chiedono', 'chiede', 'chiedi', 'chiediamo'],
+                correct: 'chiedono',
+                conjugation: 'ere'
+            },
+            {
+                type: 'fill',
+                question: 'Io _____ (ridere) molto.',
+                correct: 'rido',
+                conjugation: 'ere'
+            },
+            {
+                type: 'multiple',
+                question: 'Tu _____ (conoscere) Roma.',
+                options: ['conosci', 'conosce', 'conosciamo', 'conoscono'],
+                correct: 'conosci',
+                conjugation: 'ere'
+            },
+            {
+                type: 'multiple',
+                question: 'Lei _____ (correre) al parco.',
+                options: ['corre', 'corro', 'corri', 'corrono'],
+                correct: 'corre',
+                conjugation: 'ere'
+            },
+            {
+                type: 'fill',
+                question: 'Noi _____ (credere) alla storia.',
+                correct: 'crediamo',
+                conjugation: 'ere'
+            },
+            {
+                type: 'multiple',
+                question: 'Voi _____ (vedere) il mare.',
+                options: ['vedete', 'vede', 'vedi', 'vediamo'],
+                correct: 'vedete',
+                conjugation: 'ere'
+            },
+
+            // ESERCIZI -IRE (35-50)
+            {
+                type: 'multiple',
+                question: 'Io _____ (dormire) bene.',
+                options: ['dormo', 'dormi', 'dorme', 'dormiamo'],
                 correct: 'dormo',
-                explanation: '✅ Corretto! Dormire è regolare: io dormo (senza -isc-).',
-                errorExplanation: '❌ Dormire non aggiunge -isc-, è regolare: dormo.'
+                conjugation: 'ire'
             },
             {
-                id: 46,
-                type: 'choice',
-                question: 'Quale forma è corretta? "Noi (finire)"',
-                options: ['finisco', 'finiamo', 'finisciamo'],
-                correct: 'finiamo',
-                explanation: '✅ Corretto! Con "noi" non c\'è -isc-: finiamo (come tutti i verbi in -iamo).',
-                errorExplanation: '❌ Con "noi" la desinenza è sempre -iamo, senza -isc-.'
+                type: 'multiple',
+                question: 'Tu _____ (aprire) la finestra.',
+                options: ['apri', 'apre', 'apriamo', 'aprono'],
+                correct: 'apri',
+                conjugation: 'ire'
             },
             {
-                id: 47,
+                type: 'multiple',
+                question: 'Lui _____ (partire) domani.',
+                options: ['parte', 'parto', 'parti', 'partono'],
+                correct: 'parte',
+                conjugation: 'ire'
+            },
+            {
                 type: 'fill',
-                question: 'Voi (capire) ________ l\'italiano?',
-                correct: ['capite'],
-                explanation: '✅ Corretto! Voi cap-ite (senza -isc-).'
+                question: 'Noi _____ (sentire) la musica.',
+                correct: 'sentiamo',
+                conjugation: 'ire'
             },
             {
-                id: 48,
+                type: 'multiple',
+                question: 'Voi _____ (dormire) poco.',
+                options: ['dormite', 'dorme', 'dormi', 'dormiamo'],
+                correct: 'dormite',
+                conjugation: 'ire'
+            },
+            {
+                type: 'multiple',
+                question: 'Loro _____ (aprire) il negozio.',
+                options: ['aprono', 'apre', 'apri', 'apriamo'],
+                correct: 'aprono',
+                conjugation: 'ire'
+            },
+            {
                 type: 'fill',
-                question: 'Io (seguire) ________ il corso.',
-                correct: ['seguo'],
-                explanation: '✅ Corretto! Io seguo (verbo regolare in -IRE, non ha -isc-).'
+                question: 'Io _____ (offrire) un caffè.',
+                correct: 'offro',
+                conjugation: 'ire'
             },
             {
-                id: 49,
-                type: 'choice',
-                question: 'Completa: "Loro (preferire) ________ restare a casa."',
-                options: ['prefero', 'preferiscono', 'preferono'],
-                correct: 'preferiscono',
-                explanation: '✅ Corretto! Preferire ha -isc-: preferiscono.',
-                errorExplanation: '❌ Preferire aggiunge -isc-: preferiscono.'
+                type: 'multiple',
+                question: 'Tu _____ (seguire) il corso.',
+                options: ['segui', 'segue', 'seguiamo', 'seguono'],
+                correct: 'segui',
+                conjugation: 'ire'
             },
             {
-                id: 50,
+                type: 'multiple',
+                question: 'Lei _____ (servire) il pranzo.',
+                options: ['serve', 'servo', 'servi', 'servono'],
+                correct: 'serve',
+                conjugation: 'ire'
+            },
+            {
                 type: 'fill',
-                question: 'Tu (spedire) ________ il pacco. (verbo in -IRE con -isc-)',
-                correct: ['spedisci'],
-                explanation: '✅ Corretto! Tu sped-isci. Complimenti per aver completato tutti gli esercizi!'
+                question: 'Noi _____ (partire) alle otto.',
+                correct: 'partiamo',
+                conjugation: 'ire'
+            },
+            {
+                type: 'multiple',
+                question: 'Voi _____ (sentire) il rumore.',
+                options: ['sentite', 'sente', 'senti', 'sentiamo'],
+                correct: 'sentite',
+                conjugation: 'ire'
+            },
+            {
+                type: 'multiple',
+                question: 'Loro _____ (fuggire) via.',
+                options: ['fuggono', 'fugge', 'fuggi', 'fuggiamo'],
+                correct: 'fuggono',
+                conjugation: 'ire'
+            },
+            {
+                type: 'fill',
+                question: 'Io _____ (capire) la lezione.',
+                correct: 'capisco',
+                conjugation: 'ire'
+            },
+            {
+                type: 'multiple',
+                question: 'Tu _____ (finire) il lavoro.',
+                options: ['finisci', 'finisce', 'finiamo', 'finiscono'],
+                correct: 'finisci',
+                conjugation: 'ire'
+            },
+            {
+                type: 'multiple',
+                question: 'Lui _____ (preferire) il tè.',
+                options: ['preferisce', 'preferisco', 'preferisci', 'preferiscono'],
+                correct: 'preferisce',
+                conjugation: 'ire'
+            },
+            {
+                type: 'fill',
+                question: 'Noi _____ (pulire) la casa.',
+                correct: 'puliamo',
+                conjugation: 'ire'
             }
         ];
 
+        // Variabili di stato
         let currentExercise = 0;
-        let totalScore = 0;
+        let score = 0;
         let answered = false;
 
-        function showSection(id, btn) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-            if(btn) btn.classList.add('active');
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            loadExercise();
+        });
 
-            if(id === 'exercises' && currentExercise === 0) {
-                loadExercise();
-            }
+        // Funzione per cambiare sezione
+        function showSection(sectionId, btn) {
+            // Rimuovi active da tutti i tab
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            // Aggiungi active al tab cliccato
+            btn.classList.add('active');
+            
+            // Nascondi tutte le sezioni
+            document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+            // Mostra la sezione selezionata
+            document.getElementById(sectionId).classList.add('active');
         }
 
+        // Funzione per cambiare lingua
         function changeLanguage(lang) {
-            // Aggiorna i bottoni
+            // Aggiorna bottoni
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if(btn.dataset.lang === lang) btn.classList.add('active');
             });
-
-            // Mostra il contenuto della lingua selezionata
+            
+            // Aggiorna contenuti
             document.querySelectorAll('.lang-content').forEach(content => {
                 content.classList.remove('active');
                 if(content.dataset.langContent === lang) content.classList.add('active');
             });
         }
 
+        // Carica esercizio corrente
         function loadExercise() {
             if (currentExercise >= exercises.length) {
                 showFinalScore();
@@ -1868,166 +1812,176 @@
             const ex = exercises[currentExercise];
             const container = document.getElementById('exerciseContainer');
             
-            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
-            
-            answered = false;
-
             let html = `
-                <div class="card" style="animation: fadeIn 0.4s ease;">
-                    <div class="card-header">Esercizio ${ex.id}</div>
-                    <div class="card-body">
-                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
-                        <div class="question-box">
-                            <div class="question-text">${ex.question}</div>
-                        </div>
+                <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
+                <div class="question-box">
+                    <div class="question-text">${ex.question}</div>
+                </div>
             `;
 
-            if (ex.type === 'choice') {
-                html += `<div class="options-grid" id="optionsGrid">`;
-                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
-                shuffledOptions.forEach(opt => {
-                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+            if (ex.type === 'multiple') {
+                html += `<div class="options-grid">`;
+                ex.options.forEach((opt, idx) => {
+                    html += `<button class="option-btn" onclick="checkAnswer('${opt}', this)">${opt}</button>`;
                 });
                 html += `</div>`;
-            } else if (ex.type === 'fill') {
+            } else {
                 html += `
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi la forma verbale..." onkeypress="if(event.key==='Enter') checkFill()">
-                    </div>
                     <div class="text-center">
-                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi qui..." autocomplete="off">
+                        <br><br>
+                        <button class="btn-primary btn-check" onclick="checkFillAnswer()">Verifica</button>
                     </div>
                 `;
             }
 
             html += `
-                        <div class="feedback" id="feedback"></div>
-                        <div class="text-center" id="nextBtnContainer" style="display: none;">
-                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
-                        </div>
-                    </div>
+                <div class="feedback" id="feedback"></div>
+                <div class="text-center" id="nextBtnContainer" style="display: none;">
+                    <button class="btn-primary" onclick="nextExercise()">Prossimo Esercizio →</button>
                 </div>
             `;
 
             container.innerHTML = html;
+            answered = false;
             
+            // Aggiorna progress bar
+            const progress = ((currentExercise) / exercises.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            
+            // Focus sull'input se è fill-in
             if (ex.type === 'fill') {
                 setTimeout(() => document.getElementById('fillInput').focus(), 100);
             }
         }
 
-        function checkChoice(selected) {
+        // Controlla risposta multipla
+        function checkAnswer(selected, btn) {
             if (answered) return;
-            answered = true;
-
+            
             const ex = exercises[currentExercise];
-            const btns = document.querySelectorAll('#optionsGrid .option-btn');
             const feedback = document.getElementById('feedback');
-            const nextContainer = document.getElementById('nextBtnContainer');
-
-            btns.forEach(btn => {
-                btn.disabled = true;
-                if (btn.dataset.value === ex.correct) {
-                    btn.classList.add('correct');
-                } else if (btn.dataset.value === selected && selected !== ex.correct) {
-                    btn.classList.add('wrong');
+            const isCorrect = selected === ex.correct;
+            
+            answered = true;
+            
+            // Disabilita tutti i bottoni
+            document.querySelectorAll('.option-btn').forEach(b => {
+                b.disabled = true;
+                if (b.textContent === ex.correct) {
+                    b.classList.add('correct');
+                } else if (b === btn && !isCorrect) {
+                    b.classList.add('wrong');
                 }
             });
-
-            feedback.classList.add('show');
-
-            if (selected === ex.correct) {
-                feedback.className = 'feedback show correct';
-                feedback.textContent = ex.explanation;
-                totalScore += 2;
+            
+            if (isCorrect) {
+                score += 2; // 2 punti per esercizio (max 100)
+                feedback.className = 'feedback correct show';
+                feedback.textContent = '✓ Corretto! Ottimo lavoro!';
             } else {
-                feedback.className = 'feedback show wrong';
-                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Risposta corretta:</strong> ${ex.correct}`;
+                feedback.className = 'feedback wrong show';
+                feedback.textContent = `✗ Sbagliato. La risposta corretta è: ${ex.correct}`;
             }
-
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            nextContainer.style.display = 'block';
+            
+            updateScore();
+            document.getElementById('nextBtnContainer').style.display = 'block';
         }
 
-        function checkFill() {
+        // Controlla risposta fill-in
+        function checkFillAnswer() {
             if (answered) return;
             
             const input = document.getElementById('fillInput');
-            const value = input.value.trim().toLowerCase();
-            if (!value) return;
-
-            answered = true;
-
+            const userAnswer = input.value.trim().toLowerCase();
             const ex = exercises[currentExercise];
             const feedback = document.getElementById('feedback');
-            const nextContainer = document.getElementById('nextBtnContainer');
-
-            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
-
-            feedback.classList.add('show');
-            input.disabled = true;
-
-            if (isCorrect) {
-                feedback.className = 'feedback show correct';
-                feedback.textContent = ex.explanation;
-                input.style.borderColor = 'var(--success)';
-                input.style.background = '#f0fff4';
-                totalScore += 2;
-            } else {
-                feedback.className = 'feedback show wrong';
-                feedback.innerHTML = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
-                input.style.borderColor = 'var(--error)';
-                input.style.background = '#fff5f5';
-                input.value = ex.correct[0];
+            
+            if (!userAnswer) {
+                alert('Per favore inserisci una risposta!');
+                return;
             }
-
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            nextContainer.style.display = 'block';
+            
+            answered = true;
+            const isCorrect = userAnswer === ex.correct.toLowerCase();
+            
+            if (isCorrect) {
+                score += 2;
+                input.style.borderColor = 'var(--success)';
+                input.style.backgroundColor = 'var(--success-bg)';
+                feedback.className = 'feedback correct show';
+                feedback.textContent = '✓ Corretto! Ottimo lavoro!';
+            } else {
+                input.style.borderColor = 'var(--error)';
+                input.style.backgroundColor = 'var(--error-bg)';
+                feedback.className = 'feedback wrong show';
+                feedback.textContent = `✗ Sbagliato. La risposta corretta è: ${ex.correct}`;
+            }
+            
+            updateScore();
+            document.getElementById('nextBtnContainer').style.display = 'block';
         }
 
+        // Aggiorna punteggio
+        function updateScore() {
+            document.getElementById('currentScore').textContent = `${score} / 100`;
+        }
+
+        // Prossimo esercizio
         function nextExercise() {
             currentExercise++;
             loadExercise();
         }
 
+        // Mostra punteggio finale
         function showFinalScore() {
             document.getElementById('exerciseContainer').style.display = 'none';
-            document.getElementById('finalScoreSection').classList.add('show');
-            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            document.querySelector('.score-panel').style.display = 'none';
+            document.querySelector('.progress-bar').style.display = 'none';
+            
+            const finalSection = document.getElementById('finalScoreSection');
+            finalSection.classList.add('show');
+            
+            document.getElementById('finalScore').textContent = `${score}/100`;
             
             let message = '';
-            if (totalScore >= 90) {
-                message = '🏆 Eccellente! Padroneggi perfettamente le tre coniugazioni!';
-            } else if (totalScore >= 70) {
-                message = '👍 Ottimo lavoro! Conosci bene le coniugazioni, ma fai attenzione ai verbi in -isc-!';
-            } else if (totalScore >= 50) {
-                message = '💪 Buon lavoro! Ricorda: -ARE (a), -ERE (e), -IRE (i) e le desinenze!';
+            if (score >= 90) {
+                message = '🌟 Eccellente! Padroneggi perfettamente le tre coniugazioni!';
+            } else if (score >= 70) {
+                message = '👍 Molto bene! Conosci bene le coniugazioni, ma puoi ancora migliorare.';
+            } else if (score >= 50) {
+                message = '👌 Discreto. Ti consigliamo di rivedere le regole e riprovare.';
             } else {
-                message = '📚 Ripassa le tabelle! Ricorda le desinenze: io -o, tu -i, lui -a/-e/-e!';
+                message = '📚 Studia ancora un po\' le coniugazioni e riprova gli esercizi!';
             }
             
             document.getElementById('finalMessage').textContent = message;
-            document.getElementById('progressBar').style.width = '100%';
         }
 
+        // Riavvia esercizi
         function restartExercises() {
             currentExercise = 0;
-            totalScore = 0;
+            score = 0;
             answered = false;
             
-            exercises.sort(() => Math.random() - 0.5);
-            
             document.getElementById('exerciseContainer').style.display = 'block';
+            document.querySelector('.score-panel').style.display = 'flex';
+            document.querySelector('.progress-bar').style.display = 'block';
             document.getElementById('finalScoreSection').classList.remove('show');
-            document.getElementById('progressBar').style.width = '0%';
             
+            updateScore();
             loadExercise();
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            exercises.sort(() => Math.random() - 0.5);
+        // Gestione tasto Enter per fill-in
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !answered) {
+                const input = document.getElementById('fillInput');
+                if (input && document.activeElement === input) {
+                    checkFillAnswer();
+                }
+            }
         });
     </script>
 </body>
