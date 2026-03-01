@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articoli Indeterminativi - Teoria Multilingue + 100 Esercizi</title>
+    <title>Articoli Indeterminativi Italiani - Teoria + 50 Esercizi con Email</title>
     <style>
         * {
             margin: 0;
@@ -27,6 +27,8 @@
             --maschile: #2c5282;
             --femminile: #702459;
             --plurale: #276749;
+            --lang-bg: #e3f2fd;
+            --lang-border: #2196f3;
         }
 
         body {
@@ -65,15 +67,6 @@
             font-style: italic;
         }
 
-        .lang-selector {
-            background: rgba(255,255,255,0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
-
         .breadcrumbs {
             background: var(--light);
             border-bottom: 1px solid var(--border);
@@ -92,7 +85,7 @@
         }
 
         .main-container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -182,20 +175,10 @@
             border-left: 5px solid var(--accent);
         }
 
-        .card-header.maschile {
-            border-left-color: var(--maschile);
-            color: var(--maschile);
-        }
-
-        .card-header.femminile {
-            border-left-color: var(--femminile);
-            color: var(--femminile);
-        }
-
-        .card-header.plurale {
-            border-left-color: var(--plurale);
-            color: var(--plurale);
-        }
+        .card-header.maschile { border-left-color: var(--maschile); color: var(--maschile); }
+        .card-header.femminile { border-left-color: var(--femminile); color: var(--femminile); }
+        .card-header.plurale { border-left-color: var(--plurale); color: var(--plurale); }
+        .card-header.lang { border-left-color: var(--lang-border); color: var(--primary); background: var(--lang-bg); }
 
         .card-body {
             padding: 1.5rem;
@@ -218,36 +201,22 @@
             border-left: 4px solid var(--gold);
         }
 
-        .lang-box {
-            background: #f0fff4;
-            border: 1px solid #9ae6b4;
-            padding: 1rem;
-            margin: 0.5rem 0;
+        .warning-box {
+            background: #fff5f5;
+            border: 2px solid #fc8181;
+            padding: 1.25rem;
+            margin: 1rem 0;
             border-radius: 8px;
-            font-size: 0.95rem;
-            line-height: 1.8;
+            border-left: 4px solid var(--accent);
         }
 
-        .lang-box.arabic {
-            direction: rtl;
-            text-align: right;
-            font-family: 'Traditional Arabic', 'Arial', sans-serif;
-        }
-
-        .lang-box.urdu {
-            direction: rtl;
-            text-align: right;
-            font-family: 'Jameel Noori Nastaleeq', 'Arial', sans-serif;
-        }
-
-        .lang-label {
-            font-weight: bold;
-            color: var(--primary);
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .tip-box {
+            background: #e6fffa;
+            border: 1px solid #81e6d9;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #38b2ac;
         }
 
         .article-table {
@@ -283,17 +252,9 @@
             font-family: 'Georgia', serif;
         }
 
-        .article-display.maschile {
-            color: var(--maschile);
-        }
-
-        .article-display.femminile {
-            color: var(--femminile);
-        }
-
-        .article-display.plurale {
-            color: var(--plurale);
-        }
+        .article-display.maschile { color: var(--maschile); }
+        .article-display.femminile { color: var(--femminile); }
+        .article-display.plurale { color: var(--plurale); }
 
         .gender-tag {
             display: inline-block;
@@ -307,44 +268,59 @@
             border-radius: 12px;
         }
 
-        .tag-m {
-            background: var(--maschile);
-        }
+        .tag-m { background: var(--maschile); }
+        .tag-f { background: var(--femminile); }
+        .tag-pl { background: var(--plurale); }
 
-        .tag-f {
-            background: var(--femminile);
-        }
-
-        .tag-pl {
-            background: var(--plurale);
-        }
-
-        .comparison-row {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            font-size: 1.2rem;
-            padding: 1rem;
-            background: white;
-            border: 1px solid var(--border);
-            margin: 0.5rem 0;
+        /* Language sections */
+        .lang-section {
+            margin-bottom: 2rem;
+            border: 1px solid var(--lang-border);
             border-radius: 8px;
-            transition: all 0.2s;
+            overflow: hidden;
         }
 
-        .comparison-row:hover {
-            background: #f7fafc;
-            transform: translateX(5px);
-        }
-
-        .det {
+        .lang-header {
+            background: var(--lang-bg);
+            padding: 0.75rem 1rem;
+            font-weight: bold;
             color: var(--primary);
-            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .indet {
-            color: var(--success);
-            font-weight: bold;
+        .lang-header:hover {
+            background: #bbdefb;
+        }
+
+        .lang-content {
+            padding: 1rem;
+            display: none;
+            background: white;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        .lang-flag {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s;
+        }
+
+        .toggle-icon.rotated {
+            transform: rotate(180deg);
         }
 
         .multilang-grid {
@@ -354,48 +330,32 @@
             margin: 1rem 0;
         }
 
-        .theory-section {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
-            margin: 1rem 0;
-        }
-
-        .example-box {
-            background: #f7fafc;
-            border: 1px solid var(--border);
+        .lang-box {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
             padding: 1rem;
             margin: 0.5rem 0;
             border-radius: 8px;
-            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.8;
         }
 
-        .warning-box {
-            background: #fff5f5;
-            border: 2px solid #fc8181;
-            padding: 1.25rem;
-            margin: 1rem 0;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent);
+        .lang-box.arabic, .lang-box.urdu {
+            direction: rtl;
+            text-align: right;
         }
 
-        .tip-box {
-            background: #e6fffa;
-            border: 1px solid #81e6d9;
-            padding: 1.25rem;
-            margin: 1rem 0;
-            border-radius: 8px;
-            border-left: 4px solid #38b2ac;
+        .lang-label {
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .two-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        /* STILI ESERCIZI */
+        /* ESERCIZI STILI */
         .game-container {
             max-width: 900px;
             margin: 0 auto;
@@ -463,16 +423,6 @@
             margin-bottom: 1rem;
             line-height: 1.8;
             color: var(--dark);
-        }
-
-        .blank {
-            display: inline-block;
-            min-width: 120px;
-            border-bottom: 3px solid var(--accent);
-            color: var(--accent);
-            font-weight: bold;
-            margin: 0 0.3rem;
-            padding: 0 0.5rem;
         }
 
         .options-grid {
@@ -595,6 +545,116 @@
             box-shadow: 0 0 0 3px rgba(214, 158, 46, 0.2);
         }
 
+        .exercise-counter {
+            background: var(--gold);
+            color: #1a202c;
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .text-center { text-align: center; }
+
+        /* MODAL EMAIL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .result-summary {
+            background: #f8f9fa;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .success-message {
+            background: var(--success-bg);
+            color: var(--success);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--success);
+        }
+
+        .error-message {
+            background: var(--error-bg);
+            color: var(--error);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--error);
+        }
+
         .final-score-section {
             background: linear-gradient(135deg, var(--primary) 0%, #1a202c 100%);
             color: white;
@@ -625,26 +685,31 @@
             opacity: 0.95;
         }
 
-        .exercise-counter {
-            background: var(--gold);
-            color: #1a202c;
-            padding: 0.5rem 1.25rem;
+        .sufficiency-indicator {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
             border-radius: 20px;
             font-weight: bold;
-            display: inline-block;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
+            margin-top: 1rem;
         }
 
-        .text-center { text-align: center; }
+        .sufficiency-pass {
+            background: var(--success-bg);
+            color: var(--success);
+            border: 2px solid var(--success);
+        }
+
+        .sufficiency-fail {
+            background: var(--error-bg);
+            color: var(--error);
+            border: 2px solid var(--error);
+        }
 
         @media (max-width: 768px) {
             .nav-tabs { flex-wrap: wrap; }
             .nav-tab { padding: 0.75rem 1rem; font-size: 0.85rem; flex: 1 1 50%; }
             .options-grid { grid-template-columns: 1fr; }
-            .comparison-row { flex-direction: column; gap: 0.5rem; text-align: center; }
             .multilang-grid { grid-template-columns: 1fr; }
-            .two-col { grid-template-columns: 1fr; }
             .fill-blank { width: 100%; max-width: 300px; }
             .final-score-value { font-size: 3rem; }
         }
@@ -655,8 +720,7 @@
     <header class="header">
         <div class="header-container">
             <h1>Articoli Indeterminativi Italiani</h1>
-            <p>Teoria Completa Multilingue + 100 Esercizi Interattivi</p>
-            <div class="lang-selector">🌍 Wolof | العربية | English | Français | Bambara | اردو | ਪੰਜਾਬੀ | Shqip | Español | Português | বাংলা | हिंदी | 中文</div>
+            <p>Teoria Completa Multilingue + 50 Esercizi con Valutazione</p>
         </div>
     </header>
 
@@ -666,148 +730,648 @@
             <span>›</span>
             <a href="#">Italiano A1-A2</a>
             <span>›</span>
-            <strong>Articoli Indeterminativi - Teoria + 100 Esercizi</strong>
+            <strong>Articoli Indeterminativi - 50 Esercizi</strong>
         </div>
     </nav>
 
     <main class="main-container">
         <div class="page-header">
             <h1 class="page-title">📚 Gli Articoli Indeterminativi Italiani</h1>
-            <p class="page-subtitle">Guida completa in 13 lingue + 100 esercizi interattivi</p>
+            <p class="page-subtitle">50 esercizi (2 punti ciascuno) - Sufficienza: 60/100</p>
         </div>
 
         <nav class="nav-tabs">
             <button class="nav-tab active" onclick="showSection('intro', this)">Introduzione</button>
+            <button class="nav-tab" onclick="showSection('languages', this)">🌍 18 Lingue</button>
             <button class="nav-tab" onclick="showSection('maschile', this)">Maschile</button>
             <button class="nav-tab" onclick="showSection('femminile', this)">Femminile</button>
             <button class="nav-tab" onclick="showSection('plurale', this)">Plurale</button>
             <button class="nav-tab" onclick="showSection('confronto', this)">Confronto</button>
-            <button class="nav-tab" onclick="showSection('errori', this)">Errori Comuni</button>
-            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 100 Esercizi</button>
+            <button class="nav-tab" onclick="showSection('errori', this)">Errori</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 50 Esercizi</button>
         </nav>
 
         <!-- SEZIONE INTRODUZIONE -->
         <section id="intro" class="section active">
             <div class="card">
-                <div class="card-header">🌍 Definizione e Concetto - Multilingue</div>
+                <div class="card-header">🌍 Definizione - 18 Lingue</div>
                 <div class="card-body">
                     <div class="instruction-box">
-                        <strong>🇮🇹 Italiano:</strong> Gli <strong>articoli indeterminativi</strong> (o indefiniti) si utilizzano quando si fa riferimento a entità <strong>non specificate</strong>, cioè quando l'identità esatta della persona, dell'animale o della cosa è ignota o non importante nel contesto.
+                        <strong>🇮🇹 Italiano:</strong> Gli <strong>articoli indeterminativi</strong> si utilizzano quando si fa riferimento a entità <strong>non specificate</strong>, cioè quando l'identità esatta è ignota o non importante.
                     </div>
 
                     <div class="multilang-grid">
                         <div class="lang-box">
-                            <span class="lang-label">🇸🇳 Wolof</span>
-                            <strong>Artikul yi ñu xamul</strong> (Articles indéterminés) ñuy jëfandikoo boo bëggee wax ci mbir bu ñu xamul dara ci, walla boo bëggee wax ci ab mbir bu am solo ci ay yeneen yu bari.
+                            <span class="lang-label">🇷🇺 Русский</span>
+                            <strong>Неопределенные артикли</strong> используются при ссылке на <strong>неопределенные сущности</strong>, когда точная идентичность неизвестна или неважна.
                         </div>
-                        <div class="lang-box arabic">
-                            <span class="lang-label">🇸🇦 العربية</span>
-                            <strong>الأدوات غير المعرفة</strong> تُستخدم عند الإشارة إلى كيانات <strong>غير محددة</strong>، أي عندما تكون هوية الشخص أو الحيوان أو الشيء غير معروفة أو غير مهمة في السياق.
+                        <div class="lang-box">
+                            <span class="lang-label">🇺🇦 Українська</span>
+                            <strong>Невизначені артиклі</strong> використовуються при посиланні на <strong>невизначені сутності</strong>, коли точна ідентичність невідома або неважлива.
                         </div>
                         <div class="lang-box">
                             <span class="lang-label">🇬🇧 English</span>
-                            <strong>Indefinite articles</strong> are used when referring to <strong>unspecified entities</strong>, that is, when the exact identity of the person, animal, or thing is unknown or unimportant in the context.
+                            <strong>Indefinite articles</strong> are used when referring to <strong>unspecified entities</strong>, when the exact identity is unknown or unimportant.
                         </div>
                         <div class="lang-box">
                             <span class="lang-label">🇫🇷 Français</span>
-                            Les <strong>articles indéfinis</strong> s'utilisent lorsqu'on fait référence à des entités <strong>non spécifiées</strong>, c'est-à-dire quand l'identité exacte de la personne, de l'animal ou de la chose est inconnue ou sans importance dans le contexte.
+                            Les <strong>articles indéfinis</strong> s'utilisent lorsqu'on fait référence à des entités <strong>non spécifiées</strong>, quand l'identité exacte est inconnue ou sans importance.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇪🇸 Español</span>
+                            Los <strong>artículos indefinidos</strong> se utilizan cuando se hace referencia a <strong>entidades no especificadas</strong>, cuando la identidad exacta es desconocida o sin importancia.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇵🇹 Português</span>
+                            Os <strong>artigos indefinidos</strong> são usados quando se refere a <strong>entidades não especificadas</strong>, quando a identidade exata é desconhecida ou sem importância.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇬🇭 Twi</span>
+                            <strong>Artikul yi ñu xamul</strong> (Articles indéfinis) ñuy jëfandikoo boo bëggee wax ci mbir bu ñu xamul dara ci.
                         </div>
                         <div class="lang-box">
                             <span class="lang-label">🇲🇱 Bambara</span>
                             <strong>Artikulu minnu t'a dafalen</strong> (Articles indéterminés) bɛ baara kɛ ni an bɛ kuma ka naforo <strong>min t'a dafalen</strong> ye.
                         </div>
-                        <div class="lang-box urdu">
-                            <span class="lang-label">🇵🇰 اردو</span>
-                            <strong>غیر معینہ آرٹیکلز</strong> کا استعمال تب کیا جاتا ہے جب <strong>غیر مخصوص اداروں</strong> کا حوالہ دیا جاتا ہے۔
+                        <div class="lang-box">
+                            <span class="lang-label">🇸🇳 Wolof</span>
+                            <strong>Artik yi ñu xamul yi</strong> (Articles indéterminés) ay baat lañu yi ñuy daje ak turu nit, xay walla mbir <strong>yi ñu xamul</strong>.
                         </div>
                         <div class="lang-box">
-                            <span class="lang-label">🇮🇳 ਪੰਜਾਬੀ</span>
-                            <strong>ਅਣਜਾਣੇ ਆਰਟੀਕਲ</strong> ਦੀ ਵਰਤੋਂ ਤਦ ਕੀਤੀ ਜਾਂਦੀ ਹੈ ਜਦੋਂ <strong>ਅਣਜਾਣੀਆਂ ਇਕਾਈਆਂ</strong> ਦਾ ਜ਼ਿਕਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।
+                            <span class="lang-label">🇳🇬 Hausa</span>
+                            <strong>Artikullin da ba a ƙayyade</strong> (Articles indéfinis) ana amfani da su lokacin da aka yi magana game da <strong>entitie da ba a ƙayyade ba</strong>.
+                        </div>
+                        <div class="lang-box arabic">
+                            <span class="lang-label">🇸🇦 العربية</span>
+                            <strong>الأدوات غير المعرفة</strong> تُستخدم عند الإشارة إلى <strong>كيانات غير محددة</strong>، عندما تكون الهوية الدقيقة غير معروفة أو غير مهمة.
                         </div>
                         <div class="lang-box">
                             <span class="lang-label">🇦🇱 Shqip</span>
-                            <strong>Artikujt e pashquar</strong> (articoli indeterminativi) përdoren kur i referohen <strong>entiteteve të papërcaktuara</strong>.
+                            <strong>Artikujt e pashquar</strong> përdoren kur i referohen <strong>entiteteve të papërcaktuara</strong>, kur identiteti i saktë është i panjohur ose pa rëndësi.
                         </div>
                         <div class="lang-box">
-                            <span class="lang-label">🇪🇸 Español</span>
-                            Los <strong>artículos indefinidos</strong> se utilizan cuando se hace referencia a <strong>entidades no especificadas</strong>.
+                            <span class="lang-label">🇹🇷 Türkçe</span>
+                            <strong>Belirsiz artikeller</strong>, <strong>belirtilmemiş varlıklara</strong> atıfta bulunulduğunda kullanılır, tam kimlik bilinmediğinde veya önemsiz olduğunda.
+                        </div>
+                        <div class="lang-box urdu">
+                            <span class="lang-label">🇵🇰 اردو</span>
+                            <strong>غیر معینہ آرٹیکلز</strong> کا استعمال تب کیا جاتا ہے جب <strong>غیر مخصوص اداروں</strong> کا حوالہ دیا جاتا ہے، جب准确 شناخت نامعلوم یا غیر اہمیت کی ہو۔
                         </div>
                         <div class="lang-box">
-                            <span class="lang-label">🇧🇷 Português</span>
-                            Os <strong>artigos indefinidos</strong> são usados quando se refere a <strong>entidades não especificadas</strong>.
+                            <span class="lang-label">🇮🇳 ਪੰਜਾਬੀ</span>
+                            <strong>ਅਣਜਾਣੇ ਆਰਟੀਕਲ</strong> ਦੀ ਵਰਤੋਂ ਤਦ ਕੀਤੀ ਜਾਂਦੀ ਹੈ ਜਦੋਂ <strong>ਅਣਜਾਣੀਆਂ ਇਕਾਈਆਂ</strong> ਦਾ ਜ਼ਿਕਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਜਦੋਂ ਸਹੀ ਪਛਾਣ ਅਣਜਾਣੀ ਜਾਂ ਗੈਰ-ਮਹੱਤਵਪੂਰਨ ਹੁੰਦੀ ਹੈ।
                         </div>
                         <div class="lang-box">
                             <span class="lang-label">🇧🇩 বাংলা</span>
-                            <strong>অনির্দিষ্ট নিবন্ধগুলি</strong> ব্যবহার করা হয় যখন <strong>অনির্দিষ্ট সত্তাগুলির</strong> উল্লেখ করা হয়।
+                            <strong>অনির্দিষ্ট নিবন্ধগুলি</strong> ব্যবহার করা হয় যখন <strong>অনির্দিষ্ট সত্তাগুলির</strong> উল্লেখ করা হয়, যখন সঠিক পরিচয় অজানা বা গুরুত্বহীন।
                         </div>
                         <div class="lang-box">
                             <span class="lang-label">🇮🇳 हिंदी</span>
-                            <strong>अनिश्चित लेख</strong> का उपयोग तब किया जाता है जब <strong>अनिर्दिष्ट इकाइयों</strong> का संदर्भ दिया जाता है।
+                            <strong>अनिश्चित लेख</strong> का उपयोग तब किया जाता है जब <strong>अनिर्दिष्ट इकाइयों</strong> का संदर्भ दिया जाता है, जब सही पहचान अज्ञात या महत्वहीन होती है।
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇵🇭 Filipino</span>
+                            <strong>Mga hindi tiyak na artikulo</strong> ay ginagamit kapag tumutukoy sa <strong>mga hindi tukoy na entidad</strong>, kapag ang eksaktong pagkakakilanlan ay hindi alam o hindi mahalaga.
+                        </div>
+                        <div class="lang-box">
+                            <span class="lang-label">🇰🇷 한국어</span>
+                            <strong>부정관사</strong>는 <strong>불특정한 대상</strong>을 지칭할 때 사용되며, 정확한 정체를 알 수 없거나 중요하지 않을 때 쓰입니다.
                         </div>
                         <div class="lang-box">
                             <span class="lang-label">🇨🇳 中文</span>
-                            <strong>不定冠词</strong>用于指代<strong>未指定的实体</strong>。
+                            <strong>不定冠词</strong>用于指代<strong>未指定的实体</strong>，当确切身份未知或不重要时使用。
                         </div>
                     </div>
 
-                    <div class="theory-section">
-                        <h3 style="color: var(--primary); margin-bottom: 1rem;">📋 Forme degli Articoli Indeterminativi</h3>
-                        
-                        <table class="article-table">
-                            <tr>
-                                <th>Genere/Numero</th>
-                                <th>Forma</th>
-                                <th>Esempio</th>
-                                <th>Quando si usa</th>
-                            </tr>
-                            <tr>
-                                <td><strong>Maschile Singolare</strong></td>
-                                <td class="article-display maschile">UN</td>
-                                <td>un libro, un cane</td>
-                                <td>Con consonante semplice o vocale</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Maschile Singolare</strong></td>
-                                <td class="article-display maschile">UNO</td>
-                                <td>uno studente, uno zaino</td>
-                                <td>Con s+consonante, z, ps, gn, x, y</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Femminile Singolare</strong></td>
-                                <td class="article-display femminile">UNA</td>
-                                <td>una casa, una penna</td>
-                                <td>Con consonante qualsiasi</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Femminile Singolare</strong></td>
-                                <td class="article-display femminile">UN'</td>
-                                <td>un'amica, un'isola</td>
-                                <td>Con vocale (elisione)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Maschile Plurale</strong></td>
-                                <td class="article-display plurale">DEI</td>
-                                <td>dei libri, dei cani</td>
-                                <td>Plurale di UN</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Maschile Plurale</strong></td>
-                                <td class="article-display plurale">DEGLI</td>
-                                <td>degli studenti, degli amici</td>
-                                <td>Plurale di UNO e UN (vocali)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Femminile Plurale</strong></td>
-                                <td class="article-display plurale">DELLE</td>
-                                <td>delle case, delle amiche</td>
-                                <td>Unico plurale femminile</td>
-                            </tr>
-                        </table>
+                    <div class="card">
+                        <div class="card-header">📋 Forme degli Articoli Indeterminativi</div>
+                        <div class="card-body">
+                            <table class="article-table">
+                                <tr>
+                                    <th>Genere/Numero</th>
+                                    <th>Forma</th>
+                                    <th>Esempio</th>
+                                    <th>Quando si usa</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>Maschile Singolare</strong></td>
+                                    <td class="article-display maschile">UN</td>
+                                    <td>un libro, un cane</td>
+                                    <td>Con consonante semplice o vocale</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Maschile Singolare</strong></td>
+                                    <td class="article-display maschile">UNO</td>
+                                    <td>uno studente, uno zaino</td>
+                                    <td>Con s+consonante, z, ps, gn, x, y</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Femminile Singolare</strong></td>
+                                    <td class="article-display femminile">UNA</td>
+                                    <td>una casa, una penna</td>
+                                    <td>Con consonante qualsiasi</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Femminile Singolare</strong></td>
+                                    <td class="article-display femminile">UN'</td>
+                                    <td>un'amica, un'isola</td>
+                                    <td>Con vocale (elisione)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Maschile Plurale</strong></td>
+                                    <td class="article-display plurale">DEI</td>
+                                    <td>dei libri, dei cani</td>
+                                    <td>Plurale di UN</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Maschile Plurale</strong></td>
+                                    <td class="article-display plurale">DEGLI</td>
+                                    <td>degli studenti, degli amici</td>
+                                    <td>Plurale di UNO e UN (vocali)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Femminile Plurale</strong></td>
+                                    <td class="article-display plurale">DELLE</td>
+                                    <td>delle case, delle amiche</td>
+                                    <td>Unico plurale femminile</td>
+                                </tr>
+                            </table>
 
-                        <div class="warning-box">
-                            <strong>⚠️ Regola Fondamentale:</strong><br>
-                            <strong>L'apostrofo (') si usa SOLO al femminile singolare davanti alle vocali.</strong><br>
-                            Al maschile singolare NON si usa MAI l'apostrofo: si dice "un amico", "un elefante" (mai "un'amico").
+                            <div class="warning-box">
+                                <strong>⚠️ Regola Fondamentale:</strong><br>
+                                <strong>L'apostrofo (') si usa SOLO al femminile singolare davanti alle vocali.</strong><br>
+                                Al maschile singolare NON si usa MAI l'apostrofo: si dice "un amico", "un elefante" (mai "un'amico").
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE LINGUE DETTAGLIATE -->
+        <section id="languages" class="section">
+            <div class="card">
+                <div class="card-header lang">🌍 Spiegazioni Dettagliate in 18 Lingue</div>
+                <div class="card-body">
+                    <p style="margin-bottom: 1.5rem;">Clicca su una lingua per leggere la spiegazione completa:</p>
+
+                    <!-- 1. Русский -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇷🇺</span> <strong>Русский (Russo)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Неопределенные артикли в итальянском</h4>
+                            <p><strong>Неопределенные артикли</strong> используются при ссылке на неопределенные сущности.</p>
+                            <table class="article-table">
+                                <tr><th>Род</th><th>Число</th><th>Артикль</th><th>Примеры</th></tr>
+                                <tr><td rowspan="2">Мужской</td><td rowspan="2">Ед.ч.</td><td><strong>UN</strong></td><td>un libro (книга), un cane (собака)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (студент), uno zaino (рюкзак)</td></tr>
+                                <tr><td rowspan="2">Женский</td><td rowspan="2">Ед.ч.</td><td><strong>UNA</strong></td><td>una casa (дом), una penna (ручка)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (подруга), un'isola (остров)</td></tr>
+                                <tr><td rowspan="2">Мужской</td><td rowspan="2">Мн.ч.</td><td><strong>DEI</strong></td><td>dei libri (книги), dei cani (собаки)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (студенты), degli amici (друзья)</td></tr>
+                                <tr><td>Женский</td><td>Мн.ч.</td><td><strong>DELLE</strong></td><td>delle case (дома), delle amiche (подруги)</td></tr>
+                            </table>
+                            <p><strong>Важно:</strong> Апостроф только в женском роде перед гласными!</p>
+                        </div>
+                    </div>
+
+                    <!-- 2. Українська -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇺🇦</span> <strong>Українська (Ucraino)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Невизначені артиклі в італійській</h4>
+                            <p><strong>Невизначені артиклі</strong> використовуються для невизначених сутностей.</p>
+                            <table class="article-table">
+                                <tr><th>Рід</th><th>Число</th><th>Артикль</th><th>Приклади</th></tr>
+                                <tr><td rowspan="2">Чоловічий</td><td rowspan="2">Однина</td><td><strong>UN</strong></td><td>un libro (книга), un cane (собака)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (студент), uno zaino (рюкзак)</td></tr>
+                                <tr><td rowspan="2">Жіночий</td><td rowspan="2">Однина</td><td><strong>UNA</strong></td><td>una casa (дім), una penna (ручка)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (подруга), un'isola (острів)</td></tr>
+                                <tr><td rowspan="2">Чоловічий</td><td rowspan="2">Множина</td><td><strong>DEI</strong></td><td>dei libri (книги), dei cani (собаки)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (студенти), degli amici (друзі)</td></tr>
+                                <tr><td>Жіночий</td><td>Множина</td><td><strong>DELLE</strong></td><td>delle case (будинки), delle amiche (подруги)</td></tr>
+                            </table>
+                            <p><strong>Важливо:</strong> Апостроф тільки в жіночому роді перед голосними!</p>
+                        </div>
+                    </div>
+
+                    <!-- 3. English -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇬🇧</span> <strong>English (Inglese)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Italian Indefinite Articles</h4>
+                            <p><strong>Indefinite articles</strong> are used for unspecified entities.</p>
+                            <table class="article-table">
+                                <tr><th>Gender</th><th>Number</th><th>Article</th><th>Examples</th></tr>
+                                <tr><td rowspan="2">Masculine</td><td rowspan="2">Singular</td><td><strong>UN</strong></td><td>un libro (a book), un cane (a dog)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (a student), uno zaino (a backpack)</td></tr>
+                                <tr><td rowspan="2">Feminine</td><td rowspan="2">Singular</td><td><strong>UNA</strong></td><td>una casa (a house), una penna (a pen)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (a friend), un'isola (an island)</td></tr>
+                                <tr><td rowspan="2">Masculine</td><td rowspan="2">Plural</td><td><strong>DEI</strong></td><td>dei libri (some books), dei cani (some dogs)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (some students), degli amici (some friends)</td></tr>
+                                <tr><td>Feminine</td><td>Plural</td><td><strong>DELLE</strong></td><td>delle case (some houses), delle amiche (some friends)</td></tr>
+                            </table>
+                            <p><strong>Important:</strong> Apostrophe ONLY in feminine singular before vowels!</p>
+                        </div>
+                    </div>
+
+                    <!-- 4. Français -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇫🇷</span> <strong>Français (Francese)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Les Articles Indéfinis Italiens</h4>
+                            <p>Les <strong>articles indéfinis</strong> s'utilisent pour des entités non spécifiées.</p>
+                            <table class="article-table">
+                                <tr><th>Genre</th><th>Nombre</th><th>Article</th><th>Exemples</th></tr>
+                                <tr><td rowspan="2">Masculin</td><td rowspan="2">Singulier</td><td><strong>UN</strong></td><td>un libro (un livre), un cane (un chien)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (un étudiant), uno zaino (un sac)</td></tr>
+                                <tr><td rowspan="2">Féminin</td><td rowspan="2">Singulier</td><td><strong>UNA</strong></td><td>una casa (une maison), una penna (un stylo)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (une amie), un'isola (une île)</td></tr>
+                                <tr><td rowspan="2">Masculin</td><td rowspan="2">Pluriel</td><td><strong>DEI</strong></td><td>dei libri (des livres), dei cani (des chiens)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (des étudiants), degli amici (des amis)</td></tr>
+                                <tr><td>Féminin</td><td>Pluriel</td><td><strong>DELLE</strong></td><td>delle case (des maisons), delle amiche (des amies)</td></tr>
+                            </table>
+                            <p><strong>Important:</strong> Apostrophe UNIQUEMENT au féminin singulier devant les voyelles!</p>
+                        </div>
+                    </div>
+
+                    <!-- 5. Español -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇪🇸</span> <strong>Español (Spagnolo)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Los Artículos Indefinidos Italianos</h4>
+                            <p>Los <strong>artículos indefinidos</strong> se usan para entidades no especificadas.</p>
+                            <table class="article-table">
+                                <tr><th>Género</th><th>Número</th><th>Artículo</th><th>Ejemplos</th></tr>
+                                <tr><td rowspan="2">Masculino</td><td rowspan="2">Singular</td><td><strong>UN</strong></td><td>un libro (un libro), un cane (un perro)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (un estudiante), uno zaino (una mochila)</td></tr>
+                                <tr><td rowspan="2">Femenino</td><td rowspan="2">Singular</td><td><strong>UNA</strong></td><td>una casa (una casa), una penna (un bolígrafo)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (una amiga), un'isola (una isla)</td></tr>
+                                <tr><td rowspan="2">Masculino</td><td rowspan="2">Plural</td><td><strong>DEI</strong></td><td>dei libri (unos libros), dei cani (unos perros)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (unos estudiantes), degli amici (unos amigos)</td></tr>
+                                <tr><td>Femenino</td><td>Plural</td><td><strong>DELLE</strong></td><td>delle case (unas casas), delle amiche (unas amigas)</td></tr>
+                            </table>
+                            <p><strong>¡Importante:</strong> ¡Apóstrofo SOLO en femenino singular ante vocales!</p>
+                        </div>
+                    </div>
+
+                    <!-- 6. Português -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇵🇹</span> <strong>Português</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Os Artigos Indefinidos Italianos</h4>
+                            <p>Os <strong>artigos indefinidos</strong> são usados para entidades não especificadas.</p>
+                            <table class="article-table">
+                                <tr><th>Gênero</th><th>Número</th><th>Artigo</th><th>Exemplos</th></tr>
+                                <tr><td rowspan="2">Masculino</td><td rowspan="2">Singular</td><td><strong>UN</strong></td><td>un libro (um livro), un cane (um cachorro)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (um estudante), uno zaino (uma mochila)</td></tr>
+                                <tr><td rowspan="2">Feminino</td><td rowspan="2">Singular</td><td><strong>UNA</strong></td><td>una casa (uma casa), una penna (uma caneta)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (uma amiga), un'isola (uma ilha)</td></tr>
+                                <tr><td rowspan="2">Masculino</td><td rowspan="2">Plural</td><td><strong>DEI</strong></td><td>dei libri (uns livros), dei cani (uns cachorros)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (uns estudantes), degli amici (uns amigos)</td></tr>
+                                <tr><td>Feminino</td><td>Plural</td><td><strong>DELLE</strong></td><td>delle case (umas casas), delle amiche (umas amigas)</td></tr>
+                            </table>
+                            <p><strong>Importante:</strong> Apóstrofo APENAS no feminino singular antes de vogais!</p>
+                        </div>
+                    </div>
+
+                    <!-- 7. Twi -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇬🇭</span> <strong>Twi (Akan)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Italia kasafua mu Artikul a wɔhu no nnyie</h4>
+                            <p><strong>Artikul a wɔhu no nnyie</strong> (Indefinite articles) yɛ nsɛm a wɔde kyere nneɛma a wɔhu wɔn nnyie.</p>
+                            <table class="article-table">
+                                <tr><th>Ntɛ</th><th>Dodow</th><th>Artikul</th><th>Nhwɛso</th></tr>
+                                <tr><td rowspan="2">Ɔkasa</td><td rowspan="2">Kor</td><td><strong>UN</strong></td><td>un libro (nwoma), un cane (akwansene)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (suafo), uno zaino (bɔkɔɔ)</td></tr>
+                                <tr><td rowspan="2">Ɔbea</td><td rowspan="2">Kor</td><td><strong>UNA</strong></td><td>una casa (dan), una penna (kyɛm)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (adamfo), un'isola (supɔ)</td></tr>
+                                <tr><td rowspan="2">Ɔkasa</td><td rowspan="2">Pii</td><td><strong>DEI</strong></td><td>dei libri (nwoma), dei cani (akwansene)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (suafo), degli amici (nnamfo)</td></tr>
+                                <tr><td>Ɔbea</td><td>Pii</td><td><strong>DELLE</strong></td><td>delle case (adan), delle amiche (nnamfo)</td></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 8. Bambara -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇲🇱</span> <strong>Bambara</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Italiɛ kan Artikulu minnu t'a dafalen</h4>
+                            <p><strong>Artikulu minnu t'a dafalen</strong> (Articles indéterminés) bɛ baara kɛ ni an bɛ kuma ka naforo min t'a dafalen.</p>
+                            <table class="article-table">
+                                <tr><th>Cɛya</th><th>Hakɛ</th><th>Artikul</th><th>Misali</th></tr>
+                                <tr><td rowspan="2">Cɛ</td><td rowspan="2">Kelen</td><td><strong>UN</strong></td><td>un libro (kalan), un cane (wulu)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (denkɛ), uno zaino (sac)</td></tr>
+                                <tr><td rowspan="2">Muso</td><td rowspan="2">Kelen</td><td><strong>UNA</strong></td><td>una casa (so), una penna (plume)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (so), un'isola (dugu)</td></tr>
+                                <tr><td rowspan="2">Cɛ</td><td rowspan="2">Wɔɔrɔ</td><td><strong>DEI</strong></td><td>dei libri (kalanw), dei cani (wuluw)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (denkɛw), degli amici (sow)</td></tr>
+                                <tr><td>Muso</td><td>Wɔɔrɔ</td><td><strong>DELLE</strong></td><td>delle case (sow), delle amiche (sow)</td></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 9. Wolof -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇸🇳</span> <strong>Wolof</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Artik yi ñu xamul ci Itali</h4>
+                            <p><strong>Artik yi ñu xamul yi</strong> (Articles indéfinis) ay baat lañu yi ñuy daje ak turu nit, xay walla mbir yi ñu xamul.</p>
+                            <table class="article-table">
+                                <tr><th>Njort</th><th>Turu</th><th>Artik</th><th>Yeneen</th></tr>
+                                <tr><td rowspan="2">Njort</td><td rowspan="2">Benn</td><td><strong>UN</strong></td><td>un libro (tëere), un cane (xaj)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (xale), uno zaino (sàcc)</td></tr>
+                                <tr><td rowspan="2">Jigéen</td><td rowspan="2">Benn</td><td><strong>UNA</strong></td><td>una casa (kër), una penna (bik)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (xarit), un'isola (dunu)</td></tr>
+                                <tr><td rowspan="2">Njort</td><td rowspan="2">Ñaari</td><td><strong>DEI</strong></td><td>dei libri (tëere yi), dei cani (xaj yi)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (xale yi), degli amici (xarit yi)</td></tr>
+                                <tr><td>Jigéen</td><td>Ñaari</td><td><strong>DELLE</strong></td><td>delle case (kër yi), delle amiche (xarit yi)</td></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 10. Hausa -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇳🇬</span> <strong>Hausa</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Ma'anar Artikullin da ba a ƙayyade ba</h4>
+                            <p><strong>Artikullin da ba a ƙayyade ba</strong> (Articles indéfinis) ana amfani da su lokacin da aka yi magana game da entitie da ba a ƙayyade ba.</p>
+                            <table class="article-table">
+                                <tr><th>Jinsi</th><th>Yawan</th><th>Artikul</th><th>Misalai</th></tr>
+                                <tr><td rowspan="2">Namiji</td><td rowspan="2">Singular</td><td><strong>UN</strong></td><td>un libro (littafi), un cane (kare)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (dalibi), uno zaino (jaka)</td></tr>
+                                <tr><td rowspan="2">Mace</td><td rowspan="2">Singular</td><td><strong>UNA</strong></td><td>una casa (gida), una penna (alƙalami)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (abokiya), un'isola (tsibiri)</td></tr>
+                                <tr><td rowspan="2">Namiji</td><td rowspan="2">Plural</td><td><strong>DEI</strong></td><td>dei libri (littattafai), dei cani (karnuka)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (dalibai), degli amici (abokanai)</td></tr>
+                                <tr><td>Mace</td><td>Plural</td><td><strong>DELLE</strong></td><td>delle case (gidaje), delle amiche (abokiyoyi)</td></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 11. العربية -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇸🇦</span> <strong>العربية (Arabo)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content rtl">
+                            <div class="arabic-text">
+                                <h4>الأدوات غير المعرفة في الإيطالية</h4>
+                                <p><strong>الأدوات غير المعرفة</strong> تُستخدم عند الإشارة إلى كيانات غير محددة.</p>
+                                <table class="article-table">
+                                    <tr><th>الجنس</th><th>العدد</th><th>الأداة</th><th>أمثلة</th></tr>
+                                    <tr><td rowspan="2">مذكر</td><td rowspan="2">مفرد</td><td><strong>UN</strong></td><td>un libro (كتاب), un cane (كلب)</td></tr>
+                                    <tr><td><strong>UNO</strong></td><td>uno studente (طالب), uno zaino (حقيبة)</td></tr>
+                                    <tr><td rowspan="2">مؤنث</td><td rowspan="2">مفرد</td><td><strong>UNA</strong></td><td>una casa (منزل), una penna (قلم)</td></tr>
+                                    <tr><td><strong>UN'</strong></td><td>un'amica (صديقة), un'isola (جزيرة)</td></tr>
+                                    <tr><td rowspan="2">مذكر</td><td rowspan="2">جمع</td><td><strong>DEI</strong></td><td>dei libri (كتب), dei cani (كلاب)</td></tr>
+                                    <tr><td><strong>DEGLI</strong></td><td>degli studenti (طلاب), degli amici (أصدقاء)</td></tr>
+                                    <tr><td>مؤنث</td><td>جمع</td><td><strong>DELLE</strong></td><td>delle case (منازل), delle amiche (صديقات)</td></tr>
+                                </table>
+                                <p><strong>مهم:</strong> الفاصلة العليا فقط في المؤنث المفرد قبل الحروف المتحركة!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 12. Shqip -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇦🇱</span> <strong>Shqip (Albanese)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Artikujt e Pashquar në Italisht</h4>
+                            <p><strong>Artikujt e pashquar</strong> përdoren kur i referohen entiteteve të papërcaktuara.</p>
+                            <table class="article-table">
+                                <tr><th>Gjinia</th><th>Numri</th><th>Artikulli</th><th>Shembuj</th></tr>
+                                <tr><td rowspan="2">Mashkullore</td><td rowspan="2">Njëjës</td><td><strong>UN</strong></td><td>un libro (libër), un cane (qen)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (student), uno zaino (çantë)</td></tr>
+                                <tr><td rowspan="2">Femërore</td><td rowspan="2">Njëjës</td><td><strong>UNA</strong></td><td>una casa (shtëpi), una penna (laps)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (mike), un'isola (ishull)</td></tr>
+                                <tr><td rowspan="2">Mashkullore</td><td rowspan="2">Shumës</td><td><strong>DEI</strong></td><td>dei libri (libra), dei cani (qen)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (studentë), degli amici (miq)</td></tr>
+                                <tr><td>Femërore</td><td>Shumës</td><td><strong>DELLE</strong></td><td>delle case (shtëpi), delle amiche (miqe)</td></tr>
+                            </table>
+                            <p><strong>E rëndësishme:</strong> Apostrofi VETËM në femërore njëjës para zanoreve!</p>
+                        </div>
+                    </div>
+
+                    <!-- 13. Türkçe -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇹🇷</span> <strong>Türkçe (Turco)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>İtalyanca Belirsiz Artikeller</h4>
+                            <p><strong>Belirsiz artikeller</strong>, belirtilmemiş varlıklara atıfta bulunulduğunda kullanılır.</p>
+                            <table class="article-table">
+                                <tr><th>Cinsiyet</th><th>Sayı</th><th>Artikel</th><th>Örnekler</th></tr>
+                                <tr><td rowspan="2">Erkek</td><td rowspan="2">Tekil</td><td><strong>UN</strong></td><td>un libro (bir kitap), un cane (bir köpek)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (bir öğrenci), uno zaino (bir sırt çantası)</td></tr>
+                                <tr><td rowspan="2">Kadın</td><td rowspan="2">Tekil</td><td><strong>UNA</strong></td><td>una casa (bir ev), una penna (bir kalem)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (bir arkadaş), un'isola (bir ada)</td></tr>
+                                <tr><td rowspan="2">Erkek</td><td rowspan="2">Çoğul</td><td><strong>DEI</strong></td><td>dei libri (bazı kitaplar), dei cani (bazı köpekler)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (bazı öğrenciler), degli amici (bazı arkadaşlar)</td></tr>
+                                <tr><td>Kadın</td><td>Çoğul</td><td><strong>DELLE</strong></td><td>delle case (bazı evler), delle amiche (bazı arkadaşlar)</td></tr>
+                            </table>
+                            <p><strong>Önemli:</strong> Kesme işareti SADECE dişil tekilde sesli harflerden önce!</p>
+                        </div>
+                    </div>
+
+                    <!-- 14. اردو -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇵🇰</span> <strong>اردو (Urdu)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content rtl">
+                            <div class="urdu-text">
+                                <h4>اطالوی غیر معینہ آرٹیکلز</h4>
+                                <p><strong>غیر معینہ آرٹیکلز</strong> کا استعمال تب کیا جاتا ہے جب غیر مخصوص اداروں کا حوالہ دیا جاتا ہے۔</p>
+                                <table class="article-table">
+                                    <tr><th>جنس</th><th>تعداد</th><th>آرٹیکل</th><th>مثالیں</th></tr>
+                                    <tr><td rowspan="2">مذکر</td><td rowspan="2">واحد</td><td><strong>UN</strong></td><td>un libro (کتاب), un cane (کتا)</td></tr>
+                                    <tr><td><strong>UNO</strong></td><td>uno studente (طالب علم), uno zaino (بیگ)</td></tr>
+                                    <tr><td rowspan="2">مؤنث</td><td rowspan="2">واحد</td><td><strong>UNA</strong></td><td>una casa (گھر), una penna (قلم)</td></tr>
+                                    <tr><td><strong>UN'</strong></td><td>un'amica (دوست), un'isola (جزیرہ)</td></tr>
+                                    <tr><td rowspan="2">مذکر</td><td rowspan="2">جمع</td><td><strong>DEI</strong></td><td>dei libri (کتابیں), dei cani (کتے)</td></tr>
+                                    <tr><td><strong>DEGLI</strong></td><td>degli studenti (طالب علم), degli amici (دوست)</td></tr>
+                                    <tr><td>مؤنث</td><td>جمع</td><td><strong>DELLE</strong></td><td>delle case (گھر), delle amiche (دوست)</td></tr>
+                                </table>
+                                <p><strong>اہم:</strong> فاصلہ علوہ صرف مؤنث واحد میں حرف علت سے پہلے!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 15. ਪੰਜਾਬੀ -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇮🇳</span> <strong>ਪੰਜਾਬੀ (Panjabi)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>ਇਤਾਲਵੀ ਅਣਜਾਣੇ ਆਰਟੀਕਲ</h4>
+                            <p><strong>ਅਣਜਾਣੇ ਆਰਟੀਕਲ</strong> ਦੀ ਵਰਤੋਂ ਤਦ ਕੀਤੀ ਜਾਂਦੀ ਹੈ ਜਦੋਂ ਅਣਜਾਣੀਆਂ ਇਕਾਈਆਂ ਦਾ ਜ਼ਿਕਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।</p>
+                            <table class="article-table">
+                                <tr><th>ਲਿੰਗ</th><th>ਗਿਣਤੀ</th><th>ਲੇਖ</th><th>ਉਦਾਹਰਨਾਂ</th></tr>
+                                <tr><td rowspan="2">ਪੁਲਿੰਗ</td><td rowspan="2">ਇਕ-ਵਚਨ</td><td><strong>UN</strong></td><td>un libro (ਕਿਤਾਬ), un cane (ਕੁੱਤਾ)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (ਵਿਦਿਆਰਥੀ), uno zaino (ਥੈਲਾ)</td></tr>
+                                <tr><td rowspan="2">ਇਸਤਰੀ ਲਿੰਗ</td><td rowspan="2">ਇਕ-ਵਚਨ</td><td><strong>UNA</strong></td><td>una casa (ਘਰ), una penna (ਕਲਮ)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (ਦੋਸਤ), un'isola (ਟਾਪੂ)</td></tr>
+                                <tr><td rowspan="2">ਪੁਲਿੰਗ</td><td rowspan="2">ਬਹੁ-ਵਚਨ</td><td><strong>DEI</strong></td><td>dei libri (ਕਿਤਾਬਾਂ), dei cani (ਕੁੱਤੇ)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (ਵਿਦਿਆਰਥੀ), degli amici (ਦੋਸਤ)</td></tr>
+                                <tr><td>ਇਸਤਰੀ ਲਿੰਗ</td><td>ਬਹੁ-ਵਚਨ</td><td><strong>DELLE</strong></td><td>delle case (ਘਰ), delle amiche (ਦੋਸਤ)</td></tr>
+                            </table>
+                            <p><strong>ਮਹੱਤਵਪੂਰਨ:</strong> ਅਪੋਸਟ੍ਰੋਫ ਸਿਰਫ਼ ਇਸਤਰੀ ਲਿੰਗ ਇਕ-ਵਚਨ ਵਿੱਚ ਸਵਰਾਂ ਤੋਂ ਪਹਿਲਾਂ!</p>
+                        </div>
+                    </div>
+
+                    <!-- 16. বাংলা -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇧🇩</span> <strong>বাংলা (Bangla)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>ইতালীয় অনির্দিষ্ট নিবন্ধ</h4>
+                            <p><strong>অনির্দিষ্ট নিবন্ধগুলি</strong> ব্যবহার করা হয় যখন অনির্দিষ্ট সত্তাগুলির উল্লেখ করা হয়।</p>
+                            <table class="article-table">
+                                <tr><th>লিঙ্গ</th><th>সংখ্যা</th><th>নিবন্ধ</th><th>উদাহরণ</th></tr>
+                                <tr><td rowspan="2">পুরুষ</td><td rowspan="2">একবচন</td><td><strong>UN</strong></td><td>un libro (বই), un cane (কুকুর)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (ছাত্র), uno zaino (ব্যাগ)</td></tr>
+                                <tr><td rowspan="2">স্ত্রী</td><td rowspan="2">একবচন</td><td><strong>UNA</strong></td><td>una casa (বাড়ি), una penna (কলম)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (বান্ধবী), un'isola (দ্বীপ)</td></tr>
+                                <tr><td rowspan="2">পুরুষ</td><td rowspan="2">বহুবচন</td><td><strong>DEI</strong></td><td>dei libri (বই), dei cani (কুকুর)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (ছাত্ররা), degli amici (বন্ধুরা)</td></tr>
+                                <tr><td>স্ত্রী</td><td>বহুবচন</td><td><strong>DELLE</strong></td><td>delle case (বাড়ি), delle amiche (বান্ধবী)</td></tr>
+                            </table>
+                            <p><strong>গুরুত্বপূর্ণ:</strong> অ্যাপোস্ট্রফি শুধুমাত্র স্ত্রী একবচনে স্বরবর্ণের আগে!</p>
+                        </div>
+                    </div>
+
+                    <!-- 17. हिन्दी -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇮🇳</span> <strong>हिन्दी (Hindi)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>इतालवी अनिश्चित लेख</h4>
+                            <p><strong>अनिश्चित लेख</strong> का उपयोग तब किया जाता है जब अनिर्दिष्ट इकाइयों का संदर्भ दिया जाता है।</p>
+                            <table class="article-table">
+                                <tr><th>लिंग</th><th>संख्या</th><th>लेख</th><th>उदाहरण</th></tr>
+                                <tr><td rowspan="2">पुलिंग</td><td rowspan="2">एकवचन</td><td><strong>UN</strong></td><td>un libro (किताब), un cane (कुत्ता)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (छात्र), uno zaino (बैग)</td></tr>
+                                <tr><td rowspan="2">स्त्रीलिंग</td><td rowspan="2">एकवचन</td><td><strong>UNA</strong></td><td>una casa (घर), una penna (कलम)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (दोस्त), un'isola (द्वीप)</td></tr>
+                                <tr><td rowspan="2">पुलिंग</td><td rowspan="2">बहुवचन</td><td><strong>DEI</strong></td><td>dei libri (किताबें), dei cani (कुत्ते)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (छात्र), degli amici (दोस्त)</td></tr>
+                                <tr><td>स्त्रीलिंग</td><td>बहुवचन</td><td><strong>DELLE</strong></td><td>delle case (घर), delle amiche (दोस्त)</td></tr>
+                            </table>
+                            <p><strong>महत्वपूर्ण:</strong> एपॉस्ट्रॉफी केवल स्त्रीलिंग एकवचन में स्वर से पहले!</p>
+                        </div>
+                    </div>
+
+                    <!-- 18. Filipino -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇵🇭</span> <strong>Filipino/Tagalog</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>Mga Hindi Tiyak na Artikulo sa Italyano</h4>
+                            <p>Ang <strong>mga hindi tiyak na artikulo</strong> ay ginagamit kapag tumutukoy sa mga hindi tukoy na entidad.</p>
+                            <table class="article-table">
+                                <tr><th>Kasarian</th><th>Bilang</th><th>Artikulo</th><th>Mga Halimbawa</th></tr>
+                                <tr><td rowspan="2">Lalaki</td><td rowspan="2">Isahan</td><td><strong>UN</strong></td><td>un libro (isang libro), un cane (isang aso)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (isang estudyante), uno zaino (isang bag)</td></tr>
+                                <tr><td rowspan="2">Babae</td><td rowspan="2">Isahan</td><td><strong>UNA</strong></td><td>una casa (isang bahay), una penna (isang panulat)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (isang kaibigan), un'isola (isang isla)</td></tr>
+                                <tr><td rowspan="2">Lalaki</td><td rowspan="2">Maramihan</td><td><strong>DEI</strong></td><td>dei libri (mga libro), dei cani (mga aso)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (mga estudyante), degli amici (mga kaibigan)</td></tr>
+                                <tr><td>Babae</td><td>Maramihan</td><td><strong>DELLE</strong></td><td>delle case (mga bahay), delle amiche (mga kaibigan)</td></tr>
+                            </table>
+                            <p><strong>Mahalaga:</strong> Apostrophe LAMANG sa pambabae isahan bago ang patinig!</p>
+                        </div>
+                    </div>
+
+                    <!-- 19. 한국어 -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇰🇷</span> <strong>한국어 (Coreano)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>이탈리아어 부정관사</h4>
+                            <p><strong>부정관사</strong>는 불특정한 대상을 지칭할 때 사용됩니다.</p>
+                            <table class="article-table">
+                                <tr><th>성</th><th>수</th><th>관사</th><th>예시</th></tr>
+                                <tr><td rowspan="2">남성</td><td rowspan="2">단수</td><td><strong>UN</strong></td><td>un libro (책), un cane (개)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (학생), uno zaino (가방)</td></tr>
+                                <tr><td rowspan="2">여성</td><td rowspan="2">단수</td><td><strong>UNA</strong></td><td>una casa (집), una penna (펜)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (친구), un'isola (섬)</td></tr>
+                                <tr><td rowspan="2">남성</td><td rowspan="2">복수</td><td><strong>DEI</strong></td><td>dei libri (책들), dei cani (개들)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (학생들), degli amici (친구들)</td></tr>
+                                <tr><td>여성</td><td>복수</td><td><strong>DELLE</strong></td><td>delle case (집들), delle amiche (친구들)</td></tr>
+                            </table>
+                            <p><strong>중요:</strong> 아포스트로프는 여성 단수에서 모음 앞에서만!</p>
+                        </div>
+                    </div>
+
+                    <!-- 20. 中文 -->
+                    <div class="lang-section">
+                        <div class="lang-header" onclick="toggleLang(this)">
+                            <span><span class="lang-flag">🇨🇳</span> <strong>中文 (Cinese)</strong></span>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="lang-content">
+                            <h4>意大利语不定冠词</h4>
+                            <p><strong>不定冠词</strong>用于指代未指定的实体。</p>
+                            <table class="article-table">
+                                <tr><th>性</th><th>数</th><th>冠词</th><th>例子</th></tr>
+                                <tr><td rowspan="2">阳性</td><td rowspan="2">单数</td><td><strong>UN</strong></td><td>un libro (一本书), un cane (一只狗)</td></tr>
+                                <tr><td><strong>UNO</strong></td><td>uno studente (一个学生), uno zaino (一个背包)</td></tr>
+                                <tr><td rowspan="2">阴性</td><td rowspan="2">单数</td><td><strong>UNA</strong></td><td>una casa (一座房子), una penna (一支笔)</td></tr>
+                                <tr><td><strong>UN'</strong></td><td>un'amica (一个朋友), un'isola (一座岛)</td></tr>
+                                <tr><td rowspan="2">阳性</td><td rowspan="2">复数</td><td><strong>DEI</strong></td><td>dei libri (一些书), dei cani (一些狗)</td></tr>
+                                <tr><td><strong>DEGLI</strong></td><td>degli studenti (一些学生), degli amici (一些朋友)</td></tr>
+                                <tr><td>阴性</td><td>复数</td><td><strong>DELLE</strong></td><td>delle case (一些房子), delle amiche (一些朋友)</td></tr>
+                            </table>
+                            <p><strong>重要：</strong>撇号仅在阴性单数元音前使用！</p>
                         </div>
                     </div>
                 </div>
@@ -820,80 +1384,24 @@
                 <div class="card-header maschile">Articoli Maschili: UN e UNO</div>
                 <div class="card-body">
                     <div class="instruction-box" style="border-left-color: var(--maschile);">
-                        <strong>🇮🇹 Maschile Singolare</strong> - Due forme a seconda dell'iniziale del nome
+                        <strong>UN</strong> → consonante semplice o vocale (NO apostrofo!)<br>
+                        <strong>UNO</strong> → s+consonante, z, ps, gn, x, y
                     </div>
+                    
+                    <h3 style="color: var(--maschile); margin: 1rem 0;">UN - Esempi:</h3>
+                    <p>un libro, un cane, un tavolo, un computer, un professore, un medico, un bambino, un gatto</p>
+                    <p><strong>Con vocali (NO apostrofo!):</strong> un amico, un elefante, un orologio, un ufficio, un indirizzo</p>
 
-                    <div class="theory-section">
-                        <h3 style="color: var(--maschile); margin-bottom: 1rem;">1. UN - Regola Dettagliata</h3>
-                        
-                        <div class="multilang-grid">
-                            <div class="lang-box">
-                                <span class="lang-label">🇮🇹 Italiano</span>
-                                Si usa <strong>UN</strong> con i nomi maschili che iniziano con:
-                                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                                    <li>Consonante semplice (b, c, d, f, g, l, m, n, p, q, r, t, v)</li>
-                                    <li>Vocale (a, e, i, o, u) - <strong>SENZA apostrofo!</strong></li>
-                                </ul>
-                            </div>
-                            <div class="lang-box">
-                                <span class="lang-label">🇬🇧 English</span>
-                                Use <strong>UN</strong> with masculine nouns beginning with simple consonant or vowel (NO apostrophe!).
-                            </div>
-                            <div class="lang-box arabic">
-                                <span class="lang-label">🇸🇦 العربية</span>
-                                يُستخدم <strong>UN</strong> مع الأسماء المذكرة التي تبدأ بحرف ساكن بسيط أو حرف متحرك (بدون فاصلة عليا!).
-                            </div>
-                            <div class="lang-box">
-                                <span class="lang-label">🇨🇳 中文</span>
-                                <strong>UN</strong>用于以简单辅音或元音开头的阳性名词（没有撇号！）。
-                            </div>
-                        </div>
+                    <h3 style="color: var(--maschile); margin: 1rem 0;">UNO - Esempi:</h3>
+                    <p>uno studente, uno zaino, uno psicologo, uno gnocco, uno xilofono, uno yogurt</p>
+                    <p>uno specchio, uno sceriffo, uno smalto, uno sbaglio, uno snodo, uno zero</p>
 
-                        <div class="example-box">
-                            <strong>🇮🇹 Esempi con UN:</strong><br>
-                            un <strong>l</strong>ibro <span class="gender-tag tag-m">M</span> | un <strong>c</strong>ane <span class="gender-tag tag-m">M</span> | un <strong>t</strong>avolo <span class="gender-tag tag-m">M</span><br>
-                            un <strong>amico</strong> <span class="gender-tag tag-m">M</span> (NO apostrofo!) | un <strong>elefante</strong> <span class="gender-tag tag-m">M</span> (NO apostrofo!)<br>
-                            un <strong>orologio</strong> <span class="gender-tag tag-m">M</span> (NO apostrofo!) | un <strong>ufficio</strong> <span class="gender-tag tag-m">M</span> (NO apostrofo!)
-                        </div>
-                    </div>
-
-                    <div class="theory-section">
-                        <h3 style="color: var(--maschile); margin-bottom: 1rem;">2. UNO - Regola Dettagliata</h3>
-                        
-                        <div class="multilang-grid">
-                            <div class="lang-box">
-                                <span class="lang-label">🇮🇹 Italiano</span>
-                                Si usa <strong>UNO</strong> con i nomi maschili che iniziano con:
-                                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                                    <li><strong>s + consonante</strong> (st-, sp-, sc-, sn-, sm-, sb-, sd-, sf-, sg-)</li>
-                                    <li><strong>z</strong> (sia sonora che sorda)</li>
-                                    <li><strong>ps</strong> (psicologo)</li>
-                                    <li><strong>gn</strong> (gnocco)</li>
-                                    <li><strong>x</strong> (xilofono)</li>
-                                    <li><strong>y</strong> (yogurt)</li>
-                                </ul>
-                            </div>
-                            <div class="lang-box">
-                                <span class="lang-label">🇬🇧 English</span>
-                                Use <strong>UNO</strong> with masculine nouns beginning with s+consonant, z, ps, gn, x, y.
-                            </div>
-                            <div class="lang-box arabic">
-                                <span class="lang-label">🇸🇦 العربية</span>
-                                يُستخدم <strong>UNO</strong> مع الأسماء المذكرة التي تبدأ بـ س+حرف ساكن، ز، پس، گن، كس، ي.
-                            </div>
-                        </div>
-
-                        <div class="example-box">
-                            <strong>🇮🇹 Esempi con UNO:</strong><br>
-                            uno <strong>st</strong>udente <span class="gender-tag tag-m">M</span> | uno <strong>z</strong>aino <span class="gender-tag tag-m">M</span> | uno <strong>ps</strong>icologo <span class="gender-tag tag-m">M</span><br>
-                            uno <strong>gn</strong>occo <span class="gender-tag tag-m">M</span> | uno <strong>y</strong>ogurt <span class="gender-tag tag-m">M</span> | uno <strong>x</strong>ilofono <span class="gender-tag tag-m">M</span><br>
-                            uno <strong>sp</strong>ecchio <span class="gender-tag tag-m">M</span> | uno <strong>sc</strong>eriffo <span class="gender-tag tag-m">M</span> | uno <strong>sm</strong>alto <span class="gender-tag tag-m">M</span>
-                        </div>
-
-                        <div class="warning-box">
-                            <strong>⚠️ ERRORE COMUNE:</strong><br>
-                            <strong>MAI usare l'apostrofo al maschile!</strong> Si dice <strong>"un amico"</strong>, non "un'amico"!
-                        </div>
+                    <div class="warning-box">
+                        <strong>⚠️ ERRORE COMUNE:</strong><br>
+                        <strong>MAI usare l'apostrofo al maschile!</strong><br>
+                        ❌ un'amico → ✅ un amico<br>
+                        ❌ un'elefante → ✅ un elefante<br>
+                        ❌ un'orologio → ✅ un orologio
                     </div>
                 </div>
             </div>
@@ -905,40 +1413,19 @@
                 <div class="card-header femminile">Articoli Femminili: UNA e UN'</div>
                 <div class="card-body">
                     <div class="instruction-box" style="border-left-color: var(--femminile);">
-                        <strong>🇮🇹 Femminile Singolare</strong> - Due forme a seconda dell'iniziale del nome
+                        <strong>UNA</strong> → qualsiasi consonante (anche s+cons., z, ps, gn!)<br>
+                        <strong>UN'</strong> → vocale (con apostrofo!)
                     </div>
 
-                    <div class="theory-section">
-                        <h3 style="color: var(--femminile); margin-bottom: 1rem;">1. UNA - Regola Dettagliata</h3>
-                        
-                        <div class="example-box">
-                            <strong>🇮🇹 Esempi con UNA:</strong><br>
-                            una <strong>c</strong>asa <span class="gender-tag tag-f">F</span> | una <strong>p</strong>enna <span class="gender-tag tag-f">F</span> | una <strong>sc</strong>uola <span class="gender-tag tag-f">F</span> (Anche con sc-!)<br>
-                            una <strong>m</strong>acchina <span class="gender-tag tag-f">F</span> | una <strong>st</strong>udentessa <span class="gender-tag tag-f">F</span> (Anche con st-!)<br>
-                            una <strong>z</strong>ia <span class="gender-tag tag-f">F</span> (Anche con z-!) | una <strong>ps</strong>icologa <span class="gender-tag tag-f">F</span> (Anche con ps-!)
-                        </div>
+                    <h3 style="color: var(--femminile); margin: 1rem 0;">UNA - Esempi:</h3>
+                    <p>una casa, una penna, una macchina</p>
+                    <p><strong>Anche con s+cons, z, ps, gn:</strong> una scuola, una studentessa, una zia, una psicologa, una gnocca</p>
 
-                        <div class="tip-box">
-                            <strong>💡 Nota importante:</strong><br>
-                            Al femminile si usa <strong>UNA</strong> anche con s+consonante, z, ps, gn! Questo è diverso dal maschile dove questi casi richiedono UNO.
-                        </div>
-                    </div>
+                    <h3 style="color: var(--femminile); margin: 1rem 0;">UN' - Esempi (apostrofo obbligatorio):</h3>
+                    <p>un'amica, un'isola, un'ora, un'acqua, un'edicola, un'idea, un'arancia, un'università</p>
 
-                    <div class="theory-section">
-                        <h3 style="color: var(--femminile); margin-bottom: 1rem;">2. UN' - Regola Dettagliata (Elisione)</h3>
-                        
-                        <div class="example-box">
-                            <strong>🇮🇹 Esempi con UN':</strong><br>
-                            un'<strong>a</strong>mica <span class="gender-tag tag-f">F</span> | un'<strong>i</strong>sola <span class="gender-tag tag-f">F</span> | un'<strong>o</strong>ra <span class="gender-tag tag-f">F</span><br>
-                            un'<strong>a</strong>cqua <span class="gender-tag tag-f">F</span> | un'<strong>e</strong>dicola <span class="gender-tag tag-f">F</span> | un'<strong>i</strong>dea <span class="gender-tag tag-f">F</span><br>
-                            un'<strong>a</strong>ranica <span class="gender-tag tag-f">F</span> | un'<strong>u</strong>niversità <span class="gender-tag tag-f">F</span> (Attenzione: inizia con U ma è femminile!)
-                        </div>
-
-                        <div class="warning-box">
-                            <strong>⚠️ ATTENZIONE:</strong><br>
-                            <strong>L'apostrofo è obbligatorio solo al femminile singolare davanti alle vocali.</strong><br>
-                            Al plurale femminile si usa sempre "delle" (delle amiche, delle isole) - <strong>mai l'apostrofo al plurale!</strong>
-                        </div>
+                    <div class="tip-box">
+                        <strong>💡 Nota:</strong> Al femminile si usa <strong>UNA</strong> anche con s+consonante, z, ps, gn (diversamente dal maschile che usa UNO).
                     </div>
                 </div>
             </div>
@@ -947,43 +1434,28 @@
         <!-- SEZIONE PLURALE -->
         <section id="plurale" class="section">
             <div class="card">
-                <div class="card-header plurale">Articoli Partitivi al Plurale: DEI, DEGLI, DELLE</div>
+                <div class="card-header plurale">Articoli Partitivi: DEI, DEGLI, DELLE</div>
                 <div class="card-body">
                     <div class="instruction-box" style="border-left-color: var(--plurale);">
-                        <strong>🇮🇹 Plurale</strong> - Forme partitive (derivano da DI + articolo determinativo)
+                        <strong>DEI</strong> → plurale di UN (dei libri, dei cani)<br>
+                        <strong>DEGLI</strong> → plurale di UNO e UN con vocali (degli studenti, degli amici)<br>
+                        <strong>DELLE</strong> → unico plurale femminile (delle case, delle amiche)
                     </div>
 
-                    <div class="theory-section">
-                        <h3 style="color: var(--plurale); margin-bottom: 1rem;">1. DEI - Plurale di UN</h3>
-                        
-                        <div class="example-box">
-                            un libro → <strong>dei</strong> libri | un cane → <strong>dei</strong> cani | un tavolo → <strong>dei</strong> tavoli<br>
-                            un amico → <strong>dei</strong> amici (Nota: anche con vocale!)
-                        </div>
-                    </div>
+                    <table class="article-table">
+                        <tr><th>Singolare</th><th>Plurale</th><th>Esempio</th></tr>
+                        <tr><td>UN</td><td>DEI</td><td>un libro → dei libri</td></tr>
+                        <tr><td>UNO</td><td>DEGLI</td><td>uno zaino → degli zaini</td></tr>
+                        <tr><td>UN (vocale)</td><td>DEGLI</td><td>un amico → degli amici</td></tr>
+                        <tr><td>UNA</td><td>DELLE</td><td>una casa → delle case</td></tr>
+                        <tr><td>UN'</td><td>DELLE</td><td>un'amica → delle amiche (NO apostrofo!)</td></tr>
+                    </table>
 
-                    <div class="theory-section">
-                        <h3 style="color: var(--plurale); margin-bottom: 1rem;">2. DEGLI - Plurale di UNO e UN (con vocali)</h3>
-                        
-                        <div class="example-box">
-                            uno zaino → <strong>degli</strong> zaini | uno studente → <strong>degli</strong> studenti | uno psicologo → <strong>degli</strong> psicologi<br>
-                            un elefante → <strong>degli</strong> elefanti (Con vocale!) | un amico → <strong>degli</strong> amici (Con vocale!)
-                        </div>
-                    </div>
-
-                    <div class="theory-section">
-                        <h3 style="color: var(--plurale); margin-bottom: 1rem;">3. DELLE - Unico Plurale Femminile</h3>
-                        
-                        <div class="example-box">
-                            una casa → <strong>delle</strong> case | una penna → <strong>delle</strong> penne<br>
-                            un'amica → <strong>delle</strong> amiche (NO apostrofo!) | un'isola → <strong>delle</strong> isole (NO apostrofo!)<br>
-                            un'ora → <strong>delle</strong> ore (NO apostrofo!)
-                        </div>
-
-                        <div class="warning-box">
-                            <strong>⚠️ REGOLA FONDAMENTALE:</strong><br>
-                            Al plurale femminile <strong>NON</strong> c'è mai l'apostrofo! Si usa sempre "delle" (delle amiche, non "dell'amiche").
-                        </div>
+                    <div class="warning-box">
+                        <strong>⚠️ ATTENZIONE:</strong><br>
+                        Al plurale femminile <strong>NON</strong> c'è mai l'apostrofo!<br>
+                        ❌ dell'amiche → ✅ delle amiche<br>
+                        ❌ dell'isole → ✅ delle isole
                     </div>
                 </div>
             </div>
@@ -992,158 +1464,65 @@
         <!-- SEZIONE CONFRONTO -->
         <section id="confronto" class="section">
             <div class="card">
-                <div class="card-header">Confronto Sistematico: Determinativi vs Indeterminativi</div>
+                <div class="card-header">Confronto: Determinativi vs Indeterminativi</div>
                 <div class="card-body">
-                    <div class="comparison-row" style="background: linear-gradient(135deg, #ebf8ff 0%, #f0fff4 100%); font-weight: bold;">
-                        <span style="width: 30%;">Determinativo</span>
-                        <span style="width: 10%;">→</span>
-                        <span style="width: 30%;">Indeterminativo</span>
-                        <span style="width: 30%;">Significato</span>
-                    </div>
-
-                    <div class="comparison-row">
-                        <span><span class="det">IL</span> libro</span>
-                        <span class="arrow-big">→</span>
-                        <span><span class="indet">UN</span> libro</span>
-                        <span>Maschile semplice</span>
-                    </div>
-                    <div class="comparison-row">
-                        <span><span class="det">LO</span> studente</span>
-                        <span class="arrow-big">→</span>
-                        <span><span class="indet">UNO</span> studente</span>
-                        <span>Maschile s+cons.</span>
-                    </div>
-                    <div class="comparison-row">
-                        <span><span class="det">L'</span>amico</span>
-                        <span class="arrow-big">→</span>
-                        <span><span class="indet">UN</span> amico</span>
-                        <span>Maschile vocale<br><strong>NO apostrofo!</strong></span>
-                    </div>
-                    <div class="comparison-row">
-                        <span><span class="det">LA</span> casa</span>
-                        <span class="arrow-big">→</span>
-                        <span><span class="indet">UNA</span> casa</span>
-                        <span>Femminile consonante</span>
-                    </div>
-                    <div class="comparison-row">
-                        <span><span class="det">L'</span>amica</span>
-                        <span class="arrow-big">→</span>
-                        <span><span class="indet">UN'</span>amica</span>
-                        <span>Femminile vocale<br><strong>Con apostrofo!</strong></span>
-                    </div>
-                    <div class="comparison-row">
-                        <span><span class="det">I</span> libri</span>
-                        <span class="arrow-big">→</span>
-                        <span><span class="indet">DEI</span> libri</span>
-                        <span>Plurale maschile semplice</span>
-                    </div>
-                    <div class="comparison-row">
-                        <span><span class="det">GLI</span> studenti</span>
-                        <span class="arrow-big">→</span>
-                        <span><span class="indet">DEGLI</span> studenti</span>
-                        <span>Plurale maschile s+cons.</span>
-                    </div>
-                    <div class="comparison-row">
-                        <span><span class="det">GLI</span> amici</span>
-                        <span class="arrow-big">→</span>
-                        <span><span class="indet">DEGLI</span> amici</span>
-                        <span>Plurale maschile vocale</span>
-                    </div>
-                    <div class="comparison-row">
-                        <span><span class="det">LE</span> case</span>
-                        <span class="arrow-big">→</span>
-                        <span><span class="indet">DELLE</span> case</span>
-                        <span>Plurale femminile</span>
-                    </div>
-                    <div class="comparison-row">
-                        <span><span class="det">LE</span> amiche</span>
-                        <span class="arrow-big">→</span>
-                        <span><span class="indet">DELLE</span> amiche</span>
-                        <span>Plurale femminile<br><strong>NO apostrofo!</strong></span>
-                    </div>
+                    <table class="article-table">
+                        <tr><th>Determinativo</th><th>Indeterminativo</th><th>Esempio</th></tr>
+                        <tr><td>IL</td><td>UN</td><td>il libro → un libro</td></tr>
+                        <tr><td>LO</td><td>UNO</td><td>lo studente → uno studente</td></tr>
+                        <tr><td>L' (m)</td><td>UN (NO apostrofo!)</td><td>l'amico → un amico</td></tr>
+                        <tr><td>LA</td><td>UNA</td><td>la casa → una casa</td></tr>
+                        <tr><td>L' (f)</td><td>UN' (con apostrofo!)</td><td>l'amica → un'amica</td></tr>
+                        <tr><td>I</td><td>DEI</td><td>i libri → dei libri</td></tr>
+                        <tr><td>GLI</td><td>DEGLI</td><td>gli studenti → degli studenti</td></tr>
+                        <tr><td>LE</td><td>DELLE</td><td>le case → delle case</td></tr>
+                    </table>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE ERRORI COMUNI -->
+        <!-- SEZIONE ERRORI -->
         <section id="errori" class="section">
             <div class="card">
-                <div class="card-header" style="border-left-color: var(--accent);">Errori Comuni e Come Evitarli</div>
+                <div class="card-header" style="border-left-color: var(--accent);">Errori Comuni</div>
                 <div class="card-body">
                     <div class="warning-box">
-                        <h3 style="margin-bottom: 1rem;">❌ Errore #1: Apostrofo al maschile</h3>
-                        <div class="two-col">
-                            <div>
-                                <strong>Sbagliato:</strong><br>
-                                <span style="color: var(--error); text-decoration: line-through;">un'amico</span><br>
-                                <span style="color: var(--error); text-decoration: line-through;">un'elefante</span><br>
-                                <span style="color: var(--error); text-decoration: line-through;">un'orologio</span>
-                            </div>
-                            <div>
-                                <strong>Corretto:</strong><br>
-                                <span style="color: var(--success); font-weight: bold;">un amico</span><br>
-                                <span style="color: var(--success); font-weight: bold;">un elefante</span><br>
-                                <span style="color: var(--success); font-weight: bold;">un orologio</span>
-                            </div>
-                        </div>
-                        <p style="margin-top: 1rem;"><strong>Regola:</strong> Al maschile NON si usa MAI l'apostrofo, anche davanti alle vocali!</p>
+                        <h3>❌ Errore #1: Apostrofo al maschile</h3>
+                        <p>Sbagliato: un'amico, un'elefante<br>
+                        Corretto: un amico, un elefante</p>
                     </div>
 
                     <div class="warning-box">
-                        <h3 style="margin-bottom: 1rem;">❌ Errore #2: Apostrofo al plurale femminile</h3>
-                        <div class="two-col">
-                            <div>
-                                <strong>Sbagliato:</strong><br>
-                                <span style="color: var(--error); text-decoration: line-through;">dell'amiche</span><br>
-                                <span style="color: var(--error); text-decoration: line-through;">dell'isole</span>
-                            </div>
-                            <div>
-                                <strong>Corretto:</strong><br>
-                                <span style="color: var(--success); font-weight: bold;">delle amiche</span><br>
-                                <span style="color: var(--success); font-weight: bold;">delle isole</span>
-                            </div>
-                        </div>
-                        <p style="margin-top: 1rem;"><strong>Regola:</strong> Al plurale femminile NON c'è mai l'apostrofo!</p>
+                        <h3>❌ Errore #2: Apostrofo al plurale femminile</h3>
+                        <p>Sbagliato: dell'amiche, dell'isole<br>
+                        Corretto: delle amiche, delle isole</p>
                     </div>
 
                     <div class="warning-box">
-                        <h3 style="margin-bottom: 1rem;">❌ Errore #3: Confondere UNO e UNA con s+consonante</h3>
-                        <div class="two-col">
-                            <div>
-                                <strong>Maschile (UNO):</strong><br>
-                                <span style="color: var(--success); font-weight: bold;">uno studente</span><br>
-                                <span style="color: var(--success); font-weight: bold;">uno zaino</span>
-                            </div>
-                            <div>
-                                <strong>Femminile (UNA):</strong><br>
-                                <span style="color: var(--success); font-weight: bold;">una studentessa</span><br>
-                                <span style="color: var(--success); font-weight: bold;">una zia</span>
-                            </div>
-                        </div>
-                        <p style="margin-top: 1rem;"><strong>Regola:</strong> Al femminile si usa sempre UNA, anche con s+consonante, z, ps, gn!</p>
+                        <h3>❌ Errore #3: Confondere UNO e UNA</h3>
+                        <p>Maschile: uno studente (s+cons)<br>
+                        Femminile: una studentessa (s+cons!)</p>
                     </div>
 
                     <div class="tip-box">
-                        <h3 style="margin-bottom: 1rem;">💡 Consigli Mnemonici</h3>
-                        <ul style="margin-left: 1.5rem;">
-                            <li><strong>Apostrofo = Femminile Singolare + Vocale</strong> (e basta!)</li>
-                            <li><strong>Maschile = Mai apostrofo</strong> (nemmeno con le vocali)</li>
-                            <li><strong>Plurale = Mai apostrofo</strong> (né maschile né femminile)</li>
-                            <li><strong>UNO = Solo maschile</strong> (s+cons., z, ps, gn, x, y)</li>
-                            <li><strong>UNA = Sempre femminile</strong> (anche con s+cons., z, ps, gn)</li>
+                        <h3>💡 Regola d'oro:</h3>
+                        <ul>
+                            <li>Apostrofo = SOLO femminile singolare + vocale</li>
+                            <li>Maschile = MAI apostrofo</li>
+                            <li>Plurale = MAI apostrofo</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE ESERCIZI (100) -->
+        <!-- SEZIONE ESERCIZI (50 esercizi) -->
         <section id="exercises" class="section">
             <div class="game-container">
                 <div class="score-panel">
                     <div>
                         <div class="score-label">Esercizio</div>
-                        <div class="score-value" id="exerciseCounter">1 / 100</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
                     </div>
                     <div>
                         <div class="score-label">Punteggio</div>
@@ -1155,866 +1534,159 @@
                     <div class="progress-fill" id="progressBar"></div>
                 </div>
 
-                <div id="exerciseContainer">
-                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
-                </div>
+                <div id="exerciseContainer"></div>
 
-                <!-- SEZIONE PUNTEGGIO FINALE -->
                 <div class="final-score-section" id="finalScoreSection">
-                    <h2>🎉 Complimenti! Hai completato tutti gli esercizi!</h2>
+                    <h2>🎉 Esercizi Completati!</h2>
                     <div class="final-score-value" id="finalScore">0/100</div>
                     <p class="final-message" id="finalMessage"></p>
-                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
-                        🔄 Riprova tutti gli esercizi
+                    <div id="sufficiencyBox"></div>
+                    <button class="btn-primary" onclick="showEmailModal()" style="margin-top: 20px;">
+                        📧 Invia Risultati via Email
+                    </button>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 10px; background: #6c757d;">
+                        🔄 Riprova
                     </button>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <p>© 2024 Corso di Italiano A1-A2 - Articoli Indeterminativi - Teoria Multilingue + 100 Esercizi</p>
+    <!-- MODAL EMAIL -->
+    <div class="modal-overlay" id="emailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📧 Invia Risultati</h2>
+            </div>
+            
+            <div id="modalBody">
+                <div class="form-group">
+                    <label class="form-label">Nome e Cognome:</label>
+                    <input type="text" class="form-input" id="studentName" placeholder="Inserisci il tuo nome">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email dello studente:</label>
+                    <input type="email" class="form-input" id="studentEmail" placeholder="tua@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Riepilogo risultati:</label>
+                    <div class="result-summary" id="resultSummary"></div>
+                </div>
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn-primary" onclick="sendViaEmail()">
+                        📤 Invia con Email Client
+                    </button>
+                    <button class="btn-primary" onclick="copyResults()" style="background: #28a745;">
+                        📋 Copia Dati
+                    </button>
+                    <button class="btn-primary" onclick="closeEmailModal()" style="background: #6c757d;">
+                        ✕ Chiudi
+                    </button>
+                </div>
+
+                <div id="copyFeedback" style="margin-top: 10px; display: none;" class="success-message">
+                    ✅ Dati copiati negli appunti!
+                </div>
+            </div>
         </div>
+    </div>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <p>© 2024 Corso di Italiano A1-A2 - Articoli Indeterminativi - 50 Esercizi con Valutazione</p>
     </footer>
 
     <script>
-        // Database degli esercizi (100 totali)
+        // 50 ESERCIZI ARTICOLI INDETERMINATIVI (2 punti ciascuno = 100 totali, sufficienza 60)
         const exercises = [
-            // ESERCIZI 1-15: Articolo maschile singolare - UN (consonante semplice)
-            {
-                id: 1,
-                type: 'choice',
-                question: 'Completa: _____ libro (maschile, consonante semplice)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! Si usa UN con i nomi maschili che iniziano con consonante semplice.',
-                errorExplanation: '❌ Con i nomi maschili a consonante semplice si usa UN'
-            },
-            {
-                id: 2,
-                type: 'fill',
-                question: 'Completa: _____ cane (maschile, inizia con c-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! "Cane" è maschile, inizia con consonante semplice → UN.'
-            },
-            {
-                id: 3,
-                type: 'choice',
-                question: 'Completa: _____ tavolo (maschile, inizia con t-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! "Tavolo" è maschile, consonante semplice → UN.',
-                errorExplanation: '❌ "Tavolo" è maschile, consonante semplice → UN'
-            },
-            {
-                id: 4,
-                type: 'fill',
-                question: 'Completa: _____ computer (maschile, inizia con c-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! "Computer" è maschile, consonante semplice → UN.'
-            },
-            {
-                id: 5,
-                type: 'choice',
-                question: 'Completa: _____ professore (maschile, inizia con p-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! "Professore" è maschile, consonante semplice → UN.',
-                errorExplanation: '❌ "Professore" è maschile, consonante semplice → UN'
-            },
-            {
-                id: 6,
-                type: 'fill',
-                question: 'Completa: _____ bambino (maschile, inizia con b-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! "Bambino" è maschile, consonante semplice → UN.'
-            },
-            {
-                id: 7,
-                type: 'choice',
-                question: 'Completa: _____ gatto (maschile, inizia con g-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! "Gatto" è maschile, consonante semplice → UN.',
-                errorExplanation: '❌ "Gatto" è maschile, consonante semplice → UN'
-            },
-            {
-                id: 8,
-                type: 'fill',
-                question: 'Completa: _____ telefono (maschile, inizia con t-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! "Telefono" è maschile, consonante semplice → UN.'
-            },
-            {
-                id: 9,
-                type: 'choice',
-                question: 'Completa: _____ medico (maschile, inizia con m-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! "Medico" è maschile, consonante semplice → UN.',
-                errorExplanation: '❌ "Medico" è maschile, consonante semplice → UN'
-            },
-            {
-                id: 10,
-                type: 'fill',
-                question: 'Completa: _____ treno (maschile, inizia con t-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! "Treno" è maschile, consonante semplice → UN.'
-            },
-            {
-                id: 11,
-                type: 'choice',
-                question: 'Completa: _____ quaderno (maschile, inizia con q-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! "Quaderno" è maschile, consonante semplice → UN.',
-                errorExplanation: '❌ "Quaderno" è maschile, consonante semplice → UN'
-            },
-            {
-                id: 12,
-                type: 'fill',
-                question: 'Completa: _____ ragazzo (maschile, inizia con r-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! "Ragazzo" è maschile, consonante semplice → UN.'
-            },
-            {
-                id: 13,
-                type: 'choice',
-                question: 'Completa: _____ vaso (maschile, inizia con v-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! "Vaso" è maschile, consonante semplice → UN.',
-                errorExplanation: '❌ "Vaso" è maschile, consonante semplice → UN'
-            },
-            {
-                id: 14,
-                type: 'fill',
-                question: 'Completa: _____ dente (maschile, inizia con d-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! "Dente" è maschile, consonante semplice → UN.'
-            },
-            {
-                id: 15,
-                type: 'choice',
-                question: 'Completa: _____ fiore (maschile, inizia con f-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! "Fiore" è maschile, consonante semplice → UN.',
-                errorExplanation: '❌ "Fiore" è maschile, consonante semplice → UN'
-            },
+            // ESERCIZI 1-10: Maschile UN
+            {id: 1, type: 'choice', question: '_____ libro (maschile, consonante semplice)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Un', explanation: '✅ "Libro" è maschile, consonante semplice → UN'},
+            {id: 2, type: 'fill', question: '_____ cane (maschile, c-)', correct: ['un'], explanation: '✅ "Cane" è maschile, consonante semplice → un'},
+            {id: 3, type: 'choice', question: '_____ tavolo (maschile, t-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Un', explanation: '✅ "Tavolo" è maschile, consonante semplice → UN'},
+            {id: 4, type: 'fill', question: '_____ computer (maschile, c-)', correct: ['un'], explanation: '✅ "Computer" è maschile, consonante semplice → un'},
+            {id: 5, type: 'choice', question: '_____ professore (maschile, p-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Un', explanation: '✅ "Professore" è maschile, consonante semplice → UN'},
+            {id: 6, type: 'fill', question: '_____ medico (maschile, m-)', correct: ['un'], explanation: '✅ "Medico" è maschile, consonante semplice → un'},
+            {id: 7, type: 'choice', question: '_____ bambino (maschile, b-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Un', explanation: '✅ "Bambino" è maschile, consonante semplice → UN'},
+            {id: 8, type: 'fill', question: '_____ gatto (maschile, g-)', correct: ['un'], explanation: '✅ "Gatto" è maschile, consonante semplice → un'},
+            {id: 9, type: 'choice', question: '_____ quaderno (maschile, q-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Un', explanation: '✅ "Quaderno" è maschile, consonante semplice → UN'},
+            {id: 10, type: 'fill', question: '_____ ragazzo (maschile, r-)', correct: ['un'], explanation: '✅ "Ragazzo" è maschile, consonante semplice → un'},
 
-            // ESERCIZI 16-30: Articolo maschile singolare - UNO
-            {
-                id: 16,
-                type: 'choice',
-                question: 'Completa: _____ studente (inizia con st-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'uno',
-                explanation: '✅ Corretto! Si usa UNO con s+consonante (st-, sp-, sc-, ecc.).',
-                errorExplanation: '❌ Con s+consonante si usa UNO'
-            },
-            {
-                id: 17,
-                type: 'fill',
-                question: 'Completa: _____ zaino (inizia con z-)',
-                correct: ['uno'],
-                explanation: '✅ Corretto! Con z- si usa UNO.'
-            },
-            {
-                id: 18,
-                type: 'choice',
-                question: 'Completa: _____ psicologo (inizia con ps-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'uno',
-                explanation: '✅ Corretto! Con ps- si usa UNO.',
-                errorExplanation: '❌ Con ps- si usa UNO'
-            },
-            {
-                id: 19,
-                type: 'fill',
-                question: 'Completa: _____ gnocco (inizia con gn-)',
-                correct: ['uno'],
-                explanation: '✅ Corretto! Con gn- si usa UNO.'
-            },
-            {
-                id: 20,
-                type: 'choice',
-                question: 'Completa: _____ specchio (inizia con sp-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'uno',
-                explanation: '✅ Corretto! Con sp- (s+consonante) si usa UNO.',
-                errorExplanation: '❌ Con sp- si usa UNO'
-            },
-            {
-                id: 21,
-                type: 'fill',
-                question: 'Completa: _____ yogurt (inizia con y-)',
-                correct: ['uno'],
-                explanation: '✅ Corretto! Con y- (consonante straniera) si usa UNO.'
-            },
-            {
-                id: 22,
-                type: 'choice',
-                question: 'Completa: _____ xilofono (inizia con x-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'uno',
-                explanation: '✅ Corretto! Con x- si usa UNO.',
-                errorExplanation: '❌ Con x- si usa UNO'
-            },
-            {
-                id: 23,
-                type: 'fill',
-                question: 'Completa: _____ sceriffo (inizia con sc-)',
-                correct: ['uno'],
-                explanation: '✅ Corretto! Con sc- (s+consonante) si usa UNO.'
-            },
-            {
-                id: 24,
-                type: 'choice',
-                question: 'Completa: _____ smalto (inizia con sm-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'uno',
-                explanation: '✅ Corretto! Con sm- (s+consonante) si usa UNO.',
-                errorExplanation: '❌ Con sm- si usa UNO'
-            },
-            {
-                id: 25,
-                type: 'fill',
-                question: 'Completa: _____ sbaglio (inizia con sb-)',
-                correct: ['uno'],
-                explanation: '✅ Corretto! Con sb- (s+consonante) si usa UNO.'
-            },
-            {
-                id: 26,
-                type: 'choice',
-                question: 'Completa: _____ snodo (inizia con sn-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'uno',
-                explanation: '✅ Corretto! Con sn- (s+consonante) si usa UNO.',
-                errorExplanation: '❌ Con sn- si usa UNO'
-            },
-            {
-                id: 27,
-                type: 'fill',
-                question: 'Completa: _____ sdraio (inizia con sd-)',
-                correct: ['uno'],
-                explanation: '✅ Corretto! Con sd- (s+consonante) si usa UNO.'
-            },
-            {
-                id: 28,
-                type: 'choice',
-                question: 'Completa: _____ sfera (inizia con sf-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'uno',
-                explanation: '✅ Corretto! Con sf- (s+consonante) si usa UNO.',
-                errorExplanation: '❌ Con sf- si usa UNO'
-            },
-            {
-                id: 29,
-                type: 'fill',
-                question: 'Completa: _____ sgombero (inizia con sg-)',
-                correct: ['uno'],
-                explanation: '✅ Corretto! Con sg- (s+consonante) si usa UNO.'
-            },
-            {
-                id: 30,
-                type: 'choice',
-                question: 'Completa: _____ zero (inizia con z-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'uno',
-                explanation: '✅ Corretto! Con z- si usa UNO.',
-                errorExplanation: '❌ Con z- si usa UNO'
-            },
+            // ESERCIZI 11-20: Maschile UNO
+            {id: 11, type: 'choice', question: '_____ studente (s+consonante)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Uno', explanation: '✅ "Studente" è maschile, s+consonante (st) → UNO'},
+            {id: 12, type: 'fill', question: '_____ zaino (maschile, z-)', correct: ['uno'], explanation: '✅ "Zaino" è maschile, z → uno'},
+            {id: 13, type: 'choice', question: '_____ psicologo (ps-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Uno', explanation: '✅ "Psicologo" è maschile, ps → UNO'},
+            {id: 14, type: 'fill', question: '_____ gnocco (maschile, gn-)', correct: ['uno'], explanation: '✅ "Gnocco" è maschile, gn → uno'},
+            {id: 15, type: 'choice', question: '_____ specchio (sp-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Uno', explanation: '✅ "Specchio" è maschile, sp → UNO'},
+            {id: 16, type: 'fill', question: '_____ yogurt (maschile, y-)', correct: ['uno'], explanation: '✅ "Yogurt" è maschile, y → uno'},
+            {id: 17, type: 'choice', question: '_____ xilofono (x-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Uno', explanation: '✅ "Xilofono" è maschile, x → UNO'},
+            {id: 18, type: 'fill', question: '_____ sceriffo (maschile, sc-)', correct: ['uno'], explanation: '✅ "Sceriffo" è maschile, sc → uno'},
+            {id: 19, type: 'choice', question: '_____ smalto (sm-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Uno', explanation: '✅ "Smalto" è maschile, sm → UNO'},
+            {id: 20, type: 'fill', question: '_____ zero (maschile, z-)', correct: ['uno'], explanation: '✅ "Zero" è maschile, z → uno'},
 
-            // ESERCIZI 31-45: Articolo maschile con vocali (attenzione: NO apostrofo!)
-            {
-                id: 31,
-                type: 'choice',
-                question: 'Completa: _____ amico (maschile, inizia con a-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! Al maschile anche con le vocali si usa UN (mai l\'apostrofo!).',
-                errorExplanation: '❌ Al maschile NON si usa mai l\'apostrofo: un amico, non un\'amico'
-            },
-            {
-                id: 32,
-                type: 'fill',
-                question: 'Completa: _____ elefante (maschile, inizia con e-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! Al maschile con e- si usa UN (NO apostrofo!).'
-            },
-            {
-                id: 33,
-                type: 'choice',
-                question: 'Completa: _____ orologio (maschile, inizia con o-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! Al maschile con o- si usa UN (NO apostrofo!).',
-                errorExplanation: '❌ Al maschile NON si usa mai l\'apostrofo: un orologio, non un\'orologio'
-            },
-            {
-                id: 34,
-                type: 'fill',
-                question: 'Completa: _____ ufficio (maschile, inizia con u-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! Al maschile con u- si usa UN (NO apostrofo!).'
-            },
-            {
-                id: 35,
-                type: 'choice',
-                question: 'Completa: _____ iscritto (maschile, inizia con i-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! Al maschile con i- si usa UN (NO apostrofo!).',
-                errorExplanation: '❌ Al maschile NON si usa mai l\'apostrofo: un iscritto, non un\'iscritto'
-            },
-            {
-                id: 36,
-                type: 'fill',
-                question: 'Completa: _____ albero (maschile, inizia con a-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! Al maschile con a- si usa UN (NO apostrofo!).'
-            },
-            {
-                id: 37,
-                type: 'choice',
-                question: 'Completa: _____ esame (maschile, inizia con e-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! Al maschile con e- si usa UN (NO apostrofo!).',
-                errorExplanation: '❌ Al maschile NON si usa mai l\'apostrofo: un esame, non un\'esame'
-            },
-            {
-                id: 38,
-                type: 'fill',
-                question: 'Completa: _____ ombrello (maschile, inizia con o-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! Al maschile con o- si usa UN (NO apostrofo!).'
-            },
-            {
-                id: 39,
-                type: 'choice',
-                question: 'Completa: _____ uomo (maschile, inizia con u-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! Al maschile con u- si usa UN (NO apostrofo!).',
-                errorExplanation: '❌ Al maschile NON si usa mai l\'apostrofo: un uomo, non un\'uomo'
-            },
-            {
-                id: 40,
-                type: 'fill',
-                question: 'Completa: _____ indirizzo (maschile, inizia con i-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! Al maschile con i- si usa UN (NO apostrofo!).'
-            },
-            {
-                id: 41,
-                type: 'choice',
-                question: 'Completa: _____ abito (maschile, inizia con a-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! Al maschile con a- si usa UN (NO apostrofo!).',
-                errorExplanation: '❌ Al maschile NON si usa mai l\'apostrofo: un abito, non un\'abito'
-            },
-            {
-                id: 42,
-                type: 'fill',
-                question: 'Completa: _____ effetto (maschile, inizia con e-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! Al maschile con e- si usa UN (NO apostrofo!).'
-            },
-            {
-                id: 43,
-                type: 'choice',
-                question: 'Completa: _____ occhio (maschile, inizia con o-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! Al maschile con o- si usa UN (NO apostrofo!).',
-                errorExplanation: '❌ Al maschile NON si usa mai l\'apostrofo: un occhio, non un\'occhio'
-            },
-            {
-                id: 44,
-                type: 'fill',
-                question: 'Completa: _____ utente (maschile, inizia con u-)',
-                correct: ['un'],
-                explanation: '✅ Corretto! Al maschile con u- si usa UN (NO apostrofo!).'
-            },
-            {
-                id: 45,
-                type: 'choice',
-                question: 'Completa: _____ inizio (maschile, inizia con i-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un',
-                explanation: '✅ Corretto! Al maschile con i- si usa UN (NO apostrofo!).',
-                errorExplanation: '❌ Al maschile NON si usa mai l\'apostrofo: un inizio, non un\'inizio'
-            },
+            // ESERCIZI 21-25: Maschile con vocali (NO apostrofo!)
+            {id: 21, type: 'choice', question: '_____ amico (maschile, a-, NO apostrofo!)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Un', explanation: '✅ Al maschile MAI apostrofo: un amico'},
+            {id: 22, type: 'fill', question: '_____ elefante (maschile, e-)', correct: ['un'], explanation: '✅ Al maschile con vocale → un (NO apostrofo!)'},
+            {id: 23, type: 'choice', question: '_____ orologio (maschile, o-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Un', explanation: '✅ Al maschile MAI apostrofo: un orologio'},
+            {id: 24, type: 'fill', question: '_____ ufficio (maschile, u-)', correct: ['un'], explanation: '✅ Al maschile con vocale → un (NO apostrofo!)'},
+            {id: 25, type: 'choice', question: '_____ indirizzo (maschile, i-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Un', explanation: '✅ Al maschile MAI apostrofo: un indirizzo'},
 
-            // ESERCIZI 46-60: Articolo femminile singolare - UNA
-            {
-                id: 46,
-                type: 'choice',
-                question: 'Completa: _____ casa (femminile, consonante)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'una',
-                explanation: '✅ Corretto! Al femminile con consonante si usa UNA.',
-                errorExplanation: '❌ Al femminile con consonante si usa UNA'
-            },
-            {
-                id: 47,
-                type: 'fill',
-                question: 'Completa: _____ penna (femminile, inizia con p-)',
-                correct: ['una'],
-                explanation: '✅ Corretto! "Penna" è femminile, consonante → UNA.'
-            },
-            {
-                id: 48,
-                type: 'choice',
-                question: 'Completa: _____ scuola (femminile, inizia con sc-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'una',
-                explanation: '✅ Corretto! Al femminile anche con sc- si usa UNA (diversamente dal maschile!).',
-                errorExplanation: '❌ Al femminile si usa UNA anche con s+consonante'
-            },
-            {
-                id: 49,
-                type: 'fill',
-                question: 'Completa: _____ macchina (femminile, inizia con m-)',
-                correct: ['una'],
-                explanation: '✅ Corretto! "Macchina" è femminile, consonante → UNA.'
-            },
-            {
-                id: 50,
-                type: 'choice',
-                question: 'Completa: _____ studentessa (femminile, inizia con st-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'una',
-                explanation: '✅ Corretto! Al femminile anche con st- si usa UNA.',
-                errorExplanation: '❌ Al femminile si usa UNA anche con st-'
-            },
-            {
-                id: 51,
-                type: 'fill',
-                question: 'Completa: _____ zia (femminile, inizia con z-)',
-                correct: ['una'],
-                explanation: '✅ Corretto! "Zia" è femminile, anche con z- si usa UNA.'
-            },
-            {
-                id: 52,
-                type: 'choice',
-                question: 'Completa: _____ psicologa (femminile, inizia con ps-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'una',
-                explanation: '✅ Corretto! Al femminile anche con ps- si usa UNA.',
-                errorExplanation: '❌ Al femminile si usa UNA anche con ps-'
-            },
-            {
-                id: 53,
-                type: 'fill',
-                question: 'Completa: _____ gnocca (femminile, inizia con gn-)',
-                correct: ['una'],
-                explanation: '✅ Corretto! Al femminile anche con gn- si usa UNA.'
-            },
-            {
-                id: 54,
-                type: 'choice',
-                question: 'Completa: _____ bambina (femminile, inizia con b-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'una',
-                explanation: '✅ Corretto! "Bambina" è femminile, consonante → UNA.',
-                errorExplanation: '❌ Al femminile con consonante si usa UNA'
-            },
-            {
-                id: 55,
-                type: 'fill',
-                question: 'Completa: _____ ragazza (femminile, inizia con r-)',
-                correct: ['una'],
-                explanation: '✅ Corretto! "Ragazza" è femminile, consonante → UNA.'
-            },
-            {
-                id: 56,
-                type: 'choice',
-                question: 'Completa: _____ donna (femminile, inizia con d-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'una',
-                explanation: '✅ Corretto! "Donna" è femminile, consonante → UNA.',
-                errorExplanation: '❌ Al femminile con consonante si usa UNA'
-            },
-            {
-                id: 57,
-                type: 'fill',
-                question: 'Completa: _____ finestra (femminile, inizia con f-)',
-                correct: ['una'],
-                explanation: '✅ Corretto! "Finestra" è femminile, consonante → UNA.'
-            },
-            {
-                id: 58,
-                type: 'choice',
-                question: 'Completa: _____ giornata (femminile, inizia con g-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'una',
-                explanation: '✅ Corretto! "Giornata" è femminile, consonante → UNA.',
-                errorExplanation: '❌ Al femminile con consonante si usa UNA'
-            },
-            {
-                id: 59,
-                type: 'fill',
-                question: 'Completa: _____ lampada (femminile, inizia con l-)',
-                correct: ['una'],
-                explanation: '✅ Corretto! "Lampada" è femminile, consonante → UNA.'
-            },
-            {
-                id: 60,
-                type: 'choice',
-                question: 'Completa: _____ notte (femminile, inizia con n-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'una',
-                explanation: '✅ Corretto! "Notte" è femminile, consonante → UNA.',
-                errorExplanation: '❌ Al femminile con consonante si usa UNA'
-            },
+            // ESERCIZI 26-35: Femminile UNA
+            {id: 26, type: 'choice', question: '_____ casa (femminile, c-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Una', explanation: '✅ "Casa" è femminile, consonante → UNA'},
+            {id: 27, type: 'fill', question: '_____ penna (femminile, p-)', correct: ['una'], explanation: '✅ "Penna" è femminile, consonante → una'},
+            {id: 28, type: 'choice', question: '_____ scuola (femminile, sc-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Una', explanation: '✅ Al femminile anche con sc- si usa UNA'},
+            {id: 29, type: 'fill', question: '_____ studentessa (femminile, st-)', correct: ['una'], explanation: '✅ Al femminile anche con st- si usa una'},
+            {id: 30, type: 'choice', question: '_____ macchina (femminile, m-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Una', explanation: '✅ "Macchina" è femminile, consonante → UNA'},
+            {id: 31, type: 'fill', question: '_____ zia (femminile, z-)', correct: ['una'], explanation: '✅ Al femminile anche con z- si usa una'},
+            {id: 32, type: 'choice', question: '_____ psicologa (femminile, ps-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Una', explanation: '✅ Al femminile anche con ps- si usa UNA'},
+            {id: 33, type: 'fill', question: '_____ bambina (femminile, b-)', correct: ['una'], explanation: '✅ "Bambina" è femminile, consonante → una'},
+            {id: 34, type: 'choice', question: '_____ donna (femminile, d-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Una', explanation: '✅ "Donna" è femminile, consonante → UNA'},
+            {id: 35, type: 'fill', question: '_____ finestra (femminile, f-)', correct: ['una'], explanation: '✅ "Finestra" è femminile, consonante → una'},
 
-            // ESERCIZI 61-75: Articolo femminile singolare - UN' (apostrofo)
-            {
-                id: 61,
-                type: 'fill',
-                question: 'Completa: _____ amica (femminile singolare, inizia con a-)',
-                correct: ['un\'', 'un\''],
-                explanation: '✅ Corretto! Al femminile singolare con vocale si usa UN\' (con apostrofo!).'
-            },
-            {
-                id: 62,
-                type: 'choice',
-                question: 'Completa: _____ isola (femminile singolare, inizia con i-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un\'',
-                explanation: '✅ Corretto! Al femminile singolare con i- si usa UN\' (apostrofo obbligatorio).',
-                errorExplanation: '❌ Al femminile singolare con vocale si usa UN\' (apostrofo obbligatorio)'
-            },
-            {
-                id: 63,
-                type: 'fill',
-                question: 'Completa: _____ ora (femminile singolare, inizia con o-)',
-                correct: ['un\'', 'un\''],
-                explanation: '✅ Corretto! "Ora" è femminile singolare, inizia con o- → UN\'.'
-            },
-            {
-                id: 64,
-                type: 'choice',
-                question: 'Completa: _____ acqua (femminile singolare, inizia con a-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un\'',
-                explanation: '✅ Corretto! Al femminile singolare con a- si usa UN\' (apostrofo obbligatorio).',
-                errorExplanation: '❌ Al femminile singolare con vocale si usa UN\' (apostrofo obbligatorio)'
-            },
-            {
-                id: 65,
-                type: 'fill',
-                question: 'Completa: _____ edicola (femminile singolare, inizia con e-)',
-                correct: ['un\'', 'un\''],
-                explanation: '✅ Corretto! "Edicola" è femminile singolare, inizia con e- → UN\'.'
-            },
-            {
-                id: 66,
-                type: 'choice',
-                question: 'Completa: _____ idea (femminile singolare, inizia con i-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un\'',
-                explanation: '✅ Corretto! "Idea" è femminile singolare, inizia con i- → UN\'.',
-                errorExplanation: '❌ Al femminile singolare con vocale si usa UN\' (apostrofo obbligatorio)'
-            },
-            {
-                id: 67,
-                type: 'fill',
-                question: 'Completa: _____ arancia (femminile singolare, inizia con a-)',
-                correct: ['un\'', 'un\''],
-                explanation: '✅ Corretto! "Arancia" è femminile singolare, inizia con a- → UN\'.'
-            },
-            {
-                id: 68,
-                type: 'choice',
-                question: 'Completa: _____ università (femminile singolare, inizia con u-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un\'',
-                explanation: '✅ Corretto! "Università" è femminile singolare, inizia con u- → UN\'.',
-                errorExplanation: '❌ Al femminile singolare con vocale si usa UN\' (apostrofo obbligatorio)'
-            },
-            {
-                id: 69,
-                type: 'fill',
-                question: 'Completa: _____ entrata (femminile singolare, inizia con e-)',
-                correct: ['un\'', 'un\''],
-                explanation: '✅ Corretto! "Entrata" è femminile singolare, inizia con e- → UN\'.'
-            },
-            {
-                id: 70,
-                type: 'choice',
-                question: 'Completa: _____ uscita (femminile singolare, inizia con u-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un\'',
-                explanation: '✅ Corretto! "Uscita" è femminile singolare, inizia con u- → UN\'.',
-                errorExplanation: '❌ Al femminile singolare con vocale si usa UN\' (apostrofo obbligatorio)'
-            },
-            {
-                id: 71,
-                type: 'fill',
-                question: 'Completa: _____ automobile (femminile singolare, inizia con a-)',
-                correct: ['un\'', 'un\''],
-                explanation: '✅ Corretto! "Automobile" è femminile singolare, inizia con a- → UN\'.'
-            },
-            {
-                id: 72,
-                type: 'choice',
-                question: 'Completa: _____ opinione (femminile singolare, inizia con o-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un\'',
-                explanation: '✅ Corretto! "Opinione" è femminile singolare, inizia con o- → UN\'.',
-                errorExplanation: '❌ Al femminile singolare con vocale si usa UN\' (apostrofo obbligatorio)'
-            },
-            {
-                id: 73,
-                type: 'fill',
-                question: 'Completa: _____ impresa (femminile singolare, inizia con i-)',
-                correct: ['un\'', 'un\''],
-                explanation: '✅ Corretto! "Impresa" è femminile singolare, inizia con i- → UN\'.'
-            },
-            {
-                id: 74,
-                type: 'choice',
-                question: 'Completa: _____ estate (femminile singolare, inizia con e-)',
-                options: ['un', 'uno', 'una', 'un\''],
-                correct: 'un\'',
-                explanation: '✅ Corretto! "Estate" è femminile singolare, inizia con e- → UN\'.',
-                errorExplanation: '❌ Al femminile singolare con vocale si usa UN\' (apostrofo obbligatorio)'
-            },
-            {
-                id: 75,
-                type: 'fill',
-                question: 'Completa: _____ insegna (femminile singolare, inizia con i-)',
-                correct: ['un\'', 'un\''],
-                explanation: '✅ Corretto! "Insegna" è femminile singolare, inizia con i- → UN\'.'
-            },
+            // ESERCIZI 36-40: Femminile UN' (apostrofo)
+            {id: 36, type: 'choice', question: '_____ amica (femminile, a-, con apostrofo!)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Un\'', explanation: '✅ Al femminile singolare con vocale → UN\' (apostrofo!)'},
+            {id: 37, type: 'fill', question: '_____ isola (femminile, i-)', correct: ['un\''], explanation: '✅ "Isola" è femminile, vocale → un\' (apostrofo)'},
+            {id: 38, type: 'choice', question: '_____ ora (femminile, o-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Un\'', explanation: '✅ "Ora" è femminile, vocale → UN\' (apostrofo!)'},
+            {id: 39, type: 'fill', question: '_____ acqua (femminile, a-)', correct: ['un\''], explanation: '✅ "Acqua" è femminile, vocale → un\' (apostrofo)'},
+            {id: 40, type: 'choice', question: '_____ edicola (femminile, e-)', options: ['Un', 'Uno', 'Una', 'Un\''], correct: 'Un\'', explanation: '✅ "Edicola" è femminile, vocale → UN\' (apostrofo!)'},
 
-            // ESERCIZI 76-85: Plurale maschile - DEI
-            {
-                id: 76,
-                type: 'choice',
-                question: 'Il plurale di "un libro" è:',
-                options: ['dei libri', 'degli libri', 'delle libri', 'i libri'],
-                correct: 'dei libri',
-                explanation: '✅ Corretto! UN → DEI (maschile semplice).',
-                errorExplanation: '❌ UN diventa DEI al plurale'
-            },
-            {
-                id: 77,
-                type: 'fill',
-                question: 'Il plurale di "un cane" è: _____ cani',
-                correct: ['dei'],
-                explanation: '✅ Corretto! UN → DEI al plurale.'
-            },
-            {
-                id: 78,
-                type: 'choice',
-                question: 'Il plurale di "un tavolo" è:',
-                options: ['dei tavoli', 'degli tavoli', 'delle tavoli', 'i tavoli'],
-                correct: 'dei tavoli',
-                explanation: '✅ Corretto! UN → DEI (maschile semplice).',
-                errorExplanation: '❌ UN diventa DEI al plurale'
-            },
-            {
-                id: 79,
-                type: 'fill',
-                question: 'Il plurale di "un quaderno" è: _____ quaderni',
-                correct: ['dei'],
-                explanation: '✅ Corretto! UN → DEI al plurale.'
-            },
-            {
-                id: 80,
-                type: 'choice',
-                question: 'Il plurale di "un professore" è:',
-                options: ['dei professori', 'degli professori', 'delle professori', 'i professori'],
-                correct: 'dei professori',
-                explanation: '✅ Corretto! UN → DEI (maschile semplice).',
-                errorExplanation: '❌ UN diventa DEI al plurale'
-            },
-            {
-                id: 81,
-                type: 'fill',
-                question: 'Il plurale di "un medico" è: _____ medici',
-                correct: ['dei'],
-                explanation: '✅ Corretto! UN → DEI al plurale.'
-            },
-            {
-                id: 82,
-                type: 'choice',
-                question: 'Il plurale di "un ragazzo" è:',
-                options: ['dei ragazzi', 'degli ragazzi', 'delle ragazzi', 'i ragazzi'],
-                correct: 'dei ragazzi',
-                explanation: '✅ Corretto! UN → DEI (maschile semplice).',
-                errorExplanation: '❌ UN diventa DEI al plurale'
-            },
-            {
-                id: 83,
-                type: 'fill',
-                question: 'Il plurale di "un gatto" è: _____ gatti',
-                correct: ['dei'],
-                explanation: '✅ Corretto! UN → DEI al plurale.'
-            },
-            {
-                id: 84,
-                type: 'choice',
-                question: 'Il plurale di "un fiore" è:',
-                options: ['dei fiori', 'degli fiori', 'delle fiori', 'i fiori'],
-                correct: 'dei fiori',
-                explanation: '✅ Corretto! UN → DEI (maschile semplice).',
-                errorExplanation: '❌ UN diventa DEI al plurale'
-            },
-            {
-                id: 85,
-                type: 'fill',
-                question: 'Il plurale di "un dente" è: _____ denti',
-                correct: ['dei'],
-                explanation: '✅ Corretto! UN → DEI al plurale.'
-            },
+            // ESERCIZI 41-45: Plurale maschile DEI e DEGLI
+            {id: 41, type: 'choice', question: 'Il plurale di "un libro" è:', options: ['dei libri', 'degli libri', 'delle libri', 'i libri'], correct: 'dei libri', explanation: '✅ UN → DEI al plurale'},
+            {id: 42, type: 'fill', question: 'Il plurale di "un cane" è: _____ cani', correct: ['dei'], explanation: '✅ UN → dei al plurale'},
+            {id: 43, type: 'choice', question: 'Il plurale di "uno studente" è:', options: ['dei studenti', 'degli studenti', 'delle studenti', 'i studenti'], correct: 'degli studenti', explanation: '✅ UNO → DEGLI al plurale'},
+            {id: 44, type: 'fill', question: 'Il plurale di "uno zaino" è: _____ zaini', correct: ['degli'], explanation: '✅ UNO → degli al plurale'},
+            {id: 45, type: 'choice', question: 'Il plurale di "un amico" (vocale) è:', options: ['dei amici', 'degli amici', 'delle amici', 'gli amici'], correct: 'degli amici', explanation: '✅ UN con vocale → DEGLI al plurale'},
 
-            // ESERCIZI 86-92: Plurale maschile - DEGLI
-            {
-                id: 86,
-                type: 'choice',
-                question: 'Il plurale di "uno zaino" è:',
-                options: ['degli zaini', 'dei zaini', 'delle zaini', 'gli zaini'],
-                correct: 'degli zaini',
-                explanation: '✅ Corretto! UNO → DEGLI al plurale.',
-                errorExplanation: '❌ UNO diventa DEGLI al plurale'
-            },
-            {
-                id: 87,
-                type: 'fill',
-                question: 'Il plurale di "uno studente" è: _____ studenti',
-                correct: ['degli'],
-                explanation: '✅ Corretto! UNO → DEGLI al plurale.'
-            },
-            {
-                id: 88,
-                type: 'choice',
-                question: 'Il plurale di "uno psicologo" è:',
-                options: ['degli psicologi', 'dei psicologi', 'delle psicologi', 'gli psicologi'],
-                correct: 'degli psicologi',
-                explanation: '✅ Corretto! UNO → DEGLI al plurale.',
-                errorExplanation: '❌ UNO diventa DEGLI al plurale'
-            },
-            {
-                id: 89,
-                type: 'fill',
-                question: 'Il plurale di "uno specchio" è: _____ specchi',
-                correct: ['degli'],
-                explanation: '✅ Corretto! UNO → DEGLI al plurale.'
-            },
-            {
-                id: 90,
-                type: 'choice',
-                question: 'Il plurale di "un elefante" (con vocale) è:',
-                options: ['degli elefanti', 'dei elefanti', 'delle elefanti', 'gli elefanti'],
-                correct: 'degli elefanti',
-                explanation: '✅ Corretto! UN davanti a vocale → DEGLI al plurale.',
-                errorExplanation: '❌ UN davanti a vocale diventa DEGLI al plurale'
-            },
-            {
-                id: 91,
-                type: 'fill',
-                question: 'Il plurale di "un amico" (con vocale) è: _____ amici',
-                correct: ['degli'],
-                explanation: '✅ Corretto! UN davanti a vocale → DEGLI al plurale.'
-            },
-            {
-                id: 92,
-                type: 'choice',
-                question: 'Il plurale di "un uomo" (con vocale) è:',
-                options: ['degli uomini', 'dei uomini', 'delle uomini', 'gli uomini'],
-                correct: 'degli uomini',
-                explanation: '✅ Corretto! UN davanti a vocale → DEGLI al plurale.',
-                errorExplanation: '❌ UN davanti a vocale diventa DEGLI al plurale'
-            },
-
-            // ESERCIZI 93-100: Plurale femminile - DELLE (NO apostrofo!)
-            {
-                id: 93,
-                type: 'fill',
-                question: 'Il plurale di "una casa" è: _____ case',
-                correct: ['delle'],
-                explanation: '✅ Corretto! UNA → DELLE al plurale.'
-            },
-            {
-                id: 94,
-                type: 'choice',
-                question: 'Il plurale di "un\'amica" (femminile) è:',
-                options: ['delle amiche', 'degli amiche', 'dei amiche', 'le amiche'],
-                correct: 'delle amiche',
-                explanation: '✅ Corretto! UN\' (femminile singolare) → DELLE al plurale (NO apostrofo!).',
-                errorExplanation: '❌ UN\' (femminile) diventa DELLE al plurale. Non c\'è mai apostrofo al plurale!'
-            },
-            {
-                id: 95,
-                type: 'fill',
-                question: 'Il plurale di "una penna" è: _____ penne',
-                correct: ['delle'],
-                explanation: '✅ Corretto! UNA → DELLE al plurale.'
-            },
-            {
-                id: 96,
-                type: 'choice',
-                question: 'Il plurale di "un\'isola" (femminile) è:',
-                options: ['delle isole', 'degli isole', 'dei isole', 'le isole'],
-                correct: 'delle isole',
-                explanation: '✅ Corretto! UN\' (femminile) → DELLE al plurale (NO apostrofo!).',
-                errorExplanation: '❌ UN\' (femminile) diventa DELLE al plurale. Non c\'è mai apostrofo al plurale!'
-            },
-            {
-                id: 97,
-                type: 'fill',
-                question: 'Il plurale di "una scuola" è: _____ scuole',
-                correct: ['delle'],
-                explanation: '✅ Corretto! UNA → DELLE al plurale.'
-            },
-            {
-                id: 98,
-                type: 'choice',
-                question: 'Il plurale di "un\'ora" (femminile) è:',
-                options: ['delle ore', 'degli ore', 'dei ore', 'le ore'],
-                correct: 'delle ore',
-                explanation: '✅ Corretto! UN\' (femminile) → DELLE al plurale (NO apostrofo!).',
-                errorExplanation: '❌ UN\' (femminile) diventa DELLE al plurale. Non c\'è mai apostrofo al plurale!'
-            },
-            {
-                id: 99,
-                type: 'fill',
-                question: 'Il plurale di "una donna" è: _____ donne',
-                correct: ['delle'],
-                explanation: '✅ Corretto! UNA → DELLE al plurale.'
-            },
-            {
-                id: 100,
-                type: 'choice',
-                question: 'Completa l\'ultimo esercizio! Il plurale di "un\'idea" (femminile) è:',
-                options: ['delle idee', 'degli idee', 'dei idee', 'le idee'],
-                correct: 'delle idee',
-                explanation: '🎉 PERFETTO! UN\' (femminile) → DELLE al plurale (NO apostrofo!). Complimenti per aver completato tutti gli esercizi!',
-                errorExplanation: '❌ UN\' (femminile) diventa DELLE al plurale. Ricorda: mai apostrofo al plurale femminile!'
-            }
+            // ESERCIZI 46-50: Plurale femminile DELLE
+            {id: 46, type: 'fill', question: 'Il plurale di "una casa" è: _____ case', correct: ['delle'], explanation: '✅ UNA → DELLE al plurale'},
+            {id: 47, type: 'choice', question: 'Il plurale di "un\'amica" è:', options: ['dell\'amiche', 'delle amiche', 'degli amiche', 'le amiche'], correct: 'delle amiche', explanation: '✅ UN\' → DELLE al plurale (NO apostrofo al plurale!)'},
+            {id: 48, type: 'fill', question: 'Il plurale di "una penna" è: _____ penne', correct: ['delle'], explanation: '✅ UNA → delle al plurale'},
+            {id: 49, type: 'choice', question: 'Il plurale di "un\'isola" è:', options: ['dell\'isole', 'delle isole', 'degli isole', 'le isole'], correct: 'delle isole', explanation: '✅ UN\' → DELLE al plurale (NO apostrofo al plurale!)'},
+            {id: 50, type: 'fill', question: 'Completa: _____ libri (plurale maschile di UN)', correct: ['dei'], explanation: '✅ UN → dei al plurale'}
         ];
 
         let currentExercise = 0;
-        let totalScore = 0;
+        let score = 0;
         let answered = false;
+        let exerciseResults = [];
 
-        function showSection(id, btn) {
+        function showSection(sectionId, btn) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-            if(btn) btn.classList.add('active');
-
-            if(id === 'exercises' && currentExercise === 0) {
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+            
+            if (sectionId === 'exercises') {
                 loadExercise();
             }
+        }
+
+        function toggleLang(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.toggle-icon');
+            content.classList.toggle('active');
+            icon.classList.toggle('rotated');
         }
 
         function loadExercise() {
@@ -2025,160 +1697,125 @@
 
             const ex = exercises[currentExercise];
             const container = document.getElementById('exerciseContainer');
-            
-            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
-            
             answered = false;
 
             let html = `
-                <div class="card" style="animation: fadeIn 0.4s ease;">
-                    <div class="card-header">Esercizio ${ex.id}</div>
-                    <div class="card-body">
-                        <div class="exercise-counter">Esercizio ${currentExercise + 1} di ${exercises.length}</div>
-                        <div class="question-box">
-                            <div class="question-text">${ex.question}</div>
-                        </div>
+                <div class="exercise-counter">Esercizio ${ex.id} di 50</div>
+                <div class="question-box">
+                    <div class="question-text">${ex.question}</div>
             `;
 
             if (ex.type === 'choice') {
-                html += `<div class="options-grid" id="optionsGrid">`;
-                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
-                shuffledOptions.forEach(opt => {
-                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                html += `<div class="options-grid">`;
+                ex.options.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkAnswer('${opt.replace(/'/g, "\\'")}')">${opt}</button>`;
                 });
                 html += `</div>`;
-            } else if (ex.type === 'fill') {
+            } else {
                 html += `
-                    <div style="text-align: center; margin-bottom: 1.5rem;">
-                        <input type="text" class="fill-blank" id="fillInput" placeholder="Scrivi l'articolo..." onkeypress="if(event.key==='Enter') checkFill()">
+                    <div style="margin: 20px 0;">
+                        <input type="text" class="fill-blank" id="fillAnswer" placeholder="Scrivi l'articolo...">
                     </div>
-                    <div class="text-center">
-                        <button class="btn-primary btn-check" onclick="checkFill()">Verifica</button>
-                    </div>
+                    <button class="btn-primary btn-check" onclick="checkFillAnswer()">Verifica</button>
                 `;
             }
 
             html += `
-                        <div class="feedback" id="feedback"></div>
-                        <div class="text-center" id="nextBtnContainer" style="display: none;">
-                            <button class="btn-primary" onclick="nextExercise()">Successivo →</button>
-                        </div>
-                    </div>
+                <div class="feedback" id="feedback"></div>
+                <button class="btn-primary" id="nextBtn" onclick="nextExercise()" style="display: none;">Prossimo Esercizio →</button>
                 </div>
             `;
 
             container.innerHTML = html;
-            
-            if (ex.type === 'fill') {
-                setTimeout(() => document.getElementById('fillInput').focus(), 100);
-            }
+            updateProgress();
         }
 
-        function checkChoice(selected) {
+        function checkAnswer(selected) {
             if (answered) return;
             answered = true;
 
             const ex = exercises[currentExercise];
-            const btns = document.querySelectorAll('#optionsGrid .option-btn');
             const feedback = document.getElementById('feedback');
-            const nextContainer = document.getElementById('nextBtnContainer');
+            const buttons = document.querySelectorAll('.option-btn');
+            const nextBtn = document.getElementById('nextBtn');
 
-            btns.forEach(btn => {
+            let isCorrect = selected === ex.correct;
+            
+            buttons.forEach(btn => {
                 btn.disabled = true;
-                if (btn.dataset.value === ex.correct) {
+                if (btn.textContent === ex.correct) {
                     btn.classList.add('correct');
-                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                } else if (btn.textContent === selected && !isCorrect) {
                     btn.classList.add('wrong');
                 }
             });
 
-            feedback.classList.add('show');
-
-            if (selected === ex.correct) {
-                feedback.className = 'feedback show correct';
-                feedback.textContent = ex.explanation;
-                totalScore += 1;
+            if (isCorrect) {
+                score += 2;
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = `<strong>✅ Corretto! +2 punti</strong><br>${ex.explanation}`;
             } else {
-                feedback.className = 'feedback show wrong';
-                let errorMsg = ex.errorExplanation;
-                
-                // Verifica errori specifici sull'apostrofo
-                const isFemminileSingolareConVocale = ex.question.includes('femminile') && 
-                                                       ex.question.includes('singolare') && 
-                                                       /inizia con [aeiou]-/.test(ex.question);
-                const isMaschileConVocale = ex.question.includes('maschile') && 
-                                            /inizia con [aeiou]-/.test(ex.question);
-                
-                // Errore: usato un' al maschile
-                if (isMaschileConVocale && selected === 'un\'') {
-                    errorMsg += '\n\n⚠️ ERRORE GRAVE: L\'apostrofo NON si usa mai al maschile! Si dice "un amico", mai "un\'amico"!';
-                }
-                // Errore: usato una al femminile singolare con vocale
-                else if (isFemminileSingolareConVocale && selected === 'una') {
-                    errorMsg += '\n\n⚠️ Ricorda: al femminile singolare con vocali serve l\'apostrofo: un\'amica!';
-                }
-                
-                feedback.innerHTML = `${errorMsg}<br><br><strong>Risposta corretta:</strong> ${ex.correct}`;
+                feedback.className = 'feedback wrong show';
+                feedback.innerHTML = `<strong>❌ Sbagliato! La risposta corretta è: ${ex.correct}</strong><br>${ex.explanation}`;
             }
 
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            nextContainer.style.display = 'block';
+            exerciseResults.push({
+                id: ex.id,
+                question: ex.question,
+                userAnswer: selected,
+                correct: ex.correct,
+                isCorrect: isCorrect,
+                points: isCorrect ? 2 : 0
+            });
+
+            document.getElementById('currentScore').textContent = score + ' / 100';
+            nextBtn.style.display = 'inline-block';
         }
 
-        function checkFill() {
+        function checkFillAnswer() {
             if (answered) return;
             
-            const input = document.getElementById('fillInput');
-            const value = input.value.trim().toLowerCase();
-            if (!value) return;
+            const input = document.getElementById('fillAnswer');
+            const answer = input.value.trim().toLowerCase();
+            
+            if (!answer) {
+                alert('Inserisci una risposta!');
+                return;
+            }
 
             answered = true;
 
             const ex = exercises[currentExercise];
             const feedback = document.getElementById('feedback');
-            const nextContainer = document.getElementById('nextBtnContainer');
+            const nextBtn = document.getElementById('nextBtn');
 
-            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
-
-            feedback.classList.add('show');
-            input.disabled = true;
+            let isCorrect = ex.correct.includes(answer);
 
             if (isCorrect) {
-                feedback.className = 'feedback show correct';
-                feedback.textContent = ex.explanation;
+                score += 2;
                 input.style.borderColor = 'var(--success)';
-                input.style.background = '#f0fff4';
-                totalScore += 1;
+                input.style.background = 'var(--success-bg)';
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = `<strong>✅ Corretto! +2 punti</strong><br>${ex.explanation}`;
             } else {
-                feedback.className = 'feedback show wrong';
-                let errorMsg = `❌ Sbagliato.<br><strong>Risposta corretta:</strong> ${ex.correct[0]}`;
-                
-                // Verifica errori specifici sull'apostrofo
-                const isFemminileSingolareConVocale = ex.question.includes('femminile') && 
-                                                       ex.question.includes('singolare') && 
-                                                       /inizia con [aeiou]-/.test(ex.question);
-                const isMaschileConVocale = ex.question.includes('maschile') && 
-                                            /inizia con [aeiou]-/.test(ex.question);
-                
-                // Errore: usato un' al maschile
-                if (isMaschileConVocale && value === 'un\'') {
-                    errorMsg += '<br><br>⚠️ ERRORE GRAVE: L\'apostrofo NON si usa mai al maschile! Si dice "un amico", mai "un\'amico"!';
-                }
-                // Errore: usato una al femminile singolare con vocale
-                else if (isFemminileSingolareConVocale && value === 'una') {
-                    errorMsg += '<br><br>⚠️ Ricorda: al femminile singolare con vocali serve l\'apostrofo: un\'amica!';
-                }
-                
-                feedback.innerHTML = errorMsg;
                 input.style.borderColor = 'var(--error)';
-                input.style.background = '#fff5f5';
-                input.value = ex.correct[0];
+                input.style.background = 'var(--error-bg)';
+                feedback.className = 'feedback wrong show';
+                feedback.innerHTML = `<strong>❌ Sbagliato! La risposta corretta è: ${ex.correct[0]}</strong><br>${ex.explanation}`;
             }
 
-            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
-            nextContainer.style.display = 'block';
+            exerciseResults.push({
+                id: ex.id,
+                question: ex.question,
+                userAnswer: answer,
+                correct: ex.correct[0],
+                isCorrect: isCorrect,
+                points: isCorrect ? 2 : 0
+            });
+
+            input.disabled = true;
+            document.getElementById('currentScore').textContent = score + ' / 100';
+            nextBtn.style.display = 'inline-block';
         }
 
         function nextExercise() {
@@ -2186,55 +1823,116 @@
             loadExercise();
         }
 
+        function updateProgress() {
+            const progress = (currentExercise / exercises.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('exerciseCounter').textContent = (currentExercise + 1) + ' / 50';
+        }
+
         function showFinalScore() {
             document.getElementById('exerciseContainer').style.display = 'none';
-            document.getElementById('finalScoreSection').classList.add('show');
-            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            document.querySelector('.score-panel').style.display = 'none';
+            document.querySelector('.progress-bar').style.display = 'none';
             
-            let message = '';
-            if (totalScore >= 90) {
-                message = '🏆 Eccellente! Padroneggi perfettamente gli articoli indeterminativi!';
-            } else if (totalScore >= 70) {
-                message = '👍 Ottimo lavoro! Conosci bene le regole: apostrofo SOLO al femminile singolare!';
-            } else if (totalScore >= 50) {
-                message = '💪 Buon lavoro! Ricorda: apostrofo solo al femminile singolare (un\'amica), mai al maschile o al plurale!';
+            const finalSection = document.getElementById('finalScoreSection');
+            finalSection.classList.add('show');
+            
+            document.getElementById('finalScore').textContent = score + '/100';
+            
+            const sufficiencyBox = document.getElementById('sufficiencyBox');
+            if (score >= 60) {
+                sufficiencyBox.innerHTML = '<div class="sufficiency-indicator sufficiency-pass">✅ SUFFICIENZA RAGGIUNTA (60/100)</div>';
+                document.getElementById('finalMessage').textContent = 'Complimenti! Hai superato la prova.';
             } else {
-                message = '📚 Ripassa le regole! Ricorda: un\'amica (femminile singolare), un amico (maschile, NO apostrofo), delle amiche (plurale, NO apostrofo)!';
+                sufficiencyBox.innerHTML = '<div class="sufficiency-indicator sufficiency-fail">❌ SUFFICIENZA NON RAGGIUNTA (60/100)</div>';
+                document.getElementById('finalMessage').textContent = 'Non hai raggiunto la sufficienza. Riprova!';
+            }
+        }
+
+        function showEmailModal() {
+            const modal = document.getElementById('emailModal');
+            const summary = document.getElementById('resultSummary');
+            
+            let resultText = `ARTICOLI INDETERMINATIVI - RISULTATI\n`;
+            resultText += `================================\n\n`;
+            resultText += `PUNTEGGIO FINALE: ${score}/100\n`;
+            resultText += `SUFFICIENZA: ${score >= 60 ? 'RAGGIUNTA ✅' : 'NON RAGGIUNTA ❌'}\n`;
+            resultText += `ESERCIZI: ${exerciseResults.filter(r => r.isCorrect).length}/50 corretti\n\n`;
+            resultText += `DETTAGLIO RISPOSTE:\n`;
+            resultText += `-------------------\n\n`;
+            
+            exerciseResults.forEach(r => {
+                resultText += `Esercizio ${r.id}: ${r.isCorrect ? '✅' : '❌'}\n`;
+                resultText += `Domanda: ${r.question}\n`;
+                resultText += `Tua risposta: ${r.userAnswer}\n`;
+                if (!r.isCorrect) {
+                    resultText += `Corretto: ${r.correct}\n`;
+                }
+                resultText += `Punti: ${r.points}/2\n\n`;
+            });
+            
+            summary.textContent = resultText;
+            modal.classList.add('show');
+        }
+
+        function closeEmailModal() {
+            document.getElementById('emailModal').classList.remove('show');
+        }
+
+        function sendViaEmail() {
+            const name = document.getElementById('studentName').value.trim();
+            const email = document.getElementById('studentEmail').value.trim();
+            const summary = document.getElementById('resultSummary').textContent;
+            
+            if (!name || !email) {
+                alert('Inserisci nome e email!');
+                return;
             }
             
-            document.getElementById('finalMessage').textContent = message;
-            document.getElementById('progressBar').style.width = '100%';
+            const subject = `Risultati Articoli Indeterminativi - ${name} - ${score}/100`;
+            const body = `Nome: ${name}\nEmail: ${email}\n\n${summary}`;
+            
+            window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        function copyResults() {
+            const summary = document.getElementById('resultSummary');
+            navigator.clipboard.writeText(summary.textContent).then(() => {
+                const feedback = document.getElementById('copyFeedback');
+                feedback.style.display = 'block';
+                setTimeout(() => {
+                    feedback.style.display = 'none';
+                }, 3000);
+            });
         }
 
         function restartExercises() {
             currentExercise = 0;
-            totalScore = 0;
+            score = 0;
+            exerciseResults = [];
             answered = false;
             
-            // Mischia gli esercizi mantenendo una progressione di difficoltà approssimativa
-            const easy = exercises.slice(0, 30).sort(() => Math.random() - 0.5);
-            const medium = exercises.slice(30, 60).sort(() => Math.random() - 0.5);
-            const hard = exercises.slice(60, 100).sort(() => Math.random() - 0.5);
-            
-            // Ricostruisci l'array mantenendo la progressione
-            exercises.length = 0;
-            exercises.push(...easy, ...medium, ...hard);
-            
             document.getElementById('exerciseContainer').style.display = 'block';
+            document.querySelector('.score-panel').style.display = 'flex';
+            document.querySelector('.progress-bar').style.display = 'block';
             document.getElementById('finalScoreSection').classList.remove('show');
-            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('currentScore').textContent = '0 / 100';
             
             loadExercise();
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mischia gli esercizi all'avvio mantenendo la progressione di difficoltà
-            const easy = exercises.slice(0, 30).sort(() => Math.random() - 0.5);
-            const medium = exercises.slice(30, 60).sort(() => Math.random() - 0.5);
-            const hard = exercises.slice(60, 100).sort(() => Math.random() - 0.5);
-            
-            exercises.length = 0;
-            exercises.push(...easy, ...medium, ...hard);
+        // Chiudi modal cliccando fuori
+        document.getElementById('emailModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEmailModal();
+            }
+        });
+
+        // Gestione tasto Invio per input fill
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.getElementById('fillAnswer') && !answered) {
+                checkFillAnswer();
+            }
         });
     </script>
 </body>
