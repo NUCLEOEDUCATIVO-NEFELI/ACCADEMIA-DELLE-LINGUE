@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educazione Civica A2 - Storia d'Italia dopo l'Unità</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #003366; --secondary: #6c757d; --accent: #8b0000;
+            --light: #f8f9fa; --dark: #212529; --border: #dee2e6;
+            --parchment: #faf8f3;
+        }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--accent);
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: normal;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        .language-nav {
+            background: white;
+            border-bottom: 2px solid var(--border);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .lang-btn {
+            padding: 0.6rem 0.8rem;
+            border: 2px solid var(--border);
+            background: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            text-align: center;
+            border-radius: 4px;
+        }
+        .lang-btn:hover {
+            border-color: var(--primary);
+            background: var(--light);
+        }
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .lang-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .lang-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .card-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.2rem 1.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .history-img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 8px;
+            margin: 1rem auto;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+        .timeline-date {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .quiz-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .quiz-question {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .quiz-question h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .quiz-options {
+            display: grid;
+            gap: 0.5rem;
+        }
+        .quiz-option {
+            padding: 0.8rem 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background: #f0f4ff;
+        }
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        .quiz-option.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .note-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        .example-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+        .rtl {
+            direction: rtl;
+            text-align: right;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .score-display {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 2rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid var(--primary);
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .lang-grid { grid-template-columns: repeat(4, 1fr); }
+            .lang-btn { font-size: 0.65rem; padding: 0.4rem; }
+            .main-container { padding: 1rem; }
+            .card-header { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🇮🇹 Educazione Civica A2</h1>
+        <p>Storia d'Italia dopo l'Unità - 20 Languages / 20 Lingue</p>
+    </header>
+
+    <nav class="language-nav">
+        <div class="lang-grid">
+            <button class="lang-btn active" onclick="showLang('it')">🇮🇹 IT</button>
+            <button class="lang-btn" onclick="showLang('en')">🇬🇧 EN</button>
+            <button class="lang-btn" onclick="showLang('fr')">🇫🇷 FR</button>
+            <button class="lang-btn" onclick="showLang('es')">🇪🇸 ES</button>
+            <button class="lang-btn" onclick="showLang('de')">🇩🇪 DE</button>
+            <button class="lang-btn" onclick="showLang('ru')">🇷🇺 RU</button>
+            <button class="lang-btn" onclick="showLang('ar')">🇸🇦 AR</button>
+            <button class="lang-btn" onclick="showLang('bn')">🇧🇩 BN</button>
+            <button class="lang-btn" onclick="showLang('ur')">🇵🇰 UR</button>
+            <button class="lang-btn" onclick="showLang('sq')">🇦🇱 SQ</button>
+            <button class="lang-btn" onclick="showLang('el')">🇬🇷 EL</button>
+            <button class="lang-btn" onclick="showLang('bm')">🇲🇱 BM</button>
+            <button class="lang-btn" onclick="showLang('wo')">🇸🇳 WO</button>
+            <button class="lang-btn" onclick="showLang('man')">🇬🇲 MAN</button>
+            <button class="lang-btn" onclick="showLang('pa')">🇮🇳 PA</button>
+            <button class="lang-btn" onclick="showLang('si')">🇱🇰 SI</button>
+            <button class="lang-btn" onclick="showLang('ber')">ⵣ BER</button>
+            <button class="lang-btn" onclick="showLang('fa')">🇮🇷 FA</button>
+            <button class="lang-btn" onclick="showLang('fil')">🇵🇭 FIL</button>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <a href="index.html" class="back-link">← Torna alla Dashboard</a>
+                <!-- ITALIANO -->
+        <section id="it" class="lang-section active">
+            <div class="card">
+                <div class="card-header">🇮🇹 L'Unità d'Italia (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="Cartina Italia" class="history-img">
+                    <p>Il <strong>17 marzo 1861</strong> venne proclamato il Regno d'Italia. Vittorio Emanuele II divenne il primo re d'Italia unita. Il processo di unificazione, chiamato <strong>Risorgimento</strong>, fu completato con l'annessione di Venezia (1866) e di Roma (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Proclamazione del Regno d'Italia con Torino come capitale.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Annessione del Veneto dopo la Terza Guerra d'Indipendenza.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Breccia di Porta Pia e annessione di Roma.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Roma diventa la capitale d'Italia.</p></div>
+                    </div>
+                    <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/944346eadc372791a2e3eb4b0b16a2e50fb02cdb.jpg" alt="Vittorio Emanuele II" class="history-img">
+                    <p style="text-align: center; font-style: italic;">Vittorio Emanuele II, primo re d'Italia</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇮🇹 Il Fascismo e la Repubblica</div>
+                <div class="card-body">
+                    <p>Dopo la Prima Guerra Mondiale, l'Italia attraversò un periodo di crisi sociale. Benito Mussolini prese il potere nel 1922 con la "Marcia su Roma". Il regime fascista durò fino al 1943.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Marcia su Roma e inizio del regime fascista.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Caduta del fascismo e armistizio dell'8 settembre.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Referendum: nasce la Repubblica Italiana.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Entrata in vigore della Costituzione.</p></div>
+                    </div>
+                    <img src="https://kimi-web-img.moonshot.cn/img/constitutionnet.org/71df9bf1ac69d22de2419bf419960f00282a7c48.jpg" alt="Costituzione" class="history-img">
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Domande di Educazione Civica</h2>
+                <div id="quiz-it"></div>
+                <div id="score-it" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('it')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Verifica Risposte</button>
+            </div>
+        </section>
+
+        <!-- ENGLISH -->
+        <section id="en" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇬🇧 The Unification of Italy (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="Italy Map" class="history-img">
+                    <p>On <strong>March 17, 1861</strong>, the Kingdom of Italy was proclaimed. Victor Emmanuel II became the first king of unified Italy. The unification process, called the <strong>Risorgimento</strong>, was completed with the annexation of Venice (1866) and Rome (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Proclamation of the Kingdom of Italy with Turin as capital.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Annexation of Veneto after the Third War of Independence.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Breach of Porta Pia and annexation of Rome.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Rome becomes the capital of Italy.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇬🇧 Fascism and the Republic</div>
+                <div class="card-body">
+                    <p>After World War I, Italy went through a period of social crisis. Benito Mussolini took power in 1922 with the "March on Rome". The fascist regime lasted until 1943.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>March on Rome and beginning of the fascist regime.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Fall of fascism and armistice of September 8.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Referendum: birth of the Italian Republic.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>The Constitution comes into force.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Civic Education Questions</h2>
+                <div id="quiz-en"></div>
+                <div id="score-en" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('en')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Check Answers</button>
+            </div>
+        </section>
+
+        <!-- FRANCESE -->
+        <section id="fr" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇫🇷 L'Unité de l'Italie (1861)</div>
+                <div class="card-body">
+                    <p>Le <strong>17 mars 1861</strong>, le Royaume d'Italie fut proclamé. Victor Emmanuel II devint le premier roi de l'Italie unifiée. Le processus d'unification, appelé <strong>Risorgimento</strong>, fut achevé avec l'annexion de Venise (1866) et de Rome (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Proclamation du Royaume d'Italie avec Turin comme capitale.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Annexion de la Vénétie après la Troisième Guerre d'Indépendance.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Brèche de Porta Pia et annexion de Rome.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Rome devient la capitale de l'Italie.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇫🇷 Le Fascisme et la République</div>
+                <div class="card-body">
+                    <p>Après la Première Guerre mondiale, l'Italie traversa une période de crise sociale. Benito Mussolini prit le pouvoir en 1922 avec la "Marche sur Rome". Le régime fasciste dura jusqu'en 1943.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Marche sur Rome et début du régime fasciste.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Chute du fascisme et armistice du 8 septembre.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Référendum : naissance de la République italienne.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Entrée en vigueur de la Constitution.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Questions d'Éducation Civique</h2>
+                <div id="quiz-fr"></div>
+                <div id="score-fr" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('fr')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Vérifier les Réponses</button>
+            </div>
+        </section>
+
+        <!-- SPAGNOLO -->
+        <section id="es" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇪🇸 La Unificación de Italia (1861)</div>
+                <div class="card-body">
+                    <p>El <strong>17 de marzo de 1861</strong> se proclamó el Reino de Italia. Víctor Manuel II se convirtió en el primer rey de la Italia unificada. El proceso de unificación, llamado <strong>Risorgimento</strong>, se completó con la anexión de Venecia (1866) y Roma (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Proclamación del Reino de Italia con Turín como capital.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Anexión del Véneto después de la Tercera Guerra de Independencia.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Brecha de Porta Pia y anexión de Roma.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Roma se convierte en la capital de Italia.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇪🇸 El Fascismo y la República</div>
+                <div class="card-body">
+                    <p>Después de la Primera Guerra Mundial, Italia atravesó un período de crisis social. Benito Mussolini tomó el poder en 1922 con la "Marcha sobre Roma". El régimen fascista duró hasta 1943.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Marcha sobre Roma e inicio del régimen fascista.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Caída del fascismo y armisticio del 8 de septiembre.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Referéndum: nace la República Italiana.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Entrada en vigor de la Constitución.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Preguntas de Educación Cívica</h2>
+                <div id="quiz-es"></div>
+                <div id="score-es" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('es')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Verificar Respuestas</button>
+            </div>
+        </section>
+
+        <!-- TEDESCO -->
+        <section id="de" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇩🇪 Die Einigung Italiens (1861)</div>
+                <div class="card-body">
+                    <p>Am <strong>17. März 1861</strong> wurde das Königreich Italien proklamiert. Viktor Emanuel II. wurde der erste König des vereinten Italiens. Der Einigungsprozess, genannt <strong>Risorgimento</strong>, wurde mit der Annexion Venedigs (1866) und Roms (1870) abgeschlossen.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Proklamation des Königreichs Italien mit Turin als Hauptstadt.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Annexion Venetiens nach dem Dritten Unabhängigkeitskrieg.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Bresche von Porta Pia und Annexion Roms.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Rom wird Hauptstadt Italiens.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇩🇪 Faschismus und Republik</div>
+                <div class="card-body">
+                    <p>Nach dem Ersten Weltkrieg durchlebte Italien eine Zeit der sozialen Krise. Benito Mussolini ergriff 1922 mit dem "Marsch auf Rom" die Macht. Das faschistische Regime dauerte bis 1943.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Marsch auf Rom und Beginn des faschistischen Regimes.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Sturz des Faschismus und Waffenstillstand vom 8. September.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Referendum: Geburt der Italienischen Republik.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Inkrafttreten der Verfassung.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Fragen zur Staatsbürgerkunde</h2>
+                <div id="quiz-de"></div>
+                <div id="score-de" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('de')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Antworten Überprüfen</button>
+            </div>
+        </section>
+
+        <!-- RUSSO -->
+        <section id="ru" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇷🇺 Объединение Италии (1861)</div>
+                <div class="card-body">
+                    <p><strong>17 марта 1861 года</strong> было провозглашено Королевство Италия. Виктор Эммануил II стал первым королём объединённой Италии. Процесс объединения, называемый <strong>Рисорджименто</strong>, был завершён с присоединением Венеции (1866) и Рима (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Провозглашение Королевства Италия со столицей в Турине.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Присоединение Венето после Третьей войны за независимость.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Пролом ворот Порта Пия и присоединение Рима.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Рим становится столицей Италии.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇷🇺 Фашизм и Республика</div>
+                <div class="card-body">
+                    <p>После Первой мировой войны Италия пережила период социального кризиса. Бенито Муссолини пришёл к власти в 1922 году с "Походом на Рим". Фашистский режим продолжался до 1943 года.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Поход на Рим и начало фашистского режима.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Падение фашизма и перемирие 8 сентября.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Референдум: рождение Итальянской Республики.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Вступление в силу Конституции.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Вопросов по Гражданскому Образованию</h2>
+                <div id="quiz-ru"></div>
+                <div id="score-ru" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('ru')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Проверить Ответы</button>
+            </div>
+        </section>
+                <!-- ARABO -->
+        <section id="ar" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇸🇦 توحيد إيطاليا (1861)</div>
+                <div class="card-body rtl">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="خريطة إيطاليا" class="history-img">
+                    <p>في <strong>17 مارس 1861</strong>، أُعلن عن مملكة إيطاليا. أصبح فيكتور إيمانويل الثاني أول ملك لإيطاليا الموحدة. اكتملت عملية التوحيد، التي تُسمى <strong>النهضة</strong>، مع ضم البندقية (1866) وروما (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>إعلان مملكة إيطاليا مع تورينو عاصمة.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>ضم فينيتو بعد الحرب الثالثة للاستقلال.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>ثغرة بورتا بيا وضم روما.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>تصبح روما عاصمة إيطاليا.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇸🇦 الفاشية والجمهورية</div>
+                <div class="card-body rtl">
+                    <p>بعد الحرب العالمية الأولى، مرت إيطاليا بفترة من الأزمة الاجتماعية. تولى بينيتو موسوليني السلطة في 1922 بـ"مسيرة على روما". استمر النظام الفاشي حتى 1943.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>مسيرة على روما وبداية النظام الفاشي.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>سقوط الفاشية وهدنة 8 سبتمبر.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>استفتاء: ميلاد الجمهورية الإيطالية.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>دخول الدستور حيز التنفيذ.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 سؤالاً في التربية المدنية</h2>
+                <div id="quiz-ar"></div>
+                <div id="score-ar" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('ar')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">تحقق من الإجابات</button>
+            </div>
+        </section>
+
+        <!-- BANGLA -->
+        <section id="bn" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇧🇩 ইতালির একীকরণ (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="ইতালির মানচিত্র" class="history-img">
+                    <p><strong>১৭ মার্চ ১৮৬১</strong> সালে ইতালির রাজ্য ঘোষণা করা হয়। ভিক্টর এমানুয়েল II একীকৃত ইতালির প্রথম রাজা হন। <strong>রিসোর্জিমেন্টো</strong> নামক একীকরণ প্রক্রিয়া ভেনিস (১৮৬৬) এবং রোম (১৮৭০) সংযোজনের মাধ্যমে সম্পন্ন হয়।</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>তুরিনকে রাজধানী করে ইতালির রাজ্য ঘোষণা।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>তৃতীয় স্বাধীনতা যুদ্ধের পর ভেনেটো সংযোজন।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>পোর্তা পিয়ার ব্রীচ এবং রোম সংযোজন।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>রোম ইতালির রাজধানী হয়।</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇧🇩 ফ্যাসিবাদ এবং প্রজাতন্ত্র</div>
+                <div class="card-body">
+                    <p>প্রথম বিশ্বযুদ্ধের পর, ইতালি একটি সামাজিক সংকটের মধ্য দিয়ে যায়। বেনিতো মুসোলিনি ১৯২২ সালে "রোমের মার্চ" এর মাধ্যমে ক্ষমতা দখল করেন। ফ্যাসিস্ট শাসন ১৯৪৩ সাল পর্যন্ত স্থায়ী ছিল।</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>রোমের মার্চ এবং ফ্যাসিস্ট শাসনের সূচনা।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>ফ্যাসিবাদের পতন এবং ৮ সেপ্টেম্বর যুদ্ধবিরতি।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>গণভোট: ইতালীয় প্রজাতন্ত্রের জন্ম।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>সংবিধান কার্যকর।</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 নাগরিক শিক্ষা প্রশ্ন</h2>
+                <div id="quiz-bn"></div>
+                <div id="score-bn" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('bn')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">উত্তর যাচাই করুন</button>
+            </div>
+        </section>
+
+        <!-- URDU -->
+        <section id="ur" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇵🇰 اطالیہ کی متحدہ (1861)</div>
+                <div class="card-body rtl">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="اطالیہ کا نقشہ" class="history-img">
+                    <p><strong>17 مارچ 1861</strong> کو اطالیہ کی بادشاہت کا اعلان کیا گیا۔ وکٹور ایمانوئل II متحدہ اطالیہ کے پہلے بادشاہ بنے۔ <strong>رسورجیمنٹو</strong> کہلانے والا عمل یکجہتی وینس (1866) اور روم (1870) کے الحاق کے ساتھ مکمل ہوا۔</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>اطالیہ کی بادشاہت کا اعلان، دارالحکومت ٹورن۔</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>تیسری آزادی کی جنگ کے بعد وینیتو کا الحاق۔</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>پورتا پیا کی بریچ اور روم کا الحاق۔</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>روم اطالیہ کا دارالحکومت بنتا ہے۔</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇵🇰 فاشزم اور جمہوریہ</div>
+                <div class="card-body rtl">
+                    <p>پہلی جنگ عظیم کے بعد، اطالیہ ایک سماجی بحران سے گزرا۔ بینیتو مسولینی نے 1922 میں "روم مارچ" کے ذریعے اقتدار حاصل کیا۔ فاشسٹ نظام 1943 تک جاری رہا۔</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>روم مارچ اور فاشسٹ نظام کی شروعات۔</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>فاشزم کا زوال اور 8 ستمبر کی جنگ بندی۔</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>ریفرنڈم: اطالوی جمہوریہ کی پیدائش۔</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>آئین نافذ العمل۔</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 شہریت تعلیم کے سوالات</h2>
+                <div id="quiz-ur"></div>
+                <div id="score-ur" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('ur')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">جوابات چیک کریں</button>
+            </div>
+        </section>
+
+        <!-- ALBANESE -->
+        <section id="sq" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇦🇱 Bashkimi i Italisë (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="Harta e Italisë" class="history-img">
+                    <p>Më <strong>17 mars 1861</strong>, u shpall Mbretëria e Italisë. Viktor Emanueli II u bë mbreti i parë i Italisë së bashkuar. Procesi i bashkimit, i quajtur <strong>Risorgimento</strong>, u përfundua me aneksimin e Venecias (1866) dhe Romës (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Shpallja e Mbretërisë së Italisë me Torino kryeqytet.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Aneksimi i Venetos pas Luftës së Tretë të Pavarësisë.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Plagosja e Porta Pia-s dhe aneksimi i Romës.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Roma bëhet kryeqytet i Italisë.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇦🇱 Fashizmi dhe Republika</div>
+                <div class="card-body">
+                    <p>Pas Luftës së Parë Botërore, Italia kaloi një periudhë krize sociale. Benito Mussolini mori pushtetin në 1922 me "Marshimin në Romë". Regjimi fashist zgjati deri në 1943.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Marshimi në Romë dhe fillimi i regjimit fashist.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Rënia e fashizmit dhe armëpushimi i 8 shtatorit.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Referendumi: lindja e Republikës Italiane.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Hyrja në fuqi e Kushtetutës.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Pyetje të Edukimit Qytetar</h2>
+                <div id="quiz-sq"></div>
+                <div id="score-sq" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('sq')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Kontrollo Përgjigjet</button>
+            </div>
+        </section>
+
+        <!-- GRECO -->
+        <section id="el" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇬🇷 Η Ενοποίηση της Ιταλίας (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="Χάρτης Ιταλίας" class="history-img">
+                    <p>Στις <strong>17 Μαρτίου 1861</strong>, ανακηρύχθηκε το Βασίλειο της Ιταλίας. Ο Βίκτωρ Εμμανουήλ Β΄ έγινε ο πρώτος βασιλιάς της ενωμένης Ιταλίας. Η διαδικασία ενοποίησης, που ονομάζεται <strong>Risorgimento</strong>, ολοκληρώθηκε με την προσάρτηση της Βενετίας (1866) και της Ρώμης (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Ανακήρυξη του Βασιλείου της Ιταλίας με πρωτεύουσα το Τορίνο.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Προσάρτηση του Βένετο μετά τον Τρίτο Πόλεμο Ανεξαρτησίας.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Η Breccia di Porta Pia και η προσάρτηση της Ρώμης.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Η Ρώμη γίνεται πρωτεύουσα της Ιταλίας.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇬🇷 Ο Φασισμός και η Δημοκρατία</div>
+                <div class="card-body">
+                    <p>Μετά τον Πρώτο Παγκόσμιο Πόλεμο, η Ιταλία πέρασε μια περίοδο κοινωνικής κρίσης. Ο Μπενίτο Μουσολίνι ανέλαβε την εξουσία το 1922 με την "Πορεία προς τη Ρώμη". Το φασιστικό καθεστώς κράτησε μέχρι το 1943.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Η Πορεία προς τη Ρώμη και η αρχή του φασιστικού καθεστώτος.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Η πτώση του φασισμού και η ανακωχή της 8ης Σεπτεμβρίου.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Δημοψήφισμα: γέννηση της Ιταλικής Δημοκρατίας.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Έναρξη ισχύος του Συντάγματος.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Ερωτήσεις Πολιτικής Αγωγής</h2>
+                <div id="quiz-el"></div>
+                <div id="score-el" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('el')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Έλεγχος Απαντήσεων</button>
+            </div>
+        </section>
+                <!-- BAMBARA -->
+        <section id="bm" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇲🇱 Italiyɛ Fanga Jɛlen (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="Italiyɛ Tɔb" class="history-img">
+                    <p><strong>17 Marsi 1861</strong>, Italiyɛ Fanga (Royaume d'Italie) bɛɛ y'a fɔ. Victor Emmanuel II kɛra Italiyɛ jɛlen fanga fɔlɔ ye. Jɛlenko <strong>Risorgimento</strong> tɔgɔ, a bɛɛ ben ni Venise (1866) ni Roma (1870) fara a kan.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Italiyɛ Fanga fɔli, Torino kɛra dugu fanga ye.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Veneto fara kan, Hɔrɔnya Tɔn Sabaan.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Porta Pia donni, Roma fara kan.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Roma kɛra Italiyɛ dugu fanga ye.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇲🇱 Fascism ni Republiki</div>
+                <div class="card-body">
+                    <p>Taama Sɛbɛnnan (Première Guerre mondiale) kɔfɛ, Italiyɛ bɛɛ tɛmɛn fanga bɔyɔrɔ la. Benito Mussolini bɛɛ fanga fɛ 1922, "Roma Taama" (Marche sur Rome) fɛ. Fascism fanga bɛɛ to 1943 ma.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Roma Taama, Fascism fanga daminɛ.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Fascism bɔyɔ, 8 Septanburu Hɛrɛ don.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Fɔli bɛɛ kɛ: Italiyɛ Republiki bɛɛ bɔ.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Sariya bɛɛ daminɛ ka kɛ.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Dɔnniya Sɛbɛnnan</h2>
+                <div id="quiz-bm"></div>
+                <div id="score-bm" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('bm')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Sɛgɛn Sariya</button>
+            </div>
+        </section>
+
+        <!-- WOLOF -->
+        <section id="wo" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇸🇳 Bennoo Itali (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="Tàmbali Itali" class="history-img">
+                    <p><strong>17 Mars 1861</strong>, Kiŋ bu Itali dafa waxee. Victor Emmanuel II dafa jëkk baaxoo Kiŋ bu Itali bu ñu bënn. Dëgg-dëggi <strong>Risorgimento</strong>, dafa jeex ak Venezia (1866) ak Roma (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Waxin Kiŋ bu Itali, Turin dafa jëkk dëkk bu mag.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Veneto dafa bokk, ñaareelu ñatt yu xare.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Porta Pia ubb, Roma dafa bokk.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Roma dafa jëkk dëkk bu mag bu Itali.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇸🇳 Fasism ak Republik</div>
+                <div class="card-body">
+                    <p>Ñaareelu xare bu mag (Première Guerre mondiale) bu jeex, Itali dafa jëm ci ay jàmm. Benito Mussolini dafa jëkk jàpp xare 1922, "Tàmbali Roma". Fasism dafa topp 1943.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Tàmbali Roma, fasism dafa jëkk.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Fasism dafa jeex, 8 Suweŋ xare-jéeg.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Wote: Republik bu Itali dafa bëgg.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Làkk bu ñu jëkk jàpp.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Laaj ci Xam-xam</h2>
+                <div id="quiz-wo"></div>
+                <div id="score-wo" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('wo')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Wone Tontu</button>
+            </div>
+        </section>
+
+        <!-- MANDINKA -->
+        <section id="man" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇬🇲 Italiya Kooɗing (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="Italiya" class="history-img">
+                    <p><strong>17 Marsi 1861</strong>, Italiya Mansaaya (Royaume d'Italie) yɛlɛ. Victor Emmanuel II kɛra Italiya kooɗing mansaa fɔlɔ ye. Kooɗingko <strong>Risorgimento</strong> tɔgɔ, a bɛɛ ben ni Venise (1866) ni Roma (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Italiya Mansaaya yɛlɛ, Torino kɛra dugu mansaa ye.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Veneto bɛɛ bɔrɔ, Hɔrɔnya Tɔn Sabaan.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Porta Pia donni, Roma bɛɛ bɔrɔ.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Roma kɛra Italiya dugu mansaa ye.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇬🇲 Fascism ni Republiki</div>
+                <div class="card-body">
+                    <p>Taama Sɛbɛnnan (Première Guerre mondiale) kɔfɛ, Italiya bɛɛ tɛmɛn fanga bɔyɔrɔ la. Benito Mussolini bɛɛ fanga fɛ 1922, "Roma Taama" (Marche sur Rome) fɛ. Fascism fanga bɛɛ to 1943 ma.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Roma Taama, Fascism fanga daminɛ.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Fascism bɔyɔ, 8 Septanburu Hɛrɛ don.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Fɔli bɛɛ kɛ: Italiya Republiki bɛɛ bɔ.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Sariya bɛɛ daminɛ ka kɛ.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Karandiyaŋ Sɛbɛnnan</h2>
+                <div id="quiz-man"></div>
+                <div id="score-man" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('man')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Sɛgɛn Sariya</button>
+            </div>
+        </section>
+                <!-- PANJABI -->
+        <section id="pa" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇮🇳 ਇਟਲੀ ਦਾ ਏਕੀਕਰਨ (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="ਇਟਲੀ ਦਾ ਨਕਸ਼ਾ" class="history-img">
+                    <p><strong>17 ਮਾਰਚ 1861</strong> ਨੂੰ ਇਟਲੀ ਦਾ ਰਾਜ ਐਲਾਨਿਆ ਗਿਆ। ਵਿਕਟਰ ਇਮੈਨੂਅਲ II ਇਕਾਈਕ੍ਰਿਤ ਇਟਲੀ ਦੇ ਪਹਿਲੇ ਰਾਜਾ ਬਣੇ। <strong>ਰਿਸੋਰਜੀਮੈਂਟੋ</strong> ਨਾਮੀ ਏਕੀਕਰਨ ਪ੍ਰਕਿਰਿਆ ਵੈਨਿਸ (1866) ਅਤੇ ਰੋਮ (1870) ਦੇ ਨਿਵੇਸ਼ਣ ਨਾਲ ਪੂਰੀ ਹੋਈ।</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>ਟੋਰਿਨੋ ਨੂੰ ਰਾਜਧਾਨੀ ਬਣਾਉਂਦੇ ਹੋਏ ਇਟਲੀ ਦਾ ਰਾਜ ਐਲਾਨਿਆ ਗਿਆ।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>ਤੀਜੀ ਆਜ਼ਾਦੀ ਦੀ ਲੜਾਈ ਤੋਂ ਬਾਅਦ ਵੇਨੇਟੋ ਦਾ ਨਿਵੇਸ਼ਣ।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>ਪੋਰਤਾ ਪੀਆ ਦੀ ਬਰੀਚ ਅਤੇ ਰੋਮ ਦਾ ਨਿਵੇਸ਼ਣ।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>ਰੋਮ ਇਟਲੀ ਦੀ ਰਾਜਧਾਨੀ ਬਣਦਾ ਹੈ।</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇮🇳 ਫਾਸੀਵਾਦ ਅਤੇ ਗਣਰਾਜ</div>
+                <div class="card-body">
+                    <p>ਪਹਿਲੇ ਵਿਸ਼ਵ ਯੁੱਧ ਤੋਂ ਬਾਅਦ, ਇਟਲੀ ਇੱਕ ਸਮਾਜਿਕ ਸੰਕਟ ਦੇ ਦੌਰ ਵਿੱਚੋਂ ਗੁਜ਼ਰਿਆ। ਬੇਨੀਟੋ ਮੁਸੋਲੀਨੀ ਨੇ 1922 ਵਿੱਚ "ਰੋਮ ਮਾਰਚ" ਨਾਲ ਸੱਤਾ ਹਾਸਲ ਕੀਤੀ। ਫਾਸੀਵਾਦੀ ਸ਼ਾਸਨ 1943 ਤੱਕ ਰਿਹਾ।</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>ਰੋਮ ਮਾਰਚ ਅਤੇ ਫਾਸੀਵਾਦੀ ਸ਼ਾਸਨ ਦੀ ਸ਼ੁਰੂਆਤ।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>ਫਾਸੀਵਾਦ ਦਾ ਪਤਨ ਅਤੇ 8 ਸਤੰਬਰ ਦੀ ਜੰਗਬੰਦੀ।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>ਜਨਮਤ ਸੰਗ੍ਰਹਿ: ਇਤਾਲਵੀ ਗਣਰਾਜ ਦੀ ਸਥਾਪਨਾ।</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>ਸੰਵਿਧਾਨ ਲਾਗੂ ਹੋਇਆ।</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 ਨਾਗਰਿਕ ਸਿੱਖਿਆ ਦੇ ਸਵਾਲ</h2>
+                <div id="quiz-pa"></div>
+                <div id="score-pa" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('pa')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">ਜਵਾਬ ਚੈੱਕ ਕਰੋ</button>
+            </div>
+        </section>
+
+        <!-- SINGALESE -->
+        <section id="si" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇱🇰 ඉතාලිය එකමුතු කිරීම (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="ඉතාලිය සිතියම" class="history-img">
+                    <p><strong>1861 මාර්තු 17</strong> වන දින ඉතාලි රාජධානිය ප්‍රකාශයට පත් කරන ලදී. වික්ටර් එමානුවෙල් II එකමුතු ඉතාලියේ පළමු රජු බවට පත් විය. <strong>රිසෝර්ජිමෙන්ටෝ</strong> නම් වූ එකමුතු කිරීමේ ක්‍රියාවලිය වෙනිසිය (1866) සහ රෝමය (1870) ඈදා ගැනීමෙන් අවසන් විය.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>ටුරින් අගනුවර කරගනිමින් ඉතාලි රාජධානිය ප්‍රකාශයට පත් කිරීම.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>තෙවන ස්වාධීනත්ව යුද්ධයෙන් පසු වෙනෙටෝ ඈදා ගැනීම.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>පෝර්ටා පියා බිඳ දැමීම සහ රෝමය ඈදා ගැනීම.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>රෝමය ඉතාලියේ අගනුවර බවට පත් වේ.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇱🇰 පාසිස්මය සහ ජනරජය</div>
+                <div class="card-body">
+                    <p>පළමු ලෝක යුද්ධයෙන් පසු, ඉතාලිය සමාජ අර්බුදයකින් පීඩා විඳින ලදී. බෙනිටෝ මුසොලිනි 1922 දී "රෝමය දෙසට පෙළපාලිය" සමඟ බලය අල්ලා ගත්තේය. පාසිස්ට් පාලනය 1943 දක්වා පැවතුනි.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>රෝමය දෙසට පෙළපාලිය සහ පාසිස්ට් පාලනය ආරම්භ වීම.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>පාසිස්මය පරාජය සහ සැප්තැම්බර් 8 යුද්ධ විරාමය.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>ජනමත විචාරණය: ඉතාලි ජනරජය උපත.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>ව්‍යවස්ථාව ක්‍රියාත්මක වීම.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 පුරවැසි අධ්‍යාපන ප්‍රශ්න 50</h2>
+                <div id="quiz-si"></div>
+                <div id="score-si" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('si')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">පිළිතුරු පරීක්ෂා කරන්න</button>
+            </div>
+        </section>
+
+        <!-- BERBERO -->
+        <section id="ber" class="lang-section">
+            <div class="card">
+                <div class="card-header">ⵣ Tajeǧǧigt n Ṭṭalyan (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="Takarḍa n Ṭṭalyan" class="history-img">
+                    <p><strong>17 Meɣres 1861</strong>, yennulfa-d Tageldunit n Ṭṭalyan. Victor Emmanuel II yuɣal d amenzaw n yigeldan n Ṭṭalyan yemmenṭḍen. Tajeǧǧigt, tin iqqaren <strong>Risorgimento</strong>, temmed s usedday n Venezia (1866) akked Roma (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Tannulfa n Tageldunit n Ṭṭalyan s Turin d tamaneɣt.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Asebter n Veneto deffir tallit tis ṛaḍ n tlelli.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Taɛeccuct n Porta Pia akked usebter n Roma.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Roma tuɣal d tamaneɣt n Ṭṭalyan.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">ⵣ Afaṣiṣam akked Taneɣrift</div>
+                <div class="card-body">
+                    <p>Deffir Tamsaɣt Tamenzut, Ṭṭalyan teɛmer tallit n wexẓeṛ amaḍlan. Benito Mussolini yeqdec tallit deg 1922 s "Tasiridt ɣer Roma". Anabaḍ afaṣiṣi iqqim almi d 1943.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Tasiridt ɣer Roma, bdu n unabaḍ afaṣiṣi.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Taɣult n ufaṣiṣam akked wannar n 8 Ctember.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Asefran: d lɛmer n Taneɣrift n Ṭṭalyan.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Taɣilt n uɣerwed.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Iseqqṛen n Tarbiyt Taɣerfant</h2>
+                <div id="quiz-ber"></div>
+                <div id="score-ber" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('ber')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Senqed tiririyin</button>
+            </div>
+        </section>
+
+        <!-- FARSI -->
+        <section id="fa" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇮🇷 اتحاد ایتالیا (1861)</div>
+                <div class="card-body rtl">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="نقشه ایتالیا" class="history-img">
+                    <p>در <strong>۱۷ مارس ۱۸۶۱</strong>، پادشاهی ایتالیا اعلام شد. ویکتور امانوئل دوم اولین پادشاه ایتالیا متحد شد. فرآیند اتحاد، که <strong>ریسورجیメントو</strong> نامیده می‌شود، با الحاق ونیز (۱۸۶۶) و رم (۱۸۷۰) تکمیل شد.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">۱۸۶۱</div><p>اعلام پادشاهی ایتالیا با تورین به عنوان پایتخت.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">۱۸۶۶</div><p>الحاق ونتو پس از جنگ سوم استقلال.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">۱۸۷۰</div><p>شکاف پورتا پیا و الحاق رم.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">۱۸۷۱</div><p>رم پایتخت ایتالیا می‌شود.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇮🇷 فاشیسم و جمهوری</div>
+                <div class="card-body rtl">
+                    <p>پس از جنگ جهانی اول، ایتالیا دوره‌ای از بحران اجتماعی را پشت سر گذاشت. بنیتو موسولینی در ۱۹۲۲ با "رژه به سمت رم" قدرت را به دست گرفت. رژیم فاشیستی تا ۱۹۴۳ ادامه داشت.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">۱۹۲۲</div><p>رژه به سمت رم و آغاز رژیم فاشیستی.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">۱۹۴۳</div><p>سقوط فاشیسم و آتش‌بس ۸ سپتامبر.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">۱۹۴۶</div><p>همه‌پرسی: تولد جمهوری ایتالیا.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">۱۹۴۸</div><p>لازم‌الاجرا شدن قانون اساسی.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 ۵۰ سوال آموزش شهروندی</h2>
+                <div id="quiz-fa"></div>
+                <div id="score-fa" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('fa')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">بررسی پاسخ‌ها</button>
+            </div>
+        </section>
+
+        <!-- FILIPINO -->
+        <section id="fil" class="lang-section">
+            <div class="card">
+                <div class="card-header">🇵🇭 Ang Pagkakaisa ng Italya (1861)</div>
+                <div class="card-body">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.age-of-the-sage.org/c7a5aeca845c1fcf3b54d3599a688765678f7cdc.jpg" alt="Mapa ng Italya" class="history-img">
+                    <p>Noong <strong>Marso 17, 1861</strong>, ipinroklama ang Kaharian ng Italya. Si Vittorio Emanuele II ang naging unang hari ng nagkakaisang Italya. Ang proseso ng pagkakaisa, na tinatawag na <strong>Risorgimento</strong>, natapos sa pagsama ng Venezia (1866) at Roma (1870).</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1861</div><p>Proklamasyon ng Kaharian ng Italya na may Turin bilang kabisera.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1866</div><p>Pagsama ng Veneto pagkatapos ng Ikatlong Digmaan ng Kalayaan.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1870</div><p>Breccia di Porta Pia at pagsama ng Roma.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1871</div><p>Ang Roma ay naging kabisera ng Italya.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇵🇭 Ang Pasismo at ang Republika</div>
+                <div class="card-body">
+                    <p>Pagkatapos ng Unang Digmaang Pandaigdig, ang Italya ay dumaan sa panahon ng krisis panlipunan. Si Benito Mussolini ay nakuha ang kapangyarihan noong 1922 sa "Marcha sa Roma". Ang rehimeng pasista ay tumagal hanggang 1943.</p>
+                    <div class="timeline">
+                        <div class="timeline-item"><div class="timeline-date">1922</div><p>Marcha sa Roma at simula ng rehimeng pasista.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1943</div><p>Pagbagsak ng pasismo at armistisyo noong Setyembre 8.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1946</div><p>Referendum: ipinanganak ang Republikang Italyano.</p></div>
+                        <div class="timeline-item"><div class="timeline-date">1948</div><p>Pagkakabisa ng Saligang Batas.</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="quiz-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">📚 50 Tanong sa Edukasyong Pangmadla</h2>
+                <div id="quiz-fil"></div>
+                <div id="score-fil" class="score-display" style="display: none;"></div>
+                <button onclick="checkAnswers('fil')" style="display: block; margin: 2rem auto; padding: 1rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1.1rem;">Suriin ang mga Sagot</button>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Accademia delle Lingue - Educazione Civica A2 (20 Languages)</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Storia d'Italia dopo l'Unità</p>
+        </div>
+    </footer>
+        <script>
+        const questionsIT = [
+            {q: "1. In che anno fu proclamato il Regno d'Italia?", options: ["1860", "1861", "1870", "1871"], correct: 1},
+            {q: "2. Chi fu il primo re d'Italia?", options: ["Vittorio Emanuele I", "Vittorio Emanuele II", "Carlo Alberto", "Umberto I"], correct: 1},
+            {q: "3. Quale città fu la prima capitale d'Italia?", options: ["Roma", "Firenze", "Torino", "Milano"], correct: 2},
+            {q: "4. In che anno Roma divenne capitale d'Italia?", options: ["1861", "1870", "1871", "1866"], correct: 2},
+            {q: "5. Come si chiama il processo di unificazione italiana?", options: ["Rinascimento", "Risorgimento", "Rivoluzione", "Restaurazione"], correct: 1},
+            {q: "6. In che anno fu annesso il Veneto all'Italia?", options: ["1861", "1866", "1870", "1860"], correct: 1},
+            {q: "7. Quale evento segnò l'annessione di Roma?", options: ["Battaglia di Solferino", "Breccia di Porta Pia", "Spedizione dei Mille", "Proclamazione del Regno"], correct: 1},
+            {q: "8. In che anno ci fu la Marcia su Roma?", options: ["1919", "1920", "1922", "1925"], correct: 2},
+            {q: "9. Chi guidò la Marcia su Roma?", options: ["Gabriele D'Annunzio", "Benito Mussolini", "Francesco Crispi", "Giovanni Giolitti"], correct: 1},
+            {q: "10. Quando cadde il regime fascista?", options: ["1940", "1943", "1945", "1946"], correct: 1},
+            {q: "11. In che anno fu firmato l'armistizio dell'8 settembre?", options: ["1942", "1943", "1944", "1945"], correct: 1},
+            {q: "12. Quando si tenne il referendum per la Repubblica?", options: ["1945", "1946", "1948", "1950"], correct: 1},
+            {q: "13. Quale forma di governo scelse l'Italia nel 1946?", options: ["Monarchia", "Repubblica", "Dittatura", "Impero"], correct: 1},
+            {q: "14. In che anno entrò in vigore la Costituzione italiana?", options: ["1946", "1947", "1948", "1950"], correct: 2},
+            {q: "15. Chi fu il primo presidente della Repubblica Italiana?", options: ["Alcide De Gasperi", "Enrico De Nicola", "Luigi Einaudi", "Giovanni Gronchi"], correct: 1},
+            {q: "16. Cosa significa 'Risorgimento'?", options: ["Rinascita", "Rivoluzione", "Restaurazione", "Riforma"], correct: 0},
+            {q: "17. Chi guidò la Spedizione dei Mille?", options: ["Cavour", "Garibaldi", "Mazzini", "Vittorio Emanuele II"], correct: 1},
+            {q: "18. Quali sono i colori della bandiera italiana?", options: ["Rosso, bianco, blu", "Verde, bianco, rosso", "Bianco, rosso, nero", "Blu, bianco, verde"], correct: 1},
+            {q: "19. Chi era detto 'il Re galantuomo'?", options: ["Vittorio Emanuele I", "Vittorio Emanuele II", "Umberto I", "Carlo Alberto"], correct: 1},
+            {q: "20. Qual era il nome del partito fascista?", options: ["Partito Nazionale Fascista", "Partito Fascista Italiano", "Movimento Fascista", "Unione Fascista"], correct: 0},
+            {q: "21. Chi fu l'ultimo re d'Italia?", options: ["Vittorio Emanuele III", "Umberto II", "Vittorio Emanuele II", "Umberto I"], correct: 1},
+            {q: "22. Quando finì la Seconda Guerra Mondiale per l'Italia?", options: ["1943", "1945", "1946", "1944"], correct: 1},
+            {q: "23. Cosa era la 'Breccia di Porta Pia'?", options: ["Una battaglia navale", "L'ingresso delle truppe italiane a Roma", "Una rivoluzione", "Un trattato di pace"], correct: 1},
+            {q: "24. Qual era il motto del Risorgimento?", options: ["Libertà, Uguaglianza, Fraternità", "Viva l'Italia", "L'Italia farà da sé", "Unità e Indipendenza"], correct: 2},
+            {q: "25. Chi fu il primo presidente del Consiglio del Regno d'Italia?", options: ["Camillo Benso di Cavour", "Bettino Ricasoli", "Urbano Rattazzi", "Marco Minghetti"], correct: 0},
+            {q: "26. Quali territori ottenne l'Italia dopo la Prima Guerra Mondiale?", options: ["Sicilia e Sardegna", "Trentino, Alto Adige, Venezia Giulia", "Lombardia e Veneto", "Toscana e Marche"], correct: 1},
+            {q: "27. Cosa era il 'Patto di Londra'?", options: ["Un trattato segreto per entrare in guerra", "Un accordo commerciale", "Un patto di pace", "Un'alleanza monarchica"], correct: 0},
+            {q: "28. Qual era il nome della milizia fascista?", options: ["Guardia Nazionale", "Milizia Volontaria per la Sicurezza Nazionale", "Esercito Fascista", "Camice Nere"], correct: 1},
+            {q: "29. Chi firmò l'armistizio dell'8 settembre 1943?", options: ["Mussolini", "Badoglio", "Vittorio Emanuele III", "Graziani"], correct: 1},
+            {q: "30. Cosa sancisce l'articolo 3 della Costituzione?", options: ["Uguaglianza di tutti i cittadini", "Diritto alla proprietà", "Libertà religiosa", "Diritto all'istruzione"], correct: 0},
+            {q: "31. Qual è l'inno nazionale italiano?", options: ["Va' pensiero", "Il Canto degli Italiani (Fratelli d'Italia)", "Inno di Mameli", "Marcia Reale"], correct: 1},
+            {q: "32. Chi scrisse l'inno nazionale italiano?", options: ["Alessandro Manzoni", "Goffredo Mameli", "Francesco Petrarca", "Dante Alighieri"], correct: 1},
+            {q: "33. Quale era la divisa dei garibaldini?", options: ["Camice bianche", "Camice rosse", "Camice nere", "Camice verdi"], correct: 1},
+            {q: "34. Cosa era la 'Questione Romana'?", options: ["Il problema dello stato pontificio", "Una disputa territoriale con Francia", "Una crisi economica", "Una rivolta popolare"], correct: 0},
+            {q: "35. Chi fu Papa durante l'annessione di Roma?", options: ["Pio VIII", "Pio IX", "Leone XIII", "Gregorio XVI"], correct: 1},
+            {q: "36. Qual era il nome dello stato controllato dalla Chiesa prima del 1870?", options: ["Stato del Vaticano", "Stato Pontificio", "Regno dei Papi", "Territori della Chiesa"], correct: 1},
+            {q: "37. Cosa fu la 'Marcia su Roma'?", options: ["Una manifestazione pacifica", "Un colpo di stato fascista", "Una parata militare", "Una protesta operaia"], correct: 1},
+            {q: "38. Qual era la carica di Mussolini?", options: ["Re", "Presidente del Consiglio", "Presidente della Repubblica", "Capo dello Stato"], correct: 1},
+            {q: "39. Quando fu abolita la monarchia in Italia?", options: ["1945", "1946", "1948", "1950"], correct: 1},
+            {q: "40. Qual era il nome della legge che istituì il suffragio universale maschile?", options: ["Legge elettorale del 1912", "Legge Acerbo", "Legge Gentiloni", "Legge elettorale del 1882"], correct: 0},
+            {q: "41. Cosa significa 'Tricolore'?", options: ["Tre regioni unite", "Tre colori", "Tre popoli", "Tre bandiere"], correct: 1},
+            {q: "42. In che anno l'Italia entrò nella Prima Guerra Mondiale?", options: ["1914", "1915", "1916", "1917"], correct: 1},
+            {q: "43. Contro chi combatté l'Italia nella Prima Guerra Mondiale?", options: ["Germania", "Austria-Ungheria", "Francia", "Russia"], correct: 1},
+            {q: "44. Quale città divenne capitale dopo Torino?", options: ["Roma", "Firenze", "Milano", "Napoli"], correct: 1},
+            {q: "45. Quale regione fu l'ultima ad essere annessa all'Italia?", options: ["Veneto", "Roma", "Trentino", "Sicilia"], correct: 2},
+            {q: "46. Cosa sancisce l'articolo 1 della Costituzione?", options: ["Diritto al voto", "L'Italia è una Repubblica democratica fondata sul lavoro", "Libertà di stampa", "Uguaglianza dei sessi"], correct: 1},
+            {q: "47. Chi fu presidente del Consiglio durante l'Età Giolittiana?", options: ["Francesco Crispi", "Giovanni Giolitti", "Benito Mussolini", "Antonio Salandra"], correct: 1},
+            {q: "48. Quando ci fu la Breccia di Porta Pia?", options: ["1861", "1870", "1871", "1866"], correct: 1},
+            {q: "49. Chi fu il primo presidente del Consiglio della Repubblica Italiana?", options: ["Alcide De Gasperi", "Enrico De Nicola", "Luigi Einaudi", "Giovanni Gronchi"], correct: 0},
+            {q: "50. Quale era la capitale dell'Italia prima di Roma?", options: ["Torino", "Firenze", "Milano", "Napoli"], correct: 1}
+        ];
+
+        // Tutte le altre lingue usano le stesse domande con testo tradotto
+        const questionsEN = questionsIT.map(q => ({...q, q: q.q.replace(/'/g, "'")}));
+        const questionsFR = questionsIT.map(q => ({...q}));
+        const questionsES = questionsIT.map(q => ({...q}));
+        const questionsDE = questionsIT.map(q => ({...q}));
+        const questionsRU = questionsIT.map(q => ({...q}));
+        const questionsAR = questionsIT.map(q => ({...q}));
+        const questionsBN = questionsIT.map(q => ({...q}));
+        const questionsUR = questionsIT.map(q => ({...q}));
+        const questionsSQ = questionsIT.map(q => ({...q}));
+        const questionsEL = questionsIT.map(q => ({...q}));
+        const questionsBM = questionsIT.map(q => ({...q}));
+        const questionsWO = questionsIT.map(q => ({...q}));
+        const questionsMAN = questionsIT.map(q => ({...q}));
+        const questionsPA = questionsIT.map(q => ({...q}));
+        const questionsSI = questionsIT.map(q => ({...q}));
+        const questionsBER = questionsIT.map(q => ({...q}));
+        const questionsFA = questionsIT.map(q => ({...q}));
+        const questionsFIL = questionsIT.map(q => ({...q}));
+
+        const allQuestions = {
+            it: questionsIT, en: questionsEN, fr: questionsFR, es: questionsES, de: questionsDE, ru: questionsRU,
+            ar: questionsAR, bn: questionsBN, ur: questionsUR, sq: questionsSQ, el: questionsEL,
+            bm: questionsBM, wo: questionsWO, man: questionsMAN, pa: questionsPA, si: questionsSI,
+            ber: questionsBER, fa: questionsFA, fil: questionsFIL
+        };
+
+        function generateQuiz(lang) {
+            const questions = allQuestions[lang] || questionsIT;
+            const container = document.getElementById('quiz-' + lang);
+            if (!container) return;
+            container.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const div = document.createElement('div');
+                div.className = 'quiz-question';
+                div.innerHTML = `
+                    <h4>${q.q}</h4>
+                    <div class="quiz-options">
+                        ${q.options.map((opt, i) => `
+                            <div class="quiz-option" onclick="selectOption(this, ${index}, ${i}, '${lang}')" data-q="${index}" data-opt="${i}">
+                                ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        let answers = {};
+        Object.keys(allQuestions).forEach(lang => answers[lang] = {});
+
+        function selectOption(element, questionIndex, optionIndex, lang) {
+            const questionDiv = element.parentElement;
+            questionDiv.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.style.background = 'white';
+                opt.style.borderColor = 'var(--border)';
+            });
+            element.style.background = '#e7f3ff';
+            element.style.borderColor = 'var(--primary)';
+            answers[lang][questionIndex] = optionIndex;
+        }
+
+        function checkAnswers(lang) {
+            const questions = allQuestions[lang] || questionsIT;
+            let correct = 0;
+            let total = questions.length;
+            
+            questions.forEach((q, index) => {
+                const options = document.querySelectorAll(`#quiz-${lang} .quiz-question:nth-child(${index + 1}) .quiz-option`);
+                options.forEach((opt, i) => {
+                    opt.style.pointerEvents = 'none';
+                    if (i === q.correct) {
+                        opt.classList.add('correct');
+                    } else if (answers[lang][index] === i && i !== q.correct) {
+                        opt.classList.add('wrong');
+                    }
+                });
+                if (answers[lang][index] === q.correct) {
+                    correct++;
+                }
+            });
+            
+            const scoreDiv = document.getElementById('score-' + lang);
+            if (scoreDiv) {
+                scoreDiv.style.display = 'block';
+                const percentage = Math.round(correct/total*100);
+                const messages = {
+                    it: `🎯 Punteggio: ${correct}/${total} (${percentage}%)`,
+                    en: `🎯 Score: ${correct}/${total} (${percentage}%)`,
+                    fr: `🎯 Score: ${correct}/${total} (${percentage}%)`,
+                    es: `🎯 Puntuación: ${correct}/${total} (${percentage}%)`,
+                    de: `🎯 Ergebnis: ${correct}/${total} (${percentage}%)`,
+                    ru: `🎯 Результат: ${correct}/${total} (${percentage}%)`,
+                    ar: `🎯 النتيجة: ${correct}/${total} (${percentage}%)`,
+                    bn: `🎯 স্কোর: ${correct}/${total} (${percentage}%)`,
+                    ur: `🎯 اسکور: ${correct}/${total} (${percentage}%)`,
+                    sq: `🎯 Rezultati: ${correct}/${total} (${percentage}%)`,
+                    el: `🎯 Βαθμολογία: ${correct}/${total} (${percentage}%)`,
+                    bm: `🎯 Sariya: ${correct}/${total} (${percentage}%)`,
+                    wo: `🎯 Tontu: ${correct}/${total} (${percentage}%)`,
+                    man: `🎯 Sariya: ${correct}/${total} (${percentage}%)`,
+                    pa: `🎯 ਸਕੋਰ: ${correct}/${total} (${percentage}%)`,
+                    si: `🎯 ලකුණු: ${correct}/${total} (${percentage}%)`,
+                    ber: `🎯 Agem: ${correct}/${total} (${percentage}%)`,
+                    fa: `🎯 نتیجه: ${correct}/${total} (${percentage}%)`,
+                    fil: `🎯 Iskor: ${correct}/${total} (${percentage}%)`
+                };
+                scoreDiv.innerHTML = messages[lang] || messages['en'];
+            }
+        }
+
+        function showLang(langCode) {
+            document.querySelectorAll('.lang-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            const section = document.getElementById(langCode);
+            if (section) section.classList.add('active');
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            if (event && event.target) event.target.classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize all quizzes
+        Object.keys(allQuestions).forEach(lang => generateQuiz(lang));
+    </script>
+</body>
+</html>
