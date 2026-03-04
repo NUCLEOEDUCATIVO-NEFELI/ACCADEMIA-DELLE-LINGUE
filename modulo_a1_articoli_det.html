@@ -1334,746 +1334,274 @@
             </div>
         </section>
     </main>
-<!-- SEZIONE ESERCIZI - 50 ESERCIZI CON VALUTAZIONE -->
-<section id="esercizi" class="section">
-    <div class="card">
-        <div class="card-header" style="background: linear-gradient(135deg, #003366 0%, #8b0000 100%); color: white;">
-            <h2 style="margin: 0; font-size: 1.5rem;">🎓 Esercitazione Accademica - Articoli Determinativi</h2>
-            <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">Linguistica Italiana | 50 esercizi × 2 punti = 100 punti | Sufficienza: 60/100</p>
-        </div>
-        <div class="card-body">
-            <div class="instruction-box" style="background: #f8f9fa; border-left: 4px solid #003366; padding: 1.5rem; margin-bottom: 2rem; border-radius: 4px;">
-                <strong style="color: #003366; font-size: 1.1rem;">📋 Istruzioni per lo studente:</strong>
-                <ul style="margin-left: 2rem; margin-top: 0.5rem; line-height: 1.8;">
-                    <li>Completare gli esercizi inserendo l'articolo determinativo corretto oppure selezionando l'opzione giusta</li>
-                    <li>Gli articoli determinativi sono: <strong>il, lo, la, l', i, gli, le</strong></li>
-                    <li>Ogni esercizio vale <strong>2 punti</strong> (1 punto per ogni risposta corretta negli esercizi doppi)</li>
-                    <li>Non è possibile modificare le risposte dopo l'invio</li>
-                    <li>Inserire l'email istituzionale per ricevere l'esito dell'esercitazione</li>
-                </ul>
-            </div>
 
-            <div style="background: #e7f3ff; padding: 1.5rem; margin: 1.5rem 0; border-radius: 8px; border-left: 4px solid #003366;">
-                <label style="font-weight: bold; display: block; margin-bottom: 0.5rem; color: #003366;">📧 Email dello studente:</label>
-                <input type="email" id="studentEmail" placeholder="nome.cognome@universita.it" style="padding: 0.8rem; width: 100%; max-width: 400px; border: 2px solid #003366; border-radius: 4px; font-size: 1rem;" autocomplete="off" required>
-            </div>
+<section id="esercizi" style="max-width:900px;margin:auto;font-family:Georgia,serif;line-height:1.7">
 
-            <form id="exerciseForm">
-                
-                <!-- ESERCIZI 1-10: COMPLETAMENTO SINGOLARE MASCHILE -->
-                <div style="background: #003366; color: white; padding: 0.8rem; margin: 2rem 0 1rem 0; border-radius: 4px; font-weight: bold; font-size: 1.1rem;">
-                    Sezione A: Articoli Singolari Maschili (il, lo, l')
-                </div>
+<h2 style="text-align:center;border-bottom:2px solid #444;padding-bottom:12px">
+Verifica di grammatica – Livello A1
+</h2>
 
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #003366; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #003366; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 1 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="1" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> libro di linguistica è molto interessante.
-                    </div>
-                    <div class="feedback" id="feedback-1" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
+<p style="text-align:center;font-style:italic">
+Uso degli articoli determinativi
+</p>
 
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #003366; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #003366; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 2 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="2" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> studente frequenta il corso di fonetica.
-                    </div>
-                    <div class="feedback" id="feedback-2" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
+<p style="text-align:center">
+Studente:
+<input type="text" id="studentName" placeholder="Nome e cognome">
+</p>
 
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #003366; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #003366; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 3 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="3" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> psicologo studia il comportamento umano.
-                    </div>
-                    <div class="feedback" id="feedback-3" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
+<div style="margin:20px 0;background:#eee;border-radius:10px">
+<div id="progressBar" style="height:18px;width:0%;background:#1e4f91;border-radius:10px"></div>
+</div>
 
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #003366; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #003366; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 4 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="4" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> zaino è sul banco.
-                    </div>
-                    <div class="feedback" id="feedback-4" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
+<p id="progressText" style="text-align:center;font-size:14px">
+Completamento prova: 0%
+</p>
 
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #003366; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #003366; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 5 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="5" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> gnoma è un personaggio mitologico.
-                    </div>
-                    <div class="feedback" id="feedback-5" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
+<form id="exerciseForm"></form>
 
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #003366; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #003366; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 6 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="6" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> yacht è attraccato al porto.
-                    </div>
-                    <div class="feedback" id="feedback-6" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
+<div style="text-align:center;margin-top:30px">
 
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #003366; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #003366; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 7 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="7" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> xilofono produce suoni melodiosi.
-                    </div>
-                    <div class="feedback" id="feedback-7" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
+<button onclick="checkAnswers()" type="button">
+Valuta la prova
+</button>
 
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #003366; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #003366; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 8 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="8" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> sbaglio è umano.
-                    </div>
-                    <div class="feedback" id="feedback-8" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
+<button onclick="sendExerciseEmail()" type="button">
+Invia risultati al docente
+</button>
 
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #003366; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #003366; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 9 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="9" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> amico di Marco è molto simpatico.
-                    </div>
-                    <div class="feedback" id="feedback-9" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
+</div>
 
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #003366; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #003366; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 10 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="10" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> specchio riflette la luce.
-                    </div>
-                    <div class="feedback" id="feedback-10" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
+<p id="result" style="text-align:center;font-size:18px;margin-top:20px"></p>
 
-                <!-- ESERCIZI 11-15: SINGOLARE FEMMINILE -->
-                <div style="background: #8b0000; color: white; padding: 0.8rem; margin: 2rem 0 1rem 0; border-radius: 4px; font-weight: bold; font-size: 1.1rem;">
-                    Sezione B: Articoli Singolari Femminili (la, l')
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #8b0000; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #8b0000; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 11 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="11" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> università offre corsi di alta qualità.
-                    </div>
-                    <div class="feedback" id="feedback-11" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #8b0000; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #8b0000; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 12 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="12" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> isola è circondata dal mare.
-                    </div>
-                    <div class="feedback" id="feedback-12" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #8b0000; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #8b0000; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 13 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="13" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> ora di lezione è terminata.
-                    </div>
-                    <div class="feedback" id="feedback-13" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #8b0000; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #8b0000; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 14 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="14" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> acqua è un bene prezioso.
-                    </div>
-                    <div class="feedback" id="feedback-14" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #8b0000; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #8b0000; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 15 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="15" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> studentessa ha superato l'esame.
-                    </div>
-                    <div class="feedback" id="feedback-15" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <!-- ESERCIZI 16-25: PLURALI -->
-                <div style="background: #2c5282; color: white; padding: 0.8rem; margin: 2rem 0 1rem 0; border-radius: 4px; font-weight: bold; font-size: 1.1rem;">
-                    Sezione C: Articoli Plurali (i, gli, le)
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #2c5282; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #2c5282; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 16 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="16" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> libri sono sullo scaffale.
-                    </div>
-                    <div class="feedback" id="feedback-16" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #2c5282; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #2c5282; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 17 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="17" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> studenti sono in classe.
-                    </div>
-                    <div class="feedback" id="feedback-17" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #2c5282; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #2c5282; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 18 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="18" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> psicologi lavorano in ospedale.
-                    </div>
-                    <div class="feedback" id="feedback-18" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #2c5282; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #2c5282; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 19 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="19" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> zii arrivano domani.
-                    </div>
-                    <div class="feedback" id="feedback-19" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #2c5282; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #2c5282; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 20 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="20" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> gnomi sono creature fantastiche.
-                    </div>
-                    <div class="feedback" id="feedback-20" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #2c5282; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #2c5282; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 21 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="21" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> yacht sono nel porto turistico.
-                    </div>
-                    <div class="feedback" id="feedback-21" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #2c5282; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #2c5282; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 22 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="22" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> sbagli vanno corretti.
-                    </div>
-                    <div class="feedback" id="feedback-22" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #2c5282; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #2c5282; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 23 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="23" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> università italiane sono prestigiose.
-                    </div>
-                    <div class="feedback" id="feedback-23" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #2c5282; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #2c5282; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 24 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="24" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> isole greche sono bellissime.
-                    </div>
-                    <div class="feedback" id="feedback-24" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #2c5282; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #2c5282; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 25 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="25" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> studentesse studiano medicina.
-                    </div>
-                    <div class="feedback" id="feedback-25" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <!-- ESERCIZI 26-35: DOPPI COMPLETAMENTO -->
-                <div style="background: #553c9a; color: white; padding: 0.8rem; margin: 2rem 0 1rem 0; border-radius: 4px; font-weight: bold; font-size: 1.1rem;">
-                    Sezione D: Doppio Completamento (1 punto + 1 punto)
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #553c9a; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #553c9a; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 26 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="26" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> amico legge <input type="text" class="answer-input" data-exercise="26" data-blank="1" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> giornale.
-                    </div>
-                    <div class="feedback" id="feedback-26" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #553c9a; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #553c9a; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 27 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="27" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> professore spiega <input type="text" class="answer-input" data-exercise="27" data-blank="1" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> grammatica.
-                    </div>
-                    <div class="feedback" id="feedback-27" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #553c9a; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #553c9a; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 28 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="28" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> studentessa apre <input type="text" class="answer-input" data-exercise="28" data-blank="1" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> finestra.
-                    </div>
-                    <div class="feedback" id="feedback-28" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #553c9a; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #553c9a; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 29 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="29" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> amici leggono <input type="text" class="answer-input" data-exercise="29" data-blank="1" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> libri.
-                    </div>
-                    <div class="feedback" id="feedback-29" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #553c9a; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #553c9a; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 30 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="30" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> professori insegnano <input type="text" class="answer-input" data-exercise="30" data-blank="1" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> storia.
-                    </div>
-                    <div class="feedback" id="feedback-30" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #553c9a; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #553c9a; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 31 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="31" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> amiche aprono <input type="text" class="answer-input" data-exercise="31" data-blank="1" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> finestre.
-                    </div>
-                    <div class="feedback" id="feedback-31" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #553c9a; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #553c9a; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 32 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="32" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> specchio riflette <input type="text" class="answer-input" data-exercise="32" data-blank="1" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> immagine.
-                    </div>
-                    <div class="feedback" id="feedback-32" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #553c9a; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #553c9a; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 33 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="33" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> specchi riflettono <input type="text" class="answer-input" data-exercise="33" data-blank="1" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> immagini.
-                    </div>
-                    <div class="feedback" id="feedback-33" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #553c9a; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #553c9a; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 34 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="34" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> psicologo analizza <input type="text" class="answer-input" data-exercise="34" data-blank="1" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> comportamento.
-                    </div>
-                    <div class="feedback" id="feedback-34" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #553c9a; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #553c9a; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 35 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="35" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> psicologi analizzano <input type="text" class="answer-input" data-exercise="35" data-blank="1" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> comportamenti.
-                    </div>
-                    <div class="feedback" id="feedback-35" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <!-- ESERCIZI 36-45: SCELTA MULTIPLA -->
-                <div style="background: #065f46; color: white; padding: 0.8rem; margin: 2rem 0 1rem 0; border-radius: 4px; font-weight: bold; font-size: 1.1rem;">
-                    Sezione E: Scelta Multipla (selezionare l'opzione corretta)
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #065f46; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #065f46; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 36 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 1rem;">
-                        Quale articolo è corretto? "_____ albero è alto."
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex36" value="il" style="margin-right: 0.8rem;"> Il
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex36" value="lo" style="margin-right: 0.8rem;"> Lo
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex36" value="l" style="margin-right: 0.8rem;"> L'
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex36" value="la" style="margin-right: 0.8rem;"> La
-                        </label>
-                    </div>
-                    <div class="feedback" id="feedback-36" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #065f46; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #065f46; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 37 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 1rem;">
-                        Quale articolo è corretto? "_____ amica è gentile."
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex37" value="il" style="margin-right: 0.8rem;"> Il
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex37" value="lo" style="margin-right: 0.8rem;"> Lo
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex37" value="l" style="margin-right: 0.8rem;"> L'
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex37" value="la" style="margin-right: 0.8rem;"> La
-                        </label>
-                    </div>
-                    <div class="feedback" id="feedback-37" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #065f46; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #065f46; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 38 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 1rem;">
-                        Quale articolo è corretto? "_____ studenti sono bravi."
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex38" value="i" style="margin-right: 0.8rem;"> I
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex38" value="gli" style="margin-right: 0.8rem;"> Gli
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex38" value="le" style="margin-right: 0.8rem;"> Le
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex38" value="lo" style="margin-right: 0.8rem;"> Lo
-                        </label>
-                    </div>
-                    <div class="feedback" id="feedback-38" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #065f46; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #065f46; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 39 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 1rem;">
-                        Quale articolo è corretto? "_____ amiche sono simpatiche."
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex39" value="i" style="margin-right: 0.8rem;"> I
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex39" value="gli" style="margin-right: 0.8rem;"> Gli
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex39" value="le" style="margin-right: 0.8rem;"> Le
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex39" value="la" style="margin-right: 0.8rem;"> La
-                        </label>
-                    </div>
-                    <div class="feedback" id="feedback-39" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #065f46; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #065f46; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 40 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 1rem;">
-                        Quale articolo è corretto? "_____ zaino è pesante."
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex40" value="il" style="margin-right: 0.8rem;"> Il
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex40" value="lo" style="margin-right: 0.8rem;"> Lo
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex40" value="la" style="margin-right: 0.8rem;"> La
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex40" value="l" style="margin-right: 0.8rem;"> L'
-                        </label>
-                    </div>
-                    <div class="feedback" id="feedback-40" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #065f46; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #065f46; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 41 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 1rem;">
-                        Quale articolo è corretto? "_____ psicologi studiano la mente."
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex41" value="i" style="margin-right: 0.8rem;"> I
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex41" value="gli" style="margin-right: 0.8rem;"> Gli
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background:                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #065f46; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #065f46; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 42 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 1rem;">
-                        Quale articolo è corretto? "_____ sbagli sono perdonabili."
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex42" value="i" style="margin-right: 0.8rem;"> I
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex42" value="gli" style="margin-right: 0.8rem;"> Gli
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex42" value="le" style="margin-right: 0.8rem;"> Le
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex42" value="lo" style="margin-right: 0.8rem;"> Lo
-                        </label>
-                    </div>
-                    <div class="feedback" id="feedback-42" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #065f46; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #065f46; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 43 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 1rem;">
-                        Quale articolo è corretto? "_____ xilofono è uno strumento a percussione."
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex43" value="il" style="margin-right: 0.8rem;"> Il
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex43" value="lo" style="margin-right: 0.8rem;"> Lo
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex43" value="la" style="margin-right: 0.8rem;"> La
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex43" value="l" style="margin-right: 0.8rem;"> L'
-                        </label>
-                    </div>
-                    <div class="feedback" id="feedback-43" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #065f46; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #065f46; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 44 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 1rem;">
-                        Quale articolo è corretto? "_____ yacht sono costosi."
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex44" value="i" style="margin-right: 0.8rem;"> I
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex44" value="gli" style="margin-right: 0.8rem;"> Gli
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex44" value="le" style="margin-right: 0.8rem;"> Le
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex44" value="lo" style="margin-right: 0.8rem;"> Lo
-                        </label>
-                    </div>
-                    <div class="feedback" id="feedback-44" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #065f46; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #065f46; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 45 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 1rem;">
-                        Quale articolo è corretto? "_____ ora è tarda."
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex45" value="il" style="margin-right: 0.8rem;"> Il
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex45" value="lo" style="margin-right: 0.8rem;"> Lo
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex45" value="la" style="margin-right: 0.8rem;"> La
-                        </label>
-                        <label style="display: flex; align-items: center; padding: 0.5rem; background: #f8f9fa; border-radius: 4px; cursor: pointer;">
-                            <input type="radio" name="ex45" value="l" style="margin-right: 0.8rem;"> L'
-                        </label>
-                    </div>
-                    <div class="feedback" id="feedback-45" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <!-- ESERCIZI 46-50: COMPLETAMENTO AVANZATO -->
-                <div style="background: #7c2d12; color: white; padding: 0.8rem; margin: 2rem 0 1rem 0; border-radius: 4px; font-weight: bold; font-size: 1.1rem;">
-                    Sezione F: Completamento Avanzato - Sostantivi Irregolari e Casi Speciali
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #7c2d12; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #7c2d12; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 46 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="46" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> uomo è un essere razionale.
-                    </div>
-                    <div class="feedback" id="feedback-46" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #7c2d12; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #7c2d12; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 47 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="47" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> uomini lavorano in fabbrica.
-                    </div>
-                    <div class="feedback" id="feedback-47" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #7c2d12; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #7c2d12; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 48 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="48" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> dio della mitologia greca è Zeus.
-                    </div>
-                    <div class="feedback" id="feedback-48" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #7c2d12; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #7c2d12; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 49 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="49" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> dèi dell'Olimpo sono molti.
-                    </div>
-                    <div class="feedback" id="feedback-49" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: #ffffff; border-left: 4px solid #7c2d12; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <div style="font-weight: bold; color: #7c2d12; margin-bottom: 0.8rem; font-size: 1.1rem;">Esercizio 50 (2 punti)</div>
-                    <div style="font-size: 1.15rem; line-height: 2.2;">
-                        <input type="text" class="answer-input" data-exercise="50" data-blank="0" style="width: 70px; padding: 0.5rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.3rem; font-weight: bold; font-size: 1.1rem;" autocomplete="off"> buco è profondo.
-                    </div>
-                    <div class="feedback" id="feedback-50" style="margin-top: 0.8rem; font-weight: bold; display: none; padding: 0.5rem; border-radius: 4px;"></div>
-                </div>
-
-                <!-- RIEPILOGO E INVIO -->
-                <div style="background: linear-gradient(135deg, #003366 0%, #8b0000 100%); color: white; padding: 1.5rem; margin: 2rem 0; border-radius: 8px; text-align: center;">
-                    <h3 style="margin: 0 0 1rem 0; font-size: 1.3rem;">📊 Riepilogo Esame</h3>
-                    <p style="margin: 0; font-size: 1.1rem;">Totale esercizi: 50 | Punti totali: 100 | Sufficienza: 60/100</p>
-                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">Verifica di aver inserito l'email prima di inviare</p>
-                </div>
-
-                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
-                    <button type="button" id="checkAnswers" style="background: #003366; color: white; padding: 1rem 2rem; border: none; border-radius: 4px; font-size: 1.1rem; cursor: pointer; font-weight: bold;">
-                        ✅ Verifica Risposte
-                    </button>
-                    <button type="submit" id="submitExam" style="background: #8b0000; color: white; padding: 1rem 2rem; border: none; border-radius: 4px; font-size: 1.1rem; cursor: pointer; font-weight: bold;">
-                        📧 Invia Esito via Email
-                    </button>
-                </div>
-            </form>
-
-            <!-- RISULTATI -->
-            <div id="resultsContainer" style="display: none; margin-top: 2rem; padding: 2rem; background: #f8f9fa; border-radius: 8px; border: 2px solid #003366;">
-                <h3 style="color: #003366; margin-bottom: 1rem;">📈 Risultati dell'Esercitazione</h3>
-                <div id="scoreDisplay" style="font-size: 2rem; font-weight: bold; text-align: center; margin: 1rem 0;"></div>
-                <div id="detailedResults" style="margin-top: 1rem;"></div>
-            </div>
-        </div>
-    </div>
 </section>
 
+
+
 <script>
-// Soluzioni corrette
-const correctAnswers = {
-    // Sezione A: Singolari Maschili (1-10)
-    1: ['il'], 2: ['lo'], 3: ['lo'], 4: ['lo'], 5: ['lo'],
-    6: ['lo'], 7: ['lo'], 8: ['lo'], 9: ['l\''], 10: ['lo'],
-    // Sezione B: Singolari Femminili (11-15)
-    11: ['l\''], 12: ['l\''], 13: ['l\''], 14: ['l\''], 15: ['la'],
-    // Sezione C: Plurali (16-25)
-    16: ['i'], 17: ['gli'], 18: ['gli'], 19: ['gli'], 20: ['gli'],
-    21: ['gli'], 22: ['gli'], 23: ['le'], 24: ['le'], 25: ['le'],
-    // Sezione D: Doppio Completamento (26-35)
-    26: ['l\'', 'il'], 27: ['il', 'la'], 28: ['la', 'la'], 29: ['gli', 'i'], 30: ['i', 'la'],
-    31: ['le', 'le'], 32: ['lo', 'l\''], 33: ['gli', 'le'], 34: ['lo', 'il'], 35: ['i', 'i'],
-    // Sezione E: Scelta Multipla (36-45)
-    36: 'il', 37: 'l\'', 38: 'i', 39: 'le', 40: 'lo',
-    41: 'i', 42: 'gli', 43: 'lo', 44: 'gli', 45: 'l\'',
-    // Sezione F: Avanzato (46-50)
-    46: ['l\''], 47: ['gli'], 48: ['il'], 49: ['i'], 50: ['il']
-};
 
-// Verifica risposte
-document.getElementById('checkAnswers').addEventListener('click', function() {
-    let totalScore = 0;
-    let maxScore = 100;
-    
-    // Verifica esercizi con input testuali (1-35, 46-50)
-    for (let i = 1; i <= 50; i++) {
-        if (i >= 36 && i <= 45) continue; // Salta scelta multipla per ora
-        
-        const inputs = document.querySelectorAll(`[data-exercise="${i}"]`);
-        const correct = correctAnswers[i];
-        let exerciseScore = 0;
-        let allCorrect = true;
-        
-        inputs.forEach((input, index) => {
-            const userAnswer = input.value.trim().toLowerCase();
-            const expected = Array.isArray(correct) ? correct[index] : correct;
-            
-            if (userAnswer === expected) {
-                exerciseScore += (2 / inputs.length);
-                input.style.borderColor = '#28a745';
-                input.style.backgroundColor = '#d4edda';
-            } else {
-                allCorrect = false;
-                input.style.borderColor = '#dc3545';
-                input.style.backgroundColor = '#f8d7da';
-            }
-        });
-        
-        const feedback = document.getElementById(`feedback-${i}`);
-        if (feedback) {
-            feedback.style.display = 'block';
-            if (allCorrect) {
-                feedback.textContent = '✓ Corretto! (+2 punti)';
-                feedback.style.backgroundColor = '#d4edda';
-                feedback.style.color = '#155724';
-            } else {
-                feedback.textContent = `✗ Sbagliato. Risposta corretta: ${Array.isArray(correct) ? correct.join(', ') : correct}`;
-                feedback.style.backgroundColor = '#f8d7da';
-                feedback.style.color = '#721c24';
-            }
-        }
-        
-        totalScore += exerciseScore;
-    }
-    
-    // Verifica scelta multipla (36-45)
-    for (let i = 36; i <= 45; i++) {
-        const selected = document.querySelector(`input[name="ex${i}"]:checked`);
-        const feedback = document.getElementById(`feedback-${i}`);
-        const correct = correctAnswers[i];
-        
-        if (feedback) {
-            feedback.style.display = 'block';
-            if (selected && selected.value === correct) {
-                totalScore += 2;
-                feedback.textContent = '✓ Corretto! (+2 punti)';
-                feedback.style.backgroundColor = '#d4edda';
-                feedback.style.color = '#155724';
-            } else {
-                feedback.textContent = `✗ Sbagliato. Risposta corretta: ${correct}`;
-                feedback.style.backgroundColor = '#f8d7da';
-                feedback.style.color = '#721c24';
-            }
-        }
-    }
-    
-    // Mostra risultati
-    const resultsContainer = document.getElementById('resultsContainer');
-    const scoreDisplay = document.getElementById('scoreDisplay');
-    resultsContainer.style.display = 'block';
-    
-    const percentage = (totalScore / maxScore) * 100;
-    let grade = '';
-    let color = '';
-    
-    if (percentage >= 90) { grade = 'A (Ottimo)'; color = '#28a745'; }
-    else if (percentage >= 80) { grade = 'B (Buono)'; color = '#5cb85c'; }
-    else if (percentage >= 70) { grade = 'C (Sufficiente)'; color = '#f0ad4e'; }
-    else if (percentage >= 60) { grade = 'D (Sufficiente)'; color = '#f0ad4e'; }
-    else { grade = 'F (Insufficiente)'; color = '#dc3545'; }
-    
-    scoreDisplay.innerHTML = `
-        <div style="color: ${color};">${totalScore}/${maxScore} punti</div>
-        <div style="font-size: 1.2rem; margin-top: 0.5rem;">Voto: ${grade}</div>
-        <div style="font-size: 1rem; margin-top: 0.5rem; color: #666;">${percentage.toFixed(1)}%</div>
-    `;
-    
-    // Scroll ai risultati
-    resultsContainer.scrollIntoView({ behavior: 'smooth' });
+/* 50 DOMANDE */
+
+const questions = [
+
+"___ libro è sul tavolo",
+"___ studente parla italiano",
+"___ zaino è pesante",
+"___ psicologo lavora in ospedale",
+"___ gnomo vive nel bosco",
+
+"___ yogurt è nel frigorifero",
+"___ xilofono è uno strumento musicale",
+"___ studente studia grammatica",
+"___ amico arriva oggi",
+"___ orologio è rotto",
+
+"___ amica studia medicina",
+"___ isola è bellissima",
+"___ acqua è fredda",
+"___ edicola apre alle sette",
+"___ casa è grande",
+
+"___ libri sono sul tavolo",
+"___ studenti studiano molto",
+"___ amici arrivano domani",
+"___ zaini sono pesanti",
+"___ psicologi lavorano molto",
+
+"___ gnocchi sono buoni",
+"___ studenti entrano in classe",
+"___ case sono nuove",
+"___ penne sono blu",
+"___ amiche arrivano oggi",
+
+"___ cane dorme sul divano",
+"___ amico arriva in treno",
+"___ libri sono nuovi",
+"___ case sono grandi",
+"___ studente legge",
+
+"___ cani mangiano",
+"___ amici telefonano",
+"___ psicologo riceve pazienti",
+"___ studenti studiano insieme",
+"___ orologio segna mezzogiorno",
+
+"___ elefante è molto grande",
+"___ amici entrano in classe",
+"___ tavolo è rotondo",
+"___ libri sono rossi",
+"___ cane corre veloce",
+
+"___ amici aspettano fuori",
+"___ studente scrive",
+"___ psicologo ascolta",
+"___ zaino cade",
+"___ amica arriva",
+
+"___ penne cadono",
+"___ libri costano molto",
+"___ studenti parlano",
+"___ amiche ridono",
+"___ casa è nuova"
+
+];
+
+
+/* RISPOSTE CORRETTE */
+
+const correct = [
+
+"il","lo","lo","lo","lo",
+"lo","lo","lo","l'","l'",
+"l'","l'","l'","l'","la",
+"i","gli","gli","gli","gli",
+"gli","gli","le","le","le",
+"il","l'","i","le","lo",
+"i","gli","lo","gli","l'",
+"l'","gli","il","i","il",
+"gli","lo","lo","lo","l'",
+"le","i","gli","le","la"
+
+];
+
+
+/* ORDINE CASUALE DOMANDE */
+
+let order=[...Array(questions.length).keys()];
+order.sort(()=>Math.random()-0.5);
+
+
+/* CREAZIONE DOMANDE */
+
+let form=document.getElementById("exerciseForm");
+
+order.forEach((i,n)=>{
+
+let p=document.createElement("p");
+
+p.innerHTML=(n+1)+". "+questions[i]+
+' <input type="text" data-correct="'+correct[i]+'" class="answer">';
+
+form.appendChild(p);
+
 });
 
-// Invio form
-document.getElementById('exerciseForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = document.getElementById('studentEmail').value;
-    
-    if (!email) {
-        alert('Inserisci l\'email istituzionale prima di inviare!');
-        return;
-    }
-    
-    // Simula invio (da implementare con backend reale)
-    alert(`Esito inviato a: ${email}\n\nNota: In un'implementazione reale, qui si collegherebbe al server per inviare l'email e salvare i risultati nel database admin.`);
+
+/* BARRA AVANZAMENTO */
+
+document.querySelectorAll(".answer").forEach(input=>{
+input.addEventListener("input",updateProgress);
 });
+
+function updateProgress(){
+
+let total=document.querySelectorAll(".answer").length;
+let filled=0;
+
+document.querySelectorAll(".answer").forEach(i=>{
+if(i.value!="") filled++;
+});
+
+let percent=Math.round((filled/total)*100);
+
+document.getElementById("progressBar").style.width=percent+"%";
+
+document.getElementById("progressText").innerHTML=
+"Completamento prova: "+percent+"%";
+
+}
+
+
+/* CORREZIONE CON VISUALIZZAZIONE ERRORI */
+
+function checkAnswers(){
+
+let answers=document.querySelectorAll(".answer");
+
+let correctCount=0;
+
+answers.forEach(input=>{
+
+let user=input.value.toLowerCase().trim();
+let correct=input.dataset.correct;
+
+if(user==correct){
+
+correctCount++;
+
+input.style.background="#d4edda";
+input.style.border="2px solid green";
+
+}else{
+
+input.style.background="#f8d7da";
+input.style.border="2px solid red";
+
+if(!input.nextElementSibling){
+
+let span=document.createElement("span");
+
+span.style.marginLeft="10px";
+span.style.color="red";
+span.style.fontSize="14px";
+
+span.innerHTML=" (risposta corretta: "+correct+")";
+
+input.parentNode.appendChild(span);
+
+}
+
+}
+
+});
+
+let score=Math.round((correctCount/answers.length)*100);
+
+let message="Punteggio ottenuto: "+score+" / 100";
+
+if(score>=60){
+
+message+="<br><strong>Esito: prova superata</strong>";
+
+}else{
+
+message+="<br><strong>Esito: prova non superata</strong>";
+
+}
+
+document.getElementById("result").innerHTML=message;
+
+}
+
+
+/* INVIO EMAIL */
+
+function sendExerciseEmail(){
+
+let name=document.getElementById("studentName").value;
+
+let answers="Studente: "+name+"\n\n";
+
+let inputs=document.querySelectorAll(".answer");
+
+inputs.forEach((input,index)=>{
+answers+="Domanda "+(index+1)+": "+input.value+"\n";
+});
+
+let subject="Verifica articoli determinativi A1";
+
+let body=encodeURIComponent(answers);
+
+let teacher="infonefelieducation@gmail.com";
+
+window.location.href=`mailto:${teacher}?subject=${subject}&body=${body}`;
+
+}
+
 </script>
+
+</script>
+
 
                     </form>
 
