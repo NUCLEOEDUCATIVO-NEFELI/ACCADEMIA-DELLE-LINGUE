@@ -1335,381 +1335,463 @@
         </section>
     </main>
 
-    
+  <!-- SEZIONE ESERCIZI - 50 ESERCIZI CON VALUTAZIONE -->
+<section id="esercizi" class="section">
+    <div class="card">
+        <div class="card-header" style="background: linear-gradient(135deg, #003366 0%, #8b0000 100%); color: white;">
+            📝 Esercizi di Valutazione - Articoli Determinativi (50 esercizi × 2 punti = 100 punti)
+        </div>
+        <div class="card-body">
+            <div class="instruction-box" style="background: #fff3cd; border-left-color: #ffc107;">
+                <strong>📋 Istruzioni:</strong>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>Completa ogni esercizio inserendo l'articolo corretto (il, lo, la, l', i, gli, le)</li>
+                    <li>Ogni esercizio vale <strong>2 punti</strong> (1 punto per ogni risposta corretta)</li>
+                    <li>Totale: <strong>100 punti</strong> | Sufficienza: <strong>60/100</strong></li>
+                    <li>Inserisci la tua email per ricevere i risultati</li>
+                </ul>
+            </div>
 
-        <!-- SEZIONE ESERCIZI - 50 ESERCIZI CON VALUTAZIONE -->
-        <section id="esercizi" class="section">
-            <div class="card">
-                <div class="card-header" style="background: linear-gradient(135deg, #003366 0%, #8b0000 100%); color: white;">
-                    📝 Esercizi di Valutazione - Articoli Determinativi (50 esercizi × 2 punti = 100 punti)
+            <div style="background: #e7f3ff; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
+                <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">📧 Email dello studente:</label>
+                <input type="email" id="studentEmail" placeholder="inserisci@email.com" style="padding: 0.5rem; width: 300px; border: 2px solid var(--primary); border-radius: 4px;">
+            </div>
+
+            <form id="exerciseForm">
+                <!-- ESERCIZI 1-2 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 1 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        1. <input type="text" class="answer-input" data-exercise="1" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> libro è sul <input type="text" class="answer-input" data-exercise="1" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> tavolo.
+                    </div>
+                    <div class="feedback" id="feedback-1" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
                 </div>
-                <div class="card-body">
-                    <div class="instruction-box" style="background: #fff3cd; border-left-color: #ffc107;">
-                        <strong>📋 Istruzioni:</strong>
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>Completa ogni esercizio inserendo l'articolo corretto (il, lo, la, l', i, gli, le)</li>
-                            <li>Ogni esercizio vale <strong>2 punti</strong> (1 punto per ogni risposta corretta)</li>
-                            <li>Totale: <strong>100 punti</strong> | Sufficienza: <strong>60/100</strong></li>
-                            <li>Inserisci la tua email per ricevere i risultati</li>
-                        </ul>
-                    </div>
 
-                    <div style="background: #e7f3ff; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
-                        <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">📧 Email dello studente:</label>
-                        <input type="email" id="studentEmail" placeholder="inserisci@email.com" style="padding: 0.5rem; width: 300px; border: 2px solid var(--primary); border-radius: 4px;">
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 2 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        2. <input type="text" class="answer-input" data-exercise="2" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> studente studia in <input type="text" class="answer-input" data-exercise="2" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> università.
                     </div>
+                    <div class="feedback" id="feedback-2" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
 
-                    <form id="exerciseForm">
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 1 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile singolare: consonante semplice → IL</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-1. <input type="text" class="answer-input" data-exercise="1" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> libro è sul <input type="text" class="answer-input" data-exercise="1" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> tavolo.</div>
-<div class="feedback" id="feedback-1" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 2 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: s+consonante → LO, vocale → L'</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-2. <input type="text" class="answer-input" data-exercise="2" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> studente studia in <input type="text" class="answer-input" data-exercise="2" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> università.</div>
-<div class="feedback" id="feedback-2" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 3 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: vocale → L', z → LO</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-3. <input type="text" class="answer-input" data-exercise="3" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> amico viene a casa mia con <input type="text" class="answer-input" data-exercise="3" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> zaino nuovo.</div>
-<div class="feedback" id="feedback-3" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 4 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: ps → LO, vocale → L'</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-4. <input type="text" class="answer-input" data-exercise="4" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> psicologo lavora in <input type="text" class="answer-input" data-exercise="4" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> ospedale.</div>
-<div class="feedback" id="feedback-4" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 5 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: gn → LO, vocale → L'</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-5. <input type="text" class="answer-input" data-exercise="5" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> gnomo vive sotto <input type="text" class="answer-input" data-exercise="5" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> albero.</div>
-<div class="feedback" id="feedback-5" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 6 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: y → LO, consonante semplice → IL</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-6. <input type="text" class="answer-input" data-exercise="6" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> yacht è in <input type="text" class="answer-input" data-exercise="6" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> porto.</div>
-<div class="feedback" id="feedback-6" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 7 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: x → LO</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-7. <input type="text" class="answer-input" data-exercise="7" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> xilofono è <input type="text" class="answer-input" data-exercise="7" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> strumento musicale.</div>
-<div class="feedback" id="feedback-7" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 8 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: s+consonante → LO, vocale → L'</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-8. <input type="text" class="answer-input" data-exercise="8" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> spagnolo parla con <input type="text" class="answer-input" data-exercise="8" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> italiano.</div>
-<div class="feedback" id="feedback-8" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 9 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: s+consonante → LO</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-9. <input type="text" class="answer-input" data-exercise="9" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> svedese mangia <input type="text" class="answer-input" data-exercise="9" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> pizza.</div>
-<div class="feedback" id="feedback-9" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 10 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: z → LO</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-10. <input type="text" class="answer-input" data-exercise="10" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> zio abita in <input type="text" class="answer-input" data-exercise="10" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> appartamento.</div>
-<div class="feedback" id="feedback-10" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 11 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → LA, vocale → L'</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-11. <input type="text" class="answer-input" data-exercise="11" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> casa è molto bella e <input type="text" class="answer-input" data-exercise="11" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> isola è verde.</div>
-<div class="feedback" id="feedback-11" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 12 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → LA, vocale → L'</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-12. <input type="text" class="answer-input" data-exercise="12" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> scuola è grande e <input type="text" class="answer-input" data-exercise="12" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> aula è luminosa.</div>
-<div class="feedback" id="feedback-12" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 13 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → LA</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-13. <input type="text" class="answer-input" data-exercise="13" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> studentessa legge <input type="text" class="answer-input" data-exercise="13" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> libro.</div>
-<div class="feedback" id="feedback-13" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 14 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: vocale → L', consonante → LA</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-14. <input type="text" class="answer-input" data-exercise="14" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> amica viene con <input type="text" class="answer-input" data-exercise="14" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> sorella.</div>
-<div class="feedback" id="feedback-14" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 15 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → LA</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-15. <input type="text" class="answer-input" data-exercise="15" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> penna è sul <input type="text" class="answer-input" data-exercise="15" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> tavolo.</div>
-<div class="feedback" id="feedback-15" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 16 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: vocale → L'</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-16. <input type="text" class="answer-input" data-exercise="16" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> acqua è fredda e <input type="text" class="answer-input" data-exercise="16" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> ora è tardi.</div>
-<div class="feedback" id="feedback-16" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 17 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → LA, vocale → L'</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-17. <input type="text" class="answer-input" data-exercise="17" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> strada è lunga e <input type="text" class="answer-input" data-exercise="17" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> autostrada è veloce.</div>
-<div class="feedback" id="feedback-17" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 18 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → LA, vocale → L'</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-18. <input type="text" class="answer-input" data-exercise="18" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> donna lavora in <input type="text" class="answer-input" data-exercise="18" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> ufficio.</div>
-<div class="feedback" id="feedback-18" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 19 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → LA</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-19. <input type="text" class="answer-input" data-exercise="19" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> chiave apre <input type="text" class="answer-input" data-exercise="19" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> porta.</div>
-<div class="feedback" id="feedback-19" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 20 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: vocale → L'</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-20. <input type="text" class="answer-input" data-exercise="20" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> edicola vende <input type="text" class="answer-input" data-exercise="20" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> giornali.</div>
-<div class="feedback" id="feedback-20" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 21 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale maschile: plurale di IL → I</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-21. <input type="text" class="answer-input" data-exercise="21" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> libri sono sui <input type="text" class="answer-input" data-exercise="21" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> tavoli.</div>
-<div class="feedback" id="feedback-21" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 22 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale: LO → GLI, LA → LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-22. <input type="text" class="answer-input" data-exercise="22" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> studenti sono in <input type="text" class="answer-input" data-exercise="22" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> aule.</div>
-<div class="feedback" id="feedback-22" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 23 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale: L' → GLI, LO → GLI</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-23. <input type="text" class="answer-input" data-exercise="23" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> amici vengono con <input type="text" class="answer-input" data-exercise="23" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> zaini.</div>
-<div class="feedback" id="feedback-23" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 24 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale: LO → GLI</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-24. <input type="text" class="answer-input" data-exercise="24" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> psicologi lavorano negli <input type="text" class="answer-input" data-exercise="24" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> ospedali.</div>
-<div class="feedback" id="feedback-24" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 25 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale: LO → GLI, L' → GLI</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-25. <input type="text" class="answer-input" data-exercise="25" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> gnomi vivono sotto gli <input type="text" class="answer-input" data-exercise="25" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> alberi.</div>
-<div class="feedback" id="feedback-25" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 26 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale: LO → GLI, IL → I</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-26. <input type="text" class="answer-input" data-exercise="26" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> yacht sono nei <input type="text" class="answer-input" data-exercise="26" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> porti.</div>
-<div class="feedback" id="feedback-26" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 27 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale: LO → GLI</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-27. <input type="text" class="answer-input" data-exercise="27" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> xilofoni sono <input type="text" class="answer-input" data-exercise="27" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> strumenti musicali.</div>
-<div class="feedback" id="feedback-27" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 28 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale: LO → GLI, L' → GLI</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-28. <input type="text" class="answer-input" data-exercise="28" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> spagnoli parlano con gli <input type="text" class="answer-input" data-exercise="28" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> italiani.</div>
-<div class="feedback" id="feedback-28" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 29 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale: LO → GLI, LA → LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-29. <input type="text" class="answer-input" data-exercise="29" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> svedesi mangiano le <input type="text" class="answer-input" data-exercise="29" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> pizze.</div>
-<div class="feedback" id="feedback-29" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 30 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale: LO → GLI</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-30. <input type="text" class="answer-input" data-exercise="30" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> zii abitano negli <input type="text" class="answer-input" data-exercise="30" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> appartamenti.</div>
-<div class="feedback" id="feedback-30" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 31 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-31. <input type="text" class="answer-input" data-exercise="31" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> case sono molto belle e <input type="text" class="answer-input" data-exercise="31" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> isole sono verdi.</div>
-<div class="feedback" id="feedback-31" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 32 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-32. <input type="text" class="answer-input" data-exercise="32" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> scuole sono grandi e <input type="text" class="answer-input" data-exercise="32" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> aule sono luminose.</div>
-<div class="feedback" id="feedback-32" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 33 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-33. <input type="text" class="answer-input" data-exercise="33" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> studentesse leggono i <input type="text" class="answer-input" data-exercise="33" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> libri.</div>
-<div class="feedback" id="feedback-33" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 34 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-34. <input type="text" class="answer-input" data-exercise="34" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> amiche vengono con le <input type="text" class="answer-input" data-exercise="34" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> sorelle.</div>
-<div class="feedback" id="feedback-34" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 35 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-35. <input type="text" class="answer-input" data-exercise="35" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> penne sono sui <input type="text" class="answer-input" data-exercise="35" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> tavoli.</div>
-<div class="feedback" id="feedback-35" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 36 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-36. <input type="text" class="answer-input" data-exercise="36" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> acque sono fredde e <input type="text" class="answer-input" data-exercise="36" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> ore sono tarde.</div>
-<div class="feedback" id="feedback-36" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 37 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-37. <input type="text" class="answer-input" data-exercise="37" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> strade sono lunghe e <input type="text" class="answer-input" data-exercise="37" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> autostrade sono veloci.</div>
-<div class="feedback" id="feedback-37" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 38 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-38. <input type="text" class="answer-input" data-exercise="38" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> donne lavorano negli <input type="text" class="answer-input" data-exercise="38" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> uffici.</div>
-<div class="feedback" id="feedback-38" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 39 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-39. <input type="text" class="answer-input" data-exercise="39" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> chiavi aprono le <input type="text" class="answer-input" data-exercise="39" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> porte.</div>
-<div class="feedback" id="feedback-39" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 40 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre LE</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-40. <input type="text" class="answer-input" data-exercise="40" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> edicole vendono i <input type="text" class="answer-input" data-exercise="40" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> giornali.</div>
-<div class="feedback" id="feedback-40" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 41 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile singolare: IL + consonante</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-41. <input type="text" class="answer-input" data-exercise="41" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> mattino prendo <input type="text" class="answer-input" data-exercise="41" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> caffè e la sera leggo <input type="text" class="answer-input" data-exercise="41" data-blank="2" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> libro.</div>
-<div class="feedback" id="feedback-41" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 42 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Giorni: articolo determinativo</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-42. <input type="text" class="answer-input" data-exercise="42" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> lunedì vado in <input type="text" class="answer-input" data-exercise="42" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> palestra e <input type="text" class="answer-input" data-exercise="42" data-blank="2" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> mercoledì studio.</div>
-<div class="feedback" id="feedback-42" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 43 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Professioni: articolo indeterminativo</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-43. <input type="text" class="answer-input" data-exercise="43" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> mio fratello è <input type="text" class="answer-input" data-exercise="43" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> medico e lavora in <input type="text" class="answer-input" data-exercise="43" data-blank="2" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> ospedale.</div>
-<div class="feedback" id="feedback-43" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 44 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Nomi unici: articolo determinativo</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-44. <input type="text" class="answer-input" data-exercise="44" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> sole splende e <input type="text" class="answer-input" data-exercise="44" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> luna è piena stasera.</div>
-<div class="feedback" id="feedback-44" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 45 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Animali: articolo per categoria</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-45. <input type="text" class="answer-input" data-exercise="45" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> cane è fedele e <input type="text" class="answer-input" data-exercise="45" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> gatto è indipendente.</div>
-<div class="feedback" id="feedback-45" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 46 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Cibi: articolo per categoria</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-46. In Italia <input type="text" class="answer-input" data-exercise="46" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> pasta è famosa e <input type="text" class="answer-input" data-exercise="46" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> pizza è deliziosa.</div>
-<div class="feedback" id="feedback-46" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 47 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Misto: GLI, L', LA</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-47. <input type="text" class="answer-input" data-exercise="47" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> studenti stranieri studiano <input type="text" class="answer-input" data-exercise="47" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> italiano a <input type="text" class="answer-input" data-exercise="47" data-blank="2" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> scuola.</div>
-<div class="feedback" id="feedback-47" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 48 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale: GLI (uomini è irregolare), LE, GLI</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-48. <input type="text" class="answer-input" data-exercise="48" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> uomini e <input type="text" class="answer-input" data-exercise="48" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> donne lavorano negli <input type="text" class="answer-input" data-exercise="48" data-blank="2" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> uffici.</div>
-<div class="feedback" id="feedback-48" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 49 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale: I, GLI, IL</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-49. <input type="text" class="answer-input" data-exercise="49" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> figli giocano con <input type="text" class="answer-input" data-exercise="49" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> amici nel <input type="text" class="answer-input" data-exercise="49" data-blank="2" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> parco.</div>
-<div class="feedback" id="feedback-49" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
-<div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
-<div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 50 (2 punti)</div>
-<div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Misto: IL, LE (moto è femminile abbreviato)</div>
-<div style="font-size: 1.1rem; line-height: 2;">
-50. <input type="text" class="answer-input" data-exercise="50" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> meccanico ripara <input type="text" class="answer-input" data-exercise="50" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> macchine e <input type="text" class="answer-input" data-exercise="50" data-blank="2" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> moto.</div>
-<div class="feedback" id="feedback-50" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
-</div>
+                <!-- ESERCIZIO 3 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 3 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        3. <input type="text" class="answer-input" data-exercise="3" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> amico viene a casa mia con <input type="text" class="answer-input" data-exercise="3" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> zaino nuovo.
+                    </div>
+                    <div class="feedback" id="feedback-3" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 4 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 4 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        4. <input type="text" class="answer-input" data-exercise="4" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> psicologo lavora in <input type="text" class="answer-input" data-exercise="4" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> ospedale.
+                    </div>
+                    <div class="feedback" id="feedback-4" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 5 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 5 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        5. <input type="text" class="answer-input" data-exercise="5" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> gnomo vive sotto <input type="text" class="answer-input" data-exercise="5" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> albero.
+                    </div>
+                    <div class="feedback" id="feedback-5" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 6 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 6 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        6. <input type="text" class="answer-input" data-exercise="6" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> yacht è in <input type="text" class="answer-input" data-exercise="6" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> porto.
+                    </div>
+                    <div class="feedback" id="feedback-6" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 7 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 7 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        7. <input type="text" class="answer-input" data-exercise="7" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> xilofono è <input type="text" class="answer-input" data-exercise="7" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> strumento musicale.
+                    </div>
+                    <div class="feedback" id="feedback-7" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 8 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 8 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        8. <input type="text" class="answer-input" data-exercise="8" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> spagnolo parla con <input type="text" class="answer-input" data-exercise="8" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> italiano.
+                    </div>
+                    <div class="feedback" id="feedback-8" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 9 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 9 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        9. <input type="text" class="answer-input" data-exercise="9" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> svedese mangia <input type="text" class="answer-input" data-exercise="9" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> pizza.
+                    </div>
+                    <div class="feedback" id="feedback-9" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 10 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 10 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        10. <input type="text" class="answer-input" data-exercise="10" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> zio abita in <input type="text" class="answer-input" data-exercise="10" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> appartamento.
+                    </div>
+                    <div class="feedback" id="feedback-10" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 11 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 11 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        11. <input type="text" class="answer-input" data-exercise="11" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> casa è molto bella e <input type="text" class="answer-input" data-exercise="11" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> isola è verde.
+                    </div>
+                    <div class="feedback" id="feedback-11" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 12 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 12 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        12. <input type="text" class="answer-input" data-exercise="12" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> scuola è grande e <input type="text" class="answer-input" data-exercise="12" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> aula è luminosa.
+                    </div>
+                    <div class="feedback" id="feedback-12" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 13 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 13 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        13. <input type="text" class="answer-input" data-exercise="13" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> studentessa legge <input type="text" class="answer-input" data-exercise="13" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> libro.
+                    </div>
+                    <div class="feedback" id="feedback-13" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 14 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 14 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        14. <input type="text" class="answer-input" data-exercise="14" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> amica viene con <input type="text" class="answer-input" data-exercise="14" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> sorella.
+                    </div>
+                    <div class="feedback" id="feedback-14" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 15 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 15 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        15. <input type="text" class="answer-input" data-exercise="15" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> penna è sul <input type="text" class="answer-input" data-exercise="15" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> tavolo.
+                    </div>
+                    <div class="feedback" id="feedback-15" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 16 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 16 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        16. <input type="text" class="answer-input" data-exercise="16" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> acqua è fredda e <input type="text" class="answer-input" data-exercise="16" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> ora è tardi.
+                    </div>
+                    <div class="feedback" id="feedback-16" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 17 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 17 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        17. <input type="text" class="answer-input" data-exercise="17" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> strada è lunga e <input type="text" class="answer-input" data-exercise="17" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> autostrada è veloce.
+                    </div>
+                    <div class="feedback" id="feedback-17" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 18 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 18 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        18. <input type="text" class="answer-input" data-exercise="18" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> donna lavora in <input type="text" class="answer-input" data-exercise="18" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> ufficio.
+                    </div>
+                    <div class="feedback" id="feedback-18" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 19 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 19 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        19. <input type="text" class="answer-input" data-exercise="19" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> chiave apre <input type="text" class="answer-input" data-exercise="19" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> porta.
+                    </div>
+                    <div class="feedback" id="feedback-19" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 20 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 20 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        20. <input type="text" class="answer-input" data-exercise="20" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> edicola vende <input type="text" class="answer-input" data-exercise="20" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> giornali.
+                    </div>
+                    <div class="feedback" id="feedback-20" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZI 21-25 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 21 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        21. <input type="text" class="answer-input" data-exercise="21" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> libri sono sui <input type="text" class="answer-input" data-exercise="21" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> tavoli.
+                    </div>
+                    <div class="feedback" id="feedback-21" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 22 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        22. <input type="text" class="answer-input" data-exercise="22" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> studenti sono in <input type="text" class="answer-input" data-exercise="22" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> aule.
+                    </div>
+                    <div class="feedback" id="feedback-22" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 23 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        23. <input type="text" class="answer-input" data-exercise="23" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> amici vengono con <input type="text" class="answer-input" data-exercise="23" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> zaini.
+                    </div>
+                    <div class="feedback" id="feedback-23" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 24 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        24. <input type="text" class="answer-input" data-exercise="24" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> psicologi lavorano negli <input type="text" class="answer-input" data-exercise="24" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> ospedali.
+                    </div>
+                    <div class="feedback" id="feedback-24" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 25 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        25. <input type="text" class="answer-input" data-exercise="25" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> gnomi vivono sotto gli <input type="text" class="answer-input" data-exercise="25" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> alberi.
+                    </div>
+                    <div class="feedback" id="feedback-25" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 26 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 26 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        26. <input type="text" class="answer-input" data-exercise="26" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> yacht sono nei <input type="text" class="answer-input" data-exercise="26" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> porti.
+                    </div>
+                    <div class="feedback" id="feedback-26" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 27 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 27 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        27. <input type="text" class="answer-input" data-exercise="27" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> xilofoni sono <input type="text" class="answer-input" data-exercise="27" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> strumenti musicali.
+                    </div>
+                    <div class="feedback" id="feedback-27" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 28 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 28 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        28. <input type="text" class="answer-input" data-exercise="28" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> spagnoli parlano con gli <input type="text" class="answer-input" data-exercise="28" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> italiani.
+                    </div>
+                    <div class="feedback" id="feedback-28" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 29 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 29 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        29. <input type="text" class="answer-input" data-exercise="29" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> svedesi mangiano le <input type="text" class="answer-input" data-exercise="29" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> pizze.
+                    </div>
+                    <div class="feedback" id="feedback-29" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 30 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 30 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        30. <input type="text" class="answer-input" data-exercise="30" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> zii abitano in <input type="text" class="answer-input" data-exercise="30" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> appartamenti.
+                    </div>
+                    <div class="feedback" id="feedback-30" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZI 31-37 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 31 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        31. <input type="text" class="answer-input" data-exercise="31" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> case sono molto belle e <input type="text" class="answer-input" data-exercise="31" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> isole sono verdi.
+                    </div>
+                    <div class="feedback" id="feedback-31" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 32 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        32. <input type="text" class="answer-input" data-exercise="32" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> scuole sono grandi e <input type="text" class="answer-input" data-exercise="32" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> aule sono luminose.
+                    </div>
+                    <div class="feedback" id="feedback-32" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 33 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        33. <input type="text" class="answer-input" data-exercise="33" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> studentesse leggono i <input type="text" class="answer-input" data-exercise="33" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> libri.
+                    </div>
+                    <div class="feedback" id="feedback-33" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 34 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        34. <input type="text" class="answer-input" data-exercise="34" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> amiche vengono con le <input type="text" class="answer-input" data-exercise="34" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> sorelle.
+                    </div>
+                    <div class="feedback" id="feedback-34" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 35 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        35. <input type="text" class="answer-input" data-exercise="35" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> penne sono sui <input type="text" class="answer-input" data-exercise="35" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> tavoli.
+                    </div>
+                    <div class="feedback" id="feedback-35" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 36 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        36. <input type="text" class="answer-input" data-exercise="36" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> acque sono fredde e <input type="text" class="answer-input" data-exercise="36" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> ore sono tarde.
+                    </div>
+                    <div class="feedback" id="feedback-36" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 37 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        37. <input type="text" class="answer-input" data-exercise="37" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> strade sono lunghe e <input type="text" class="answer-input" data-exercise="37" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> autostrade sono veloci.
+                    </div>
+                    <div class="feedback" id="feedback-37" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 38 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 38 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        38. <input type="text" class="answer-input" data-exercise="38" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> donne lavorano <input type="text" class="answer-input" data-exercise="38" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> uffici.
+                    </div>
+                    <div class="feedback" id="feedback-38" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 39 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 39 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        39. <input type="text" class="answer-input" data-exercise="39" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> chiavi aprono le <input type="text" class="answer-input" data-exercise="39" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> porte.
+                    </div>
+                    <div class="feedback" id="feedback-39" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZIO 40 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 40 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        40. <input type="text" class="answer-input" data-exercise="40" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> edicole vendono i <input type="text" class="answer-input" data-exercise="40" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> giornali.
+                    </div>
+                    <div class="feedback" id="feedback-40" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <!-- ESERCIZI 41-50 -->
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 41 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        41. <input type="text" class="answer-input" data-exercise="41" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> mattino prendo <input type="text" class="answer-input" data-exercise="41" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> caffè e <input type="text" class="answer-input" data-exercise="41" data-blank="2" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> sera riposo.
+                    </div>
+                    <div class="feedback" id="feedback-41" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 42 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        42. <input type="text" class="answer-input" data-exercise="42" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> lunedì vado in palestra e <input type="text" class="answer-input" data-exercise="42" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> mercoledì studio in biblioteca.
+                    </div>
+                    <div class="feedback" id="feedback-42" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 43 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        43. <input type="text" class="answer-input" data-exercise="43" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> mio fratello studia <input type="text" class="answer-input" data-exercise="43" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> medicina e <input type="text" class="answer-input" data-exercise="43" data-blank="2" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> sorella studia arte.
+                    </div>
+                    <div class="feedback" id="feedback-43" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 44 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        44. <input type="text" class="answer-input" data-exercise="44" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> sole splende e <input type="text" class="answer-input" data-exercise="44" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> luna è piena stasera.
+                    </div>
+                    <div class="feedback" id="feedback-44" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 45 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        45. <input type="text" class="answer-input" data-exercise="45" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> cane è fedele e <input type="text" class="answer-input" data-exercise="45" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> gatto è indipendente.
+                    </div>
+                    <div class="feedback" id="feedback-45" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 46 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        46. In Italia <input type="text" class="answer-input" data-exercise="46" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> pasta è famosa e <input type="text" class="answer-input" data-exercise="46" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> pizza è deliziosa.
+                    </div>
+                    <div class="feedback" id="feedback-46" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 47 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        47. <input type="text" class="answer-input" data-exercise="47" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> studenti stranieri studiano <input type="text" class="answer-input" data-exercise="47" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> italiano in classe.
+                    </div>
+                    <div class="feedback" id="feedback-47" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 48 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        48. <input type="text" class="answer-input" data-exercise="48" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> uomini e <input type="text" class="answer-input" data-exercise="48" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> donne lavorano negli uffici.
+                    </div>
+                    <div class="feedback" id="feedback-48" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 49 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        49. <input type="text" class="answer-input" data-exercise="49" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> figli giocano con <input type="text" class="answer-input" data-exercise="49" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> amici nel parco.
+                    </div>
+                    <div class="feedback" id="feedback-49" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+
+                <div class="exercise-item" style="margin-bottom: 1.5rem; padding: 1rem; background: #f8f9fa; border-left: 4px solid var(--primary); border-radius: 4px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 50 (2 punti)</div>
+                    <div style="font-size: 1.1rem; line-height: 2;">
+                        50. <input type="text" class="answer-input" data-exercise="50" data-blank="0" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> meccanico ripara <input type="text" class="answer-input" data-exercise="50" data-blank="1" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> macchine e <input type="text" class="answer-input" data-exercise="50" data-blank="2" style="width: 60px; padding: 0.3rem; text-align: center; border: 2px solid #dee2e6; border-radius: 4px; margin: 0 0.2rem; font-weight: bold;" autocomplete="off"> moto.
+                    </div>
+                    <div class="feedback" id="feedback-50" style="margin-top: 0.5rem; font-weight: bold; display: none;"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+               
 
                     </form>
 
