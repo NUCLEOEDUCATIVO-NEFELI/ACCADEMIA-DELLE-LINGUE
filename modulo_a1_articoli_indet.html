@@ -1445,769 +1445,269 @@
                 </div>
             </div>
         </section>
+<section id="esercizi_indeterminativi" style="max-width:900px;margin:auto;font-family:Georgia,serif;line-height:1.7">
+
+<h2 style="text-align:center;border-bottom:2px solid #444;padding-bottom:12px">
+Verifica di grammatica – Livello A1
+</h2>
+
+<p style="text-align:center;font-style:italic">
+Uso degli articoli indeterminativi
+</p>
+
+<p style="text-align:center">
+Studente:
+<input type="text" id="studentName2" placeholder="Nome e cognome">
+</p>
 
-        <!-- SEZIONE ESERCIZI - 50 ESERCIZI CON VALUTAZIONE -->
-        <section id="esercizi" class="section">
-            <div class="card">
-                <div class="card-header" style="background: linear-gradient(135deg, #003366 0%, #8b0000 100%); color: white;">
-                    📝 Esercizi di Valutazione - Articoli Indeterminativi (50 esercizi × 2 punti = 100 punti)
-                </div>
-                <div class="card-body">
-                    <div class="instruction-box" style="background: #fff3cd; border-left-color: #ffc107;">
-                        <strong>📋 Istruzioni:</strong>
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>Completa ogni esercizio inserendo l'articolo corretto (un, uno, una, un', dei, degli, delle)</li>
-                            <li>Ogni esercizio vale <strong>2 punti</strong> (1 punto per ogni risposta corretta)</li>
-                            <li>Totale: <strong>100 punti</strong> | Sufficienza: <strong>60/100</strong></li>
-                            <li>Inserisci la tua email per ricevere i risultati</li>
-                        </ul>
-                    </div>
-
-                    <div style="background: #e7f3ff; padding: 1rem; margin: 1rem 0; border-radius: 8px;">
-                        <label style="font-weight: bold; display: block; margin-bottom: 0.5rem;">📧 Email dello studente:</label>
-                        <input type="email" id="studentEmail" placeholder="inserisci@email.com" style="padding: 0.5rem; width: 300px; border: 2px solid var(--primary); border-radius: 4px;">
-                    </div>
-
-                    <form id="exerciseForm">
-                        <!-- ESERCIZI 1-10: Maschile UN -->
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 1 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile singolare: consonante semplice → UN</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                1. Ho comprato <input type="text" class="answer-input" data-exercise="1" data-blank="0" autocomplete="off"> libro interessante e <input type="text" class="answer-input" data-exercise="1" data-blank="1" autocomplete="off"> nuovo computer.
-                            </div>
-                            <div class="feedback" id="feedback-1"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 2 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: consonante semplice → UN</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                2. C'è <input type="text" class="answer-input" data-exercise="2" data-blank="0" autocomplete="off"> cane nel giardino e <input type="text" class="answer-input" data-exercise="2" data-blank="1" autocomplete="off"> gatto sul tetto.
-                            </div>
-                            <div class="feedback" id="feedback-2"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 3 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: consonante semplice → UN</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                3. Ho visto <input type="text" class="answer-input" data-exercise="3" data-blank="0" autocomplete="off"> bel film e <input type="text" class="answer-input" data-exercise="3" data-blank="1" autocomplete="off"> tavolo nuovo.
-                            </div>
-                            <div class="feedback" id="feedback-3"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 4 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: consonante semplice → UN</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                4. Mio figlio è <input type="text" class="answer-input" data-exercise="4" data-blank="0" autocomplete="off"> bambino felice e ha <input type="text" class="answer-input" data-exercise="4" data-blank="1" autocomplete="off"> pallone rosso.
-                            </div>
-                            <div class="feedback" id="feedback-4"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 5 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: consonante semplice → UN</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                5. Ho incontrato <input type="text" class="answer-input" data-exercise="5" data-blank="0" autocomplete="off"> medico e <input type="text" class="answer-input" data-exercise="5" data-blank="1" autocomplete="off"> professore ieri.
-                            </div>
-                            <div class="feedback" id="feedback-5"></div>
-                        </div>
-
-                        <!-- ESERCIZI 6-15: Maschile UNO -->
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 6 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: s+consonante → UNO</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                6. C'è <input type="text" class="answer-input" data-exercise="6" data-blank="0" autocomplete="off"> studente nuovo in classe e ha <input type="text" class="answer-input" data-exercise="6" data-blank="1" autocomplete="off"> zaino blu.
-                            </div>
-                            <div class="feedback" id="feedback-6"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 7 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: ps → UNO</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                7. Ho bisogno di <input type="text" class="answer-input" data-exercise="7" data-blank="0" autocomplete="off"> psicologo e <input type="text" class="answer-input" data-exercise="7" data-blank="1" autocomplete="off"> psichiatra.
-                            </div>
-                            <div class="feedback" id="feedback-7"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 8 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: gn → UNO</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                8. Ho mangiato <input type="text" class="answer-input" data-exercise="8" data-blank="0" autocomplete="off"> gnocco delizioso e <input type="text" class="answer-input" data-exercise="8" data-blank="1" autocomplete="off"> gnocco fritto.
-                            </div>
-                            <div class="feedback" id="feedback-8"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 9 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: y → UNO</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                9. Voglio comprare <input type="text" class="answer-input" data-exercise="9" data-blank="0" autocomplete="off"> yogurt e <input type="text" class="answer-input" data-exercise="9" data-blank="1" autocomplete="off"> yacht (se fossi ricco!).
-                            </div>
-                            <div class="feedback" id="feedback-9"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 10 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: x → UNO</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                10. Suono <input type="text" class="answer-input" data-exercise="10" data-blank="0" autocomplete="off"> xilofono e <input type="text" class="answer-input" data-exercise="10" data-blank="1" autocomplete="off"> xilofono antico.
-                            </div>
-                            <div class="feedback" id="feedback-10"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 11 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: s+consonante → UNO</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                11. Ho rotto <input type="text" class="answer-input" data-exercise="11" data-blank="0" autocomplete="off"> specchio e <input type="text" class="answer-input" data-exercise="11" data-blank="1" autocomplete="off"> sceriffo mi ha arrestato (scherzo!).
-                            </div>
-                            <div class="feedback" id="feedback-11"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 12 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: s+consonante → UNO</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                12. Ho comprato <input type="text" class="answer-input" data-exercise="12" data-blank="0" autocomplete="off"> smalto rosso e <input type="text" class="answer-input" data-exercise="12" data-blank="1" autocomplete="off"> sbaglio lo correggo subito.
-                            </div>
-                            <div class="feedback" id="feedback-12"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 13 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: z → UNO</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                13. Ho visto <input type="text" class="answer-input" data-exercise="13" data-blank="0" autocomplete="off"> zio ieri e <input type="text" class="answer-input" data-exercise="13" data-blank="1" autocomplete="off"> zero assoluto al totocalcio.
-                            </div>
-                            <div class="feedback" id="feedback-13"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 14 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: s+consonante → UNO</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                14. C'è <input type="text" class="answer-input" data-exercise="14" data-blank="0" autocomplete="off"> snodo stradale e <input type="text" class="answer-input" data-exercise="14" data-blank="1" autocomplete="off"> svedese al bar.
-                            </div>
-                            <div class="feedback" id="feedback-14"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 15 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: s+consonante → UNO</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                15. Ho fatto <input type="text" class="answer-input" data-exercise="15" data-blank="0" autocomplete="off"> sfondo nuovo per il telefono e <input type="text" class="answer-input" data-exercise="15" data-blank="1" autocomplete="off"> spagnolo mi ha aiutato.
-                            </div>
-                            <div class="feedback" id="feedback-15"></div>
-                        </div>
-
-                        <!-- ESERCIZI 16-20: Maschile con vocali (NO apostrofo!) -->
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 16 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: vocale → UN (NO apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                16. Ho <input type="text" class="answer-input" data-exercise="16" data-blank="0" autocomplete="off"> amico speciale e <input type="text" class="answer-input" data-exercise="16" data-blank="1" autocomplete="off"> elefante (di peluche).
-                            </div>
-                            <div class="feedback" id="feedback-16"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 17 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: vocale → UN (NO apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                17. Ho comprato <input type="text" class="answer-input" data-exercise="17" data-blank="0" autocomplete="off"> orologio svizzero e <input type="text" class="answer-input" data-exercise="17" data-blank="1" autocomplete="off"> ufficio nuovo.
-                            </div>
-                            <div class="feedback" id="feedback-17"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 18 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: vocale → UN (NO apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                18. Ho scritto <input type="text" class="answer-input" data-exercise="18" data-blank="0" autocomplete="off"> indirizzo sbagliato e <input type="text" class="answer-input" data-exercise="18" data-blank="1" autocomplete="off"> albero nel giardino.
-                            </div>
-                            <div class="feedback" id="feedback-18"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 19 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: vocale → UN (NO apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                19. Ho visto <input type="text" class="answer-input" data-exercise="19" data-blank="0" autocomplete="off"> uomo alto e <input type="text" class="answer-input" data-exercise="19" data-blank="1" autocomplete="off"> opera d'arte.
-                            </div>
-                            <div class="feedback" id="feedback-19"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 20 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Maschile: vocale → UN (NO apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                20. Ho <input type="text" class="answer-input" data-exercise="20" data-blank="0" autocomplete="off"> ingegnere in famiglia e <input type="text" class="answer-input" data-exercise="20" data-blank="1" autocomplete="off"> avvocato come amico.
-                            </div>
-                            <div class="feedback" id="feedback-20"></div>
-                        </div>
-
-                        <!-- ESERCIZI 21-30: Femminile UNA -->
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 21 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → UNA</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                21. Ho comprato <input type="text" class="answer-input" data-exercise="21" data-blank="0" autocomplete="off"> casa grande e <input type="text" class="answer-input" data-exercise="21" data-blank="1" autocomplete="off"> penna nuova.
-                            </div>
-                            <div class="feedback" id="feedback-21"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 22 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → UNA (anche s+cons!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                22. Frequento <input type="text" class="answer-input" data-exercise="22" data-blank="0" autocomplete="off"> scuola bella e sono <input type="text" class="answer-input" data-exercise="22" data-blank="1" autocomplete="off"> studentessa modello.
-                            </div>
-                            <div class="feedback" id="feedback-22"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 23 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → UNA (anche s+cons!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                23. Ho <input type="text" class="answer-input" data-exercise="23" data-blank="0" autocomplete="off"> macchina veloce e <input type="text" class="answer-input" data-exercise="23" data-blank="1" autocomplete="off"> bicicletta nuova.
-                            </div>
-                            <div class="feedback" id="feedback-23"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 24 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → UNA (anche z!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                24. Ho <input type="text" class="answer-input" data-exercise="24" data-blank="0" autocomplete="off"> zia simpatica e <input type="text" class="answer-input" data-exercise="24" data-blank="1" autocomplete="off"> zia che abita a Roma.
-                            </div>
-                            <div class="feedback" id="feedback-24"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 25 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → UNA (anche ps!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                25. Conosco <input type="text" class="answer-input" data-exercise="25" data-blank="0" autocomplete="off"> psicologa brava e <input type="text" class="answer-input" data-exercise="25" data-blank="1" autocomplete="off"> psicologa online.
-                            </div>
-                            <div class="feedback" id="feedback-25"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 26 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → UNA</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                26. Ho visto <input type="text" class="answer-input" data-exercise="26" data-blank="0" autocomplete="off"> bambina carina e <input type="text" class="answer-input" data-exercise="26" data-blank="1" autocomplete="off"> donna elegante.
-                            </div>
-                            <div class="feedback" id="feedback-26"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 27 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → UNA</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                27. Ho comprato <input type="text" class="answer-input" data-exercise="27" data-blank="0" autocomplete="off"> finestra nuova e <input type="text" class="answer-input" data-exercise="27" data-blank="1" autocomplete="off"> porta antica.
-                            </div>
-                            <div class="feedback" id="feedback-27"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 28 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → UNA</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                28. Ho <input type="text" class="answer-input" data-exercise="28" data-blank="0" autocomplete="off"> chiave inglese e <input type="text" class="answer-input" data-exercise="28" data-blank="1" autocomplete="off"> chiave per la porta.
-                            </div>
-                            <div class="feedback" id="feedback-28"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 29 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → UNA</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                29. Ho perso <input type="text" class="answer-input" data-exercise="29" data-blank="0" autocomplete="off"> borsa nuova e <input type="text" class="answer-input" data-exercise="29" data-blank="1" autocomplete="off"> carta d'identità.
-                            </div>
-                            <div class="feedback" id="feedback-29"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 30 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: consonante → UNA</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                30. Ho trovato <input type="text" class="answer-input" data-exercise="30" data-blank="0" autocomplete="off"> moneta antica e <input type="text" class="answer-input" data-exercise="30" data-blank="1" autocomplete="off"> moneta rara.
-                            </div>
-                            <div class="feedback" id="feedback-30"></div>
-                        </div>
-
-                        <!-- ESERCIZI 31-35: Femminile UN' (apostrofo) -->
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 31 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: vocale → UN' (con apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                31. Ho <input type="text" class="answer-input" data-exercise="31" data-blank="0" autocomplete="off"> amica speciale e <input type="text" class="answer-input" data-exercise="31" data-blank="1" autocomplete="off"> amica di infanzia.
-                            </div>
-                            <div class="feedback" id="feedback-31"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 32 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: vocale → UN' (con apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                32. Visito <input type="text" class="answer-input" data-exercise="32" data-blank="0" autocomplete="off"> isola greca e <input type="text" class="answer-input" data-exercise="32" data-blank="1" autocomplete="off"> isola tropicale.
-                            </div>
-                            <div class="feedback" id="feedback-32"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 33 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: vocale → UN' (con apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                33. Ho <input type="text" class="answer-input" data-exercise="33" data-blank="0" autocomplete="off"> ora libera e <input type="text" class="answer-input" data-exercise="33" data-blank="1" autocomplete="off"> ora per studiare.
-                            </div>
-                            <div class="feedback" id="feedback-33"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 34 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: vocale → UN' (con apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                34. Bevo <input type="text" class="answer-input" data-exercise="34" data-blank="0" autocomplete="off"> acqua fresca e <input type="text" class="answer-input" data-exercise="34" data-blank="1" autocomplete="off"> acqua minerale.
-                            </div>
-                            <div class="feedback" id="feedback-34"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 35 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Femminile: vocale → UN' (con apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                35. Ho comprato all'<input type="text" class="answer-input" data-exercise="35" data-blank="0" autocomplete="off"> edicola e ho visto <input type="text" class="answer-input" data-exercise="35" data-blank="1" autocomplete="off"> edicola nuova.
-                            </div>
-                            <div class="feedback" id="feedback-35"></div>
-                        </div>
-
-                        <!-- ESERCIZI 36-40: Plurale maschile DEI e DEGLI -->
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 36 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale maschile: UN → DEI</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                36. Ho comprato <input type="text" class="answer-input" data-exercise="36" data-blank="0" autocomplete="off"> libri interessanti e <input type="text" class="answer-input" data-exercise="36" data-blank="1" autocomplete="off"> cani da compagnia.
-                            </div>
-                            <div class="feedback" id="feedback-36"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 37 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale maschile: UNO → DEGLI</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                37. Ci sono <input type="text" class="answer-input" data-exercise="37" data-blank="0" autocomplete="off"> studenti nuovi e <input type="text" class="answer-input" data-exercise="37" data-blank="1" autocomplete="off"> zaini blu in classe.
-                            </div>
-                            <div class="feedback" id="feedback-37"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 38 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale maschile: UN (vocale) → DEGLI</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                38. Ho invitato <input type="text" class="answer-input" data-exercise="38" data-blank="0" autocomplete="off"> amici a cena e <input type="text" class="answer-input" data-exercise="38" data-blank="1" autocomplete="off"> elefanti allo zoo.
-                            </div>
-                            <div class="feedback" id="feedback-38"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 39 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale maschile: UNO → DEGLI</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                39. Ho visto <input type="text" class="answer-input" data-exercise="39" data-blank="0" autocomplete="off"> psicologi bravi e <input type="text" class="answer-input" data-exercise="39" data-blank="1" autocomplete="off"> gnocchi deliziosi al ristorante.
-                            </div>
-                            <div class="feedback" id="feedback-39"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 40 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale maschile: UNO → DEGLI</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                40. Ho comprato <input type="text" class="answer-input" data-exercise="40" data-blank="0" autocomplete="off"> yogurt alla frutta e <input type="text" class="answer-input" data-exercise="40" data-blank="1" autocomplete="off"> specchi nuovi.
-                            </div>
-                            <div class="feedback" id="feedback-40"></div>
-                        </div>
-
-                        <!-- ESERCIZI 41-50: Plurale femminile DELLE e misto -->
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 41 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre DELLE (NO apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                41. Ho visitato <input type="text" class="answer-input" data-exercise="41" data-blank="0" autocomplete="off"> case antiche e <input type="text" class="answer-input" data-exercise="41" data-blank="1" autocomplete="off"> isole bellissime.
-                            </div>
-                            <div class="feedback" id="feedback-41"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 42 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre DELLE (NO apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                42. Ho incontrato <input type="text" class="answer-input" data-exercise="42" data-blank="0" autocomplete="off"> amiche carine e <input type="text" class="answer-input" data-exercise="42" data-blank="1" autocomplete="off"> ore felici.
-                            </div>
-                            <div class="feedback" id="feedback-42"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 43 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre DELLE (NO apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                43. Ho bevuto <input type="text" class="answer-input" data-exercise="43" data-blank="0" autocomplete="off"> acque minerali e <input type="text" class="answer-input" data-exercise="43" data-blank="1" autocomplete="off"> acque termali.
-                            </div>
-                            <div class="feedback" id="feedback-43"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 44 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre DELLE (NO apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                44. Ho visto <input type="text" class="answer-input" data-exercise="44" data-blank="0" autocomplete="off"> edicole nuove e <input type="text" class="answer-input" data-exercise="44" data-blank="1" autocomplete="off"> idee interessanti.
-                            </div>
-                            <div class="feedback" id="feedback-44"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 45 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Plurale femminile: sempre DELLE (NO apostrofo!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                45. Ho comprato <input type="text" class="answer-input" data-exercise="45" data-blank="0" autocomplete="off"> penne colorate e <input type="text" class="answer-input" data-exercise="45" data-blank="1" autocomplete="off"> chiavi inglesi.
-                            </div>
-                            <div class="feedback" id="feedback-45"></div>
-                        </div>
-
-                        <!-- ESERCIZI MISTI FINALI -->
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 46 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Misto: UN (maschile vocale NO apostrofo!), DELLE</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                46. Ho <input type="text" class="answer-input" data-exercise="46" data-blank="0" autocomplete="off"> amico medico e <input type="text" class="answer-input" data-exercise="46" data-blank="1" autocomplete="off"> amiche infermiere.
-                            </div>
-                            <div class="feedback" id="feedback-46"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 47 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Misto: UNO, UN'</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                47. Ho incontrato <input type="text" class="answer-input" data-exercise="47" data-blank="0" autocomplete="off"> studente straniero e <input type="text" class="answer-input" data-exercise="47" data-blank="1" autocomplete="off"> studentessa italiana.
-                            </div>
-                            <div class="feedback" id="feedback-47"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 48 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Misto: DEGLI, DELLE</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                48. Ho invitato <input type="text" class="answer-input" data-exercise="48" data-blank="0" autocomplete="off"> amici italiani e <input type="text" class="answer-input" data-exercise="48" data-blank="1" autocomplete="off"> amiche spagnole.
-                            </div>
-                            <div class="feedback" id="feedback-48"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 49 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Misto: UNO, UNA (anche con s+cons!)</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                49. Ho visto <input type="text" class="answer-input" data-exercise="49" data-blank="0" autocomplete="off"> psicologo e <input type="text" class="answer-input" data-exercise="49" data-blank="1" autocomplete="off"> psicologa.
-                            </div>
-                            <div class="feedback" id="feedback-49"></div>
-                        </div>
-
-                        <div class="exercise-item">
-                            <div style="font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">Esercizio 50 (2 punti)</div>
-                            <div style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem;">💡 Misto: DEI, DELLE</div>
-                            <div style="font-size: 1.1rem; line-height: 2;">
-                                50. Ho comprato <input type="text" class="answer-input" data-exercise="50" data-blank="0" autocomplete="off"> libri di storia e <input type="text" class="answer-input" data-exercise="50" data-blank="1" autocomplete="off"> penne colorate.
-                            </div>
-                            <div class="feedback" id="feedback-50"></div>
-                        </div>
-                    </form>
-
-                    <div style="display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap;">
-                        <button onclick="calculateScore()" style="background: var(--primary); color: white; padding: 1rem 2rem; border: none; border-radius: 4px; cursor: pointer; font-size: 1.1rem; font-weight: bold;">
-                            📊 Calcola Punteggio
-                        </button>
-                        <button onclick="sendResults()" style="background: var(--accent); color: white; padding: 1rem 2rem; border: none; border-radius: 4px; cursor: pointer; font-size: 1.1rem; font-weight: bold;">
-                            📧 Invia Risultati via Email
-                        </button>
-                        <button onclick="resetExercises()" style="background: var(--secondary); color: white; padding: 1rem 2rem; border: none; border-radius: 4px; cursor: pointer; font-size: 1.1rem;">
-                            🔄 Reset
-                        </button>
-                    </div>
-
-                    <div id="resultsPanel" class="results-panel">
-                        <h3 style="color: var(--primary); margin-bottom: 1rem;">📈 Risultati della Valutazione</h3>
-                        <div class="score-display" id="scoreDisplay"></div>
-                        <div id="detailsDisplay" style="margin-top: 1rem;"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
-        <div style="max-width: 1200px; margin: 0 auto;">
-            <p>© 2024 Corso di Italiano A1 - Articoli Indeterminativi - Teoria Completa Multilingue</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Teoria disponibile in 18 lingue</p>
-        </div>
-    </footer>
-
-    <script>
-        // Dati degli esercizi con risposte corrette
-        const correctAnswers = {
-            1: ['un', 'un'],
-            2: ['un', 'un'],
-            3: ['un', 'un'],
-            4: ['un', 'un'],
-            5: ['un', 'un'],
-            6: ['uno', 'uno'],
-            7: ['uno', 'uno'],
-            8: ['uno', 'uno'],
-            9: ['uno', 'uno'],
-            10: ['uno', 'uno'],
-            11: ['uno', 'uno'],
-            12: ['uno', 'uno'],
-            13: ['uno', 'uno'],
-            14: ['uno', 'uno'],
-            15: ['uno', 'uno'],
-            16: ['un', 'un'],
-            17: ['un', 'un'],
-            18: ['un', 'un'],
-            19: ['un', 'un'],
-            20: ['un', 'un'],
-            21: ['una', 'una'],
-            22: ['una', 'una'],
-            23: ['una', 'una'],
-            24: ['una', 'una'],
-            25: ['una', 'una'],
-            26: ['una', 'una'],
-            27: ['una', 'una'],
-            28: ['una', 'una'],
-            29: ['una', 'una'],
-            30: ['una', 'una'],
-            31: ["un'", "un'"],
-            32: ["un'", "un'"],
-            33: ["un'", "un'"],
-            34: ["un'", "un'"],
-            35: ["un'", "un'"],
-            36: ['dei', 'dei'],
-            37: ['degli', 'degli'],
-            38: ['degli', 'degli'],
-            39: ['degli', 'degli'],
-            40: ['degli', 'degli'],
-            41: ['delle', 'delle'],
-            42: ['delle', 'delle'],
-            43: ['delle', 'delle'],
-            44: ['delle', 'delle'],
-            45: ['delle', 'delle'],
-            46: ['un', 'delle'],
-            47: ['uno', "un'"],
-            48: ['degli', 'delle'],
-            49: ['uno', 'una'],
-            50: ['dei', 'delle']
-        };
-
-        function toggleLang(header) {
-            const content = header.nextElementSibling;
-            const icon = header.querySelector('.toggle-icon');
-            content.classList.toggle('active');
-            icon.classList.toggle('rotated');
-        }
-
-        function showSection(id, btn) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
-            if(btn) btn.classList.add('active');
-        }
-
-        function calculateScore() {
-            let totalScore = 0;
-            let maxScore = 100;
-            let details = [];
-
-            for (let i = 1; i <= 50; i++) {
-                const inputs = document.querySelectorAll(`input[data-exercise="${i}"]`);
-                let exerciseScore = 0;
-                let correctAnswersForExercise = correctAnswers[i];
-
-                inputs.forEach((input, index) => {
-                    const userAnswer = input.value.trim().toLowerCase();
-                    const correctAnswer = correctAnswersForExercise[index];
-
-                    if (userAnswer === correctAnswer) {
-                        exerciseScore += 1;
-                        input.classList.add('correct');
-                        input.classList.remove('wrong');
-                    } else {
-                        input.classList.add('wrong');
-                        input.classList.remove('correct');
-                    }
-                });
-
-                totalScore += exerciseScore;
-
-                // Mostra feedback
-                const feedbackDiv = document.getElementById(`feedback-${i}`);
-                if (exerciseScore === 2) {
-                    feedbackDiv.innerHTML = '✅ Perfetto! (2/2 punti)';
-                    feedbackDiv.className = 'feedback correct show';
-                } else if (exerciseScore === 1) {
-                    feedbackDiv.innerHTML = '⚠️ Parzialmente corretto (1/2 punti)';
-                    feedbackDiv.className = 'feedback wrong show';
-                } else {
-                    feedbackDiv.innerHTML = `❌ Sbagliato (0/2 punti) - Risposte: ${correctAnswersForExercise.join(', ')}`;
-                    feedbackDiv.className = 'feedback wrong show';
-                }
-
-                details.push({
-                    exercise: i,
-                    score: exerciseScore,
-                    answers: correctAnswersForExercise
-                });
-            }
-
-            // Mostra pannello risultati
-            const resultsPanel = document.getElementById('resultsPanel');
-            const scoreDisplay = document.getElementById('scoreDisplay');
-            const detailsDisplay = document.getElementById('detailsDisplay');
-
-            resultsPanel.classList.add('show');
-
-            let scoreColor = totalScore >= 60 ? 'score-pass' : 'score-fail';
-            let message = totalScore >= 60 ? '🎉 COMPLIMENTI! Hai superato la prova!' : '❌ Non hai raggiunto la sufficienza (60/100). Riprova!';
-
-            scoreDisplay.innerHTML = `
-                <div class="${scoreColor}">${totalScore}/100 punti</div>
-                <div style="font-size: 1.2rem; margin-top: 0.5rem;">${message}</div>
-                <div style="font-size: 1rem; color: var(--secondary); margin-top: 0.5rem;">
-                    Esatte: ${details.filter(d => d.score === 2).length} | Parziali: ${details.filter(d => d.score === 1).length} | Sbagliate: ${details.filter(d => d.score === 0).length}
-                </div>
-            `;
-
-            // Scrolla ai risultati
-            resultsPanel.scrollIntoView({ behavior: 'smooth' });
-
-            return { totalScore, details };
-        }
-
-        function sendResults() {
-            const email = document.getElementById('studentEmail').value.trim();
-
-            if (!email) {
-                alert('⚠️ Per favore, inserisci la tua email prima di inviare i risultati.');
-                document.getElementById('studentEmail').focus();
-                return;
-            }
-
-            if (!email.includes('@') || !email.includes('.')) {
-                alert('⚠️ Inserisci un indirizzo email valido.');
-                return;
-            }
-
-            // Calcola il punteggio se non già fatto
-            let results;
-            const resultsPanel = document.getElementById('resultsPanel');
-            if (!resultsPanel.classList.contains('show')) {
-                results = calculateScore();
-            } else {
-                // Estrai il punteggio dal display
-                const scoreText = document.getElementById('scoreDisplay').textContent;
-                const scoreMatch = scoreText.match(/(\d+)\/100/);
-                const totalScore = scoreMatch ? parseInt(scoreMatch[1]) : 0;
-                results = { totalScore };
-            }
-
-            // Prepara i dati per l'invio
-            const formData = {
-                email: email,
-                score: results.totalScore,
-                maxScore: 100,
-                passed: results.totalScore >= 60,
-                timestamp: new Date().toLocaleString('it-IT'),
-                subject: 'Articoli Indeterminativi Italiani - Risultati Esercizi',
-                exerciseType: '50 esercizi (2 punti ciascuno)'
-            };
-
-            // Simula l'invio email (in produzione, questo chiamerebbe un backend)
-            console.log('Invio risultati a:', formData);
-
-            // Mostra conferma
-            const confirmationDiv = document.createElement('div');
-            confirmationDiv.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: #28a745;
-                color: white;
-                padding: 2rem;
-                border-radius: 8px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-                z-index: 1000;
-                text-align: center;
-                max-width: 400px;
-            `;
-            confirmationDiv.innerHTML = `
-                <div style="font-size: 3rem; margin-bottom: 1rem;">📧</div>
-                <h3 style="margin-bottom: 1rem;">Risultati Inviati!</h3>
-                <p>I risultati (${results.totalScore}/100) sono stati inviati a:</p>
-                <p style="font-weight: bold; margin: 1rem 0;">${email}</p>
-                <p style="font-size: 0.9rem; opacity: 0.9;">Data: ${formData.timestamp}</p>
-                <button onclick="this.parentElement.remove(); document.getElementById('emailOverlay').remove();" 
-                        style="margin-top: 1rem; padding: 0.5rem 1rem; background: white; color: #28a745; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
-                    Chiudi
-                </button>
-            `;
-
-            // Overlay scuro
-            const overlay = document.createElement('div');
-            overlay.id = 'emailOverlay';
-            overlay.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.5);
-                z-index: 999;
-            `;
-
-            document.body.appendChild(overlay);
-            document.body.appendChild(confirmationDiv);
-
-            // In un'implementazione reale, qui faresti una chiamata fetch al server:
-            /*
-            fetch('/api/send-results', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => console.log('Email inviata:', data))
-            .catch(error => console.error('Errore:', error));
-            */
-        }
-
-        function resetExercises() {
-            if (confirm('Sei sicuro di voler cancellare tutte le risposte?')) {
-                document.querySelectorAll('.answer-input').forEach(input => {
-                    input.value = '';
-                    input.classList.remove('correct', 'wrong');
-                });
-                document.querySelectorAll('.feedback').forEach(fb => {
-                    fb.classList.remove('show');
-                    fb.innerHTML = '';
-                });
-                document.getElementById('resultsPanel').classList.remove('show');
-                document.getElementById('studentEmail').value = '';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+<div style="margin:20px 0;background:#eee;border-radius:10px">
+<div id="progressBar2" style="height:18px;width:0%;background:#1e4f91;border-radius:10px"></div>
+</div>
+
+<p id="progressText2" style="text-align:center;font-size:14px">
+Completamento prova: 0%
+</p>
+
+<form id="exerciseForm2"></form>
+
+<div style="text-align:center;margin-top:30px">
+
+<button onclick="checkAnswers2()" type="button">
+Valuta la prova
+</button>
+
+<button onclick="sendExerciseEmail2()" type="button">
+Invia risultati al docente
+</button>
+
+</div>
+
+<p id="result2" style="text-align:center;font-size:18px;margin-top:20px"></p>
+
+</section>
+
+
+<script>
+
+/* DOMANDE */
+
+const questions2 = [
+
+"Ho ___ libro interessante",
+"Vedo ___ studente nuovo",
+"Porto ___ zaino pesante",
+"Incontro ___ psicologo gentile",
+"Nel bosco vive ___ gnomo",
+
+"Mangio ___ yogurt",
+"Ascolto ___ xilofono",
+"Parlo con ___ studente",
+"Ho ___ amico fidato",
+"Compro ___ orologio",
+
+"Lei è ___ amica cara",
+"Visitiamo ___ isola",
+"Bevo ___ acqua fresca",
+"Compro ___ edicola vicino casa",
+"Abitiamo in ___ casa grande",
+
+"Leggo ___ libro di storia",
+"Parlo con ___ studente straniero",
+"Ho ___ amico italiano",
+"Porto ___ zaino nuovo",
+"Consulto ___ psicologo",
+
+"Mangio ___ gnocco",
+"Bevo ___ yogurt alla fragola",
+"Compro ___ casa nuova",
+"Uso ___ penna blu",
+"Incontro ___ amica",
+
+"Vedo ___ cane",
+"Invito ___ amico",
+"Leggo ___ libro interessante",
+"Affitto ___ casa",
+"Incontro ___ studente",
+
+"Adotto ___ cane",
+"Telefono a ___ amico",
+"Consulto ___ psicologo",
+"Conosco ___ studente",
+"Compro ___ orologio",
+
+"Allo zoo vedo ___ elefante",
+"Invito ___ amico a cena",
+"Uso ___ tavolo rotondo",
+"Leggo ___ libro rosso",
+"Adotto ___ cane veloce",
+
+"Incontro ___ amico",
+"Osservo ___ studente",
+"Ascolto ___ psicologo",
+"Porto ___ zaino",
+"Invito ___ amica",
+
+"Compro ___ penna",
+"Leggo ___ libro",
+"Parlo con ___ studente",
+"Incontro ___ amica",
+"Affitto ___ casa"
+
+];
+
+
+/* RISPOSTE CORRETTE */
+
+const correct2 = [
+
+"un","uno","uno","uno","uno",
+"uno","uno","uno","un","un",
+"un'","un'","un'","un'","una",
+"un","uno","un","uno","uno",
+"uno","uno","una","una","un'",
+"un","un","un","una","uno",
+"un","un","uno","uno","un",
+"un","un","un","un","un",
+"un","uno","uno","uno","un'",
+"una","un","uno","un'","una"
+
+];
+
+
+/* ORDINE CASUALE */
+
+let order2=[...Array(questions2.length).keys()];
+order2.sort(()=>Math.random()-0.5);
+
+
+/* CREA DOMANDE */
+
+let form2=document.getElementById("exerciseForm2");
+
+order2.forEach((i,n)=>{
+
+let p=document.createElement("p");
+
+p.innerHTML=(n+1)+". "+questions2[i]+
+' <input type="text" data-correct="'+correct2[i]+'" class="answer2">';
+
+form2.appendChild(p);
+
+});
+
+
+/* BARRA AVANZAMENTO */
+
+document.querySelectorAll(".answer2").forEach(input=>{
+input.addEventListener("input",updateProgress2);
+});
+
+function updateProgress2(){
+
+let total=document.querySelectorAll(".answer2").length;
+let filled=0;
+
+document.querySelectorAll(".answer2").forEach(i=>{
+if(i.value!="") filled++;
+});
+
+let percent=Math.round((filled/total)*100);
+
+document.getElementById("progressBar2").style.width=percent+"%";
+
+document.getElementById("progressText2").innerHTML=
+"Completamento prova: "+percent+"%";
+
+}
+
+
+/* CORREZIONE */
+
+function checkAnswers2(){
+
+let answers=document.querySelectorAll(".answer2");
+
+let correctCount=0;
+
+answers.forEach(input=>{
+
+let user=input.value.toLowerCase().trim();
+let correct=input.dataset.correct;
+
+if(user==correct){
+
+correctCount++;
+
+input.style.background="#d4edda";
+input.style.border="2px solid green";
+
+}else{
+
+input.style.background="#f8d7da";
+input.style.border="2px solid red";
+
+if(!input.nextElementSibling){
+
+let span=document.createElement("span");
+
+span.style.marginLeft="10px";
+span.style.color="red";
+span.style.fontSize="14px";
+
+span.innerHTML=" (risposta corretta: "+correct+")";
+
+input.parentNode.appendChild(span);
+
+}
+
+}
+
+});
+
+let score=Math.round((correctCount/answers.length)*100);
+
+let message="Punteggio ottenuto: "+score+" / 100";
+
+if(score>=60){
+
+message+="<br><strong>Esito: prova superata</strong>";
+
+}else{
+
+message+="<br><strong>Esito: prova non superata</strong>";
+
+}
+
+document.getElementById("result2").innerHTML=message;
+
+}
+
+
+/* EMAIL */
+
+function sendExerciseEmail2(){
+
+let name=document.getElementById("studentName2").value;
+
+let answers="Studente: "+name+"\n\n";
+
+let inputs=document.querySelectorAll(".answer2");
+
+inputs.forEach((input,index)=>{
+answers+="Domanda "+(index+1)+": "+input.value+"\n";
+});
+
+let subject="Verifica articoli indeterminativi A1";
+
+let body=encodeURIComponent(answers);
+
+let teacher="infonefelieducation@gmail.com";
+
+window.location.href=`mailto:${teacher}?subject=${subject}&body=${body}`;
+
+}
+
+</script>
         }
     </script>
 </body>
