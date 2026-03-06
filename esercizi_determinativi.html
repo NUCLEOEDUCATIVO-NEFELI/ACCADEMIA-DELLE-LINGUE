@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articoli Determinativi - Esercizi Scelta Multipla (50 Domande)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .instructions {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .progress-container {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .progress-label {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar-outer {
+            width: 100%;
+            height: 30px;
+            background: var(--light);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--b1-color) 0%, var(--primary) 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .score-display {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-box {
+            text-align: center;
+        }
+
+        .score-label-small {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .exercise-card {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .exercise-number {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border: 1px solid var(--error);
+        }
+
+        .btn-next {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+
+        .btn-next:hover {
+            background: #002147;
+            transform: translateY(-2px);
+        }
+
+        .final-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            text-align: center;
+            display: none;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .final-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .final-score {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+
+        .evaluation {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+
+        .evaluation.passed {
+            background: var(--success);
+            color: white;
+        }
+
+        .evaluation.failed {
+            background: var(--error);
+            color: white;
+        }
+
+        .email-btn {
+            background: var(--b1-color);
+            color: #000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 1.5rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .email-btn:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .main-container { padding: 1rem; }
+            .exercise-card { padding: 1.5rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .final-score { font-size: 3rem; }
+            .header h1 { font-size: 1.4rem; }
+            .score-display { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>📰 Articoli Determinativi - Esercizi a Scelta Multipla</h1>
+        <p>50 domande | Il, Lo, La, L', I, Gli, Le | 2 punti a domanda | Max 100 punti</p>
+    </header>
+
+    <main class="main-container">
+        <div class="instructions">
+            <strong>Istruzioni:</strong> Scegli l'articolo determinativo corretto. Ricorda: <strong>il</strong> (consonante), <strong>lo</strong> (s+consonante, z, gn, ps, y), <strong>la</strong> (femminile), <strong>l'</strong> (vocale), <strong>i</strong> (plurale maschile), <strong>gli</strong> (plurale maschile con vocale/s+consonante/z), <strong>le</strong> (plurale femminile). Ogni risposta corretta vale 2 punti. Per superare la prova devi ottenere almeno 60 punti.
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Avanzamento Esercizi</div>
+            <div class="progress-bar-outer">
+                <div class="progress-bar-inner" id="progressBar">0%</div>
+            </div>
+            <div class="score-display">
+                <div class="score-box">
+                    <div class="score-label-small">Domanda</div>
+                    <div class="score-value" id="questionNum">1/50</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label-small">Punteggio</div>
+                    <div class="score-value" id="currentScore">0/100</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label-small">Corrette</div>
+                    <div class="score-value" id="correctCount">0/50</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="exerciseContainer">
+            <!-- Esercizi caricati dinamicamente -->
+        </div>
+
+        <div class="final-section" id="finalSection">
+            <h2>🎉 Hai completato tutti gli esercizi!</h2>
+            <div class="final-score" id="finalScore">0/100</div>
+            <div id="evaluationBox" class="evaluation"></div>
+            <p id="finalMessage"></p>
+            
+            <button class="email-btn" id="emailBtn" onclick="sendResults()">
+                📧 Invia Risultati via Email
+            </button>
+            
+            <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                Clicca per inviare il tuo punteggio a infonefelieducation@gmail.com
+            </div>
+            
+            <button class="btn-next" onclick="restartExercise()" style="margin-top: 2rem;">
+                🔄 Riprova Tutti gli Esercizi
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // 50 esercizi a scelta multipla sugli ARTICOLI DETERMINATIVI
+        const exercises = [
+            // IL - maschile singolare consonante semplice (1-10)
+            { id: 1, question: "________ libro è sul tavolo.", options: ["Il", "Lo", "La", "L'"], correct: "Il" },
+            { id: 2, question: "________ cane abbaia forte.", options: ["Il", "Lo", "La", "L'"], correct: "Il" },
+            { id: 3, question: "________ professore spiega bene.", options: ["Il", "Lo", "La", "L'"], correct: "Il" },
+            { id: 4, question: "________ treno arriva alle 9.", options: ["Il", "Lo", "La", "L'"], correct: "Il" },
+            { id: 5, question: "________ mare è calmo oggi.", options: ["Il", "Lo", "La", "L'"], correct: "Il" },
+            { id: 6, question: "________ pane è fresco.", options: ["Il", "Lo", "La", "L'"], correct: "Il" },
+            { id: 7, question: "________ bambino gioca nel parco.", options: ["Il", "Lo", "La", "L'"], correct: "Il" },
+            { id: 8, question: "________ tavolo è di legno.", options: ["Il", "Lo", "La", "L'"], correct: "Il" },
+            { id: 9, question: "________ problema è difficile.", options: ["Il", "Lo", "La", "L'"], correct: "Il" },
+            { id: 10, question: "________ caffè è pronto.", options: ["Il", "Lo", "La", "L'"], correct: "Il" },
+
+            // LO - maschile singolare s+consonante, z, gn, ps, y (11-18)
+            { id: 11, question: "________ studente studia medicina.", options: ["Lo", "Il", "La", "L'"], correct: "Lo" },
+            { id: 12, question: "________ zio abita a Roma.", options: ["Lo", "Il", "La", "L'"], correct: "Lo" },
+            { id: 13, question: "________ psicologo riceve pazienti.", options: ["Lo", "Il", "La", "L'"], correct: "Lo" },
+            { id: 14, question: "________ gnomo è una statua.", options: ["Lo", "Il", "La", "L'"], correct: "Lo" },
+            { id: 15, question: "________ yacht è enorme.", options: ["Lo", "Il", "La", "L'"], correct: "Lo" },
+            { id: 16, question: "________ specchio è rotto.", options: ["Lo", "Il", "La", "L'"], correct: "Lo" },
+            { id: 17, question: "________ sbaglio è grave.", options: ["Lo", "Il", "La", "L'"], correct: "Lo" },
+            { id: 18, question: "________ zoo ha molti animali.", options: ["Lo", "Il", "La", "L'"], correct: "Lo" },
+
+            // LA - femminile singolare (19-26)
+            { id: 19, question: "________ casa è grande.", options: ["La", "Il", "Lo", "L'"], correct: "La" },
+            { id: 20, question: "________ penna non scrive.", options: ["La", "Il", "Lo", "L'"], correct: "La" },
+            { id: 21, question: "________ scuola è nuova.", options: ["La", "Il", "Lo", "L'"], correct: "La" },
+            { id: 22, question: "________ macchina è veloce.", options: ["La", "Il", "Lo", "L'"], correct: "La" },
+            { id: 23, question: "________ donna legge il giornale.", options: ["La", "Il", "Lo", "L'"], correct: "La" },
+            { id: 24, question: "________ pizza è buonissima.", options: ["La", "Il", "Lo", "L'"], correct: "La" },
+            { id: 25, question: "________ chiave è perduta.", options: ["La", "Il", "Lo", "L'"], correct: "La" },
+            { id: 26, question: "________ sera fa freddo.", options: ["La", "Il", "Lo", "L'"], correct: "La" },
+
+            // L' - maschile e femminile singolare vocale (27-32)
+            { id: 27, question: "________ amico viene stasera.", options: ["L'", "Il", "Lo", "La"], correct: "L'" },
+            { id: 28, question: "________ acqua è fredda.", options: ["L'", "Il", "Lo", "La"], correct: "L'" },
+            { id: 29, question: "________ ospedale è vicino.", options: ["L'", "Il", "Lo", "La"], correct: "L'" },
+            { id: 30, question: "________ isola è bellissima.", options: ["L'", "Il", "Lo", "La"], correct: "L'" },
+            { id: 31, question: "________ uomo lavora molto.", options: ["L'", "Il", "Lo", "La"], correct: "L'" },
+            { id: 32, question: "________ erba è verde.", options: ["L'", "Il", "Lo", "La"], correct: "L'" },
+
+            // I - maschile plurale consonante semplice (33-38)
+            { id: 33, question: "________ libri sono pesanti.", options: ["I", "Gli", "Le", "Il"], correct: "I" },
+            { id: 34, question: "________ cani corrono veloci.", options: ["I", "Gli", "Le", "Il"], correct: "I" },
+            { id: 35, question: "________ treni sono in ritardo.", options: ["I", "Gli", "Le", "Il"], correct: "I" },
+            { id: 36, question: "________ bambini giocano.", options: ["I", "Gli", "Le", "Il"], correct: "I" },
+            { id: 37, question: "________ problemi sono tanti.", options: ["I", "Gli", "Le", "Il"], correct: "I" },
+            { id: 38, question: "________ professore spiegano bene.", options: ["I", "Gli", "Le", "Il"], correct: "I" },
+
+            // GLI - maschile plurale vocale, s+consonante, z, gn, ps, y (39-44)
+            { id: 39, question: "________ amici vengono stasera.", options: ["Gli", "I", "Le", "Il"], correct: "Gli" },
+            { id: 40, question: "________ studenti sono bravi.", options: ["Gli", "I", "Le", "Il"], correct: "Gli" },
+            { id: 41, question: "________ zii abitano a Milano.", options: ["Gli", "I", "Le", "Il"], correct: "Gli" },
+            { id: 42, question: "________ psicologi studiano la mente.", options: ["Gli", "I", "Le", "Il"], correct: "Gli" },
+            { id: 43, question: "________ uomini lavorano qui.", options: ["Gli", "I", "Le", "Il"], correct: "Gli" },
+            { id: 44, question: "________ specchi sono nuovi.", options: ["Gli", "I", "Le", "Il"], correct: "Gli" },
+
+            // LE - femminile plurale (45-50)
+            { id: 45, question: "________ case sono grandi.", options: ["Le", "La", "I", "Gli"], correct: "Le" },
+            { id: 46, question: "________ donne parlano forte.", options: ["Le", "La", "I", "Gli"], correct: "Le" },
+            { id: 47, question: "________ macchine sono veloci.", options: ["Le", "La", "I", "Gli"], correct: "Le" },
+            { id: 48, question: "________ chiavi sono perse.", options: ["Le", "La", "I", "Gli"], correct: "Le" },
+            { id: 49, question: "________ scuole sono chiuse.", options: ["Le", "La", "I", "Gli"], correct: "Le" },
+            { id: 50, question: "________ isole sono tropicali.", options: ["Le", "L'", "I", "Gli"], correct: "Le" }
+        ];
+
+        let currentExercise = 0;
+        let correctAnswers = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalResults();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            // Aggiorna progresso
+            const progress = ((currentExercise / exercises.length) * 100).toFixed(0);
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressBar').textContent = progress + '%';
+            document.getElementById('questionNum').textContent = (currentExercise + 1) + '/50';
+            
+            answered = false;
+
+            // Mischia le opzioni
+            const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
+
+            let optionsHtml = '';
+            shuffledOptions.forEach(opt => {
+                const safeOpt = opt.replace(/'/g, "&#39;");
+                optionsHtml += `<button class="option-btn" onclick="checkAnswer('${safeOpt}')" data-value="${safeOpt}">${opt}</button>`;
+            });
+
+            container.innerHTML = `
+                <div class="exercise-card">
+                    <div class="exercise-number">Esercizio ${ex.id} di 50</div>
+                    <div class="question-text">${ex.question}</div>
+                    <div class="options-grid" id="optionsGrid">
+                        ${optionsHtml}
+                    </div>
+                    <div class="feedback" id="feedback"></div>
+                    <div style="text-align: center; display: none;" id="nextContainer">
+                        <button class="btn-next" onclick="nextExercise()">Prossima Domanda →</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function checkAnswer(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextContainer');
+
+            const decodedSelected = selected.replace(/&#39;/g, "'");
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                const btnValue = btn.dataset.value.replace(/&#39;/g, "'");
+                if (btnValue === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btnValue === decodedSelected && decodedSelected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            if (decodedSelected === ex.correct) {
+                correctAnswers++;
+                totalScore += 2;
+                feedback.className = 'feedback show correct';
+                feedback.textContent = '✅ Corretto!';
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato! La risposta corretta è: <strong>${ex.correct}</strong>`;
+            }
+
+            document.getElementById('currentScore').textContent = totalScore + '/100';
+            document.getElementById('correctCount').textContent = correctAnswers + '/50';
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalResults() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('progressBar').style.width = '100%';
+            document.getElementById('progressBar').textContent = '100%';
+            document.getElementById('questionNum').textContent = '50/50';
+            
+            const finalSection = document.getElementById('finalSection');
+            const evaluationBox = document.getElementById('evaluationBox');
+            const finalMessage = document.getElementById('finalMessage');
+            
+            finalSection.classList.add('show');
+            document.getElementById('finalScore').textContent = totalScore + '/100';
+            
+            if (totalScore >= 60) {
+                evaluationBox.className = 'evaluation passed';
+                evaluationBox.innerHTML = `✅ SUPERATO! Hai ottenuto ${totalScore} punti su 100`;
+                finalMessage.innerHTML = `Complimenti! Hai risposto correttamente a <strong>${correctAnswers}</strong> domande su 50.`;
+            } else {
+                evaluationBox.className = 'evaluation failed';
+                evaluationBox.innerHTML = `❌ NON SUPERATO. Hai ottenuto ${totalScore} punti su 100 (minimo 60)`;
+                finalMessage.innerHTML = `Hai risposto correttamente a <strong>${correctAnswers}</strong> domande su 50.<br>Ricorda: <strong>lo/gli</strong> per s+consonante, z, gn, ps, y, vocale!`;
+            }
+        }
+
+        function sendResults() {
+            const status = totalScore >= 60 ? 'SUPERATO' : 'NON SUPERATO';
+            const subject = `Risultato Esercizi Articoli Determinativi - ${status}`;
+            const body = `Ciao,%0D%0A%0D%0AHo completato gli esercizi sugli Articoli Determinativi.%0D%0A%0D%0ARisultato:%0D%0A- Punteggio: ${totalScore}/100 punti%0D%0A- Risposte corrette: ${correctAnswers}/50%0D%0A- Stato: ${status}%0D%0A- Minimo richiesto: 60 punti%0D%0A%0D%0AGrazie!`;
+            
+            window.location.href = `mailto:infonefelieducation@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+        }
+
+        function restartExercise() {
+            currentExercise = 0;
+            correctAnswers = 0;
+            totalScore = 0;
+            answered = false;
+            
+            // Mischia gli esercizi
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('progressBar').textContent = '0%';
+            document.getElementById('currentScore').textContent = '0/100';
+            document.getElementById('correctCount').textContent = '0/50';
+            
+            loadExercise();
+        }
+
+        // Inizializza
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mischia gli esercizi all'inizio
+            exercises.sort(() => Math.random() - 0.5);
+            loadExercise();
+        });
+    </script>
+</body>
+</html>
