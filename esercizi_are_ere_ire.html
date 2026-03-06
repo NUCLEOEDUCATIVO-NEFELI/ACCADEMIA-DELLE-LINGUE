@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verbi in ARE ERE IRE - Esercizi Scelta Multipla (50 Domande)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --b1-color: #c9a227;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #276749;
+            --success-bg: #c6f6d5;
+            --error: #c53030;
+            --error-bg: #fed7d7;
+            --parchment: #faf8f3;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--b1-color);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .instructions {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .progress-container {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .progress-label {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar-outer {
+            width: 100%;
+            height: 30px;
+            background: var(--light);
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--b1-color) 0%, var(--primary) 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .score-display {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-box {
+            text-align: center;
+        }
+
+        .score-label-small {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .exercise-card {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .exercise-number {
+            background: var(--b1-color);
+            color: #000;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border: 1px solid var(--error);
+        }
+
+        .btn-next {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+
+        .btn-next:hover {
+            background: #002147;
+            transform: translateY(-2px);
+        }
+
+        .final-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            text-align: center;
+            display: none;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .final-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .final-score {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b1-color);
+            margin: 20px 0;
+        }
+
+        .evaluation {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+
+        .evaluation.passed {
+            background: var(--success);
+            color: white;
+        }
+
+        .evaluation.failed {
+            background: var(--error);
+            color: white;
+        }
+
+        .email-btn {
+            background: var(--b1-color);
+            color: #000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 1.5rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .email-btn:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .main-container { padding: 1rem; }
+            .exercise-card { padding: 1.5rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .final-score { font-size: 3rem; }
+            .header h1 { font-size: 1.4rem; }
+            .score-display { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <h1>📝 Verbi in ARE ERE IRE - Esercizi a Scelta Multipla</h1>
+        <p>50 domande | Prima coniugazione (-ARE), Seconda (-ERE), Terza (-IRE) | 2 punti a domanda | Max 100 punti</p>
+    </header>
+
+    <main class="main-container">
+        <div class="instructions">
+            <strong>Istruzioni:</strong> Scegli la forma corretta del verbo. Ricorda: <strong>-ARE</strong> (parlare: parlo, parli, parla, parliamo, parlate, parlano) | <strong>-ERE</strong> (vedere: vedo, vedi, vede, vediamo, vedete, vedono) | <strong>-IRE</strong> (dormire: dormo, dormi, dorme, dormiamo, dormite, dormono / capire: capisco, capisci, capisce, capiamo, capite, capiscono). Ogni risposta corretta vale 2 punti. Per superare la prova devi ottenere almeno 60 punti.
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">Avanzamento Esercizi</div>
+            <div class="progress-bar-outer">
+                <div class="progress-bar-inner" id="progressBar">0%</div>
+            </div>
+            <div class="score-display">
+                <div class="score-box">
+                    <div class="score-label-small">Domanda</div>
+                    <div class="score-value" id="questionNum">1/50</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label-small">Punteggio</div>
+                    <div class="score-value" id="currentScore">0/100</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label-small">Corrette</div>
+                    <div class="score-value" id="correctCount">0/50</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="exerciseContainer">
+            <!-- Esercizi caricati dinamicamente -->
+        </div>
+
+        <div class="final-section" id="finalSection">
+            <h2>🎉 Hai completato tutti gli esercizi!</h2>
+            <div class="final-score" id="finalScore">0/100</div>
+            <div id="evaluationBox" class="evaluation"></div>
+            <p id="finalMessage"></p>
+            
+            <button class="email-btn" id="emailBtn" onclick="sendResults()">
+                📧 Invia Risultati via Email
+            </button>
+            
+            <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                Clicca per inviare il tuo punteggio a infonefelieducation@gmail.com
+            </div>
+            
+            <button class="btn-next" onclick="restartExercise()" style="margin-top: 2rem;">
+                🔄 Riprova Tutti gli Esercizi
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // 50 esercizi a scelta multipla sui verbi in ARE ERE IRE
+        const exercises = [
+            // VERBI IN -ARE (1-18): parlare, mangiare, studiare, lavorare, abitare, amare, guardare, ascoltare, comprare, cercare, entrare, pensare, portare, arrivare, guardare, telefonare, insegnare, viaggiare
+            { id: 1, question: "Io ________ italiano con il professore.", options: ["parlo", "parli", "parla", "parlano"], correct: "parlo" },
+            { id: 2, question: "Tu ________ la pizza ogni sabato.", options: ["mangi", "mangio", "mangia", "mangiamo"], correct: "mangi" },
+            { id: 3, question: "Lei ________ medicina all'università.", options: ["studia", "studio", "studi", "studiamo"], correct: "studia" },
+            { id: 4, question: "Noi ________ in un ufficio grande.", options: ["lavoriamo", "lavoro", "lavora", "lavorano"], correct: "lavoriamo" },
+            { id: 5, question: "Voi ________ a Roma da molti anni.", options: ["abitate", "abito", "abiti", "abitano"], correct: "abitate" },
+            { id: 6, question: "Loro ________ molto la loro famiglia.", options: ["amano", "amo", "ami", "ama"], correct: "amano" },
+            { id: 7, question: "Io ________ sempre la televisione la sera.", options: ["guardo", "guardi", "guarda", "guardano"], correct: "guardo" },
+            { id: 8, question: "Tu ________ la musica classica?", options: ["ascolti", "ascolto", "ascolta", "ascoltano"], correct: "ascolti" },
+            { id: 9, question: "Marco ________ il pane al supermercato.", options: ["compra", "compro", "compri", "comprano"], correct: "compra" },
+            { id: 10, question: "Noi ________ un nuovo appartamento.", options: ["cerchiamo", "cerco", "cerchi", "cercano"], correct: "cerchiamo" },
+            { id: 11, question: "Voi ________ sempre in ritardo alla lezione.", options: ["entrate", "entro", "entri", "entrano"], correct: "entrate" },
+            { id: 12, question: "Io ________ che sia una buona idea.", options: ["penso", "pensi", "pensa", "pensano"], correct: "penso" },
+            { id: 13, question: "Tu ________ sempre i tuoi libri a scuola.", options: ["porti", "porto", "porta", "portano"], correct: "porti" },
+            { id: 14, question: "Il treno ________ alle 15:30 in punto.", options: ["arriva", "arrivo", "arrivi", "arrivano"], correct: "arriva" },
+            { id: 15, question: "Loro ________ il tramonto dal balcone.", options: ["guardano", "guardo", "guardi", "guarda"], correct: "guardano" },
+            { id: 16, question: "Io ________ a mia madre ogni domenica.", options: ["telefono", "telefoni", "telefona", "telefonano"], correct: "telefono" },
+            { id: 17, question: "Noi ________ storia in una scuola superiore.", options: ["insegniamo", "insegno", "insegni", "insegnano"], correct: "insegniamo" },
+            { id: 18, question: "Voi ________ molto per lavoro?", options: ["viaggiate", "viaggio", "viaggi", "viaggiano"], correct: "viaggiate" },
+
+            // VERBI IN -ERE (19-32): vedere, bere, leggere, scrivere, mettere, prendere, vivere, sapere, conoscere, chiudere, aprire, ripetere, decidere, perdere, rispondere, correre
+            { id: 19, question: "Io ________ un film al cinema stasera.", options: ["vedo", "vedi", "vede", "vedono"], correct: "vedo" },
+            { id: 20, question: "Tu ________ sempre il caffè al bar.", options: ["bevi", "bevo", "beve", "bevono"], correct: "bevi" },
+            { id: 21, question: "Lei ________ molti libri ogni anno.", options: ["legge", "leggo", "leggi", "leggono"], correct: "legge" },
+            { id: 22, question: "Noi ________ una lettera al direttore.", options: ["scriviamo", "scrivo", "scrivi", "scrivono"], correct: "scriviamo" },
+            { id: 23, question: "Voi ________ sempre la musica troppo alta.", options: ["mettete", "metto", "metti", "mettono"], correct: "mettete" },
+            { id: 24, question: "Loro ________ l'autobus alle 8:00.", options: ["prendono", "prendo", "prendi", "prende"], correct: "prendono" },
+            { id: 25, question: "Io ________ in una piccola città di mare.", options: ["vivo", "vivi", "vive", "vivono"], correct: "vivo" },
+            { id: 26, question: "Tu ________ cucinare molto bene.", options: ["sai", "so", "sa", "sanno"], correct: "sai" },
+            { id: 27, question: "Maria ________ tutti i negozi del centro.", options: ["conosce", "conosco", "conosci", "conoscono"], correct: "conosce" },
+            { id: 28, question: "Noi ________ la porta con la chiave.", options: ["chiudiamo", "chiudo", "chiudi", "chiudono"], correct: "chiudiamo" },
+            { id: 29, question: "Voi ________ il negozio alle 9:00.", options: ["aprite", "apro", "apri", "aprono"], correct: "aprite" },
+            { id: 30, question: "Io ________ sempre la stessa domanda.", options: ["ripeto", "ripeti", "ripete", "ripetono"], correct: "ripeto" },
+            { id: 31, question: "Tu ________ di partire domani mattina.", options: ["decidi", "decido", "decide", "decidono"], correct: "decidi" },
+            { id: 32, question: "Loro ________ spesso il portafoglio.", options: ["perdono", "perdo", "perdi", "perde"], correct: "perdono" },
+
+            // VERBI IN -IRE (33-42): dormire, capire, finire, preferire, pulire, spedire, costruire, seguire, sentire, aprire
+            { id: 33, question: "Io ________ otto ore ogni notte.", options: ["dormo", "dormi", "dorme", "dormono"], correct: "dormo" },
+            { id: 34, question: "Tu ________ la lezione di italiano?", options: ["capisci", "capisco", "capisce", "capiscono"], correct: "capisci" },
+            { id: 35, question: "Lei ________ sempre i compiti prima di cena.", options: ["finisce", "finisco", "finisci", "finiscono"], correct: "finisce" },
+            { id: 36, question: "Noi ________ il teatro al cinema.", options: ["preferiamo", "preferisco", "preferisci", "preferisce"], correct: "preferiamo" },
+            { id: 37, question: "Voi ________ la casa ogni sabato.", options: ["pulite", "pulisco", "pulisci", "puliscono"], correct: "pulite" },
+            { id: 38, question: "Loro ________ le lettere con il corriere.", options: ["spediscono", "spedisco", "spedisci", "spedisce"], correct: "spediscono" },
+            { id: 39, question: "Io ________ una casa in campagna.", options: ["costruisco", "costruisci", "costruisce", "costruiscono"], correct: "costruisco" },
+            { id: 40, question: "Tu ________ un corso di ballo?", options: ["segui", "seguo", "segue", "seguono"], correct: "segui" },
+            { id: 41, question: "Mia nonna non ________ bene da un orecchio.", options: ["sente", "sento", "senti", "sentono"], correct: "sente" },
+            { id: 42, question: "Noi ________ sempre la finestra di mattina.", options: ["apriamo", "apro", "apri", "aprono"], correct: "apriamo" },
+
+            // MIX DIFFICILI (43-50)
+            { id: 43, question: "Io non ________ mai la verità.", options: ["dico", "dici", "dice", "dicono"], correct: "dico" },
+            { id: 44, question: "Tu ________ sempre i tuoi problemi agli altri.", options: ["racconti", "racconto", "racconta", "raccontano"], correct: "racconti" },
+            { id: 45, question: "Lei ________ molto bene il francese.", options: ["parla", "parlo", "parli", "parlano"], correct: "parla" },
+            { id: 46, question: "Noi ________ spesso al ristorante cinese.", options: ["mangiamo", "mangio", "mangi", "mangiano"], correct: "mangiamo" },
+            { id: 47, question: "Voi ________ sempre le stesse cose.", options: ["dite", "dico", "dici", "dicono"], correct: "dite" },
+            { id: 48, question: "Loro ________ il treno per Milano.", options: ["prendono", "prendo", "prendi", "prende"], correct: "prendono" },
+            { id: 49, question: "Io ________ molto stanco questa sera.", options: ["sono", "ho", "sto", "sto"], correct: "sono" },
+            { id: 50, question: "Tu ________ dove abita Marco?", options: ["sai", "so", "sa", "sanno"], correct: "sai" }
+        ];
+
+        let currentExercise = 0;
+        let correctAnswers = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalResults();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            // Aggiorna progresso
+            const progress = ((currentExercise / exercises.length) * 100).toFixed(0);
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressBar').textContent = progress + '%';
+            document.getElementById('questionNum').textContent = (currentExercise + 1) + '/50';
+            
+            answered = false;
+
+            // Mischia le opzioni
+            const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
+
+            let optionsHtml = '';
+            shuffledOptions.forEach(opt => {
+                const safeOpt = opt.replace(/'/g, "&#39;");
+                optionsHtml += `<button class="option-btn" onclick="checkAnswer('${safeOpt}')" data-value="${safeOpt}">${opt}</button>`;
+            });
+
+            container.innerHTML = `
+                <div class="exercise-card">
+                    <div class="exercise-number">Esercizio ${ex.id} di 50</div>
+                    <div class="question-text">${ex.question}</div>
+                    <div class="options-grid" id="optionsGrid">
+                        ${optionsHtml}
+                    </div>
+                    <div class="feedback" id="feedback"></div>
+                    <div style="text-align: center; display: none;" id="nextContainer">
+                        <button class="btn-next" onclick="nextExercise()">Prossima Domanda →</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function checkAnswer(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextContainer');
+
+            const decodedSelected = selected.replace(/&#39;/g, "'");
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                const btnValue = btn.dataset.value.replace(/&#39;/g, "'");
+                if (btnValue === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btnValue === decodedSelected && decodedSelected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            if (decodedSelected === ex.correct) {
+                correctAnswers++;
+                totalScore += 2;
+                feedback.className = 'feedback show correct';
+                feedback.textContent = '✅ Corretto!';
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Sbagliato! La risposta corretta è: <strong>${ex.correct}</strong>`;
+            }
+
+            document.getElementById('currentScore').textContent = totalScore + '/100';
+            document.getElementById('correctCount').textContent = correctAnswers + '/50';
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalResults() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('progressBar').style.width = '100%';
+            document.getElementById('progressBar').textContent = '100%';
+            document.getElementById('questionNum').textContent = '50/50';
+            
+            const finalSection = document.getElementById('finalSection');
+            const evaluationBox = document.getElementById('evaluationBox');
+            const finalMessage = document.getElementById('finalMessage');
+            
+            finalSection.classList.add('show');
+            document.getElementById('finalScore').textContent = totalScore + '/100';
+            
+            if (totalScore >= 60) {
+                evaluationBox.className = 'evaluation passed';
+                evaluationBox.innerHTML = `✅ SUPERATO! Hai ottenuto ${totalScore} punti su 100`;
+                finalMessage.innerHTML = `Complimenti! Hai risposto correttamente a <strong>${correctAnswers}</strong> domande su 50.`;
+            } else {
+                evaluationBox.className = 'evaluation failed';
+                evaluationBox.innerHTML = `❌ NON SUPERATO. Hai ottenuto ${totalScore} punti su 100 (minimo 60)`;
+                finalMessage.innerHTML = `Hai risposto correttamente a <strong>${correctAnswers}</strong> domande su 50.<br>Ricorda: <strong>-ARE</strong> (o-a-i-iamo-ate-ano) | <strong>-ERE</strong> (o-i-e-iamo-ete-ono) | <strong>-IRE</strong> (o-i-e-iamo-ite-ono /isco-isci-isce-iamo-ite-iscono)!`;
+            }
+        }
+
+        function sendResults() {
+            const status = totalScore >= 60 ? 'SUPERATO' : 'NON SUPERATO';
+            const subject = `Risultato Esercizi Verbi ARE ERE IRE - ${status}`;
+            const body = `Ciao,%0D%0A%0D%0AHo completato gli esercizi sui Verbi in ARE ERE IRE.%0D%0A%0D%0ARisultato:%0D%0A- Punteggio: ${totalScore}/100 punti%0D%0A- Risposte corrette: ${correctAnswers}/50%0D%0A- Stato: ${status}%0D%0A- Minimo richiesto: 60 punti%0D%0A%0D%0AGrazie!`;
+            
+            window.location.href = `mailto:infonefelieducation@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+        }
+
+        function restartExercise() {
+            currentExercise = 0;
+            correctAnswers = 0;
+            totalScore = 0;
+            answered = false;
+            
+            // Mischia gli esercizi
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('progressBar').textContent = '0%';
+            document.getElementById('currentScore').textContent = '0/100';
+            document.getElementById('correctCount').textContent = '0/50';
+            
+            loadExercise();
+        }
+
+        // Inizializza
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mischia gli esercizi all'inizio
+            exercises.sort(() => Math.random() - 0.5);
+            loadExercise();
+        });
+    </script>
+</body>
+</html>
