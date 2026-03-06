@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preposizioni Articolate - Italiano A1 (50 Esercizi)</title>
+    <title>Preposizioni Articolate - Italiano A1 (50 Esercizi) - Multilingue</title>
     <style>
         * {
             margin: 0;
@@ -88,7 +88,7 @@
         }
 
         .main-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -196,6 +196,59 @@
             padding: 1rem 1.5rem;
             margin: 1rem 0;
             font-size: 0.95rem;
+        }
+
+        .lang-selector {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .lang-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .lang-btn:hover {
+            background: var(--light);
+            border-color: var(--primary);
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .theory-content {
+            display: none;
+        }
+
+        .theory-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .lang-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--b1-color);
         }
 
         .prep-grid {
@@ -458,6 +511,31 @@
         .mt-2 { margin-top: 1rem; }
         .mb-2 { margin-bottom: 1rem; }
 
+        .grammar-box {
+            background: #f0f8ff;
+            border: 1px solid #b0d4f1;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: var(--light);
+            font-weight: bold;
+        }
+
         @media (max-width: 768px) {
             .nav-tabs { flex-wrap: wrap; }
             .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
@@ -466,6 +544,7 @@
             .header h1 { font-size: 1.5rem; }
             .page-title { font-size: 1.5rem; }
             .final-score-value { font-size: 3rem; }
+            .lang-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 <base target="_blank">
@@ -491,98 +570,846 @@
     <main class="main-container">
         <div class="page-header">
             <h1 class="page-title">📚 Preposizioni Articolate</h1>
-            <p class="page-subtitle">Fonetica e Morfologia: unione di preposizioni e articoli con 50 esercizi</p>
+            <p class="page-subtitle">Fonetica e Morfologia: unione di preposizioni e articoli con 50 esercizi multilingue</p>
         </div>
 
         <nav class="nav-tabs">
-            <button class="nav-tab active" onclick="showSection('theory', this)">📖 Teoria</button>
+            <button class="nav-tab active" onclick="showSection('theory', this)">📖 Teoria / Theory</button>
             <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Esercizi (50)</button>
         </nav>
 
-        <!-- SEZIONE TEORIA -->
+        <!-- SEZIONE TEORIA MULTILINGUE -->
         <section id="theory" class="section active">
-            <div class="card">
-                <div class="card-header">Definizione e Formazione</div>
-                <div class="card-body">
-                    <div class="instruction-box">
-                        <strong>Definizione:</strong> Le preposizioni articolate nascono dall'unione di una preposizione semplice (di, a, da, in, su) con un articolo determinativo. Questa fusione è regolata da leggi fonetiche specifiche.
+            <div class="lang-selector">
+                <h3>Seleziona la tua lingua / Select your language:</h3>
+                <div class="lang-grid">
+                    <button class="lang-btn active" onclick="showLanguage('it', this)">🇮🇹 Italiano</button>
+                    <button class="lang-btn" onclick="showLanguage('en', this)">🇬🇧 English</button>
+                    <button class="lang-btn" onclick="showLanguage('fr', this)">🇫🇷 Français</button>
+                    <button class="lang-btn" onclick="showLanguage('es', this)">🇪🇸 Español</button>
+                    <button class="lang-btn" onclick="showLanguage('pt', this)">🇵🇹 Português</button>
+                    <button class="lang-btn" onclick="showLanguage('pa', this)">🇮🇳 ਪੰਜਾਬੀ (Panjabi)</button>
+                    <button class="lang-btn" onclick="showLanguage('bm', this)">🇲🇱 Bambara</button>
+                    <button class="lang-btn" onclick="showLanguage('wo', this)">🇸🇳 Wolof</button>
+                    <button class="lang-btn" onclick="showLanguage('zh', this)">🇨🇳 中文 (Cinese)</button>
+                    <button class="lang-btn" onclick="showLanguage('fil', this)">🇵🇭 Filipino</button>
+                    <button class="lang-btn" onclick="showLanguage('ar', this)">🇸🇦 العربية (Arabo)</button>
+                    <button class="lang-btn" onclick="showLanguage('sq', this)">🇦🇱 Shqip (Albanese)</button>
+                    <button class="lang-btn" onclick="showLanguage('mk', this)">🇲🇰 Македонски (Macedone)</button>
+                    <button class="lang-btn" onclick="showLanguage('ha', this)">🇳🇬 Hausa</button>
+                    <button class="lang-btn" onclick="showLanguage('man', this)">🇬🇲 Mandinka</button>
+                    <button class="lang-btn" onclick="showLanguage('sw', this)">🇹🇿 Kiswahili</button>
+                    <button class="lang-btn" onclick="showLanguage('ur', this)">🇵🇰 اردو (Urdu)</button>
+                    <button class="lang-btn" onclick="showLanguage('ps', this)">🇦🇫 پښتو (Pashto)</button>
+                    <button class="lang-btn" onclick="showLanguage('hi', this)">🇮🇳 हिंदी (Hindi)</button>
+                </div>
+            </div>
+
+            <!-- ITALIANO -->
+            <div id="lang-it" class="theory-content active">
+                <div class="card">
+                    <div class="card-header">Definizione e Formazione</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Le Preposizioni Articolate in Italiano</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Definizione:</strong> Le preposizioni articolate nascono dall'unione di una preposizione semplice (di, a, da, in, su) con un articolo determinativo. Questa fusione è regolata da leggi fonetiche specifiche ed è obbligatoria in italiano.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Regole Fondamentali:</h4>
+                            <ul>
+                                <li><strong>DI</strong> (possesso, origine): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (direzione, luogo): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (provenienza): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (stato in luogo): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (posizione sopra): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Note fonetiche:</strong> La preposizione <em>in</em> subisce elisione della vocale iniziale davanti a tutti gli articoli, divenendo <strong>n-</strong> (nel, nello, nella, negli, nelle). Questo fenomeno è noto come "assimilazione parziale". Si usa <strong>lo/gli</strong> davanti a parole che iniziano per: z, y, gn, ps, s+consonante, i+vocale.
+                        </div>
+
+                        <div class="prep-grid">
+                            <div class="prep-table">
+                                <div class="prep-title">DI + Articolo</div>
+                                <ul class="contract-list">
+                                    <li>di + il = <strong>del</strong> libro</li>
+                                    <li>di + lo = <strong>dello</strong> studente</li>
+                                    <li>di + la = <strong>della</strong> casa</li>
+                                    <li>di + l' = <strong>dell'</strong>amico</li>
+                                    <li>di + i = <strong>dei</strong> ragazzi</li>
+                                    <li>di + gli = <strong>degli</strong> studenti</li>
+                                    <li>di + le = <strong>delle</strong> case</li>
+                                </ul>
+                            </div>
+
+                            <div class="prep-table">
+                                <div class="prep-title">A + Articolo</div>
+                                <ul class="contract-list">
+                                    <li>a + il = <strong>al</strong> cinema</li>
+                                    <li>a + lo = <strong>allo</strong> stadio</li>
+                                    <li>a + la = <strong>alla</strong> stazione</li>
+                                    <li>a + l' = <strong>all'</strong>ospedale</li>
+                                    <li>a + i = <strong>ai</strong> giovani</li>
+                                    <li>a + gli = <strong>agli</strong> amici</li>
+                                    <li>a + le = <strong>alle</strong> donne</li>
+                                </ul>
+                            </div>
+
+                            <div class="prep-table">
+                                <div class="prep-title">DA + Articolo</div>
+                                <ul class="contract-list">
+                                    <li>da + il = <strong>dal</strong> medico</li>
+                                    <li>da + lo = <strong>dallo</strong> psicologo</li>
+                                    <li>da + la = <strong>dalla</strong> Francia</li>
+                                    <li>da + l' = <strong>dall'</strong>Italia</li>
+                                    <li>da + i = <strong>dai</strong> genitori</li>
+                                    <li>da + gli = <strong>dagli</strong> zii</li>
+                                    <li>da + le = <strong>dalle</strong> signore</li>
+                                </ul>
+                            </div>
+
+                            <div class="prep-table">
+                                <div class="prep-title">IN + Articolo</div>
+                                <ul class="contract-list">
+                                    <li>in + il = <strong>nel</strong> parco</li>
+                                    <li>in + lo = <strong>nello</strong> studio</li>
+                                    <li>in + la = <strong>nella</strong> scatola</li>
+                                    <li>in + l' = <strong>nell'</strong>armadio</li>
+                                    <li>in + i = <strong>nei</strong> negozi</li>
+                                    <li>in + gli = <strong>negli</strong> uffici</li>
+                                    <li>in + le = <strong>nelle</strong> città</li>
+                                </ul>
+                            </div>
+
+                            <div class="prep-table">
+                                <div class="prep-title">SU + Articolo</div>
+                                <ul class="contract-list">
+                                    <li>su + il = <strong>sul</strong> tavolo</li>
+                                    <li>su + lo = <strong>sullo</strong> scaffale</li>
+                                    <li>su + la = <strong>sulla</strong> sedia</li>
+                                    <li>su + l' = <strong>sull'</strong>aereo</li>
+                                    <li>su + i = <strong>sui</strong> libri</li>
+                                    <li>su + gli = <strong>sugli</strong> alberi</li>
+                                    <li>su + le = <strong>sulle</strong> montagne</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="prep-grid">
-                        <div class="prep-table">
-                            <div class="prep-title">DI + Articolo</div>
-                            <ul class="contract-list">
-                                <li>di + il = <strong>del</strong> libro</li>
-                                <li>di + lo = <strong>dello</strong> studente</li>
-                                <li>di + la = <strong>della</strong> casa</li>
-                                <li>di + l' = <strong>dell'</strong>amico</li>
-                                <li>di + i = <strong>dei</strong> ragazzi</li>
-                                <li>di + gli = <strong>degli</strong> studenti</li>
-                                <li>di + le = <strong>delle</strong> case</li>
+            <!-- ENGLISH -->
+            <div id="lang-en" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Definition and Formation</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Articulated Prepositions in Italian</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Definition:</strong> Articulated prepositions are formed by combining a simple preposition (di, a, da, in, su) with a definite article. This fusion is governed by specific phonetic laws and is mandatory in Italian. Unlike English, Italian cannot separate the preposition from the article.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Fundamental Rules:</h4>
+                            <p>In English, we say "of the" or "to the" as separate words. In Italian, these <strong>must</strong> combine into single words:</p>
+                            <ul>
+                                <li><strong>DI</strong> (of/from): di + il = del (of the), di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (to/at): a + il = al (to the), a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (from/by): da + il = dal (from the), da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (in): in + il = nel (in the), in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (on): su + il = sul (on the), su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
                             </ul>
                         </div>
 
-                        <div class="prep-table">
-                            <div class="prep-title">A + Articolo</div>
-                            <ul class="contract-list">
-                                <li>a + il = <strong>al</strong> cinema</li>
-                                <li>a + lo = <strong>allo</strong> stadio</li>
-                                <li>a + la = <strong>alla</strong> stazione</li>
-                                <li>a + l' = <strong>all'</strong>ospedale</li>
-                                <li>a + i = <strong>ai</strong> giovani</li>
-                                <li>a + gli = <strong>agli</strong> amici</li>
-                                <li>a + le = <strong>alle</strong> donne</li>
-                            </ul>
+                        <div class="note-box">
+                            <strong>Phonetic Note:</strong> The preposition <em>in</em> loses its initial vowel when combined with articles, becoming <strong>n-</strong> (nel, nello, nella, negli, nelle). This is called "partial assimilation." Use <strong>lo/gli</strong> before words starting with: z, y, gn, ps, s+consonant, i+vowel.
                         </div>
 
-                        <div class="prep-table">
-                            <div class="prep-title">DA + Articolo</div>
-                            <ul class="contract-list">
-                                <li>da + il = <strong>dal</strong> medico</li>
-                                <li>da + lo = <strong>dallo</strong> psicologo</li>
-                                <li>da + la = <strong>dalla</strong> Francia</li>
-                                <li>da + l' = <strong>dall'</strong>Italia</li>
-                                <li>da + i = <strong>dai</strong> genitori</li>
-                                <li>da + gli = <strong>dagli</strong> zii</li>
-                                <li>da + le = <strong>dalle</strong> signore</li>
-                            </ul>
-                        </div>
-
-                        <div class="prep-table">
-                            <div class="prep-title">IN + Articolo</div>
-                            <ul class="contract-list">
-                                <li>in + il = <strong>nel</strong> parco</li>
-                                <li>in + lo = <strong>nello</strong> studio</li>
-                                <li>in + la = <strong>nella</strong> scatola</li>
-                                <li>in + l' = <strong>nell'</strong>armadio</li>
-                                <li>in + i = <strong>nei</strong> negozi</li>
-                                <li>in + gli = <strong>negli</strong> uffici</li>
-                                <li>in + le = <strong>nelle</strong> città</li>
-                            </ul>
-                        </div>
-
-                        <div class="prep-table">
-                            <div class="prep-title">SU + Articolo</div>
-                            <ul class="contract-list">
-                                <li>su + il = <strong>sul</strong> tavolo</li>
-                                <li>su + lo = <strong>sullo</strong> scaffale</li>
-                                <li>su + la = <strong>sulla</strong> sedia</li>
-                                <li>su + l' = <strong>sull'</strong>aereo</li>
-                                <li>su + i = <strong>sui</strong> libri</li>
-                                <li>su + gli = <strong>sugli</strong> alberi</li>
-                                <li>su + le = <strong>sulle</strong> montagne</li>
+                        <div class="grammar-box">
+                            <h4>Key Differences from English:</h4>
+                            <ul>
+                                <li>English: "I go to the cinema" (3 words) → Italian: "Vado al cinema" (2 words)</li>
+                                <li>English: "The book is on the table" (5 words) → Italian: "Il libro è sul tavolo" (4 words)</li>
+                                <li>English: "I'm from the USA" (4 words) → Italian: "Vengo dagli USA" (2 words)</li>
                             </ul>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="note-box">
-                        <strong>Note fonetiche:</strong> La preposizione <em>in</em> subisce elisione della vocale iniziale davanti a tutti gli articoli, divenendo <strong>n-</strong> (nel, nello, nella, negli, nelle). Questo fenomeno è noto come "assimilazione parziale".
+            <!-- FRANÇAIS -->
+            <div id="lang-fr" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Définition et Formation</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Les Prépositions Articulées en Italien</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Définition:</strong> Les prépositions articulées naissent de l'union d'une préposition simple (di, a, da, in, su) avec un article défini. Cette fusion est régie par des lois phonétiques spécifiques et est obligatoire en italien. Contrairement au français où nous séparons "à le" en "au", l'italien va plus loin dans la contraction.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Règles Fondamentales:</h4>
+                            <p>En français, nous avons des contractions simples comme "au" (à + le) et "aux" (à + les). En italien, ce système est beaucoup plus développé:</p>
+                            <ul>
+                                <li><strong>DI</strong> (de): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (à): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (de/depuis): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (dans): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelles</li>
+                                <li><strong>SU</strong> (sur): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Note Phonétique:</strong> La préposition <em>in</em> subit l'élision de la voyelle initiale devant tous les articles, devenant <strong>n-</strong> (nel, nello, nella, negli, nelles). On utilise <strong>lo/gli</strong> devant les mots commençant par: z, y, gn, ps, s+consonne, i+voyelle.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Comparaison avec le Français:</h4>
+                            <table class="comparison-table">
+                                <tr><th>Français</th><th>Italien</th></tr>
+                                <tr><td>Je vais au cinéma</td><td>Vado al cinema</td></tr>
+                                <tr><td>Le livre est sur la table</td><td>Il libro è sul tavolo</td></tr>
+                                <tr><td>Je viens de l'Italie</td><td>Vengo dall'Italia</td></tr>
+                                <tr><td>Dans le parc</td><td>Nel parco</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESPAÑOL -->
+            <div id="lang-es" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Definición y Formación</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Las Preposiciones Articuladas en Italiano</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Definición:</strong> Las preposiciones articuladas nacen de la unión de una preposición simple (di, a, da, in, su) con un artículo determinado. Esta fusión está regulada por leyes fonéticas específicas y es obligatoria en italiano. A diferencia del español, el italiano contrae todas estas preposiciones con los artículos.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Reglas Fundamentales:</h4>
+                            <p>En español tenemos contracciones como "al" (a + el) y "del" (de + el). En italiano, este sistema se extiende a cinco preposiciones y múltiples formas:</p>
+                            <ul>
+                                <li><strong>DI</strong> (de): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (a): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (desde/de): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (en): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (sobre): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Nota Fonética:</strong> La preposición <em>in</em> sufre elisión de la vocal inicial ante todos los artículos, convirtiéndose en <strong>n-</strong> (nel, nello, nella, negli, nelle). Se usa <strong>lo/gli</strong> ante palabras que empiezan por: z, y, gn, ps, s+consonante, i+vocal.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Comparación con el Español:</h4>
+                            <p>El español y el italiano comparten las contracciones "al" y "del", pero el italiano va mucho más allá:</p>
+                            <ul>
+                                <li>Español: "Voy al cine" = Italiano: "Vado al cinema" ✓ (igual)</li>
+                                <li>Español: "Vengo de la casa" (sin contracción) = Italiano: "Vengo dalla casa" (con contracción obligatoria)</li>
+                                <li>Español: "Estoy en el parque" = Italiano: "Sono nel parco" (in + il = nel)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PORTUGUÊS -->
+            <div id="lang-pt" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Definição e Formação</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">As Preposições Articuladas em Italiano</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Definição:</strong> As preposições articuladas nascem da união de uma preposição simples (di, a, da, in, su) com um artigo definido. Esta fusão é regulada por leis fonéticas específicas e é obrigatória em italiano. Embora o português tenha contrações como "no" (em + o) e "na" (em + a), o italiano tem um sistema muito mais extenso.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Regras Fundamentais:</h4>
+                            <ul>
+                                <li><strong>DI</strong> (de): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (a): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (de/desde): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (em): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (sobre): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Nota Fonética:</strong> A preposição <em>in</em> sofre elisão da vogal inicial diante de todos os artigos, tornando-se <strong>n-</strong> (nel, nello, nella, negli, nelle). Usa-se <strong>lo/gli</strong> diante de palavras iniciadas por: z, y, gn, ps, s+consoante, i+vogal.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Comparação com o Português:</h4>
+                            <p>O português contrai "em" com artigos (no, na, nos, nas), mas o italiano contrai cinco preposições diferentes:</p>
+                            <table class="comparison-table">
+                                <tr><th>Português</th><th>Italiano</th></tr>
+                                <tr><td>No parque (em + o)</td><td>Nel parco (in + il)</td></tr>
+                                <tr><td>Na casa (em + a)</td><td>Nella casa (in + la)</td></tr>
+                                <tr><td>Do médico (de + o)</td><td>Dal medico (da + il)</td></tr>
+                                <tr><td>À escola (a + a)</td><td>Alla scuola (a + la)</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANJABI -->
+            <div id="lang-pa" class="theory-content">
+                <div class="card">
+                    <div class="card-header">ਪਰਿਭਾਸ਼ਾ ਅਤੇ ਬਣਤਰ</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">ਇਤਾਲਵੀ ਵਿੱਚ ਸੰਯੁਕਤ ਸੰਬੰਧਕ (Preposizioni Articolate)</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>ਪਰਿਭਾਸ਼ਾ:</strong> ਸੰਯੁਕਤ ਸੰਬੰਧਕ ਸਰਲ ਸੰਬੰਧਕ (di, a, da, in, su) ਅਤੇ ਨਿਰਧਾਰਕ ਲੇਖ (articolo determinativo) ਦੇ ਮਿਲਾਪ ਤੋਂ ਬਣਦੇ ਹਨ। ਇਹ ਮਿਲਾਪ ਖਾਸ ਧੁਨਿਕ ਨਿਯਮਾਂ ਅਨੁਸਾਰ ਹੁੰਦਾ ਹੈ ਅਤੇ ਇਤਾਲਵੀ ਵਿੱਚ ਲਾਜ਼ਮੀ ਹੈ।
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>ਮੁੱਢਲੇ ਨਿਯਮ:</h4>
+                            <ul>
+                                <li><strong>DI</strong (ਦਾ/ਤੋਂ): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (ਨੂੰ/ਤੇ): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (ਤੋਂ): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (ਵਿੱਚ): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (ਤੇ/ਉੱਤੇ): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>ਧੁਨਿਕ ਨੋਟ:</strong> ਸੰਬੰਧਕ <em>in</em> ਸਾਰੇ ਲੇਖਾਂ ਦੇ ਸਾਹਮਣੇ ਆਪਣੀ ਸ਼ੁਰੂਆਤੀ ਸਵਰ ਗੁਆ ਦਿੰਦਾ ਹੈ, ਅਤੇ <strong>n-</strong> ਬਣ ਜਾਂਦਾ ਹੈ (nel, nello, nella, negli, nelle)। <strong>lo/gli</strong> ਉਨ੍ਹਾਂ ਸ਼ਬਦਾਂ ਤੋਂ ਪਹਿਲਾਂ ਵਰਤੋ ਜੋ ਇਨ੍ਹਾਂ ਨਾਲ ਸ਼ੁਰੂ ਹੁੰਦੇ ਹਨ: z, y, gn, ps, s+ਵਿਅੰਜਨ, i+ਸਵਰ।
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>ਉਦਾਹਰਨਾਂ:</h4>
+                            <ul>
+                                <li>ਮੈਂ ਸਿਨੇਮਾ ਜਾਂਦਾ ਹਾਂ - Vado al cinema</li>
+                                <li>ਕਿਤਾਬ ਮੇਜ਼ ਉੱਤੇ ਹੈ - Il libro è sul tavolo</li>
+                                <li>ਮੈਂ ਡਾਕਟਰ ਕੋਲੋਂ ਆਇਆ ਹਾਂ - Vengo dal medico</li>
+                                <li>ਉਹ ਪਾਰਕ ਵਿੱਚ ਹੈ - È nel parco</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BAMBARA -->
+            <div id="lang-bm" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Bayɛlɛmali ni Bɛnkan</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Italienkan na Preposizioni Articulate (Jɛkulu-ɲɛfɛlaw)</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Bayɛlɛmali:</strong> Preposizioni articulatenw (jɛkulu-ɲɛfɛlaw) bɛ bɔ jɛkulu dɔdɔdaw ni artikulu determinatifw (ɲɛfɛlaw) yɛrɛbɔli la. O bɛ kɛ ɲɛmɔgɔya fɔnɛtiki dɔw cɛma, wa Italienkan na o ye fɛn ye min kan ka kɛ.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Fanga Jɛkuluw:</h4>
+                            <ul>
+                                <li><strong>DI</strong> (ka/la): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (fɛ/ma): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (bɔ): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (kɔnɔ): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (kan): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Fɔnɛtiiki Kibaruya:</strong> Jɛkulu <em>in</em> bɛ a daminɛkɛra balali bolo artikulu bɛɛ ɲɛfɛ, a bɛ kɛ <strong>n-</strong> ye (nel, nello, nella, negli, nelle). Aw ye <strong>lo/gli</strong> kɛ kuma minnu bɛ daminɛ ni: z, y, gn, ps, s+fɔlɔfɔlɔ, i+balali.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Minnu Bɛ Se Ka Kɛ:</h4>
+                            <ul>
+                                <li>N bɛ taa sinema la - Vado al cinema</li>
+                                <li>Gafe bɛ tabulo kan - Il libro è sul tavolo</li>
+                                <li>N bɛ bɔ dokotoro fɛ - Vengo dal medico</li>
+                                <li>A bɛ parki kɔnɔ - È nel parco</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WOLOF -->
+            <div id="lang-wo" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Teksifiy ak Dajale</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Preposizioni Articolate yi ci Italien</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Teksifiy:</strong> Preposizioni articulate yi dañuy siiw ci bokkoom benn preposizione wu yàqu (di, a, da, in, su) ak benn article determinatif. Bokk bi dafay jëm ci yoon yu am solo yi, te wàajal na ci làkk Italien.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Yoon Yu Am Solo Yi:</h4>
+                            <ul>
+                                <li><strong>DI</strong> (boole/bii): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (ci/à): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (gàddu/gi): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (ci biir): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (kaw): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Xelal Fonetik:</strong> Preposizione <em>in</em> dafay leen a yoonu baat bu njëkk yi article yi, dafay komaat <strong>n-</strong> (nel, nello, nella, negli, nelle). Jëfandikoo <strong>lo/gli</strong> ci kàddu yi di tambali ak: z, y, gn, ps, s+xar, i+baat bu sell.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Paragraf yi:</h4>
+                            <ul>
+                                <li>Dama dem sinema - Vado al cinema</li>
+                                <li>Téere bi nekk na kaw taabal bi - Il libro è sul tavolo</li>
+                                <li>Dama jëm ci doktër bi - Vengo dal medico</li>
+                                <li>Moom nekk na ci park bi - È nel parco</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中文 (CINESE) -->
+            <div id="lang-zh" class="theory-content">
+                <div class="card">
+                    <div class="card-header">定义与构成</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">意大利语中的缩合前置词 (Preposizioni Articolate)</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>定义：</strong>缩合前置词是由简单前置词（di, a, da, in, su）与定冠词结合而成的。这种融合遵循特定的语音规则，在意大利语中是强制性的。与汉语不同，意大利语必须将前置词与冠词合并。
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>基本规则：</h4>
+                            <ul>
+                                <li><strong>DI</strong>（的/从）：di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong>（到/在）：a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong>（从/由）：da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong>（在...里）：in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong>（在...上）：su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>语音注释：</strong>前置词<em>in</em>在所有冠词前都会失去首元音，变成<strong>n-</strong>（nel, nello, nella, negli, nelle）。这被称为"部分同化"现象。在以下开头的单词前使用<strong>lo/gli</strong>：z, y, gn, ps, s+辅音, i+元音。
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>与汉语的比较：</h4>
+                            <p>汉语使用独立的介词和量词，而意大利语必须将它们合并：</p>
+                            <ul>
+                                <li>汉语："去电影院"（3个词）→ 意大利语："Vado al cinema"（2个词，al = a + il）</li>
+                                <li>汉语："书在桌子上"（5个词）→ 意大利语："Il libro è sul tavolo"（4个词，sul = su + il）</li>
+                                <li>汉语："我从医生那里来"（6个词）→ 意大利语："Vengo dal medico"（3个词，dal = da + il）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILIPINO -->
+            <div id="lang-fil" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Kahulugan at Pagbuo</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Mga Artikulong Preposisyon sa Italyano</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Kahulugan:</strong> Ang mga artikulong preposisyon ay nabubuo sa pamamagitan ng pagsasanib ng isang simpleng preposisyon (di, a, da, in, su) at isang tiyak na pantukoy (articolo determinativo). Ang pagsasanib na ito ay sinusunod ng mga tiyak na batas sa ponetika at sapilitan sa wikang Italyano.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Pangunahing mga Tuntunin:</h4>
+                            <ul>
+                                <li><strong>DI</strong> (ng/mula sa): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (sa/patungo sa): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (mula sa/galing sa): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (sa loob ng): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (sa ibabaw ng): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Tala sa Ponetika:</strong> Ang preposisyon na <em>in</em> ay nawawalan ng unang patinig sa harap ng lahat ng pantukoy, at nagiging <strong>n-</strong> (nel, nello, nella, negli, nelle). Gamitin ang <strong>lo/gli</strong> sa harap ng mga salitang nagsisimula sa: z, y, gn, ps, s+katinig, i+patinig.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Mga Halimbawa:</h4>
+                            <ul>
+                                <li>Pupunta ako sa sinehan - Vado al cinema</li>
+                                <li>Nasa ibabaw ng mesa ang libro - Il libro è sul tavolo</li>
+                                <li>Galing ako sa doktor - Vengo dal medico</li>
+                                <li>Nasa loob siya ng parke - È nel parco</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARABO -->
+            <div id="lang-ar" class="theory-content" dir="rtl">
+                <div class="card">
+                    <div class="card-header" style="text-align: right;">التعريف والتكوين</div>
+                    <div class="card-body" style="text-align: right;">
+                        <h2 class="lang-title" style="text-align: right;">حروف الجر المركبة في الإيطالية</h2>
+                        
+                        <div class="instruction-box" style="text-align: right;">
+                            <strong>التعريف:</strong> حروف الجر المركبة (Preposizioni Articolate) تتشكل من اتحاد حرف جر بسيط (di, a, da, in, su) مع أداة تعريف. هذا الاتحاد يخضع لقواعد صوتية محددة وإلزامي في اللغة الإيطالية.
+                        </div>
+
+                        <div class="grammar-box" style="text-align: right;">
+                            <h4>القواعد الأساسية:</h4>
+                            <ul style="list-style-position: inside;">
+                                <li><strong>DI</strong> (ال/of): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (إلى/at): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (من/from): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (في/in): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (على/on): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box" style="text-align: right;">
+                            <strong>ملاحظة صوتية:</strong> حرف الجر <em>in</em> يفقد حرف العلة الأولي أمام جميع أدوات التعريف، ويصبح <strong>n-</strong> (nel, nello, nella, negli, nelle). يُستخدم <strong>lo/gli</strong> أمام الكلمات التي تبدأ بـ: z, y, gn, ps, s+حرف ساكن, i+حرف علة.
+                        </div>
+
+                        <div class="grammar-box" style="text-align: right;">
+                            <h4>أمثلة:</h4>
+                            <ul style="list-style-position: inside;">
+                                <li>أذهب إلى السينما - Vado al cinema</li>
+                                <li>الكتاب على الطاولة - Il libro è sul tavolo</li>
+                                <li>أنا قادم من الطبيب - Vengo dal medico</li>
+                                <li>هو في الحديقة - È nel parco</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHQIP (ALBANESE) -->
+            <div id="lang-sq" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Përkufizimi dhe Formimi</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Parafjalët e Artikuara në Italisht</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Përkufizimi:</strong> Parafjalët e artikuara (Preposizioni Articolate) krijohen nga bashkimi i një parafjale të thjeshtë (di, a, da, in, su) me një artikull të caktuar. Ky bashkim rregullohet nga ligje fonetike specifike dhe është i detyrueshëm në italisht.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Rregullat Themelore:</h4>
+                            <ul>
+                                <li><strong>DI</strong> (i/e): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (në/te): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (nga/prej): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (në brendi të): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (mbi): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Shënim Fonetik:</strong> Parafjala <em>in</em> humbet zanoren fillestare përpara të gjithë artikujve, duke u bërë <strong>n-</strong> (nel, nello, nella, negli, nelle). Përdoret <strong>lo/gli</strong> përpara fjalëve që fillojnë me: z, y, gn, ps, s+bashkëtingëllore, i+zanore.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Krahasimi me Shqipen:</h4>
+                            <p>Në shqip nuk kemi bashkim të parafjalëve me artikujt, por në italisht kjo është e detyrueshme:</p>
+                            <ul>
+                                <li>Shqip: "Unë shkoj në kinema" → Italisht: "Vado al cinema" (al = a + il)</li>
+                                <li>Shqip: "Libri është mbi tryezë" → Italisht: "Il libro è sul tavolo" (sul = su + il)</li>
+                                <li>Shqip: "Unë vij nga doktori" → Italisht: "Vengo dal medico" (dal = da + il)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- МАКЕДОНСКИ (MACEDONE) -->
+            <div id="lang-mk" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Дефиниција и Формирање</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Сложени предлози во италијанскиот јазик</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Дефиниција:</strong> Сложените предлози (Preposizioni Articolate) се формираат со спојување на едноставен предлог (di, a, da, in, su) со определен член. Ова спојување се регулира со специфични фонетски закони и е задолжително на италијански.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Основни Правила:</h4>
+                            <ul>
+                                <li><strong>DI</strong> (од/на): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (во/кaј): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (од): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (во): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (на/врз): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Фонетска Белешка:</strong> Предлогот <em>in</em> го губи почетниот самогласк пред сите членови, станувајќи <strong>n-</strong> (nel, nello, nella, negli, nelle). Се користи <strong>lo/gli</strong> пред зборови што започнуваат со: z, y, gn, ps, s+согласка, i+самогласка.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Примери:</h4>
+                            <ul>
+                                <li>Одам во кино - Vado al cinema</li>
+                                 <li>Книгата е на маса - Il libro è sul tavolo</li>
+                                <li>Доаѓам од доктор - Vengo dal medico</li>
+                                <li>Тој е во паркот - È nel parco</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HAUSA -->
+            <div id="lang-ha" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Ma'anar da Kafa</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Preposizioni Articulate a Harshen Italiyanci</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Ma'anar:</strong> Preposizioni Articulate na samu ne daga haɗin preposition mai sauƙi (di, a, da, in, su) tare da article mai ƙayyade. Wannan haɗin yana bin dokokin sauti na musamman kuma wajibi ne a harshen Italiyanci.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Dokokin Asali:</h4>
+                            <ul>
+                                <li><strong>DI</strong> (na/daga): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (zuwa/a): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (daga): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (a cikin): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (a kan): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Labar na Sauti:</strong> Preposition <em>in</em> tana rasa wasalin farko gaban dukkan articles, ta zama <strong>n-</strong> (nel, nello, nella, negli, nelle). A yi amfani da <strong>lo/gli</strong> gaban kalmomin da suka fara da: z, y, gn, ps, s+tsayayye, i+wasali.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Misalai:</h4>
+                            <ul>
+                                <li>Ina zuwa sinima - Vado al cinema</li>
+                                <li>Littafin yana kan teburi - Il libro è sul tavolo</li>
+                                <li>Na fito daga likita - Vengo dal medico</li>
+                                <li>Yana cikin filin wasa - È nel parco</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MANDINKA -->
+            <div id="lang-man" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Tinani ni Kuncili</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Preposizioni Articulate kan Italien Kango</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Tinani:</strong> Preposizioni Articulate be taaara preposition sing sing (di, a, da, in, su) ni article determinatif. Taaara nin be jate fasaro telefolo, a be Italien kango la o be na o ye.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Fasaro Kuncili:</h4>
+                            <ul>
+                                <li><strong>DI</strong> (ka/la): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (la/ma): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (boo): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (kono): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (kan): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Telefolo Fasaro:</strong> Preposition <em>in</em> be a telefolo sing sing lafolo article, a be <strong>n-</strong> (nel, nello, nella, negli, nelle). A be <strong>lo/gli</strong> kango nin be taaara: z, y, gn, ps, s+consonne, i+voyelle.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Misali:</h4>
+                            <ul>
+                                <li>N be taara sinema - Vado al cinema</li>
+                                <li>Lafolo be kan table - Il libro è sul tavolo</li>
+                                <li>N be booma dokotoro - Vengo dal medico</li>
+                                <li>A be kono park - È nel parco</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KISWAHILI -->
+            <div id="lang-sw" class="theory-content">
+                <div class="card">
+                    <div class="card-header">Ufafanuzi na Uundaji</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">Viunganishi vya Viambishi katika Kiitaliano</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>Ufafanuzi:</strong> Viunganishi vya viambishi (Preposizioni Articolate) vinatokana na muunganiko wa kiunganishi rahisi (di, a, da, in, su) na kiambishi maalum. Muunganiko huu unafuata sheria za sauti mahususi na ni lazima katika Kiitaliano.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Sheria za Msingi:</h4>
+                            <ul>
+                                <li><strong>DI</strong> (ya/kutoka): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (kwa/katika): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (kutoka): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (ndani): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (juu): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>Dokezo la Sauti:</strong> Kiunganishi <em>in</em> hupoteza irabu yake ya kwanza mbele ya viambishi vyote, ikawa <strong>n-</strong> (nel, nello, nella, negli, nelle). Tumia <strong>lo/gli</strong> mbele ya maneno yanayoanza na: z, y, gn, ps, s+kirabu, i+irabu.
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>Mifano:</h4>
+                            <ul>
+                                <li>Naenda sinema - Vado al cinema</li>
+                                <li>Kitabu kiko juu ya meza - Il libro è sul tavolo</li>
+                                <li>Ninatoka kwa daktari - Vengo dal medico</li>
+                                <li>Yu ndani ya bustani - È nel parco</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- URDU -->
+            <div id="lang-ur" class="theory-content" dir="rtl">
+                <div class="card">
+                    <div class="card-header" style="text-align: right;">تعریف اور تشکیل</div>
+                    <div class="card-body" style="text-align: right;">
+                        <h2 class="lang-title" style="text-align: right;">اطالوی زبان میں مرکب حروف جر</h2>
+                        
+                        <div class="instruction-box" style="text-align: right;">
+                            <strong>تعریف:</strong> مرکب حروف جر (Preposizioni Articolate) سادہ حرف جر (di, a, da, in, su) اور معین آرٹیکل کے ملاپ سے بنتے ہیں۔ یہ ملاپ مخصوص آوازی قوانین کے تحت ہوتا ہے اور اطالوی زبان میں لازمی ہے۔
+                        </div>
+
+                        <div class="grammar-box" style="text-align: right;">
+                            <h4>بنیادی قوانین:</h4>
+                            <ul style="list-style-position: inside;">
+                                <li><strong>DI</strong> (کا/سے): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (کو/پر): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (سے): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (میں): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (پر): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box" style="text-align: right;">
+                            <strong>آوازی نوٹ:</strong> حرف جر <em>in</em> تمام آرٹیکلز کے سامنے اپنی پہلی حرف علہ کھو دیتا ہے، اور <strong>n-</strong> بن جاتا ہے (nel, nello, nella, negli, nelle)۔ <strong>lo/gli</strong> کا استعمال ان الفاظ کے سامنے کریں جو ان حروف سے شروع ہوتے ہیں: z, y, gn, ps, s+حرف صحیح, i+حرف علہ۔
+                        </div>
+
+                        <div class="grammar-box" style="text-align: right;">
+                            <h4>مثالیں:</h4>
+                            <ul style="list-style-position: inside;">
+                                <li>میں سینما جا رہا ہوں - Vado al cinema</li>
+                                <li>کتاب میز پر ہے - Il libro è sul tavolo</li>
+                                <li>میں ڈاکٹر کے یہاں سے آ رہا ہوں - Vengo dal medico</li>
+                                <li>وہ پارک میں ہے - È nel parco</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASHTO -->
+            <div id="lang-ps" class="theory-content" dir="rtl">
+                <div class="card">
+                    <div class="card-header" style="text-align: right;">تعریف او جوړښت</div>
+                    <div class="card-body" style="text-align: right;">
+                        <h2 class="lang-title" style="text-align: right;">په ایټالوي کې مرکب حروف جر</h2>
+                        
+                        <div class="instruction-box" style="text-align: right;">
+                            <strong>تعریف:</strong> مرکب حروف جر (Preposizioni Articolate) د ساده حرف جر (di, a, da, in, su) او ټاکلی مقالې (article) ترکیب څخه جوړیږي. دا ترکیب د ځانګړو غږیزو قوانینو په مطابق کیږي او په ایټالوي کې اړین دی.
+                        </div>
+
+                        <div class="grammar-box" style="text-align: right;">
+                            <h4>اساسي قوانین:</h4>
+                            <ul style="list-style-position: inside;">
+                                <li><strong>DI</strong> (د/څخه): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (ته/په): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (څخه): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (په کې): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (په باندې): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box" style="text-align: right;">
+                            <strong>غږیز یادښت:</strong> حرف جر <em>in</em> د ټولو مقالو مخکې خپل لومړی غږ له لاسه ورکوي، او <strong>n-</strong> کیږي (nel, nello, nella, negli, nelle). د <strong>lo/gli</strong> کارول هغه کلیمو مخکې وکړئ چې په دې حروفو پیل کیږي: z, y, gn, ps, s+همغږی, i+غږیزه غږ.
+                        </div>
+
+                        <div class="grammar-box" style="text-align: right;">
+                            <h4>بېلګې:</h4>
+                            <ul style="list-style-position: inside;">
+                                <li>زه سینما ته ځم - Vado al cinema</li>
+                                <li>کتاب په مېز باندې دی - Il libro è sul tavolo</li>
+                                <li>زه د ډاکټر څخه راغلم - Vengo dal medico</li>
+                                <li>هغه په پارک کې دی - È nel parco</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HINDI -->
+            <div id="lang-hi" class="theory-content">
+                <div class="card">
+                    <div class="card-header">परिभाषा और निर्माण</div>
+                    <div class="card-body">
+                        <h2 class="lang-title">इतालवी में संयुक्त पूर्वसर्ग (Preposizioni Articolate)</h2>
+                        
+                        <div class="instruction-box">
+                            <strong>परिभाषा:</strong> संयुक्त पूर्वसर्ग (Preposizioni Articolate) सरल पूर्वसर्ग (di, a, da, in, su) और निश्चित लेख (articolo determinativo) के मिलने से बनते हैं। यह मिलान विशिष्ट ध्वनि नियमों के अनुसार होता है और इतालवी में अनिवार्य है।
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>मूलभूत नियम:</h4>
+                            <ul>
+                                <li><strong>DI</strong> (का/से): di + il = del, di + lo = dello, di + la = della, di + l' = dell', di + i = dei, di + gli = degli, di + le = delle</li>
+                                <li><strong>A</strong> (को/पर): a + il = al, a + lo = allo, a + la = alla, a + l' = all', a + i = ai, a + gli = agli, a + le = alle</li>
+                                <li><strong>DA</strong> (से): da + il = dal, da + lo = dallo, da + la = dalla, da + l' = dall', da + i = dai, da + gli = dagli, da + le = dalle</li>
+                                <li><strong>IN</strong> (में): in + il = nel, in + lo = nello, in + la = nella, in + l' = nell', in + i = nei, in + gli = negli, in + le = nelle</li>
+                                <li><strong>SU</strong> (पर): su + il = sul, su + lo = sullo, su + la = sulla, su + l' = sull', su + i = sui, su + gli = sugli, su + le = sulle</li>
+                            </ul>
+                        </div>
+
+                        <div class="note-box">
+                            <strong>ध्वनि टिप्पणी:</strong> पूर्वसर्ग <em>in</em> सभी लेखों के सामने अपना प्रारंभिक स्वर खो देता है, और <strong>n-</strong> बन जाता है (nel, nello, nella, negli, nelle)। <strong>lo/gli</strong> का उपयोग उन शब्दों से पहले करें जो इनसे शुरू होते हैं: z, y, gn, ps, s+व्यंजन, i+स्वर।
+                        </div>
+
+                        <div class="grammar-box">
+                            <h4>उदाहरण:</h4>
+                            <ul>
+                                <li>मैं सिनेमा जा रहा हूँ - Vado al cinema</li>
+                                <li>किताब मेज पर है - Il libro è sul tavolo</li>
+                                <li>मैं डॉक्टर के यहाँ से आ रहा हूँ - Vengo dal medico</li>
+                                <li>वह पार्क में है - È nel parco</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SEZIONE ESERCIZI -->
+        <!-- SEZIONE ESERCIZI (invariata) -->
         <section id="exercises" class="section">
             <div class="game-container">
                 <div class="score-panel">
@@ -619,12 +1446,12 @@
 
     <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
         <div style="max-width: 1200px; margin: 0 auto;">
-            <p>© 2024 Corso di Italiano A1 - Preposizioni Articolate (50 Esercizi)</p>
+            <p>© 2024 Corso di Italiano A1 - Preposizioni Articolate (50 Esercizi) - Versione Multilingue</p>
         </div>
     </footer>
 
     <script>
-        // Database degli esercizi (50 totali)
+        // Database degli esercizi (50 totali) - invariato
         const exercises = [
             // ESERCIZI 1-10: Trasformazione base DI + articolo
             {
@@ -1066,6 +1893,13 @@
             }
         }
 
+        function showLanguage(lang, btn) {
+            document.querySelectorAll('.theory-content').forEach(t => t.classList.remove('active'));
+            document.getElementById('lang-' + lang).classList.add('active');
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+
         function loadExercise() {
             if (currentExercise >= exercises.length) {
                 showFinalScore();
@@ -1095,7 +1929,6 @@
                 html += `<div class="options-grid" id="optionsGrid">`;
                 const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
                 shuffledOptions.forEach(opt => {
-                    // Gestione sicura dell'apostrofo nei data attribute
                     const safeOpt = opt.replace(/'/g, "&#39;");
                     html += `<button class="option-btn" onclick="checkChoice('${safeOpt}')" data-value="${safeOpt}">${opt}</button>`;
                 });
@@ -1136,7 +1969,6 @@
             const feedback = document.getElementById('feedback');
             const nextContainer = document.getElementById('nextBtnContainer');
 
-            // Decodifica l'apostrofo per il confronto
             const decodedSelected = selected.replace(/&#39;/g, "'");
             
             btns.forEach(btn => {
