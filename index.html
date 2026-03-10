@@ -186,6 +186,13 @@
             border-left-color: var(--success);
         }
 
+        .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+            display: block;
+            border-left-color: #f59e0b;
+        }
+
         .password-strength-indicator {
             display: flex;
             gap: 4px;
@@ -504,6 +511,7 @@
         
         .status-completed { background: var(--success); color: white; }
         .status-pending { background: var(--accent); color: #000; }
+        .status-rejected { background: var(--error); color: white; }
 
         /* ADMIN STYLES */
         .stats-grid { 
@@ -555,6 +563,10 @@
             background: #dcfce7;
             color: #166534;
         }
+        .badge-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
 
         .password-box {
             background: #f0fdf4;
@@ -573,7 +585,7 @@
             border: 2px solid var(--border);
         }
 
-        /* MOBILE MENU TOGGLE - RIMOSSO DISPLAY NONE */
+        /* MOBILE MENU TOGGLE */
         .mobile-menu-toggle {
             background: rgba(255,255,255,0.2);
             border: 1px solid rgba(255,255,255,0.3);
@@ -598,6 +610,26 @@
 
         .sidebar-overlay.active {
             display: block;
+        }
+
+        /* PENDING APPROVAL MESSAGE */
+        .pending-message {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .pending-message h3 {
+            color: #92400e;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .pending-message p {
+            color: #78350f;
+            margin-bottom: 0.5rem;
         }
 
         @media (max-width: 1024px) {
@@ -675,7 +707,6 @@
         }
     </style>
 <base target="_blank">
-<base target="_blank">
 </head>
 <body>
 
@@ -692,34 +723,25 @@
             <p style="font-size: 0.75rem; margin-top: 4px; opacity: 0.8;">Livello A1 - C2 QCER</p>
         </div>
         <div class="login-body">
+            <div class="alert alert-warning" style="display: block; margin-bottom: 20px;">
+                <strong>🔒 Accesso Riservato</strong><br>
+                Solo gli utenti autorizzati dall'amministratore possono accedere. 
+                Richiedi l'accesso se non hai ancora le credenziali.
+            </div>
             <form id="loginForm">
                 <div class="alert alert-error" id="loginError"></div>
                 <div class="form-group">
                     <label class="form-label">Indirizzo Email</label>
-                    <input type="email" id="loginEmail" class="form-input" required placeholder="nome@istituzione.edu"/>
+                    <input type="email" id="loginEmail" class="form-input" required placeholder="nome@email.com"/>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" id="loginPassword" class="form-input" required placeholder="Inserire password" oninput="checkPasswordStrength()"/>
-                    
-                    <div class="password-strength-indicator" id="strengthIndicator">
-                        <div class="strength-bar" id="bar1"></div>
-                        <div class="strength-bar" id="bar2"></div>
-                        <div class="strength-bar" id="bar3"></div>
-                        <div class="strength-bar" id="bar4"></div>
-                    </div>
-                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 4px;" id="strengthText">
-                        Digita la password per vedere la forza
-                    </div>
+                    <input type="password" id="loginPassword" class="form-input" required placeholder="Inserire password"/>
                 </div>
                 <button type="submit" class="btn">Accedi alla Piattaforma</button>
                 
-                <div style="margin-top: 20px; padding: 16px; background: #f7fafc; border: 1px solid var(--border); font-size: 0.8rem;">
-                    <strong>🔧 Modalità Debug:</strong> Per testare, inserisci qualsiasi email e una password di almeno 6 caratteri. Il sistema funzionerà in modalità demo.
-                </div>
-
                 <div class="form-footer">
-                    <p>Non si possiedono credenziali? <a onclick="showRequestAccess()">Richiedi accesso</a></p>
+                    <p>Non hai le credenziali? <a onclick="showRequestAccess()">Richiedi accesso</a></p>
                     <p style="margin-top: 8px;"><a onclick="showAdminLogin()">Accesso Amministratore</a></p>
                 </div>
             </form>
@@ -747,14 +769,41 @@
                     <input type="email" id="reqEmail" class="form-input" placeholder="mario.rossi@email.it" required>
                 </div>
                 <div class="form-group">
+                    <label class="form-label">Telefono (opzionale)</label>
+                    <input type="tel" id="reqPhone" class="form-input" placeholder="+39 123 456 7890">
+                </div>
+                <div class="form-group">
                     <label class="form-label">Motivazione della richiesta *</label>
-                    <textarea id="reqMotivation" class="form-input" placeholder="Spiega perché vuoi accedere alla piattaforma..." required></textarea>
+                    <textarea id="reqMotivation" class="form-input" placeholder="Spiega perché vuoi accedere alla piattaforma (es. corso di italiano, preparazione esame CECOL, ecc.)..." required></textarea>
                 </div>
                 <button type="submit" class="btn">📤 Invia Richiesta</button>
                 <div class="form-footer">
                     <p><a onclick="backToLogin()">← Torna al login</a></p>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== PENDING APPROVAL SECTION ==================== -->
+<div id="pendingSection" class="login-section" style="display: none;">
+    <div class="login-container">
+        <div class="login-header">
+            <div class="login-logo">⏳</div>
+            <h1 style="font-size: 1.3rem; line-height: 1.3; font-weight: normal;">RICHIESTA IN ATTESA</h1>
+        </div>
+        <div class="login-body">
+            <div class="pending-message">
+                <h3>🕐 La tua richiesta è in fase di valutazione</h3>
+                <p>Gentile <strong id="pendingName">Utente</strong>,</p>
+                <p>La tua richiesta di accesso è stata ricevuta e sarà esaminata dall'amministratore.</p>
+                <p><strong>Email:</strong> <span id="pendingEmail"></span></p>
+                <p style="margin-top: 1rem; font-style: italic;">
+                    Riceverai una notifica non appena la tua richiesta sarà approvata.<br>
+                    Le credenziali di accesso ti verranno comunicate via email o telefono.
+                </p>
+            </div>
+            <button onclick="backToLogin()" class="btn btn-secondary">← Torna al Login</button>
         </div>
     </div>
 </div>
@@ -1852,7 +1901,7 @@
                     <p class="section-subtitle">Approva o rifiuta le richieste di registrazione degli studenti</p>
                 </div>
                 <div class="card">
-                    <div class="card-header">Elenco Richieste in Attesa</div>
+                    <div class="card-header">Elenco Richieste</div>
                     <div class="card-body">
                         <table class="data-table" id="requests-table">
                             <thead>
@@ -1860,7 +1909,9 @@
                                     <th>Data</th>
                                     <th>Nome</th>
                                     <th>Email</th>
+                                    <th>Telefono</th>
                                     <th>Motivazione</th>
+                                    <th>Stato</th>
                                     <th>Azioni</th>
                                 </tr>
                             </thead>
@@ -1877,7 +1928,7 @@
                 </div>
                 <div style="margin:24px 0;">
                     <h1 class="section-title">Utenti Registrati</h1>
-                    <p class="section-subtitle">Visualizza e gestisci gli account degli studenti</p>
+                    <p class="section-subtitle">Visualizza e gestisci gli account degli studenti autorizzati</p>
                 </div>
                 <div class="card">
                     <div class="card-header">
@@ -1894,6 +1945,7 @@
                                     <th>Nome</th>
                                     <th>Email</th>
                                     <th>Password</th>
+                                    <th>Data Creazione</th>
                                     <th>Azioni</th>
                                 </tr>
                             </thead>
@@ -1938,7 +1990,27 @@
             </div>
 
             <!-- ADMIN PASSWORDS -->
-            
+            <div id="admin-passwords" class="section">
+                <div class="breadcrumbs">
+                    <span onclick="showAdminSection('admin-home')" style="cursor: pointer;">Dashboard</span> / <strong>Generatore Password</strong>
+                </div>
+                <div style="margin:24px 0;">
+                    <h1 class="section-title">Generatore Password Sicure</h1>
+                    <p class="section-subtitle">Crea password robuste per gli account degli studenti</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">Genera Nuova Password</div>
+                    <div class="card-body">
+                        <div class="password-box">
+                            <p style="margin-bottom: 1rem;">Clicca il pulsante per generare una password sicura di 12 caratteri</p>
+                            <div class="password-display" id="generated-password">...</div>
+                            <button class="btn" onclick="generatePassword()" style="width: auto; display: inline-block; margin-right: 1rem;">🔄 Genera Password</button>
+                            <button class="btn btn-success" onclick="copyPassword()" style="width: auto; display: inline-block;">📋 Copia</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- ADMIN ACTIVITY MONITORING -->
             <div id="admin-activity" class="section">
                 <div class="breadcrumbs">
@@ -2016,7 +2088,7 @@
                     <div class="card">
                         <div class="card-header">🏆 Studenti Più Attivi (Oggi)</div>
                         <div class="card-body" id="top-students-list">
-                            <div style="color: var(--text-secondary); text-align: center;">Nessun attività oggi</div>
+                            <div style="color: var(--text-secondary); text-align: center;">Nessuna attività oggi</div>
                         </div>
                     </div>
                 </div>
@@ -2070,53 +2142,42 @@
                     </div>
                 </div>
             </div>
-<div id="admin-passwords" class="section">
-                <div class="breadcrumbs">
-                    <span onclick="showAdminSection('admin-home')" style="cursor: pointer;">Dashboard</span> / <strong>Generatore Password</strong>
-                </div>
-                <div style="margin:24px 0;">
-                    <h1 class="section-title">Generatore Password Sicure</h1>
-                    <p class="section-subtitle">Crea password robuste per gli account degli studenti</p>
-                </div>
-                <div class="card">
-                    <div class="card-header">Genera Nuova Password</div>
-                    <div class="card-body">
-                        <div class="password-box">
-                            <p style="margin-bottom: 1rem;">Clicca il pulsante per generare una password sicura di 12 caratteri</p>
-                            <div class="password-display" id="generated-password">...</div>
-                            <button class="btn" onclick="generatePassword()" style="width: auto; display: inline-block; margin-right: 1rem;">🔄 Genera Password</button>
-                            <button class="btn btn-success" onclick="copyPassword()" style="width: auto; display: inline-block;">📋 Copia</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </main>
     </div>
 </div>
 
 <script>
 // ==================== DATABASE ====================
-let db = { users: [], requests: [], scores: [] };
+let db = { users: [], requests: [], scores: [], activities: [], sessions: [], activeSessions: [] };
 
 function initDB() {
-    const stored = localStorage.getItem('accademia_data');
+    // NUOVA VERSIONE - RESET COMPLETO: Usa un nuovo nome per il database per forzare il reset
+    const stored = localStorage.getItem('accademia_data_v2');
     if (stored) {
         db = JSON.parse(stored);
     } else {
-        db.users.push({
-            id: 'admin001',
-            email: 'admin@accademia.it',
-            password: 'Admin2024!',
-            name: 'Amministratore',
-            role: 'admin',
-            created: new Date().toISOString()
-        });
+        // Reset completo - solo admin iniziale
+        db = {
+            users: [{
+                id: 'admin001',
+                email: 'admin@accademia.it',
+                password: 'Admin2024!',
+                name: 'Amministratore',
+                role: 'admin',
+                created: new Date().toISOString()
+            }],
+            requests: [],
+            scores: [],
+            activities: [],
+            sessions: [],
+            activeSessions: []
+        };
         saveDB();
     }
 }
 
 function saveDB() {
-    localStorage.setItem('accademia_data', JSON.stringify(db));
+    localStorage.setItem('accademia_data_v2', JSON.stringify(db));
 }
 
 // Module info for tracking
@@ -2139,95 +2200,55 @@ const moduleInfo = {
     'modulo_a2_personalita.html': { name: 'La Personalità', level: 'A2' }
 };
 
-// ==================== PASSWORD FUNCTIONS ====================
-function checkPasswordStrength() {
-    const password = document.getElementById('loginPassword').value;
-    const bars = [
-        document.getElementById('bar1'),
-        document.getElementById('bar2'),
-        document.getElementById('bar3'),
-        document.getElementById('bar4')
-    ];
-    const strengthText = document.getElementById('strengthText');
-    
-    bars.forEach(bar => bar.className = 'strength-bar');
-    
-    if (password.length === 0) {
-        strengthText.textContent = 'Digita la password per vedere la forza';
-        strengthText.style.color = 'var(--text-secondary)';
-        return;
-    }
-    
-    let strength = 0;
-    if (password.length >= 6) strength++;
-    if (password.length >= 10) strength++;
-    if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
-    if (/[0-9]/.test(password) && /[^a-zA-Z0-9]/.test(password)) strength++;
-    
-    for (let i = 0; i < strength; i++) {
-        if (bars[i]) {
-            if (strength <= 2) bars[i].classList.add('weak');
-            else if (strength === 3) bars[i].classList.add('medium');
-            else bars[i].classList.add('strong');
-        }
-    }
-    
-    const texts = ['Password molto debole', 'Password debole', 'Password media', 'Password buona', 'Password eccellente'];
-    strengthText.textContent = texts[strength] || 'Digita la password';
-    strengthText.style.color = strength <= 2 ? 'var(--error)' : strength === 3 ? 'var(--accent)' : 'var(--success)';
-}
-
 // ==================== LOGIN FUNCTIONS ====================
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
+    const email = document.getElementById('loginEmail').value.toLowerCase().trim();
     const password = document.getElementById('loginPassword').value;
     
-    if (password.length < 6) {
-        document.getElementById('loginError').textContent = 'La password deve essere di almeno 6 caratteri';
+    // Verifica credenziali nel database
+    const user = db.users.find(u => u.email.toLowerCase() === email && u.password === password);
+    
+    if (!user) {
+        document.getElementById('loginError').textContent = '❌ Credenziali non valide. Se non hai un account, richiedi l\'accesso.';
         document.getElementById('loginError').style.display = 'block';
         return;
     }
     
-    // Check if user exists in DB
-    const user = db.users.find(u => u.email === email && u.password === password && u.role !== 'admin');
-    if (!user) {
-        // Demo mode - allow any login
+    if (user.role === 'admin') {
         document.getElementById('loginSection').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'flex';
-        
-        const name = email.split('@')[0].replace(/\./g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-        document.getElementById('welcomeName').textContent = name;
-        document.getElementById('userNameDisplay').textContent = name;
-        
-        let level = 'A1';
-        if (password.includes('B2')) level = 'B2';
-        else if (password.includes('B1')) level = 'B1';
-        else if (password.includes('A2')) level = 'A2';
-        document.getElementById('userClassDisplay').textContent = 'Livello ' + level + ' QCER';
+        document.getElementById('adminDashboard').style.display = 'flex';
+        updateAdminStats();
+        loadAdminRequests();
     } else {
+        // Login studente
         document.getElementById('loginSection').style.display = 'none';
         document.getElementById('dashboard').style.display = 'flex';
+        
         document.getElementById('welcomeName').textContent = user.name;
         document.getElementById('userNameDisplay').textContent = user.name;
         document.getElementById('userClassDisplay').textContent = 'Livello QCER';
+        
+        // Avvia sessione tracciamento
+        startSession(user.email, user.name);
+        loadResults();
+        updateStats();
     }
-    
-    loadResults();
-    updateStats();
 });
 
 function logout() {
+    endSession();
     document.getElementById('loginSection').style.display = 'flex';
     document.getElementById('dashboard').style.display = 'none';
     document.getElementById('loginPassword').value = '';
     document.getElementById('loginEmail').value = '';
-    checkPasswordStrength();
+    document.getElementById('loginError').style.display = 'none';
 }
 
 function backToLogin() {
     document.getElementById('requestAccess').style.display = 'none';
     document.getElementById('adminLoginSection').style.display = 'none';
+    document.getElementById('pendingSection').style.display = 'none';
     document.getElementById('loginSection').style.display = 'flex';
 }
 
@@ -2245,7 +2266,8 @@ function showRequestAccess() {
 document.getElementById('requestForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const name = document.getElementById('reqName').value.trim();
-    const email = document.getElementById('reqEmail').value.trim();
+    const email = document.getElementById('reqEmail').value.trim().toLowerCase();
+    const phone = document.getElementById('reqPhone').value.trim();
     const motivation = document.getElementById('reqMotivation').value.trim();
 
     if (!name || !email || !motivation) {
@@ -2253,10 +2275,25 @@ document.getElementById('requestForm').addEventListener('submit', function(e) {
         return;
     }
 
+    // Verifica se email già registrata
+    const existingUser = db.users.find(u => u.email.toLowerCase() === email);
+    if (existingUser) {
+        showRequestAlert('error', 'Questa email è già registrata. Prova ad accedere.');
+        return;
+    }
+
+    // Verifica se richiesta già esistente
+    const existingRequest = db.requests.find(r => r.email.toLowerCase() === email && r.status === 'pending');
+    if (existingRequest) {
+        showRequestAlert('error', 'Hai già una richiesta in attesa di approvazione.');
+        return;
+    }
+
     const requestData = {
         id: 'req_' + Date.now(),
         name: name,
         email: email,
+        phone: phone,
         motivation: motivation,
         status: 'pending',
         created: new Date().toISOString()
@@ -2266,12 +2303,11 @@ document.getElementById('requestForm').addEventListener('submit', function(e) {
     db.requests.push(requestData);
     saveDB();
 
-    showRequestAlert('success', 'Richiesta inviata con successo! Riceverai una risposta entro 48 ore.');
-    document.getElementById('requestForm').reset();
-    
-    setTimeout(function() {
-        backToLogin();
-    }, 3000);
+    // Mostra schermata di attesa
+    document.getElementById('requestAccess').style.display = 'none';
+    document.getElementById('pendingSection').style.display = 'flex';
+    document.getElementById('pendingName').textContent = name;
+    document.getElementById('pendingEmail').textContent = email;
 });
 
 function showRequestAlert(type, message) {
@@ -2284,18 +2320,18 @@ function showRequestAlert(type, message) {
 // ==================== ADMIN LOGIN ====================
 document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    const email = document.getElementById('adminEmail').value;
+    const email = document.getElementById('adminEmail').value.toLowerCase().trim();
     const password = document.getElementById('adminPassword').value;
 
-    if (email === 'admin@accademia.it' && password === 'Admin2024!') {
+    const admin = db.users.find(u => u.email === email && u.password === password && u.role === 'admin');
+    
+    if (admin) {
         document.getElementById('adminLoginSection').style.display = 'none';
         document.getElementById('adminDashboard').style.display = 'flex';
         updateAdminStats();
         loadAdminRequests();
-        loadAdminUsers();
-        loadAdminScores();
     } else {
-        document.getElementById('adminLoginError').textContent = 'Credenziali non valide';
+        document.getElementById('adminLoginError').textContent = '❌ Credenziali amministratore non valide';
         document.getElementById('adminLoginError').style.display = 'block';
     }
 });
@@ -2308,18 +2344,15 @@ function adminLogout() {
 
 // ==================== NAVIGATION ====================
 function showSection(sectionId) {
-    // Hide all sections
     document.querySelectorAll('.section').forEach(section => {
         section.classList.remove('active');
     });
     
-    // Show target section
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
         targetSection.classList.add('active');
     }
     
-    // Update nav items
     document.querySelectorAll('.nav-item').forEach(item => {
         item.classList.remove('active');
     });
@@ -2362,7 +2395,6 @@ function toggleSidebar() {
     }
 }
 
-// Chiudi sidebar quando si clicca su un link (mobile)
 document.addEventListener('DOMContentLoaded', function() {
     const navItems = document.querySelectorAll('.nav-item');
     navItems.forEach(item => {
@@ -2383,8 +2415,8 @@ document.addEventListener('DOMContentLoaded', function() {
 let userResults = [];
 
 function loadResults() {
-    const userEmail = document.getElementById('loginEmail').value || 'demo@student.it';
-    const userScores = db.scores ? db.scores.filter(s => s.userEmail === userEmail) : [];
+    const userEmail = document.getElementById('loginEmail').value.toLowerCase().trim() || '';
+    const userScores = db.scores ? db.scores.filter(s => s.userEmail.toLowerCase() === userEmail) : [];
     
     userResults = Object.keys(moduleInfo).map(url => {
         const info = moduleInfo[url];
@@ -2491,32 +2523,43 @@ function updateAdminStats() {
 
 function loadAdminRequests() {
     const tbody = document.querySelector('#requests-table tbody');
-    const pending = db.requests.filter(r => r.status === 'pending');
+    const requests = db.requests || [];
     
     if (!tbody) return;
     
-    if (pending.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuna richiesta in attesa</td></tr>';
+    if (requests.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuna richiesta presente</td></tr>';
         return;
     }
     
-    tbody.innerHTML = pending.map(r => `
-        <tr>
-            <td>${new Date(r.created).toLocaleDateString('it-IT')}</td>
-            <td>${r.name}</td>
-            <td>${r.email}</td>
-            <td>${r.motivation.substring(0, 50)}...</td>
-            <td>
-                <button class="btn btn-success" onclick="approveRequest('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem; margin-right: 0.5rem;">✓ Approva</button>
-                <button class="btn btn-danger" onclick="rejectRequest('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem;">✗ Rifiuta</button>
-            </td>
-        </tr>
-    `).join('');
+    tbody.innerHTML = requests.map(r => {
+        let statusBadge = '';
+        if (r.status === 'pending') statusBadge = '<span class="badge badge-pending">In attesa</span>';
+        else if (r.status === 'approved') statusBadge = '<span class="badge badge-approved">Approvata</span>';
+        else if (r.status === 'rejected') statusBadge = '<span class="badge badge-rejected">Rifiutata</span>';
+        
+        const actions = r.status === 'pending' ? `
+            <button class="btn btn-success" onclick="approveRequest('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem; margin-right: 0.5rem;">✓ Approva</button>
+            <button class="btn btn-danger" onclick="rejectRequest('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem;">✗ Rifiuta</button>
+        ` : '<span style="color: var(--text-secondary);">Nessuna azione</span>';
+        
+        return `
+            <tr>
+                <td>${new Date(r.created).toLocaleDateString('it-IT')}</td>
+                <td>${r.name}</td>
+                <td>${r.email}</td>
+                <td>${r.phone || '-'}</td>
+                <td>${r.motivation.substring(0, 50)}...</td>
+                <td>${statusBadge}</td>
+                <td>${actions}</td>
+            </tr>
+        `;
+    }).join('');
 }
 
 function approveRequest(id) {
     const req = db.requests.find(r => r.id === id);
-    if (!req) return;
+    if (!req || req.status !== 'pending') return;
     
     const password = generateRandomPassword();
     
@@ -2554,7 +2597,7 @@ function loadAdminUsers() {
     if (!tbody) return;
     
     if (students.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuno studente registrato</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuno studente registrato</td></tr>';
         return;
     }
     
@@ -2564,6 +2607,7 @@ function loadAdminUsers() {
             <td>${u.name}</td>
             <td>${u.email}</td>
             <td><code style="background: var(--bg-primary); padding: 4px 8px; font-family: monospace;">${u.password}</code></td>
+            <td>${new Date(u.created).toLocaleDateString('it-IT')}</td>
             <td><button class="btn btn-danger" onclick="deleteUser('${u.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem;">🗑️ Elimina</button></td>
         </tr>
     `).join('');
@@ -2587,7 +2631,7 @@ function addUser() {
     
     db.users.push({
         id: 'user_' + Date.now(),
-        email: email,
+        email: email.toLowerCase().trim(),
         password: password,
         name: name,
         role: 'student',
@@ -2698,49 +2742,8 @@ function downloadCSV(data, filename) {
     a.click();
 }
 
-// ==================== INIT ====================
-window.onload = function() {
-    initDB();
-    checkPasswordStrength();
-};
-
 // ==================== ACTIVITY MONITORING SYSTEM ====================
 
-// Struttura dati per le attività
-function initActivityDB() {
-    if (!db.activities) db.activities = [];
-    if (!db.sessions) db.sessions = [];
-    if (!db.activeSessions) db.activeSessions = [];
-    saveDB();
-}
-
-// Traccia attività studente
-function trackActivity(userEmail, userName, action, detail, duration = 0) {
-    const activity = {
-        id: 'act_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-        userEmail: userEmail,
-        userName: userName,
-        action: action,
-        detail: detail,
-        timestamp: new Date().toISOString(),
-        duration: duration,
-        ip: '127.0.0.1',
-        userAgent: navigator.userAgent,
-        sessionId: getCurrentSessionId()
-    };
-
-    if (!db.activities) db.activities = [];
-    db.activities.push(activity);
-
-    if (db.activities.length > 1000) {
-        db.activities = db.activities.slice(-1000);
-    }
-
-    saveDB();
-    updateRealTimeLog(activity);
-}
-
-// Gestione sessioni
 function startSession(userEmail, userName) {
     const sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     const session = {
@@ -2761,6 +2764,8 @@ function startSession(userEmail, userName) {
 
     localStorage.setItem('current_session_id', sessionId);
     localStorage.setItem('session_start', session.startTime);
+    localStorage.setItem('current_user_email', userEmail);
+    localStorage.setItem('current_user_name', userName);
 
     trackActivity(userEmail, userName, 'login', 'Accesso alla piattaforma');
 
@@ -2789,81 +2794,33 @@ function endSession(sessionId = null) {
 
     localStorage.removeItem('current_session_id');
     localStorage.removeItem('session_start');
+    localStorage.removeItem('current_user_email');
+    localStorage.removeItem('current_user_name');
 }
 
-function getCurrentSessionId() {
-    return localStorage.getItem('current_session_id') || 'unknown';
-}
+function trackActivity(userEmail, userName, action, detail, duration = 0) {
+    const activity = {
+        id: 'act_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        userEmail: userEmail,
+        userName: userName,
+        action: action,
+        detail: detail,
+        timestamp: new Date().toISOString(),
+        duration: duration,
+        ip: '127.0.0.1',
+        userAgent: navigator.userAgent,
+        sessionId: localStorage.getItem('current_session_id') || 'unknown'
+    };
 
-function updateSessionActivity(page = null) {
-    const sid = localStorage.getItem('current_session_id');
-    if (!sid || !db.activeSessions) return;
+    if (!db.activities) db.activities = [];
+    db.activities.push(activity);
 
-    const session = db.activeSessions.find(s => s.id === sid);
-    if (session) {
-        session.lastActivity = new Date().toISOString();
-        if (page) session.currentPage = page;
-        saveDB();
-    }
-}
-
-// Tracciamento pagine e tempo
-let pageStartTime = Date.now();
-let currentPage = window.location.pathname;
-
-function trackPageView(pageName, pageUrl) {
-    const duration = Math.floor((Date.now() - pageStartTime) / 1000);
-
-    if (currentPage && currentPage !== pageUrl) {
-        const userEmail = document.getElementById('loginEmail')?.value || 'unknown';
-        const userName = document.getElementById('userNameDisplay')?.textContent || 'Studente';
-
-        if (userEmail !== 'unknown') {
-            trackActivity(userEmail, userName, 'pageview', currentPage, duration);
-        }
+    if (db.activities.length > 1000) {
+        db.activities = db.activities.slice(-1000);
     }
 
-    pageStartTime = Date.now();
-    currentPage = pageUrl;
-    updateSessionActivity(pageUrl);
+    saveDB();
 }
-
-// Page Visibility API
-document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'hidden') {
-        localStorage.setItem('page_hidden_time', Date.now().toString());
-    } else {
-        const hiddenTime = localStorage.getItem('page_hidden_time');
-        if (hiddenTime) {
-            const awayTime = Date.now() - parseInt(hiddenTime);
-            pageStartTime += awayTime;
-            localStorage.removeItem('page_hidden_time');
-        }
-    }
-});
-
-// Tracciamento interazioni
-let activityTimeout;
-let isActive = true;
-
-function trackUserInteraction() {
-    if (!isActive) {
-        isActive = true;
-        updateSessionActivity();
-    }
-
-    clearTimeout(activityTimeout);
-    activityTimeout = setTimeout(() => {
-        isActive = false;
-    }, 300000);
-}
-
-document.addEventListener('click', trackUserInteraction);
-document.addEventListener('keydown', trackUserInteraction);
-document.addEventListener('scroll', trackUserInteraction);
-document.addEventListener('mousemove', trackUserInteraction);
-
-// ==================== ADMIN ACTIVITY FUNCTIONS ====================
 
 function loadAdminActivity() {
     updateActivityStats();
@@ -2910,7 +2867,7 @@ function renderActivityTable(filter = 'all') {
     }
 
     if (activities.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuna attivit registrata</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuna attività registrata</td></tr>';
         return;
     }
 
@@ -3002,7 +2959,7 @@ function renderTopStudents() {
     const sorted = Object.entries(studentActivity).sort((a, b) => b[1].count - a[1].count).slice(0, 10);
 
     if (sorted.length === 0) {
-        container.innerHTML = '<div style="color: var(--text-secondary); text-align: center;">Nessun attivit oggi</div>';
+        container.innerHTML = '<div style="color: var(--text-secondary); text-align: center;">Nessuna attività oggi</div>';
         return;
     }
 
@@ -3029,7 +2986,7 @@ function filterActivities() {
 
 function exportActivities() {
     if (!db.activities || db.activities.length === 0) {
-        alert('Nessuna attivit da esportare');
+        alert('Nessuna attività da esportare');
         return;
     }
 
@@ -3050,7 +3007,6 @@ function exportActivities() {
 
 function loadAdminSessions() {
     renderSessionsTable();
-    updateRealTimeLog();
 }
 
 function renderSessionsTable() {
@@ -3103,7 +3059,7 @@ function terminateSession(sessionId) {
 }
 
 function terminateAllSessions() {
-    if (!confirm(' ATTENZIONE: Vuoi terminare TUTTE le sessioni attive?')) return;
+    if (!confirm('ATTENZIONE: Vuoi terminare TUTTE le sessioni attive?')) return;
 
     if (db.activeSessions) {
         db.activeSessions.forEach(s => endSession(s.id));
@@ -3126,7 +3082,7 @@ function refreshSessions() {
         });
 
         expired.forEach(s => {
-            trackActivity(s.userEmail, s.userName, 'logout', 'Sessione scaduta per inattivit', 
+            trackActivity(s.userEmail, s.userName, 'logout', 'Sessione scaduta per inattività', 
                 Math.floor((now - new Date(s.startTime)) / 1000));
         });
 
@@ -3134,47 +3090,6 @@ function refreshSessions() {
         saveDB();
     }
 }
-
-function updateRealTimeLog(activity = null) {
-    const container = document.getElementById('real-time-activity');
-    if (!container) return;
-
-    if (activity) {
-        const time = new Date(activity.timestamp).toLocaleTimeString('it-IT');
-        const div = document.createElement('div');
-        div.style.cssText = 'padding: 8px; border-bottom: 1px solid var(--border); animation: fadeIn 0.3s;';
-        div.innerHTML = `
-            <span style="color: var(--text-secondary);">[${time}]</span>
-            <strong>${activity.userName}</strong>
-            <span style="color: ${getActionColor(activity.action)};">${activity.action}</span>
-            ${activity.detail ? ' ' + activity.detail : ''}
-        `;
-
-        container.insertBefore(div, container.firstChild);
-
-        while (container.children.length > 50) {
-            container.removeChild(container.lastChild);
-        }
-    }
-}
-
-function getActionColor(action) {
-    switch(action) {
-        case 'login': return 'var(--success)';
-        case 'logout': return 'var(--error)';
-        case 'pageview': return 'var(--level-a2)';
-        case 'module_complete': return 'var(--level-a1)';
-        default: return 'var(--text-primary)';
-    }
-}
-
-setInterval(() => {
-    if (document.getElementById('admin-sessions')?.classList.contains('active')) {
-        refreshSessions();
-    }
-}, 30000);
-
-// ==================== UTILITY FUNCTIONS ====================
 
 function formatDuration(seconds) {
     const hours = Math.floor(seconds / 3600);
@@ -3190,44 +3105,11 @@ function formatDuration(seconds) {
     }
 }
 
-// ==================== MODIFICA FUNZIONI ESISTENTI ====================
-
-// Sovrascrivi login esistente per aggiungere tracking
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-    const email = document.getElementById('loginEmail').value;
-    const name = email.split('@')[0].replace(/\./g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-
-    setTimeout(() => {
-        startSession(email, name);
-    }, 100);
-});
-
-// Sovrascrivi logout esistente
-const originalLogout = logout;
-logout = function() {
-    endSession();
-    originalLogout();
+// ==================== INIT ====================
+window.onload = function() {
+    initDB();
 };
-
-// Tracking navigazione pagine
-window.addEventListener('beforeunload', function() {
-    updateSessionActivity();
-});
-
-// Inizializza DB attivit
-initActivityDB();
-
-// Aggiungi CSS per animazioni
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-`;
-document.head.appendChild(style);
 </script>
 
 </body>
 </html>
-
