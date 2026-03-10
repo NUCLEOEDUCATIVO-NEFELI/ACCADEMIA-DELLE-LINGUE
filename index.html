@@ -675,6 +675,7 @@
         }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
@@ -1790,6 +1791,13 @@
             <div class="nav-item" onclick="showAdminSection('admin-passwords')" id="nav-admin-passwords">
                 <span>🔐</span><span>Generatore Password</span>
             </div>
+            <div class="nav-item" onclick="showAdminSection('admin-activity')" id="nav-admin-activity">
+                <span>📊</span><span>Monitoraggio Attività</span>
+            </div>
+            <div class="nav-item" onclick="showAdminSection('admin-sessions')" id="nav-admin-sessions">
+                <span>🟢</span><span>Sessioni Attive</span>
+            </div>
+
             <div class="menu-category">Sistema</div>
             <div class="nav-item" onclick="backToLogin()">
                 <span>🎓</span><span>Torna alla Piattaforma</span>
@@ -1930,7 +1938,139 @@
             </div>
 
             <!-- ADMIN PASSWORDS -->
-            <div id="admin-passwords" class="section">
+            
+            <!-- ADMIN ACTIVITY MONITORING -->
+            <div id="admin-activity" class="section">
+                <div class="breadcrumbs">
+                    <span onclick="showAdminSection('admin-home')" style="cursor: pointer;">Dashboard</span> / <strong>Monitoraggio Attività</strong>
+                </div>
+                <div style="margin:24px 0;">
+                    <h1 class="section-title">📊 Monitoraggio Attività Studenti</h1>
+                    <p class="section-subtitle">Tracciamento completo delle attività degli studenti sulla piattaforma</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Sessioni Oggi</div>
+                        <div class="stat-value" id="stat-sessions-today">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Attivi Adesso</div>
+                        <div class="stat-value" id="stat-active-now">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Totale Attività</div>
+                        <div class="stat-value" id="stat-total-activities">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Tempo Medio Sessione</div>
+                        <div class="stat-value" id="stat-avg-session-time">0m</div>
+                    </div>
+                </div>
+
+                <!-- Activity Log -->
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                            <span>📋 Log Attività</span>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <select id="activity-filter" onchange="filterActivities()" style="padding: 6px 12px; border: 1px solid var(--border); font-family: inherit;">
+                                    <option value="all">Tutte le azioni</option>
+                                    <option value="login">Login</option>
+                                    <option value="logout">Logout</option>
+                                    <option value="pageview">Visualizzazione pagine</option>
+                                    <option value="module_start">Inizio modulo</option>
+                                    <option value="module_complete">Completamento</option>
+                                </select>
+                                <button class="btn btn-success" onclick="exportActivities()" style="width: auto; padding: 8px 16px; font-size: 0.85rem;">📊 Esporta</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <table class="data-table" id="activity-table">
+                            <thead>
+                                <tr>
+                                    <th>Data/Ora</th>
+                                    <th>Studente</th>
+                                    <th>Email</th>
+                                    <th>Azione</th>
+                                    <th>Dettaglio</th>
+                                    <th>Durata</th>
+                                    <th>IP</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Top Pages and Students -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px; margin-top: 24px;">
+                    <div class="card">
+                        <div class="card-header">📈 Pagine Più Visitate</div>
+                        <div class="card-body" id="top-pages-list">
+                            <div style="color: var(--text-secondary); text-align: center;">Nessun dato disponibile</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">🏆 Studenti Più Attivi (Oggi)</div>
+                        <div class="card-body" id="top-students-list">
+                            <div style="color: var(--text-secondary); text-align: center;">Nessun attività oggi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMIN ACTIVE SESSIONS -->
+            <div id="admin-sessions" class="section">
+                <div class="breadcrumbs">
+                    <span onclick="showAdminSection('admin-home')" style="cursor: pointer;">Dashboard</span> / <strong>Sessioni Attive</strong>
+                </div>
+                <div style="margin:24px 0;">
+                    <h1 class="section-title">🟢 Sessioni Attive</h1>
+                    <p class="section-subtitle">Monitora le sessioni degli studenti connessi in tempo reale</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                            <span>Sessioni in corso (<span id="active-count">0</span>) - Ultimo aggiornamento: <span id="last-update">--:--</span></span>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn" onclick="refreshSessions()" style="width: auto; padding: 8px 16px; font-size: 0.85rem;">🔄 Aggiorna</button>
+                                <button class="btn btn-danger" onclick="terminateAllSessions()" style="width: auto; padding: 8px 16px; font-size: 0.85rem;">⛔ Termina Tutte</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <table class="data-table" id="sessions-table">
+                            <thead>
+                                <tr>
+                                    <th>Studente</th>
+                                    <th>Email</th>
+                                    <th>Inizio</th>
+                                    <th>Durata</th>
+                                    <th>Pagina Corrente</th>
+                                    <th>Stato</th>
+                                    <th>Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Real-time Activity Log -->
+                <div class="card" style="margin-top: 24px;">
+                    <div class="card-header">📡 Log in Tempo Reale</div>
+                    <div class="card-body">
+                        <div id="real-time-activity" style="max-height: 300px; overflow-y: auto; font-family: monospace; font-size: 0.85rem; background: var(--bg-primary); padding: 12px; border: 1px solid var(--border);">
+                            <div style="color: var(--text-secondary); text-align: center; padding: 20px;">In attesa di attività...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div id="admin-passwords" class="section">
                 <div class="breadcrumbs">
                     <span onclick="showAdminSection('admin-home')" style="cursor: pointer;">Dashboard</span> / <strong>Generatore Password</strong>
                 </div>
@@ -2198,6 +2338,8 @@ function showAdminSection(sectionId) {
     if (sectionId === 'admin-requests') loadAdminRequests();
     if (sectionId === 'admin-users') loadAdminUsers();
     if (sectionId === 'admin-scores') loadAdminScores();
+    if (sectionId === 'admin-activity') loadAdminActivity();
+    if (sectionId === 'admin-sessions') loadAdminSessions();
 }
 
 function showLevel(level) {
@@ -2561,7 +2703,531 @@ window.onload = function() {
     initDB();
     checkPasswordStrength();
 };
+
+// ==================== ACTIVITY MONITORING SYSTEM ====================
+
+// Struttura dati per le attività
+function initActivityDB() {
+    if (!db.activities) db.activities = [];
+    if (!db.sessions) db.sessions = [];
+    if (!db.activeSessions) db.activeSessions = [];
+    saveDB();
+}
+
+// Traccia attività studente
+function trackActivity(userEmail, userName, action, detail, duration = 0) {
+    const activity = {
+        id: 'act_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        userEmail: userEmail,
+        userName: userName,
+        action: action,
+        detail: detail,
+        timestamp: new Date().toISOString(),
+        duration: duration,
+        ip: '127.0.0.1',
+        userAgent: navigator.userAgent,
+        sessionId: getCurrentSessionId()
+    };
+
+    if (!db.activities) db.activities = [];
+    db.activities.push(activity);
+
+    if (db.activities.length > 1000) {
+        db.activities = db.activities.slice(-1000);
+    }
+
+    saveDB();
+    updateRealTimeLog(activity);
+}
+
+// Gestione sessioni
+function startSession(userEmail, userName) {
+    const sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    const session = {
+        id: sessionId,
+        userEmail: userEmail,
+        userName: userName,
+        startTime: new Date().toISOString(),
+        lastActivity: new Date().toISOString(),
+        currentPage: window.location.pathname,
+        isActive: true,
+        ip: '127.0.0.1',
+        userAgent: navigator.userAgent
+    };
+
+    if (!db.activeSessions) db.activeSessions = [];
+    db.activeSessions.push(session);
+    saveDB();
+
+    localStorage.setItem('current_session_id', sessionId);
+    localStorage.setItem('session_start', session.startTime);
+
+    trackActivity(userEmail, userName, 'login', 'Accesso alla piattaforma');
+
+    return sessionId;
+}
+
+function endSession(sessionId = null) {
+    const sid = sessionId || localStorage.getItem('current_session_id');
+    if (!sid) return;
+
+    const session = db.activeSessions ? db.activeSessions.find(s => s.id === sid) : null;
+    if (session) {
+        const duration = Math.floor((new Date() - new Date(session.startTime)) / 1000);
+        trackActivity(session.userEmail, session.userName, 'logout', 'Uscita dalla piattaforma', duration);
+
+        if (!db.sessions) db.sessions = [];
+        db.sessions.push({
+            ...session,
+            endTime: new Date().toISOString(),
+            duration: duration
+        });
+
+        db.activeSessions = db.activeSessions.filter(s => s.id !== sid);
+        saveDB();
+    }
+
+    localStorage.removeItem('current_session_id');
+    localStorage.removeItem('session_start');
+}
+
+function getCurrentSessionId() {
+    return localStorage.getItem('current_session_id') || 'unknown';
+}
+
+function updateSessionActivity(page = null) {
+    const sid = localStorage.getItem('current_session_id');
+    if (!sid || !db.activeSessions) return;
+
+    const session = db.activeSessions.find(s => s.id === sid);
+    if (session) {
+        session.lastActivity = new Date().toISOString();
+        if (page) session.currentPage = page;
+        saveDB();
+    }
+}
+
+// Tracciamento pagine e tempo
+let pageStartTime = Date.now();
+let currentPage = window.location.pathname;
+
+function trackPageView(pageName, pageUrl) {
+    const duration = Math.floor((Date.now() - pageStartTime) / 1000);
+
+    if (currentPage && currentPage !== pageUrl) {
+        const userEmail = document.getElementById('loginEmail')?.value || 'unknown';
+        const userName = document.getElementById('userNameDisplay')?.textContent || 'Studente';
+
+        if (userEmail !== 'unknown') {
+            trackActivity(userEmail, userName, 'pageview', currentPage, duration);
+        }
+    }
+
+    pageStartTime = Date.now();
+    currentPage = pageUrl;
+    updateSessionActivity(pageUrl);
+}
+
+// Page Visibility API
+document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden') {
+        localStorage.setItem('page_hidden_time', Date.now().toString());
+    } else {
+        const hiddenTime = localStorage.getItem('page_hidden_time');
+        if (hiddenTime) {
+            const awayTime = Date.now() - parseInt(hiddenTime);
+            pageStartTime += awayTime;
+            localStorage.removeItem('page_hidden_time');
+        }
+    }
+});
+
+// Tracciamento interazioni
+let activityTimeout;
+let isActive = true;
+
+function trackUserInteraction() {
+    if (!isActive) {
+        isActive = true;
+        updateSessionActivity();
+    }
+
+    clearTimeout(activityTimeout);
+    activityTimeout = setTimeout(() => {
+        isActive = false;
+    }, 300000);
+}
+
+document.addEventListener('click', trackUserInteraction);
+document.addEventListener('keydown', trackUserInteraction);
+document.addEventListener('scroll', trackUserInteraction);
+document.addEventListener('mousemove', trackUserInteraction);
+
+// ==================== ADMIN ACTIVITY FUNCTIONS ====================
+
+function loadAdminActivity() {
+    updateActivityStats();
+    renderActivityTable();
+    renderTopPages();
+    renderTopStudents();
+}
+
+function updateActivityStats() {
+    const today = new Date().toDateString();
+    const todayActivities = db.activities ? db.activities.filter(a => 
+        new Date(a.timestamp).toDateString() === today
+    ) : [];
+
+    const activeSessions = db.activeSessions || [];
+    const totalActivities = db.activities ? db.activities.length : 0;
+
+    let avgTime = 0;
+    if (db.sessions && db.sessions.length > 0) {
+        const totalTime = db.sessions.reduce((sum, s) => sum + (s.duration || 0), 0);
+        avgTime = Math.floor(totalTime / db.sessions.length / 60);
+    }
+
+    const statSessionsToday = document.getElementById('stat-sessions-today');
+    const statActiveNow = document.getElementById('stat-active-now');
+    const statTotalActivities = document.getElementById('stat-total-activities');
+    const statAvgSessionTime = document.getElementById('stat-avg-session-time');
+
+    if (statSessionsToday) statSessionsToday.textContent = todayActivities.filter(a => a.action === 'login').length;
+    if (statActiveNow) statActiveNow.textContent = activeSessions.length;
+    if (statTotalActivities) statTotalActivities.textContent = totalActivities;
+    if (statAvgSessionTime) statAvgSessionTime.textContent = avgTime + 'm';
+}
+
+function renderActivityTable(filter = 'all') {
+    const tbody = document.querySelector('#activity-table tbody');
+    if (!tbody) return;
+
+    let activities = db.activities || [];
+    activities = activities.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 100);
+
+    if (filter !== 'all') {
+        activities = activities.filter(a => a.action === filter);
+    }
+
+    if (activities.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuna attivit registrata</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = activities.map(a => {
+        const date = new Date(a.timestamp);
+        const timeStr = date.toLocaleTimeString('it-IT');
+        const dateStr = date.toLocaleDateString('it-IT');
+
+        let actionBadge = '';
+        switch(a.action) {
+            case 'login': actionBadge = '<span class="badge badge-approved"> Login</span>'; break;
+            case 'logout': actionBadge = '<span class="badge badge-pending"> Logout</span>'; break;
+            case 'pageview': actionBadge = '<span class="badge" style="background: #dbeafe; color: #1e40af;"> Pagina</span>'; break;
+            case 'module_start': actionBadge = '<span class="badge" style="background: #fef3c7; color: #92400e;"> Inizio</span>'; break;
+            case 'module_complete': actionBadge = '<span class="badge badge-approved"> Completato</span>'; break;
+            default: actionBadge = '<span class="badge">' + a.action + '</span>';
+        }
+
+        const duration = a.duration ? formatDuration(a.duration) : '-';
+
+        return `
+            <tr>
+                <td>${dateStr}<br><small style="color: var(--text-secondary);">${timeStr}</small></td>
+                <td>${a.userName}</td>
+                <td>${a.userEmail}</td>
+                <td>${actionBadge}</td>
+                <td>${a.detail}</td>
+                <td>${duration}</td>
+                <td><small style="color: var(--text-secondary);">${a.ip}</small></td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function renderTopPages() {
+    const container = document.getElementById('top-pages-list');
+    if (!container) return;
+
+    const pageViews = {};
+    (db.activities || []).forEach(a => {
+        if (a.action === 'pageview') {
+            pageViews[a.detail] = (pageViews[a.detail] || 0) + 1;
+        }
+    });
+
+    const sorted = Object.entries(pageViews).sort((a, b) => b[1] - a[1]).slice(0, 10);
+
+    if (sorted.length === 0) {
+        container.innerHTML = '<div style="color: var(--text-secondary); text-align: center;">Nessun dato disponibile</div>';
+        return;
+    }
+
+    const max = sorted[0][1];
+    container.innerHTML = sorted.map(([page, count]) => {
+        const percentage = (count / max) * 100;
+        return `
+            <div style="margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 0.9rem;">
+                    <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 70%;">${page}</span>
+                    <span style="font-weight: 600;">${count}</span>
+                </div>
+                <div style="background: var(--bg-primary); height: 8px; border-radius: 4px; overflow: hidden;">
+                    <div style="background: var(--primary); height: 100%; width: ${percentage}%; transition: width 0.3s;"></div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function renderTopStudents() {
+    const container = document.getElementById('top-students-list');
+    if (!container) return;
+
+    const today = new Date().toDateString();
+    const studentActivity = {};
+
+    (db.activities || []).forEach(a => {
+        if (new Date(a.timestamp).toDateString() === today) {
+            if (!studentActivity[a.userEmail]) {
+                studentActivity[a.userEmail] = { name: a.userName, count: 0, lastActivity: a.timestamp };
+            }
+            studentActivity[a.userEmail].count++;
+            if (new Date(a.timestamp) > new Date(studentActivity[a.userEmail].lastActivity)) {
+                studentActivity[a.userEmail].lastActivity = a.timestamp;
+            }
+        }
+    });
+
+    const sorted = Object.entries(studentActivity).sort((a, b) => b[1].count - a[1].count).slice(0, 10);
+
+    if (sorted.length === 0) {
+        container.innerHTML = '<div style="color: var(--text-secondary); text-align: center;">Nessun attivit oggi</div>';
+        return;
+    }
+
+    container.innerHTML = sorted.map(([email, data]) => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg-primary); margin-bottom: 8px; border-left: 3px solid var(--primary);">
+            <div>
+                <div style="font-weight: 600;">${data.name}</div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">${email}</div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-weight: 600; color: var(--primary);">${data.count} azioni</div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary);">Ultima: ${new Date(data.lastActivity).toLocaleTimeString('it-IT')}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function filterActivities() {
+    const filter = document.getElementById('activity-filter');
+    if (filter) {
+        renderActivityTable(filter.value);
+    }
+}
+
+function exportActivities() {
+    if (!db.activities || db.activities.length === 0) {
+        alert('Nessuna attivit da esportare');
+        return;
+    }
+
+    const data = db.activities.map(a => ({
+        Data: new Date(a.timestamp).toLocaleString('it-IT'),
+        Studente: a.userName,
+        Email: a.userEmail,
+        Azione: a.action,
+        Dettaglio: a.detail,
+        Durata: a.duration ? formatDuration(a.duration) : '',
+        IP: a.ip
+    }));
+
+    downloadCSV(data, 'attivita_studenti');
+}
+
+// ==================== ADMIN SESSIONS FUNCTIONS ====================
+
+function loadAdminSessions() {
+    renderSessionsTable();
+    updateRealTimeLog();
+}
+
+function renderSessionsTable() {
+    const tbody = document.querySelector('#sessions-table tbody');
+    const activeSessions = db.activeSessions || [];
+
+    const activeCount = document.getElementById('active-count');
+    const lastUpdate = document.getElementById('last-update');
+
+    if (activeCount) activeCount.textContent = activeSessions.length;
+    if (lastUpdate) lastUpdate.textContent = new Date().toLocaleTimeString('it-IT');
+
+    if (!tbody) return;
+
+    if (activeSessions.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuna sessione attiva</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = activeSessions.map(s => {
+        const duration = Math.floor((new Date() - new Date(s.startTime)) / 1000);
+        const lastActivity = Math.floor((new Date() - new Date(s.lastActivity)) / 1000);
+
+        let status = '<span class="badge badge-approved"> Attivo</span>';
+        if (lastActivity > 300) status = '<span class="badge badge-pending"> Inattivo</span>';
+        if (lastActivity > 600) status = '<span class="badge" style="background: #fee2e2; color: #991b1b;"> Idle</span>';
+
+        return `
+            <tr>
+                <td><strong>${s.userName}</strong></td>
+                <td>${s.userEmail}</td>
+                <td>${new Date(s.startTime).toLocaleTimeString('it-IT')}</td>
+                <td>${formatDuration(duration)}</td>
+                <td><code style="background: var(--bg-primary); padding: 2px 6px; font-size: 0.8rem;">${s.currentPage || 'N/D'}</code></td>
+                <td>${status}</td>
+                <td>
+                    <button class="btn btn-danger" onclick="terminateSession('${s.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem;">Termina</button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function terminateSession(sessionId) {
+    if (!confirm('Sei sicuro di voler terminare questa sessione?')) return;
+
+    endSession(sessionId);
+    renderSessionsTable();
+    updateActivityStats();
+}
+
+function terminateAllSessions() {
+    if (!confirm(' ATTENZIONE: Vuoi terminare TUTTE le sessioni attive?')) return;
+
+    if (db.activeSessions) {
+        db.activeSessions.forEach(s => endSession(s.id));
+        db.activeSessions = [];
+        saveDB();
+    }
+
+    renderSessionsTable();
+    updateActivityStats();
+    alert('Tutte le sessioni sono state terminate');
+}
+
+function refreshSessions() {
+    renderSessionsTable();
+    const now = new Date();
+    if (db.activeSessions) {
+        const expired = db.activeSessions.filter(s => {
+            const lastActivity = new Date(s.lastActivity);
+            return (now - lastActivity) > 1800000;
+        });
+
+        expired.forEach(s => {
+            trackActivity(s.userEmail, s.userName, 'logout', 'Sessione scaduta per inattivit', 
+                Math.floor((now - new Date(s.startTime)) / 1000));
+        });
+
+        db.activeSessions = db.activeSessions.filter(s => !expired.find(e => e.id === s.id));
+        saveDB();
+    }
+}
+
+function updateRealTimeLog(activity = null) {
+    const container = document.getElementById('real-time-activity');
+    if (!container) return;
+
+    if (activity) {
+        const time = new Date(activity.timestamp).toLocaleTimeString('it-IT');
+        const div = document.createElement('div');
+        div.style.cssText = 'padding: 8px; border-bottom: 1px solid var(--border); animation: fadeIn 0.3s;';
+        div.innerHTML = `
+            <span style="color: var(--text-secondary);">[${time}]</span>
+            <strong>${activity.userName}</strong>
+            <span style="color: ${getActionColor(activity.action)};">${activity.action}</span>
+            ${activity.detail ? ' ' + activity.detail : ''}
+        `;
+
+        container.insertBefore(div, container.firstChild);
+
+        while (container.children.length > 50) {
+            container.removeChild(container.lastChild);
+        }
+    }
+}
+
+function getActionColor(action) {
+    switch(action) {
+        case 'login': return 'var(--success)';
+        case 'logout': return 'var(--error)';
+        case 'pageview': return 'var(--level-a2)';
+        case 'module_complete': return 'var(--level-a1)';
+        default: return 'var(--text-primary)';
+    }
+}
+
+setInterval(() => {
+    if (document.getElementById('admin-sessions')?.classList.contains('active')) {
+        refreshSessions();
+    }
+}, 30000);
+
+// ==================== UTILITY FUNCTIONS ====================
+
+function formatDuration(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+
+    if (hours > 0) {
+        return `${hours}h ${minutes}m ${secs}s`;
+    } else if (minutes > 0) {
+        return `${minutes}m ${secs}s`;
+    } else {
+        return `${secs}s`;
+    }
+}
+
+// ==================== MODIFICA FUNZIONI ESISTENTI ====================
+
+// Sovrascrivi login esistente per aggiungere tracking
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    const email = document.getElementById('loginEmail').value;
+    const name = email.split('@')[0].replace(/\./g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+    setTimeout(() => {
+        startSession(email, name);
+    }, 100);
+});
+
+// Sovrascrivi logout esistente
+const originalLogout = logout;
+logout = function() {
+    endSession();
+    originalLogout();
+};
+
+// Tracking navigazione pagine
+window.addEventListener('beforeunload', function() {
+    updateSessionActivity();
+});
+
+// Inizializza DB attivit
+initActivityDB();
+
+// Aggiungi CSS per animazioni
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+`;
+document.head.appendChild(style);
 </script>
 
 </body>
 </html>
+
