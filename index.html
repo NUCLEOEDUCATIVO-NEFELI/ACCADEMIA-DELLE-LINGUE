@@ -2359,6 +2359,11 @@ function showSection(sectionId) {
     
     const navItem = document.getElementById('nav-' + sectionId);
     if (navItem) navItem.classList.add('active');
+    
+    // Carica i risultati quando si naviga nella sezione results
+    if (sectionId === 'results') {
+        loadResults();
+    }
 }
 
 function showAdminSection(sectionId) {
@@ -2415,8 +2420,27 @@ document.addEventListener('DOMContentLoaded', function() {
 let userResults = [];
 
 function loadResults() {
-    const userEmail = document.getElementById('loginEmail').value.toLowerCase().trim() || '';
-    const userScores = db.scores ? db.scores.filter(s => s.userEmail.toLowerCase() === userEmail) : [];
+    // Ottieni l'email dell'utente corrente da localStorage (più affidabile)
+    let userEmail = localStorage.getItem('current_user_email') || '';
+    
+    // Fallback al campo login se disponibile
+    if (!userEmail && document.getElementById('loginEmail')) {
+        userEmail = document.getElementById('loginEmail').value.toLowerCase().trim();
+    }
+    
+    if (!userEmail) {
+        console.error('Nessun utente loggato trovato');
+        document.getElementById('resultsTableBody').innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-secondary); padding: 2rem;">⚠️ Errore: Nessun utente loggato. Effettua nuovamente il login.</td></tr>';
+        return;
+    }
+    
+    const userScores = db.scores ? db.scores.filter(s => s.userEmail && s.userEmail.toLowerCase() === userEmail.toLowerCase()) : [];
+    
+    // Aggiorna anche il nome dell'utente nel welcome se non è già impostato
+    const userName = localStorage.getItem('current_user_name');
+    if (userName && document.getElementById('welcomeName')) {
+        document.getElementById('welcomeName').textContent = userName;
+    }
     
     userResults = Object.keys(moduleInfo).map(url => {
         const info = moduleInfo[url];
@@ -2430,6 +2454,9 @@ function loadResults() {
     });
     
     renderResultsTable(userResults);
+    
+    // Aggiorna anche le statistiche
+    updateStats();
 }
 
 function renderResultsTable(results) {
