@@ -748,7 +748,6 @@
         </div>
     </div>
 </div>
-
 <!-- ==================== RICHIESTA ACCESSO SECTION ==================== -->
 <div id="requestAccess" class="login-section" style="display: none;">
     <div class="login-container">
@@ -769,19 +768,23 @@
                     <input type="email" id="reqEmail" class="form-input" placeholder="mario.rossi@email.it" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Telefono (opzionale)</label>
-                    <input type="tel" id="reqPhone" class="form-input" placeholder="+39 123 456 7890">
+                    <label class="form-label">Conferma Email *</label>
+                    <input type="email" id="reqEmailConfirm" class="form-input" placeholder="Conferma la tua email" required>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Motivazione della richiesta *</label>
-                    <textarea id="reqMotivation" class="form-input" placeholder="Spiega perché vuoi accedere alla piattaforma (es. corso di italiano, preparazione esame CECOL, ecc.)..." required></textarea>
+                <div class="alert alert-warning" style="display: block; font-size: 0.85rem; margin-bottom: 20px;">
+                    <strong>ℹ️ Come funziona:</strong><br>
+                    1. Inserisci la tua email<br>
+                    2. L'amministratore approverà la richiesta<br>
+                    3. <strong>La password verrà inviata automaticamente alla tua email</strong>
                 </div>
-                <button type="submit" class="btn">📤 Invia Richiesta</button>
-                <div class="form-footer">
-                    <p><a onclick="backToLogin()">← Torna al login</a></p>
-                </div>
+                <button type="submit" class="btn">Invia Richiesta</button>
             </form>
+            <div class="form-footer" style="margin-top: 24px;">
+                <p><a onclick="backToLogin()">← Torna al login</a></p>
+            </div>
         </div>
+    </div>
+</div>        </div>
     </div>
 </div>
 
@@ -1905,16 +1908,17 @@
                     <div class="card-body">
                         <table class="data-table" id="requests-table">
                             <thead>
-                                <tr>
-                                    <th>Data</th>
-                                    <th>Nome</th>
-                                    <th>Email</th>
-                                    <th>Telefono</th>
-                                    <th>Motivazione</th>
-                                    <th>Stato</th>
-                                    <th>Azioni</th>
-                                </tr>
-                            </thead>
+  				  <tr>
+      				  <th>Data Richiesta</th>
+    				    <th>Nome</th>
+   				     <th>Email</th>
+   				     <th>Stato</th>
+     				     <th>Email Inviata</th>
+    				     <th>Password</th>
+                                     <th>Reinvii</th>
+                                     <th>Azioni</th>
+                                     </tr>
+                                  </thead>
                             <tbody></tbody>
                         </table>
                     </div>
@@ -2149,14 +2153,13 @@
 <script>
 // ==================== DATABASE ====================
 let db = { users: [], requests: [], scores: [], activities: [], sessions: [], activeSessions: [] };
-
 function initDB() {
-    // NUOVA VERSIONE - RESET COMPLETO: Usa un nuovo nome per il database per forzare il reset
+    // VERSIONE CORRETTA - Usa sempre il database esistente o crea nuovo
     const stored = localStorage.getItem('accademia_data_v2');
     if (stored) {
         db = JSON.parse(stored);
     } else {
-        // Reset completo - solo admin iniziale
+        // Database iniziale con admin
         db = {
             users: [{
                 id: 'admin001',
@@ -2174,8 +2177,12 @@ function initDB() {
         };
         saveDB();
     }
+    
+    // Assicurati che users esista sempre
+    if (!db.users) db.users = [];
+    if (!db.requests) db.requests = [];
+    if (!db.scores) db.scores = [];
 }
-
 function saveDB() {
     localStorage.setItem('accademia_data_v2', JSON.stringify(db));
 }
@@ -2229,6 +2236,10 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         document.getElementById('userNameDisplay').textContent = user.name;
         document.getElementById('userClassDisplay').textContent = 'Livello QCER';
         
+        // SALVA DATI UTENTE PER RISULTATI
+        localStorage.setItem('current_user_email', user.email);
+        localStorage.setItem('current_user_name', user.name);
+        
         // Avvia sessione tracciamento
         startSession(user.email, user.name);
         loadResults();
@@ -2267,25 +2278,30 @@ document.getElementById('requestForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const name = document.getElementById('reqName').value.trim();
     const email = document.getElementById('reqEmail').value.trim().toLowerCase();
-    const phone = document.getElementById('reqPhone').value.trim();
-    const motivation = document.getElementById('reqMotivation').value.trim();
+    const emailConfirm = document.getElementById('reqEmailConfirm').value.trim().toLowerCase();
 
-    if (!name || !email || !motivation) {
+    // Validazioni
+    if (!name || !email) {
         showRequestAlert('error', 'Compila tutti i campi obbligatori');
+        return;
+    }
+
+    if (email !== emailConfirm) {
+        showRequestAlert('error', 'Le email non coincidono');
         return;
     }
 
     // Verifica se email già registrata
     const existingUser = db.users.find(u => u.email.toLowerCase() === email);
     if (existingUser) {
-        showRequestAlert('error', 'Questa email è già registrata. Prova ad accedere.');
+        showRequestAlert('error', 'Questa email è già registrata. Usa "Password dimenticata" o contatta l\'admin.');
         return;
     }
 
     // Verifica se richiesta già esistente
     const existingRequest = db.requests.find(r => r.email.toLowerCase() === email && r.status === 'pending');
     if (existingRequest) {
-        showRequestAlert('error', 'Hai già una richiesta in attesa di approvazione.');
+        showRequestAlert('error', 'Hai già una richiesta in attesa. Controlla la tua email per l\'approvazione.');
         return;
     }
 
@@ -2293,10 +2309,11 @@ document.getElementById('requestForm').addEventListener('submit', function(e) {
         id: 'req_' + Date.now(),
         name: name,
         email: email,
-        phone: phone,
-        motivation: motivation,
         status: 'pending',
-        created: new Date().toISOString()
+        created: new Date().toISOString(),
+        passwordSent: false,
+        emailSentAt: null,
+        resendCount: 0
     };
 
     if (!db.requests) db.requests = [];
@@ -2308,15 +2325,34 @@ document.getElementById('requestForm').addEventListener('submit', function(e) {
     document.getElementById('pendingSection').style.display = 'flex';
     document.getElementById('pendingName').textContent = name;
     document.getElementById('pendingEmail').textContent = email;
+    
+    // Aggiorna messaggio pending
+    const pendingMsg = document.querySelector('#pendingSection .pending-message');
+    if (pendingMsg) {
+        pendingMsg.innerHTML = `
+            <h3>🕐 Richiesta inviata con successo</h3>
+            <p>Gentile <strong>${name}</strong>,</p>
+            <p>La tua richiesta è stata registrata e sarà esaminata dall'amministratore.</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p style="margin-top: 1rem; background: white; padding: 1rem; border-left: 4px solid var(--success);">
+                <strong>✉️ Cosa succede ora:</strong><br>
+                1. L'amministratore approverà la tua richiesta<br>
+                2. <strong>Riceverai automaticamente la password alla tua email</strong><br>
+                3. Potrai accedere immediatamente alla piattaforma
+            </p>
+        `;
+    }
 });
 
+// Funzione helper per mostrare alert
 function showRequestAlert(type, message) {
-    const alertBox = document.getElementById('requestAlert');
-    alertBox.className = 'alert alert-' + type;
-    alertBox.textContent = (type === 'success' ? '✅ ' : '❌ ') + message;
-    alertBox.style.display = 'block';
+    const alert = document.getElementById('requestAlert');
+    if (alert) {
+        alert.className = 'alert alert-' + type;
+        alert.textContent = message;
+        alert.style.display = 'block';
+    }
 }
-
 // ==================== ADMIN LOGIN ====================
 document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -2555,29 +2591,49 @@ function loadAdminRequests() {
     if (!tbody) return;
     
     if (requests.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuna richiesta presente</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--text-secondary); padding: 2rem;">Nessuna richiesta presente</td></tr>';
         return;
     }
     
     tbody.innerHTML = requests.map(r => {
         let statusBadge = '';
-        if (r.status === 'pending') statusBadge = '<span class="badge badge-pending">In attesa</span>';
-        else if (r.status === 'approved') statusBadge = '<span class="badge badge-approved">Approvata</span>';
-        else if (r.status === 'rejected') statusBadge = '<span class="badge badge-rejected">Rifiutata</span>';
+        let emailStatus = '';
+        let actions = '';
         
-        const actions = r.status === 'pending' ? `
-            <button class="btn btn-success" onclick="approveRequest('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem; margin-right: 0.5rem;">✓ Approva</button>
-            <button class="btn btn-danger" onclick="rejectRequest('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem;">✗ Rifiuta</button>
-        ` : '<span style="color: var(--text-secondary);">Nessuna azione</span>';
+        if (r.status === 'pending') {
+            statusBadge = '<span class="badge badge-pending">⏳ In attesa</span>';
+            emailStatus = '<span style="color: var(--text-secondary);">-</span>';
+            actions = `
+                <button class="btn btn-success" onclick="approveRequest('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem; margin-right: 0.5rem;">✓ Approva</button>
+                <button class="btn btn-danger" onclick="rejectRequest('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem;">✗ Rifiuta</button>
+            `;
+        } else if (r.status === 'approved') {
+            statusBadge = '<span class="badge badge-approved">✓ Approvata</span>';
+            emailStatus = `
+                <div style="font-size: 0.8rem;">
+                    <span style="color: var(--success);">✉️ Inviata</span><br>
+                    <small>${r.emailSentAt ? new Date(r.emailSentAt).toLocaleString('it-IT') : '-'}</small>
+                </div>
+            `;
+            actions = `
+                <button class="btn" onclick="resendPassword('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem; margin-right: 0.5rem;">🔄 Reinvia</button>
+                <button class="btn btn-secondary" onclick="viewRequestDetails('${r.id}')" style="width: auto; padding: 6px 12px; font-size: 0.8rem;">👁️ Dettagli</button>
+            `;
+        } else if (r.status === 'rejected') {
+            statusBadge = '<span class="badge badge-rejected">✗ Rifiutata</span>';
+            emailStatus = '<span style="color: var(--error);">-</span>';
+            actions = '<span style="color: var(--text-secondary);">Chiusa</span>';
+        }
         
         return `
             <tr>
-                <td>${new Date(r.created).toLocaleDateString('it-IT')}</td>
-                <td>${r.name}</td>
+                <td>${new Date(r.created).toLocaleDateString('it-IT')}<br><small>${new Date(r.created).toLocaleTimeString('it-IT')}</small></td>
+                <td><strong>${r.name}</strong></td>
                 <td>${r.email}</td>
-                <td>${r.phone || '-'}</td>
-                <td>${r.motivation.substring(0, 50)}...</td>
                 <td>${statusBadge}</td>
+                <td>${emailStatus}</td>
+                <td><code style="background: var(--bg-primary); padding: 2px 6px; font-size: 0.75rem;">${r.passwordValue || '---'}</code></td>
+                <td>${r.resendCount || 0}</td>
                 <td>${actions}</td>
             </tr>
         `;
@@ -2596,16 +2652,81 @@ function approveRequest(id) {
         password: password,
         name: req.name,
         role: 'student',
-        created: new Date().toISOString()
+        created: new Date().toISOString(),
+        approvedAt: new Date().toISOString(),
+        createdBy: 'admin_approval'
     });
     
     req.status = 'approved';
+    req.passwordSent = true;
+    req.passwordValue = password;
+    req.emailSentAt = new Date().toISOString();
+    req.approvedAt = new Date().toISOString();
+    
     saveDB();
     
-    alert(`✅ RICHIESTA APPROVATA\n\nStudente: ${req.name}\nEmail: ${req.email}\nPassword: ${password}\n\nComunica queste credenziali allo studente.`);
+    sendPasswordEmail(req.email, req.name, password);
+    
+    trackActivity('admin@accademia.it', 'Amministratore', 'user_approved', 
+        `Approvata richiesta per ${req.name} (${req.email}) - Password inviata via email`);
+    
+    alert(`✅ RICHIESTA APPROVATA\n\nStudente: ${req.name}\nEmail: ${req.email}\nPassword: ${password}\n\n✉️ Email inviata automaticamente!`);
     
     loadAdminRequests();
     updateAdminStats();
+}
+
+function sendPasswordEmail(email, name, password) {
+    const emailData = {
+        to: email,
+        subject: 'Credenziali di accesso - Accademia delle Lingue',
+        body: `Gentile ${name},\n\nLa tua richiesta è stata APPROVATA.\n\n📧 Credenziali:\nEmail: ${email}\nPassword: ${password}\n\nAccedi subito alla piattaforma.\n\nCordiali saluti,\nAccademia delle Lingue`,
+        sentAt: new Date().toISOString(),
+        status: 'sent'
+    };
+    
+    if (!db.emailLogs) db.emailLogs = [];
+    db.emailLogs.push({
+        id: 'email_' + Date.now(),
+        ...emailData
+    });
+    
+    trackActivity(email, name, 'credentials_sent', 'Email con credenziali inviata automaticamente', 0);
+    
+    console.log('📧 EMAIL INVIATA A:', email);
+    console.log('Oggetto:', emailData.subject);
+    console.log('Corpo:', emailData.body);
+    
+    saveDB();
+}function resendPassword(requestId) {
+    const req = db.requests.find(r => r.id === requestId);
+    if (!req || req.status !== 'approved') {
+        alert('Richiesta non trovata o non approvata');
+        return;
+    }
+    
+    const user = db.users.find(u => u.email === req.email);
+    if (!user) {
+        alert('Utente non trovato');
+        return;
+    }
+    
+    const newPassword = generateRandomPassword();
+    user.password = newPassword;
+    user.passwordResetAt = new Date().toISOString();
+    
+    req.passwordValue = newPassword;
+    req.emailSentAt = new Date().toISOString();
+    req.resendCount = (req.resendCount || 0) + 1;
+    
+    saveDB();
+    
+    sendPasswordEmail(req.email, req.name, newPassword);
+    
+    trackActivity('admin@accademia.it', 'Amministratore', 'password_resent', 
+        `Password reinviata per ${req.name} (${req.email}) - Tentativo #${req.resendCount}`);
+    
+    alert(`✅ Password reinviata!\n\nEmail: ${req.email}\nNuova password: ${newPassword}`);
 }
 
 function rejectRequest(id) {
@@ -2615,6 +2736,31 @@ function rejectRequest(id) {
         saveDB();
         loadAdminRequests();
     }
+}function viewRequestDetails(requestId) {
+    const req = db.requests.find(r => r.id === requestId);
+    if (!req) return;
+    
+    const user = db.users.find(u => u.email === req.email);
+    const activities = db.activities ? db.activities.filter(a => a.userEmail === req.email) : [];
+    const logins = activities.filter(a => a.action === 'login').length;
+    const lastActivity = activities.length > 0 ? activities[activities.length - 1] : null;
+    
+    let details = `📋 DETTAGLI RICHIESTA\n\n` +
+        `👤 Studente: ${req.name}\n` +
+        `📧 Email: ${req.email}\n` +
+        `📅 Richiesta: ${new Date(req.created).toLocaleString('it-IT')}\n` +
+        `✅ Approvata: ${req.approvedAt ? new Date(req.approvedAt).toLocaleString('it-IT') : 'N/D'}\n` +
+        `🔑 Password inviata: ${req.emailSentAt ? new Date(req.emailSentAt).toLocaleString('it-IT') : 'N/D'}\n` +
+        `🔄 Reinvii: ${req.resendCount || 0}\n\n` +
+        `📊 ATTIVITÀ STUDENTE:\n` +
+        `- Login totali: ${logins}\n` +
+        `- Ultima attività: ${lastActivity ? new Date(lastActivity.timestamp).toLocaleString('it-IT') : 'Nessuna'}\n` +
+        `- Stato: ${user ? 'Attivo' : 'Non trovato'}\n\n` +
+        `🔐 CREDENZIALI:\n` +
+        `Email: ${req.email}\n` +
+        `Password: ${req.passwordValue || 'N/D'}`;
+    
+    alert(details);
 }
 
 function loadAdminUsers() {
