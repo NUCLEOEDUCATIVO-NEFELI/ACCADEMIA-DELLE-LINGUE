@@ -57,6 +57,24 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
+        .exercises-btn {
+            display: inline-block;
+            margin: 1rem;
+            padding: 0.8rem 1.2rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .exercises-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -131,140 +149,6 @@
             border-radius: 0 4px 4px 0;
         }
 
-        .exercise-container {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .exercise-number {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        .exercise-text {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .option-btn {
-            padding: 0.8rem 1rem;
-            background: var(--bg-color);
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            cursor: pointer;
-            text-align: left;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-
-        .option-btn:hover {
-            border-color: var(--primary);
-            background: #e8f5e9;
-        }
-
-        .option-btn.correct {
-            background: #d4edda;
-            border-color: var(--success);
-            color: #155724;
-        }
-
-        .option-btn.wrong {
-            background: #f8d7da;
-            border-color: var(--accent);
-            color: #721c24;
-        }
-
-        .feedback {
-            margin-top: 0.5rem;
-            padding: 0.8rem;
-            border-radius: 6px;
-            display: none;
-        }
-
-        .feedback.show {
-            display: block;
-        }
-
-        .feedback.correct {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .feedback.wrong {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .fill-blank {
-            border-bottom: 2px solid var(--primary);
-            padding: 0 0.5rem;
-            min-width: 80px;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .input-answer {
-            padding: 0.5rem;
-            border: 2px solid var(--border);
-            border-radius: 4px;
-            font-size: 1rem;
-            width: 200px;
-        }
-
-        .check-btn {
-            padding: 0.5rem 1rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-left: 0.5rem;
-        }
-
-        .check-btn:hover {
-            background: #1e5c3e;
-        }
-
-        .progress-bar {
-            background: var(--border);
-            height: 8px;
-            border-radius: 4px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: var(--primary);
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s;
-        }
-
-        .score-display {
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
         @media (max-width: 480px) {
             .header h1 { font-size: 1.5rem; }
             .section h2 { font-size: 1.3rem; }
@@ -276,16 +160,43 @@
 <body>
     <header class="header">
         <h1>📚 Pronomi Diretti e Comparativi</h1>
-        <p>Teoria multilingue e esercizi interattivi</p>
+        <p>Teoria multilingue</p>
     </header>
 
     <a href="index.html" class="back-btn">← Torna alla Dashboard</a>
+    <a href="es_comp.html" class="exercises-btn">📝 Esercizi</a>
 
     <div class="container">
 
         <!-- SEZIONE TEORIA -->
         <div class="section">
-            <h2>🌍 Teoria in 17 Lingue</h2>
+            <h2>🌍 Teoria in 18 Lingue</h2>
+
+            <!-- BANGLA -->
+            <div class="language-card">
+                <div class="language-name"><span class="flag">🇧🇩</span> বাংলা (Bangla/Bengali)</div>
+                <div class="theory-content">
+                    <strong>সরাসরি উদ্দেশ্য সর্বনাম (Pronomi Diretti):</strong>
+                    <ul>
+                        <li>আমাকে (mi) - তারা আমাকে দেখে, তারা আমাকে ভালোবাসে</li>
+                        <li>তোমাকে/আপনাকে (ti) - আমি তোমাকে/আপনাকে দেখি, আমি তোমাকে/আপনাকে জানি</li>
+                        <li>তাকে/ওকে (lo/la) - আমরা তাকে/ওকে দেখি, আমরা তাকে/ওকে বুঝি</li>
+                        <li>আমাদের (ci) - তোমরা/আপনারা আমাদের দেখো, তারা আমাদের আমন্ত্রণ জানায়</li>
+                        <li>তোমাদের/আপনাদের (vi) - আমি তোমাদের/আপনাদের দেখি, তারা তোমাদের/আপনাদের সাহায্য করে</li>
+                        <li>তাদের/ওদের (li/le) - আমরা তাদের/ওদের দেখি, আমি তাদের/ওদের বুঝি</li>
+                    </ul>
+                    <strong>তুলনার ধাপ (Comparativi):</strong>
+                    <ul>
+                        <li>সর্বোচ্চ: সবচেয়ে + বিশেষণ (il più)</li>
+                        <li>বেশি: এর চেয়ে বেশি (più di)</li>
+                        <li>কম: এর চেয়ে কম (meno di)</li>
+                        <li>সমান: এর মতোই/এর সমান (tanto quanto)</li>
+                    </ul>
+                    <div class="example-box">
+                        Esempi: তারা <strong>আমাকে</strong> দেখে (Loro mi vedono)।সে <strong>আমার চেয়ে লম্বা</strong> (Lei è più alta di me)।
+                    </div>
+                </div>
+            </div>
 
             <!-- RUSSO -->
             <div class="language-card">
@@ -697,7 +608,7 @@
                         <li>相等: 和...一样 (tanto... quanto)</li>
                     </ul>
                     <div class="example-box">
-                        Esempi: 他们看见<strong>我</strong> (Loro mi vedono)۔她<strong>比我高</strong> (Lei è più alta di me)۔
+                        Esempi: 他们看见<strong>我</strong> (Loro mi vedono)۔她<strong>比我高</strong> (Lei è più alta di me)।
                     </div>
                 </div>
             </div>
@@ -754,145 +665,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- SEZIONE ESERCIZI -->
-        <div class="section">
-            <h2>📝 60 Esercizi Interattivi</h2>
-            <div class="score-display">Punteggio: <span id="score">0</span>/60</div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress"></div>
-            </div>
-
-            <div id="exercises-container">
-                <!-- ESERCIZI GENERATI VIA JS -->
-            </div>
-        </div>
     </div>
-
-    <script>
-
-        const exercises = [
-            {num: 1, tipo: 'scelta', domanda: "Completa: 'Marco ___ vede' (lui vede me)", opzioni: ['mi', 'ti', 'lo', 'ci'], risposta: 0, spiegazione: "'Mi' è il pronome diretto per la prima persona singolare."},
-            {num: 2, tipo: 'scelta', domanda: "Completa: 'Io ___ conosco' (io conosco te)", opzioni: ['mi', 'ti', 'lo', 'vi'], risposta: 1, spiegazione: "'Ti' è il pronome diretto per la seconda persona singolare."},
-            {num: 3, tipo: 'scelta', domanda: "Completa: 'Noi ___ vediamo' (noi vediamo lui)", opzioni: ['la', 'lo', 'li', 'le'], risposta: 1, spiegazione: "'Lo' è il pronome diretto maschile singolare."},
-            {num: 4, tipo: 'scelta', domanda: "Completa: 'Voi ___ ascoltate' (voi ascoltate lei)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 1, spiegazione: "'La' è il pronome diretto femminile singolare."},
-            {num: 5, tipo: 'scelta', domanda: "Completa: 'Loro ___ invitano' (loro invitano noi)", opzioni: ['mi', 'ti', 'ci', 'vi'], risposta: 2, spiegazione: "'Ci' è il pronome diretto per la prima persona plurale."},
-            {num: 6, tipo: 'scelta', domanda: "Completa: 'Io ___ capisco' (io capisco voi)", opzioni: ['ci', 'vi', 'li', 'le'], risposta: 1, spiegazione: "'Vi' è il pronome diretto per la seconda persona plurale."},
-            {num: 7, tipo: 'scelta', domanda: "Completa: 'Noi ___ vediamo' (noi vediamo loro maschi)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 2, spiegazione: "'Li' è il pronome diretto maschile plurale."},
-            {num: 8, tipo: 'scelta', domanda: "Completa: 'Io ___ incontro' (io incontro loro femmine)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 3, spiegazione: "'Le' è il pronome diretto femminile plurale."},
-            {num: 9, tipo: 'scelta', domanda: "Completa: '___ ami?' (ami me?)", opzioni: ['Mi', 'Ti', 'Lo', 'Ci'], risposta: 0, spiegazione: "'Mi' è il pronome oggetto diretto per 'me'."},
-            {num: 10, tipo: 'scelta', domanda: "Completa: '___ vedo domani' (vedo te domani)", opzioni: ['Mi', 'Ti', 'Lo', 'Vi'], risposta: 1, spiegazione: "'Ti' si riferisce a 'te'."},
-            {num: 11, tipo: 'scelta', domanda: "Completa: 'Maria ___ ama' (Maria ama lui)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 0, spiegazione: "'Lo' si riferisce a 'lui' (maschile)."},
-            {num: 12, tipo: 'scelta', domanda: "Completa: 'Paolo ___ cerca' (Paolo cerca lei)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 1, spiegazione: "'La' si riferisce a 'lei' (femminile)."},
-            {num: 13, tipo: 'scelta', domanda: "Completa: '___ chiamano sempre' (chiamano sempre noi)", opzioni: ['Mi', 'Ti', 'Ci', 'Vi'], risposta: 2, spiegazione: "'Ci' si riferisce a 'noi'."},
-            {num: 14, tipo: 'scelta', domanda: "Completa: 'Io ___ saluto' (io saluto voi tutti)", opzioni: ['ci', 'vi', 'li', 'le'], risposta: 1, spiegazione: "'Vi' si riferisce a 'voi' (plurale)."},
-            {num: 15, tipo: 'scelta', domanda: "Completa: '___ vedo al cinema' (vedo loro maschi al cinema)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 2, spiegazione: "'Li' si riferisce a 'loro' maschile."},
-            {num: 16, tipo: 'scelta', domanda: "Completa: '___ ascolto attentamente' (ascolto loro femmine attentamente)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 3, spiegazione: "'Le' si riferisce a 'loro' femminile."},
-            {num: 17, tipo: 'scelta', domanda: "Trasforma: 'Vedo Marco' → '___ vedo'", opzioni: ['Lo', 'La', 'Li', 'Le'], risposta: 0, spiegazione: "Marco è maschile singolare, quindi 'lo'."},
-            {num: 18, tipo: 'scelta', domanda: "Trasforma: 'Conosco Maria' → '___ conosco'", opzioni: ['Lo', 'La', 'Li', 'Le'], risposta: 1, spiegazione: "Maria è femminile singolare, quindi 'la'."},
-            {num: 19, tipo: 'scelta', domanda: "Trasforma: 'Invito i ragazzi' → '___ invito'", opzioni: ['Lo', 'La', 'Li', 'Le'], risposta: 2, spiegazione: "'I ragazzi' è maschile plurale, quindi 'li'."},
-            {num: 20, tipo: 'scelta', domanda: "Trasforma: 'Aspetto le amiche' → '___ aspetto'", opzioni: ['Lo', 'La', 'Li', 'Le'], risposta: 3, spiegazione: "'Le amiche' è femminile plurale, quindi 'le'."},
-            {num: 21, tipo: 'scelta', domanda: "Completa: 'Non ___ capisco' (non capisco te)", opzioni: ['mi', 'ti', 'lo', 'ci'], risposta: 1, spiegazione: "'Ti' si riferisce a 'te'."},
-            {num: 22, tipo: 'scelta', domanda: "Completa: 'Non ___ vedo' (non vedo lui)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 0, spiegazione: "'Lo' si riferisce a 'lui'."},
-            {num: 23, tipo: 'scelta', domanda: "Completa: 'Anche io ___ penso' (penso così anch'io)", opzioni: ['lo', 'la', 'li', 'le'], risposta: 0, spiegazione: "'Lo' è usato anche per sostituire concetti/idee (maschile)."},
-            {num: 24, tipo: 'scelta', domanda: "Completa: '___ so' (lo so)", opzioni: ['Lo', 'La', 'Li', 'Le'], risposta: 0, spiegazione: "'Lo' si usa con verbi come sapere, pensare, credere."},
-            {num: 25, tipo: 'scelta', domanda: "Completa: '___ vedo bene' (vi vedo bene)", opzioni: ['Mi', 'Ti', 'Ci', 'Vi'], risposta: 3, spiegazione: "'Vi' si riferisce a 'voi'."},
-            {num: 26, tipo: 'scelta', domanda: "Completa: '___ sento spesso' (vi sento spesso)", opzioni: ['Mi', 'Ti', 'Ci', 'Vi'], risposta: 3, spiegazione: "'Vi' è il pronome per 'voi'."},
-            {num: 27, tipo: 'scelta', domanda: "Completa: '___ chiamo domani' (ti chiamo domani)", opzioni: ['Mi', 'Ti', 'Lo', 'Ci'], risposta: 1, spiegazione: "'Ti' si riferisce a 'te'."},
-            {num: 28, tipo: 'scelta', domanda: "Completa: '___ amo tanto' (ti amo tanto)", opzioni: ['Mi', 'Ti', 'Lo', 'La'], risposta: 1, spiegazione: "'Ti' è il pronome oggetto diretto per 'te'."},
-            {num: 29, tipo: 'scelta', domanda: "Completa: '___ odiano' (mi odiano)", opzioni: ['Mi', 'Ti', 'Lo', 'Ci'], risposta: 0, spiegazione: "'Mi' si riferisce a 'me'."},
-            {num: 30, tipo: 'scelta', domanda: "Completa: '___ rispettano' (ci rispettano)", opzioni: ['Mi', 'Ti', 'Ci', 'Vi'], risposta: 2, spiegazione: "'Ci' si riferisce a 'noi'."},
-            {num: 31, tipo: 'scelta', domanda: "Completa: 'Maria è ___ alta ___ Paolo'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "Per la maggioranza si usa 'più... di'."},
-            {num: 32, tipo: 'scelta', domanda: "Completa: 'Questo libro è ___ interessante ___ quell'altro'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più... di' indica maggioranza."},
-            {num: 33, tipo: 'scelta', domanda: "Completa: 'Sono ___ felice ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più felice di te' = maggioranza."},
-            {num: 34, tipo: 'scelta', domanda: "Completa: 'Luca è ___ veloce ___ Marco'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "Comparativo di maggioranza con 'più... di'."},
-            {num: 35, tipo: 'scelta', domanda: "Completa: 'Questa casa è ___ grande ___ la nostra'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più grande di' = maggioranza."},
-            {num: 36, tipo: 'scelta', domanda: "Completa: 'Io sono ___ intelligente ___ lui'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "Comparativo di maggioranza."},
-            {num: 37, tipo: 'scelta', domanda: "Completa: 'La pizza è ___ buona ___ la pasta'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più buona di' = maggioranza."},
-            {num: 38, tipo: 'scelta', domanda: "Completa: 'Questo esercizio è ___ difficile ___ quello di ieri'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "Comparativo di maggioranza."},
-            {num: 39, tipo: 'scelta', domanda: "Completa: 'Lei è ___ gentile ___ sua madre'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più gentile di' = maggioranza."},
-            {num: 40, tipo: 'scelta', domanda: "Completa: 'Oggi fa ___ caldo ___ ieri'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'più / che'], risposta: 0, spiegazione: "'Più caldo di' = maggioranza."},
-            {num: 41, tipo: 'scelta', domanda: "Completa: 'Io sono ___ alto ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "Per la minoranza si usa 'meno... di'."},
-            {num: 42, tipo: 'scelta', domanda: "Completa: 'Questo film è ___ bello ___ l'altro'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno bello di' = minoranza."},
-            {num: 43, tipo: 'scelta', domanda: "Completa: 'Studio ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno di te' = minoranza."},
-            {num: 44, tipo: 'scelta', domanda: "Completa: 'La mia macchina è ___ veloce ___ la tua'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "Comparativo di minoranza."},
-            {num: 45, tipo: 'scelta', domanda: "Completa: 'Questo problema è ___ complicato ___ quello precedente'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno complicato di' = minoranza."},
-            {num: 46, tipo: 'scelta', domanda: "Completa: 'Mangio ___ ___ mio fratello'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno di' = minoranza."},
-            {num: 47, tipo: 'scelta', domanda: "Completa: 'Questa strada è ___ larga ___ l'autostrada'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "Comparativo di minoranza."},
-            {num: 48, tipo: 'scelta', domanda: "Completa: 'Dormo ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno di te' = minoranza."},
-            {num: 49, tipo: 'scelta', domanda: "Completa: 'Questo esercizio è ___ facile ___ quello di ieri'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno facile di' = minoranza."},
-            {num: 50, tipo: 'scelta', domanda: "Completa: 'Parlo ___ ___ mio professore'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'meno / che'], risposta: 1, spiegazione: "'Meno di' = minoranza."},
-            {num: 51, tipo: 'scelta', domanda: "Completa: 'Sei ___ alto ___ me'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "Per l'uguaglianza si usa 'tanto... quanto'."},
-            {num: 52, tipo: 'scelta', domanda: "Completa: 'Lavoro ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto quanto' = uguaglianza."},
-            {num: 53, tipo: 'scelta', domanda: "Completa: 'Questo libro è ___ interessante ___ quell'altro'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto interessante quanto' = uguaglianza."},
-            {num: 54, tipo: 'scelta', domanda: "Completa: 'Studio ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "Comparativo di uguaglianza."},
-            {num: 55, tipo: 'scelta', domanda: "Completa: 'Siamo ___ felici ___ voi'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto felici quanto' = uguaglianza."},
-            {num: 56, tipo: 'scelta', domanda: "Completa: 'Mangio ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto quanto' = uguaglianza."},
-            {num: 57, tipo: 'scelta', domanda: "Completa: 'Questa casa è ___ bella ___ la vostra'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "Comparativo di uguaglianza."},
-            {num: 58, tipo: 'scelta', domanda: "Completa: 'Corro ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto quanto' = uguaglianza."},
-            {num: 59, tipo: 'scelta', domanda: "Completa: 'Parlo italiano ___ ___ te'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto bene quanto te' = uguaglianza."},
-            {num: 60, tipo: 'scelta', domanda: "Completa: 'Sei ___ gentile ___ tua madre'", opzioni: ['più / di', 'meno / di', 'tanto / quanto', 'tanto / di'], risposta: 2, spiegazione: "'Tanto gentile quanto' = uguaglianza."},
-        ];
-
-        let score = 0;
-        let answered = new Set();
-
-        function renderExercises() {
-            const container = document.getElementById('exercises-container');
-            container.innerHTML = '';
-
-            exercises.forEach(ex => {
-                const div = document.createElement('div');
-                div.className = 'exercise-container';
-                div.innerHTML = `
-                    <div class="exercise-text"><span class="exercise-number">${ex.num}</span>${ex.domanda}</div>
-                    <div class="options" id="options-${ex.num}">
-                        ${ex.opzioni.map((opt, idx) => `
-                            <button class="option-btn" onclick="checkAnswer(${ex.num}, ${idx}, ${ex.risposta})">${opt}</button>
-                        `).join('')}
-                    </div>
-                    <div class="feedback" id="feedback-${ex.num}"></div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        function checkAnswer(exNum, selected, correct) {
-            if (answered.has(exNum)) return;
-
-            const buttons = document.querySelectorAll(`#options-${exNum} .option-btn`);
-            const feedback = document.getElementById(`feedback-${exNum}`);
-            const exercise = exercises.find(e => e.num === exNum);
-
-            buttons.forEach((btn, idx) => {
-                btn.disabled = true;
-                if (idx === correct) {
-                    btn.classList.add('correct');
-                } else if (idx === selected && idx !== correct) {
-                    btn.classList.add('wrong');
-                }
-            });
-
-            if (selected === correct) {
-                score++;
-                feedback.className = 'feedback correct show';
-                feedback.textContent = '✓ Corretto! ' + exercise.spiegazione;
-            } else {
-                feedback.className = 'feedback wrong show';
-                feedback.textContent = '✗ Sbagliato. ' + exercise.spiegazione;
-            }
-
-            answered.add(exNum);
-            updateScore();
-        }
-
-        function updateScore() {
-            document.getElementById('score').textContent = score;
-            const progress = (answered.size / 60) * 100;
-            document.getElementById('progress').style.width = progress + '%';
-        }
-
-        renderExercises();
-    </script>
 </body>
 </html>

@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esercizi: Pronomi Diretti e Comparativi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .progress-section {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .progress-bar-container {
+            background: #dee2e6;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .score-display {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .exercises-container {
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .exercise-frame {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .exercise-frame:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .exercise-frame.completed {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .exercise-frame.wrong {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .exercise-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .exercise-text {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .option-btn {
+            padding: 12px 20px;
+            border: 2px solid #dee2e6;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: #667eea;
+            background: #e7e9ff;
+            transform: scale(1.02);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct-answer {
+            background: #28a745 !important;
+            color: white !important;
+            border-color: #28a745 !important;
+        }
+
+        .option-btn.wrong-answer {
+            background: #dc3545 !important;
+            color: white !important;
+            border-color: #dc3545 !important;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .feedback.wrong {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        .email-section {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .email-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .email-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .email-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .final-score {
+            font-size: 2em;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 600px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Esercizi di Grammatica Italiana</h1>
+            <p>Pronomi Diretti e Comparativi</p>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-info">
+                <span>Progresso: <span id="completed-count">0</span>/60 esercizi</span>
+                <span id="percentage">0%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="score-display">
+            <span>Punteggio attuale:</span>
+            <span id="current-score">0/100 punti</span>
+        </div>
+
+        <div class="exercises-container">
+            <!-- SEZIONE PRONOMI DIRETTI -->
+            <h2 class="section-title">📚 Esercizi 1-30: Pronomi Diretti</h2>
+            
+            <!-- Esercizio 1 -->
+            <div class="exercise-frame" id="ex-1">
+                <div class="exercise-number">1</div>
+                <div class="exercise-text">Completa: "Marco ___ vede" (lui vede me)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(1, 0, 0, this)">mi</button>
+                    <button class="option-btn" onclick="checkAnswer(1, 1, 0, this)">ti</button>
+                    <button class="option-btn" onclick="checkAnswer(1, 2, 0, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(1, 3, 0, this)">ci</button>
+                </div>
+                <div id="feedback-1" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 2 -->
+            <div class="exercise-frame" id="ex-2">
+                <div class="exercise-number">2</div>
+                <div class="exercise-text">Completa: "Io ___ conosco" (io conosco te)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(2, 0, 1, this)">mi</button>
+                    <button class="option-btn" onclick="checkAnswer(2, 1, 1, this)">ti</button>
+                    <button class="option-btn" onclick="checkAnswer(2, 2, 1, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(2, 3, 1, this)">vi</button>
+                </div>
+                <div id="feedback-2" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 3 -->
+            <div class="exercise-frame" id="ex-3">
+                <div class="exercise-number">3</div>
+                <div class="exercise-text">Completa: "Noi ___ vediamo" (noi vediamo lui)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(3, 0, 1, this)">la</button>
+                    <button class="option-btn" onclick="checkAnswer(3, 1, 1, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(3, 2, 1, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(3, 3, 1, this)">le</button>
+                </div>
+                <div id="feedback-3" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 4 -->
+            <div class="exercise-frame" id="ex-4">
+                <div class="exercise-number">4</div>
+                <div class="exercise-text">Completa: "Voi ___ ascoltate" (voi ascoltate lei)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(4, 0, 1, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(4, 1, 1, this)">la</button>
+                    <button class="option-btn" onclick="checkAnswer(4, 2, 1, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(4, 3, 1, this)">le</button>
+                </div>
+                <div id="feedback-4" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 5 -->
+            <div class="exercise-frame" id="ex-5">
+                <div class="exercise-number">5</div>
+                <div class="exercise-text">Completa: "Loro ___ invitano" (loro invitano noi)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(5, 0, 2, this)">mi</button>
+                    <button class="option-btn" onclick="checkAnswer(5, 1, 2, this)">ti</button>
+                    <button class="option-btn" onclick="checkAnswer(5, 2, 2, this)">ci</button>
+                    <button class="option-btn" onclick="checkAnswer(5, 3, 2, this)">vi</button>
+                </div>
+                <div id="feedback-5" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 6 -->
+            <div class="exercise-frame" id="ex-6">
+                <div class="exercise-number">6</div>
+                <div class="exercise-text">Completa: "Io ___ capisco" (io capisco voi)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(6, 0, 1, this)">ci</button>
+                    <button class="option-btn" onclick="checkAnswer(6, 1, 1, this)">vi</button>
+                    <button class="option-btn" onclick="checkAnswer(6, 2, 1, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(6, 3, 1, this)">le</button>
+                </div>
+                <div id="feedback-6" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 7 -->
+            <div class="exercise-frame" id="ex-7">
+                <div class="exercise-number">7</div>
+                <div class="exercise-text">Completa: "Noi ___ vediamo" (noi vediamo loro maschi)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(7, 0, 2, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(7, 1, 2, this)">la</button>
+                    <button class="option-btn" onclick="checkAnswer(7, 2, 2, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(7, 3, 2, this)">le</button>
+                </div>
+                <div id="feedback-7" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 8 -->
+            <div class="exercise-frame" id="ex-8">
+                <div class="exercise-number">8</div>
+                <div class="exercise-text">Completa: "Io ___ incontro" (io incontro loro femmine)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(8, 0, 3, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(8, 1, 3, this)">la</button>
+                    <button class="option-btn" onclick="checkAnswer(8, 2, 3, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(8, 3, 3, this)">le</button>
+                </div>
+                <div id="feedback-8" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 9 -->
+            <div class="exercise-frame" id="ex-9">
+                <div class="exercise-number">9</div>
+                <div class="exercise-text">Completa: "___ ami?" (ami me?)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(9, 0, 0, this)">Mi</button>
+                    <button class="option-btn" onclick="checkAnswer(9, 1, 0, this)">Ti</button>
+                    <button class="option-btn" onclick="checkAnswer(9, 2, 0, this)">Lo</button>
+                    <button class="option-btn" onclick="checkAnswer(9, 3, 0, this)">Ci</button>
+                </div>
+                <div id="feedback-9" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 10 -->
+            <div class="exercise-frame" id="ex-10">
+                <div class="exercise-number">10</div>
+                <div class="exercise-text">Completa: "___ vedo domani" (vedo te domani)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(10, 0, 1, this)">Mi</button>
+                    <button class="option-btn" onclick="checkAnswer(10, 1, 1, this)">Ti</button>
+                    <button class="option-btn" onclick="checkAnswer(10, 2, 1, this)">Lo</button>
+                    <button class="option-btn" onclick="checkAnswer(10, 3, 1, this)">Vi</button>
+                </div>
+                <div id="feedback-10" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 11 -->
+            <div class="exercise-frame" id="ex-11">
+                <div class="exercise-number">11</div>
+                <div class="exercise-text">Completa: "Maria ___ ama" (Maria ama lui)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(11, 0, 0, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(11, 1, 0, this)">la</button>
+                    <button class="option-btn" onclick="checkAnswer(11, 2, 0, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(11, 3, 0, this)">le</button>
+                </div>
+                <div id="feedback-11" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 12 -->
+            <div class="exercise-frame" id="ex-12">
+                <div class="exercise-number">12</div>
+                <div class="exercise-text">Completa: "Paolo ___ cerca" (Paolo cerca lei)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(12, 0, 1, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(12, 1, 1, this)">la</button>
+                    <button class="option-btn" onclick="checkAnswer(12, 2, 1, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(12, 3, 1, this)">le</button>
+                </div>
+                <div id="feedback-12" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 13 -->
+            <div class="exercise-frame" id="ex-13">
+                <div class="exercise-number">13</div>
+                <div class="exercise-text">Completa: "___ chiamano sempre" (chiamano sempre noi)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(13, 0, 2, this)">Mi</button>
+                    <button class="option-btn" onclick="checkAnswer(13, 1, 2, this)">Ti</button>
+                    <button class="option-btn" onclick="checkAnswer(13, 2, 2, this)">Ci</button>
+                    <button class="option-btn" onclick="checkAnswer(13, 3, 2, this)">Vi</button>
+                </div>
+                <div id="feedback-13" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 14 -->
+            <div class="exercise-frame" id="ex-14">
+                <div class="exercise-number">14</div>
+                <div class="exercise-text">Completa: "Io ___ saluto" (io saluto voi tutti)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(14, 0, 1, this)">ci</button>
+                    <button class="option-btn" onclick="checkAnswer(14, 1, 1, this)">vi</button>
+                    <button class="option-btn" onclick="checkAnswer(14, 2, 1, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(14, 3, 1, this)">le</button>
+                </div>
+                <div id="feedback-14" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 15 -->
+            <div class="exercise-frame" id="ex-15">
+                <div class="exercise-number">15</div>
+                <div class="exercise-text">Completa: "___ vedo al cinema" (vedo loro maschi al cinema)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(15, 0, 2, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(15, 1, 2, this)">la</button>
+                    <button class="option-btn" onclick="checkAnswer(15, 2, 2, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(15, 3, 2, this)">le</button>
+                </div>
+                <div id="feedback-15" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 16 -->
+            <div class="exercise-frame" id="ex-16">
+                <div class="exercise-number">16</div>
+                <div class="exercise-text">Completa: "___ ascolto attentamente" (ascolto loro femmine attentamente)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(16, 0, 3, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(16, 1, 3, this)">la</button>
+                    <button class="option-btn" onclick="checkAnswer(16, 2, 3, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(16, 3, 3, this)">le</button>
+                </div>
+                <div id="feedback-16" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 17 -->
+            <div class="exercise-frame" id="ex-17">
+                <div class="exercise-number">17</div>
+                <div class="exercise-text">Trasforma: "Vedo Marco" → "___ vedo"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(17, 0, 0, this)">Lo</button>
+                    <button class="option-btn" onclick="checkAnswer(17, 1, 0, this)">La</button>
+                    <button class="option-btn" onclick="checkAnswer(17, 2, 0, this)">Li</button>
+                    <button class="option-btn" onclick="checkAnswer(17, 3, 0, this)">Le</button>
+                </div>
+                <div id="feedback-17" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 18 -->
+            <div class="exercise-frame" id="ex-18">
+                <div class="exercise-number">18</div>
+                <div class="exercise-text">Trasforma: "Conosco Maria" → "___ conosco"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(18, 0, 1, this)">Lo</button>
+                    <button class="option-btn" onclick="checkAnswer(18, 1, 1, this)">La</button>
+                    <button class="option-btn" onclick="checkAnswer(18, 2, 1, this)">Li</button>
+                    <button class="option-btn" onclick="checkAnswer(18, 3, 1, this)">Le</button>
+                </div>
+                <div id="feedback-18" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 19 -->
+            <div class="exercise-frame" id="ex-19">
+                <div class="exercise-number">19</div>
+                <div class="exercise-text">Trasforma: "Invito i ragazzi" → "___ invito"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(19, 0, 2, this)">Lo</button>
+                    <button class="option-btn" onclick="checkAnswer(19, 1, 2, this)">La</button>
+                    <button class="option-btn" onclick="checkAnswer(19, 2, 2, this)">Li</button>
+                    <button class="option-btn" onclick="checkAnswer(19, 3, 2, this)">Le</button>
+                </div>
+                <div id="feedback-19" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 20 -->
+            <div class="exercise-frame" id="ex-20">
+                <div class="exercise-number">20</div>
+                <div class="exercise-text">Trasforma: "Aspetto le amiche" → "___ aspetto"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(20, 0, 3, this)">Lo</button>
+                    <button class="option-btn" onclick="checkAnswer(20, 1, 3, this)">La</button>
+                    <button class="option-btn" onclick="checkAnswer(20, 2, 3, this)">Li</button>
+                    <button class="option-btn" onclick="checkAnswer(20, 3, 3, this)">Le</button>
+                </div>
+                <div id="feedback-20" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 21 -->
+            <div class="exercise-frame" id="ex-21">
+                <div class="exercise-number">21</div>
+                <div class="exercise-text">Completa: "Non ___ capisco" (non capisco te)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(21, 0, 1, this)">mi</button>
+                    <button class="option-btn" onclick="checkAnswer(21, 1, 1, this)">ti</button>
+                    <button class="option-btn" onclick="checkAnswer(21, 2, 1, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(21, 3, 1, this)">ci</button>
+                </div>
+                <div id="feedback-21" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 22 -->
+            <div class="exercise-frame" id="ex-22">
+                <div class="exercise-number">22</div>
+                <div class="exercise-text">Completa: "Non ___ vedo" (non vedo lui)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(22, 0, 0, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(22, 1, 0, this)">la</button>
+                    <button class="option-btn" onclick="checkAnswer(22, 2, 0, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(22, 3, 0, this)">le</button>
+                </div>
+                <div id="feedback-22" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 23 -->
+            <div class="exercise-frame" id="ex-23">
+                <div class="exercise-number">23</div>
+                <div class="exercise-text">Completa: "Anche io ___ penso" (penso così anch'io)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(23, 0, 0, this)">lo</button>
+                    <button class="option-btn" onclick="checkAnswer(23, 1, 0, this)">la</button>
+                    <button class="option-btn" onclick="checkAnswer(23, 2, 0, this)">li</button>
+                    <button class="option-btn" onclick="checkAnswer(23, 3, 0, this)">le</button>
+                </div>
+                <div id="feedback-23" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 24 -->
+            <div class="exercise-frame" id="ex-24">
+                <div class="exercise-number">24</div>
+                <div class="exercise-text">Completa: "___ so" (lo so)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(24, 0, 0, this)">Lo</button>
+                    <button class="option-btn" onclick="checkAnswer(24, 1, 0, this)">La</button>
+                    <button class="option-btn" onclick="checkAnswer(24, 2, 0, this)">Li</button>
+                    <button class="option-btn" onclick="checkAnswer(24, 3, 0, this)">Le</button>
+                </div>
+                <div id="feedback-24" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 25 -->
+            <div class="exercise-frame" id="ex-25">
+                <div class="exercise-number">25</div>
+                <div class="exercise-text">Completa: "___ vedo bene" (vi vedo bene)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(25, 0, 3, this)">Mi</button>
+                    <button class="option-btn" onclick="checkAnswer(25, 1, 3, this)">Ti</button>
+                    <button class="option-btn" onclick="checkAnswer(25, 2, 3, this)">Ci</button>
+                    <button class="option-btn" onclick="checkAnswer(25, 3, 3, this)">Vi</button>
+                </div>
+                <div id="feedback-25" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 26 -->
+            <div class="exercise-frame" id="ex-26">
+                <div class="exercise-number">26</div>
+                <div class="exercise-text">Completa: "___ sento spesso" (vi sento spesso)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(26, 0, 3, this)">Mi</button>
+                    <button class="option-btn" onclick="checkAnswer(26, 1, 3, this)">Ti</button>
+                    <button class="option-btn" onclick="checkAnswer(26, 2, 3, this)">Ci</button>
+                    <button class="option-btn" onclick="checkAnswer(26, 3, 3, this)">Vi</button>
+                </div>
+                <div id="feedback-26" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 27 -->
+            <div class="exercise-frame" id="ex-27">
+                <div class="exercise-number">27</div>
+                <div class="exercise-text">Completa: "___ chiamo domani" (ti chiamo domani)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(27, 0, 1, this)">Mi</button>
+                    <button class="option-btn" onclick="checkAnswer(27, 1, 1, this)">Ti</button>
+                    <button class="option-btn" onclick="checkAnswer(27, 2, 1, this)">Lo</button>
+                    <button class="option-btn" onclick="checkAnswer(27, 3, 1, this)">Ci</button>
+                </div>
+                <div id="feedback-27" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 28 -->
+            <div class="exercise-frame" id="ex-28">
+                <div class="exercise-number">28</div>
+                <div class="exercise-text">Completa: "___ amo tanto" (ti amo tanto)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(28, 0, 1, this)">Mi</button>
+                    <button class="option-btn" onclick="checkAnswer(28, 1, 1, this)">Ti</button>
+                    <button class="option-btn" onclick="checkAnswer(28, 2, 1, this)">Lo</button>
+                    <button class="option-btn" onclick="checkAnswer(28, 3, 1, this)">La</button>
+                </div>
+                <div id="feedback-28" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 29 -->
+            <div class="exercise-frame" id="ex-29">
+                <div class="exercise-number">29</div>
+                <div class="exercise-text">Completa: "___ odiano" (mi odiano)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(29, 0, 0, this)">Mi</button>
+                    <button class="option-btn" onclick="checkAnswer(29, 1, 0, this)">Ti</button>
+                    <button class="option-btn" onclick="checkAnswer(29, 2, 0, this)">Lo</button>
+                    <button class="option-btn" onclick="checkAnswer(29, 3, 0, this)">Ci</button>
+                </div>
+                <div id="feedback-29" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 30 -->
+            <div class="exercise-frame" id="ex-30">
+                <div class="exercise-number">30</div>
+                <div class="exercise-text">Completa: "___ rispettano" (ci rispettano)</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(30, 0, 2, this)">Mi</button>
+                    <button class="option-btn" onclick="checkAnswer(30, 1, 2, this)">Ti</button>
+                    <button class="option-btn" onclick="checkAnswer(30, 2, 2, this)">Ci</button>
+                    <button class="option-btn" onclick="checkAnswer(30, 3, 2, this)">Vi</button>
+                </div>
+                <div id="feedback-30" class="feedback"></div>
+            </div>
+
+            <!-- SEZIONE COMPARATIVI -->
+            <h2 class="section-title">📊 Esercizi 31-60: Comparativi</h2>
+
+            <!-- Esercizio 31 -->
+            <div class="exercise-frame" id="ex-31">
+                <div class="exercise-number">31</div>
+                <div class="exercise-text">Completa: "Maria è ___ alta ___ Paolo"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(31, 0, 0, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(31, 1, 0, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(31, 2, 0, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(31, 3, 0, this)">più / che</button>
+                </div>
+                <div id="feedback-31" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 32 -->
+            <div class="exercise-frame" id="ex-32">
+                <div class="exercise-number">32</div>
+                <div class="exercise-text">Completa: "Questo libro è ___ interessante ___ quell'altro"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(32, 0, 0, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(32, 1, 0, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(32, 2, 0, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(32, 3, 0, this)">più / che</button>
+                </div>
+                <div id="feedback-32" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 33 -->
+            <div class="exercise-frame" id="ex-33">
+                <div class="exercise-number">33</div>
+                <div class="exercise-text">Completa: "Sono ___ felice ___ te"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(33, 0, 0, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(33, 1, 0, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(33, 2, 0, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(33, 3, 0, this)">più / che</button>
+                </div>
+                <div id="feedback-33" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 34 -->
+            <div class="exercise-frame" id="ex-34">
+                <div class="exercise-number">34</div>
+                <div class="exercise-text">Completa: "Luca è ___ veloce ___ Marco"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(34, 0, 0, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(34, 1, 0, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(34, 2, 0, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(34, 3, 0, this)">più / che</button>
+                </div>
+                <div id="feedback-34" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 35 -->
+            <div class="exercise-frame" id="ex-35">
+                <div class="exercise-number">35</div>
+                <div class="exercise-text">Completa: "Questa casa è ___ grande ___ la nostra"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(35, 0, 0, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(35, 1, 0, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(35, 2, 0, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(35, 3, 0, this)">più / che</button>
+                </div>
+                <div id="feedback-35" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 36 -->
+            <div class="exercise-frame" id="ex-36">
+                <div class="exercise-number">36</div>
+                <div class="exercise-text">Completa: "Io sono ___ intelligente ___ lui"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(36, 0, 0, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(36, 1, 0, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(36, 2, 0, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(36, 3, 0, this)">più / che</button>
+                </div>
+                <div id="feedback-36" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 37 -->
+            <div class="exercise-frame" id="ex-37">
+                <div class="exercise-number">37</div>
+                <div class="exercise-text">Completa: "La pizza è ___ buona ___ la pasta"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(37, 0, 0, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(37, 1, 0, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(37, 2, 0, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(37, 3, 0, this)">più / che</button>
+                </div>
+                <div id="feedback-37" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 38 -->
+            <div class="exercise-frame" id="ex-38">
+                <div class="exercise-number">38</div>
+                <div class="exercise-text">Completa: "Questo esercizio è ___ difficile ___ quello di ieri"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(38, 0, 0, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(38, 1, 0, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(38, 2, 0, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(38, 3, 0, this)">più / che</button>
+                </div>
+                <div id="feedback-38" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 39 -->
+            <div class="exercise-frame" id="ex-39">
+                <div class="exercise-number">39</div>
+                <div class="exercise-text">Completa: "Lei è ___ gentile ___ sua madre"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(39, 0, 0, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(39, 1, 0, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(39, 2, 0, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(39, 3, 0, this)">più / che</button>
+                </div>
+                <div id="feedback-39" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 40 -->
+            <div class="exercise-frame" id="ex-40">
+                <div class="exercise-number">40</div>
+                <div class="exercise-text">Completa: "Oggi fa ___ caldo ___ ieri"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(40, 0, 0, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(40, 1, 0, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(40, 2, 0, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(40, 3, 0, this)">più / che</button>
+                </div>
+                <div id="feedback-40" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 41 -->
+            <div class="exercise-frame" id="ex-41">
+                <div class="exercise-number">41</div>
+                <div class="exercise-text">Completa: "Io sono ___ alto ___ te"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(41, 0, 1, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(41, 1, 1, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(41, 2, 1, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(41, 3, 1, this)">meno / che</button>
+                </div>
+                <div id="feedback-41" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 42 -->
+            <div class="exercise-frame" id="ex-42">
+                <div class="exercise-number">42</div>
+                <div class="exercise-text">Completa: "Questo film è ___ bello ___ l'altro"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(42, 0, 1, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(42, 1, 1, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(42, 2, 1, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(42, 3, 1, this)">meno / che</button>
+                </div>
+                <div id="feedback-42" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 43 -->
+            <div class="exercise-frame" id="ex-43">
+                <div class="exercise-number">43</div>
+                <div class="exercise-text">Completa: "Studio ___ ___ te"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(43, 0, 1, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(43, 1, 1, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(43, 2, 1, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(43, 3, 1, this)">meno / che</button>
+                </div>
+                <div id="feedback-43" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 44 -->
+            <div class="exercise-frame" id="ex-44">
+                <div class="exercise-number">44</div>
+                <div class="exercise-text">Completa: "La mia macchina è ___ veloce ___ la tua"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(44, 0, 1, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(44, 1, 1, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(44, 2, 1, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(44, 3, 1, this)">meno / che</button>
+                </div>
+                <div id="feedback-44" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 45 -->
+            <div class="exercise-frame" id="ex-45">
+                <div class="exercise-number">45</div>
+                <div class="exercise-text">Completa: "Questo problema è ___ complicato ___ quello precedente"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(45, 0, 1, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(45, 1, 1, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(45, 2, 1, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(45, 3, 1, this)">meno / che</button>
+                </div>
+                <div id="feedback-45" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 46 -->
+            <div class="exercise-frame" id="ex-46">
+                <div class="exercise-number">46</div>
+                <div class="exercise-text">Completa: "Mangio ___ ___ mio fratello"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(46, 0, 1, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(46, 1, 1, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(46, 2, 1, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(46, 3, 1, this)">meno / che</button>
+                </div>
+                <div id="feedback-46" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 47 -->
+            <div class="exercise-frame" id="ex-47">
+                <div class="exercise-number">47</div>
+                <div class="exercise-text">Completa: "Questa strada è ___ larga ___ l'autostrada"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(47, 0, 1, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(47, 1, 1, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(47, 2, 1, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(47, 3, 1, this)">meno / che</button>
+                </div>
+                <div id="feedback-47" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 48 -->
+            <div class="exercise-frame" id="ex-48">
+                <div class="exercise-number">48</div>
+                <div class="exercise-text">Completa: "Dormo ___ ___ te"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(48, 0, 1, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(48, 1, 1, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(48, 2, 1, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(48, 3, 1, this)">meno / che</button>
+                </div>
+                <div id="feedback-48" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 49 -->
+            <div class="exercise-frame" id="ex-49">
+                <div class="exercise-number">49</div>
+                <div class="exercise-text">Completa: "Questo esercizio è ___ facile ___ quello di ieri"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(49, 0, 1, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(49, 1, 1, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(49, 2, 1, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(49, 3, 1, this)">meno / che</button>
+                </div>
+                <div id="feedback-49" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 50 -->
+            <div class="exercise-frame" id="ex-50">
+                <div class="exercise-number">50</div>
+                <div class="exercise-text">Completa: "Parlo ___ ___ mio professore"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(50, 0, 1, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(50, 1, 1, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(50, 2, 1, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(50, 3, 1, this)">meno / che</button>
+                </div>
+                <div id="feedback-50" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 51 -->
+            <div class="exercise-frame" id="ex-51">
+                <div class="exercise-number">51</div>
+                <div class="exercise-text">Completa: "Sei ___ alto ___ me"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(51, 0, 2, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(51, 1, 2, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(51, 2, 2, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(51, 3, 2, this)">tanto / di</button>
+                </div>
+                <div id="feedback-51" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 52 -->
+            <div class="exercise-frame" id="ex-52">
+                <div class="exercise-number">52</div>
+                <div class="exercise-text">Completa: "Lavoro ___ ___ te"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(52, 0, 2, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(52, 1, 2, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(52, 2, 2, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(52, 3, 2, this)">tanto / di</button>
+                </div>
+                <div id="feedback-52" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 53 -->
+            <div class="exercise-frame" id="ex-53">
+                <div class="exercise-number">53</div>
+                <div class="exercise-text">Completa: "Questo libro è ___ interessante ___ quell'altro"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(53, 0, 2, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(53, 1, 2, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(53, 2, 2, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(53, 3, 2, this)">tanto / di</button>
+                </div>
+                <div id="feedback-53" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 54 -->
+            <div class="exercise-frame" id="ex-54">
+                <div class="exercise-number">54</div>
+                <div class="exercise-text">Completa: "Studio ___ ___ te"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(54, 0, 2, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(54, 1, 2, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(54, 2, 2, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(54, 3, 2, this)">tanto / di</button>
+                </div>
+                <div id="feedback-54" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 55 -->
+            <div class="exercise-frame" id="ex-55">
+                <div class="exercise-number">55</div>
+                <div class="exercise-text">Completa: "Siamo ___ felici ___ voi"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(55, 0, 2, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(55, 1, 2, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(55, 2, 2, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(55, 3, 2, this)">tanto / di</button>
+                </div>
+                <div id="feedback-55" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 56 -->
+            <div class="exercise-frame" id="ex-56">
+                <div class="exercise-number">56</div>
+                <div class="exercise-text">Completa: "Mangio ___ ___ te"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(56, 0, 2, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(56, 1, 2, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(56, 2, 2, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(56, 3, 2, this)">tanto / di</button>
+                </div>
+                <div id="feedback-56" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 57 -->
+            <div class="exercise-frame" id="ex-57">
+                <div class="exercise-number">57</div>
+                <div class="exercise-text">Completa: "Questa casa è ___ bella ___ la vostra"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(57, 0, 2, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(57, 1, 2, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(57, 2, 2, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(57, 3, 2, this)">tanto / di</button>
+                </div>
+                <div id="feedback-57" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 58 -->
+            <div class="exercise-frame" id="ex-58">
+                <div class="exercise-number">58</div>
+                <div class="exercise-text">Completa: "Sei ___ bravo ___ tuo padre"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(58, 0, 2, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(58, 1, 2, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(58, 2, 2, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(58, 3, 2, this)">tanto / di</button>
+                </div>
+                <div id="feedback-58" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 59 -->
+            <div class="exercise-frame" id="ex-59">
+                <div class="exercise-number">59</div>
+                <div class="exercise-text">Completa: "Questo vino è ___ buono ___ quello francese"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(59, 0, 2, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(59, 1, 2, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(59, 2, 2, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(59, 3, 2, this)">tanto / di</button>
+                </div>
+                <div id="feedback-59" class="feedback"></div>
+            </div>
+
+            <!-- Esercizio 60 -->
+            <div class="exercise-frame" id="ex-60">
+                <div class="exercise-number">60</div>
+                <div class="exercise-text">Completa: "Parlo italiano ___ ___ te"</div>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(60, 0, 2, this)">più / di</button>
+                    <button class="option-btn" onclick="checkAnswer(60, 1, 2, this)">meno / di</button>
+                    <button class="option-btn" onclick="checkAnswer(60, 2, 2, this)">tanto / quanto</button>
+                    <button class="option-btn" onclick="checkAnswer(60, 3, 2, this)">tanto / di</button>
+                </div>
+                <div id="feedback-60" class="feedback"></div>
+            </div>
+
+        </div>
+
+        <div class="email-section">
+            <h3>📧 Invia i tuoi risultati</h3>
+            <p>Completa tutti gli esercizi e invia il tuo punteggio</p>
+            <div class="final-score" id="final-score-display">0/100</div>
+            <button class="email-btn" id="email-btn" onclick="sendResults()">
+                📨 Invia risultati via Email
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Stato del quiz
+        let completedExercises = new Set();
+        let correctAnswers = 0;
+        const totalExercises = 60;
+        const pointsPerExercise = 2;
+        const maxScore = 100;
+        const minScore = 60;
+        const emailDestination = "infonefelieducation@gmail.com";
+
+        // Spiegazioni per ogni esercizio
+        const explanations = {
+            1: "'Mi' è il pronome diretto per la prima persona singolare (me).",
+            2: "'Ti' è il pronome diretto per la seconda persona singolare (te).",
+            3: "'Lo' è il pronome diretto maschile singolare (lui).",
+            4: "'La' è il pronome diretto femminile singolare (lei).",
+            5: "'Ci' è il pronome diretto per la prima persona plurale (noi).",
+            6: "'Vi' è il pronome diretto per la seconda persona plurale (voi).",
+            7: "'Li' è il pronome diretto maschile plurale (loro maschi).",
+            8: "'Le' è il pronome diretto femminile plurale (loro femmine).",
+            9: "'Mi' è il pronome oggetto diretto per 'me'.",
+            10: "'Ti' si riferisce a 'te' (seconda persona singolare).",
+            11: "'Lo' si riferisce a 'lui' (maschile singolare).",
+            12: "'La' si riferisce a 'lei' (femminile singolare).",
+            13: "'Ci' si riferisce a 'noi' (prima persona plurale).",
+            14: "'Vi' si riferisce a 'voi' (seconda persona plurale).",
+            15: "'Li' si riferisce a 'loro' maschile plurale.",
+            16: "'Le' si riferisce a 'loro' femminile plurale.",
+            17: "Marco è maschile singolare, quindi si usa 'lo'.",
+            18: "Maria è femminile singolare, quindi si usa 'la'.",
+            19: "'I ragazzi' è maschile plurale, quindi si usa 'li'.",
+            20: "'Le amiche' è femminile plurale, quindi si usa 'le'.",
+            21: "'Ti' si riferisce a 'te' (seconda persona singolare).",
+            22: "'Lo' si riferisce a 'lui' (maschile singolare).",
+            23: "'Lo' è usato anche per sostituire concetti/idee (maschile).",
+            24: "'Lo' si usa con verbi come sapere, pensare, credere.",
+            25: "'Vi' si riferisce a 'voi' (seconda persona plurale).",
+            26: "'Vi' è il pronome per 'voi' (seconda persona plurale).",
+            27: "'Ti' si riferisce a 'te' (seconda persona singolare).",
+            28: "'Ti' è il pronome oggetto diretto per 'te'.",
+            29: "'Mi' si riferisce a 'me' (prima persona singolare).",
+            30: "'Ci' si riferisce a 'noi' (prima persona plurale).",
+            31: "Per la maggioranza si usa 'più... di'.",
+            32: "'Più... di' indica maggioranza.",
+            33: "'Più felice di te' = comparativo di maggioranza.",
+            34: "Comparativo di maggioranza con 'più... di'.",
+            35: "'Più grande di' = comparativo di maggioranza.",
+            36: "Comparativo di maggioranza.",
+            37: "'Più buona di' = comparativo di maggioranza.",
+            38: "Comparativo di maggioranza.",
+            39: "'Più gentile di' = comparativo di maggioranza.",
+            40: "'Più caldo di' = comparativo di maggioranza.",
+            41: "Per la minoranza si usa 'meno... di'.",
+            42: "'Meno bello di' = comparativo di minoranza.",
+            43: "'Meno di te' = comparativo di minoranza.",
+            44: "Comparativo di minoranza.",
+            45: "'Meno complicato di' = comparativo di minoranza.",
+            46: "'Meno di mio fratello' = comparativo di minoranza.",
+            47: " Comparativo di minoranza.",
+            48: "'Meno di te' = comparativo di minoranza.",
+            49: "'Meno facile di' = comparativo di minoranza.",
+            50: "'Meno di mio professore' = comparativo di minoranza.",
+            51: "Per l'uguaglianza si usa 'tanto... quanto'.",
+            52: "'Tanto... quanto' = comparativo di uguaglianza.",
+            53: "'Tanto interessante quanto' = comparativo di uguaglianza.",
+            54: "'Tanto... quanto' = comparativo di uguaglianza.",
+            55: "'Tanto felici quanto' = comparativo di uguaglianza.",
+            56: "'Tanto... quanto' = comparativo di uguaglianza.",
+            57: "'Tanto bella quanto' = comparativo di uguaglianza.",
+            58: "'Tanto bravo quanto' = comparativo di uguaglianza.",
+            59: "'Tanto buono quanto' = comparativo di uguaglianza.",
+            60: "'Tanto... quanto' = comparativo di uguaglianza."
+        };
+
+        // Risposte corrette (indice della risposta corretta per ogni esercizio)
+        const correctAnswerIndices = {
+            1: 0, 2: 1, 3: 1, 4: 1, 5: 2, 6: 1, 7: 2, 8: 3, 9: 0, 10: 1,
+            11: 0, 12: 1, 13: 2, 14: 1, 15: 2, 16: 3, 17: 0, 18: 1, 19: 2, 20: 3,
+            21: 1, 22: 0, 23: 0, 24: 0, 25: 3, 26: 3, 27: 1, 28: 1, 29: 0, 30: 2,
+            31: 0, 32: 0, 33: 0, 34: 0, 35: 0, 36: 0, 37: 0, 38: 0, 39: 0, 40: 0,
+            41: 1, 42: 1, 43: 1, 44: 1, 45: 1, 46: 1, 47: 1, 48: 1, 49: 1, 50: 1,
+            51: 2, 52: 2, 53: 2, 54: 2, 55: 2, 56: 2, 57: 2, 58: 2, 59: 2, 60: 2
+        };
+
+        // Testi delle risposte corrette per ogni esercizio
+        const correctAnswerTexts = {
+            1: "mi", 2: "ti", 3: "lo", 4: "la", 5: "ci", 6: "vi", 7: "li", 8: "le", 9: "Mi", 10: "Ti",
+            11: "lo", 12: "la", 13: "Ci", 14: "vi", 15: "li", 16: "le", 17: "Lo", 18: "La", 19: "Li", 20: "Le",
+            21: "ti", 22: "lo", 23: "lo", 24: "Lo", 25: "Vi", 26: "Vi", 27: "Ti", 28: "Ti", 29: "Mi", 30: "Ci",
+            31: "più / di", 32: "più / di", 33: "più / di", 34: "più / di", 35: "più / di",
+            36: "più / di", 37: "più / di", 38: "più / di", 39: "più / di", 40: "più / di",
+            41: "meno / di", 42: "meno / di", 43: "meno / di", 44: "meno / di", 45: "meno / di",
+            46: "meno / di", 47: "meno / di", 48: "meno / di", 49: "meno / di", 50: "meno / di",
+            51: "tanto / quanto", 52: "tanto / quanto", 53: "tanto / quanto", 54: "tanto / quanto",
+            55: "tanto / quanto", 56: "tanto / quanto", 57: "tanto / quanto", 58: "tanto / quanto",
+            59: "tanto / quanto", 60: "tanto / quanto"
+        };
+
+        function checkAnswer(exerciseNum, selectedIndex, correctIndex, btnElement) {
+            const exerciseFrame = document.getElementById('ex-' + exerciseNum);
+            const feedback = document.getElementById('feedback-' + exerciseNum);
+            const buttons = exerciseFrame.querySelectorAll('.option-btn');
+            
+            // Disabilita tutti i pulsanti
+            buttons.forEach(btn => btn.disabled = true);
+            
+            // Verifica se la risposta è corretta
+            const isCorrect = selectedIndex === correctIndex;
+            
+            if (isCorrect) {
+                btnElement.classList.add('correct-answer');
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = '✅ Corretto! ' + explanations[exerciseNum];
+                
+                if (!completedExercises.has(exerciseNum)) {
+                    correctAnswers++;
+                    completedExercises.add(exerciseNum);
+                }
+                exerciseFrame.classList.add('completed');
+            } else {
+                btnElement.classList.add('wrong-answer');
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = '❌ Sbagliato! La risposta corretta è: <strong>' + 
+                                    correctAnswerTexts[exerciseNum] + '</strong>. ' + 
+                                    explanations[exerciseNum];
+                
+                // Evidenzia la risposta corretta
+                buttons[correctIndex].classList.add('correct-answer');
+                
+                if (!completedExercises.has(exerciseNum)) {
+                    completedExercises.add(exerciseNum);
+                }
+                exerciseFrame.classList.add('wrong');
+            }
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const completed = completedExercises.size;
+            const percentage = Math.round((completed / totalExercises) * 100);
+            const currentScore = Math.min(correctAnswers * pointsPerExercise, maxScore);
+            
+            document.getElementById('completed-count').textContent = completed;
+            document.getElementById('percentage').textContent = percentage + '%';
+            document.getElementById('progress-bar').style.width = percentage + '%';
+            document.getElementById('current-score').textContent = currentScore + '/' + maxScore + ' punti';
+            document.getElementById('final-score-display').textContent = currentScore + '/' + maxScore;
+            
+            // Abilita il pulsante email solo se tutti gli esercizi sono completati
+            const emailBtn = document.getElementById('email-btn');
+            if (completed === totalExercises) {
+                emailBtn.disabled = false;
+                emailBtn.textContent = '📨 Invia risultati via Email';
+            } else {
+                emailBtn.disabled = true;
+                emailBtn.textContent = '📨 Completa tutti gli esercizi (' + completed + '/' + totalExercises + ')';
+            }
+        }
+
+        function sendResults() {
+            const completed = completedExercises.size;
+            
+            if (completed < totalExercises) {
+                alert('Completa tutti gli esercizi prima di inviare i risultati!');
+                return;
+            }
+            
+            const score = Math.min(correctAnswers * pointsPerExercise, maxScore);
+            const percentage = Math.round((correctAnswers / totalExercises) * 100);
+            
+            // Calcola il voto finale (min 60, max 100)
+            let finalGrade = score;
+            if (finalGrade < minScore) {
+                finalGrade = minScore;
+            }
+            
+            const subject = encodeURIComponent('Risultati Esercizi: Pronomi Diretti e Comparativi');
+            const body = encodeURIComponent(
+                'Ciao!\\n\\n' +
+                'Ho completato gli esercizi su Pronomi Diretti e Comparativi.\\n\\n' +
+                'RISULTATI:\\n' +
+                '✓ Esercizi completati: ' + completed + '/' + totalExercises + '\\n' +
+                '✓ Risposte corrette: ' + correctAnswers + '/' + totalExercises + '\\n' +
+                '✓ Percentuale corretto: ' + percentage + '%\\n' +
+                '✓ Punteggio totale: ' + score + '/' + maxScore + ' punti\\n' +
+                '✓ Voto finale: ' + finalGrade + '/100\\n\\n' +
+                'Data: ' + new Date().toLocaleString('it-IT') + '\\n\\n' +
+                'Grazie!'
+            );
+            
+            window.location.href = 'mailto:' + emailDestination + '?subject=' + subject + '&body=' + body;
+            
+            // Mostra conferma
+            setTimeout(() => {
+                alert('Email preparata!\\n\\nPunteggio: ' + score + '/' + maxScore + ' punti\\nVoto finale: ' + finalGrade + '/100\\n\\nControlla la tua applicazione email per inviare il messaggio a ' + emailDestination);
+            }, 500);
+        }
+
+        // Inizializza la pagina
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
